@@ -1,16 +1,16 @@
-#Programa de Convivencia Espacial
+# Programa de Convivencia Espacial
 
-##Descripcion
+## Descripcion
 **Programa de Convivencia Espacial** es un party-game en el que los jugadores controlan astronautas para pelearse por el control de diversas estaciones espaciales hasta el espacio profundo. El juego se desarrolla en rápidas rondas, con los jugadores valiéndose de sus habilidades para disparar y lanzar armas además de moverse en entornos sin gravedad, impulsándose desde paredes, objetos y los cuerpos de sus enemigos.
 
 
-##Pivotal Tracker
+## Pivotal Tracker
 El avance de nuestro proyecto seguido a través de Pivotal.
 Puedes encontrar nuestro pivotal [aqui](https://www.pivotaltracker.com/projects/2431723).
 
-##Pagina Web
+## Pagina Web
 
-##Miembros
+## Miembros
 Tai1 Games está compuesto actualmente por diez miembros:
 * [Adrián Álvarez](https://www.github.com/AdriAlvarez00)
 * [Álvar Domingo](https://www.github.com/Auraum)
