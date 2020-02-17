@@ -24,3 +24,12 @@ Hay libertad de escribir el código como sea más cómodo y escalable dentro de 
 	como siempre que saltemos desde una posición de agarre (subclase de grabbing)
 	iremos a Air::Idle, este input no aparecerá por duplicado en Grabbing::Idle ni Grabbing::Charging.
 	
+## Librerías
+
+* **SDL2:** a pesar de la tentativa de Carlos León para usar Unreal.
+
+* **Box2D:** como motor de físicas.
+
+* **SDL2_TTF:** como librería de texto.
+
+* **SDL2_Mixer:** como librería de audio.
