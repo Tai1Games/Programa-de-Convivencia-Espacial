@@ -19,6 +19,7 @@ Hay libertad de escribir el código como sea más cómodo y escalable dentro de 
 	con una máquina de estados
 	
 	![InputStateMachine](assets/web/InputStateMachine.png "Máquina de estados")
+	
 	_Ejemplo:_ 
 	como siempre que saltemos desde una posición de agarre (subclase de grabbing)
 	iremos a Air::Idle, este input no aparecerá por duplicado en Grabbing::Idle ni Grabbing::Charging.
