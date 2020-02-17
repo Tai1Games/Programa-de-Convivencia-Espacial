@@ -35,6 +35,8 @@ Comentar antes de cada método en el header (no setters y getters) lo que hace
 
 ### Pivotal y Github
 
+**El que haga un commit al master muere**
+
 Todas las historias han de ir en ramas distintas
 
 Liveshare para visual si quereis hacer pair programming
