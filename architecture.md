@@ -1,1 +1,25 @@
-Commit de prueba para pivotal
+# Arquitectura del proyecto
+
+Se han determinado los siguientes patrones de diseño a la hora de desarrollar PCE.
+Hay libertad de escribir el código como sea más cómodo y escalable dentro de estos patrones.
+
+## Patrones de diseño
+
+* **Arquitectura por componentes:** Al igual que en TPV2 los estados de juego gestionarán una lista de entidades con componentes. Se pueden crear **componentes mediante herencia**, pero las entidades no tendrán subclases.
+
+* **Singleton:** Habrá un único singleton, GameManager, que gestionará la comunicación entre objetos del juego. Cualquier otro "manager", encargado de texturas/sonido será únicamente accesible desde el GameManager para mantener el código limpio.
+
+* **Máquina de estados:** Usaremos dos máquinas de estados:
+
+  * _Pila de estados_: Al igual que en TPV1, usaremos una pila de estados para facilitar la vuelta al estado anterior. Se añadirán un estado de partida, que dicta el modo en el que se suceden las rondas de juego y un PlayState, que recibirá por parámetro el tipo de juego y el mapa.
+
+  * _Input del jugador,_ como alternativa a 
+	tener un switch pantagruélico que compruebe booleanos como isJumping || isSeizingTheMeansOfProduction tendremos una máquina 
+	de estados jerárquica concurrente que gestionará el input o se lo enviará su superclase. Las armas también funcionarán 
+	con una máquina de estados
+	
+	![InputStateMachine](assets/web/InputStateMachine.png "Máquina de estados")
+	_Ejemplo:_ 
+	como siempre que saltemos desde una posición de agarre (subclase de grabbing)
+	iremos a Air::Idle, este input no aparecerá por duplicado en Grabbing::Idle ni Grabbing::Charging.
+	
