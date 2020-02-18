@@ -211,7 +211,7 @@ Al igual que en el modo de juego anterior, en este modo de juego nos interesa sa
 
 - **Capitalismo:**
 
-![ConceptUIModoCapitalismo](assetsGDD/conceptUIModoCapitalismo.png)
+![conceptUIModoCapitalismo](assets/web/conceptUIModoCapitalismo.png)
 
 En este modo de juego nos interesa saber el número de monedas que ha ganado cada jugador y el número necesario de monedas para ganar. 
 Como en este modo los jugadores no pueden morir, no será necesario representar el número de vidas.
