@@ -79,7 +79,7 @@ Cuando un jugador consiga descargar todos sus archivos, acabará la ronda en el 
 
 En el escenario aparecen monedas que los jugadores deberán recoger. Al golpear a los enemigos, soltarán monedas. En este modo de juego los jugadores son invulnerables y cuando son golpeados pierden dinero y son empujados. Al acabarse el tiempo, el jugador con más dinero gana.
 
-![ConceptModoCapitalismo](assets/web/conceptModoCapitalismo.png)
+![conceptModoCapitalismo](assets/web/conceptModoCapitalismo.png)
 
 
 ### 4.4 Mecánicas:
