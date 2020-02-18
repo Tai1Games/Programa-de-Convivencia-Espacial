@@ -1,20 +1,25 @@
 # Documento de diseño
 
+---
 ## 1. Introducción:
 Programa de Convivencia Espacial es un party-game en el que los jugadores controlarán astronautas para pelearse por el control de diversas estaciones espaciales
 hasta el espacio profundo.
 El juego se desarrollará en rápidas rondas, valiéndose de sus habilidades para disparar armas y lanzar objetos del mobiliario además de moverse en entornos
 sin gravedad, impulsándose desde paredes, objetos y los cuerpos de sus enemigos.
 
+---
 ## 2. Historia:
 De entre todos los experimentos a los que te podías haber apuntado para sacarte unos euros de más, has acabado en el peor de todos. 
 Bienvenido al PCE (Programa de Convivencia Espacial), en el que, durante varios y tortuosos meses, convivirás con gente de todo el mundo, con todos los
 choques (culturales y físicos) que eso conlleva. ¿Lograrás volver a la tierra siendo el mejor (y más rico) compañero de piso espacial?
 
+
+---
 ## 3. Personajes:
 Los jugadores encarnan a un astronauta participante en el PCE. Cada astronauta pertenece a una nación diferente. 
 Esto se verá reflejado en su aspecto físico, ya que su traje llevará bordada la bandera de su nación correspondiente.
 
+---
 ## 4. Gameplay:
 
 ### 4.1 Controles:
@@ -144,7 +149,8 @@ Cuando un jugador recoge un arma, empezará el tiempo de respawn del lugar donde
 
 - **Tipos de armas:** *Actualmente las armas se dividen en 3 subclases*
 
-**Armas cuerpo a cuerpo:**
+
+**● Armas cuerpo a cuerpo:**
 
 **- Confeti:** Arma de corto alcance que ejerce 2 puntos de daño y aplica un gran impulso al otro jugador (onda expansiva).
 
@@ -152,7 +158,8 @@ Cuando un jugador recoge un arma, empezará el tiempo de respawn del lugar donde
 
 **- Toalla mojada** Arma cuerpo a cuerpo de medio alcance que hace 1 punto de daño al anemigo y además le empuja una grán distancia. La tolla solo hace su efecto en una pequeña área al extremo final de su rango.
 
-**Armas a distancia:**
+
+**● Armas a distancia:**
 
 **- Objetos contundentes:** Son armas arrojadizas de un solo uso repartidos por el escenario que hacen 1 punto de daño. Estos pueden venir en varias formas (rocas, ladrillos, libros, tuppers congelados...) pero su tamaño será similar.
 
@@ -164,7 +171,8 @@ Cuando un jugador recoge un arma, empezará el tiempo de respawn del lugar donde
 
 **-Grapadora:** Arma a distancia con poca munición que ejerce 1 punto de daño por disparo.
 
-**Armas misceláneas:**
+
+**● Armas misceláneas:**
 
 **-Extintor:** Permite que el jugador se mueva libremente por el escenario gracias a la espuma a presión. No ejerce daño, pero al lanzarlo puede desarmar.
 
@@ -221,7 +229,7 @@ Como en este modo los jugadores no pueden morir, no será necesario representar 
 	
 	- **Paredes acolchadas:** Permiten el rebote del jugador.
 	
-![ConceptGimnasio](assets/web/ConceptGimnasio.png)
+![conceptGimnasio](assets/web/conceptGimnasio.png)
 
 - **Sala de máquinas:**
 
@@ -261,7 +269,7 @@ Como en este modo los jugadores no pueden morir, no será necesario representar 
 
 *No hay peligros mortales para el jugador, pero hay una multitud de objetos que los jugadores se pueden arrojar (sillas, lámparas…)*
 
-![conceptSalaDeEStar](assets/web/conceptSalaDeEStar.png)
+![conceptSalaDeEStar](assets/web/conceptSalaDeEstar.png)
 
 - **Entrada de la estación:**
 
@@ -279,6 +287,7 @@ Como en este modo los jugadores no pueden morir, no será necesario representar 
 | Wi-Fight | 1 | 1 | 1 | 1 | 1 |
 | Capitalismo | 1 | 1 | 1 | 1 | 1 |
 
+---
 ## 5. Carta a los reyes magos:
 
 *En este apartado exploramos nuevas mecánicas o contenido que querríamos añadir al juego, pero dado al nivel de incertidumbre que existe ahora mismo en el desarrollo no estamos cómodos en añadirlos al GDD.*
