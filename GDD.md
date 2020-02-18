@@ -92,7 +92,7 @@ Al mantener un botón, el jugador cargará una flecha de impulso. Su dirección 
 
 A medida que el jugador cargue el impulso, se llenarán los segmentos de la flecha. Para calcular la fuerza del impulso, se contarán los segmentos que el jugador haya cargado. De este modo, si el jugador ha cargado un segmento y medio, el impulso resultante será de un segmento de potencia.
 
-![ConceptImpulso](assetsGDD/conceptImpulso.png)
+![ConceptImpulso](assets/web/conceptImpulso.png)
 
 *Ejemplo de un jugador cargando su salto*
 
@@ -178,26 +178,26 @@ Cuando un jugador recoge un arma, empezará el tiempo de respawn del lugar donde
 
 - **Por tiempo:**
 
-![ConceptUIModoTiempo](assetsGDD/conceptUIModoTiempo.png)
+![ConceptUIModoTiempo](assets/web/conceptUIModoTiempo.png)
 
 En este modo de juego nos interesa mostrar la vida del jugador, el tiempo restante y el número de bajas que lleva cada jugador.
 
 - **Por vidas:**
 
-![ConceptUIModoVidas](assetsGDD/conceptUIModoVidas.png)
+![ConceptUIModoVidas](assets/web/conceptUIModoVidas.png)
 
 En este modo de juego nos interesa el número de vidas restantes que tiene cada jugador.
 
 - **¡Pelea por el mando!:**
 
-![ConceptUIModoMando](assetsGDD/conceptUIModoMando.png)
+![ConceptUIModoMando](assets/web/conceptUIModoMando.png)
 
 En este modo de juego nos interesa saber el progreso de victoria que lleva cada personaje.
 
 
 - **Wi-Fight:**
 
-![ConceptUIModoWi-Fight](assetsGDD/conceptUIModoWi-Fight.png)
+![ConceptUIModoWi-Fight](assets/web/conceptUIModoWi-Fight.png)
 
 Al igual que en el modo de juego anterior, en este modo de juego nos interesa saber el progreso de victoria que lleva cada personaje.
 
@@ -221,7 +221,7 @@ Como en este modo los jugadores no pueden morir, no será necesario representar 
 	
 	- **Paredes acolchadas:** Permiten el rebote del jugador.
 	
-![ConceptGimnasio](assetsGDD/ConceptGimnasio.png)
+![ConceptGimnasio](assets/web/ConceptGimnasio.png)
 
 - **Sala de máquinas:**
 
@@ -233,7 +233,7 @@ Como en este modo los jugadores no pueden morir, no será necesario representar 
 	
 	- **Botones:** Se pueden activar con un disparo o con un golpe. Permiten la aceleración o la deceleración del horno.
 	
-![conceptSalaDeMaquinas](assetsGDD/conceptSalaDeMaquinas.png)
+![conceptSalaDeMaquinas](assets/web/conceptSalaDeMaquinas.png)
 
 - **Jardin botánico:**
 
@@ -245,7 +245,7 @@ Como en este modo los jugadores no pueden morir, no será necesario representar 
 	
 	- **Plantas carnívoras:** Devoran a los jugadores que se acerquen a ellas.
 
-![conceptJardinBotanico](assetsGDD/conceptJardinBotanico.png)
+![conceptJardinBotanico](assets/web/conceptJardinBotanico.png)
 
 - **Cocina:**
 
@@ -255,29 +255,29 @@ Como en este modo los jugadores no pueden morir, no será necesario representar 
 	
 	- **Utensilios de cocina:** Funcionan como armas arrojadizas.
 	
-![conceptCocina](assetsGDD/conceptCocina.png)
+![conceptCocina](assets/web/conceptCocina.png)
 	
 - **Sala de estar:**
 
 *No hay peligros mortales para el jugador, pero hay una multitud de objetos que los jugadores se pueden arrojar (sillas, lámparas…)*
 
-![conceptSalaDeEStar](assetsGDD/conceptSalaDeEStar.png)
+![conceptSalaDeEStar](assets/web/conceptSalaDeEStar.png)
 
 - **Entrada de la estación:**
 
 	- **Compuertas:** Hay 4 repartidas por el escenario. Estas se irán abriendo de forma regular cada cierto tiempo. Antes de abrirse, un muro dividirá la sala en secciones. De este modo, si el jugador escapa de la sección que va a ser abierta al espacio, sobrevivirá. Si un jugador sale lanzado al espacio, morirá.
 	
-![conceptEntradaEstacion](assetsGDD/conceptEntradaEstacion.png)
+![conceptEntradaEstacion](assets/web/conceptEntradaEstacion.png)
 
 *Disponibilidad de modos de juego en cada mapa (0 no está disponible, 1 si lo está):*
 
-|   | cocina | gimnasio | s. de máquinas | s. de estar |
-| --- | --- | --- | --- | --- |
-| Por vidas | 1 | 1 | 1 | 1 |
-| Por tiempo | 1 | 1 | 1 | 1 |
-| Pelea mando | 1 | 1 | 1 | 1 |
-| Wi-Fight | 1 | 1 | 1 | 1 |
-| Capitalismo | 1 | 1 | 1 | 1 |
+|   | cocina | gimnasio | s. de máquinas | s. de estar | entrada estación |
+| --- | --- | --- | --- | --- | --- |
+| Por vidas | 1 | 1 | 1 | 1 | 1 |
+| Por tiempo | 1 | 1 | 1 | 1 | 1 |
+| Pelea mando | 1 | 1 | 1 | 1 | 1 |
+| Wi-Fight | 1 | 1 | 1 | 1 | 1 |
+| Capitalismo | 1 | 1 | 1 | 1 | 1 |
 
 ## 5. Carta a los reyes magos:
 
