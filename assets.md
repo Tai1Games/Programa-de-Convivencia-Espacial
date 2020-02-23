@@ -9,7 +9,7 @@
 * **Animacion:** los jugadores y elementos pertinentes del entorno estarán animados, además, los cadáveres de los personajes tendrán animación tipo _ragdoll_, moviéndose con las físicas libremente
 
 	
-![Sprite del jugador](assets/web/spriteJugador.png "Sprite del jugador")
+![Sprite del jugador](assets/web/spriteJugador.gif "Sprite del jugador")
 	
 	
 ## Sonido
