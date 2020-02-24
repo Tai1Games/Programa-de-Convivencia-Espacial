@@ -2,7 +2,7 @@
 
 ## Sprites
 
-* **Estilo:** por el momento, los sprites tanto de los jugadores como de las armas y otros objetos "movibles" tendrán un stilo pixel art con una resolución media baja (alrededor de 32 pixeles de alto por jugador). Se usará un reborde negro para los jugadores y otros elementos de importancia, como por ejemplo las partes interaccionables del mapa
+* **Estilo:** por el momento, los sprites tanto de los jugadores como de las armas y otros objetos "movibles" tendrán un estilo pixel art con una resolución media baja (alrededor de 32 pixeles de alto por jugador). Se usará un reborde negro para los jugadores y otros elementos de importancia, como por ejemplo las partes interaccionables del mapa
 
 * **Paleta:** colores similares a los pastel, aunque esta "norma" se podrá rompe para dar especial importancia a ciertos elementos como objetos interactuables o peligrosos.
 
