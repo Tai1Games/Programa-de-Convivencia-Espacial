@@ -16,7 +16,7 @@
 
 * **Efectos de sonido:** utilizaremos sonidos generados por nosotros (con paginas como [as3sfxr], [ChipTone] o [Bfxr]) asi como efectos descargados de internet.
 
-* **Música:** se encarga Jorgemo, ami no me mires.
+* **Música:** se encarga Jorge, a mi no me mires.
 
 [as3sfxr]: http://www.superflashbros.net/as3sfxr/
 [ChipTone]: https://sfbgames.com/chiptone/
