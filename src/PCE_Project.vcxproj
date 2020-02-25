@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="PCE_Project.h" />
     <ClInclude Include="Resource.h" />
