@@ -115,6 +115,11 @@
       <AdditionalLibraryDirectories>SDL2-2.0.10\lib\x64;Box2D\lib;SDL2_ttf-2.0.15\lib\x64;SDL2_mixer-2.0.4\lib\x64</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;box2d.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)SDL2-2.0.10\lib\$(Platform)\SDL2.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL2_mixer-2.0.4\lib\$(Platform)\SDL2_mixer.dll\" "$(TargetDir)"
+copy "$(SolutionDir)SDL2_ttf-2.0.15\lib\$(Platform)\SDL2_ttf.dll" "$(TargetDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -153,6 +158,11 @@
       <AdditionalLibraryDirectories>SDL2-2.0.10\lib\x64;Box2D\lib;SDL2_ttf-2.0.15\lib\x64;SDL2_mixer-2.0.4\lib\x64</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;box2d.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)SDL2-2.0.10\lib\$(Platform)\SDL2.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL2_mixer-2.0.4\lib\$(Platform)\SDL2_mixer.dll\" "$(TargetDir)"
+copy "$(SolutionDir)SDL2_ttf-2.0.15\lib\$(Platform)\SDL2_ttf.dll" "$(TargetDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Constants.h" />
