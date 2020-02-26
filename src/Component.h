@@ -37,9 +37,10 @@ public:
 	}
 
 	//Metodos que implementan los hijos y los dotan de funcionalidad
-	virtual void init() = 0;
-	virtual void update() = 0;
-	virtual void draw() = 0;
+	virtual void init() {}
+	virtual void update() {};
+	virtual void draw() {};
+	virtual void handleInput() {};
 
 };
 
