@@ -13,18 +13,16 @@ void createWindow() {
 
 int main(int argc, char* argv[]) {
 	json windowConfig;
-	windowConfig["width"] = 1180;
-	windowConfig["heigth"] = 720;
+	windowConfig["width"] = 1920;
+	windowConfig["heigth"] = 1080;
 	windowConfig["name"] = "El loco juego de Tai1 Games";
 
 	std::ofstream out("windowConfig.json");
 	out << std::setw(4) << windowConfig << std::endl;
 	out.close();
-
-	SDL_Game PCE = SDL_Game();
-
+	SDL_Game Game;
 
 	//descomentar para depurar
-	//while (true) {};
+	while (true) {};
 	return 0;
 }
