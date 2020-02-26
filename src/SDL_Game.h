@@ -1,6 +1,8 @@
 #pragma once
+
 #include <SDL.h>
 #include "Constants.h"
+#include "EntityManager.h"
 #include <memory>
 #include <assert.h>
 
@@ -17,6 +19,7 @@ protected:
 
 	SDL_Window* window_;
 	SDL_Renderer* renderer_;
+	EntityManager* entityManager_;
 
 	static unique_ptr<SDL_Game> instance_;
 private:
