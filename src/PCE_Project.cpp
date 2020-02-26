@@ -7,10 +7,9 @@ void createWindow() {
 }
 
 int main(int argc, char* argv[]) {
-	SDL_Game PCE = SDL_Game();
-
+	SDL_Game Game;
 
 	//descomentar para depurar
-	//while (true) {};
+	while (true) {};
 	return 0;
 }
