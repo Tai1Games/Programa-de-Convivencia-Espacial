@@ -13,7 +13,7 @@ void createWindow() {
 
 int main(int argc, char* argv[]) {
 	json windowConfig;
-	windowConfig["width"] = 1280;
+	windowConfig["width"] = 1180;
 	windowConfig["heigth"] = 720;
 	windowConfig["name"] = "El loco juego de Tai1 Games";
 
