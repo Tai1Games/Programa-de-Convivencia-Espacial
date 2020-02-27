@@ -1,7 +1,6 @@
 #include "Entity.h"
 
-Entity::Entity(SDL_Game* game, EntityManager* mngr) :
-	game_(game), //
+Entity::Entity( EntityManager* mngr) :
 	entityManager_(mngr) //
 {
 }
@@ -16,7 +15,7 @@ void Entity::update()
 	}
 }
 
-void Entity::draw()
+void Entity::render()
 {
 	for (auto& c : components_) {
 		c->draw();

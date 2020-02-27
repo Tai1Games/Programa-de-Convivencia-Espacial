@@ -9,17 +9,15 @@ class SDL_Game;
 class EntityManager
 {
 public:
-	EntityManager(SDL_Game* g);
+	EntityManager();
 	virtual ~EntityManager();
 
 	void update();
-	void draw();
+	void render();
 	Entity* addEntity();
 
 
 private:
 	std::vector<std::unique_ptr<Entity>> entities_;
-	SDL_Game* game_;
-
 };
 

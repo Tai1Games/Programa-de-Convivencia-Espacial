@@ -11,7 +11,7 @@ class EntityManager;
 class Entity
 {
 public:
-	Entity(SDL_Game* game, EntityManager* mngr);
+	Entity(EntityManager* mngr);
 	virtual ~Entity();
 
 	EntityManager* getEntityManager() {
@@ -25,7 +25,6 @@ public:
 		components_.push_back(std::move(uPtr));
 		componentsArray_[c->getId()] = c;
 		c->setEntity(this);
-		c->setGame(game_);
 		c->init();
 		return c;
 	}
@@ -40,10 +39,9 @@ public:
 	}
 
 	void update();
-	void draw();
+	void render();
 
 private:
-	SDL_Game* game_;
 	EntityManager* entityManager_;
 
 	std::vector<unique_ptr<Component>> components_;
