@@ -3,6 +3,7 @@
 #include "Constants.h"
 #include <memory>
 #include <assert.h>
+#include "EntityManager.h"
 
 using namespace std;
 //Interfaz entre el juego y el display
