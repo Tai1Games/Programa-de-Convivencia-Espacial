@@ -173,11 +173,14 @@ copy "$(SolutionDir)SDL2_ttf-2.0.15\lib\$(Platform)\SDL2_ttf.dll" "$(TargetDir)"
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SDL_Game.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="PCE_Project.cpp" />
     <ClCompile Include="SDL_Game.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PCE_Project.rc" />
