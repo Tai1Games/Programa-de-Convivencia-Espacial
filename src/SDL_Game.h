@@ -3,6 +3,7 @@
 #include "Constants.h"
 #include <memory>
 #include <assert.h>
+#include "EntityManager.h"
 
 using namespace std;
 //Interfaz entre el juego y el display
@@ -17,6 +18,7 @@ protected:
 
 	SDL_Window* window_;
 	SDL_Renderer* renderer_;
+	EntityManager* entityManager_;
 
 	static unique_ptr<SDL_Game> instance_;
 private:
