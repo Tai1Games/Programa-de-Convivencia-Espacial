@@ -40,6 +40,7 @@ public:
 
 	void update();
 	void render();
+	void handleInput();
 
 private:
 	EntityManager* entityManager_;

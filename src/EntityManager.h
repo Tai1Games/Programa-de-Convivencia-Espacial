@@ -14,6 +14,7 @@ public:
 
 	void update();
 	void render();
+	void handleInput();
 	Entity* addEntity();
 
 
