@@ -165,6 +165,7 @@ copy "$(SolutionDir)SDL2_ttf-2.0.15\lib\$(Platform)\SDL2_ttf.dll" "$(TargetDir)"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="checkML.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentType.h" />
     <ClInclude Include="Constants.h" />
