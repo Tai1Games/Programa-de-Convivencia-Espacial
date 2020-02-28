@@ -7,12 +7,12 @@ public:
 	Health(int l);
 	~Health();
 
-	void resetHealth() { lifes_ = lifesMax_; }
+	void resetHealth() { lives_ = livesMax_; }
 	bool subtractLife(int damage); //return true si despues del daño sigue vivo
 	void addLife(int sum); //suma sum a la vida siempre y cuando esta no supere la constanteGeneral
-	int getHealthMax() { return lifesMax_; }
+	int getHealthMax() { return livesMax_; }
 private:
-	int lifes_;
-	int lifesMax_;
+	int lives_;
+	int livesMax_;
 };
 

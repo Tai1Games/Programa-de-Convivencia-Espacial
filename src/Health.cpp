@@ -1,9 +1,9 @@
 #include "Health.h"
 #include <iostream>
 
-Health::Health(int l) : Component(ComponentType::Health)
+Health::Health(int lives) : Component(ComponentType::Health)
 {
-	lifes_ = lifesMax_ = l;
+	lives_ = livesMax_ = l;
 }
 
 Health::~Health()
@@ -12,14 +12,14 @@ Health::~Health()
 
 bool Health::subtractLife(int damage)
 {
-	lifes_ -= damage;
+	lives_ -= damage;
 
-	if (lifes_ > 0) return true;
+	if (lives_ > 0) return true;
 	else return false;
 }
 
 void Health::addLife(int sum)
 {
-	if (lifes_ + sum > lifesMax_) lifes_ = lifesMax_;
-	else lifes_ += sum;
+	if (lives_ + sum > livesMax_) lives_ = livesMax_;
+	else lives_ += sum;
 }
