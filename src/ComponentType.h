@@ -8,6 +8,7 @@ namespace ComponentType {
 	enum CmpId : CmpIdType {
 		//Vayan metiendo aqui sus componentes segun lo hagan
 		Transform,
+		Health,
 		// don't touch the rest of this enum, it is to identify the max
 		// number of components
 		_LastCmptId_
