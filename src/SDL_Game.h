@@ -4,6 +4,8 @@
 #include <memory>
 #include <assert.h>
 #include "EntityManager.h"
+#include "SDLTexturesManager.h"
+#include "Resources.h"
 
 using namespace std;
 //Interfaz entre el juego y el display
@@ -12,8 +14,12 @@ class SDL_Game
 protected:
 
 	//Fonts
+
 	//Textures
+	SDLTexturesManager* textures_ = nullptr;
+
 	//Audio
+
 	//Rng
 
 	SDL_Window* window_;
@@ -38,5 +44,7 @@ public:
 	inline unsigned int getTime() {
 		return SDL_GetTicks();
 	}
+
+	SDLTexturesManager getTexturesMngr() { return textures_; }
 };
 

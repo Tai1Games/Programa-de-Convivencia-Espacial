@@ -23,9 +23,14 @@ SDL_Game::~SDL_Game() {
 }
 
 void SDL_Game::initializeResources() {
+	textures_ = new SDLTexturesManager();
+	textures_->init();
 
+	for (auto& image : Resources::images_) {
+		textures_->loadFromImg(image.id, renderer_, image.fileName);
+	}
 }
 
 void SDL_Game::closeResources() {
-
+	delete textures_;
 }
