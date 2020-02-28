@@ -1,7 +1,7 @@
 #include "Health.h"
 #include <iostream>
 
-Health::Health(int lives) : Component(ComponentType::Health)
+Health::Health(int l) : Component(ComponentType::Health)
 {
 	lives_ = livesMax_ = l;
 }
