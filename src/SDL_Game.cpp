@@ -72,4 +72,6 @@ void SDL_Game::initializeResources() {
 
 void SDL_Game::closeResources() {
 	delete textures_;
+	delete fonts_;
+	delete audio_;
 }
