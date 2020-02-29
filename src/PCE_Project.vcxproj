@@ -117,11 +117,10 @@
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;box2d.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)SDL2-2.0.10\lib\$(Platform)\" "$(TargetDir)"
-copy "$(SolutionDir)SDL2_mixer-2.0.4\lib\$(Platform)\" "$(TargetDir)"
-copy "$(SolutionDir)SDL2_ttf-2.0.15\lib\$(Platform)\" "$(TargetDir)"
-copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\" "$(TargetDir)"
-</Command>
+      <Command>copy "$(SolutionDir)SDL2-2.0.10\lib\$(Platform)\*.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL2_mixer-2.0.4\lib\$(Platform)\*.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL2_ttf-2.0.15\lib\$(Platform)\*.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -162,9 +161,10 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\" "$(TargetDir)"
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;box2d.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)SDL2-2.0.10\lib\$(Platform)\SDL2.dll" "$(TargetDir)"
-copy "$(SolutionDir)SDL2_mixer-2.0.4\lib\$(Platform)\SDL2_mixer.dll\" "$(TargetDir)"
-copy "$(SolutionDir)SDL2_ttf-2.0.15\lib\$(Platform)\SDL2_ttf.dll" "$(TargetDir)"</Command>
+      <Command>copy "$(SolutionDir)SDL2-2.0.10\lib\$(Platform)\*.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL2_mixer-2.0.4\lib\$(Platform)\*.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL2_ttf-2.0.15\lib\$(Platform)\*.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
