@@ -76,7 +76,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);SDL2-2.0.10\include;Box2D\include\box2d;SDL2_ttf-2.0.15\include;SDL2_mixer-2.0.4\include;json\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);SDL2-2.0.10\include;Box2D\include\box2d;SDL2_ttf-2.0.15\include;SDL2_mixer-2.0.4\include;json\include;SDL2_image-2.0.5\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -112,8 +112,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>SDL2-2.0.10\lib\x64;Box2D\lib;SDL2_ttf-2.0.15\lib\x64;SDL2_mixer-2.0.4\lib\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;box2d.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>SDL2-2.0.10\lib\x64;Box2D\lib;SDL2_ttf-2.0.15\lib\x64;SDL2_mixer-2.0.4\lib\x64;SDL2_image-2.0.5\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;box2d.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)SDL2-2.0.10\lib\$(Platform)\SDL2.dll" "$(TargetDir)"
@@ -176,6 +176,8 @@ copy "$(SolutionDir)SDL2_ttf-2.0.15\lib\$(Platform)\SDL2_ttf.dll" "$(TargetDir)"
     <ClInclude Include="PCE_Project.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Resources.h" />
+    <ClInclude Include="SDLAudioManager.h" />
+    <ClInclude Include="SDLFontsManager.h" />
     <ClInclude Include="SDLTexturesManager.h" />
     <ClInclude Include="SDL_Game.h" />
     <ClInclude Include="SDL_macros.h" />
@@ -191,6 +193,8 @@ copy "$(SolutionDir)SDL2_ttf-2.0.15\lib\$(Platform)\SDL2_ttf.dll" "$(TargetDir)"
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="PCE_Project.cpp" />
     <ClCompile Include="Resources.cpp" />
+    <ClCompile Include="SDLAudioManager.cpp" />
+    <ClCompile Include="SDLFontsManager.cpp" />
     <ClCompile Include="SDLTexturesManager.cpp" />
     <ClCompile Include="SDL_Game.cpp" />
     <ClCompile Include="sdl_macros.cpp" />

@@ -19,14 +19,14 @@ public:
 
 	enum AudioId : std::size_t {
 		// music
-		
+		MainTheme
 
 		// sound effects
 		
 	};
 
 	enum FontId : std::size_t {
-		
+		NES_Chimera
 	};
 
 	struct FontInfo {

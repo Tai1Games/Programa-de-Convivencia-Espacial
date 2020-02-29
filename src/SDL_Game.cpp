@@ -8,6 +8,19 @@ SDL_Game::SDL_Game(){
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 
 	initializeResources();
+
+	//Prueba multimedia
+	textures_->getTexture(Resources::Tinky)->render({ WINDOW_WIDTH / 2 - 70,WINDOW_HEIGHT / 2 - 135,140,200 });
+
+	Texture introText(renderer_,
+		"PROGRAMA DE CONVIVENCIA ESPACIAL",
+		fonts_->getFont(Resources::NES_Chimera),
+		{ COLOR(0xc7f2edff) });
+	introText.render(
+		WINDOW_WIDTH / 2 - introText.getWidth() / 2, WINDOW_HEIGHT - 250);
+	SDL_RenderPresent(renderer_);
+
+	audio_->playMusic(Resources::MainTheme, -1);
 }
 
 SDL_Game::~SDL_Game() {
@@ -23,11 +36,37 @@ SDL_Game::~SDL_Game() {
 }
 
 void SDL_Game::initializeResources() {
+	/*random_ = new SRandBasedGenerator();
+	random_->init();*/
+
 	textures_ = new SDLTexturesManager();
 	textures_->init();
 
+	fonts_ = new SDLFontsManager();
+	fonts_->init();
+
+	audio_ = new SDLAudioManager();
+	audio_->init();
+
 	for (auto& image : Resources::images_) {
 		textures_->loadFromImg(image.id, renderer_, image.fileName);
+	}
+
+	for (auto& font : Resources::fonts_) {
+		fonts_->loadFont(font.id, font.fileName, font.size);
+	}
+
+	for (auto& txtmsg : Resources::messages_) {
+		textures_->loadFromText(txtmsg.id, renderer_, txtmsg.msg,
+			fonts_->getFont(txtmsg.fontId), txtmsg.color);
+	}
+
+	for (auto& sound : Resources::sounds_) {
+		audio_->loadSound(sound.id, sound.fileName);
+	}
+
+	for (auto& music : Resources::musics_) {
+		audio_->loadMusic(music.id, music.fileName);
 	}
 }
 

@@ -5,7 +5,10 @@
 #include <assert.h>
 #include "EntityManager.h"
 #include "SDLTexturesManager.h"
+#include "SDLAudioManager.h"
+#include "SDLFontsManager.h"
 #include "Resources.h"
+#include "SDL_macros.h"
 
 using namespace std;
 //Interfaz entre el juego y el display
@@ -14,11 +17,13 @@ class SDL_Game
 protected:
 
 	//Fonts
+	SDLFontsManager* fonts_ = nullptr;
 
 	//Textures
 	SDLTexturesManager* textures_ = nullptr;
 
 	//Audio
+	SDLAudioManager* audio_ = nullptr;
 
 	//Rng
 
@@ -45,6 +50,6 @@ public:
 		return SDL_GetTicks();
 	}
 
-	SDLTexturesManager getTexturesMngr() { return textures_; }
+	SDLTexturesManager* getTexturesMngr() { return textures_; }
 };
 
