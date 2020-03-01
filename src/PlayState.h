@@ -3,6 +3,8 @@
 #include "Entity.h"
 #include "EntityManager.h"
 #include "Box2D/include/box2d/box2d.h"
+#include "checkML.h"
+
 
 using namespace std;
 
@@ -13,17 +15,17 @@ class PlayState
 {
 public:
 	PlayState();
+	~PlayState();
 	virtual void init();
 	virtual void update();
 	virtual void render();
 	virtual void handleInput();
 private:
-	EntityManager* eManager_;
-	b2World* physicsWorld;
-	vector<b2Body*> physicalEntities; //almacena los punteros a los colliders de b2
+	EntityManager* entityManager_;
+	b2World* physicsWorld_;
+	vector<b2Body*> physicalEntities_; //almacena los punteros a los colliders de b2
 	//puede que no sea necesario si cogemos la referencia en cuanto los creamos con addPhysicalEntity
 	b2Body* addPhysicalEntity(/*PARÁMETROS PARA PODER CREAR UN BODY*/);  //añade una entidad fisica
-
 	//HUD
 
 };

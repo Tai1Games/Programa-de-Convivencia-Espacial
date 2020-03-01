@@ -1,8 +1,9 @@
 #include "SDL_Game.h"
+#include "PlayState.h"
 
 unique_ptr<SDL_Game> SDL_Game::instance_;
 
-SDL_Game::SDL_Game(){
+SDL_Game::SDL_Game() {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window_ = SDL_CreateWindow(WINDOW_NAME.c_str(),SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,WINDOW_WIDTH, WINDOW_HEIGHT,SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
@@ -10,7 +11,7 @@ SDL_Game::SDL_Game(){
 	initializeResources();
 
 	//Prueba multimedia
-	textures_->getTexture(Resources::Tinky)->render({ WINDOW_WIDTH / 2 - 70,WINDOW_HEIGHT / 2 - 135,140,200 });
+	//textures_->getTexture(Resources::Tinky)->render({ WINDOW_WIDTH / 2 - 70,WINDOW_HEIGHT / 2 - 135,140,200 });
 
 	Texture introText(renderer_,
 		"PROGRAMA DE CONVIVENCIA ESPACIAL",
@@ -20,7 +21,7 @@ SDL_Game::SDL_Game(){
 		WINDOW_WIDTH / 2 - introText.getWidth() / 2, WINDOW_HEIGHT - 250);
 	SDL_RenderPresent(renderer_);
 
-	audio_->playMusic(Resources::MainTheme, -1);
+	//audio_->playMusic(Resources::MainTheme, -1);
 }
 
 SDL_Game::~SDL_Game() {
@@ -33,6 +34,24 @@ SDL_Game::~SDL_Game() {
 	window_ =  nullptr;
 	
 	SDL_Quit();
+}
+
+void SDL_Game::start() {
+	exit_ = false;
+	gameState_ = new PlayState();
+	gameState_->init();
+	while (!exit_) {
+		//Uint32 startTime = game_->getTime();
+
+		gameState_->handleInput();
+		gameState_->update();
+		gameState_->render();
+
+		//Uint32 frameTime = game_->getTime() - startTime;
+		//if (frameTime < 10)
+		//	SDL_Delay(10 - frameTime);
+		//exit_ = !exit_;
+	}
 }
 
 void SDL_Game::initializeResources() {

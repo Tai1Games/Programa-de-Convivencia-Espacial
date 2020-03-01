@@ -1,6 +1,8 @@
 #pragma once
 #include "Component.h"
 #include "Vector2D.h"
+#include "checkML.h"
+
 
 class Transform : public Component
 {
@@ -30,6 +32,18 @@ public:
 	void setWH(double w, double h) { width_ = w; heigth_ = h; }
 	void setW(double w) { width_ = w; }
 	void setH(double h) { heigth_ = h; }
+
+	//destRect
+	SDL_Rect getDestRect() const {
+		SDL_Rect r;
+
+		r.x = position_.getX();
+		r.y = position_.getY();
+		r.w = width_;
+		r.h = heigth_;
+
+		return r;
+	}
 
 private:
 	Vector2D position_;

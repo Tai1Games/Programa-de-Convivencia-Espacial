@@ -1,5 +1,7 @@
 #pragma once
-#include <string>;
+#include <string>
+#include "checkML.h"
+
 
 /*Agregar aquí todas las constantes del juego. Cada vez que haya que hacer uso de las constantes,
 simplemente hay que hacer #include "Constants.h" en el archivo en el que estemos programando.*/
