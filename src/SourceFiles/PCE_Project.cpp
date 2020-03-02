@@ -1,6 +1,6 @@
 #include "SDL_Game.h"
 #include "checkML.h"
-#include "json/single_include/nlohmann/json.hpp"
+#include "../json/single_include/nlohmann/json.hpp"
 #include <fstream>
 #include <iomanip>
 
