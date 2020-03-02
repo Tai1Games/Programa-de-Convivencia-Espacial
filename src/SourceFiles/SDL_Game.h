@@ -12,6 +12,7 @@
 
 using namespace std;
 //Interfaz entre el juego y el display
+class InputHandler;
 class SDL_Game
 {
 protected:
@@ -29,6 +30,8 @@ protected:
 
 	SDL_Window* window_;
 	SDL_Renderer* renderer_;
+	
+	InputHandler* inputHandler_;
 
 	static unique_ptr<SDL_Game> instance_;
 private:
@@ -49,6 +52,8 @@ public:
 	inline unsigned int getTime() {
 		return SDL_GetTicks();
 	}
+
+	InputHandler* getInputHandler() { return inputHandler_; }
 
 	SDLTexturesManager* getTexturesMngr() { return textures_; }
 };

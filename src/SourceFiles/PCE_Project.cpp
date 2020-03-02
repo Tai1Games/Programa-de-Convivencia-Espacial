@@ -3,6 +3,7 @@
 #include "../json/single_include/nlohmann/json.hpp"
 #include <fstream>
 #include <iomanip>
+#include "InputHandler.h"
 
 using json = nlohmann::json;
 
@@ -31,6 +32,8 @@ int main(int argc, char* argv[]) {
 
 
 	//descomentar para depurar
-	while (true) {};
+	while (true) {
+		Game.getInputHandler()->update();
+	};
 	return 0;
 }

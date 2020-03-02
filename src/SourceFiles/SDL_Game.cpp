@@ -1,4 +1,5 @@
 #include "SDL_Game.h"
+#include "InputHandler.h"
 
 unique_ptr<SDL_Game> SDL_Game::instance_;
 
@@ -20,7 +21,11 @@ SDL_Game::SDL_Game(){
 		WINDOW_WIDTH / 2 - introText.getWidth() / 2, WINDOW_HEIGHT - 250);
 	SDL_RenderPresent(renderer_);
 
-	audio_->playMusic(Resources::MainTheme, -1);
+	//audio_->playMusic(Resources::MainTheme, -1);
+
+	inputHandler_ = new InputHandler();
+	inputHandler_->initialiseJoysticks();
+
 }
 
 SDL_Game::~SDL_Game() {
