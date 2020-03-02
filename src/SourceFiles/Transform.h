@@ -2,7 +2,7 @@
 #include "Component.h"
 #include "Vector2D.h"
 #include "checkML.h"
-#include "Box2D/include/box2d/box2d.h"
+#include "box2d.h"
 
 
 class Transform : public Component

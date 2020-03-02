@@ -2,7 +2,7 @@
 #include <list>
 #include "Entity.h"
 #include "EntityManager.h"
-#include "Box2D/include/box2d/box2d.h"
+#include "box2d.h"
 #include "checkML.h"
 
 
