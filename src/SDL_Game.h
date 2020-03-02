@@ -48,13 +48,13 @@ public:
 	SDL_Game(SDL_Game&) = delete;
 	SDL_Game& operator=(SDL_Game&) = delete;
 
-	//inline static SDL_Game* instance() {
-	//	assert(instance_.get() != nullptr);
-	//	return instance_.get();
-	//	std::cout << "He sido llamado por singleton" << std::endl;
-	//}
+	/*inline static SDL_Game* instance() {
+		assert(instance_.get() != nullptr);
+		return instance_.get();
+		std::cout << "He sido llamado por singleton" << std::endl;
+	}*/
 
-	static SDL_Game* instance() {
+	inline static SDL_Game* instance() {
 		if (instance_.get() == nullptr) {
 			instance_.reset(new SDL_Game());
 		}
