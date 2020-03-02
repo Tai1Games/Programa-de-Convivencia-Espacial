@@ -1,9 +1,9 @@
 #pragma once
 #include "Component.h"
 #include "Texture.h"
-#include "Transform.h"
 #include "Entity.h"
 #include "checkML.h"
+#include "Collider.h"
 
 
 class Viewer :
@@ -12,7 +12,7 @@ class Viewer :
 private:
 protected:
 	Texture* tex_;
-	Transform* tr_;
+	Collider* collider_;
 	//SDL_Rect* clip;
 public:
 	Viewer();
