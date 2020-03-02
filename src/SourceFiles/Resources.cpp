@@ -3,12 +3,12 @@
 
 vector<Resources::FontInfo> Resources::fonts_ {
 		//Fuentes {nombre_en_enum, ruta, tamaño}
-		{NES_Chimera, "../assets/game/fonts/NES-Chimera.ttf", 38}
+		{NES_Chimera, "../../assets/game/fonts/NES-Chimera.ttf", 38}
 };
 
 vector<Resources::ImageInfo> Resources::images_ {
 		//Imágenes {nombre_en_enum, ruta}
-		{ Tinky, "../assets/game/textures/Tinky.png" }
+		{ Tinky, "../../assets/game/textures/Tinky.png" }
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_ {
@@ -19,7 +19,7 @@ vector<Resources::TextMsgInfo> Resources::messages_ {
 
 vector<Resources::MusicInfo> Resources::musics_ {
 		//Música {nombre_en_enum, ruta}
-		{ MainTheme, "../assets/game/sound/mainTheme.mp3" }
+		{ MainTheme, "../../assets/game/sound/mainTheme.mp3" }
 };
 
 vector<Resources::SoundInfo> Resources::sounds_ {

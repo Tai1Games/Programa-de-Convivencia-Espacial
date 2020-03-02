@@ -69,4 +69,3 @@ public:
 	SDLTexturesManager* getTexturesMngr() { return textures_; }
 	SDL_Renderer* getRenderer() { return  renderer_; }
 };
-
