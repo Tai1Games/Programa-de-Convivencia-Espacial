@@ -11,7 +11,9 @@ public:
 
 	enum TextureId : std::size_t {
 		// images
-		Tinky,
+		Tinky, 
+		VidaActiva,
+		VidaInactiva,
 
 		// text
 		
