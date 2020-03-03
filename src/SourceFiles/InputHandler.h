@@ -11,12 +11,17 @@ using namespace std;
 class InputHandler {
 public:
 	const int m_joystickDeadZone = 10000;
+	const int m_triggerDeadZone = 10000; //trigger deadzone equals threshold
+
 	InputHandler();
 	enum MOUSEBUTTON : Uint8 {
 		LEFT = 0, MIDDLE = 1, RIGHT = 2
 	};
-	enum GAMEPADAXIS : Uint8 {
-		LH = 0, LV = 1, LT = 2, RH = 3, RV = 4, LR = 5
+	enum GAMEPADSTICK : Uint8 {
+		LEFTSTICK = 1, RIGHTSTICK=2
+	};
+	enum GAMEPADTRIGGER : Uint8 {
+		LEFTTRIGGER = 1, RIGHTTRIGGER = 2
 	};
 
 	InputHandler(InputHandler&) = delete;
@@ -120,12 +125,14 @@ private:
 	Vector2D mousePos_;
 	std::array<bool, 3> mbState_;
 
-	int xValue(int joy, int stick);
-	int yValue(int joy, int stick);
+	int getAxisX(int joy, GAMEPADSTICK stick);
+	int getAxisY(int joy, GAMEPADSTICK stick);
+	int getTrigger(int joy, GAMEPADTRIGGER trigger);
 
 	//Pruebas de Gamepad para proyecto
 	std::vector<SDL_Joystick*> m_joysticks;
 	std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
+	std::vector<std::pair<int*,int*>> m_triggerValues;
 	bool m_bJoysticksInitialised;
 	bool isButtonDownEvent_;
 	bool isButtonUpEvent_;

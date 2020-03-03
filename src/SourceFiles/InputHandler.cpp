@@ -10,6 +10,7 @@ InputHandler::~InputHandler() {
 }
 
 void InputHandler::update() {
+	//cout << "A" << endl;
 
 	SDL_Event event;
 
@@ -38,6 +39,7 @@ void InputHandler::update() {
 		}
 
 	}
+
 }
 
 void InputHandler::initialiseJoysticks() {
@@ -52,6 +54,8 @@ void InputHandler::initialiseJoysticks() {
 				m_joysticks.push_back(joy);
 				m_joystickValues.push_back(std::make_pair(new
 					Vector2D(0, 0), new Vector2D(0, 0))); // add our pair
+				m_triggerValues.push_back(std::make_pair
+				(new int(0), new int(0)));
 			}
 			else
 			{
@@ -92,32 +96,49 @@ void InputHandler::clearState() {
 	}
 }
 
-int InputHandler::xValue(int joy, int stick)
+int InputHandler::getAxisX(int joy, GAMEPADSTICK stick)
 {
 	if (m_joystickValues.size() > 0)
 	{
-		if (stick == 1)
+		if (stick == LEFT)
+
 		{
 			return m_joystickValues[joy].first->getX();
 		}
-		else if (stick == 2)
+		else if (stick == RIGHT)
 		{
 			return m_joystickValues[joy].second->getX();
 		}
 	}
 	return 0;
 }
-int InputHandler::yValue(int joy, int stick)
+
+int InputHandler::getAxisY(int joy, GAMEPADSTICK stick)
 {
-	if (m_joystickValues.size() > 0)
+	if (m_joystickValues.size() > joy)
 	{
-		if (stick == 1)
+		if (stick == LEFTSTICK)
 		{
 			return m_joystickValues[joy].first->getY();
 		}
-		else if (stick == 2)
+		else if (stick == RIGHTSTICK)
 		{
 			return m_joystickValues[joy].second->getY();
+		}
+	}
+	return 0;
+}
+
+int InputHandler::getTrigger(int joy, GAMEPADTRIGGER trigger) {
+	if (m_joystickValues.size() > joy)
+	{
+		if (trigger == LEFTTRIGGER)
+		{
+			return *m_triggerValues[joy].first;
+		}
+		else if (trigger == RIGHTTRIGGER)
+		{
+			return *m_triggerValues[joy].second;
 		}
 	}
 	return 0;
@@ -158,6 +179,21 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 			m_joystickValues[whichOne].first->setY(0);
 		}
 	}
+	//left trigger move up or down
+	if (event.jaxis.axis == 2) {
+		if (event.jaxis.value > m_triggerDeadZone)
+		{
+			*m_triggerValues[whichOne].first=1;
+		}
+		//else if (event.jaxis.value < -m_joystickDeadZone)
+		//{
+		//	m_joystickValues[whichOne].first->setY(-1);
+		//}
+		else
+		{
+			*m_triggerValues[whichOne].first = 0;
+		}
+	}
 	// right stick move left or right
 	if (event.jaxis.axis == 3)
 	{
@@ -189,12 +225,32 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		{
 			m_joystickValues[whichOne].second->setY(0);
 		}
+		
+	}
+	//right trigger move up or down
+	if (event.jaxis.axis == 5) {
+		if (event.jaxis.value > m_triggerDeadZone)
+		{
+			*m_triggerValues[whichOne].second = 1;
+		}
+		//else if (event.jaxis.value < -m_joystickDeadZone)
+		//{
+		//	m_joystickValues[whichOne].first->setY(-1);
+		//}
+		else
+		{
+			*m_triggerValues[whichOne].second = 0;
+		}
 	}
 
-	cout << whichOne << endl;
-	cout<<"Left: " <<
-	m_joystickValues[whichOne].first->getX() << " " << m_joystickValues[whichOne].first->getY() << endl;
-	cout << "Right: " <<
-		m_joystickValues[whichOne].second->getX() << " " << m_joystickValues[whichOne].second->getY() << endl;
+
+	//cout << "Controller 0:" << endl;
+	//cout << "Triggers " << getTrigger(0, LEFTTRIGGER) << " " << getTrigger(0, RIGHTTRIGGER) << endl;
+
+	//cout << whichOne << endl;
+	//cout<<"Left: " <<
+	//m_joystickValues[whichOne].first->getX() << " " << m_joystickValues[whichOne].first->getY() << endl;
+	//cout << "Right: " <<
+	//	m_joystickValues[whichOne].second->getX() << " " << m_joystickValues[whichOne].second->getY() << endl;
 }
 
