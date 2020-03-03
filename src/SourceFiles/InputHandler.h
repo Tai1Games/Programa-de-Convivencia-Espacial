@@ -23,6 +23,9 @@ public:
 	enum GAMEPADTRIGGER : Uint8 {
 		LEFTTRIGGER = 1, RIGHTTRIGGER = 2
 	};
+	enum GAMEPADBUTTON : Uint8 {
+		A, B, X, Y
+	};
 
 	InputHandler(InputHandler&) = delete;
 	InputHandler& operator=(InputHandler&) = delete;
@@ -116,6 +119,8 @@ private:
 	}
 
 	inline void onJoyAxisChange(SDL_Event& event);
+	inline void onJoyButtonChange(SDL_Event& event, bool isDown);
+
 	const Uint8* kbState_;
 	bool isKeyUpEvent_;
 	bool isKeyDownEvent_;
@@ -128,11 +133,13 @@ private:
 	int getAxisX(int joy, GAMEPADSTICK stick);
 	int getAxisY(int joy, GAMEPADSTICK stick);
 	int getTrigger(int joy, GAMEPADTRIGGER trigger);
+	bool isButtonDown(int joy, GAMEPADBUTTON button);
 
 	//Pruebas de Gamepad para proyecto
 	std::vector<SDL_Joystick*> m_joysticks;
 	std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
 	std::vector<std::pair<int*,int*>> m_triggerValues;
+	std::vector<std::vector<bool>> m_buttonStates;
 	bool m_bJoysticksInitialised;
 	bool isButtonDownEvent_;
 	bool isButtonUpEvent_;

@@ -36,6 +36,12 @@ void InputHandler::update() {
 		case SDL_JOYAXISMOTION:
 			onJoyAxisChange(event);
 			break;
+		case SDL_JOYBUTTONDOWN:
+			onJoyButtonChange(event, true);
+			break;
+		case SDL_JOYBUTTONUP:
+			onJoyButtonChange(event, false);
+			break;
 		}
 
 	}
@@ -56,6 +62,13 @@ void InputHandler::initialiseJoysticks() {
 					Vector2D(0, 0), new Vector2D(0, 0))); // add our pair
 				m_triggerValues.push_back(std::make_pair
 				(new int(0), new int(0)));
+
+				std::vector<bool> tempButtons;
+				for (int j = 0; j < SDL_JoystickNumButtons(joy); j++)
+				{
+					tempButtons.push_back(false);
+				}
+				m_buttonStates.push_back(tempButtons);
 			}
 			else
 			{
@@ -252,5 +265,14 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 	//m_joystickValues[whichOne].first->getX() << " " << m_joystickValues[whichOne].first->getY() << endl;
 	//cout << "Right: " <<
 	//	m_joystickValues[whichOne].second->getX() << " " << m_joystickValues[whichOne].second->getY() << endl;
+}
+
+void InputHandler::onJoyButtonChange(SDL_Event& event,bool isDown) {
+	int whichOne = event.jaxis.which;
+
+	m_buttonStates[whichOne][event.jbutton.button] = isDown;
+
+	if (isDown)
+		cout << (int)event.jbutton.button << endl;
 }
 
