@@ -21,21 +21,19 @@ void PlayState::init() {
 	Entity* tinky = entityManager_->addEntity();
 	Entity* ground = entityManager_->addEntity();
 	Entity* rock = entityManager_->addEntity();
-	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 150, 80, 50, 50, 50, 0, false);
-	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 0, 500, 1000, 10, 50, 0, false);
-	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 500, 80, 20, 20, 10, 0, false);
-	//Transform* tr = tinky->addComponent<Transform>(tinkyBody);
-	//Transform* trG = ground->addComponent<Transform>(wallBody);
-	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un tinky.
-	ground->addComponent<Viewer>();						//  también se puede poner un SDL_Rect para el clip (después de la textura)
+	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 150, 80, 50, 50, 50, 0, 0, 0, false);
+	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 0, 500, 1000, 10, 50, 0, 0, 0, false);
+	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 500, 80, 20, 20, 10, 0, 0, 0, false);
+	tinky->addComponent<Viewer>();
+	ground->addComponent<Viewer>();
 	rock->addComponent < Viewer >();
-	//tr->getBody()->ApplyForce(b2Vec2 (0, -200), b2Vec2(0, 0), true);
-	//tr->getBody()->ApplyLinearImpulse(b2Vec2(0, -100), b2Vec2(0, 0),true);
+	collRock->createFixture(100, 100, 10, 0, 0, 0, true);
+	std::cout << collRock->isSensor(0) << " " << collRock->isSensor(1);
 }
 
 void PlayState::update() {
 	entityManager_->update();
-	physicsWorld_->Step(1.0f / 240.0f, 6, 2);
+	physicsWorld_->Step(1.0f / 60.0f, 6, 2);
 	//también debería actualizar la lógica de modo de juego
 	//spawners de monedas, carga de objetivos...
 }
