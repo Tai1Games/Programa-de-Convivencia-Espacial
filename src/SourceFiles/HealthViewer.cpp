@@ -17,7 +17,7 @@ void HealthViewer::update()
 {
 	//Todo lo hace el draw, este no sirve ninguna función 
 }
-void HealthViewer::draw()
+void HealthViewer::draw() const
 {
 	for (int i = 1; i <= he->getHealthMax(); i++) {
 		SDL_Rect dest = { pos.getX()+ (30*i), pos.getY(), 40, 50 };

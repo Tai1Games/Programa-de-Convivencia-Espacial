@@ -20,7 +20,7 @@ public:
 
 	void init() override;
 	void update()override;
-	void draw()override;
+	void draw() const override;
 	void handleInput()override;
 
 };
