@@ -1,6 +1,8 @@
 #include "PlayState.h"
 #include "Transform.h"
 #include "Viewer.h"
+#include "Health.h"
+#include "HealthViewer.h"
 
 PlayState::PlayState() :
 	entityManager_(nullptr),
@@ -27,6 +29,9 @@ void PlayState::init() {
 	//Transform* tr = tinky->addComponent<Transform>(tinkyBody);
 	//Transform* trG = ground->addComponent<Transform>(wallBody);
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un tinky.
+	tinky->addComponent<Health>(3);
+	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(20, 20));
+
 	ground->addComponent<Viewer>();						//  también se puede poner un SDL_Rect para el clip (después de la textura)
 	rock->addComponent < Viewer >();
 	//tr->getBody()->ApplyForce(b2Vec2 (0, -200), b2Vec2(0, 0), true);
