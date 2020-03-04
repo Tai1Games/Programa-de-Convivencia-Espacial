@@ -1,4 +1,5 @@
 #include "SDL_Game.h"
+#include "Vector2D.h"
 
 unique_ptr<SDL_Game> SDL_Game::instance_;
 
