@@ -1,7 +1,7 @@
 #include "Collider.h"
 
 Collider::Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
-	float density, float friction, bool sensor) :
+	float density, float friction, float restitution, bool sensor) :
 	world_(world),
 	Component(ComponentType::Collider),
 	width_(width),
@@ -13,6 +13,7 @@ Collider::Collider(b2World* world, b2BodyType type, float x, float y, float widt
 	fixtureDef_.shape = &shape_;
 	fixtureDef_.density = density;
 	fixtureDef_.friction = friction;
+	fixtureDef_.restitution = restitution;
 	fixtureDef_.isSensor = sensor;
 	body_->CreateFixture(&fixtureDef_);
 }
