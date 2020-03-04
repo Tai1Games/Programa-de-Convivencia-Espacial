@@ -13,6 +13,8 @@ namespace ComponentType {
 		Health,
 		Viewer,
 		Collider,
+		AttachesToObjects,
+		AttachableObject,
 		// don't touch the rest of this enum, it is to identify the max
 		// number of components
 		_LastCmptId_

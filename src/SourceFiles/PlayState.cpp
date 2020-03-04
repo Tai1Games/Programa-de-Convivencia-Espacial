@@ -1,5 +1,6 @@
 #include "PlayState.h"
 #include "Transform.h"
+#include "AttachesToObjects.h"
 #include "Viewer.h"
 
 PlayState::PlayState() :
@@ -27,6 +28,7 @@ void PlayState::init() {
 	//Transform* tr = tinky->addComponent<Transform>(tinkyBody);
 	//Transform* trG = ground->addComponent<Transform>(wallBody);
 	tinky->addComponent<Viewer>();
+	tinky->addComponent<AttachesToObjects>();
 	ground->addComponent<Viewer>();
 	rock->addComponent < Viewer >();
 	//tr->getBody()->ApplyForce(b2Vec2 (0, -200), b2Vec2(0, 0), true);

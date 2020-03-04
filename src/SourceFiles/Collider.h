@@ -14,6 +14,7 @@ public:
 	//getters
 	float getW() { return width_; }
 	float getH() { return height_; }
+	b2Body* getBody() { return body_; }
 	b2Vec2 getPos() { return body_->GetPosition(); }
 	b2Vec2 getLinearVelocity() { return body_->GetLinearVelocity(); }
 	b2BodyType getType() { return body_->GetType(); }
