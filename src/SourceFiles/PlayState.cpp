@@ -41,8 +41,8 @@ void PlayState::init() {
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 0, 500, 1000, 10, 50, 0, false);
 	//Transform* tr = tinky->addComponent<Transform>(tinkyBody);
 	//Transform* trG = ground->addComponent<Transform>(wallBody);
-	tinky->addComponent<Viewer>();
-	ground->addComponent<Viewer>();
+	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un tinky.
+	ground->addComponent<Viewer>();						//  también se puede poner un SDL_Rect para el clip (después de la textura)
 	//tr->getBody()->ApplyForce(b2Vec2 (0, -200), b2Vec2(0, 0), true);
 	//tr->getBody()->ApplyLinearImpulse(b2Vec2(0, -100), b2Vec2(0, 0),true);
 }

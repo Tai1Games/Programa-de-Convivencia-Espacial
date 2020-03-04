@@ -13,6 +13,14 @@ Viewer::Viewer(Resources::TextureId tex) :
 	textureId_(tex) {	//
 }
 
+Viewer::Viewer(Resources::TextureId tex, SDL_Rect clip) :
+	Component(ComponentType::Viewer), //
+	tex_(nullptr),	//
+	collider_(nullptr),
+	clip_(clip),
+	textureId_(tex) {	//
+}
+
 Viewer::~Viewer() {
 
 }
@@ -22,7 +30,8 @@ void Viewer::init() {
 	collider_ = GETCMP1_(Collider);
 	if (tex_ == nullptr) {
 		tex_ = SDL_Game::instance()->getTexturesMngr()->getTexture(textureId_);
-		clip_ = SDL_Rect{ 0, 0, tex_->getWidth(), tex_->getHeight() };
+		if(clip_.w == 0 && clip_.h == 0)
+			clip_ = SDL_Rect{ 0, 0, tex_->getWidth(), tex_->getHeight() };
 	}
 }
 

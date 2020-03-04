@@ -16,6 +16,7 @@ protected:
 public:
 	Viewer();
 	Viewer(Resources::TextureId tex);
+	Viewer(Resources::TextureId tex, SDL_Rect clip);
 	virtual ~Viewer();
 
 	virtual void init() override;
