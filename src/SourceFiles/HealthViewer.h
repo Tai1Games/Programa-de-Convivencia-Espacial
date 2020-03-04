@@ -2,7 +2,7 @@
 #include "Component.h"
 #include "Texture.h"
 #include "Health.h"
-#include "Vector2D.h"
+#include "box2d.h"
 
 class HealthViewer : public Component {
 private:
@@ -10,11 +10,14 @@ private:
 	Texture* empty = nullptr;	//Textura que indica que ya no disponemos de ese "toque"
 
 	Health* he = nullptr;		//Actualizar la lista de Componentes :D
-	Vector2D pos;
+	b2Vec2 pos;
+
+	Resources::TextureId active;
+	Resources::TextureId disable;
 
 public:
 	//Punteros a las 2 texturas de la vida y la posición de origen
-	HealthViewer(Texture* f_, Texture* e_, Vector2D pos_);
+	HealthViewer(Resources::TextureId texA , Resources::TextureId texD, b2Vec2 pos_);
 
 	virtual ~HealthViewer() { full = nullptr; empty = nullptr; };
 

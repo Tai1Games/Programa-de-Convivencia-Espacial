@@ -30,8 +30,7 @@ void PlayState::init() {
 	//Transform* trG = ground->addComponent<Transform>(wallBody);
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un tinky.
 	tinky->addComponent<Health>(3);
-	tinky->addComponent<HealthViewer>(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::VidaActiva),
-		SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::VidaInactiva), Vector2D(20, 20));
+	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(20, 20));
 
 	ground->addComponent<Viewer>();						//  también se puede poner un SDL_Rect para el clip (después de la textura)
 	rock->addComponent < Viewer >();
