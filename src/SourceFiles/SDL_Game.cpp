@@ -1,5 +1,6 @@
 #include "SDL_Game.h"
 #include "PlayState.h"
+#include "Resources.h"
 
 unique_ptr<SDL_Game> SDL_Game::instance_;
 
@@ -82,15 +83,16 @@ void SDL_Game::start() {
 	gameState_ = new PlayState();
 	gameState_->init();
 	while (!exit_) {
-		//Uint32 startTime = game_->getTime();
+		Uint32 startTime = getTime();
 
 		gameState_->handleInput();
 		gameState_->update();
 		gameState_->render();
 
-		//Uint32 frameTime = game_->getTime() - startTime;
-		//if (frameTime < 10)
-		//	SDL_Delay(10 - frameTime);
+		Uint32 frameTime = getTime() - startTime;
+		if (frameTime < MS_PER_FRAME)
+			SDL_Delay(MS_PER_FRAME - frameTime);
+
 		//exit_ = !exit_;
 	}
 }

@@ -1,5 +1,6 @@
 #include "Viewer.h"
 #include "Entity.h"
+#include "Resources.h"
 
 Viewer::Viewer():
 	Component(ComponentType::Viewer), //

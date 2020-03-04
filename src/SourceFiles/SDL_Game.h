@@ -7,7 +7,7 @@
 #include "SDLTexturesManager.h"
 #include "SDLAudioManager.h"
 #include "SDLFontsManager.h"
-#include "Resources.h"
+#include "GameStateMachine.h"
 #include "SDL_macros.h"
 #include "iostream"
 #include "checkML.h"
@@ -18,28 +18,22 @@ class PlayState;
 //Interfaz entre el juego y el display
 class SDL_Game
 {
+protected:
+
+	SDLFontsManager* fonts_ = nullptr;
+	SDLTexturesManager* textures_ = nullptr;
+	SDLAudioManager* audio_ = nullptr;
+	GameStateMachine* gamestateMachine_ = nullptr;
+	SDL_Window* window_ = nullptr;
+	SDL_Renderer* renderer_ = nullptr;
+	PlayState* gameState_ = nullptr;
+
+	static unique_ptr<SDL_Game> instance_;
 private:
 	bool exit_;
 	void initializeResources();
 	void closeResources();
-protected:
 
-	//Fonts
-	SDLFontsManager* fonts_ = nullptr;
-
-	//Textures
-	SDLTexturesManager* textures_ = nullptr;
-
-	//Audio
-	SDLAudioManager* audio_ = nullptr;
-
-	//Rng
-
-	SDL_Window* window_;
-	SDL_Renderer* renderer_;
-	PlayState* gameState_;
-
-	static unique_ptr<SDL_Game> instance_;
 public:
 	void start();
 	SDL_Game();
@@ -67,5 +61,8 @@ public:
 	}
 
 	SDLTexturesManager* getTexturesMngr() { return textures_; }
+	SDLAudioManager* getAudioMngr() { return audio_; }
+	SDLFontsManager* getFontMngr() { return fonts_; }
+	GameStateMachine* getStateMachine() { return gamestateMachine_; }
 	SDL_Renderer* getRenderer() { return  renderer_; }
 };

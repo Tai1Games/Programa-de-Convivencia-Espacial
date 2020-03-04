@@ -23,8 +23,8 @@ Todos los métodos `virtual` se ponen otra vez `virtual` de forma explícita par
 Variables privadas siguen el esquema: nombre_
 
 **Órden en el header**
-1. Privado
 1. Protegido
+1. Privado
 1. Publico
 1. Constructora
 1. Destructora
