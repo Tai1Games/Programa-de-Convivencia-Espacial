@@ -90,9 +90,6 @@
     <ClInclude Include="AttachesToObjects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AttachableObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -147,9 +144,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AttachesToObjects.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AttachableObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -19,6 +19,7 @@ public:
 	b2Vec2 getLinearVelocity() { return body_->GetLinearVelocity(); }
 	b2BodyType getType() { return body_->GetType(); }
 	b2Transform getTransform() { return body_->GetTransform(); }
+	b2World* getWorld() { return world_; }
 	float getAngle() { return body_->GetAngle(); }
 	float getMass() { return body_->GetMass(); }
 	bool isAwake() { return body_->IsAwake(); }

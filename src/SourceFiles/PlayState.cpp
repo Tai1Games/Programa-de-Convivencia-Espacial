@@ -28,7 +28,8 @@ void PlayState::init() {
 	//Transform* tr = tinky->addComponent<Transform>(tinkyBody);
 	//Transform* trG = ground->addComponent<Transform>(wallBody);
 	tinky->addComponent<Viewer>();
-	tinky->addComponent<AttachesToObjects>();
+	AttachesToObjects* attachesToObjectTinky = tinky->addComponent<AttachesToObjects>();
+	attachesToObjectTinky->attachToObject(collRock, b2Vec2(10, 10));
 	ground->addComponent<Viewer>();
 	rock->addComponent < Viewer >();
 	//tr->getBody()->ApplyForce(b2Vec2 (0, -200), b2Vec2(0, 0), true);

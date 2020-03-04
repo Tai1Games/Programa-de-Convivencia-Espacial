@@ -169,7 +169,6 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AttachableObject.h" />
     <ClInclude Include="AttachesToObjects.h" />
     <ClInclude Include="checkML.h" />
     <ClInclude Include="Collider.h" />
@@ -197,7 +196,6 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="Viewer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AttachableObject.cpp" />
     <ClCompile Include="AttachesToObjects.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
