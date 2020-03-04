@@ -12,6 +12,8 @@ public:
 	}
 
 	//getters
+	float getW() { return width_; }
+	float getH() { return height_; }
 	b2Vec2 getPos() { return body_->GetPosition(); }
 	b2Vec2 getLinearVelocity() { return body_->GetLinearVelocity(); }
 	b2BodyType getType() { return body_->GetType(); }
@@ -34,6 +36,8 @@ public:
 	void applyForce(b2Vec2 force, b2Vec2 point, bool wake) { body_->ApplyForce(force, point, wake); }
 
 private:
+	float width_;
+	float height_;
 	b2Body* body_;
 	b2World* world_;
 	b2BodyDef bodyDef_;

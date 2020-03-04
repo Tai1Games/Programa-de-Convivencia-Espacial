@@ -3,6 +3,8 @@
 #include <SDL.h>
 #include <string>
 #include <vector>
+#include "checkML.h"
+
 
 using namespace std;
 
@@ -11,7 +13,7 @@ public:
 
 	enum TextureId : std::size_t {
 		// images
-		Tinky,
+		Tinky
 
 		// text
 		

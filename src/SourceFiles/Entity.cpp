@@ -21,3 +21,10 @@ void Entity::render()
 		c->draw();
 	}
 }
+
+void Entity::handleInput()
+{
+	for (auto& c : components_) {
+		c->handleInput();
+	}
+}

@@ -6,6 +6,8 @@
 #include <SDL_image.h>
 #include <assert.h>
 #include <map>
+#include "checkML.h"
+
 
 using namespace std;
 
