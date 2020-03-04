@@ -1,5 +1,5 @@
 #include "SDL_Game.h"
-#include "Vector2D.h"
+#include "PlayState.h"
 
 unique_ptr<SDL_Game> SDL_Game::instance_;
 
@@ -76,4 +76,22 @@ void SDL_Game::closeResources() {
 	delete textures_;
 	delete fonts_;
 	delete audio_;
+}
+
+void SDL_Game::start() {
+	exit_ = false;
+	gameState_ = new PlayState();
+	gameState_->init();
+	while (!exit_) {
+		//Uint32 startTime = game_->getTime();
+
+		gameState_->handleInput();
+		gameState_->update();
+		gameState_->render();
+
+		//Uint32 frameTime = game_->getTime() - startTime;
+		//if (frameTime < 10)
+		//	SDL_Delay(10 - frameTime);
+		//exit_ = !exit_;
+	}
 }

@@ -26,11 +26,9 @@ int main(int argc, char* argv[]) {
 
 	//Colocar antes del constructor de SDL_Game
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	SDL_Game Game;
-
-
+	SDL_Game::instance()->start();
 
 	//descomentar para depurar
-	while (true) {};
+	//while (true) {};
 	return 0;
 }

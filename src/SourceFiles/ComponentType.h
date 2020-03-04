@@ -1,5 +1,7 @@
 #pragma once
 #include <ctime>
+#include "checkML.h"
+
 
 namespace ComponentType {
 
@@ -7,8 +9,9 @@ namespace ComponentType {
 
 	enum CmpId : CmpIdType {
 		//Vayan metiendo aqui sus componentes segun lo hagan
-		Transform,
+		Transform = 0,
 		Health,
+		Viewer,
 		Collider,
 		HealthViewer,
 		// don't touch the rest of this enum, it is to identify the max
