@@ -5,19 +5,19 @@
 #include "checkML.h"
 #include "Collider.h"
 
-
-class Viewer :
-	public Component
+class Viewer : public Component
 {
 private:
 protected:
+	Resources::TextureId textureId_;
 	Texture* tex_;
 	Collider* collider_;
-	//SDL_Rect* clip;
+	SDL_Rect clip_;
 public:
 	Viewer();
-	~Viewer();
+	Viewer(Resources::TextureId tex);
+	virtual ~Viewer();
 
-	void init() override;
-	void draw() const override;
+	virtual void init() override;
+	virtual void draw() const override;
 };
