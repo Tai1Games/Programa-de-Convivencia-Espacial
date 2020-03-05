@@ -15,7 +15,7 @@ protected:
 public:
 	GameState();
 	virtual ~GameState();
-	virtual void init();
+	virtual void init() {};
 	virtual void update();
 	virtual void render();
 	virtual void handleInput();

@@ -28,12 +28,3 @@ void PlayState::init() {
 	//tr->getBody()->ApplyForce(b2Vec2 (0, -200), b2Vec2(0, 0), true);
 	//tr->getBody()->ApplyLinearImpulse(b2Vec2(0, -100), b2Vec2(0, 0),true);
 }
-
-void PlayState::update() {
-}
-
-void PlayState::render() {
-}
-void PlayState::handleInput() {
-	
-}

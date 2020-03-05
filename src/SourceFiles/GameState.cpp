@@ -16,10 +16,6 @@ GameState::~GameState() {
 	physicsWorld_ = nullptr;
 }
 
-void GameState::init() {
-
-}
-
 void GameState::update() {
 	entityManager_->update();
 	physicsWorld_->Step(MS_PER_FRAME, 6, 2);
