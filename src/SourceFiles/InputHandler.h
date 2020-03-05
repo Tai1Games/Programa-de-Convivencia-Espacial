@@ -93,6 +93,27 @@ public:
 	//   Chapter 4 of 'SDL Game Development' book
 	//   Available online via https://biblioteca.ucm.es/
 	//
+	inline bool isButonDownEvent() {
+		return isButtonDownEvent_;
+	}
+	inline bool isButtonUpEvent() {
+		return isButtonUpEvent_;
+	}
+	inline bool isAxisMovementEvent() {
+		return isAxisMovementEvent_;
+	}
+	inline bool isButtonJustUp(int ctrl, SDL_GameControllerButton b) {
+		return(isButtonUpEvent_ && m_buttonStates[ctrl][b] == JustUp);
+	}
+	inline bool isButtonJustDown(int ctrl, SDL_GameControllerButton b) {
+		return(isButtonDownEvent_ && m_buttonStates[ctrl][b] == JustDown);
+	}
+	inline bool isButtonDown(int ctrl, SDL_GameControllerButton b) {
+		return(m_buttonStates[ctrl][b] == Down);
+	}
+	inline bool isButtonUp(int ctrl, SDL_GameControllerButton b) {
+		return(m_buttonStates[ctrl][b] == Up);
+	}
 
 private:
 	void clearState();
@@ -145,27 +166,7 @@ private:
 	int getAxisY(int joy, GAMEPADSTICK stick);
 	int getTrigger(int joy, GAMEPADTRIGGER trigger);
 	bool isButtonDown(int joy, GAMEPADBUTTON button);
-	inline bool isButonDownEvent() {
-		return isButtonDownEvent_;
-	}
-	inline bool isButtonUpEvent() {
-		return isButtonUpEvent_;
-	}
-	inline bool isAxisMovementEvent() {
-		return isAxisMovementEvent_;
-	}
-	inline bool isButtonJustUp(int ctrl, SDL_GameControllerButton b) {
-		return(m_buttonStates[ctrl][b]==JustUp);
-	}
-	inline bool isButtonJustDown(int ctrl, SDL_GameControllerButton b) {
-		return(m_buttonStates[ctrl][b] == JustDown);
-	}
-	inline bool isButtonDown(int ctrl, SDL_GameControllerButton b) {
-		return(m_buttonStates[ctrl][b] == Down);
-	}
-	inline bool isButtonUp(int ctrl, SDL_GameControllerButton b) {
-		return(m_buttonStates[ctrl][b] == Up);
-	}
+
 
 	std::vector<SDL_GameController*> m_gameControllers;
 	std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;

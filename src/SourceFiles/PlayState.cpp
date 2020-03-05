@@ -3,6 +3,7 @@
 #include "Viewer.h"
 #include "Health.h"
 #include "HealthViewer.h"
+#include "InputHandler.h"
 
 PlayState::PlayState() :
 	entityManager_(nullptr),
@@ -43,6 +44,7 @@ void PlayState::update() {
 	physicsWorld_->Step(1.0f / 240.0f, 6, 2);
 	//también debería actualizar la lógica de modo de juego
 	//spawners de monedas, carga de objetivos...
+	
 }
 void PlayState::render() {
 	SDL_RenderClear(SDL_Game::instance()->getRenderer());
@@ -53,4 +55,26 @@ void PlayState::render() {
 }
 void PlayState::handleInput() {
 	entityManager_->handleInput();
+
+	InputHandler* ih = SDL_Game::instance()->getInputHandler();
+	ih->update();
+	//if (ih->isButtonJustDown(0, SDL_CONTROLLER_BUTTON_A)) {
+	//	cout << "sebajo laAAAAAAAAA" << endl;
+	//}
+	//if (ih->isButtonJustDown(0, SDL_CONTROLLER_BUTTON_B)) {
+	//	cout << "sebajo laBBBBBBB" << endl;
+	//}
+	//if (ih->isButtonJustUp(0, SDL_CONTROLLER_BUTTON_A)) {
+	//	cout << "sesolto laAAAAAAAAA" << endl;
+	//}
+	//if (ih->isButtonJustUp(0, SDL_CONTROLLER_BUTTON_B)) {
+	//	cout << "sesolto laBBBBBBB" << endl;
+	//}
+	//if (ih->isButtonDown(0, SDL_CONTROLLER_BUTTON_A)) {
+	//	cout << "AAAAAAAAA" << endl;
+	//}
+	//if (ih->isButtonDown(0, SDL_CONTROLLER_BUTTON_B)) {
+	//	cout << "BBBBBBB" << endl;
+	//}
+
 }

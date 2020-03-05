@@ -117,6 +117,8 @@ void InputHandler::clearState() {
 	isMouseButtonEvent_ = false;
 	isMouseMotionEvent_ = false;
 	isAxisMovementEvent_ = false;
+	isButtonDownEvent_ = false;
+	isButtonUpEvent_ = false;
 
 	for (int i = 0; i < 3; i++) {
 		mbState_[i] = false;
@@ -298,6 +300,11 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 }
 
 void InputHandler::onJoyButtonChange(SDL_Event& event,ButtonState just) {
+	if (just == JustDown)
+		isButtonDownEvent_ = true;
+	else
+		isButtonUpEvent_ = true;
+	
 	int whichOne = event.jaxis.which;
 	//if (event.cbutton.button != event.jbutton.button)
 	//	cout << "Puto sdl" << endl;
