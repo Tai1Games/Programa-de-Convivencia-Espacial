@@ -4,6 +4,7 @@
 
 #include "ComponentType.h"
 #include "SDL_Game.h"
+#include "checkML.h"
 
 class Entity;
 
@@ -37,9 +38,9 @@ public:
 	}
 
 	//Metodos que implementan los hijos y los dotan de funcionalidad
-	virtual void init() {}
+	virtual void init() {};
 	virtual void update() {};
-	virtual void draw() {};
+	virtual void draw() const {};
 	virtual void handleInput() {};
 
 };

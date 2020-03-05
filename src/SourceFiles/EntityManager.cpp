@@ -17,6 +17,12 @@ void EntityManager::render() {
 		e->render();
 	}
 }
+void EntityManager::handleInput() {
+	for (auto& e : entities_) {
+		e->handleInput();
+	}
+}
+
 
 Entity* EntityManager::addEntity() {
 	Entity* e = new Entity(this);

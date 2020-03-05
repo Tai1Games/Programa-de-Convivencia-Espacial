@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "box2d.h"
+#include "SDL_rect.h"
 
 class Collider : public Component
 {
@@ -12,16 +13,24 @@ public:
 	}
 
 	//getters
-	b2Vec2 getPos() { return body_->GetPosition(); }
-	b2Vec2 getLinearVelocity() { return body_->GetLinearVelocity(); }
-	b2BodyType getType() { return body_->GetType(); }
-	b2Transform getTransform() { return body_->GetTransform(); }
-	float getAngle() { return body_->GetAngle(); }
-	float getMass() { return body_->GetMass(); }
-	bool isAwake() { return body_->IsAwake(); }
-	bool isSensor() { return fixtureDef_.isSensor; }
-	bool isEnabled() { return body_->IsEnabled(); }
-	bool isBullet() { return body_->IsBullet(); }
+	float getW() const { return width_; }
+	float getH() const { return height_; }
+	b2Vec2 getPos() const { return body_->GetPosition(); }
+	b2Vec2 getLinearVelocity() const { return body_->GetLinearVelocity(); }
+	b2BodyType getType() const { return body_->GetType(); }
+	b2Transform getTransform() const { return body_->GetTransform(); }
+	float getAngle() const { return body_->GetAngle(); }
+	float getMass() const { return body_->GetMass(); }
+	bool isAwake() const { return body_->IsAwake(); }
+	bool isSensor() const { return fixtureDef_.isSensor; }
+	bool isEnabled() const { return body_->IsEnabled(); }
+	bool isBullet() const { return body_->IsBullet(); }
+	SDL_Rect getRect() const {
+		return SDL_Rect{
+			(int)getPos().x, (int)getPos().y,
+			(int)getW(), (int)getH()
+		};
+	}
 
 	//setters
 	void setType(b2BodyType t) { body_->SetType(t); }
@@ -34,6 +43,8 @@ public:
 	void applyForce(b2Vec2 force, b2Vec2 point, bool wake) { body_->ApplyForce(force, point, wake); }
 
 private:
+	float width_;
+	float height_;
 	b2Body* body_;
 	b2World* world_;
 	b2BodyDef bodyDef_;

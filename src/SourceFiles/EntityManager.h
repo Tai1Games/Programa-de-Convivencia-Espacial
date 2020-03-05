@@ -2,6 +2,8 @@
 
 #include <vector>
 #include <memory>
+#include "checkML.h"
+
 
 class Entity;
 class SDL_Game;
@@ -14,6 +16,7 @@ public:
 
 	void update();
 	void render();
+	void handleInput();
 	Entity* addEntity();
 
 

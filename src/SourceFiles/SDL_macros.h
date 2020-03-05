@@ -2,6 +2,8 @@
 
 #include <string>
 #include <SDL.h>
+#include "checkML.h"
+
 
 /*
  * This file includes some SDL related macros
