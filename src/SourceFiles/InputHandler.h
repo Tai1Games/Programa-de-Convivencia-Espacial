@@ -5,7 +5,9 @@
 #include <vector>
 #include "Vector2D.h"
 #include <memory>
+#include "../json/single_include/nlohmann/json.hpp"
 
+using json = nlohmann::json;
 using namespace std;
 
 class InputHandler {
@@ -25,6 +27,9 @@ public:
 	};
 	enum GAMEPADBUTTON : Uint8 {
 		A, B, X, Y
+	};
+	enum ButtonState :Uint8 {
+		Up = 0, JustUp, Down, JustDown
 	};
 
 	InputHandler(InputHandler&) = delete;
@@ -118,9 +123,6 @@ private:
 		}
 	}
 
-	inline void onJoyAxisChange(SDL_Event& event);
-	inline void onJoyButtonChange(SDL_Event& event, bool isDown);
-
 	const Uint8* kbState_;
 	bool isKeyUpEvent_;
 	bool isKeyDownEvent_;
@@ -130,19 +132,49 @@ private:
 	Vector2D mousePos_;
 	std::array<bool, 3> mbState_;
 
+
+	//Pruebas de Gamepad para proyecto
+
+
+	inline void onJoyAxisChange(SDL_Event& event);
+	inline void onJoyButtonChange(SDL_Event& event, ButtonState just);
+	inline bool mapJoystick(SDL_GameController* joy, json mapData);
+
+
 	int getAxisX(int joy, GAMEPADSTICK stick);
 	int getAxisY(int joy, GAMEPADSTICK stick);
 	int getTrigger(int joy, GAMEPADTRIGGER trigger);
 	bool isButtonDown(int joy, GAMEPADBUTTON button);
+	inline bool isButonDownEvent() {
+		return isButtonDownEvent_;
+	}
+	inline bool isButtonUpEvent() {
+		return isButtonUpEvent_;
+	}
+	inline bool isAxisMovementEvent() {
+		return isAxisMovementEvent_;
+	}
+	inline bool isButtonJustUp(int ctrl, SDL_GameControllerButton b) {
+		return(m_buttonStates[ctrl][b]==JustUp);
+	}
+	inline bool isButtonJustDown(int ctrl, SDL_GameControllerButton b) {
+		return(m_buttonStates[ctrl][b] == JustDown);
+	}
+	inline bool isButtonDown(int ctrl, SDL_GameControllerButton b) {
+		return(m_buttonStates[ctrl][b] == Down);
+	}
+	inline bool isButtonUp(int ctrl, SDL_GameControllerButton b) {
+		return(m_buttonStates[ctrl][b] == Up);
+	}
 
-	//Pruebas de Gamepad para proyecto
-	std::vector<SDL_Joystick*> m_joysticks;
+	std::vector<SDL_GameController*> m_gameControllers;
 	std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
 	std::vector<std::pair<int*,int*>> m_triggerValues;
-	std::vector<std::vector<bool>> m_buttonStates;
+	std::vector<std::vector<ButtonState>> m_buttonStates;
+
 	bool m_bJoysticksInitialised;
 	bool isButtonDownEvent_;
 	bool isButtonUpEvent_;
-	bool isJoyAxisMovement_;
+	bool isAxisMovementEvent_;
 };
 

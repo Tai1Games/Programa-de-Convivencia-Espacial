@@ -1,4 +1,6 @@
 #include "InputHandler.h"
+#include <fstream>
+
 
 
 InputHandler::InputHandler() {
@@ -37,10 +39,10 @@ void InputHandler::update() {
 			onJoyAxisChange(event);
 			break;
 		case SDL_JOYBUTTONDOWN:
-			onJoyButtonChange(event, true);
+			onJoyButtonChange(event, JustDown);
 			break;
 		case SDL_JOYBUTTONUP:
-			onJoyButtonChange(event, false);
+			onJoyButtonChange(event, JustUp);
 			break;
 		}
 
@@ -53,20 +55,32 @@ void InputHandler::initialiseJoysticks() {
 		SDL_InitSubSystem(SDL_INIT_JOYSTICK);
 	}
 	if (SDL_NumJoysticks() > 0) {
+
+		json mapData;
+		ifstream inData = ifstream("../config/inputMapping.json");
+		if (inData.is_open()) {
+			inData >> mapData;
+			cout << "loaded Mapping files" << endl;
+		}
 		for (int i = 0; i < SDL_NumJoysticks(); i++) {
-			SDL_Joystick* joy = SDL_JoystickOpen(i);
-			if (joy)
+			SDL_GameController* gameCtrl = SDL_GameControllerOpen(i);
+			if (gameCtrl)
 			{
-				m_joysticks.push_back(joy);
+				cout << "--------------" << endl;
+				cout << SDL_GameControllerName(gameCtrl) << endl;
+				if (mapJoystick(gameCtrl, mapData)) {
+					cout << "Controller " << i <<" mapped accordingly" << endl;
+				}
+				m_gameControllers.push_back(gameCtrl);
 				m_joystickValues.push_back(std::make_pair(new
 					Vector2D(0, 0), new Vector2D(0, 0))); // add our pair
 				m_triggerValues.push_back(std::make_pair
 				(new int(0), new int(0)));
 
-				std::vector<bool> tempButtons;
-				for (int j = 0; j < SDL_JoystickNumButtons(joy); j++)
+				std::vector<ButtonState> tempButtons;
+				for (int j = 0; j < SDL_CONTROLLER_BUTTON_MAX; j++)
 				{
-					tempButtons.push_back(false);
+					tempButtons.push_back(Up);
 				}
 				m_buttonStates.push_back(tempButtons);
 			}
@@ -76,7 +90,7 @@ void InputHandler::initialiseJoysticks() {
 			}
 			SDL_JoystickEventState(SDL_ENABLE);
 			m_bJoysticksInitialised = true;
-			std::cout << "Initialised " << m_joysticks.size() << " joystick(s)";
+			std::cout << "Initialised " << m_gameControllers.size() << " joystick(s)";
 		}
 	}
 	else
@@ -92,7 +106,7 @@ void InputHandler::clearJoysticks()
 		for (unsigned int i = 0; i < SDL_NumJoysticks();
 			i++)
 		{
-			SDL_JoystickClose(m_joysticks[i]);
+			SDL_GameControllerClose(m_gameControllers[i]);
 		}
 	}
 }
@@ -102,10 +116,26 @@ void InputHandler::clearState() {
 	isKeyUpEvent_ = false;
 	isMouseButtonEvent_ = false;
 	isMouseMotionEvent_ = false;
-	isJoyAxisMovement_ = false;
+	isAxisMovementEvent_ = false;
 
 	for (int i = 0; i < 3; i++) {
 		mbState_[i] = false;
+	}
+
+	for (int controller = 0; controller < m_gameControllers.size();controller++) {
+		for (int j = 0; j < SDL_CONTROLLER_BUTTON_MAX; j++) {
+			switch (m_buttonStates[controller][j])
+			{
+			case(JustDown):
+				m_buttonStates[controller][j] = Down;
+				break;
+			case(JustUp):
+				m_buttonStates[controller][j] = Up;
+				break;
+			default:
+				break;
+			}
+		}
 	}
 }
 
@@ -158,7 +188,7 @@ int InputHandler::getTrigger(int joy, GAMEPADTRIGGER trigger) {
 }
 
 void InputHandler::onJoyAxisChange(SDL_Event& event) {
-	isJoyAxisMovement_ = true;
+	isAxisMovementEvent_ = true;
 	int whichOne = event.jaxis.which;
 	// left stick move left or right
 	if (event.jaxis.axis == 0)
@@ -267,12 +297,49 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 	//	m_joystickValues[whichOne].second->getX() << " " << m_joystickValues[whichOne].second->getY() << endl;
 }
 
-void InputHandler::onJoyButtonChange(SDL_Event& event,bool isDown) {
+void InputHandler::onJoyButtonChange(SDL_Event& event,ButtonState just) {
 	int whichOne = event.jaxis.which;
+	//if (event.cbutton.button != event.jbutton.button)
+	//	cout << "Puto sdl" << endl;
+	//if(SDL_GameControllerGetButton(m_gameControllers[whichOne],SDL_CONTROLLER_BUTTON_B)) {
+	//	cout << "BBBBBBBBB" << endl;
+	//}
 
-	m_buttonStates[whichOne][event.jbutton.button] = isDown;
+	//m_buttonStates[whichOne][event.jbutton.button] = just;
+	//m_buttonStates[whichOne]
+	//	[SDL_GameControllerGetBindForButton
+	//	(m_gameControllers[whichOne],(SDL_GameControllerButton)event.jbutton.button).value] = just;
+	m_buttonStates[whichOne][(int)SDL_GameControllerGetBindForButton
+	(m_gameControllers[whichOne], (SDL_GameControllerButton)event.cbutton.button).value.button] = just;
 
-	if (isDown)
-		cout << (int)event.jbutton.button << endl;
+
+	/*if (just = JustDown)
+		cout << SDL_GameControllerGetBindForButton
+		(m_gameControllers[whichOne], (SDL_GameControllerButton)event.cbutton.button).value.button << endl;*/
+}
+
+bool InputHandler::mapJoystick(SDL_GameController* ctrl,json mapData) {
+	const int bytes = 33;
+	const int bits = bytes * 8;
+	char guid[bits] = {};
+	SDL_Joystick* joy = SDL_GameControllerGetJoystick(ctrl);
+	SDL_JoystickGetGUIDString(SDL_JoystickGetGUID(joy), guid, bits);
+
+	cout << "looking for " << guid << " mapString" << endl;
+	if (!(mapData[guid]).is_null()) {
+		cout << "found " << guid << " mapString" << endl;
+		string mapString = mapData[guid];
+		cout << SDL_GameControllerMappingForGUID(SDL_JoystickGetGUID(joy)) << endl;
+		int res = SDL_GameControllerAddMapping(mapString.c_str());
+		cout << "-----------------------------" << endl;
+		cout << SDL_GameControllerMappingForGUID(SDL_JoystickGetGUID(joy)) << endl;
+
+		return res== 1;
+		
+	}
+	else {
+		return false;
+	}
+	return false;
 }
 
