@@ -29,15 +29,8 @@ protected:
 	GameStateMachine* gamestateMachine_ = nullptr;
 	SDL_Window* window_ = nullptr;
 	SDL_Renderer* renderer_ = nullptr;
-	PlayState* gameState_ = nullptr;
-
-	//Rng
-
-	SDL_Window* window_;
-	SDL_Renderer* renderer_;
-	PlayState* gameState_;
-	
-	InputHandler* inputHandler_;
+	PlayState* gameState_ = nullptr;	
+	InputHandler* inputHandler_ =  nullptr;
 
 	static unique_ptr<SDL_Game> instance_;
 private:
