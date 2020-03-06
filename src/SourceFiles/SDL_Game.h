@@ -3,11 +3,13 @@
 #include "Constants.h"
 #include <memory>
 #include <assert.h>
+
 #include "EntityManager.h"
 #include "SDLTexturesManager.h"
 #include "SDLAudioManager.h"
 #include "SDLFontsManager.h"
 #include "GameStateMachine.h"
+
 #include "SDL_macros.h"
 #include "iostream"
 #include "checkML.h"
