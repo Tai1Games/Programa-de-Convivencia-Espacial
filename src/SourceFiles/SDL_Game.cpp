@@ -1,5 +1,4 @@
 #include "SDL_Game.h"
-#include "InputHandler.h"
 #include "PlayState.h"
 
 unique_ptr<SDL_Game> SDL_Game::instance_;
@@ -24,10 +23,6 @@ SDL_Game::SDL_Game(){
 
 	audio_->setMusicVolume(7);
 	audio_->playMusic(Resources::MainTheme, -1);
-
-	inputHandler_ = new InputHandler();
-	inputHandler_->initialiseJoysticks();
-
 }
 
 SDL_Game::~SDL_Game() {
@@ -38,7 +33,7 @@ SDL_Game::~SDL_Game() {
 
 	SDL_DestroyWindow(window_);
 	window_ =  nullptr;
-
+	
 	SDL_Quit();
 }
 

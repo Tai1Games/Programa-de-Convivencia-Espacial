@@ -39,8 +39,6 @@ protected:
 	SDL_Renderer* renderer_;
 	PlayState* gameState_;
 
-	InputHandler* inputHandler_;
-
 	static unique_ptr<SDL_Game> instance_;
 public:
 	void start();
