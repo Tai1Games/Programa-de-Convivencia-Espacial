@@ -33,7 +33,6 @@ void PlayState::init() {
 	ground->addComponent<Viewer>();
 	rock->addComponent < Viewer >();
 	collRock->createFixture(100, 100, 10, 0, 0, 0, true);
-	std::cout << collRock->isSensor(0) << " " << collRock->isSensor(1);
 }
 
 void PlayState::update() {

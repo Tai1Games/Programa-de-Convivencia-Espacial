@@ -4,32 +4,34 @@ Collider::Collider(b2World* world, b2BodyType type, float x, float y, float widt
 	float density, float friction, float restitution, int groupIndex, bool sensor) :
 	world_(world),
 	Component(ComponentType::Collider)
-{
-    width_[0] = width;
-	height_[0] = height;
+{   
 	bodyDef_.type = type;
 	bodyDef_.position.Set(x, y);
 	body_ = world_->CreateBody(&bodyDef_);
-	shape_[0].SetAsBox(width, height);
-	fixtureDef_[0].shape = &shape_[0];
-	fixtureDef_[0].density = density;
-	fixtureDef_[0].friction = friction;
-	fixtureDef_[0].restitution = fmod(restitution, 1.0);
-	fixtureDef_[0].filter.groupIndex = groupIndex;
-	fixtureDef_[0].isSensor = sensor;
-	body_->CreateFixture(&fixtureDef_[0]);
+	createFixture(width, height, density, friction, restitution, groupIndex, sensor);
 }
 
 void Collider::createFixture(float width, float height, float density,
 	float friction, float restitution, int groupIndex, bool sensor) {
-	width_[1] = width;
-	height_[1] = height;
-	shape_[1].SetAsBox(width, height);
-	fixtureDef_[1].shape = &shape_[1];
-	fixtureDef_[1].density = density;
-	fixtureDef_[1].friction = friction;
-	fixtureDef_[1].restitution = fmod(restitution, 1.0);
-	fixtureDef_[1].filter.groupIndex = groupIndex;
-	fixtureDef_[1].isSensor = sensor;
-	body_->CreateFixture(&fixtureDef_[1]);
+	widths_.push_back(width);
+	heights_.push_back(height);
+	b2PolygonShape shape;
+	shape.SetAsBox(width, height);
+	shapes_.push_back(shape);
+	b2FixtureDef aux;
+	aux.shape = &shapes_.back();
+	aux.density = density;
+	aux.friction = friction;
+	aux.restitution = fmod(restitution, 1.0);
+	aux.filter.groupIndex = groupIndex;
+	aux.isSensor = sensor;
+	fixtureDefs_.push_back(aux);
+	fixtures_.push_back(body_->CreateFixture(&fixtureDefs_.back()));
+}
+
+void Collider::destroyFixture(int i) {
+	body_->DestroyFixture(fixtures_[i]);
+	/*fixtures_.erase(fixtures_.begin() + i);
+	fixtureDef_.erase(fixtureDef_.begin() + i);
+	shape_.erase(shape_.begin() + i);*/
 }

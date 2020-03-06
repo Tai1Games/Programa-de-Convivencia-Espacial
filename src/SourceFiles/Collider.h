@@ -13,8 +13,8 @@ public:
 	}
 
 	//getters
-	float getW(int i) const{ return width_[i]; }
-	float getH(int i) const { return height_[i]; }
+	float getW(int i) const{ return widths_[i]; }
+	float getH(int i) const { return heights_[i]; }
 	b2Vec2 getPos() const { return body_->GetPosition(); }
 	b2Vec2 getLinearVelocity() const { return body_->GetLinearVelocity(); }
 	b2BodyType getType() const { return body_->GetType(); }
@@ -22,7 +22,7 @@ public:
 	float getAngle() const { return body_->GetAngle(); }
 	float getMass() const { return body_->GetMass(); }
 	bool isAwake() const { return body_->IsAwake(); }
-	bool isSensor(int i) const { return fixtureDef_[i].isSensor; }
+	bool isSensor(int i) const { return fixtureDefs_[i].isSensor; }
 	bool isEnabled() const { return body_->IsEnabled(); }
 	bool isBullet() const { return body_->IsBullet(); }
 	SDL_Rect getRect() const {
@@ -43,6 +43,7 @@ public:
 	void applyForce(b2Vec2 force, b2Vec2 point) { body_->ApplyForce(force, point, true); }
 	void createFixture(float width, float height, float density,
 		float friction, float restitution, int groupIndex, bool sensor);
+	void destroyFixture(int i);
 
 private:
 	//general
@@ -51,9 +52,10 @@ private:
 	b2BodyDef bodyDef_;
 
 	//fixtures
-	float width_[2];
-	float height_[2];
-	b2PolygonShape shape_[2];
-	b2FixtureDef fixtureDef_[2];
+	vector<float> widths_;
+	vector<float> heights_;
+	vector<b2PolygonShape> shapes_;
+	vector<b2FixtureDef> fixtureDefs_;
+	vector<b2Fixture*> fixtures_;
 };
 
