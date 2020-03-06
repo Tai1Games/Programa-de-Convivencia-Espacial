@@ -83,8 +83,8 @@
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);SDL2-2.0.10\include;Box2D\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);SDL2-2.0.10\include;Box2D\include\box2d;SDL2_ttf-2.0.15\include;SDL2_mixer-2.0.4\include</IncludePath>
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);SDL2-2.0.10\include;Box2D\include\box2d;SDL2_ttf-2.0.15\include;SDL2_mixer-2.0.4\include;json\include;SDL2_image-2.0.5\include</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -152,6 +152,8 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)SDL2-2.0.10\include;$(SolutionDir)Box2D\include\box2d;$(SolutionDir)SDL2_ttf-2.0.15\include;$(SolutionDir)SDL2_mixer-2.0.4\include;$(SolutionDir)json\include;$(SolutionDir)SDL2_image-2.0.5\include</AdditionalIncludeDirectories>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -159,7 +161,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)SDL2-2.0.10\lib\x64;$(SolutionDir)Box2D\lib;$(SolutionDir)SDL2_ttf-2.0.15\lib\x64;$(SolutionDir)SDL2_mixer-2.0.4\lib\x64;$(SolutionDir)SDL2_image-2.0.5\lib\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;box2d.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;box2d.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)SDL2-2.0.10\lib\$(Platform)\*.dll" "$(TargetDir)"
@@ -178,6 +180,8 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="HealthViewer.h" />
     <ClInclude Include="PCE_Project.h" />
@@ -201,6 +205,8 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Font.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="HealthViewer.cpp" />
     <ClCompile Include="PCE_Project.cpp" />
