@@ -3,6 +3,7 @@
 #include "Viewer.h"
 #include "Health.h"
 #include "HealthViewer.h"
+#include "Pickable.h"
 
 PlayState::PlayState() :
 	entityManager_(nullptr),
@@ -23,9 +24,11 @@ void PlayState::init() {
 	Entity* tinky = entityManager_->addEntity();
 	Entity* ground = entityManager_->addEntity();
 	Entity* rock = entityManager_->addEntity();
-	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 150, 80, 50, 50, 50, 0,0, false);
+	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 150, 80, 50, 50, 50, 0,0.5, false);
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 0, 500, 1000, 10, 50, 0,0, false);
 	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 150, 200, 20, 20, 10, 0,0, false);
+	Pickable* pickableObject = rock->addComponent<Pickable>();
+	if(!pickableObject->IsPicked()) pickableObject->PickObjectBy(collTinky);
 	//Transform* tr = tinky->addComponent<Transform>(tinkyBody);
 	//Transform* trG = ground->addComponent<Transform>(wallBody);
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un tinky.

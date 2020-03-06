@@ -6,15 +6,16 @@
 class Pickable : public Component
 {
 private:
-	Collider* mainCollider = nullptr;
-	b2WeldJoint* joint = nullptr;
-	bool picked = false;
+	Collider* mainCollider_ = nullptr;
+	b2WeldJoint* joint_ = nullptr;
+	bool picked_ = false;
 protected:
 public:
 	Pickable(): Component(ComponentType::Pickable){}
 	~Pickable(){};
 	virtual void init() override;
-	void PickedBy(Collider* player);
-	bool IsPicked() { return picked; }
+	void PickObjectBy(Collider* player);
+	bool IsPicked() { return picked_; }
+	void UnPickObject();
 };
 
