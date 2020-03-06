@@ -55,7 +55,7 @@ void PlayState::render() {
 }
 void PlayState::handleInput() {
 	entityManager_->handleInput();
-	DebugInput();
+	//DebugInput();
 
 
 }
@@ -97,8 +97,8 @@ void PlayState::DebugInput() {
 			cout << "Der: " << vD.x << " " << vD.y << endl;
 			cout << endl;
 		}
-		double tD = ih->getTrigger(i, InputHandler::GAMEPADTRIGGER::LEFTTRIGGER);
-		double tI = ih->getTrigger(i, InputHandler::GAMEPADTRIGGER::RIGHTTRIGGER);
+		double tD = ih->getTrigger(i, InputHandler::GAMEPADTRIGGER::RIGHTTRIGGER);
+		double tI = ih->getTrigger(i, InputHandler::GAMEPADTRIGGER::LEFTTRIGGER);
 		if (tD != 0 || tI != 0) {
 			cout << "TRIGGERS" << endl << "--------" << endl;
 			cout << "Izq: " << tI << endl;

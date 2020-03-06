@@ -13,15 +13,11 @@ using namespace std;
 
 class InputHandler {
 public:
-	const int m_joystickDeadZone = 10000;
-	const int m_triggerDeadZone = 10000; //trigger deadzone equals threshold
-
-	InputHandler();
 	enum MOUSEBUTTON : Uint8 {
 		LEFT = 0, MIDDLE = 1, RIGHT = 2
 	};
 	enum GAMEPADSTICK : Uint8 {
-		LEFTSTICK = 1, RIGHTSTICK=2
+		LEFTSTICK = 1, RIGHTSTICK = 2
 	};
 	enum GAMEPADTRIGGER : Uint8 {
 		LEFTTRIGGER = 1, RIGHTTRIGGER = 2
@@ -29,6 +25,79 @@ public:
 	enum ButtonState :Uint8 {
 		Up = 0, JustUp, Down, JustDown
 	};
+
+private:
+	//
+	//variables
+	//
+	//keyboard
+	const Uint8* kbState_;
+	bool isKeyUpEvent_;
+	bool isKeyDownEvent_;
+	//---------------------------------------------
+	//mouse
+	bool isMouseMotionEvent_;
+	bool isMouseButtonEvent_;
+	b2Vec2 mousePos_;
+	std::array<bool, 3> mbState_;
+	//---------------------------------------------
+	//controllers
+	int numControllers_;
+	std::vector<SDL_GameController*> m_gameControllers;
+	std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
+	std::vector<std::pair<double*, double*>> m_triggerValues;
+	std::vector<std::vector<ButtonState>> m_buttonStates;
+
+	bool m_bJoysticksInitialised;
+	bool isButtonDownEvent_;
+	bool isButtonUpEvent_;
+	bool isAxisMovementEvent_;
+	//
+	//Methods
+	//
+	//controllers
+	void clearState();
+	void clearJoysticks();
+
+	inline void onJoyAxisChange(SDL_Event& event);
+	inline void onJoyButtonChange(SDL_Event& event, ButtonState just);
+	inline bool mapJoystick(SDL_GameController* joy, json mapData);
+	//---------------------------------------------
+	//keyboard
+	inline void onKeyDown(SDL_Event& event) {
+		isKeyDownEvent_ = true;
+		// kbState_ = SDL_GetKeyboardState(0);
+	}
+	inline void onKeyUp(SDL_Event& event) {
+		isKeyUpEvent_ = true;
+		// kbState_ = SDL_GetKeyboardState(0);
+	}
+	//---------------------------------------------
+	//mouse
+	inline void onMouseMotion(SDL_Event& event) {
+		isMouseMotionEvent_ = true;
+		mousePos_.Set(event.motion.x, event.motion.y);
+	}
+	inline void onMouseButtonChange(SDL_Event& event, bool isDown) {
+		isMouseButtonEvent_ = true;
+		if (event.button.button == SDL_BUTTON_LEFT) {
+			mbState_[LEFT] = isDown;
+		}
+		else if (event.button.button == SDL_BUTTON_MIDDLE) {
+			mbState_[MIDDLE] = isDown;
+		}
+		else if (event.button.button == SDL_BUTTON_RIGHT) {
+			mbState_[RIGHT] = isDown;
+		}
+	}
+	//---------------------------------------------
+
+
+public:
+	const int m_joystickDeadZone = 10000;
+	const int m_triggerDeadZone = 10000; //trigger deadzone equals threshold
+
+	InputHandler();
 
 	InputHandler(InputHandler&) = delete;
 	InputHandler& operator=(InputHandler&) = delete;
@@ -116,71 +185,5 @@ public:
 	double getStickY(int ctrl, GAMEPADSTICK stick);
 	double getTrigger(int ctrl, GAMEPADTRIGGER trigger);
 
-
-private:
-	//
-	//Methods
-	//
-	//controllers
-	void clearState();
-	void clearJoysticks();
-
-	inline void onJoyAxisChange(SDL_Event& event);
-	inline void onJoyButtonChange(SDL_Event& event, ButtonState just);
-	inline bool mapJoystick(SDL_GameController* joy, json mapData);
-
-	//keyboard
-	inline void onKeyDown(SDL_Event& event) {
-		isKeyDownEvent_ = true;
-		// kbState_ = SDL_GetKeyboardState(0);
-	}
-	inline void onKeyUp(SDL_Event& event) {
-		isKeyUpEvent_ = true;
-		// kbState_ = SDL_GetKeyboardState(0);
-	}
-	
-	//mouse
-	inline void onMouseMotion(SDL_Event& event) {
-		isMouseMotionEvent_ = true;
-		mousePos_.Set(event.motion.x, event.motion.y);
-	}
-	inline void onMouseButtonChange(SDL_Event& event, bool isDown) {
-		isMouseButtonEvent_ = true;
-		if (event.button.button == SDL_BUTTON_LEFT) {
-			mbState_[LEFT] = isDown;
-		}
-		else if (event.button.button == SDL_BUTTON_MIDDLE) {
-			mbState_[MIDDLE] = isDown;
-		}
-		else if (event.button.button == SDL_BUTTON_RIGHT) {
-			mbState_[RIGHT] = isDown;
-		}
-	}
-
-	//
-	//variables
-	//
-	//keyboard
-	const Uint8* kbState_;
-	bool isKeyUpEvent_;
-	bool isKeyDownEvent_;
-	//mouse
-	bool isMouseMotionEvent_;
-	bool isMouseButtonEvent_;
-	b2Vec2 mousePos_;
-	std::array<bool, 3> mbState_;
-
-
-
-	int numControllers_;
-	std::vector<SDL_GameController*> m_gameControllers;
-	std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
-	std::vector<std::pair<double*,double*>> m_triggerValues;
-	std::vector<std::vector<ButtonState>> m_buttonStates;
-
-	bool m_bJoysticksInitialised;
-	bool isButtonDownEvent_;
-	bool isButtonUpEvent_;
-	bool isAxisMovementEvent_;
 };
 
