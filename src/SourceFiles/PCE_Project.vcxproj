@@ -179,6 +179,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="Font.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Health.h" />
+    <ClInclude Include="InputHandler.h" />
     <ClInclude Include="HealthViewer.h" />
     <ClInclude Include="PCE_Project.h" />
     <ClInclude Include="Pickable.h" />
@@ -204,6 +205,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="HealthViewer.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="PCE_Project.cpp" />
     <ClCompile Include="Pickable.cpp" />
     <ClCompile Include="PlayState.cpp" />
