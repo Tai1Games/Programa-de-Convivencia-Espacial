@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include "Resources.h"
 #include "Texture.h"
 #include "Health.h"
 #include "box2d.h"
@@ -10,14 +11,14 @@ private:
 	Texture* empty = nullptr;	//Textura que indica que ya no disponemos de ese "toque"
 
 	Health* he = nullptr;		//Actualizar la lista de Componentes :D
-	b2Vec2 pos;
+	b2Vec2 pos_;
 
-	Resources::TextureId active;
-	Resources::TextureId disable;
+	int activeTextureId_;
+	int disableTextureId_;
 
 public:
 	//Punteros a las 2 texturas de la vida y la posición de origen
-	HealthViewer(Resources::TextureId texA , Resources::TextureId texD, b2Vec2 pos_);
+	HealthViewer(int texActiveId , int texDisabledId, b2Vec2 pos);
 
 	virtual ~HealthViewer() { full = nullptr; empty = nullptr; };
 

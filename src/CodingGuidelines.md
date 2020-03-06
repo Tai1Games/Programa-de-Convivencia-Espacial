@@ -39,6 +39,10 @@ Comentar antes de cada método en el header (no setters y getters) lo que hace
 
 Todas las historias han de ir en ramas distintas
 
+Es buena práctica hacer merge de master a tu rama antes de hacer pull para resolver todos los posibles conflictos y confirmar que funciona
+
+Hay que compilar en 'Debug' y en 'Release' **antes** de pedir pull, asegurándose de que funciona en los dos modos
+
 Liveshare para visual si quereis hacer pair programming
 
 Los nombres de los commits han de ser descriptivos y útiles
