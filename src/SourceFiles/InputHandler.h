@@ -81,6 +81,9 @@ public:
 	bool joysticksInitialised() {
 		return m_bJoysticksInitialised;
 	}
+	int getNumControllers() {
+		return numControllers_;
+	}
 
 	//Ask for this variables when asking for input
 	//type of events
@@ -169,7 +172,7 @@ private:
 
 
 
-
+	int numControllers_;
 	std::vector<SDL_GameController*> m_gameControllers;
 	std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
 	std::vector<std::pair<double*,double*>> m_triggerValues;

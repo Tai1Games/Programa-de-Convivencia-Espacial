@@ -1,12 +1,14 @@
 #include "InputHandler.h"
 #include <fstream>
 #include <box2d.h>
+#include <iostream>
 
 
-
+using namespace std;
 InputHandler::InputHandler() {
 	clearState();
 	kbState_ = SDL_GetKeyboardState(0);
+	numControllers_ = 0;
 }
 
 InputHandler::~InputHandler() {
@@ -55,13 +57,14 @@ void InputHandler::initialiseJoysticks() {
 	if (SDL_WasInit(SDL_INIT_JOYSTICK) == 0) {
 		SDL_InitSubSystem(SDL_INIT_JOYSTICK);
 	}
+	numControllers_ = SDL_NumJoysticks();
 	if (SDL_NumJoysticks() > 0) {
 
 		json mapData;
 		ifstream inData = ifstream("../config/inputMapping.json");
 		if (inData.is_open()) {
 			inData >> mapData;
-			cout << "loaded Mapping files" << endl;
+			//cout << "loaded Mapping files" << endl;
 		}
 		for (int i = 0; i < SDL_NumJoysticks(); i++) {
 			SDL_GameController* gameCtrl = SDL_GameControllerOpen(i);
@@ -232,7 +235,7 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 	if (event.jaxis.axis == 2) {
 		if (event.jaxis.value > m_triggerDeadZone)
 		{
-			*m_triggerValues[whichOne].first=1;
+			*m_triggerValues[whichOne].first=abs(event.jaxis.value);
 		}
 		//else if (event.jaxis.value < -m_joystickDeadZone)
 		//{
@@ -280,7 +283,7 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 	if (event.jaxis.axis == 5) {
 		if (event.jaxis.value > m_triggerDeadZone)
 		{
-			*m_triggerValues[whichOne].second = 1;
+			*m_triggerValues[whichOne].second = abs(event.jaxis.value);
 		}
 		//else if (event.jaxis.value < -m_joystickDeadZone)
 		//{
