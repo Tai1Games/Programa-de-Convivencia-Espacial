@@ -18,6 +18,7 @@
 using namespace std;
 class PlayState;
 //Interfaz entre el juego y el display
+class InputHandler;
 class SDL_Game
 {
 protected:
@@ -29,6 +30,7 @@ protected:
 	SDL_Window* window_ = nullptr;
 	SDL_Renderer* renderer_ = nullptr;
 	PlayState* gameState_ = nullptr;
+	InputHandler* inputHandler_ =  nullptr;
 
 	static unique_ptr<SDL_Game> instance_;
 private:
@@ -61,6 +63,8 @@ public:
 	inline unsigned int getTime() {
 		return SDL_GetTicks();
 	}
+
+	InputHandler* getInputHandler() { return inputHandler_; }
 
 	SDLTexturesManager* getTexturesMngr() { return textures_; }
 	SDLAudioManager* getAudioMngr() { return audio_; }

@@ -37,3 +37,25 @@ void PlayState::init() {
 	rock->addComponent < Viewer >();
 	collRock->createFixture(100, 100, 10, 0, 0, 0, true);
 }
+
+void PlayState::update() {
+	entityManager_->update();
+	physicsWorld_->Step(1.0f / 240.0f, 6, 2);
+	//también debería actualizar la lógica de modo de juego
+	//spawners de monedas, carga de objetivos...
+
+}
+void PlayState::render() {
+	SDL_RenderClear(SDL_Game::instance()->getRenderer());
+
+	entityManager_->render();
+
+	SDL_RenderPresent(SDL_Game::instance()->getRenderer());
+}
+void PlayState::handleInput() {
+	GameState::handleInput();
+	entityManager_->handleInput();
+	//DebugInput();
+
+
+}
