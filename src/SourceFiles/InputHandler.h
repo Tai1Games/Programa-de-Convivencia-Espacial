@@ -6,6 +6,7 @@
 #include "Vector2D.h"
 #include <memory>
 #include "../json/single_include/nlohmann/json.hpp"
+#include <box2d.h>
 
 using json = nlohmann::json;
 using namespace std;
@@ -25,9 +26,6 @@ public:
 	enum GAMEPADTRIGGER : Uint8 {
 		LEFTTRIGGER = 1, RIGHTTRIGGER = 2
 	};
-	enum GAMEPADBUTTON : Uint8 {
-		A, B, X, Y
-	};
 	enum ButtonState :Uint8 {
 		Up = 0, JustUp, Down, JustDown
 	};
@@ -41,28 +39,21 @@ public:
 	void update();
 
 	// keyboard
-	inline bool keyDownEvent() {
-		return isKeyDownEvent_;
-	}
-
+	inline bool keyDownEvent();
 	inline bool keyUpEvent() {
 		return isKeyUpEvent_;
 	}
-
 	inline bool isKeyDown(SDL_Scancode key) {
 		// return kbState_[key] == 1;
 		return keyDownEvent() && kbState_[key] == 1;
 	}
-
 	inline bool isKeyDown(SDL_Keycode key) {
 		return isKeyDown(SDL_GetScancodeFromKey(key));
 	}
-
 	inline bool isKeyUp(SDL_Scancode key) {
 		// kbState_[key] == 0;
 		return keyUpEvent() && kbState_[key] == 0;
 	}
-
 	inline bool isKeyUp(SDL_Keycode key) {
 		return isKeyUp(SDL_GetScancodeFromKey(key));
 	}
@@ -76,7 +67,7 @@ public:
 		return isMouseButtonEvent_;
 	}
 
-	inline const Vector2D& getMousePos() {
+	b2Vec2 getMousePos() {
 		return mousePos_;
 	}
 
@@ -85,14 +76,14 @@ public:
 	}
 
 	// Joystick
+	//init
 	void initialiseJoysticks();
 	bool joysticksInitialised() {
 		return m_bJoysticksInitialised;
 	}
-	// see:
-	//   Chapter 4 of 'SDL Game Development' book
-	//   Available online via https://biblioteca.ucm.es/
-	//
+
+	//Ask for this variables when asking for input
+	//type of events
 	inline bool isButonDownEvent() {
 		return isButtonDownEvent_;
 	}
@@ -102,23 +93,40 @@ public:
 	inline bool isAxisMovementEvent() {
 		return isAxisMovementEvent_;
 	}
+	//justup/down for the exact press or release
 	inline bool isButtonJustUp(int ctrl, SDL_GameControllerButton b) {
 		return(isButtonUpEvent_ && m_buttonStates[ctrl][b] == JustUp);
 	}
 	inline bool isButtonJustDown(int ctrl, SDL_GameControllerButton b) {
 		return(isButtonDownEvent_ && m_buttonStates[ctrl][b] == JustDown);
 	}
+	//isup/down for holding a button
 	inline bool isButtonDown(int ctrl, SDL_GameControllerButton b) {
 		return(m_buttonStates[ctrl][b] == Down);
 	}
 	inline bool isButtonUp(int ctrl, SDL_GameControllerButton b) {
 		return(m_buttonStates[ctrl][b] == Up);
 	}
+	//get the direction or a value from a stick/trigger given a controller
+	b2Vec2 getStickDir(int ctrl, GAMEPADSTICK stick);
+	double getStickX(int ctrl, GAMEPADSTICK stick);
+	double getStickY(int ctrl, GAMEPADSTICK stick);
+	double getTrigger(int ctrl, GAMEPADTRIGGER trigger);
+
 
 private:
+	//
+	//Methods
+	//
+	//controllers
 	void clearState();
 	void clearJoysticks();
 
+	inline void onJoyAxisChange(SDL_Event& event);
+	inline void onJoyButtonChange(SDL_Event& event, ButtonState just);
+	inline bool mapJoystick(SDL_GameController* joy, json mapData);
+
+	//keyboard
 	inline void onKeyDown(SDL_Event& event) {
 		isKeyDownEvent_ = true;
 		// kbState_ = SDL_GetKeyboardState(0);
@@ -127,9 +135,11 @@ private:
 		isKeyUpEvent_ = true;
 		// kbState_ = SDL_GetKeyboardState(0);
 	}
+	
+	//mouse
 	inline void onMouseMotion(SDL_Event& event) {
 		isMouseMotionEvent_ = true;
-		mousePos_.set(event.motion.x, event.motion.y);
+		mousePos_.Set(event.motion.x, event.motion.y);
 	}
 	inline void onMouseButtonChange(SDL_Event& event, bool isDown) {
 		isMouseButtonEvent_ = true;
@@ -144,33 +154,25 @@ private:
 		}
 	}
 
+	//
+	//variables
+	//
+	//keyboard
 	const Uint8* kbState_;
 	bool isKeyUpEvent_;
 	bool isKeyDownEvent_;
+	//mouse
 	bool isMouseMotionEvent_;
 	bool isMouseButtonEvent_;
-
-	Vector2D mousePos_;
+	b2Vec2 mousePos_;
 	std::array<bool, 3> mbState_;
 
 
-	//Pruebas de Gamepad para proyecto
-
-
-	inline void onJoyAxisChange(SDL_Event& event);
-	inline void onJoyButtonChange(SDL_Event& event, ButtonState just);
-	inline bool mapJoystick(SDL_GameController* joy, json mapData);
-
-
-	int getAxisX(int joy, GAMEPADSTICK stick);
-	int getAxisY(int joy, GAMEPADSTICK stick);
-	int getTrigger(int joy, GAMEPADTRIGGER trigger);
-	bool isButtonDown(int joy, GAMEPADBUTTON button);
 
 
 	std::vector<SDL_GameController*> m_gameControllers;
 	std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
-	std::vector<std::pair<int*,int*>> m_triggerValues;
+	std::vector<std::pair<double*,double*>> m_triggerValues;
 	std::vector<std::vector<ButtonState>> m_buttonStates;
 
 	bool m_bJoysticksInitialised;
