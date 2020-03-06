@@ -25,9 +25,10 @@ void PlayState::init() {
 	Entity* ground = entityManager_->addEntity();
 	Entity* rock = entityManager_->addEntity();
 
-Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 150, 80, 50, 50, 50, 0, 0, 0, false);
-Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 0, 500, 1000, 10, 50, 0, 0, 0, false);
-Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 500, 80, 20, 20, 10, 0, 0, 0, false);
+	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 240, 80, 50, 50, 50, 0, 0, 0, false);
+	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 0, 500, 1000, 10, 50, 0, 0, 0, false);
+	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 250, 280, 20, 20, 10, 0, 0, 0, false);
+	
 	Pickable* pickableObject = rock->addComponent<Pickable>();
 	if(!pickableObject->IsPicked()) pickableObject->PickObjectBy(collTinky);
 	//Transform* tr = tinky->addComponent<Transform>(tinkyBody);
