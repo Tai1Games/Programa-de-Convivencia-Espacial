@@ -21,6 +21,7 @@ SDL_Game::SDL_Game(){
 		WINDOW_WIDTH / 2 - introText.getWidth() / 2, WINDOW_HEIGHT - 250);
 	SDL_RenderPresent(renderer_);
 
+	audio_->setMusicVolume(7);
 	audio_->playMusic(Resources::MainTheme, -1);
 }
 

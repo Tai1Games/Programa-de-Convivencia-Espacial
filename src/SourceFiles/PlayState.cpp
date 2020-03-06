@@ -1,6 +1,8 @@
 #include "PlayState.h"
 #include "Transform.h"
 #include "Viewer.h"
+#include "Health.h"
+#include "HealthViewer.h"
 
 PlayState::PlayState() :
 	entityManager_(nullptr),
@@ -14,7 +16,7 @@ PlayState::~PlayState() {
 
 void PlayState::init() {
 	//aqui se crean todas las entidades necesarias
-	//se podría JSONizar para evitar compilar
+	//se podrÃ­a JSONizar para evitar compilar
 	entityManager_ = new EntityManager();
 	physicsWorld_ = new b2World(b2Vec2(0, 9.8));
 	
@@ -26,8 +28,11 @@ void PlayState::init() {
 	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 150, 200, 20, 20, 10, 0,0, false);
 	//Transform* tr = tinky->addComponent<Transform>(tinkyBody);
 	//Transform* trG = ground->addComponent<Transform>(wallBody);
-	tinky->addComponent<Viewer>();
-	ground->addComponent<Viewer>();
+	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un tinky.
+	tinky->addComponent<Health>(3);
+	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(20, 20));
+
+	ground->addComponent<Viewer>();						//  tambiÃ©n se puede poner un SDL_Rect para el clip (despuÃ©s de la textura)
 	rock->addComponent < Viewer >();
 	//tr->getBody()->ApplyForce(b2Vec2 (0, -200), b2Vec2(0, 0), true);
 	//tr->getBody()->ApplyLinearImpulse(b2Vec2(0, -100), b2Vec2(0, 0),true);
@@ -36,7 +41,7 @@ void PlayState::init() {
 void PlayState::update() {
 	entityManager_->update();
 	physicsWorld_->Step(1.0f / 240.0f, 6, 2);
-	//también debería actualizar la lógica de modo de juego
+	//tambiÃ©n deberÃ­a actualizar la lÃ³gica de modo de juego
 	//spawners de monedas, carga de objetivos...
 }
 void PlayState::render() {

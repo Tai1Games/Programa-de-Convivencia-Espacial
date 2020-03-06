@@ -8,7 +8,9 @@ vector<Resources::FontInfo> Resources::fonts_ {
 
 vector<Resources::ImageInfo> Resources::images_ {
 		//Imágenes {nombre_en_enum, ruta}
-		{ Tinky, "../../assets/game/textures/Tinky.png" }
+		{ Tinky, "../../assets/game/textures/Tinky.png" },
+		{ ActiveHealth, "../../assets/game/textures/VidaActiva.png" },
+		{ DisableHealth, "../../assets/game/textures/VidaInactiva.png" }
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_ {
