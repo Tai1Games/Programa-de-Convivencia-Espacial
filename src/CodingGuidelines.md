@@ -23,8 +23,8 @@ Todos los métodos `virtual` se ponen otra vez `virtual` de forma explícita par
 Variables privadas siguen el esquema: nombre_
 
 **Órden en el header**
-1. Privado
 1. Protegido
+1. Privado
 1. Publico
 1. Constructora
 1. Destructora
@@ -38,6 +38,10 @@ Comentar antes de cada método en el header (no setters y getters) lo que hace
 **El que haga un commit al master muere**
 
 Todas las historias han de ir en ramas distintas
+
+Es buena práctica hacer merge de master a tu rama antes de hacer pull para resolver todos los posibles conflictos y confirmar que funciona
+
+Hay que compilar en 'Debug' y en 'Release' **antes** de pedir pull, asegurándose de que funciona en los dos modos
 
 Liveshare para visual si quereis hacer pair programming
 

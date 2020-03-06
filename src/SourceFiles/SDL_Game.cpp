@@ -1,4 +1,5 @@
 #include "SDL_Game.h"
+#include "Resources.h"
 #include "InputHandler.h"
 #include "PlayState.h"
 
@@ -54,6 +55,8 @@ void SDL_Game::initializeResources() {
 	audio_ = new SDLAudioManager();
 	audio_->init();
 
+	gamestateMachine_ = new GameStateMachine();
+
 	for (auto& image : Resources::images_) {
 		textures_->loadFromImg(image.id, renderer_, image.fileName);
 	}
@@ -78,24 +81,29 @@ void SDL_Game::initializeResources() {
 
 void SDL_Game::closeResources() {
 	delete textures_;
+	textures_ = nullptr;
 	delete fonts_;
+	fonts_ = nullptr;
 	delete audio_;
+	audio_ = nullptr;
+	delete gamestateMachine_;
+	gamestateMachine_ = nullptr;
 }
 
 void SDL_Game::start() {
 	exit_ = false;
-	gameState_ = new PlayState();
-	gameState_->init();
+	gamestateMachine_->changeToState(States::play);
 	while (!exit_) {
-		//Uint32 startTime = game_->getTime();
+		Uint32 startTime = getTime();
 
-		gameState_->handleInput();
-		gameState_->update();
-		gameState_->render();
+		gamestateMachine_->update();
+		gamestateMachine_->render();
+		gamestateMachine_->handleInput();
 
-		//Uint32 frameTime = game_->getTime() - startTime;
-		//if (frameTime < 10)
-		//	SDL_Delay(10 - frameTime);
+		Uint32 frameTime = getTime() - startTime;
+		if (frameTime < MS_PER_FRAME)
+			SDL_Delay(MS_PER_FRAME - frameTime);
+
 		//exit_ = !exit_;
 	}
 }

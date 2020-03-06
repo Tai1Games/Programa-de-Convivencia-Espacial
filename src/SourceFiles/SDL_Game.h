@@ -3,11 +3,13 @@
 #include "Constants.h"
 #include <memory>
 #include <assert.h>
+
 #include "EntityManager.h"
 #include "SDLTexturesManager.h"
 #include "SDLAudioManager.h"
 #include "SDLFontsManager.h"
-#include "Resources.h"
+#include "GameStateMachine.h"
+
 #include "SDL_macros.h"
 #include "iostream"
 #include "checkML.h"
@@ -19,20 +21,15 @@ class PlayState;
 class InputHandler;
 class SDL_Game
 {
-private:
-	bool exit_;
-	void initializeResources();
-	void closeResources();
 protected:
 
-	//Fonts
 	SDLFontsManager* fonts_ = nullptr;
-
-	//Textures
 	SDLTexturesManager* textures_ = nullptr;
-
-	//Audio
 	SDLAudioManager* audio_ = nullptr;
+	GameStateMachine* gamestateMachine_ = nullptr;
+	SDL_Window* window_ = nullptr;
+	SDL_Renderer* renderer_ = nullptr;
+	PlayState* gameState_ = nullptr;
 
 	//Rng
 
@@ -43,6 +40,11 @@ protected:
 	InputHandler* inputHandler_;
 
 	static unique_ptr<SDL_Game> instance_;
+private:
+	bool exit_;
+	void initializeResources();
+	void closeResources();
+
 public:
 	void start();
 	SDL_Game();
@@ -72,5 +74,8 @@ public:
 	InputHandler* getInputHandler() { return inputHandler_; }
 
 	SDLTexturesManager* getTexturesMngr() { return textures_; }
+	SDLAudioManager* getAudioMngr() { return audio_; }
+	SDLFontsManager* getFontMngr() { return fonts_; }
+	GameStateMachine* getStateMachine() { return gamestateMachine_; }
 	SDL_Renderer* getRenderer() { return  renderer_; }
 };

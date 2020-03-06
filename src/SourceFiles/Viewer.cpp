@@ -1,24 +1,25 @@
 #include "Viewer.h"
 #include "Entity.h"
+#include "Resources.h"
 
 Viewer::Viewer() : 
 	Viewer(Resources::Tinky) {	//
 }
 
-Viewer::Viewer(Resources::TextureId tex) :
+Viewer::Viewer(int textureId) :
 	Component(ComponentType::Viewer), //
 	tex_(nullptr),	//
 	collider_(nullptr),
 	clip_(SDL_Rect{ 0, 0, 0, 0 }),
-	textureId_(tex) {	//
+	textureId_(textureId) {	//
 }
 
-Viewer::Viewer(Resources::TextureId tex, SDL_Rect clip) :
+Viewer::Viewer(int textureId, SDL_Rect clip) :
 	Component(ComponentType::Viewer), //
 	tex_(nullptr),	//
 	collider_(nullptr),
 	clip_(clip),
-	textureId_(tex) {	//
+	textureId_(textureId) {	//
 }
 
 Viewer::~Viewer() {
