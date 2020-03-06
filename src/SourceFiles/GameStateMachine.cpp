@@ -3,7 +3,7 @@
 #include "PlayState.h"
 
 GameStateMachine::GameStateMachine() {
-	for (short i = 0; i < NUMBER_OF_STATES; i++)
+	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
 		states_.push_back(nullptr);
 }
 
@@ -15,7 +15,7 @@ GameStateMachine::~GameStateMachine() {
 }
 
 void GameStateMachine::changeToState(int state) {
-	if (state != currentState_ && state < NUMBER_OF_STATES) {
+	if (state != currentState_ && state < States::NUMBER_OF_STATES) {
 		currentState_ = state;
 		if (states_[state] == nullptr) {
 			//create state
@@ -37,7 +37,7 @@ void GameStateMachine::changeToState(int state) {
 }
 
 void GameStateMachine::deleteState(int state) {
-	if (state != currentState_ && state < NUMBER_OF_STATES) {
+	if (state != currentState_ && state < States::NUMBER_OF_STATES) {
 		delete states_[state];
 		states_[state] = nullptr;
 	}
