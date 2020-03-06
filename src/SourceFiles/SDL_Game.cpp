@@ -96,9 +96,9 @@ void SDL_Game::start() {
 	while (!exit_) {
 		Uint32 startTime = getTime();
 
+		gamestateMachine_->handleInput();
 		gamestateMachine_->update();
 		gamestateMachine_->render();
-		gamestateMachine_->handleInput();
 
 		Uint32 frameTime = getTime() - startTime;
 		if (frameTime < MS_PER_FRAME)
