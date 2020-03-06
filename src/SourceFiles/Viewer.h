@@ -9,14 +9,14 @@ class Viewer : public Component
 {
 private:
 protected:
-	Resources::TextureId textureId_;
+	int textureId_;
 	Texture* tex_;
 	Collider* collider_;
 	SDL_Rect clip_;
 public:
 	Viewer();
-	Viewer(Resources::TextureId tex);
-	Viewer(Resources::TextureId tex, SDL_Rect clip);
+	Viewer(int textureId);
+	Viewer(int textureId, SDL_Rect clip);
 	virtual ~Viewer();
 
 	virtual void init() override;
