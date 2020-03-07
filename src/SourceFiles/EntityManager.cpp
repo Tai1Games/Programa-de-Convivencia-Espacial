@@ -4,6 +4,7 @@
 EntityManager::EntityManager(){}
 
 EntityManager::~EntityManager() {
+	entities_.clear();
 }
 
 void EntityManager::update() {
