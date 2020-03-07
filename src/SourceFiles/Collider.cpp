@@ -22,7 +22,7 @@ void Collider::createFixture(float width, float height, float density,
 	aux.shape = &shapes_.back();
 	aux.density = density;
 	aux.friction = friction;
-	aux.restitution = fmod(restitution, 1.0);
+	aux.restitution = /*fmod(restitution, 1.0)*/restitution;
 	aux.filter.groupIndex = groupIndex;
 	aux.isSensor = sensor;
 	fixtureDefs_.push_back(aux);

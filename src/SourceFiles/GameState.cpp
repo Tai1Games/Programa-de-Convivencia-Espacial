@@ -19,7 +19,7 @@ GameState::~GameState() {
 
 void GameState::update() {
 	entityManager_->update();
-	physicsWorld_->Step(/*MS_PER_FRAME*/1.0f/60.0f, 6, 2);
+	physicsWorld_->Step(MS_PER_FRAME, 6, 2);
 	//también debería actualizar la lógica de modo de juego
 	//spawners de monedas, carga de objetivos...
 }
@@ -34,7 +34,7 @@ void GameState::render() {
 
 void GameState::handleInput() {
 	SDL_Game::instance()->getInputHandler()->update();
-	//DebugInput();
+	DebugInput();
 	if(entityManager_!=nullptr)
 		entityManager_->handleInput();
 }

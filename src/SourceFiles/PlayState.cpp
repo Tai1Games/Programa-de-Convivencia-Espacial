@@ -4,6 +4,7 @@
 #include "Health.h"
 #include "HealthViewer.h"
 #include "Pickable.h"
+#include "PickObjectListener.h"
 
 PlayState::PlayState()  {
 }
@@ -21,12 +22,14 @@ void PlayState::init() {
 	Entity* ground = entityManager_->addEntity();
 	Entity* rock = entityManager_->addEntity();
 
-	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 240, 80, 50, 50, 50, 0, 0, 0, false);
+	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 240, 80, 50, 50, 50, 0, 1, 0, false);
+	//Forma provisional de identificar al jugador, se pueden pasar otro tipo de datos.
+	collTinky->setUserData((void*)0);
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 0, 500, 1000, 10, 50, 0, 0, 0, false);
 	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 250, 280, 20, 20, 10, 0, 0, 0, false);
-
+	collSuelo->setUserData((void*)5);
 	Pickable* pickableObject = rock->addComponent<Pickable>();
-	if(!pickableObject->IsPicked()) pickableObject->PickObjectBy(collTinky);
+	//if(!pickableObject->IsPicked()) pickableObject->PickObjectBy(collTinky);
 	//Transform* tr = tinky->addComponent<Transform>(tinkyBody);
 	//Transform* trG = ground->addComponent<Transform>(wallBody);
 
@@ -36,11 +39,14 @@ void PlayState::init() {
 	ground->addComponent<Viewer>();
 	rock->addComponent < Viewer >();
 	collRock->createFixture(100, 100, 10, 0, 0, 0, true);
+
+	PickObjectListener* objectListener = new PickObjectListener();
+	physicsWorld_->SetContactListener(objectListener);
 }
 
 void PlayState::update() {
 	entityManager_->update();
-	physicsWorld_->Step(1.0f / 240.0f, 6, 2);
+	physicsWorld_->Step(1.0f / 60.0f, 6, 2);
 	//también debería actualizar la lógica de modo de juego
 	//spawners de monedas, carga de objetivos...
 

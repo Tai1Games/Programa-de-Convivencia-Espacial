@@ -22,6 +22,7 @@ public:
 	b2BodyType getType() const { return body_->GetType(); }
 	b2Transform getTransform() const { return body_->GetTransform(); }
 	b2World* getWorld() const { return world_; }
+	b2Fixture* getFixture(int i) const { return fixtures_[i]; }
 	float getAngle() const { return body_->GetAngle(); }
 	float getMass() const { return body_->GetMass(); }
 	bool isAwake() const { return body_->IsAwake(); }
@@ -42,6 +43,7 @@ public:
 	void setBullet(bool b) { body_->SetBullet(b); }
 	void setTransform(b2Vec2 pos, float angle) { body_->SetTransform(pos, angle); }
 	void setLinearVelocity(b2Vec2 vel) { body_->SetLinearVelocity(vel); }
+	void setUserData(void* data) { body_->SetUserData(data); }
 	void applyLinearImpulse(b2Vec2 force, b2Vec2 point) { body_->ApplyLinearImpulse(force, point, true); }
 	void applyForce(b2Vec2 force, b2Vec2 point) { body_->ApplyForce(force, point, true); }
 	void createFixture(float width, float height, float density,
