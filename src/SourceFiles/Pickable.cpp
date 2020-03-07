@@ -33,11 +33,13 @@ void Pickable::PickObjectBy(b2Body* playerBody)
 		jointDef.bodyA = playerBody;
 		jointDef.bodyB = mainCollider_->getBody();
 		jointDef.collideConnected = false;
+		mainCollider_->getBody()->SetEnabled(false);
 		mainCollider_->setTransform(b2Vec2(playerBody->GetPosition().x-mainCollider_->getW(0), playerBody->GetPosition().y + 25),0);
 		jointDef.localAnchorA = b2Vec2(0, 50 / 2);
 		jointDef.localAnchorB = b2Vec2(mainCollider_->getW(0), 10);
 		joint_ = (b2WeldJoint*)mainCollider_->getWorld()->CreateJoint(&jointDef);
 		picked_ = true;
+		mainCollider_->getBody()->SetEnabled(true);
 	}
 }
 
@@ -51,17 +53,17 @@ void Pickable::UnPickObject()
 
 void Pickable::SavePlayerInfo(int index, b2Body* playerB)
 {
-	cout << "si";
-	cout << index << endl;
-	cout << playerB->GetUserData() << endl;
+	//cout << "si";
+	//cout << index << endl;
+	//cout << playerB->GetUserData() << endl;
 	playerInfo[index].isNear = true;
 	playerInfo[index].body = playerB;
 }
 
 void Pickable::DeletePlayerInfo(int index)
 {
-	cout << "no";
-	cout << index << endl;
+	//cout << "no";
+	//cout << index << endl;
 	playerInfo[index].isNear = false;
 	playerInfo[index].body = nullptr;
 }

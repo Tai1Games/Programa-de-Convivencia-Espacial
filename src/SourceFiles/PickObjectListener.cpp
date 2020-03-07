@@ -1,5 +1,21 @@
 #include "PickObjectListener.h"
 
+void PickObjectListener::BeginContact(b2Contact* contact)
+{
+	Pickable* pickableObj = nullptr;
+	b2Body* playerB = nullptr;
+	if (contactPickableObjectAndPlayer(contact, pickableObj, playerB))
+		pickableObj->SavePlayerInfo(int(playerB->GetUserData()), playerB);
+}
+
+void PickObjectListener::EndContact(b2Contact* contact)
+{
+	Pickable* pickableObj = nullptr;
+	b2Body* playerB = nullptr;
+	if (contactPickableObjectAndPlayer(contact, pickableObj, playerB))
+		pickableObj->DeletePlayerInfo(int(playerB->GetUserData()));
+}
+
 bool PickObjectListener::contactPickableObjectAndPlayer(b2Contact* contact, Pickable*& pickableObj, b2Body*& playerB)
 {
 	b2Fixture* fixtureA = contact->GetFixtureA();

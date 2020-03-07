@@ -46,7 +46,7 @@ void PlayState::init() {
 
 void PlayState::update() {
 	entityManager_->update();
-	physicsWorld_->Step(10.0f / 60.0f, 6, 2);
+	physicsWorld_->Step(5.0f / 60.0f, 6, 2);
 	//también debería actualizar la lógica de modo de juego
 	//spawners de monedas, carga de objetivos...
 

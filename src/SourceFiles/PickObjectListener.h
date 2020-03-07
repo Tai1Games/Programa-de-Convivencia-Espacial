@@ -5,21 +5,9 @@
 
 class PickObjectListener : public b2ContactListener
 {
-    virtual void BeginContact(b2Contact* contact) {
-
-        Pickable* pickableObj = nullptr;
-        b2Body* playerB = nullptr;
-        if (contactPickableObjectAndPlayer(contact, pickableObj, playerB))
-            pickableObj->SavePlayerInfo(int(playerB->GetUserData()),playerB);
-    }
-
-    virtual void EndContact(b2Contact* contact) {
-
-        Pickable* pickableObj = nullptr;
-        b2Body* playerB = nullptr;
-        if (contactPickableObjectAndPlayer(contact, pickableObj, playerB))
-            pickableObj->DeletePlayerInfo(int(playerB->GetUserData()));
-    }
+private:
+    virtual void BeginContact(b2Contact* contact);
+    virtual void EndContact(b2Contact* contact);
     bool contactPickableObjectAndPlayer(b2Contact* contact, Pickable*& pickableObj, b2Body*& playerB);
 };
 

@@ -23,6 +23,7 @@ public:
 	Pickable(): Component(ComponentType::Pickable){}
 	~Pickable(){};
 	virtual void init() override;
+	/*Se comprueba que jugador ha pulado Y y está cerca para recoger este objeto*/
 	virtual void update() override;
 	/*Crea un joint entre el collider del objeto y el collider del jugador enviado como parametro*/
 	void PickObjectBy(b2Body* playerBody);
@@ -32,6 +33,7 @@ public:
 	void UnPickObject();
 	/*Guarda la informacion del jugador que está dentro del trigger*/
 	void SavePlayerInfo(int index, b2Body* playerB);
+	/*Borra la informacion del jugador que sale del trigger*/
 	void DeletePlayerInfo(int index);
 };
 
