@@ -41,7 +41,6 @@ void GameState::handleInput() {
 
 void GameState::DebugInput() {
 	InputHandler* ih = SDL_Game::instance()->getInputHandler();
-	ih->update();
 	for (int i = 0; i < ih->getNumControllers(); i++)
 	{
 		/*cout << "----------------" << endl;
