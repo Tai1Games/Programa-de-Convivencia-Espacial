@@ -16,7 +16,6 @@
 
 
 using namespace std;
-class PlayState;
 //Interfaz entre el juego y el display
 class InputHandler;
 class SDL_Game
