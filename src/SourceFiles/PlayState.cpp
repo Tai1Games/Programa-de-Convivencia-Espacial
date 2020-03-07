@@ -45,23 +45,11 @@ void PlayState::init() {
 }
 
 void PlayState::update() {
-	entityManager_->update();
-	physicsWorld_->Step(5.0f / 60.0f, 6, 2);
-	//también debería actualizar la lógica de modo de juego
-	//spawners de monedas, carga de objetivos...
-
+	GameState::update();
 }
 void PlayState::render() {
-	SDL_RenderClear(SDL_Game::instance()->getRenderer());
-
-	entityManager_->render();
-
-	SDL_RenderPresent(SDL_Game::instance()->getRenderer());
+	GameState::render();
 }
 void PlayState::handleInput() {
 	GameState::handleInput();
-	entityManager_->handleInput();
-	//DebugInput();
-
-
 }
