@@ -19,7 +19,7 @@ void Pickable::update()
 
 	for (int i = 0; i<playerInfo.size(); i++) {
 
-		if (ih_->isButtonDown(i, SDL_CONTROLLER_BUTTON_Y) && playerInfo[i].isNear) {
+		if (ih_->isButtonDown(i, SDL_CONTROLLER_BUTTON_Y) && playerInfo[i].isNear && !IsPicked()) {
 			cout << "inRange";
 			PickObjectBy(playerInfo[i].body);
 		}
@@ -33,8 +33,9 @@ void Pickable::PickObjectBy(b2Body* playerBody)
 		jointDef.bodyA = playerBody;
 		jointDef.bodyB = mainCollider_->getBody();
 		jointDef.collideConnected = false;
-		/*mainCollider_->setTransform(b2Vec2(playerBody->GetPosition().x, playerBody->GetPosition().y),0);*/
-		jointDef.localAnchorA = b2Vec2(-100, 50 / 2);
+		mainCollider_->setTransform(b2Vec2(playerBody->GetPosition().x-mainCollider_->getW(0), playerBody->GetPosition().y + 25),0);
+		jointDef.localAnchorA = b2Vec2(0, 50 / 2);
+		jointDef.localAnchorB = b2Vec2(mainCollider_->getW(0), 10);
 		joint_ = (b2WeldJoint*)mainCollider_->getWorld()->CreateJoint(&jointDef);
 		picked_ = true;
 	}

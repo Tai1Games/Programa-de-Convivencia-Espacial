@@ -17,6 +17,7 @@ private:
 	b2WeldJoint* joint_ = nullptr;
 	bool picked_ = false;
 	InputHandler* ih_ = nullptr;
+	/*Vector que informa de los jugadores que están cerca/dentro del trigger y su respectivo body*/
 	std::vector<PlayerInfo> playerInfo;
 public:
 	Pickable(): Component(ComponentType::Pickable){}
