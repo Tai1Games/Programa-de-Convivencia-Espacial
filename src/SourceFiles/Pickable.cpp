@@ -11,17 +11,17 @@ void Pickable::init()
 	//Pone la informacion de esta clase en el body, para poder usarla en el Listener
 	mainCollider_->setUserData(this);
 	//Tamaño del vector segun el numero de jugadores
-	playerInfo.resize(ih_->getNumControllers());
+	playerInfo_.resize(ih_->getNumControllers());
 }
 
 void Pickable::update()
 {
 
-	for (int i = 0; i<playerInfo.size(); i++) {
+	for (int i = 0; i<playerInfo_.size(); i++) {
 
-		if (ih_->isButtonDown(i, SDL_CONTROLLER_BUTTON_Y) && playerInfo[i].isNear && !IsPicked()) {
+		if (ih_->isButtonDown(i, SDL_CONTROLLER_BUTTON_Y) && playerInfo_[i].isNear && !IsPicked()) {
 			cout << "inRange";
-			PickObjectBy(playerInfo[i].body);
+			PickObjectBy(playerInfo_[i].body);
 		}
 	}
 }
@@ -56,14 +56,14 @@ void Pickable::SavePlayerInfo(int index, b2Body* playerB)
 	//cout << "si";
 	//cout << index << endl;
 	//cout << playerB->GetUserData() << endl;
-	playerInfo[index].isNear = true;
-	playerInfo[index].body = playerB;
+	playerInfo_[index].isNear = true;
+	playerInfo_[index].body = playerB;
 }
 
 void Pickable::DeletePlayerInfo(int index)
 {
 	//cout << "no";
 	//cout << index << endl;
-	playerInfo[index].isNear = false;
-	playerInfo[index].body = nullptr;
+	playerInfo_[index].isNear = false;
+	playerInfo_[index].body = nullptr;
 }

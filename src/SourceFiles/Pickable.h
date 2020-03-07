@@ -18,7 +18,7 @@ private:
 	bool picked_ = false;
 	InputHandler* ih_ = nullptr;
 	/*Vector que informa de los jugadores que están cerca/dentro del trigger y su respectivo body*/
-	std::vector<PlayerInfo> playerInfo;
+	std::vector<PlayerInfo> playerInfo_;
 public:
 	Pickable(): Component(ComponentType::Pickable){}
 	~Pickable(){};

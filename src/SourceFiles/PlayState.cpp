@@ -10,6 +10,9 @@ PlayState::PlayState()  {
 }
 
 PlayState::~PlayState() {
+	for (auto o : listenerVector_) {
+		delete o;
+	}
 }
 
 void PlayState::init() {
@@ -40,8 +43,10 @@ void PlayState::init() {
 	rock->addComponent < Viewer >();
 	collRock->createFixture(100, 100, 10, 0, 0, 0, true);
 
-	PickObjectListener* objectListener = new PickObjectListener();
-	physicsWorld_->SetContactListener(objectListener);
+	//Listeners
+	PickObjectListener* pOListener = new PickObjectListener();
+	physicsWorld_->SetContactListener(pOListener);
+	listenerVector_.push_back(pOListener);
 }
 
 void PlayState::update() {

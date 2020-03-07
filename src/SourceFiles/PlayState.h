@@ -4,7 +4,6 @@
 #include "Entity.h"
 #include "checkML.h"
 
-
 using namespace std;
 
 // esta clase es equivalente a un nivel del juego
@@ -12,6 +11,8 @@ using namespace std;
 //tambien deberia convertirse en un template de modo de juego y mapa
 class PlayState : public GameState
 {
+private:
+	vector<b2ContactListener*> listenerVector_;
 public:
 	PlayState();
 	~PlayState();
