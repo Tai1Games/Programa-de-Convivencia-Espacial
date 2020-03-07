@@ -34,6 +34,13 @@ public:
 		};
 	}
 
+	SDL_Rect getRectRender() const {
+		return SDL_Rect{
+			(int)(getPos().x * 60.0f), (int)(WINDOW_HEIGHT - getPos().y * 60.0f),
+			(int)(getW(0) * 60.0f), (int)(getH(0) * 60.0f)
+		};
+	}
+
 	//setters
 	void setType(b2BodyType t) { body_->SetType(t); }
 	void setAwake(bool b) { body_->SetAwake(b); }

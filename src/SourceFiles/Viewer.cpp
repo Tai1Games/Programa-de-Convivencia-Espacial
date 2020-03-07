@@ -37,5 +37,5 @@ void Viewer::init() {
 }
 
 void Viewer::draw() const {
-	tex_->render(collider_->getRect(), collider_->getAngle(), clip_);
+	tex_->render(collider_->getRectRender(), collider_->getAngle(), clip_);
 }
