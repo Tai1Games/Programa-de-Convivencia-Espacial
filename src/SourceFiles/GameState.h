@@ -12,6 +12,10 @@ protected:
 	//puede que no sea necesario si cogemos la referencia en cuanto los creamos con addPhysicalEntity
 	b2Body* addPhysicalEntity(/*PARÁMETROS PARA PODER CREAR UN BODY*/);  //añade una entidad fisica
 	//HUD
+#pragma region Debug
+	void DebugInput();
+#pragma endregion
+
 public:
 	GameState();
 	virtual ~GameState();

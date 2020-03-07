@@ -17,6 +17,17 @@ public:
 	PlayState();
 	~PlayState();
 	virtual void init();
+	virtual void update();
+	virtual void render();
+	virtual void handleInput();
+private:
+	EntityManager* entityManager_;
+	b2World* physicsWorld_;
+	vector<b2Body*> physicalEntities_; //almacena los punteros a los colliders de b2
+	//puede que no sea necesario si cogemos la referencia en cuanto los creamos con addPhysicalEntity
+	b2Body* addPhysicalEntity(/*PAR�METROS PARA PODER CREAR UN BODY*/);  //a�ade una entidad fisica
+	//HUD
+	void DebugInput();
 
 };
 

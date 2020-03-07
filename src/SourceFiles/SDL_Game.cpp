@@ -1,5 +1,7 @@
 #include "SDL_Game.h"
 #include "Resources.h"
+#include "InputHandler.h"
+#include "PlayState.h"
 
 unique_ptr<SDL_Game> SDL_Game::instance_;
 
@@ -23,6 +25,9 @@ SDL_Game::SDL_Game(){
 
 	audio_->setMusicVolume(7);
 	audio_->playMusic(Resources::MainTheme, -1);
+	inputHandler_ = new InputHandler();
+	inputHandler_->initialiseJoysticks();
+
 }
 
 SDL_Game::~SDL_Game() {
@@ -91,9 +96,9 @@ void SDL_Game::start() {
 	while (!exit_) {
 		Uint32 startTime = getTime();
 
+		gamestateMachine_->handleInput();
 		gamestateMachine_->update();
 		gamestateMachine_->render();
-		gamestateMachine_->handleInput();
 
 		Uint32 frameTime = getTime() - startTime;
 		if (frameTime < MS_PER_FRAME)
