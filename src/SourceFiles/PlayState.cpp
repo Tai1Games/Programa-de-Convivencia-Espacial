@@ -4,6 +4,7 @@
 #include "Health.h"
 #include "HealthViewer.h"
 #include "InputHandler.h"
+#include "CollisionHandler.h"
 
 PlayState::PlayState()  {
 }
@@ -20,10 +21,13 @@ void PlayState::init() {
 	Entity* tinky = entityManager_->addEntity();
 	Entity* ground = entityManager_->addEntity();
 	Entity* rock = entityManager_->addEntity();
+	CollisionHandler* col = new CollisionHandler();
+	physicsWorld_->SetContactListener(col);
 
 	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 150, 80, 50, 50, 50, 0, 0, 0, false);
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 0, 500, 1000, 10, 50, 0, 0, 0, false);
 	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 500, 80, 20, 20, 10, 0, 0, 0, false);
+	collTinky->createFixture(150, 80, 50, 50, 50, 0, true);
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un tinky.
 	tinky->addComponent<Health>(3);
 	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(20, 20));
@@ -34,7 +38,7 @@ void PlayState::init() {
 
 void PlayState::update() {
 	entityManager_->update();
-	physicsWorld_->Step(1.0f / 240.0f, 6, 2);
+	physicsWorld_->Step(1.0f / 1.0f, 6, 2);
 	//también debería actualizar la lógica de modo de juego
 	//spawners de monedas, carga de objetivos...
 	
@@ -50,7 +54,5 @@ void PlayState::handleInput() {
 	GameState::handleInput();
 	entityManager_->handleInput();
 	//DebugInput();
-
-
 }
 
