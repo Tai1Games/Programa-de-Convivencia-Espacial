@@ -24,16 +24,18 @@ void PlayState::init() {
 	CollisionHandler* col = new CollisionHandler();
 	physicsWorld_->SetContactListener(col);
 
-	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 150, 80, 50, 50, 50, 0, 0, 0, false);
-	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 0, 500, 1000, 10, 50, 0, 0, 0, false);
-	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 500, 80, 20, 20, 10, 0, 0, 0, false);
-	collTinky->createFixture(150, 80, 50, 50, 50, 0, true);
+	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 150, 80, 50, 50, 50, 0, 0,
+		Collider::CollisionLayer::Normal, false);
+	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 0, 500, 1000, 10, 50, 0, 0, 
+		Collider::CollisionLayer::Normal, false);
+	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 500, 80, 20, 20, 10, 0, 0, 
+		Collider::CollisionLayer::Triggers, false);
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un tinky.
 	tinky->addComponent<Health>(3);
 	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(20, 20));
 	ground->addComponent<Viewer>();
+	ground->addComponent<Health>(10);
 	rock->addComponent < Viewer >();
-	collRock->createFixture(100, 100, 10, 0, 0, 0, true);
 }
 
 void PlayState::update() {

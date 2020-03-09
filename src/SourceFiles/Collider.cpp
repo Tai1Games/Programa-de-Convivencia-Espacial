@@ -1,18 +1,18 @@
 #include "Collider.h"
 
 Collider::Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
-	float density, float friction, float restitution, int groupIndex, bool sensor) :
+	float density, float friction, float restitution, CollisionLayer c, bool sensor) :
 	world_(world),
 	Component(ComponentType::Collider)
 {   
 	bodyDef_.type = type;
 	bodyDef_.position.Set(x, y);
 	body_ = world_->CreateBody(&bodyDef_);
-	createFixture(width, height, density, friction, restitution, groupIndex, sensor);
+	createFixture(width, height, density, friction, restitution, c, sensor);
 }
 
 void Collider::createFixture(float width, float height, float density,
-	float friction, float restitution, int groupIndex, bool sensor) {
+	float friction, float restitution, CollisionLayer c, bool sensor) {
 	widths_.push_back(width);
 	heights_.push_back(height);
 	b2PolygonShape shape;
@@ -23,7 +23,20 @@ void Collider::createFixture(float width, float height, float density,
 	aux.density = density;
 	aux.friction = friction;
 	aux.restitution = fmod(restitution, 1.0);
-	aux.filter.groupIndex = groupIndex;
+	switch (c) {
+	case 1:
+		aux.filter.categoryBits = Normal; //what am I?
+		aux.filter.maskBits = Normal | Player; //what do I collide with?
+		break;
+	case 2:
+		aux.filter.categoryBits = Player;
+		aux.filter.maskBits = Normal | Player | Triggers;
+		break;
+	case 3:
+		aux.filter.categoryBits = Triggers;
+		aux.filter.maskBits = Player;
+		break;
+	}
 	aux.isSensor = sensor;
 	fixtureDefs_.push_back(aux);
 	fixtures_.push_back(body_->CreateFixture(&fixtureDefs_.back()));

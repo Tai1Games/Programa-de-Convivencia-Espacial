@@ -1,6 +1,7 @@
 #pragma once
 #include <box2d.h>
 #include <iostream>
+#include "Health.h"
 
 class CollisionHandler :
 	public b2ContactListener
@@ -18,6 +19,6 @@ public:
 
     void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
 
-    bool TriggerCollision(b2Fixture* fixA, b2Fixture* fixB);
+    bool ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player);
 };
 
