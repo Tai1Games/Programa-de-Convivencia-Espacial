@@ -2,6 +2,7 @@
 #include "Component.h"
 #include "Entity.h"
 #include "Collider.h"
+#include "Viewer.h"
 
 struct PlayerInfo
 {
@@ -9,7 +10,7 @@ struct PlayerInfo
 	b2Body* body = nullptr;
 };
 
-class Pickable : public Component
+class Weapon : public Component
 {
 protected:
 private:
@@ -17,11 +18,13 @@ private:
 	b2WeldJoint* joint_ = nullptr;
 	bool picked_ = false;
 	InputHandler* ih_ = nullptr;
+	Viewer* vw_ = nullptr;
+	int weaponType_= 0;
 	/*Vector que informa de los jugadores que están cerca/dentro del trigger y su respectivo body*/
 	std::vector<PlayerInfo> playerInfo_;
 public:
-	Pickable(): Component(ComponentType::Pickable){}
-	~Pickable(){};
+	Weapon(): Component(ComponentType::Weapon){}
+	~Weapon(){};
 	virtual void init() override;
 	/*Se comprueba que jugador ha pulado Y y está cerca para recoger este objeto*/
 	virtual void update() override;

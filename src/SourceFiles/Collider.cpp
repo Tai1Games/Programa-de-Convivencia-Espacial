@@ -36,3 +36,9 @@ void Collider::destroyFixture(int i) {
 	shape_.erase(shape_.begin() + i);*/
 
 }
+
+void Collider::setFixtureGroup(int fixtureIndex, int gIndex){
+	b2Filter filter;
+	filter.groupIndex = gIndex;
+	getFixture(fixtureIndex)->SetFilterData(filter);
+}

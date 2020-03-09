@@ -3,7 +3,7 @@
 #include "Viewer.h"
 #include "Health.h"
 #include "HealthViewer.h"
-#include "Pickable.h"
+#include "Weapon.h"
 #include "PickObjectListener.h"
 
 PlayState::PlayState()  {
@@ -31,7 +31,7 @@ void PlayState::init() {
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 0, 500, 1000, 10, 50, 0, 0, 0, false);
 	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 250, 280, 20, 20, 10, 0, 0, 0, false);
 	collSuelo->setUserData((void*)5);
-	Pickable* pickableObject = rock->addComponent<Pickable>();
+	
 	//if(!pickableObject->IsPicked()) pickableObject->PickObjectBy(collTinky);
 	//Transform* tr = tinky->addComponent<Transform>(tinkyBody);
 	//Transform* trG = ground->addComponent<Transform>(wallBody);
@@ -41,6 +41,7 @@ void PlayState::init() {
 	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(20, 20));
 	ground->addComponent<Viewer>();
 	rock->addComponent < Viewer >();
+	Weapon* pickableObject = rock->addComponent<Weapon>();
 	collRock->createFixture(100, 100, 10, 0, 0, 0, true);
 
 	//Listeners

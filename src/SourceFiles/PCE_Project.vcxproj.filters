@@ -96,13 +96,16 @@
     <ClInclude Include="HealthViewer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Pickable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="InputHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PickObjectListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -167,13 +170,16 @@
     <ClCompile Include="HealthViewer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Pickable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="InputHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PickObjectListener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hands.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

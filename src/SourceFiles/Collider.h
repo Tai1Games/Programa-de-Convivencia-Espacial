@@ -43,6 +43,7 @@ public:
 	void setBullet(bool b) { body_->SetBullet(b); }
 	void setTransform(b2Vec2 pos, float angle) { body_->SetTransform(pos, angle); }
 	void setLinearVelocity(b2Vec2 vel) { body_->SetLinearVelocity(vel); }
+	void setFixtureGroup(int fixtureIndex, int groupIndex);
 	void setUserData(void* data) { body_->SetUserData(data); }
 	void applyLinearImpulse(b2Vec2 force, b2Vec2 point) { body_->ApplyLinearImpulse(force, point, true); }
 	void applyForce(b2Vec2 force, b2Vec2 point) { body_->ApplyForce(force, point, true); }
