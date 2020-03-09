@@ -15,8 +15,10 @@ public:
 	//getters
 	float getW(int i) const{ return widths_[i]; }
 	float getH(int i) const { return heights_[i]; }
+	b2World* getWorld() const { return world_; }
 	b2Vec2 getPos() const { return body_->GetPosition(); }
 	b2Vec2 getLinearVelocity() const { return body_->GetLinearVelocity(); }
+	b2Body* getBody() const { return body_; }
 	b2BodyType getType() const { return body_->GetType(); }
 	b2Transform getTransform() const { return body_->GetTransform(); }
 	float getAngle() const { return body_->GetAngle(); }

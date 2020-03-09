@@ -28,6 +28,9 @@ void PlayState::init() {
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un tinky.
 	tinky->addComponent<Health>(3);
 	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(20, 20));
+	AttachesToObjects* attachesTinky = tinky->addComponent<AttachesToObjects>();
+	attachesTinky->attachToObject(collRock, b2Vec2(0, 0));
+
 	ground->addComponent<Viewer>();
 	rock->addComponent < Viewer >();
 	collRock->createFixture(100, 100, 10, 0, 0, 0, true);
