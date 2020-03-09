@@ -12,6 +12,12 @@ const int WINDOW_WIDTH = 1280;
 const std::string WINDOW_NAME = "PCE";
 const double MS_PER_FRAME = 1000.0/60.0; //Asumiendo 60fps
 
+//Constantes Generales
+const double PI = 3.14159265359;
+
+//Constantes Escala Render
+const double PIXELS_PER_METER = 60.0;
+
 //Modos de juegos
 enum States
 {

@@ -2,13 +2,15 @@
 
 Collider::Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
 
-	float density, float friction, float restitution, int groupIndex, bool sensor) :
+	float density, float friction, float restitution, float linearDrag, float angDrag, int groupIndex, bool sensor) :
 
 	world_(world),
 	Component(ComponentType::Collider)
 {
 	bodyDef_.type = type;
 	bodyDef_.position.Set(x, y);
+	bodyDef_.linearDamping = linearDrag;
+	bodyDef_.angularDamping = angDrag;
 	body_ = world_->CreateBody(&bodyDef_);
 
 	createFixture(width, height, density, friction, restitution, groupIndex, sensor);

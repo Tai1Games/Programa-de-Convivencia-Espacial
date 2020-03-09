@@ -2,13 +2,16 @@
 #include "Component.h"
 #include "box2d.h"
 #include "SDL_rect.h"
+#include "Constants.h"
+
 
 class Collider : public Component
 {
 public:
+	//Friccion -> rozamiento al contacto con otros cuerpos   Drag-> rozamiento con el aire
 	Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
 
-		float density, float friction, float restitution, int groupIndex, bool sensor);
+		float density, float friction, float restitution, float linearDrag, float angDrag, int groupIndex, bool sensor);
 
 	~Collider() {
 		world_->DestroyBody(body_); world_ = nullptr;
@@ -36,8 +39,10 @@ public:
 
 	SDL_Rect getRectRender() const {
 		return SDL_Rect{
-			(int)(getPos().x * 60.0f), (int)(WINDOW_HEIGHT - getPos().y * 60.0f),
-			(int)(getW(0) * 60.0f), (int)(getH(0) * 60.0f)
+			(int)(getPos().x * PIXELS_PER_METER - (getW(0) * PIXELS_PER_METER)), 
+			(int)(WINDOW_HEIGHT - (getPos().y * PIXELS_PER_METER + (getH(0) * PIXELS_PER_METER))),
+			(int)(getW(0) * PIXELS_PER_METER *2), 
+			(int)(getH(0) * PIXELS_PER_METER *2)
 		};
 	}
 
@@ -48,8 +53,8 @@ public:
 	void setBullet(bool b) { body_->SetBullet(b); }
 	void setTransform(b2Vec2 pos, float angle) { body_->SetTransform(pos, angle); }
 	void setLinearVelocity(b2Vec2 vel) { body_->SetLinearVelocity(vel); }
-	void applyLinearImpulse(b2Vec2 force, b2Vec2 point) { body_->ApplyLinearImpulse(force, point, true); }
-	void applyForce(b2Vec2 force, b2Vec2 point) { body_->ApplyForce(force, point, true); }
+	void applyLinearImpulse(b2Vec2 force, b2Vec2 point) { body_->ApplyLinearImpulse(force, body_->GetPosition() + point, true); }
+	void applyForce(b2Vec2 force, b2Vec2 point) { body_->ApplyForce(force, body_->GetPosition() + point, true); }
 	void createFixture(float width, float height, float density,
 		float friction, float restitution, int groupIndex, bool sensor);
 	void destroyFixture(int i);
