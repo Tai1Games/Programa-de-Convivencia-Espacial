@@ -1,4 +1,5 @@
 #include "AttachesToObjects.h"
+#include "InputHandler.h"
 
 void AttachesToObjects::init() {
 	mainCollider = GETCMP1_(Collider); //Obtiene el collider del cuerpo principal.
@@ -17,5 +18,18 @@ void AttachesToObjects::attachToObject(Collider* attachableObject, b2Vec2 collPo
 void AttachesToObjects::deAttachFromObject() {
 	if (joint != nullptr) { //Destruye el joint. Si haces un delete(joint) peta por algún motivo. CREO que esto no deja basura.
 		mainCollider->getWorld()->DestroyJoint(joint);
+		joint = nullptr;
+	}
+}
+
+void AttachesToObjects::handleInput() {
+	InputHandler* ih = SDL_Game::instance()->getInputHandler();
+
+	if (ih->isButtonJustDown(playerNumber_, SDL_CONTROLLER_BUTTON_A)) {
+		cout << "just pressed A" << endl;
+	}
+
+	else if (ih->isButtonJustUp(playerNumber_, SDL_CONTROLLER_BUTTON_A)) {
+		deAttachFromObject();
 	}
 }

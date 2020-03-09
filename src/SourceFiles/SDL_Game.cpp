@@ -95,7 +95,6 @@ void SDL_Game::start() {
 	gamestateMachine_->changeToState(States::play);
 	while (!exit_) {
 		Uint32 startTime = getTime();
-
 		gamestateMachine_->handleInput();
 		gamestateMachine_->update();
 		gamestateMachine_->render();
