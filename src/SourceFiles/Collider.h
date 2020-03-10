@@ -20,13 +20,13 @@ private:
 	vector<b2FixtureDef> fixtureDefs_;
 	vector<b2Fixture*> fixtures_;
 
-
-//Add the different collision layers as we see fit
-enum CollisionLayer{
-	Normal = 0x0001, //a collision layer can't be zero or else it won't collide
-	Player,
-	Trigger
-};
+public:
+	//Add the different collision layers as we see fit
+	enum CollisionLayer {
+		Normal = 0x0001, //a collision layer can't be zero or else it won't collide
+		Player,
+		Trigger
+	};
 
 	//Friccion -> rozamiento al contacto con otros cuerpos   Drag-> rozamiento con el aire
 	Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
@@ -39,7 +39,7 @@ enum CollisionLayer{
 	}
 
 	//getters
-	float getW(int i) const{ return widths_[i]; }
+	float getW(int i) const { return widths_[i]; }
 	float getH(int i) const { return heights_[i]; }
 	b2Vec2 getPos() const { return body_->GetPosition(); }
 	b2Vec2 getLinearVelocity() const { return body_->GetLinearVelocity(); }
@@ -62,8 +62,8 @@ enum CollisionLayer{
 		return SDL_Rect{
 			(int)(getPos().x * PIXELS_PER_METER - (getW(0) * PIXELS_PER_METER)),
 			(int)(WINDOW_HEIGHT - (getPos().y * PIXELS_PER_METER + (getH(0) * PIXELS_PER_METER))),
-			(int)(getW(0) * PIXELS_PER_METER *2),
-			(int)(getH(0) * PIXELS_PER_METER *2)
+			(int)(getW(0) * PIXELS_PER_METER * 2),
+			(int)(getH(0) * PIXELS_PER_METER * 2)
 		};
 	}
 
