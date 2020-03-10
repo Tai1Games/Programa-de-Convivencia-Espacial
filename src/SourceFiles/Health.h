@@ -6,6 +6,10 @@
 
 class Health: public Component
 {
+private:
+	int lives_;
+	int livesMax_;
+	Collider* col_ = nullptr;
 public:
 	Health(int l);
 	~Health();
@@ -17,9 +21,6 @@ public:
 	void addLife(int sum); //suma sum a la vida siempre y cuando esta no supere la constanteGeneral
 	int getHealthMax() { return livesMax_; }
 	int getHealth() { return lives_; }
-private:
-	int lives_;
-	int livesMax_;
-	Collider* col_ = nullptr;
+
 };
 

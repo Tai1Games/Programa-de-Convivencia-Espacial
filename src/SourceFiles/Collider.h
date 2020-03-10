@@ -5,12 +5,25 @@
 
 class Collider : public Component
 {
+private:
+	//general
+	b2Body* body_;
+	b2World* world_;
+	b2BodyDef bodyDef_;
+
+	//fixtures
+	vector<float> widths_;
+	vector<float> heights_;
+	vector<b2PolygonShape> shapes_;
+	vector<b2FixtureDef> fixtureDefs_;
+	vector<b2Fixture*> fixtures_;
+
 public:
 	//Add the different collision layers as we see fit
 	enum CollisionLayer{
 		Normal = 0x0001, //a collision layer can't be zero or else it won't collide
 		Player,
-		Triggers,
+		Trigger
 	};
 	Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
 		float density, float friction, float restitution, CollisionLayer c, bool sensor);
@@ -51,18 +64,5 @@ public:
 	void createFixture(float width, float height, float density,
 		float friction, float restitution, CollisionLayer, bool sensor);
 	void destroyFixture(int i);
-
-private:
-	//general
-	b2Body* body_;
-	b2World* world_;
-	b2BodyDef bodyDef_;
-
-	//fixtures
-	vector<float> widths_;
-	vector<float> heights_;
-	vector<b2PolygonShape> shapes_;
-	vector<b2FixtureDef> fixtureDefs_;
-	vector<b2Fixture*> fixtures_;
 };
 
