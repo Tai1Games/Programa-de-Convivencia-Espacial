@@ -27,11 +27,11 @@ void PlayState::init() {
 	Entity* rock = entityManager_->addEntity();
 	
 	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 150, 80, 50, 50, 50, 0, 0,
-		Collider::CollisionLayer::Normal, false);
+		Collider::CollisionLayer::Normal, false, false);
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 0, 500, 1000, 10, 50, 0, 0, 
-		Collider::CollisionLayer::Normal, false);
+		Collider::CollisionLayer::Normal, false, true);
 	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 500, 80, 20, 20, 10, 0, 0, 
-		Collider::CollisionLayer::Trigger, false);
+		Collider::CollisionLayer::Trigger, false, true);
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un tinky.
 	tinky->addComponent<Health>(3);
 	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(20, 20));

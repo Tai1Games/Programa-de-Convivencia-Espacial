@@ -1,7 +1,7 @@
 #include "Collider.h"
 
 Collider::Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
-	float density, float friction, float restitution, CollisionLayer c, bool sensor) :
+	float density, float friction, float restitution, CollisionLayer c, bool sensor, bool canBeAttached) :
 	world_(world),
 	Component(ComponentType::Collider)
 {   
@@ -9,6 +9,7 @@ Collider::Collider(b2World* world, b2BodyType type, float x, float y, float widt
 	bodyDef_.position.Set(x, y);
 	body_ = world_->CreateBody(&bodyDef_);
 	createFixture(width, height, density, friction, restitution, c, sensor);
+	createFixture(width + HITBOX_ATTACH_TO_OBJECTS_OFFSET, height + HITBOX_ATTACH_TO_OBJECTS_OFFSET, 0, 0, 0, CollisionLayer::Trigger, true);
 }
 
 void Collider::createFixture(float width, float height, float density,

@@ -7,16 +7,21 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	b2Fixture* fixB = contact->GetFixtureB();
 
 	//player damage collision
-	Health* player = nullptr;
+	Health* player_Health = nullptr;
+	AttachesToObjects* player_AttachesToObjects = nullptr;
 
 	//check collision then do whatever, in this case twice because it might be two players colliding 
-	if (ObjectCollidesWithPlayer(fixA, player)) {
-		player->subtractLife(1);
-		std::cout << "Health: " << player->getHealth() << endl;
+	if (ObjectCollidesWithPlayer(fixA, player_Health)) {
+		player_Health->subtractLife(1);
+		std::cout << "Health: " << player_Health->getHealth() << endl;
 	}
-	if (ObjectCollidesWithPlayer(fixB, player)) {
-		player->subtractLife(1);
-		std::cout << "Health: " << player->getHealth() << endl;
+	if (ObjectCollidesWithPlayer(fixB, player_Health)) {
+		player_Health->subtractLife(1);
+		std::cout << "Health: " << player_Health->getHealth() << endl;
+	}
+	if (AttachableObjectCollidesWithPlayer(fixA, player_AttachesToObjects)) {
+		//player_AttachesToObjects->attachToObject(fixB->GetBody(), contact->GetWorldManifold)
+		
 	}
 }
 
@@ -42,6 +47,13 @@ bool CollisionHandler::ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player
 {	
 	if (player = static_cast<Health*>(fixA->GetBody()->GetUserData())) return true;
 	else return false;
+}
+
+bool CollisionHandler::AttachableObjectCollidesWithPlayer(b2Fixture* fixA, AttachesToObjects*& player) {
+	if (player = static_cast<AttachesToObjects*>(fixA->GetBody()->GetUserData())) {
+		cout << "ajnas";
+	}
+	return true;
 }
 
 //add pickable object method and grabbable object method here

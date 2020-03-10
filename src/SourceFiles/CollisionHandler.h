@@ -2,6 +2,7 @@
 #include <box2d.h>
 #include <iostream>
 #include "Health.h"
+#include "AttachesToObjects.h"
 
 class CollisionHandler :
 	public b2ContactListener
@@ -20,5 +21,7 @@ public:
     void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
 
     bool ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player);
+
+	bool AttachableObjectCollidesWithPlayer(b2Fixture* fixA, AttachesToObjects*& player);
 };
 

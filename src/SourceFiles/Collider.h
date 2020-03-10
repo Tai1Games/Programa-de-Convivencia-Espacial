@@ -26,7 +26,7 @@ public:
 		Trigger
 	};
 	Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
-		float density, float friction, float restitution, CollisionLayer c, bool sensor);
+		float density, float friction, float restitution, CollisionLayer c, bool sensor, bool canBeAttached);
 	~Collider() {
 		world_->DestroyBody(body_); world_ = nullptr;
 	}
