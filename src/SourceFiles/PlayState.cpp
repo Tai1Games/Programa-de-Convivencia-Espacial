@@ -4,6 +4,7 @@
 #include "Health.h"
 #include "HealthViewer.h"
 #include "InputHandler.h"
+#include "CollisionHandler.h"
 
 PlayState::PlayState()  {
 }
@@ -16,6 +17,8 @@ void PlayState::init() {
 	//se podría JSONizar para evitar compilar
 	entityManager_ = new EntityManager();
 	physicsWorld_ = new b2World(b2Vec2(0, 0));
+	collisionHandler_ = new CollisionHandler();
+	physicsWorld_->SetContactListener(collisionHandler_);
 
 	Entity* tinky = entityManager_->addEntity();
 	Entity* ground = entityManager_->addEntity();
@@ -23,9 +26,9 @@ void PlayState::init() {
 	//Entity* rock = entityManager_->addEntity();
 	//Entity* spaceJunk = entityManager_->addEntity();
 																			// x, y, width, height,			density,	friction,	restitution,	linearDrag,		angularDrag,	groupIndex,	sensor
-	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 1.7, 8, 1, 1,		1,			0.1,		0.2,			0,				0,				1,			false);
-	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 10.5, -0.5, 12,1,	10,			0,			0.2,			0,				0,				1,			false);
-	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody, 21.5, 10, 1, 10,		10,			1,			0.2,			0,				0,				1,			false);
+	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 1.7, 8, 1, 1,		1,			0.1,		0.2,			0,				0,				1,			Collider::CollisionLayer::Normal, false);
+	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 10.5, -0.5, 12,1,	10,			0,			0.2,			0,				0,				1,		Collider::CollisionLayer::Normal, false);
+	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody, 21.5, 10, 1, 10,		10,			1,			0.2,			0,				0,				1,		Collider::CollisionLayer::Normal,	false);
 	//Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 500, 80, 20, 20,   10, 0, 0, 0.1, false);
 	//Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 300, 60, 30, 30,   20, 1000000000000000, 0.8, 0, false);
 
@@ -52,7 +55,8 @@ void PlayState::init() {
 
 void PlayState::update() {
 	entityManager_->update();
-	physicsWorld_->Step(1.0f / 240.0f, 6, 2);
+	//el que vuelva tocar el step de physicsworld muere
+	physicsWorld_->Step(SECONDS_PER_FRAME, 6, 2);
 	//también debería actualizar la lógica de modo de juego
 	//spawners de monedas, carga de objetivos...
 
@@ -67,5 +71,7 @@ void PlayState::render() {
 void PlayState::handleInput() {
 	GameState::handleInput();
 	entityManager_->handleInput();
+
+	//DebugInput();
 
 }
