@@ -11,6 +11,7 @@ const int WINDOW_HEIGHT = 720;
 const int WINDOW_WIDTH = 1280;
 const std::string WINDOW_NAME = "PCE";
 const double MS_PER_FRAME = 1000.0/60.0; //Asumiendo 60fps
+const double SECONDS_PER_FRAME = 1.0 / 60.0;
 
 //Modos de juegos
 enum States
