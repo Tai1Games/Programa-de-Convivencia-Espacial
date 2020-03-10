@@ -24,16 +24,16 @@ void Collider::createFixture(float width, float height, float density,
 	aux.friction = friction;
 	aux.restitution = fmod(restitution, 1.0);
 	switch (c) {
-	case 1:
+	case Normal:
 		aux.filter.categoryBits = Normal; //what am I?
 		aux.filter.maskBits = Normal | Player; //what do I collide with?
 		break;
-	case 2:
+	case Player:
 		aux.filter.categoryBits = Player;
-		aux.filter.maskBits = Normal | Player | Triggers;
+		aux.filter.maskBits = Normal | Player | Trigger;
 		break;
-	case 3:
-		aux.filter.categoryBits = Triggers;
+	case Trigger:
+		aux.filter.categoryBits = Trigger;
 		aux.filter.maskBits = Player;
 		break;
 	}
