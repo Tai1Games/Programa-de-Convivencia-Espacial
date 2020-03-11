@@ -50,7 +50,6 @@ void PlayState::init() {
 	//tr->getBody()->ApplyLinearImpulse(b2Vec2(0, -100), b2Vec2(0, 0),true);
 
 	//collRock->createFixture(100, 100, 10, 0, 0, 0, true);
-
 }
 
 void PlayState::update() {
@@ -64,7 +63,8 @@ void PlayState::update() {
 void PlayState::render() {
 	SDL_RenderClear(SDL_Game::instance()->getRenderer());
 
-	entityManager_->render();
+	//entityManager_->render();
+	tileMap_->drawMap();
 
 	SDL_RenderPresent(SDL_Game::instance()->getRenderer());
 }

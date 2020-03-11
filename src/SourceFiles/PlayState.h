@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "checkML.h"
 #include "collisionHandler.h"
+#include "TileMap.h"
 
 
 using namespace std;
@@ -22,6 +23,7 @@ private:
 	//HUD
 
 	CollisionHandler* collisionHandler_;
+	TileMap* tileMap_ = new TileMap();
 
 public:
 	PlayState();
