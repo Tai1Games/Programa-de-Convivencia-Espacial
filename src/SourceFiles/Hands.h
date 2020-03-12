@@ -11,15 +11,16 @@ private:
 	Collider* collider_ = nullptr;
 	int textureId_;
 	SDL_Rect clip_;
-
+	int playerID_ = -1;
 protected:
 public:
-	Hands();
-	Hands(int textureId);
-	Hands(int textureId, SDL_Rect clip);
+	Hands(int playerID);
+	Hands(int textureId, int playerID);
+	Hands(int textureId, SDL_Rect clip, int playerID);
 	~Hands() {};
 	virtual void init();
 	virtual void draw() const;
 	void setWeapon(int weaponColumn);
+	int getPlayerId() { return playerID_; }
 };
 

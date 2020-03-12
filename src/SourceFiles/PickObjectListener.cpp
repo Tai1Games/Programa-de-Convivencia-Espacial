@@ -1,6 +1,6 @@
 #include "PickObjectListener.h"
 
-void PickObjectListener::BeginContact(b2Contact* contact)
+/*void PickObjectListener::BeginContact(b2Contact* contact)
 {
 	Weapon* pickableObj = nullptr;
 	b2Body* playerB = nullptr;
@@ -40,5 +40,5 @@ bool PickObjectListener::contactPickableObjectAndPlayer(b2Contact* contact, Weap
 		return (pickableObj != nullptr && playerB != nullptr);
 	}
 	else return false;
-
-}
+	
+}*/

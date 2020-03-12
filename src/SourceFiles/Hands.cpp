@@ -1,43 +1,45 @@
 #include "Hands.h"
 #include "Entity.h"
+#include "Resources.h"
 
-Hands::Hands() : 
-	Component(ComponentType::Hands),
-	tex_(nullptr),	//
-	collider_(nullptr)
-{
-}
-
-Hands::Hands(int textureId) :
+Hands::Hands(int playerID) : 
 	Component(ComponentType::Hands),
 	tex_(nullptr),	//
 	collider_(nullptr),
-	textureId_(textureId)
+	playerID_(playerID)
 {
 }
 
-Hands::Hands(int textureId, SDL_Rect clip) :
+Hands::Hands(int textureId, int playerID) :
 	Component(ComponentType::Hands),
 	tex_(nullptr),	//
 	collider_(nullptr),
 	textureId_(textureId),
-	clip_(clip)
+	playerID_(playerID)
+{
+}
+
+Hands::Hands(int textureId, SDL_Rect clip, int playerID) :
+	Component(ComponentType::Hands),
+	tex_(nullptr),	//
+	collider_(nullptr),
+	textureId_(textureId),
+	clip_(clip),
+	playerID_(playerID)
 {
 }
 
 void Hands::init()
 {
 	collider_ = GETCMP1_(Collider);
-	if (tex_ == nullptr) {
-		tex_ = SDL_Game::instance()->getTexturesMngr()->getTexture(textureId_);
-		if (clip_.w == 0 && clip_.h == 0)
-			clip_ = SDL_Rect{ 0, 0, tex_->getWidth(), tex_->getHeight() };
-	}
+	/*if (tex_ == nullptr) {
+		tex_ = game_->getTexturesMngr()->getTexture(Resources::Tinky);
+	}*/
 }
 
 void Hands::draw() const
 {
-	tex_->render(collider_->getRect(), collider_->getAngle(), clip_);
+	//tex_->render(collider_->getRect(), collider_->getAngle(), clip_);
 }
 
 void Hands::setWeapon(int weaponColumn)

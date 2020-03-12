@@ -14,7 +14,6 @@ Collider::Collider(b2World* world, b2BodyType type, float x, float y, float widt
 	body_ = world_->CreateBody(&bodyDef_);
 
 	createFixture(width, height, density, friction, restitution, c, sensor);
-
 }
 
 void Collider::createFixture(float width, float height, float density,
