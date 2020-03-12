@@ -2,8 +2,8 @@
 #include "Entity.h"
 #include "Resources.h"
 
-Viewer::Viewer() : 
-	Viewer(Resources::Tinky) {	//
+Viewer::Viewer() :
+	Viewer(Resources::Debug) {	//
 }
 
 Viewer::Viewer(int textureId) :
@@ -27,7 +27,7 @@ Viewer::~Viewer() {
 }
 
 void Viewer::init() {
-	
+
 	collider_ = GETCMP1_(Collider);
 	if (tex_ == nullptr) {
 		tex_ = SDL_Game::instance()->getTexturesMngr()->getTexture(textureId_);
@@ -38,5 +38,5 @@ void Viewer::init() {
 
 void Viewer::draw() const {
 	if(drawable_)
-	tex_->render(collider_->getRect(), collider_->getAngle(), clip_);
+	tex_->render(collider_->getRectRender(), (collider_->getAngle()*-180/PI ), clip_); // getAngle devuelve radianes, hay que pasarlos a �ngulos
 }
