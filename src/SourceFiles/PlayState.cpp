@@ -59,12 +59,4 @@ void PlayState::update() {
 	physicsWorld_->Step(SECONDS_PER_FRAME, 6, 2);
 	//también debería actualizar la lógica de modo de juego
 	//spawners de monedas, carga de objetivos...
-
-}
-void PlayState::render() {
-	GameState::render();
-}
-void PlayState::handleInput() {
-	GameState::handleInput();
-	//DebugInput();
 }

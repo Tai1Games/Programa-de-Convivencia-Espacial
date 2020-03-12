@@ -27,8 +27,5 @@ public:
 	~PlayState();
 	virtual void init();
 	virtual void update();
-	virtual void render();
-	virtual void handleInput();
-
 };
 
