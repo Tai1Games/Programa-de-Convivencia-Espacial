@@ -22,6 +22,7 @@ TileMap::TileMap() {
 			map_[row][column] = lvl1[row][column];
 		}
 	}
+	loadTileson("../../assets/tilemaps/TD_TilemapBit.json");
 }
 
 void TileMap::drawMap() {
@@ -43,5 +44,17 @@ void TileMap::drawMap() {
 				break;
 			}
 		}
+	}
+}
+
+void TileMap::loadTileson(string path) {
+	tson::Tileson parser;
+	tson::Map map = parser.parse(fs::path(path));
+
+	if (map.getStatus() == tson::Map::ParseStatus::OK) {
+		cout << "Parseado correctamente por fin" << endl;
+		tson::Tileset* t = map.getTileset("modded_colored");
+		if (t != nullptr)
+			cout << "No se como pero esta cosa ha parseado y pillado el tileset a la primera" << endl;
 	}
 }

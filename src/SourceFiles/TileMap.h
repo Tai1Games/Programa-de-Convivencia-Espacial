@@ -1,5 +1,6 @@
 #pragma once
 #include "Texture.h"
+#include "Tileson.h"
 class TileMap
 {
 protected:
@@ -13,5 +14,6 @@ public:
 	TileMap();
 	~TileMap();
 	void drawMap();
+	void loadTileson(string path);
 };
 
