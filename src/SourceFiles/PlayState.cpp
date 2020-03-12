@@ -54,7 +54,7 @@ void PlayState::init() {
 }
 
 void PlayState::update() {
-	entityManager_->update();
+	GameState::update();
 	//el que vuelva tocar el step de physicsworld muere
 	physicsWorld_->Step(SECONDS_PER_FRAME, 6, 2);
 	//también debería actualizar la lógica de modo de juego
@@ -62,16 +62,9 @@ void PlayState::update() {
 
 }
 void PlayState::render() {
-	SDL_RenderClear(SDL_Game::instance()->getRenderer());
-
-	entityManager_->render();
-
-	SDL_RenderPresent(SDL_Game::instance()->getRenderer());
+	GameState::render();
 }
 void PlayState::handleInput() {
 	GameState::handleInput();
-	entityManager_->handleInput();
-
 	//DebugInput();
-
 }
