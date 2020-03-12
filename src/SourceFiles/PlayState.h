@@ -13,7 +13,6 @@ using namespace std;
 class PlayState : public GameState
 {
 private:
-	//EntityManager* entityManager_;
 	b2World* physicsWorld_;
 	vector<b2Body*> physicalEntities_; //almacena los punteros a los colliders de b2
 	//puede que no sea necesario si cogemos la referencia en cuanto los creamos con addPhysicalEntity
@@ -27,7 +26,4 @@ public:
 	~PlayState();
 	virtual void init();
 	virtual void update();
-	virtual void render();
-	virtual void handleInput();
-
 };
