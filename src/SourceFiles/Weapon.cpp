@@ -8,7 +8,7 @@ void Weapon::init()
 	mainCollider_ = GETCMP1_(Collider);
 	vw_ = GETCMP1_(Viewer);
 	//Fixture Sensor añadido por el componente
-	mainCollider_->createFixture(100, 100, 10, 0, 0, 0, true);
+	mainCollider_->createFixture(100, 100, 10, 0, 0, Collider::CollisionLayer::Normal, true);
 	//Pone la informacion de esta clase en el body, para poder usarla en el Listener
 	mainCollider_->setUserData(this);
 	//Tamaño del vector segun el numero de jugadores
