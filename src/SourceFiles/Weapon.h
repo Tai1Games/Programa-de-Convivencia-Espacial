@@ -33,6 +33,7 @@ private:
 	std::vector<PlayerInfo> playerInfo_;
 	/*Mano que coge este objeto*/
 	Hands* currentHand_ = nullptr;
+	float throwSpeed_ = 150;
 public:
 	Weapon(Weapon::WeaponID wId): Component(ComponentType::Weapon), weaponType_(wId){}
 	~Weapon(){};
