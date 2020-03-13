@@ -3,21 +3,9 @@
 #include "Resources.h"
 #include "InputHandler.h"
 
-Hands::Hands(int playerID, int textureId) :
+Hands::Hands(int playerID, int textureId, WeaponID wId) :
 	Component(ComponentType::Hands),
-	tex_(nullptr),	//
-	collider_(nullptr),
 	textureId_(textureId),
-	playerID_(playerID)
-{
-}
-
-Hands::Hands(int playerID, int textureId, SDL_Rect clip) :
-	Component(ComponentType::Hands),
-	tex_(nullptr),	//
-	collider_(nullptr),
-	textureId_(textureId),
-	clip_(clip),
 	playerID_(playerID)
 {
 }
@@ -27,7 +15,7 @@ void Hands::init()
 	collider_ = GETCMP1_(Collider);
 	ih_ = SDL_Game::instance()->getInputHandler();
 	if (tex_ == nullptr) {
-		tex_ = game_->getTexturesMngr()->getTexture(Resources::Tinky);
+		tex_ = game_->getTexturesMngr()->getTexture(textureId_);
 	}
 }
 
@@ -39,7 +27,13 @@ void Hands::draw() const
 	destRect.h = colRec.h / 2;
 	destRect.x = pos_.x;
 	destRect.y = pos_.y;
-	tex_->render(destRect, collider_->getAngle()/*, clip_*/);
+
+	SDL_Rect clip;
+	clip.w = tex_->getWidth() / WEAPON_NUMBER;
+	clip.h = tex_->getHeight();
+	clip.y = 0; clip.x = clip.w * currentWeapon_;
+
+	tex_->render(destRect, collider_->getAngle(), clip);
 }
 
 void Hands::update()
@@ -53,16 +47,7 @@ void Hands::update()
 	}
 }
 
-void Hands::setWeapon(int weaponColumn)
+void Hands::setWeapon(WeaponID wId)
 {
-	clip_.x = clip_.w * weaponColumn;
-}
-
-SDL_Rect  Hands::getRectRender() const {
-	return SDL_Rect{
-		(int)(pos_.x * PIXELS_PER_METER - (tex_->getWidth() * PIXELS_PER_METER)),
-		(int)(WINDOW_HEIGHT - (pos_.y * PIXELS_PER_METER + (tex_->getHeight() * PIXELS_PER_METER))),
-		(int)(tex_->getWidth() * PIXELS_PER_METER * 2),
-		(int)(tex_->getHeight() * PIXELS_PER_METER * 2)
-	};
+	currentWeapon_ = wId;
 }

@@ -1,6 +1,7 @@
 #include "Weapon.h"
 #include <iostream>
 #include "InputHandler.h"
+#include "Hands.h"
 
 void Weapon::init()
 {
@@ -21,14 +22,15 @@ void Weapon::update()
 
 		if (ih_->isButtonJustDown(i, SDL_CONTROLLER_BUTTON_Y) && playerInfo_[i].isNear && !IsPicked()) {
 			cout << "inRange";
-			PickObjectBy(playerInfo_[i].body);
+			PickObjectBy(playerInfo_[i].playerHands);
 		}
 	}
 }
 
-void Weapon::PickObjectBy(b2Body* playerBody)
+void Weapon::PickObjectBy(Hands* playerH)
 {
 	picked_ = true;
+	playerH->setWeapon(weaponType_);
 	mainCollider_->getBody()->SetEnabled(false);
 	vw_->setDrawable(false);
 }
@@ -40,14 +42,14 @@ void Weapon::UnPickObject()
 	vw_->setDrawable(true);
 }
 
-void Weapon::SavePlayerInfo(int index, b2Body* playerB)
+void Weapon::SavePlayerInfo(int index, Hands* playerH)
 {
 	playerInfo_[index].isNear = true;
-	playerInfo_[index].body = playerB;
+	playerInfo_[index].playerHands = playerH;
 }
 
 void Weapon::DeletePlayerInfo(int index)
 {
 	playerInfo_[index].isNear = false;
-	playerInfo_[index].body = nullptr;
+	playerInfo_[index].playerHands = nullptr;
 }
