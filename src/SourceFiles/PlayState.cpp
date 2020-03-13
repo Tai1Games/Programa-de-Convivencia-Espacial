@@ -48,6 +48,9 @@ void PlayState::init() {
 	collRock->setUserData(rock);
 	rock->addComponent<Weapon>();
 
+	collpared->setUserData(pared);
+	collSuelo->setUserData(ground);
+
 	//spaceJunk->addComponent<Viewer>();
 
 	collTinky->setUserData(tinky);

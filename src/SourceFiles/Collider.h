@@ -25,7 +25,8 @@ public:
 	enum CollisionLayer {
 		Normal = 0x0001, //a collision layer can't be zero or else it won't collide
 		Player,
-		Trigger
+		Trigger,
+		Weapon
 	};
 
 	//Friccion -> rozamiento al contacto con otros cuerpos   Drag-> rozamiento con el aire

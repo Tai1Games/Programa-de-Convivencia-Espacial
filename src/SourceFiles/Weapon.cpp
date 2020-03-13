@@ -8,7 +8,7 @@ void Weapon::init()
 	mainCollider_ = GETCMP1_(Collider);
 	vw_ = GETCMP1_(Viewer);
 	//Fixture Sensor a�adido por el componente
-	mainCollider_->createFixture(mainCollider_->getW(0)*4, mainCollider_->getH(0), 1, 0.1, 0, Collider::CollisionLayer::Trigger, true);
+	mainCollider_->createFixture(mainCollider_->getW(0)*4, mainCollider_->getH(0), 1, 0.1, 0, Collider::CollisionLayer::Weapon, true);
 	//Pone la informacion de esta clase en el body, para poder usarla en el Listener
 	//Tama�o del vector segun el numero de jugadores
 	playerInfo_.resize(ih_->getNumControllers());
@@ -64,7 +64,6 @@ void Weapon::SavePlayerInfo(int index, b2Body* playerB)
 
 void Weapon::DeletePlayerInfo(int index)
 {
-	cout << "sijaja SALIDO" << endl;
 	//cout << index << endl;
 	playerInfo_[index].isNear = false;
 	playerInfo_[index].body = nullptr;
