@@ -2,15 +2,7 @@
 #include "Entity.h"
 #include "Resources.h"
 
-Hands::Hands(int playerID) : 
-	Component(ComponentType::Hands),
-	tex_(nullptr),	//
-	collider_(nullptr),
-	playerID_(playerID)
-{
-}
-
-Hands::Hands(int textureId, int playerID) :
+Hands::Hands(int playerID, int textureId) :
 	Component(ComponentType::Hands),
 	tex_(nullptr),	//
 	collider_(nullptr),

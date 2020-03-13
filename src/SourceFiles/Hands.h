@@ -14,9 +14,8 @@ private:
 	int playerID_ = -1;
 protected:
 public:
-	Hands(int playerID);
-	Hands(int textureId, int playerID);
-	Hands(int textureId, SDL_Rect clip, int playerID);
+	Hands(int playerID, int textureId);
+	Hands(int playerID, int textureId, SDL_Rect clip);
 	~Hands() {};
 	virtual void init();
 	virtual void draw() const;

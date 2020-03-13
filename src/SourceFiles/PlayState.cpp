@@ -6,7 +6,6 @@
 #include "InputHandler.h"
 #include "CollisionHandler.h"
 #include "Weapon.h"
-#include "PickObjectListener.h"
 #include "Hands.h"
 
 PlayState::PlayState()  {
@@ -36,7 +35,7 @@ void PlayState::init() {
 	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 10, 2, 0.5, 0.5,		1,			0,			0.2,			0,				0,					Collider::CollisionLayer::Normal,	false);
 	//Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 300, 60, 30, 30,   20, 1000000000000000, 0.8, 0, false);
 
-	tinky->addComponent<Hands>(0);
+	tinky->addComponent<Hands>(0, Resources::Tinky);
 	cout<<collTinky->getMass();
 
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un cuadrado de debug.

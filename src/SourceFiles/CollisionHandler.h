@@ -26,7 +26,5 @@ public:
     bool ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player);
 
     bool PlayerCanPickWeapon(b2Contact* contact, Weapon* &pickableObj, Hands* &player, b2Body* &body);
-
-    //bool contactPickableObjectAndPlayer(b2Contact* contact, Weapon*& pickableObj, b2Body*& playerB);
 };
 
