@@ -7,10 +7,10 @@ void Weapon::init()
 	ih_ = SDL_Game::instance()->getInputHandler();
 	mainCollider_ = GETCMP1_(Collider);
 	vw_ = GETCMP1_(Viewer);
-	//Fixture Sensor añadido por el componente
-	mainCollider_->createFixture(mainCollider_->getW(0)*4, mainCollider_->getH(0)*4, 1, 0.1, 0, Collider::CollisionLayer::Trigger, true);
+	//Fixture Sensor aï¿½adido por el componente
+	mainCollider_->createFixture(mainCollider_->getW(0)*4, mainCollider_->getH(0), 1, 0.1, 0, Collider::CollisionLayer::Trigger, true);
 	//Pone la informacion de esta clase en el body, para poder usarla en el Listener
-	//Tamaño del vector segun el numero de jugadores
+	//Tamaï¿½o del vector segun el numero de jugadores
 	playerInfo_.resize(ih_->getNumControllers());
 }
 
