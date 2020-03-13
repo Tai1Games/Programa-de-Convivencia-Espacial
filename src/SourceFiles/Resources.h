@@ -17,6 +17,7 @@ public:
 		Tinky, 
 		ActiveHealth,
 		DisableHealth,
+		DebugTilemap,
 
 		// text
 		
