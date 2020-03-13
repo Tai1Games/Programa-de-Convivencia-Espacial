@@ -17,29 +17,41 @@ void Weapon::init()
 
 void Weapon::update()
 {
+	if (currentHand_ == nullptr) {
+		for (int i = 0; i < playerInfo_.size(); i++) {
 
-	for (int i = 0; i<playerInfo_.size(); i++) {
-
-		if (ih_->isButtonJustDown(i, SDL_CONTROLLER_BUTTON_Y) && playerInfo_[i].isNear && !IsPicked()) {
-			cout << "inRange";
-			PickObjectBy(playerInfo_[i].playerHands);
+			if (!IsPicked() && playerInfo_[i].isNear && ih_->isButtonJustDown(i, SDL_CONTROLLER_BUTTON_Y)) {
+				cout << "inRange";
+				PickObjectBy(playerInfo_[i].playerHands);
+			}
 		}
 	}
+	else if(IsPicked() && ih_->isButtonJustDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_Y))
+	{
+		UnPickObject();
+	}
+	
 }
 
 void Weapon::PickObjectBy(Hands* playerH)
 {
+	currentHand_ = playerH;
 	picked_ = true;
-	playerH->setWeapon(weaponType_);
+	currentHand_->setWeapon(weaponType_);
 	mainCollider_->getBody()->SetEnabled(false);
 	vw_->setDrawable(false);
 }
 
 void Weapon::UnPickObject()
 {
+	currentHand_->setWeapon(NoWeapon);
 	picked_ = false;
 	mainCollider_->getBody()->SetEnabled(true);
 	vw_->setDrawable(true);
+	mainCollider_->setLinearVelocity(b2Vec2(0, 0));
+	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x, currentHand_->getPos().y), 0);
+	
+	currentHand_ = nullptr;
 }
 
 void Weapon::SavePlayerInfo(int index, Hands* playerH)

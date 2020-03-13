@@ -23,7 +23,6 @@ enum WeaponID {
 
 class Weapon : public Component
 {
-protected:
 private:
 	Collider* mainCollider_ = nullptr;
 	bool picked_ = false;
@@ -32,6 +31,8 @@ private:
 	WeaponID weaponType_;
 	/*Vector que informa de los jugadores que están cerca/dentro del trigger y su respectivo body*/
 	std::vector<PlayerInfo> playerInfo_;
+	/*Mano que coge este objeto*/
+	Hands* currentHand_ = nullptr;
 public:
 	Weapon(Weapon::WeaponID wId): Component(ComponentType::Weapon), weaponType_(wId){}
 	~Weapon(){};
