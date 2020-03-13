@@ -12,6 +12,8 @@ private:
 	int textureId_;
 	SDL_Rect clip_;
 	int playerID_ = -1;
+
+	SDL_Rect getRectRender() const;
 protected:
 public:
 	Hands(int playerID, int textureId);

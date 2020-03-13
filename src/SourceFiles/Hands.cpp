@@ -41,10 +41,19 @@ void Hands::draw() const
 }
 
 void Hands::update() const {
-	//pos_.x = collider_->getPos().x + collider_->getPos
+	pos_.Set(3, 3);
 }
 
 void Hands::setWeapon(int weaponColumn)
 {
 	clip_.x = clip_.w * weaponColumn;
+}
+
+SDL_Rect  Hands::getRectRender() const {
+	return SDL_Rect{
+		(int)(pos_.x * PIXELS_PER_METER - (tex_->getWidth() * PIXELS_PER_METER)),
+		(int)(WINDOW_HEIGHT - (pos_.y * PIXELS_PER_METER + (tex_->getHeight() * PIXELS_PER_METER))),
+		(int)(tex_->getWidth() * PIXELS_PER_METER * 2),
+		(int)(tex_->getHeight() * PIXELS_PER_METER * 2)
+	};
 }
