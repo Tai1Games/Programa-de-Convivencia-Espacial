@@ -3,7 +3,21 @@
 //Handles start of collisions
 void CollisionHandler::BeginContact(b2Contact* contact)
 { 
-	
+	/*b2Fixture* fixA = contact->GetFixtureA();
+	b2Fixture* fixB = contact->GetFixtureB();
+
+	//player damage collision
+	Health* player = nullptr;
+
+	//check collision then do whatever, in this case twice because it might be two players colliding 
+	if (ObjectCollidesWithPlayer(fixA, player)) {
+		player->subtractLife(1);
+		std::cout << "Health: " << player->getHealth() << endl;
+	}
+	if (ObjectCollidesWithPlayer(fixB, player)) {
+		player->subtractLife(1);
+		std::cout << "Health: " << player->getHealth() << endl;
+	}*/
 
 	//Pickable weapon collisions
 	Weapon* pickableObj = nullptr;
@@ -12,23 +26,6 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	if (PlayerCanPickWeapon(contact, pickableObj, playerHands, playerBody)) {
 		cout << "jaja si" << endl;
 		pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerBody);
-	}
-	else {
-		b2Fixture* fixA = contact->GetFixtureA();
-		b2Fixture* fixB = contact->GetFixtureB();
-
-		//player damage collision
-		Health* player = nullptr;
-
-		//check collision then do whatever, in this case twice because it might be two players colliding 
-		if (ObjectCollidesWithPlayer(fixA, player)) {
-			player->subtractLife(1);
-			std::cout << "Health: " << player->getHealth() << endl;
-		}
-		if (ObjectCollidesWithPlayer(fixB, player)) {
-			player->subtractLife(1);
-			std::cout << "Health: " << player->getHealth() << endl;
-		}
 	}
 	/*if (contactPickableObjectAndPlayer(contact, pickableObj, playerB))
 		pickableObj->SavePlayerInfo(int(playerB->GetUserData()), playerB);*/
@@ -70,14 +67,18 @@ bool CollisionHandler::PlayerCanPickWeapon(b2Contact* contact, Weapon* &pickable
 	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
 	if ((fixAentity->hasComponent(ComponentType::Weapon)) && 
-		(pickableObj = static_cast<Weapon*>(fixAentity->getComponent<Weapon>(ComponentType::Weapon)))) {
+		(pickableObj = static_cast<Weapon*>(fixAentity->getComponent<Weapon>(ComponentType::Weapon))) &&
+		fixBentity->hasComponent(ComponentType::Hands)) {
+
 		player = static_cast<Hands*>(fixBentity->getComponent<Hands>(ComponentType::Hands));
 		Collider* col = static_cast<Collider*>(fixBentity->getComponent<Collider>(ComponentType::Collider));
 		playerBody = col->getBody();
 		return true;
 	}
 	else if ((fixBentity->hasComponent(ComponentType::Weapon)) &&
-		(pickableObj = static_cast<Weapon*>(fixBentity->getComponent<Weapon>(ComponentType::Weapon)))) {
+		(pickableObj = static_cast<Weapon*>(fixBentity->getComponent<Weapon>(ComponentType::Weapon))) &&
+		fixAentity->hasComponent(ComponentType::Hands)){
+
 		player = static_cast<Hands*>(fixAentity->getComponent<Hands>(ComponentType::Hands));
 		Collider* col = static_cast<Collider*>(fixAentity->getComponent<Collider>(ComponentType::Collider));
 		playerBody = col->getBody();
