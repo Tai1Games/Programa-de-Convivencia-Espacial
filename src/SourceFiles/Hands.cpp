@@ -42,8 +42,8 @@ void Hands::update()
 	if (vI.Length() != 0) {
 		dir_.Set(vI.x,vI.y);
 	}
-	pos_.Set(collider_->getPos().x + dir_.x*((bodyOffset_ / PIXELS_PER_METER)),
-		collider_->getPos().y - dir_.y* ((bodyOffset_ / PIXELS_PER_METER)));
+	pos_.Set(collider_->getPos().x + dir_.x * (bodyOffset_ / PIXELS_PER_METER),
+		collider_->getPos().y - dir_.y * (bodyOffset_ / PIXELS_PER_METER));
 }
 
 void Hands::setWeapon(WeaponID wId)
