@@ -19,6 +19,7 @@ public:
 	~Hands() {};
 	virtual void init();
 	virtual void draw() const;
+	virtual void update() const;
 	void setWeapon(int weaponColumn);
 	int getPlayerId() { return playerID_; }
 };

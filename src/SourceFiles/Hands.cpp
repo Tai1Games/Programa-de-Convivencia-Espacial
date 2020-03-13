@@ -11,7 +11,7 @@ Hands::Hands(int playerID, int textureId) :
 {
 }
 
-Hands::Hands(int textureId, SDL_Rect clip, int playerID) :
+Hands::Hands(int playerID, int textureId, SDL_Rect clip) :
 	Component(ComponentType::Hands),
 	tex_(nullptr),	//
 	collider_(nullptr),
@@ -32,6 +32,10 @@ void Hands::init()
 void Hands::draw() const
 {
 	//tex_->render(collider_->getRect(), collider_->getAngle(), clip_);
+}
+
+void Hands::update() const {
+
 }
 
 void Hands::setWeapon(int weaponColumn)

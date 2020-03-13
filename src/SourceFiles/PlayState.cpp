@@ -1,5 +1,6 @@
 #include "PlayState.h"
 #include "Transform.h"
+#include "Texture.h"
 #include "Viewer.h"
 #include "Health.h"
 #include "HealthViewer.h"
@@ -8,7 +9,7 @@
 #include "Weapon.h"
 #include "Hands.h"
 
-PlayState::PlayState()  {
+PlayState::PlayState(SDL_Game* game): game_(game)  {
 }
 
 PlayState::~PlayState() {
@@ -17,7 +18,7 @@ PlayState::~PlayState() {
 void PlayState::init() {
 	//aqui se crean todas las entidades necesarias
 	//se podría JSONizar para evitar compilar
-	entityManager_ = new EntityManager();
+	entityManager_ = new EntityManager(game_);
 	physicsWorld_ = new b2World(b2Vec2(0, 0));
 	collisionHandler_ = new CollisionHandler();
 	physicsWorld_->SetContactListener(collisionHandler_);
@@ -35,7 +36,7 @@ void PlayState::init() {
 	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 10, 2, 0.5, 0.5,		1,			0,			0.2,			0,				0,					Collider::CollisionLayer::Normal,	false);
 	//Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 300, 60, 30, 30,   20, 1000000000000000, 0.8, 0, false);
 
-	tinky->addComponent<Hands>(0, Resources::Tinky);
+	tinky->addComponent<Hands>(0, Resources::Tinky, SDL_Rect{0,0,20,20});
 	cout<<collTinky->getMass();
 
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un cuadrado de debug.

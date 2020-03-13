@@ -11,7 +11,7 @@ class SDL_Game;
 class EntityManager
 {
 public:
-	EntityManager();
+	EntityManager(SDL_Game* game);
 	virtual ~EntityManager();
 
 	void update();
@@ -21,6 +21,7 @@ public:
 
 
 private:
+	SDL_Game* game_;
 	std::vector<std::unique_ptr<Entity>> entities_;
 };
 

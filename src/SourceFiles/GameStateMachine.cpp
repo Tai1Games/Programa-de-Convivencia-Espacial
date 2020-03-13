@@ -2,7 +2,7 @@
 #include "Constants.h"
 #include "PlayState.h"
 
-GameStateMachine::GameStateMachine() {
+GameStateMachine::GameStateMachine(SDL_Game* game): game_(game) {
 	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
 		states_.push_back(nullptr);
 }
@@ -24,7 +24,7 @@ void GameStateMachine::changeToState(int state) {
 			case States::menu:
 				break;
 			case States::play:
-				states_[state] = new PlayState();
+				states_[state] = new PlayState(game_);
 				break;
 			case States::pause:
 				break;
