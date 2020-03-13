@@ -1,6 +1,7 @@
 #include "Weapon.h"
 #include <iostream>
 #include "InputHandler.h"
+#include "Hands.h"
 
 void Weapon::init()
 {
@@ -21,28 +22,17 @@ void Weapon::update()
 
 		if (ih_->isButtonDown(i, SDL_CONTROLLER_BUTTON_Y) && playerInfo_[i].isNear && !IsPicked()) {
 			cout << "inRange";
-			PickObjectBy(playerInfo_[i].body);
+			PickObjectBy(playerInfo_[i].playerHands);
 		}
 	}
 }
 
-void Weapon::PickObjectBy(b2Body* playerBody)
+void Weapon::PickObjectBy(Hands* playerH)
 {
-	if (joint_ == nullptr) {
-		//b2WeldJointDef jointDef;
-		//jointDef.bodyA = playerBody;
-		//jointDef.bodyB = mainCollider_->getBody();
-		//jointDef.collideConnected = false;
-		//mainCollider_->getBody()->SetEnabled(false);
-		//mainCollider_->setTransform(b2Vec2(playerBody->GetPosition().x-mainCollider_->getW(0), playerBody->GetPosition().y + 25),0);
-		//jointDef.localAnchorA = b2Vec2(0, 50 / 2);
-		//jointDef.localAnchorB = b2Vec2(mainCollider_->getW(0), 10);
-		//joint_ = (b2WeldJoint*)mainCollider_->getWorld()->CreateJoint(&jointDef);
-		picked_ = true;
-		mainCollider_->getBody()->SetEnabled(false);
-		vw_->setDrawable(false);
-		//mainCollider_->getBody()->SetEnabled(true);
-	}
+	picked_ = true;
+	playerH->setWeapon(weaponType_);
+	mainCollider_->getBody()->SetEnabled(false);
+	vw_->setDrawable(false);
 }
 
 void Weapon::UnPickObject()
@@ -53,18 +43,15 @@ void Weapon::UnPickObject()
 	}
 }
 
-void Weapon::SavePlayerInfo(int index, b2Body* playerB)
+void Weapon::SavePlayerInfo(int index, Hands* playerH)
 {
-	//cout << "si";
-	//cout << index << endl;
-	//cout << playerB->GetUserData() << endl;
 	playerInfo_[index].isNear = true;
-	playerInfo_[index].body = playerB;
+	playerInfo_[index].playerHands = playerH;
 }
 
 void Weapon::DeletePlayerInfo(int index)
 {
 	//cout << index << endl;
 	playerInfo_[index].isNear = false;
-	playerInfo_[index].body = nullptr;
+	playerInfo_[index].playerHands = nullptr;
 }

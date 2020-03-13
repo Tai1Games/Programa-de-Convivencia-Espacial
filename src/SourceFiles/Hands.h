@@ -2,6 +2,7 @@
 #include "Component.h"
 #include "Texture.h"
 #include "Collider.h"
+#include "Weapon.h"
 class Hands : public Component
 {
 private:
@@ -9,21 +10,18 @@ private:
 	double bodyOffset_ = 100;
 	Texture* tex_ = nullptr;
 	Collider* collider_ = nullptr;
-	int textureId_;
-	SDL_Rect clip_;
+	int textureId_ = 0;
 	int playerID_ = -1;
+	WeaponID currentWeapon_ = NoWeapon;
 	InputHandler* ih_ = nullptr;
-
-	SDL_Rect getRectRender() const;
 protected:
 public:
-	Hands(int playerID, int textureId);
-	Hands(int playerID, int textureId, SDL_Rect clip);
+	Hands(int playerID, int textureId, WeaponID wId = NoWeapon);
 	~Hands() {};
 	virtual void init() override;
 	virtual void draw() const;
 	virtual void update() override;
-	void setWeapon(int weaponColumn);
+	void setWeapon(WeaponID wId);
 	int getPlayerId() { return playerID_; }
 };
 

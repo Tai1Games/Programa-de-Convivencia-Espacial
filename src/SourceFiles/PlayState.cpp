@@ -36,17 +36,18 @@ void PlayState::init() {
 	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 10, 2, 0.5, 0.5,		1,			0,			0.2,			0,				0,					Collider::CollisionLayer::Normal,	false);
 	//Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 300, 60, 30, 30,   20, 1000000000000000, 0.8, 0, false);
 
-	tinky->addComponent<Hands>(0, Resources::Tinky, SDL_Rect{0,0,20,20});
-	cout<<collTinky->getMass();
+	tinky->addComponent<Hands>(0, Resources::Hands);
+	cout << collTinky->getMass();
 
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un cuadrado de debug.
 	tinky->addComponent<Health>(3);
 	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(20, 20));
 	ground->addComponent<Viewer>();
 	pared->addComponent<Viewer>();
-	rock->addComponent <Viewer>(Resources::Tinky);
+
+	rock->addComponent <Viewer>(Resources::PinkTinky);
 	collRock->setUserData(rock);
-	rock->addComponent<Weapon>();
+	rock->addComponent<Weapon>(WeaponID::PinkTinky);
 
 	collpared->setUserData(pared);
 	collSuelo->setUserData(ground);
