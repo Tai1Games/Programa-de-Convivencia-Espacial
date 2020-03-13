@@ -76,7 +76,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);SDL2-2.0.10\include;Box2D\include\box2d;SDL2_ttf-2.0.15\include;SDL2_mixer-2.0.4\include;json\include;SDL2_image-2.0.5\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);SDL2-2.0.10\include;Box2D\include\box2d;SDL2_ttf-2.0.15\include;SDL2_mixer-2.0.4\include;json\single_include\nlohmann;tileson\include;json\single_include\nlohmann;SDL2_image-2.0.5\include;tileson\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -84,7 +84,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);SDL2-2.0.10\include;Box2D\include\box2d;SDL2_ttf-2.0.15\include;SDL2_mixer-2.0.4\include;json\include;SDL2_image-2.0.5\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);SDL2-2.0.10\include;Box2D\include\box2d;SDL2_ttf-2.0.15\include;SDL2_mixer-2.0.4\include;json\single_include\nlohmann;tileson\include;json\single_include\nlhomann;SDL2_image-2.0.5\include;</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -108,13 +108,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)SDL2-2.0.10\include;$(SolutionDir)Box2D\include\box2d;$(SolutionDir)SDL2_ttf-2.0.15\include;$(SolutionDir)SDL2_mixer-2.0.4\include;$(SolutionDir)json\include;$(SolutionDir)SDL2_image-2.0.5\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)SDL2-2.0.10\include;$(SolutionDir)Box2D\include\box2d;$(SolutionDir)SDL2_ttf-2.0.15\include;$(SolutionDir)SDL2_mixer-2.0.4\include;$(SolutionDir)json\single_include\nlohmann;$(SolutionDir)SDL2_image-2.0.5\include;$(SolutionDir)tileson\include;$(SolutionDir)json\single_include\nlohmann;$(SolutionDir)tileson\include;$(SolutionDir)json\single_include\nlohmann;$(SolutionDir)tileson\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)SDL2-2.0.10\lib\x64;$(SolutionDir)Box2D\lib;$(SolutionDir)SDL2_ttf-2.0.15\lib\x64;$(SolutionDir)SDL2_mixer-2.0.4\lib\x64;$(SolutionDir)SDL2_image-2.0.5\lib\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;box2d.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SDL2-2.0.10\lib\x64;$(SolutionDir)Box2D\lib\Debug;$(SolutionDir)SDL2_ttf-2.0.15\lib\x64;$(SolutionDir)SDL2_mixer-2.0.4\lib\x64;$(SolutionDir)SDL2_image-2.0.5\lib\x64;$(SolutionDir)tileson\lib\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;box2d.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_image.lib;tileson.lib;tileson.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)SDL2-2.0.10\lib\$(Platform)\*.dll" "$(TargetDir)"
@@ -151,17 +153,18 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)SDL2-2.0.10\include;$(SolutionDir)Box2D\include\box2d;$(SolutionDir)SDL2_ttf-2.0.15\include;$(SolutionDir)SDL2_mixer-2.0.4\include;$(SolutionDir)json\include;$(SolutionDir)SDL2_image-2.0.5\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)SDL2-2.0.10\include;$(SolutionDir)Box2D\include\box2d;$(SolutionDir)SDL2_ttf-2.0.15\include;$(SolutionDir)SDL2_mixer-2.0.4\include;$(SolutionDir)json\single_include\nlhomann;$(SolutionDir)SDL2_image-2.0.5\include;;$(SolutionDir)json\single_include\nlohmann;$(SolutionDir)tileson\include;$(SolutionDir)json\single_include\nlohmann;$(SolutionDir)tileson\include</AdditionalIncludeDirectories>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)SDL2-2.0.10\lib\x64;$(SolutionDir)Box2D\lib;$(SolutionDir)SDL2_ttf-2.0.15\lib\x64;$(SolutionDir)SDL2_mixer-2.0.4\lib\x64;$(SolutionDir)SDL2_image-2.0.5\lib\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;box2d.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SDL2-2.0.10\lib\x64;$(SolutionDir)Box2D\lib\Release;$(SolutionDir)SDL2_ttf-2.0.15\lib\x64;$(SolutionDir)SDL2_mixer-2.0.4\lib\x64;$(SolutionDir)SDL2_image-2.0.5\lib\x64;$(SolutionDir)tileson\lib\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;box2d.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_image.lib;tileson.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)SDL2-2.0.10\lib\$(Platform)\*.dll" "$(TargetDir)"

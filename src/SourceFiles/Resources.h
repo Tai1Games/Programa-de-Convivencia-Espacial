@@ -17,6 +17,7 @@ public:
 		Tinky, 
 		ActiveHealth,
 		DisableHealth,
+		DebugTilemap,
 
 		// text
 		
@@ -24,7 +25,8 @@ public:
 
 	enum AudioId : std::size_t {
 		// music
-		MainTheme
+		MainTheme,
+		Reveal,
 
 		// sound effects
 		

@@ -64,7 +64,7 @@ void PlayState::render() {
 	SDL_RenderClear(SDL_Game::instance()->getRenderer());
 
 	//entityManager_->render();
-	tileMap_->drawMap();
+	tileMap_->drawTMap();
 
 	SDL_RenderPresent(SDL_Game::instance()->getRenderer());
 }

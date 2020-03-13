@@ -11,7 +11,8 @@ vector<Resources::ImageInfo> Resources::images_ {
 		{ Debug, "../../assets/game/textures/debug.png" },
 		{ Tinky, "../../assets/game/textures/Tinky.png" },
 		{ ActiveHealth, "../../assets/game/textures/VidaActiva.png" },
-		{ DisableHealth, "../../assets/game/textures/VidaInactiva.png" }
+		{ DisableHealth, "../../assets/game/textures/VidaInactiva.png" },
+		{ DebugTilemap , "../../assets/game/tilemaps/modded_colored.png"}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_ {
@@ -22,7 +23,8 @@ vector<Resources::TextMsgInfo> Resources::messages_ {
 
 vector<Resources::MusicInfo> Resources::musics_ {
 		//Música {nombre_en_enum, ruta}
-		{ MainTheme, "../../assets/game/sound/mainTheme.mp3" }
+		{ MainTheme, "../../assets/game/sound/mainTheme.mp3" },
+		{Reveal, "../../assets/game/sound/gotem.mp3"}
 };
 
 vector<Resources::SoundInfo> Resources::sounds_ {
