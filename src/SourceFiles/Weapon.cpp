@@ -49,8 +49,9 @@ void Weapon::UnPickObject()
 	mainCollider_->getBody()->SetEnabled(true);
 	vw_->setDrawable(true);
 	mainCollider_->setLinearVelocity(b2Vec2(0, 0));
-	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x, currentHand_->getPos().y), 0);
-	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * throwSpeed_, -currentHand_->getDir().y * throwSpeed_),b2Vec2(0,0));
+	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x, currentHand_->getPos().y), currentHand_->getAngle());
+	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * throwSpeed_, -currentHand_->getDir().y * throwSpeed_), mainCollider_->getBody()->GetLocalCenter());
+	mainCollider_->getBody()->SetAngularVelocity(spinSpeed_);
 	currentHand_ = nullptr;
 }
 

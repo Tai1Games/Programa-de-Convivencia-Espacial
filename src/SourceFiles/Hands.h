@@ -15,6 +15,8 @@ private:
 	int playerID_ = -1;
 	WeaponID currentWeapon_ = NoWeapon;
 	InputHandler* ih_ = nullptr;
+	float angle_ = 0;
+	bool onFlipped_ = false;
 protected:
 public:
 	Hands(int playerID, int textureId, WeaponID wId = NoWeapon);
@@ -26,5 +28,6 @@ public:
 	int getPlayerId() { return playerID_; }
 	b2Vec2 getPos() { return pos_; }
 	b2Vec2 getDir() { return dir_; }
+	float getAngle() { return angle_; }
 };
 

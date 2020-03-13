@@ -34,6 +34,7 @@ private:
 	/*Mano que coge este objeto*/
 	Hands* currentHand_ = nullptr;
 	float throwSpeed_ = 150;
+	float spinSpeed_ = 8;
 public:
 	Weapon(Weapon::WeaponID wId): Component(ComponentType::Weapon), weaponType_(wId){}
 	~Weapon(){};
