@@ -25,7 +25,8 @@ public:
 
 	enum AudioId : std::size_t {
 		// music
-		MainTheme
+		MainTheme,
+		Reveal,
 
 		// sound effects
 		

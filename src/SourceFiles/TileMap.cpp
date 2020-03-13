@@ -92,13 +92,16 @@ void TileMap::drawTMap() {
 						tson::Vector2i position = { std::get<0>(pos) * tMap_.getTileSize().x,std::get<1>(pos) * tMap_.getTileSize().y };
 
 						int baseTilePosition = (tile->getId() - firstId); //This will determine the base position of the tile.
+						int spacing = tileset->getSpacing();
 
 						//The baseTilePosition can be used to calculate offset on its related tileset image.
-						int tileModX = (baseTilePosition % columns);
+						int currentCol = (baseTilePosition % columns);
 						int currentRow = (baseTilePosition / columns);
-						int offsetX = (tileModX != 0) ? ((tileModX)*tMap_.getTileSize().x) : (0 * tMap_.getTileSize().x);
-						int offsetY = (currentRow < rows - 1) ? (currentRow * tMap_.getTileSize().y) :
-							((rows - 1) * tMap_.getTileSize().y);
+						//int offsetX = (tileModX != 0) ? ((tileModX)*tMap_.getTileSize().x) : (0 * tMap_.getTileSize().x);
+						int offsetX = currentCol * (tMap_.getTileSize().x+spacing);
+						/*int offsetY = (currentRow < rows - 1) ? (currentRow * tMap_.getTileSize().y) :
+							((rows - 1) * tMap_.getTileSize().y);*/
+						int offsetY = (currentRow) * (tMap_.getTileSize().y+spacing);
 
 						SDL_Rect drawPos = { position.x,position.y,tMap_.getTileSize().x,tMap_.getTileSize().y };
 						SDL_Rect tilesetClip = { offsetX,offsetY,tMap_.getTileSize().x ,tMap_.getTileSize().y };
