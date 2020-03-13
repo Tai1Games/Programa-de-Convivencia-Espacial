@@ -1,6 +1,7 @@
 #include "Hands.h"
 #include "Entity.h"
 #include "Resources.h"
+#include "InputHandler.h"
 
 Hands::Hands(int playerID, int textureId) :
 	Component(ComponentType::Hands),
@@ -24,6 +25,7 @@ Hands::Hands(int playerID, int textureId, SDL_Rect clip) :
 void Hands::init()
 {
 	collider_ = GETCMP1_(Collider);
+	ih_ = SDL_Game::instance()->getInputHandler();
 	if (tex_ == nullptr) {
 		tex_ = game_->getTexturesMngr()->getTexture(Resources::Tinky);
 	}
@@ -35,13 +37,19 @@ void Hands::draw() const
 	SDL_Rect destRect;
 	destRect.w = colRec.w / 2;
 	destRect.h = colRec.h / 2;
-	destRect.x = colRec.x + (colRec.w + colRec.w/5);
-	destRect.y = colRec.y + (colRec.h / 2) - (destRect.h/2);
+	destRect.x = (colRec.x /*+ (colRec.w + colRec.w/5)*/ + colRec.w/4) + pos_.x*bodyOffset_;
+	destRect.y = (colRec.y /*+ (colRec.h / 2) - (destRect.h/2)*/+ colRec.h/4) + pos_.y*bodyOffset_;
 	tex_->render(destRect, collider_->getAngle()/*, clip_*/);
 }
 
-void Hands::update() const {
-	pos_.Set(3, 3);
+void Hands::update()
+{
+
+	b2Vec2 vI = ih_->getStickDir(0, InputHandler::GAMEPADSTICK::LEFTSTICK);
+	if (vI.Length() != 0) {
+		b2Vec2 vI = ih_->getStickDir(0, InputHandler::LEFTSTICK);
+		pos_.Set(vI.x,vI.y);
+	}
 }
 
 void Hands::setWeapon(int weaponColumn)
