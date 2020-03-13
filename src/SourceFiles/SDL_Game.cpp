@@ -55,7 +55,7 @@ void SDL_Game::initializeResources() {
 	audio_ = new SDLAudioManager();
 	audio_->init();
 
-	gamestateMachine_ = new GameStateMachine(this);
+	gamestateMachine_ = new GameStateMachine();
 
 	for (auto& image : Resources::images_) {
 		textures_->loadFromImg(image.id, renderer_, image.fileName);

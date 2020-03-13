@@ -20,10 +20,9 @@ private:
 	//HUD
 
 	CollisionHandler* collisionHandler_;
-	SDL_Game* game_;
 
 public:
-	PlayState(SDL_Game* game);
+	PlayState();
 	~PlayState();
 	virtual void init();
 	virtual void update();

@@ -1,8 +1,7 @@
 #include "Entity.h"
 
-Entity::Entity(SDL_Game* game, EntityManager* mngr) :
-	entityManager_(mngr),
-	game_(game)
+Entity::Entity(EntityManager* mngr) :
+	entityManager_(mngr)
 {
 }
 

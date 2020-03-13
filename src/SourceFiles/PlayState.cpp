@@ -9,7 +9,7 @@
 #include "Weapon.h"
 #include "Hands.h"
 
-PlayState::PlayState(SDL_Game* game): game_(game)  {
+PlayState::PlayState()  {
 }
 
 PlayState::~PlayState() {
@@ -18,7 +18,7 @@ PlayState::~PlayState() {
 void PlayState::init() {
 	//aqui se crean todas las entidades necesarias
 	//se podría JSONizar para evitar compilar
-	entityManager_ = new EntityManager(game_);
+	entityManager_ = new EntityManager();
 	physicsWorld_ = new b2World(b2Vec2(0, 0));
 	collisionHandler_ = new CollisionHandler();
 	physicsWorld_->SetContactListener(collisionHandler_);

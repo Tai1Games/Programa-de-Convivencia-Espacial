@@ -15,7 +15,7 @@ void Hands::init()
 	collider_ = GETCMP1_(Collider);
 	ih_ = SDL_Game::instance()->getInputHandler();
 	if (tex_ == nullptr) {
-		tex_ = game_->getTexturesMngr()->getTexture(textureId_);
+		tex_ = SDL_Game::instance()->getTexturesMngr()->getTexture(textureId_);
 	}
 }
 
