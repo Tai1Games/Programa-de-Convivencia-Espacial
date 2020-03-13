@@ -37,18 +37,19 @@ void Hands::draw() const
 	SDL_Rect destRect;
 	destRect.w = colRec.w / 2;
 	destRect.h = colRec.h / 2;
-	destRect.x = (colRec.x /*+ (colRec.w + colRec.w/5)*/ + colRec.w/4) + pos_.x*bodyOffset_;
-	destRect.y = (colRec.y /*+ (colRec.h / 2) - (destRect.h/2)*/+ colRec.h/4) + pos_.y*bodyOffset_;
+	destRect.x = pos_.x;
+	destRect.y = pos_.y;
 	tex_->render(destRect, collider_->getAngle()/*, clip_*/);
 }
 
 void Hands::update()
 {
-
-	b2Vec2 vI = ih_->getStickDir(0, InputHandler::GAMEPADSTICK::LEFTSTICK);
+	b2Vec2 vI = ih_->getStickDir(getPlayerId(), InputHandler::GAMEPADSTICK::LEFTSTICK);
 	if (vI.Length() != 0) {
-		b2Vec2 vI = ih_->getStickDir(0, InputHandler::LEFTSTICK);
-		pos_.Set(vI.x,vI.y);
+		dir_.Set(vI.x,vI.y);
+		SDL_Rect colRec = collider_->getRectRender();
+		pos_.Set((colRec.x + colRec.w / 4) + dir_.x * bodyOffset_,
+			(colRec.y + colRec.h / 4) + dir_.y * bodyOffset_);
 	}
 }
 

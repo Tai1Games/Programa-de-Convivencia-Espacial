@@ -15,7 +15,6 @@ class Weapon : public Component
 protected:
 private:
 	Collider* mainCollider_ = nullptr;
-	b2WeldJoint* joint_ = nullptr;
 	bool picked_ = false;
 	InputHandler* ih_ = nullptr;
 	Viewer* vw_ = nullptr;
