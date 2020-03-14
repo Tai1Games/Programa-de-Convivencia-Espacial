@@ -12,24 +12,25 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	//check collision then do whatever, in this case twice because it might be two players colliding 
 	if (ObjectCollidesWithPlayer(fixA, player)) {
 
-		b2Vec2 force = fixA->GetBody()->GetMass() * fixA->GetBody()->GetLinearVelocity();
+		//Measure de impact of an object with the player 
+		b2Vec2 force = fixB->GetBody()->GetMass() * fixB->GetBody()->GetLinearVelocity();
 		int impact= force.Length();
 
 		
-
-		if (impact > 30 && impact < 45) {
+		//Depending on the force of impact we apply damage to the player
+		if (impact >= 35 && impact < 50) {
 			player->subtractLife(1);
 			std::cout << "Health: " << player->getHealth() << endl;
 			cout << impact << endl;
 		}
 
-		if (impact > 45 && impact < 55) {
+		if (impact >= 50 && impact < 65) {
 			player->subtractLife(2);
 			std::cout << "Health: " << player->getHealth() << endl;
 			cout << impact << endl;
 		}
 
-		if (impact > 55) {
+		if (impact >= 65) {
 			player->subtractLife(3);
 			std::cout << "Health: " << player->getHealth() << endl;
 			cout << impact << endl;

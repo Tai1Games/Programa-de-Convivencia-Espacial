@@ -17,6 +17,12 @@ public:
 		Tinky, 
 		ActiveHealth,
 		DisableHealth,
+		Chancla,
+		Extintor,
+		Mancuerna,
+		Pelota,
+		Grapadora,
+		Piedra
 
 		// text
 		

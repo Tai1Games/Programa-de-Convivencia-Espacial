@@ -11,7 +11,13 @@ vector<Resources::ImageInfo> Resources::images_ {
 		{ Debug, "../../assets/game/textures/debug.png" },
 		{ Tinky, "../../assets/game/textures/Tinky.png" },
 		{ ActiveHealth, "../../assets/game/textures/VidaActiva.png" },
-		{ DisableHealth, "../../assets/game/textures/VidaInactiva.png" }
+		{ DisableHealth, "../../assets/game/textures/VidaInactiva.png" },
+		{ Chancla, "../../assets/game/textures/Chancla.png" },
+		{ Grapadora, "../../assets/game/textures/Grapadora.png" },
+		{ Extintor, "../../assets/game/textures/Extintor.png" },
+		{ Piedra, "../../assets/game/textures/Piedra.png" },
+		{ Pelota, "../../assets/game/textures/PelotaSaltarina.png" },
+		{ Mancuerna, "../../assets/game/textures/Mancuerna.png" }
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_ {
