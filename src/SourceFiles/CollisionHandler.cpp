@@ -3,21 +3,8 @@
 //Handles start of collisions
 void CollisionHandler::BeginContact(b2Contact* contact)
 {
-	/*b2Fixture* fixA = contact->GetFixtureA();
+	b2Fixture* fixA = contact->GetFixtureA();
 	b2Fixture* fixB = contact->GetFixtureB();
-
-	//player damage collision
-	Health* player = nullptr;
-
-	//check collision then do whatever, in this case twice because it might be two players colliding
-	if (ObjectCollidesWithPlayer(fixA, player)) {
-		player->subtractLife(1);
-		std::cout << "Health: " << player->getHealth() << endl;
-	}
-	if (ObjectCollidesWithPlayer(fixB, player)) {
-		player->subtractLife(1);
-		std::cout << "Health: " << player->getHealth() << endl;
-	}*/
 
 	//Pickable weapon collisions
 	Weapon* pickableObj = nullptr;
@@ -28,6 +15,20 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		cout << "jaja si" << endl;
 		pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands);
 	}
+	else {
+		//player damage collision
+		Health* playerHealth = nullptr;
+
+		//check collision then do whatever, in this case twice because it might be two players colliding
+		if (ObjectCollidesWithPlayer(fixA, playerHealth)) {
+			playerHealth->subtractLife(1);
+			std::cout << "Health: " << playerHealth->getHealth() << endl;
+		}
+		if (ObjectCollidesWithPlayer(fixB, playerHealth)) {
+			playerHealth->subtractLife(1);
+			std::cout << "Health: " << playerHealth->getHealth() << endl;
+		}
+	}	
 }
 
 //Handles end of collisions
