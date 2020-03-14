@@ -21,8 +21,8 @@ const double PIXELS_PER_METER = 60.0;
 
 //Limites de fuerza para impactos
 const int lowDamage = 35;
-const int mediumDamage = 35;
-const int hightDamage = 35;
+const int mediumDamage = 50;
+const int hightDamage = 70;
 
 //Modos de juegos
 enum States
