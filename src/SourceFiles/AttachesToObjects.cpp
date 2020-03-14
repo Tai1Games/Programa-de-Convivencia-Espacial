@@ -6,12 +6,12 @@ void AttachesToObjects::init() {
 	mainCollider_->setUserData(this);
 }
 
-void AttachesToObjects::attachToObject(b2Body* attachableObject, b2Vec2 collPoint) {
+void AttachesToObjects::attachToObject() {
 	b2WeldJointDef jointDef; //Definición del nuevo joint.
-	jointDef.bodyA = mainCollider_->getBody(); //Body del jugador.
-	jointDef.bodyB = attachableObject; //Body del objeto al que se tiene que atar.
+	jointDef.bodyA = bodyToBeAttached; //Body del objeto al que se tiene que atar.
+	jointDef.bodyB = mainCollider_->getBody(); //Body del jugador.
 	jointDef.collideConnected = true; //Flag que decide si estos 2 objetos van a ejercer físicas el uno contra el otro.
-	jointDef.localAnchorA = collPoint; //Punto en el que se crea el joint en referencia al JUGADOR. Esto queda por revisar una vez esté implementado el collider fancy de Álvar.
+	jointDef.localAnchorA = collPoint_; //Punto en el que se crea el joint en referencia al JUGADOR. Esto queda por revisar una vez esté implementado el collider fancy de Álvar.
 
 	b2World* world = mainCollider_->getWorld();
 	joint_ = (b2WeldJoint*)world->CreateJoint(&jointDef); //Crea el joint con la definición que hemos creado previamente
@@ -24,14 +24,29 @@ void AttachesToObjects::deAttachFromObject() {
 	}
 }
 
+bool AttachesToObjects::isPressingInput() {
+	InputHandler* ih = SDL_Game::instance()->getInputHandler();
+
+	return (ih->isButtonJustDown(playerNumber_, SDL_CONTROLLER_BUTTON_A));
+}
+
 void AttachesToObjects::handleInput() {
 	InputHandler* ih = SDL_Game::instance()->getInputHandler();
 
-	if (ih->isButtonJustDown(playerNumber_, SDL_CONTROLLER_BUTTON_A)) {
-		cout << "just pressed A" << endl;
-	}
-
-	else if (ih->isButtonJustUp(playerNumber_, SDL_CONTROLLER_BUTTON_A)) {
+	if (ih->isButtonJustUp(playerNumber_, SDL_CONTROLLER_BUTTON_A)) {
 		deAttachFromObject();
+	}
+}
+
+void AttachesToObjects::registerCollision(b2Body* attachableObject, b2Vec2 collPoint) {
+	bodyToBeAttached = attachableObject;
+	collPoint_ = collPoint;
+	registeredCollision = true;
+}
+
+void AttachesToObjects::update() {
+	if (registeredCollision) {
+		registeredCollision = false;
+		attachToObject();
 	}
 }
