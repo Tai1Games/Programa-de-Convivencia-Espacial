@@ -19,6 +19,11 @@ const double PI = 3.14159265359;
 //Constantes Escala Render
 const double PIXELS_PER_METER = 60.0;
 
+//Limites de fuerza para impactos
+const int lowDamage = 35;
+const int mediumDamage = 35;
+const int hightDamage = 35;
+
 //Modos de juegos
 enum States
 {

@@ -7,11 +7,11 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, Health* playerHealth) {
 	int impact = force.Length();
 
 	//Depending on the force of impact we apply damage to the player
-	if (impact >= 35 && impact < 50) {playerHealth->subtractLife(1);}
+	if (impact >= lowDamage && impact < mediumDamage) {playerHealth->subtractLife(1);}
 
-	if (impact >= 50 && impact < 65) {playerHealth->subtractLife(2);}
+	if (impact >= mediumDamage && impact < hightDamage) {playerHealth->subtractLife(2);}
 
-	if (impact >= 65) {playerHealth->subtractLife(3);}
+	if (impact >= hightDamage) {playerHealth->subtractLife(3);}
 }
 
 //Handles start of collisions
