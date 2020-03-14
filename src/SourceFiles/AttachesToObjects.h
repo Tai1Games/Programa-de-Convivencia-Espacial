@@ -7,7 +7,7 @@ class AttachesToObjects : public Component
 {
 private:
 	Collider* mainCollider_ = nullptr; //Collider del objeto principal (el Tinky)
-	Collider* objectToBeAttached_ = nullptr; //Este será el collider con el que colisionara y se agarrara
+	//Collider* objectToBeAttached_ = nullptr; //Este será el collider con el que colisionara y se agarrara
 	b2WeldJoint* joint_ = nullptr; //Joint entre el jugador y otro objeto
 	int playerNumber_;
 public:
@@ -18,4 +18,3 @@ public:
 	virtual void init() override;
 	virtual void handleInput();
 };
-

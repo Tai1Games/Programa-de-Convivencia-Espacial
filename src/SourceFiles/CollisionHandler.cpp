@@ -5,22 +5,22 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 { 
 	b2Fixture* fixA = contact->GetFixtureA();
 	b2Fixture* fixB = contact->GetFixtureB();
-
 	//player damage collision
-	Health* player_Health = nullptr;
+	//Health* player_Health = nullptr;
 	AttachesToObjects* player_AttachesToObjects = nullptr;
 	
 	//check collision then do whatever, in this case twice because it might be two players colliding 
-	if (ObjectCollidesWithPlayer(fixA, player_Health)) {
+	/*if (ObjectCollidesWithPlayer(fixA, player_Health)) {
 		player_Health->subtractLife(1);
 		std::cout << "Health: " << player_Health->getHealth() << endl;
 	}
 	if (ObjectCollidesWithPlayer(fixB, player_Health)) {
 		player_Health->subtractLife(1);
 		std::cout << "Health: " << player_Health->getHealth() << endl;
-	}
+	}*/
 	if (AttachableObjectCollidesWithPlayer(fixA, player_AttachesToObjects)) {
 		player_AttachesToObjects->attachToObject(fixB->GetBody(), b2Vec2(contact->GetManifold()->localPoint.x, contact->GetManifold()->localPoint.y));
+	// ESTE NO FUNCIONA BIEN :)
 	}
 }
 

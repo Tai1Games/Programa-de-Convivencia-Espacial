@@ -13,7 +13,8 @@ void AttachesToObjects::attachToObject(b2Body* attachableObject, b2Vec2 collPoin
 	jointDef.collideConnected = true; //Flag que decide si estos 2 objetos van a ejercer físicas el uno contra el otro.
 	jointDef.localAnchorA = collPoint; //Punto en el que se crea el joint en referencia al JUGADOR. Esto queda por revisar una vez esté implementado el collider fancy de Álvar.
 
-	joint_ = (b2WeldJoint*)mainCollider_->getWorld()->CreateJoint(&jointDef); //Crea el joint con la definición que hemos creado previamente
+	b2World* world = mainCollider_->getWorld();
+	joint_ = (b2WeldJoint*)world->CreateJoint(&jointDef); //Crea el joint con la definición que hemos creado previamente
 }
 
 void AttachesToObjects::deAttachFromObject() {
