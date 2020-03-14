@@ -19,8 +19,10 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		std::cout << "Health: " << player_Health->getHealth() << endl;
 	}*/
 	if (AttachableObjectCollidesWithPlayer(fixA, player_AttachesToObjects)) {
-		if (player_AttachesToObjects->isPressingInput()) player_AttachesToObjects->registerCollision(fixB->GetBody(), b2Vec2(contact->GetManifold()->localPoint.x, contact->GetManifold()->localPoint.y));
-	// ESTE NO FUNCIONA BIEN :)
+		b2WorldManifold manifold;
+		contact->GetWorldManifold(&manifold);
+		if (player_AttachesToObjects->isPressingInput()) player_AttachesToObjects->registerCollision(fixB->GetBody(), b2Vec2(manifold.points[0].x , manifold.points[0].y));
+		//if (player_AttachesToObjects->isPressingInput()) player_AttachesToObjects->registerCollision(fixB->GetBody(), b2Vec2((manifold.points[0].x + manifold.points[1].x) / 2, (manifold.points[0].y + manifold.points[1].y) / 2));
 	}
 }
 
