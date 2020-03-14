@@ -24,7 +24,7 @@ SDL_Game::SDL_Game(){
 	SDL_RenderPresent(renderer_);
 
 
-	audio_->setMusicVolume(7);
+	audio_->setMusicVolume(2);
 	audio_->playMusic(Resources::Reveal, -1);
 	inputHandler_ = new InputHandler();
 	inputHandler_->initialiseJoysticks();

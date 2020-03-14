@@ -24,7 +24,7 @@ private:
 	//HUD
 
 	CollisionHandler* collisionHandler_;
-	TileMap* tileMap_ = new TileMap();
+	TileMap* tileMap_ = new TileMap(WINDOW_WIDTH,WINDOW_HEIGHT);
 
 public:
 	PlayState();

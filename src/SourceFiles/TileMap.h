@@ -1,22 +1,23 @@
 #pragma once
 #include "Texture.h"
 #include "Tileson.h"
-class TileMap
+#include "Component.h"
+#include "vector"
+class TileMap : public Component
 {
 protected:
-	int map_[9][16];
-	std::pair<int, int> res_; //resolucion de la pantalla
-	const int SIZE = 32;
+	int width_, height_;
+	int mapCols_, mapRows_;
 	tson::Map tMap_;
-	void drawTile(tson::Tile* t);
+	std::vector<tson::Tileset> tileSets_;
+	std::vector<Texture*> tSetTextures_;
 private:
 	Texture* debugT_;
 	Texture* tinkyT_; 
 public:
-	TileMap();
+	TileMap(int w,int h);
 	~TileMap();
-	void drawMap();
 	void drawTMap();
-	void loadTileson(string path);
+	bool loadTileson(string path);
 };
 

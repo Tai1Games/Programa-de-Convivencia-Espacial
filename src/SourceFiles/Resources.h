@@ -4,8 +4,9 @@
 #include <string>
 #include <vector>
 #include "checkML.h"
+#include "json.hpp"
 
-
+using json = nlohmann::json;
 using namespace std;
 
 class Resources {
@@ -17,7 +18,8 @@ public:
 		Tinky, 
 		ActiveHealth,
 		DisableHealth,
-		DebugTilemap,
+		TSet_Kenney1bit,
+		TSet_Dungeon,
 
 		// text
 		
@@ -70,5 +72,6 @@ public:
 	static vector<TextMsgInfo> messages_; // initialized in .cpp
 	static vector<MusicInfo> musics_; // initialized in .cpp
 	static vector<SoundInfo> sounds_; // initialized in .cpp
+	static map<std::string, Resources::TextureId> tilesetTag_; // initialized in .cpp
 
 };

@@ -7,8 +7,8 @@
 simplemente hay que hacer #include "Constants.h" en el archivo en el que estemos programando.*/
 
 //Constantes referentes a la ventana del juego
-const int WINDOW_HEIGHT = 720;
-const int WINDOW_WIDTH = 1280;
+const int WINDOW_HEIGHT = 32*16*2;
+const int WINDOW_WIDTH = 32*16*2;
 const std::string WINDOW_NAME = "PCE";
 const double MS_PER_FRAME = 1000.0/60.0; //Asumiendo 60fps
 const double SECONDS_PER_FRAME = 1.0 / 60.0;
