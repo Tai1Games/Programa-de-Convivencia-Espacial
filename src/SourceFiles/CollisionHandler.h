@@ -6,6 +6,9 @@
 class CollisionHandler :
 	public b2ContactListener
 {
+private:
+	void damageOnImpact(b2Fixture* fix, Health* playerHealth);
+
 public:
 
     CollisionHandler() {};

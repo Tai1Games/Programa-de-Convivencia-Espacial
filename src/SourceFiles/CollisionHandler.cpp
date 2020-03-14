@@ -1,4 +1,18 @@
 #include "CollisionHandler.h"
+//This method calculates the damage recieved by the impact of an object (or another player) with the player
+void CollisionHandler::damageOnImpact(b2Fixture* fix, Health* playerHealth) {
+	//Measure de impact of an object with the player 
+	b2Vec2 force = fix->GetBody()->GetMass() * fix->GetBody()->GetLinearVelocity();
+
+	int impact = force.Length();
+
+	//Depending on the force of impact we apply damage to the player
+	if (impact >= 35 && impact < 50) {playerHealth->subtractLife(1);}
+
+	if (impact >= 50 && impact < 65) {playerHealth->subtractLife(2);}
+
+	if (impact >= 65) {playerHealth->subtractLife(3);}
+}
 
 //Handles start of collisions
 void CollisionHandler::BeginContact(b2Contact* contact)
@@ -11,35 +25,11 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 
 	//check collision then do whatever, in this case twice because it might be two players colliding 
 	if (ObjectCollidesWithPlayer(fixA, player)) {
-
-		//Measure de impact of an object with the player 
-		b2Vec2 force = fixB->GetBody()->GetMass() * fixB->GetBody()->GetLinearVelocity();
-		int impact= force.Length();
-
-		
-		//Depending on the force of impact we apply damage to the player
-		if (impact >= 35 && impact < 50) {
-			player->subtractLife(1);
-			std::cout << "Health: " << player->getHealth() << endl;
-			cout << impact << endl;
-		}
-
-		if (impact >= 50 && impact < 65) {
-			player->subtractLife(2);
-			std::cout << "Health: " << player->getHealth() << endl;
-			cout << impact << endl;
-		}
-
-		if (impact >= 65) {
-			player->subtractLife(3);
-			std::cout << "Health: " << player->getHealth() << endl;
-			cout << impact << endl;
-		}
+		damageOnImpact(fixB, player);	//Check the stats of the other object
 	}
 
 	if (ObjectCollidesWithPlayer(fixB, player)) {
-		player->subtractLife(1);
-		std::cout << "Health: " << player->getHealth() << endl;
+		damageOnImpact(fixA, player);	//Check the stats of the other object
 	}
 }
 
