@@ -36,6 +36,6 @@ void Viewer::init() {
 	}
 }
 
-void Viewer::draw() const {
+void Viewer::draw() {
 	tex_->render(collider_->getRectRender(), (collider_->getAngle()*-180/PI ), clip_); // getAngle devuelve radianes, hay que pasarlos a ángulos
 }

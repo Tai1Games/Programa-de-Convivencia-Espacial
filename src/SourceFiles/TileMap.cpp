@@ -3,29 +3,33 @@
 #include "Resources.h"
 #include "json.hpp"
 
-TileMap::TileMap(int w, int h):Component(ComponentType::Tilemap),
+TileMap::TileMap(int w, int h,string map):Component(ComponentType::Tilemap),
 width_(w),
-height_(h) {
-	SDLTexturesManager* tm = SDL_Game::instance()->getTexturesMngr();
-	tinkyT_ = tm->getTexture(Resources::Tinky);
-	debugT_ = tm->getTexture(Resources::Debug);
-	loadTileson("../../assets/game/tilemaps/TD_TilemapBitCSV.json");
+height_(h),
+tm(nullptr){
+	loadTileson(map);
 }
 
 TileMap::~TileMap() {
-
+	tm = nullptr;
 }
 
-void TileMap::drawTMap() {
-	//https://github.com/SSBMTonberry/tileson
-	//lo he adaptado a SDL.
-	//creo que puedo optimizarlo, pero eso para cuando funcione
-	//hay que encontrar una forma de emparejar estas cositas
-	Texture* tilesetT_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::tilesetTag_.find("modded_colored")->second);
-	tson::Tileset* tSet = tMap_.getTileset("modded_colored");
-	for (tson::Layer tileLayer : tMap_.getLayers())
+void TileMap::init() {
+	tm = SDL_Game::instance()->getTexturesMngr();
+}
+void TileMap::draw() {
+	//código bastante modificado basado en https://github.com/SSBMTonberry/tileson 
+	//He añadido sistema de escalado
+	//soporte automático para varios tilesets
+	//soporte de texturas de SDL
+	
+	Texture* tilesetT_;//Textura del tileset a utilizar
+	const tson::Tileset* tSet;//Datos del tileset a utilizar
+	
+	//recorremos todas las capas del mapa
+	for (auto& tileLayer : tMap_.getLayers())
 	{
-
+		//podemos distinguir entre capas de tiles, objetos, imagenes más adelante
 		if (tileLayer.getType() == tson::Layer::Type::TileLayer)
 		{
 			//pos = position in tile units
@@ -42,9 +46,11 @@ void TileMap::drawTMap() {
 					{
 						i++;
 					}
-					if(i<tileSets_.size())
+					if (i < tileSets_.size())
 						tSet = &tileSets_[i];
+					else throw exception("No se encontró el tileset");
 
+					//variables auxiliares para el dibujado del tile
 					int firstId = tSet->getFirstgid(); //First tile id of the tileset
 					int tSetColumns = tSet->getColumns();
 					int tSetRows = tSet->getTileCount() / tSetColumns;
@@ -52,27 +58,27 @@ void TileMap::drawTMap() {
 					int tileWidth = tSet->getTileSize().x;
 					int tileHeight = tSet->getTileSize().y;
 					int spacing = tSet->getSpacing();
+					int margin = tSet->getMargin();
 
 
-					tilesetT_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::tilesetTag_.find(tSet->getName())->second);;
-					//Get position in pixel units
+					tilesetT_ = tm->getTexture(Resources::tilesetTag_.find(tSet->getName())->second);;
+					//Posicion de dibujado del vector
 					tson::Vector2i position = { std::get<0>(pos) * width_ /mapCols_,std::get<1>(pos) * height_ / mapRows_ };
 
+					//posicion unidimensional del tile en el tileset
 					int baseTilePosition = (tile->getId() - firstId); //This will determine the base position of the tile.
 
-					//The baseTilePosition can be used to calculate offset on its related tileset image.
+					//fila y columna del tile en el tileset
 					int currentCol = (baseTilePosition % tSetColumns);
 					int currentRow = (baseTilePosition / tSetRows);
-					//int offsetX = (currentRow != 0) ? ((currentRow)*tMap_.getTileSize().x) : (0 * tMap_.getTileSize().x);
+
+					//posiciones del tile en el tileset
 					int offsetX = currentCol * (tileWidth+spacing);
-					/*int offsetY = (currentRow < rows - 1) ? (currentRow * tMap_.getTileSize().y) :
-						((rows - 1) * tMap_.getTileSize().y);*/
-					int offsetY = (currentRow) * (tileHeight+spacing);
+					int offsetY = (currentRow) * (tileHeight+margin);
 
 					SDL_Rect drawPos = { position.x,position.y,width_ / mapCols_,height_/mapRows_ };
 					SDL_Rect tilesetClip = { offsetX,offsetY,tileWidth ,tileWidth};
-					//if(id == 1107)
-						tilesetT_->render(drawPos, tilesetClip);
+					tilesetT_->render(drawPos, tilesetClip);
 				}
 			}
 		}
@@ -83,18 +89,13 @@ bool TileMap::loadTileson(string path) {
 	tson::Tileson parser;
 	tMap_ = parser.parse(fs::path(path));
 	if (tMap_.getStatus() == tson::Map::ParseStatus::OK) {
-		//guardamos todas las texturas de los tileset
+		//variables de escala
 		mapCols_ = tMap_.getSize().x;
 		mapRows_ = tMap_.getSize().y;
+		//guardamos los datos de los tilesets que se usan
 		tileSets_ = tMap_.getTilesets();
-		tSetTextures_.reserve(tileSets_.size());
-		for (tson::Tileset tileset : tileSets_) {
-			string name = tileset.getName();
-			tSetTextures_.push_back(
-				SDL_Game::instance()->getTexturesMngr()
-				->getTexture(Resources::tilesetTag_.find(name)->second));
-		}
+		return true;
 	}
 	else
-	return false;
+		return false;
 }

@@ -20,5 +20,5 @@ public:
 	virtual ~Viewer();
 
 	virtual void init() override;
-	virtual void draw() const override;
+	virtual void draw() override;
 };

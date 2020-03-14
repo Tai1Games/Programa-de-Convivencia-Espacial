@@ -20,11 +20,16 @@ void PlayState::init() {
 	collisionHandler_ = new CollisionHandler();
 	physicsWorld_->SetContactListener(collisionHandler_);
 
+	Entity* map = entityManager_->addEntity();
 	Entity* tinky = entityManager_->addEntity();
 	Entity* ground = entityManager_->addEntity();
 	Entity* pared = entityManager_->addEntity();
+
 	//Entity* rock = entityManager_->addEntity();
 	//Entity* spaceJunk = entityManager_->addEntity();
+
+	map->addComponent<TileMap>(WINDOW_WIDTH, WINDOW_HEIGHT,
+		"../../assets/game/tilemaps/TD_TilemapBitCSV.json");
 																			// x, y, width, height,			density,	friction,	restitution,	linearDrag,		angularDrag,		Layer,								sensor
 	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 1.7, 8, 1, 1,		1,			0.1,		0.2,			0,				0,					Collider::CollisionLayer::Normal,	false);
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 10.5, -0.5, 12,1,	10,			0,			0.2,			0,				0,					Collider::CollisionLayer::Normal,	false);
@@ -63,8 +68,7 @@ void PlayState::update() {
 void PlayState::render() {
 	SDL_RenderClear(SDL_Game::instance()->getRenderer());
 
-	//entityManager_->render();
-	tileMap_->drawTMap();
+	entityManager_->render();
 
 	SDL_RenderPresent(SDL_Game::instance()->getRenderer());
 }

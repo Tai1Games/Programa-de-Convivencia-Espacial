@@ -40,7 +40,7 @@ public:
 	//Metodos que implementan los hijos y los dotan de funcionalidad
 	virtual void init() {};
 	virtual void update() {};
-	virtual void draw() const {};
+	virtual void draw() {};
 	virtual void handleInput() {};
 
 };
