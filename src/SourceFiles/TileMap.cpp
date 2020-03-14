@@ -6,18 +6,22 @@
 TileMap::TileMap(int w, int h,string map):Component(ComponentType::Tilemap),
 width_(w),
 height_(h),
-tm(nullptr){
+tm_(nullptr){
 	loadTileson(map);
 }
 
 TileMap::~TileMap() {
-	tm = nullptr;
+	tm_ = nullptr;
 }
 
 void TileMap::init() {
-	tm = SDL_Game::instance()->getTexturesMngr();
+	tm_ = SDL_Game::instance()->getTexturesMngr();
 }
-void TileMap::draw() {
+void TileMap::update() {
+	//apaño para que draw sea const
+	layers_ = tMap_.getLayers();
+}
+void TileMap::draw() const {
 	//código bastante modificado basado en https://github.com/SSBMTonberry/tileson 
 	//He añadido sistema de escalado
 	//soporte automático para varios tilesets
@@ -27,7 +31,7 @@ void TileMap::draw() {
 	const tson::Tileset* tSet;//Datos del tileset a utilizar
 	
 	//recorremos todas las capas del mapa
-	for (auto& tileLayer : tMap_.getLayers())
+	for (auto& tileLayer : layers_)
 	{
 		//podemos distinguir entre capas de tiles, objetos, imagenes más adelante
 		if (tileLayer.getType() == tson::Layer::Type::TileLayer)
@@ -61,7 +65,7 @@ void TileMap::draw() {
 					int margin = tSet->getMargin();
 
 
-					tilesetT_ = tm->getTexture(Resources::tilesetTag_.find(tSet->getName())->second);;
+					tilesetT_ = tm_->getTexture(Resources::tilesetTag_.find(tSet->getName())->second);;
 					//Posicion de dibujado del vector
 					tson::Vector2i position = { std::get<0>(pos) * width_ /mapCols_,std::get<1>(pos) * height_ / mapRows_ };
 

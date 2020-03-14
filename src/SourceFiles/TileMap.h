@@ -10,15 +10,17 @@ protected:
 	int mapCols_, mapRows_;
 	tson::Map tMap_;
 	std::vector<tson::Tileset> tileSets_;
-	SDLTexturesManager* tm;
+	SDLTexturesManager* tm_;
+	std::vector<tson::Layer> layers_;
 private:
 	Texture* debugT_;
 	Texture* tinkyT_; 
 public:
 	TileMap(int w,int h,string map);
 	~TileMap();
+	virtual void update() override;
 	virtual void init() override;
-	virtual void draw() override;
+	virtual void draw() const override;
 	bool loadTileson(string path);
 };
 
