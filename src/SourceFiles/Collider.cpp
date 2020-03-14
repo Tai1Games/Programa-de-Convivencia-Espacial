@@ -1,13 +1,18 @@
 #include "Collider.h"
 
 Collider::Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
-	float density, float friction, float restitution, CollisionLayer c, bool sensor, bool canBeAttached) :
+
+	float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor, bool canBeAttached) :
+
 	world_(world),
 	Component(ComponentType::Collider)
-{   
+{
 	bodyDef_.type = type;
 	bodyDef_.position.Set(x, y);
+	bodyDef_.linearDamping = linearDrag;
+	bodyDef_.angularDamping = angDrag;
 	body_ = world_->CreateBody(&bodyDef_);
+
 	createFixture(width, height, density, friction, restitution, c, sensor);
 	createFixture(width + HITBOX_ATTACH_TO_OBJECTS_OFFSET, height + HITBOX_ATTACH_TO_OBJECTS_OFFSET, 0, 0, 0, CollisionLayer::Player, false);
 }
@@ -48,4 +53,5 @@ void Collider::destroyFixture(int i) {
 	/*fixtures_.erase(fixtures_.begin() + i);
 	fixtureDef_.erase(fixtureDef_.begin() + i);
 	shape_.erase(shape_.begin() + i);*/
+
 }

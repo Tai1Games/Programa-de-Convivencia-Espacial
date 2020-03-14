@@ -7,10 +7,6 @@ class GameState
 {
 protected:
 	EntityManager* entityManager_;
-	b2World* physicsWorld_;
-	std::vector<b2Body*> physicalEntities_; //almacena los punteros a los colliders de b2
-	//puede que no sea necesario si cogemos la referencia en cuanto los creamos con addPhysicalEntity
-	b2Body* addPhysicalEntity(/*PARÁMETROS PARA PODER CREAR UN BODY*/);  //añade una entidad fisica
 	//HUD
 #pragma region Debug
 	void DebugInput();

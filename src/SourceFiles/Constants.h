@@ -14,6 +14,12 @@ const double MS_PER_FRAME = 1000.0/60.0; //Asumiendo 60fps
 const double SECONDS_PER_FRAME = 1.0 / 60.0;
 const double HITBOX_ATTACH_TO_OBJECTS_OFFSET = 4;
 
+//Constantes Generales
+const double PI = 3.14159265359;
+
+//Constantes Escala Render
+const double PIXELS_PER_METER = 60.0;
+
 //Modos de juegos
 enum States
 {
