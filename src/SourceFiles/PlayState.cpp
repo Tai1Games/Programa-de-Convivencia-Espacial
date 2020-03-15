@@ -31,7 +31,7 @@ void PlayState::init() {
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 10.5, -0.5, 12,1,	10,			0,			0.2,			0,				0,					Collider::CollisionLayer::Normal,	false,     true);
 	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody, 21.5, 10, 1, 10,		10,			1,			0.2,			0,				0,					Collider::CollisionLayer::Normal,	false,     true);
 	//Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 500, 80, 20, 20,   10, 0, 0, 0.1, false);
-	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 10, 8, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::Normal, false, true);
+	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 10, 8, 3, 3, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::Normal, false, true);
 	//collJunk->setTransform(collJunk->getTransform().p, 168);
 	//cout<<collTinky->getMass();
 
