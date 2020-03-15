@@ -12,12 +12,12 @@ class CollisionHandler :
 	public b2ContactListener
 {
 private:
-	struct weldData {
+	struct weldData { //Struct donde guardamos los datos necesarios para hacer un weld.
 		AttachesToObjects* player = nullptr;
 		b2Body* bodyToBeAttached = nullptr;
 		b2Vec2 collPoint;
 	};
-	vector<weldData> vecWeld;
+	vector<weldData> vecWeld; //Vector donde almacenamos los welds que realizaremos al final del step.
 public:
 
     CollisionHandler() {};
