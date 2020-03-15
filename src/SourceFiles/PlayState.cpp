@@ -50,6 +50,9 @@ void PlayState::init() {
 	//spaceJunk->addComponent<Viewer>();
 
 	//cout << collJunk->getMass();
+	collTinky->setUserData(tinky);
+	collTonko->setUserData(tonko);
+
 
 	collTinky->applyLinearImpulse(b2Vec2(40, 20), b2Vec2(0.1, 0));
 
