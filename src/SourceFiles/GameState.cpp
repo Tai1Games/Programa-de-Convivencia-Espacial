@@ -15,7 +15,7 @@ GameState::~GameState() {
 
 void GameState::update() {
 	entityManager_->update();
-	//también debería actualizar la lógica de modo de juego
+	//tambiï¿½n deberï¿½a actualizar la lï¿½gica de modo de juego
 	//spawners de monedas, carga de objetivos...
 }
 
@@ -29,7 +29,7 @@ void GameState::render() {
 
 void GameState::handleInput() {
 	SDL_Game::instance()->getInputHandler()->update();
-	//DebugInput();
+	DebugInput();
 	if(entityManager_!=nullptr)
 		entityManager_->handleInput();
 }

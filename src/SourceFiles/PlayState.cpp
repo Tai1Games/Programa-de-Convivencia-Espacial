@@ -1,10 +1,13 @@
 #include "PlayState.h"
 #include "Transform.h"
+#include "Texture.h"
 #include "Viewer.h"
 #include "Health.h"
 #include "HealthViewer.h"
 #include "InputHandler.h"
 #include "CollisionHandler.h"
+#include "Weapon.h"
+#include "Hands.h"
 
 PlayState::PlayState()  {
 }
@@ -23,18 +26,18 @@ void PlayState::init() {
 	Entity* tinky = entityManager_->addEntity();
 	Entity* ground = entityManager_->addEntity();
 	Entity* pared = entityManager_->addEntity();
-	//Entity* rock = entityManager_->addEntity();
+	Entity* rock = entityManager_->addEntity();
 	//Entity* spaceJunk = entityManager_->addEntity();
-	Entity* tonko = entityManager_->addEntity();
+	
 																			// x, y, width, height,			density,	friction,	restitution,	linearDrag,		angularDrag,		Layer,								sensor
-	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 5, 3, 1, 1,		1,			0.1,		0.2,			0,				0,					Collider::CollisionLayer::Normal,	false);
+	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 2, 2, 1, 1,			1,			0.1,		0.2,			0,				0,					Collider::CollisionLayer::Player,	false);
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 10.5, -0.5, 12,1,	10,			0,			0.2,			0,				0,					Collider::CollisionLayer::Normal,	false);
 	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody, 21.5, 10, 1, 10,		10,			1,			0.2,			0,				0,					Collider::CollisionLayer::Normal,	false);
-	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,15, 8, 1, 1, 5, 0.1, 0.2, 0, 0, Collider::CollisionLayer::Normal, false);
+	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 10, 2, 0.5, 0.5,		1,			0,			0.2,			0,				0,					Collider::CollisionLayer::Normal,	false);
 	//Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 300, 60, 30, 30,   20, 1000000000000000, 0.8, 0, false);
 
-	cout<<collTinky->getMass();
-	
+	tinky->addComponent<Hands>(0, Resources::Hands);
+	cout << collTinky->getMass();
 
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un cuadrado de debug.
 	tinky->addComponent<Health>(3);
@@ -42,12 +45,17 @@ void PlayState::init() {
 	ground->addComponent<Viewer>();
 	pared->addComponent<Viewer>();
 
-	//rock->addComponent <Viewer>(Resources::Mancuerna);
-	tonko->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un cuadrado de debug.
-	tonko->addComponent<Health>(3);
-	tonko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(550, 20));
+	rock->addComponent <Viewer>(Resources::PinkTinky);
+	collRock->setUserData(rock);
+	rock->addComponent<Weapon>(WeaponID::PinkTinky);
+
+	collpared->setUserData(pared);
+	collSuelo->setUserData(ground);
 
 	//spaceJunk->addComponent<Viewer>();
+
+	collTinky->setUserData(tinky);
+	
 
 	//cout << collJunk->getMass();
 	collTinky->setUserData(tinky);
@@ -58,6 +66,9 @@ void PlayState::init() {
 
 	collTonko->applyLinearImpulse(b2Vec2(-40, -20), b2Vec2(0.1, 0));
 
+	//collTinky->applyLinearImpulse(b2Vec2(40, -30), b2Vec2(0.1, 0));
+	collTinky->applyLinearImpulse(b2Vec2(10, 0), b2Vec2(0, 0));
+	//collRock->applyLinearImpulse(b2Vec2(10, 0), b2Vec2(0, 0));
 	//tr->getBody()->ApplyForce(b2Vec2 (0, -200), b2Vec2(0, 0), true);
 	//tr->getBody()->ApplyLinearImpulse(b2Vec2(0, -100), b2Vec2(0, 0),true);
 

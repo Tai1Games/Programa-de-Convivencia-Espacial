@@ -2,12 +2,12 @@
 #include "SDL_Macros.h"
 
 vector<Resources::FontInfo> Resources::fonts_ {
-		//Fuentes {nombre_en_enum, ruta, tamaño}
+		//Fuentes {nombre_en_enum, ruta, tamaï¿½o}
 		{NES_Chimera, "../../assets/game/fonts/NES-Chimera.ttf", 38}
 };
 
 vector<Resources::ImageInfo> Resources::images_ {
-		//Imágenes {nombre_en_enum, ruta}
+		//Imï¿½genes {nombre_en_enum, ruta}
 		{ Debug, "../../assets/game/textures/debug.png" },
 		{ Tinky, "../../assets/game/textures/Tinky.png" },
 		{ ActiveHealth, "../../assets/game/textures/VidaActiva.png" },
@@ -18,6 +18,8 @@ vector<Resources::ImageInfo> Resources::images_ {
 		{ Piedra, "../../assets/game/textures/Piedra.png" },
 		{ Pelota, "../../assets/game/textures/PelotaSaltarina.png" },
 		{ Mancuerna, "../../assets/game/textures/Mancuerna.png" }
+		{ Hands, "../../assets/game/textures/hands.png" },
+		{ PinkTinky, "../../assets/game/textures/PinkTinky.png"}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_ {
@@ -27,7 +29,7 @@ vector<Resources::TextMsgInfo> Resources::messages_ {
 };
 
 vector<Resources::MusicInfo> Resources::musics_ {
-		//Música {nombre_en_enum, ruta}
+		//Mï¿½sica {nombre_en_enum, ruta}
 		{ MainTheme, "../../assets/game/sound/mainTheme.mp3" }
 };
 

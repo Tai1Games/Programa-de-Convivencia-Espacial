@@ -1,7 +1,7 @@
 #include "EntityManager.h"
 #include "Entity.h"
 
-EntityManager::EntityManager(){}
+EntityManager::EntityManager() {}
 
 EntityManager::~EntityManager() {
 	entities_.clear();

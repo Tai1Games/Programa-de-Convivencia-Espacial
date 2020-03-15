@@ -23,6 +23,8 @@ public:
 		Pelota,
 		Grapadora,
 		Piedra
+		Hands,
+		PinkTinky
 
 		// text
 		
