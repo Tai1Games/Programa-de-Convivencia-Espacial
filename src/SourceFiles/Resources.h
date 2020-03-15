@@ -22,7 +22,7 @@ public:
 		Mancuerna,
 		Pelota,
 		Grapadora,
-		Piedra
+		Piedra,
 		Hands,
 		PinkTinky
 

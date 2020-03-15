@@ -17,7 +17,7 @@ vector<Resources::ImageInfo> Resources::images_ {
 		{ Extintor, "../../assets/game/textures/Extintor.png" },
 		{ Piedra, "../../assets/game/textures/Piedra.png" },
 		{ Pelota, "../../assets/game/textures/PelotaSaltarina.png" },
-		{ Mancuerna, "../../assets/game/textures/Mancuerna.png" }
+		{ Mancuerna, "../../assets/game/textures/Mancuerna.png" },
 		{ Hands, "../../assets/game/textures/hands.png" },
 		{ PinkTinky, "../../assets/game/textures/PinkTinky.png"}
 };

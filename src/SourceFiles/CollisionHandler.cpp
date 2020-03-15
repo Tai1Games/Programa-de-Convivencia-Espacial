@@ -1,5 +1,6 @@
 #include "CollisionHandler.h"
 //This method calculates the damage recieved by the impact of an object (or another player) with the player
+
 void CollisionHandler::damageOnImpact(b2Fixture* fix, Health* playerHealth) {
 	//Measure de impact of an object with the player 
 	b2Vec2 force = fix->GetBody()->GetMass() * fix->GetBody()->GetLinearVelocity();
@@ -32,34 +33,22 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 
 	if (ObjectCollidesWithPlayer(fixB, player)) {
 		damageOnImpact(fixA, player);	//Check the stats of the other object
-	//Pickable weapon collisions
-	Weapon* pickableObj = nullptr;
-	Hands* playerHands = nullptr;
-	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon ||
-		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon) &&
-		PlayerCanPickWeapon(contact, pickableObj, playerHands)) {
-		cout << "jaja si" << endl;
-		pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands);
-	}
-	else {
-		//player damage collision
-		Health* playerHealth = nullptr;
 
-		//check collision then do whatever, in this case twice because it might be two players colliding
-		if (ObjectCollidesWithPlayer(fixA, playerHealth)) {
-			playerHealth->subtractLife(1);
-			std::cout << "Health: " << playerHealth->getHealth() << endl;
+
+	//Pickable weapon collisions
+		Weapon* pickableObj = nullptr;
+		Hands* playerHands = nullptr;
+		if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon ||
+			contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon) &&
+			PlayerCanPickWeapon(contact, pickableObj, playerHands)) {
+			cout << "jaja si" << endl;
+			pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands);
 		}
-		if (ObjectCollidesWithPlayer(fixB, playerHealth)) {
-			playerHealth->subtractLife(1);
-			std::cout << "Health: " << playerHealth->getHealth() << endl;
-		}
-	}	
+	}
 }
 
 //Handles end of collisions
-void CollisionHandler::EndContact(b2Contact* contact)
-{
+void CollisionHandler::EndContact(b2Contact * contact){
 	//Pickable weapons
 	Weapon* pickableObj = nullptr;
 	Hands* playerHands = nullptr;
@@ -73,14 +62,10 @@ void CollisionHandler::EndContact(b2Contact* contact)
 }
 
 //If you want to disable a collision after it's detected
-void CollisionHandler::PreSolve(b2Contact* contact, const b2Manifold* oldManifold)
-{
-}
+void CollisionHandler::PreSolve(b2Contact* contact, const b2Manifold* oldManifold) {}
 
 //Gather info about impulses
-void CollisionHandler::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse)
-{
-}
+void CollisionHandler::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {}
 
 //to add a new collision behaviour, make a method that checks if it's the specific collision you want
 //you can distinguish bodies by their user data or make them collide with certain objects only with collision layers
