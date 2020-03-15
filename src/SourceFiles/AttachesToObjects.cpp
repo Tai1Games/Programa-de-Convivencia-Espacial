@@ -6,49 +6,42 @@ void AttachesToObjects::init() {
 	mainCollider_->setUserData(this);
 }
 
-void AttachesToObjects::attachToObject() {
-	b2WeldJointDef jointDef; //Definición del nuevo joint.
-	jointDef.bodyA = mainCollider_->getBody(); //Body del jugador.
-	jointDef.bodyB = bodyToBeAttached; //Body del objeto al que se tiene que atar.
-	jointDef.collideConnected = false; //Flag que decide si estos 2 objetos van a ejercer físicas el uno contra el otro.
-	jointDef.localAnchorA = jointDef.bodyA->GetLocalPoint(collPoint_);
-	jointDef.localAnchorB = jointDef.bodyB->GetLocalPoint(collPoint_);
-	jointDef.referenceAngle = jointDef.bodyB->GetAngle() - jointDef.bodyA->GetAngle();
-	b2World* world = mainCollider_->getWorld();
-	joint_ = (b2WeldJoint*)world->CreateJoint(&jointDef); //Crea el joint con la definición que hemos creado previamente
-}
-
-void AttachesToObjects::deAttachFromObject() {
-	if (joint_ != nullptr) { //Destruye el joint. Si haces un delete(joint) peta por algún motivo. CREO que esto no deja basura.
-		mainCollider_->getWorld()->DestroyJoint(joint_);
-		joint_ = nullptr;
-		bodyToBeAttached = nullptr;
+void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint) {
+	if (joint_ == nullptr) {
+		attachedObject_ = attachedObject;
+		b2WeldJointDef jointDef; //Definición del nuevo joint.
+		jointDef.bodyA = mainCollider_->getBody(); //Body del jugador.
+		jointDef.bodyB = attachedObject; //Body del objeto al que se tiene que atar.
+		jointDef.collideConnected = false; //Flag que decide si estos 2 objetos van a ejercer físicas el uno contra el otro.
+		jointDef.localAnchorA = jointDef.bodyA->GetLocalPoint(collPoint); //Punto donde se ata el cuerpo A al cuerpo B
+		jointDef.localAnchorB = jointDef.bodyB->GetLocalPoint(collPoint); //Punto donde se ata el cuerpo B al cuerpo A
+		jointDef.referenceAngle = jointDef.bodyB->GetAngle() - jointDef.bodyA->GetAngle(); //Ángulo conjunto del cuerpo
+		b2World* world = mainCollider_->getWorld(); //Obtenemos el mundo físico para crear el joint
+		joint_ = (b2WeldJoint*)world->CreateJoint(&jointDef); //Crea el joint con la definición que hemos definido previamente
 	}
 }
 
-bool AttachesToObjects::isPressingInput() {
-	InputHandler* ih = SDL_Game::instance()->getInputHandler();
-	return (ih->isButtonDown(playerNumber_, SDL_CONTROLLER_BUTTON_A) && bodyToBeAttached == nullptr);
+void AttachesToObjects::deAttachFromObject() {
+	if (joint_ != nullptr) {
+		mainCollider_->getWorld()->DestroyJoint(joint_); //Destruye el joint
+		joint_ = nullptr; //Al hacer la acción de arriba, el puntero a joint_ sigue apuntando a una dirección de memoria que NO es válida. Por eso se iguala a nullptr
+		attachedObject_ = nullptr;
+	}
 }
 
-void AttachesToObjects::handleInput() {
+bool AttachesToObjects::canAttachToObject() { //Se agarra si está pretando una tecla válida y si no está agarrado a otra cosa.
+	InputHandler* ih = SDL_Game::instance()->getInputHandler();
+	return ((ih->isButtonDown(playerNumber_, SDL_CONTROLLER_BUTTON_A)) && attachedObject_ == nullptr);
+}
+
+void AttachesToObjects::handleInput() { //Si el jugador suelta la tecla de agarre, se suelta.
 	InputHandler* ih = SDL_Game::instance()->getInputHandler();
 
-	if (ih->isButtonJustUp(playerNumber_, SDL_CONTROLLER_BUTTON_A)) {
+	if (ih->isButtonJustUp(playerNumber_, SDL_CONTROLLER_BUTTON_A) ) {
 		deAttachFromObject();
 	}
 }
 
-void AttachesToObjects::registerCollision(b2Body* attachableObject, b2Vec2 collPoint) {
-	bodyToBeAttached = attachableObject;
-	collPoint_ = collPoint;
-	registeredCollision = true;
-}
-
 void AttachesToObjects::update() {
-	if (registeredCollision) {
-		registeredCollision = false;
-		attachToObject();
-	}
-	cout << mainCollider_->getPos().x << "  " << mainCollider_->getPos().y << endl;
+	cout << "sijaja";
 }

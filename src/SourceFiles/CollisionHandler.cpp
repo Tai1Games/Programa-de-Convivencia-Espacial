@@ -6,23 +6,28 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	b2Fixture* fixA = contact->GetFixtureA();
 	b2Fixture* fixB = contact->GetFixtureB();
 	//player damage collision
-	//Health* player_Health = nullptr;
+	Health* player_Health = nullptr;
 	AttachesToObjects* player_AttachesToObjects = nullptr;
 	
 	//check collision then do whatever, in this case twice because it might be two players colliding 
-	/*if (ObjectCollidesWithPlayer(fixA, player_Health)) {
+	if (ObjectCollidesWithPlayer(fixA, player_Health)) {
 		player_Health->subtractLife(1);
 		std::cout << "Health: " << player_Health->getHealth() << endl;
 	}
 	if (ObjectCollidesWithPlayer(fixB, player_Health)) {
 		player_Health->subtractLife(1);
 		std::cout << "Health: " << player_Health->getHealth() << endl;
-	}*/
+	}
 	if (AttachableObjectCollidesWithPlayer(fixA, player_AttachesToObjects)) {
-		b2WorldManifold manifold;
-		contact->GetWorldManifold(&manifold);
-		if (player_AttachesToObjects->isPressingInput()) player_AttachesToObjects->registerCollision(fixB->GetBody(), b2Vec2(manifold.points[0].x , manifold.points[0].y));
-		//if (player_AttachesToObjects->isPressingInput()) player_AttachesToObjects->registerCollision(fixB->GetBody(), b2Vec2((manifold.points[0].x + manifold.points[1].x) / 2, (manifold.points[0].y + manifold.points[1].y) / 2));
+		if (player_AttachesToObjects->canAttachToObject()) {
+			b2WorldManifold manifold;
+			contact->GetWorldManifold(&manifold);
+			weldData newWeld;
+			newWeld.player = player_AttachesToObjects;
+			newWeld.bodyToBeAttached = fixB->GetBody();
+			newWeld.collPoint = b2Vec2(manifold.points[0].x, manifold.points[0].y);
+			vecWeld.push_back(newWeld);
+		}
 	}
 }
 
@@ -34,6 +39,7 @@ void CollisionHandler::EndContact(b2Contact* contact)
 //If you want to disable a collision after it's detected
 void CollisionHandler::PreSolve(b2Contact* contact, const b2Manifold* oldManifold)
 {
+
 }
 
 //Gather info about impulses
@@ -55,4 +61,10 @@ bool CollisionHandler::AttachableObjectCollidesWithPlayer(b2Fixture* fixA, Attac
 	else return false;
 }
 
+void CollisionHandler::SolveInteractions() {
+	for (int k = 0; k < vecWeld.size(); k++) {
+		vecWeld[k].player->attachToObject(vecWeld[k].bodyToBeAttached, vecWeld[k].collPoint);
+	}
+	vecWeld.clear();
+}
 //add pickable object method and grabbable object method here

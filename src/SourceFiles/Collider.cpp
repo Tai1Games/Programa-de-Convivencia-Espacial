@@ -14,7 +14,7 @@ Collider::Collider(b2World* world, b2BodyType type, float x, float y, float widt
 	body_ = world_->CreateBody(&bodyDef_);
 
 	createFixture(width, height, density, friction, restitution, c, sensor);
-	createFixture(width + HITBOX_ATTACH_TO_OBJECTS_OFFSET, height + HITBOX_ATTACH_TO_OBJECTS_OFFSET, 0, 0, 0, CollisionLayer::Trigger, false);
+	if (canBeAttached) createFixture(width + HITBOX_ATTACH_TO_OBJECTS_OFFSET, height + HITBOX_ATTACH_TO_OBJECTS_OFFSET, 0, 0, 0, CollisionLayer::Trigger, false);
 }
 
 void Collider::createFixture(float width, float height, float density,
