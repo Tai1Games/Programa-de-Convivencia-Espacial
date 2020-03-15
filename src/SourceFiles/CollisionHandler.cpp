@@ -1,4 +1,19 @@
 #include "CollisionHandler.h"
+//This method calculates the damage recieved by the impact of an object (or another player) with the player
+
+void CollisionHandler::damageOnImpact(b2Fixture* fix, Health* playerHealth) {
+	//Measure de impact of an object with the player 
+	b2Vec2 force = fix->GetBody()->GetMass() * fix->GetBody()->GetLinearVelocity();
+
+	int impact = force.Length();
+
+	//Depending on the force of impact we apply damage to the player
+	if (impact >= lowDamage && impact < mediumDamage) {playerHealth->subtractLife(1);}
+
+	if (impact >= mediumDamage && impact < hightDamage) {playerHealth->subtractLife(2);}
+
+	if (impact >= hightDamage) {playerHealth->subtractLife(3);}
+}
 
 //Handles start of collisions
 void CollisionHandler::BeginContact(b2Contact* contact)
@@ -12,22 +27,37 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	Hands* playerHands = nullptr;
 
 	if (AttachableObjectCollidesWithPlayer(fixA, player_AttachesToObjects) && fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) { //Comprueba que FixA es el jugador y que FixB es un Trigger
-		if (player_AttachesToObjects->canAttachToObject()) { //Comprueba que el jugador puede agarrarse al objeto (está pulsando la A y no está agarrado a ningun otro)
+		if (player_AttachesToObjects->canAttachToObject()) { //Comprueba que el jugador puede agarrarse al objeto (estï¿½ pulsando la A y no estï¿½ agarrado a ningun otro)
 			b2WorldManifold manifold; //Una manifold es un registro donde se guardan todas las colisiones
 			contact->GetWorldManifold(&manifold); //Obtenemos la manifold global
 			weldData newWeld; //Struct donde guardamos los datos necesarios para crear un weld
 			newWeld.player = player_AttachesToObjects;
 			newWeld.bodyToBeAttached = fixB->GetBody();
-			newWeld.collPoint = b2Vec2(manifold.points[0].x, manifold.points[0].y); //Punto de colisión. En cualquier colisión siempre hay 2 puntos de colisión. Con 1 nos basta.
-			vecWeld.push_back(newWeld); //Metemos el weldData en el vector. La razón por la que no hacemos el joint ya es porque no se puede crear un joint en medio de un step.
+			newWeld.collPoint = b2Vec2(manifold.points[0].x, manifold.points[0].y); //Punto de colisiï¿½n. En cualquier colisiï¿½n siempre hay 2 puntos de colisiï¿½n. Con 1 nos basta.
+			vecWeld.push_back(newWeld); //Metemos el weldData en el vector. La razï¿½n por la que no hacemos el joint ya es porque no se puede crear un joint en medio de un step.
 		}
 	}
 
-	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon ||
-		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon) &&
-		PlayerCanPickWeapon(contact, pickableObj, playerHands)) {
-		cout << "jaja si" << endl;
-		pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands);
+	//check collision then do whatever, in this case twice because it might be two players colliding 
+	if (ObjectCollidesWithPlayer(fixA, player)) {
+		damageOnImpact(fixB, player);	//Check the stats of the other object
+	}
+
+	player = nullptr;	//Lo reseteamos para evitar problemas
+
+	if (ObjectCollidesWithPlayer(fixB, player)) {
+		damageOnImpact(fixA, player);	//Check the stats of the other object
+
+
+	//Pickable weapon collisions
+		Weapon* pickableObj = nullptr;
+		Hands* playerHands = nullptr;
+		if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon ||
+			contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon) &&
+			PlayerCanPickWeapon(contact, pickableObj, playerHands)) {
+			cout << "jaja si" << endl;
+			pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands);
+		}
 	}
 
 
@@ -50,8 +80,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 }
 
 //Handles end of collisions
-void CollisionHandler::EndContact(b2Contact* contact)
-{
+void CollisionHandler::EndContact(b2Contact * contact){
 	//Pickable weapons
 	Weapon* pickableObj = nullptr;
 	Hands* playerHands = nullptr;
@@ -71,18 +100,25 @@ void CollisionHandler::PreSolve(b2Contact* contact, const b2Manifold* oldManifol
 }
 
 //Gather info about impulses
-void CollisionHandler::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse)
-{
-}
+void CollisionHandler::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {}
 
 //to add a new collision behaviour, make a method that checks if it's the specific collision you want
 //you can distinguish bodies by their user data or make them collide with certain objects only with collision layers
 //if you need to use a component you have to do collider->setUserData(this) in the component's init first
-bool CollisionHandler::ObjectCollidesWithPlayer(b2Fixture* fixA, Health* &player)
-{
-	Entity* fixAEnt = static_cast<Entity*>(fixA->GetBody()->GetUserData());
-	if ((fixAEnt->hasComponent(ComponentType::Health)) &&
-		(player = static_cast<Health*>(fixAEnt->getComponent<Health>(ComponentType::Health)))) return true;
+bool CollisionHandler::ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player)
+{	
+	//Obtenemos los datos guardados en el Collider
+	Entity* aux = static_cast<Entity*>(fixA->GetBody()->GetUserData());
+
+	if(aux != nullptr){		//Cuidado de que no sea null
+
+	//Cogemos el health si es que lo tiene
+	player = aux->getComponent<Health>(ComponentType::Health);
+	}
+
+	if (player != nullptr) {	//Si lo tiene es que es un player
+		return true;
+	}
 	else return false;
 }
 

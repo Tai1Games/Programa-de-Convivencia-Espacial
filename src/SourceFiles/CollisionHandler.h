@@ -18,6 +18,8 @@ private:
 		b2Vec2 collPoint;
 	};
 	vector<weldData> vecWeld; //Vector donde almacenamos los welds que realizaremos al final del step.
+
+	void damageOnImpact(b2Fixture* fix, Health* playerHealth);
 public:
 
     CollisionHandler() {};
