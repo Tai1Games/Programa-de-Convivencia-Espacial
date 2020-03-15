@@ -14,7 +14,6 @@ Collider::Collider(b2World* world, b2BodyType type, float x, float y, float widt
 	body_ = world_->CreateBody(&bodyDef_);
 
 	createFixture(width, height, density, friction, restitution, c, sensor);
-
 }
 
 void Collider::createFixture(float width, float height, float density,
@@ -36,10 +35,14 @@ void Collider::createFixture(float width, float height, float density,
 		break;
 	case Player:
 		aux.filter.categoryBits = Player;
-		aux.filter.maskBits = Normal | Player | Trigger;
+		aux.filter.maskBits = Normal | Player | Trigger | Weapon;
 		break;
 	case Trigger:
 		aux.filter.categoryBits = Trigger;
+		aux.filter.maskBits = Player;
+		break;
+	case Weapon:
+		aux.filter.categoryBits = Weapon;
 		aux.filter.maskBits = Player;
 		break;
 	}

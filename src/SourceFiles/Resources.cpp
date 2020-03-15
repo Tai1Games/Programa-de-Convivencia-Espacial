@@ -11,7 +11,9 @@ vector<Resources::ImageInfo> Resources::images_ {
 		{ Debug, "../../assets/game/textures/debug.png" },
 		{ Tinky, "../../assets/game/textures/Tinky.png" },
 		{ ActiveHealth, "../../assets/game/textures/VidaActiva.png" },
-		{ DisableHealth, "../../assets/game/textures/VidaInactiva.png" }
+		{ DisableHealth, "../../assets/game/textures/VidaInactiva.png" },
+		{ Hands, "../../assets/game/textures/hands.png" },
+		{ PinkTinky, "../../assets/game/textures/PinkTinky.png"}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_ {
