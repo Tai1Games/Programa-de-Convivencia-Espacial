@@ -25,7 +25,8 @@ public:
 	enum CollisionLayer {
 		Normal = 0x0001, //a collision layer can't be zero or else it won't collide
 		Player,
-		Trigger
+		Trigger,
+		Weapon
 	};
 
 	//Friccion -> rozamiento al contacto con otros cuerpos   Drag-> rozamiento con el aire
@@ -39,12 +40,14 @@ public:
 	//getters
 	float getW(int i) const { return widths_[i]; }
 	float getH(int i) const { return heights_[i]; }
-	b2World* getWorld() const { return world_; }
+	b2Body* getBody() { return body_; }
 	b2Vec2 getPos() const { return body_->GetPosition(); }
 	b2Vec2 getLinearVelocity() const { return body_->GetLinearVelocity(); }
 	b2Body* getBody() const { return body_; }
 	b2BodyType getType() const { return body_->GetType(); }
 	b2Transform getTransform() const { return body_->GetTransform(); }
+	b2World* getWorld() const { return world_; }
+	b2Fixture* getFixture(int i) const { return fixtures_[i]; }
 	float getAngle() const { return body_->GetAngle(); }
 	float getMass() const { return body_->GetMass(); }
 	bool isAwake() const { return body_->IsAwake(); }

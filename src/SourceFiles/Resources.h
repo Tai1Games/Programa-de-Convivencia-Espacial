@@ -17,6 +17,8 @@ public:
 		Tinky, 
 		ActiveHealth,
 		DisableHealth,
+		Hands,
+		PinkTinky
 
 		// text
 		

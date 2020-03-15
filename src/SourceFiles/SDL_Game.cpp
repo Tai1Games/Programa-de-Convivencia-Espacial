@@ -28,7 +28,6 @@ SDL_Game::SDL_Game(){
 	audio_->playMusic(Resources::MainTheme, -1);
 	inputHandler_ = new InputHandler();
 	inputHandler_->initialiseJoysticks();
-
 }
 
 SDL_Game::~SDL_Game() {

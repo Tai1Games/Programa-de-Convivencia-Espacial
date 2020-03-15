@@ -1,11 +1,14 @@
 #include "PlayState.h"
 #include "Transform.h"
 #include "AttachesToObjects.h"
+#include "Texture.h"
 #include "Viewer.h"
 #include "Health.h"
 #include "HealthViewer.h"
 #include "InputHandler.h"
 #include "CollisionHandler.h"
+#include "Weapon.h"
+#include "Hands.h"
 
 PlayState::PlayState()  {
 }
@@ -41,9 +44,18 @@ void PlayState::init() {
 	ground->addComponent<Viewer>();
 	tinky->addComponent<AttachesToObjects>(0);
 	pared->addComponent<Viewer>();
-	//rock->addComponent <Viewer>();
+
+	rock->addComponent <Viewer>(Resources::PinkTinky);
+	collRock->setUserData(rock);
+	rock->addComponent<Weapon>(WeaponID::PinkTinky);
+
+	collpared->setUserData(pared);
+	collSuelo->setUserData(ground);
 
 	spaceJunk->addComponent<Viewer>();
+
+	collTinky->setUserData(tinky);
+	
 
 	//cout << collJunk->getMass();
 

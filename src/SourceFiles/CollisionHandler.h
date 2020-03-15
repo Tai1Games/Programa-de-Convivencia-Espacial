@@ -3,6 +3,10 @@
 #include <iostream>
 #include "Health.h"
 #include "AttachesToObjects.h"
+#include "Weapon.h"
+#include "Entity.h"
+#include "Hands.h"
+#include "Collider.h"
 
 class CollisionHandler :
 	public b2ContactListener
@@ -32,5 +36,7 @@ public:
     bool ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player);
 
 	bool AttachableObjectCollidesWithPlayer(b2Fixture* fixA, AttachesToObjects*& player);
+	
+    bool PlayerCanPickWeapon(b2Contact* contact, Weapon* &pickableObj, Hands* &player);
 };
 

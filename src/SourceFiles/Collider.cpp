@@ -36,10 +36,14 @@ void Collider::createFixture(float width, float height, float density,
 		break;
 	case Player:
 		aux.filter.categoryBits = Player;
-		aux.filter.maskBits = Normal | Player | Trigger;
+		aux.filter.maskBits = Normal | Player | Trigger | Weapon;
 		break;
 	case Trigger:
 		aux.filter.categoryBits = Trigger;
+		aux.filter.maskBits = Player;
+		break;
+	case Weapon:
+		aux.filter.categoryBits = Weapon;
 		aux.filter.maskBits = Player;
 		break;
 	}
