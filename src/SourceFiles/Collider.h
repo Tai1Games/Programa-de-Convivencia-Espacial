@@ -23,7 +23,8 @@ private:
 public:
 	//Add the different collision layers as we see fit
 	enum CollisionLayer {
-		Normal = 0x0001, //a collision layer can't be zero or else it won't collide
+		NormalObject = 0x0001, //a collision layer can't be zero or else it won't collide
+		NormalAttachableObject,
 		Player,
 		Trigger,
 		Weapon
