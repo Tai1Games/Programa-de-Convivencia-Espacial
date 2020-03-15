@@ -10,15 +10,15 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	AttachesToObjects* player_AttachesToObjects = nullptr;
 	
 	//check collision then do whatever, in this case twice because it might be two players colliding 
-	if (ObjectCollidesWithPlayer(fixA, player_Health)) {
+	/*if (ObjectCollidesWithPlayer(fixA, player_Health)) {
 		player_Health->subtractLife(1);
 		std::cout << "Health: " << player_Health->getHealth() << endl;
 	}
 	if (ObjectCollidesWithPlayer(fixB, player_Health)) {
 		player_Health->subtractLife(1);
 		std::cout << "Health: " << player_Health->getHealth() << endl;
-	}
-	if (AttachableObjectCollidesWithPlayer(fixA, player_AttachesToObjects)) {
+	}*/
+	if (AttachableObjectCollidesWithPlayer(fixA, player_AttachesToObjects) && fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
 		if (player_AttachesToObjects->canAttachToObject()) {
 			b2WorldManifold manifold;
 			contact->GetWorldManifold(&manifold);

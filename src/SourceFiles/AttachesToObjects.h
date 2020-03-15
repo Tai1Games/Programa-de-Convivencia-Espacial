@@ -18,5 +18,4 @@ public:
 	bool canAttachToObject(); //Comprueba si el jugador está pulsando la tecla válida y si no está sujeto a otro objeto
 	virtual void init() override;
 	virtual void handleInput();
-	virtual void update();
 };

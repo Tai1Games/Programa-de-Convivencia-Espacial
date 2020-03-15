@@ -41,7 +41,3 @@ void AttachesToObjects::handleInput() { //Si el jugador suelta la tecla de agarr
 		deAttachFromObject();
 	}
 }
-
-void AttachesToObjects::update() {
-	cout << "sijaja";
-}

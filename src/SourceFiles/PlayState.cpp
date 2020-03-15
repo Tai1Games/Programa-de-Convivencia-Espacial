@@ -29,11 +29,11 @@ void PlayState::init() {
 																			// x, y, width, height,			density,	friction,	restitution,	linearDrag,		angularDrag,		Layer,								sensor     canBeAttached
 	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 1.7, 8, 1, 1,		1,			0.1,		0.2,			0,				0,					Collider::CollisionLayer::Player,	false,     false);
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody, 10.5, -0.5, 12,1,	10,			0,			0.2,			0,				0,					Collider::CollisionLayer::Normal,	false,     true);
-	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody, 21.5, 10, 1, 10,		10,			1,			0.2,			0,				0,					Collider::CollisionLayer::Normal,	false,     false);
+	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody, 21.5, 10, 1, 10,		10,			1,			0.2,			0,				0,					Collider::CollisionLayer::Normal,	false,     true);
 	//Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 500, 80, 20, 20,   10, 0, 0, 0.1, false);
 	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 10, 8, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::Normal, false, true);
-	collJunk->setTransform(collJunk->getTransform().p, 168);
-	cout<<collTinky->getMass();
+	//collJunk->setTransform(collJunk->getTransform().p, 168);
+	//cout<<collTinky->getMass();
 
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un cuadrado de debug.
 	/*tinky->addComponent<Health>(3);
@@ -47,7 +47,7 @@ void PlayState::init() {
 
 	//cout << collJunk->getMass();
 
-	collTinky->applyLinearImpulse(b2Vec2(0, -20), b2Vec2(1, 1));
+	collTinky->applyLinearImpulse(b2Vec2(10, 0), b2Vec2(1, 1));
 	//collJunk->applyLinearImpulse(b2Vec2(-100, 0), b2Vec2(0, 0));
 	//tr->getBody()->ApplyForce(b2Vec2 (0, -200), b2Vec2(0, 0), true);
 	//tr->getBody()->ApplyLinearImpulse(b2Vec2(0, -100), b2Vec2(0, 0),true);
