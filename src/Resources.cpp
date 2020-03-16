@@ -19,7 +19,7 @@ vector<Resources::TextMsgInfo> Resources::messages_ {
 
 vector<Resources::MusicInfo> Resources::musics_ {
 		//Música {nombre_en_enum, ruta}
-		{ MainTheme, "../assets/game/sound/mainTheme.mp3" }
+		{ MainTheme, "../assets/game/sound/mainMenu.mp3" }
 };
 
 vector<Resources::SoundInfo> Resources::sounds_ {
