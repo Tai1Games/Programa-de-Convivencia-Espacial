@@ -114,6 +114,9 @@
     <ClInclude Include="CollisionHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -168,7 +171,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AttachesToObjects.cpp">
-         <Filter>Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameStateMachine.cpp">
       <Filter>Source Files</Filter>
@@ -189,6 +192,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CollisionHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

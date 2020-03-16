@@ -24,6 +24,11 @@ const int lowDamage = 35;
 const int mediumDamage = 50;
 const int hightDamage = 70;
 
+
+//Constantes jugador
+const int IMPULSE_FROM_OBJECT_FORCE = 50;
+
+
 //Modos de juegos
 enum States
 {
