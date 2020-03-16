@@ -4,8 +4,9 @@
 #include <string>
 #include <vector>
 #include "checkML.h"
+#include "json.hpp"
 
-
+using json = nlohmann::json;
 using namespace std;
 
 class Resources {
@@ -17,6 +18,8 @@ public:
 		Tinky, 
 		ActiveHealth,
 		DisableHealth,
+		TSet_Kenney1bit,
+		TSet_Dungeon,
 		Chancla,
 		Extintor,
 		Mancuerna,
@@ -32,7 +35,8 @@ public:
 
 	enum AudioId : std::size_t {
 		// music
-		MainTheme
+		MainTheme,
+		Reveal,
 
 		// sound effects
 		
@@ -76,5 +80,6 @@ public:
 	static vector<TextMsgInfo> messages_; // initialized in .cpp
 	static vector<MusicInfo> musics_; // initialized in .cpp
 	static vector<SoundInfo> sounds_; // initialized in .cpp
+	static map<std::string, Resources::TextureId> tilesetTag_; // initialized in .cpp
 
 };

@@ -15,6 +15,7 @@ namespace ComponentType {
 		Collider,
 		AttachesToObjects,
 		HealthViewer,
+		Tilemap,
 		Weapon,
 		Hands,
 		// don't touch the rest of this enum, it is to identify the max
