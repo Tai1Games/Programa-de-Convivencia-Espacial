@@ -3,7 +3,7 @@
 
 vector<Resources::FontInfo> Resources::fonts_ {
 		//Fuentes {nombre_en_enum, ruta, tama�o}
-		{NES_Chimera, "../../assets/game/fonts/NES-Chimera.ttf", 38}
+		{NES_Chimera , "../../assets/game/fonts/NES-Chimera.ttf", 38}
 };
 
 vector<Resources::ImageInfo> Resources::images_ {
@@ -19,7 +19,9 @@ vector<Resources::ImageInfo> Resources::images_ {
 		{ Pelota, "../../assets/game/textures/PelotaSaltarina.png" },
 		{ Mancuerna, "../../assets/game/textures/Mancuerna.png" },
 		{ Hands, "../../assets/game/textures/hands.png" },
-		{ PinkTinky, "../../assets/game/textures/PinkTinky.png"}
+		{ PinkTinky, "../../assets/game/textures/PinkTinky.png"},
+		{ TSet_Kenney1bit , "../../assets/game/tilemaps/modded_colored.png"},
+		{ TSet_Dungeon , "../../assets/game/tilemaps/dungeon_ts.png"}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_ {
@@ -30,7 +32,8 @@ vector<Resources::TextMsgInfo> Resources::messages_ {
 
 vector<Resources::MusicInfo> Resources::musics_ {
 		//M�sica {nombre_en_enum, ruta}
-		{ MainTheme, "../../assets/game/sound/mainTheme.mp3" }
+		{ MainTheme , "../../assets/game/sound/mainTheme.mp3" },
+		{Reveal, "../../assets/game/sound/gotem.mp3"}
 };
 
 vector<Resources::SoundInfo> Resources::sounds_ {
@@ -38,3 +41,7 @@ vector<Resources::SoundInfo> Resources::sounds_ {
 		//{ Shoot, "../assets/game/sound/shoot.mp3" },
 };
 
+map<std::string, Resources::TextureId> Resources::tilesetTag_{
+	{"modded_colored",TextureId::TSet_Kenney1bit},
+	{"dungeon_ts",TextureId::TSet_Dungeon}
+};

@@ -14,6 +14,7 @@ namespace ComponentType {
 		Viewer,
 		Collider,
 		HealthViewer,
+		Tilemap,
 		Weapon,
 		Hands,
 		// don't touch the rest of this enum, it is to identify the max

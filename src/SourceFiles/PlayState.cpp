@@ -6,6 +6,8 @@
 #include "HealthViewer.h"
 #include "InputHandler.h"
 #include "CollisionHandler.h"
+#include "TileMap.h"
+#include "Tileson.h"
 #include "Weapon.h"
 #include "Hands.h"
 
@@ -23,11 +25,16 @@ void PlayState::init() {
 	collisionHandler_ = new CollisionHandler();
 	physicsWorld_->SetContactListener(collisionHandler_);
 
+	Entity* map = entityManager_->addEntity();
 	Entity* tinky = entityManager_->addEntity();
 	Entity* ground = entityManager_->addEntity();
 	Entity* pared = entityManager_->addEntity();
+
 	//Entity* rock = entityManager_->addEntity();
 	//Entity* spaceJunk = entityManager_->addEntity();
+
+	map->addComponent<TileMap>(WINDOW_WIDTH, WINDOW_HEIGHT,
+		"../../assets/game/tilemaps/TD_TilemapBitCSV.json");
 	Entity* tonko = entityManager_->addEntity();
 																			// x, y, width, height,			density,	friction,	restitution,	linearDrag,		angularDrag,		Layer,								sensor
 	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 2, 2, 1, 1,			1,			0.1,		0.2,			0,				0,					Collider::CollisionLayer::Player,	false);
@@ -74,7 +81,6 @@ void PlayState::init() {
 	//tr->getBody()->ApplyLinearImpulse(b2Vec2(0, -100), b2Vec2(0, 0),true);
 
 	//collRock->createFixture(100, 100, 10, 0, 0, 0, true);
-
 }
 
 void PlayState::update() {
