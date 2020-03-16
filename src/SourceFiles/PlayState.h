@@ -5,7 +5,6 @@
 #include "checkML.h"
 #include "collisionHandler.h"
 
-
 using namespace std;
 
 // esta clase es equivalente a un nivel del juego
@@ -28,4 +27,3 @@ public:
 	virtual void init();
 	virtual void update();
 };
-

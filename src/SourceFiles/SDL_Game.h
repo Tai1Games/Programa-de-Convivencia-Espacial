@@ -16,7 +16,6 @@
 
 
 using namespace std;
-class PlayState;
 //Interfaz entre el juego y el display
 class InputHandler;
 class SDL_Game
@@ -29,7 +28,6 @@ protected:
 	GameStateMachine* gamestateMachine_ = nullptr;
 	SDL_Window* window_ = nullptr;
 	SDL_Renderer* renderer_ = nullptr;
-	PlayState* gameState_ = nullptr;	
 	InputHandler* inputHandler_ =  nullptr;
 
 	static unique_ptr<SDL_Game> instance_;

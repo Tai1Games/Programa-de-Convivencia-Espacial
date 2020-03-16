@@ -2,10 +2,17 @@
 #include <box2d.h>
 #include <iostream>
 #include "Health.h"
+#include "Weapon.h"
+#include "Entity.h"
+#include "Hands.h"
+#include "Collider.h"
 
 class CollisionHandler :
 	public b2ContactListener
 {
+private:
+	void damageOnImpact(b2Fixture* fix, Health* playerHealth);
+
 public:
 
     CollisionHandler() {};
@@ -20,5 +27,7 @@ public:
     void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
 
     bool ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player);
+
+    bool PlayerCanPickWeapon(b2Contact* contact, Weapon* &pickableObj, Hands* &player);
 };
 

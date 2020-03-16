@@ -13,6 +13,8 @@ protected:
 	Texture* tex_;
 	Collider* collider_;
 	SDL_Rect clip_;
+	bool drawable_ = true;
+
 public:
 	Viewer();
 	Viewer(int textureId);
@@ -21,4 +23,5 @@ public:
 
 	virtual void init() override;
 	virtual void draw() const override;
+	void setDrawable(bool b) { drawable_ = b; }
 };

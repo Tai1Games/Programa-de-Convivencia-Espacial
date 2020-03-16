@@ -1,7 +1,7 @@
 #include "Entity.h"
 
-Entity::Entity( EntityManager* mngr) :
-	entityManager_(mngr) //
+Entity::Entity(EntityManager* mngr) :
+	entityManager_(mngr)
 {
 }
 

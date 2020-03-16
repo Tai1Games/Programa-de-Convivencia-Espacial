@@ -20,6 +20,14 @@ public:
 		DisableHealth,
 		TSet_Kenney1bit,
 		TSet_Dungeon,
+		Chancla,
+		Extintor,
+		Mancuerna,
+		Pelota,
+		Grapadora,
+		Piedra,
+		Hands,
+		PinkTinky
 
 		// text
 		
