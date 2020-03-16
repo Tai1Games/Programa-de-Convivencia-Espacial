@@ -87,6 +87,12 @@
     <ClInclude Include="Collider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AttachesToObjects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="GameStateMachine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -166,6 +172,9 @@
     </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AttachesToObjects.cpp">
+         <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameStateMachine.cpp">
       <Filter>Source Files</Filter>

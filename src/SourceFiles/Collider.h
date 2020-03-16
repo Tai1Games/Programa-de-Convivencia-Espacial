@@ -23,7 +23,8 @@ private:
 public:
 	//Add the different collision layers as we see fit
 	enum CollisionLayer {
-		Normal = 0x0001, //a collision layer can't be zero or else it won't collide
+		NormalObject = 0x0001, //a collision layer can't be zero or else it won't collide
+		NormalAttachableObject,
 		Player,
 		Trigger,
 		Weapon
@@ -31,7 +32,7 @@ public:
 
 	//Friccion -> rozamiento al contacto con otros cuerpos   Drag-> rozamiento con el aire
 	Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
-		float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor);
+		float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor, bool canBeAttached);
 
 	~Collider() {
 		world_->DestroyBody(body_); world_ = nullptr;
@@ -43,6 +44,7 @@ public:
 	b2Body* getBody() { return body_; }
 	b2Vec2 getPos() const { return body_->GetPosition(); }
 	b2Vec2 getLinearVelocity() const { return body_->GetLinearVelocity(); }
+	b2Body* getBody() const { return body_; }
 	b2BodyType getType() const { return body_->GetType(); }
 	b2Transform getTransform() const { return body_->GetTransform(); }
 	b2World* getWorld() const { return world_; }

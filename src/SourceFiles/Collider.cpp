@@ -2,7 +2,7 @@
 
 Collider::Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
 
-	float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor) :
+	float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor, bool canBeAttached) :
 
 	world_(world),
 	Component(ComponentType::Collider)
@@ -13,7 +13,13 @@ Collider::Collider(b2World* world, b2BodyType type, float x, float y, float widt
 	bodyDef_.angularDamping = angDrag;
 	body_ = world_->CreateBody(&bodyDef_);
 
-	createFixture(width, height, density, friction, restitution, c, sensor);
+	if (!canBeAttached) createFixture(width, height, density, friction, restitution, c, sensor);
+	else createFixture(width, height, density, friction, restitution, CollisionLayer::NormalAttachableObject, sensor);
+	/*Este modelo se puede expandir de la siguiente manera.
+	Una situación probable sería necesitar, por ejemplo, una capa Chair y otra AttachableChair, ya que la capa NormalGrabbableObject no nos sirve.
+	A continuación, cambiaríamos estas 2 líneas anteriores de la siguiente manera:
+		if (!canBeAttached) createFixture(width, height, density, friction, restitution, c, sensor);
+		else createFixture(width, height, density, friction, restitution, (CollisionLayer)(c+1), sensor);*/
 }
 
 void Collider::createFixture(float width, float height, float density,
@@ -29,13 +35,17 @@ void Collider::createFixture(float width, float height, float density,
 	aux.friction = friction;
 	aux.restitution = fmod(restitution, 1.0);
 	switch (c) {
-	case Normal:
-		aux.filter.categoryBits = Normal; //what am I?
-		aux.filter.maskBits = Normal | Player; //what do I collide with?
+	case NormalObject:
+		aux.filter.categoryBits = NormalObject; //what am I?
+		aux.filter.maskBits = NormalObject | NormalAttachableObject | Player; //what do I collide with?
+		break;
+	case NormalAttachableObject:
+		aux.filter.categoryBits = NormalAttachableObject; //what am I?
+		aux.filter.maskBits = NormalObject | NormalAttachableObject | Player; //what do I collide with?
 		break;
 	case Player:
 		aux.filter.categoryBits = Player;
-		aux.filter.maskBits = Normal | Player | Trigger | Weapon;
+		aux.filter.maskBits = NormalObject | NormalAttachableObject | Player | Trigger | Weapon;
 		break;
 	case Trigger:
 		aux.filter.categoryBits = Trigger;

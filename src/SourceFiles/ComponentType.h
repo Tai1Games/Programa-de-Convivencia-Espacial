@@ -13,6 +13,7 @@ namespace ComponentType {
 		Health,
 		Viewer,
 		Collider,
+		AttachesToObjects,
 		HealthViewer,
 		Tilemap,
 		Weapon,

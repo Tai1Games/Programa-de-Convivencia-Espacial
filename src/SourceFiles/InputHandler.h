@@ -108,7 +108,9 @@ public:
 	void update();
 
 	// keyboard
-	inline bool keyDownEvent();
+	inline bool keyDownEvent() {
+		return isKeyDownEvent_;
+	}
 	inline bool keyUpEvent() {
 		return isKeyUpEvent_;
 	}
