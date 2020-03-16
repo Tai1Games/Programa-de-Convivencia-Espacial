@@ -52,7 +52,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon ||
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon) &&
 		PlayerCanPickWeapon(contact, pickableObj, playerHands)) {
-		cout << "jaja si" << endl;
+		cout << "Picked up weapon" << endl;
 		pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands);
 	}
 }
@@ -66,9 +66,8 @@ void CollisionHandler::EndContact(b2Contact * contact){
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon) &&
 		PlayerCanPickWeapon(contact, pickableObj, playerHands)) {
 		pickableObj->DeletePlayerInfo(playerHands->getPlayerId());
-		cout << "jaja no" << endl;
+		cout << "Dropped weapon" << endl;
 	}
-
 }
 
 //If you want to disable a collision after it's detected

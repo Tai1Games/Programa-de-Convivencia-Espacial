@@ -15,6 +15,7 @@ namespace ComponentType {
 		Collider,
 		AttachesToObjects,
 		HealthViewer,
+		Tilemap,
 		Weapon,
 		Hands,
 		PlayerController,

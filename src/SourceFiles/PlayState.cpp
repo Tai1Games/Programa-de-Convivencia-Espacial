@@ -7,6 +7,8 @@
 #include "HealthViewer.h"
 #include "InputHandler.h"
 #include "CollisionHandler.h"
+#include "TileMap.h"
+#include "Tileson.h"
 #include "Weapon.h"
 #include "Hands.h"
 #include "PlayerController.h"
@@ -25,10 +27,19 @@ void PlayState::init() {
 	collisionHandler_ = new CollisionHandler();
 	physicsWorld_->SetContactListener(collisionHandler_);
 
+	Entity* map = entityManager_->addEntity();
 	Entity* tinky = entityManager_->addEntity();
 	Entity* ground = entityManager_->addEntity();
 	Entity* pared = entityManager_->addEntity();
 	Entity* rock = entityManager_->addEntity();
+
+
+	//Entity* rock = entityManager_->addEntity();
+	//Entity* spaceJunk = entityManager_->addEntity();
+
+	map->addComponent<TileMap>(WINDOW_WIDTH, WINDOW_HEIGHT,
+		"../../assets/game/tilemaps/TD_TilemapBitCSV.json");
+
 	Entity* tonko = entityManager_->addEntity();
 	Entity* spaceJunk = entityManager_->addEntity();
 
@@ -71,7 +82,8 @@ void PlayState::init() {
 	//Fuerzas iniciales
 	collTinky->applyLinearImpulse(b2Vec2(20, -10), b2Vec2(1, 1));
 	//collTonko->applyLinearImpulse(b2Vec2(0, 1000), b2Vec2(0.1, 0));
-	//collJunk->applyLinearImpulse(b2Vec2(150, 0), b2Vec2(0.1, 0));
+	collJunk->applyLinearImpulse(b2Vec2(150, 0), b2Vec2(0.1, 0));
+
 }
 
 void PlayState::update() {
