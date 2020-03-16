@@ -4,8 +4,6 @@
 #include "Entity.h"
 #include "checkML.h"
 #include "collisionHandler.h"
-#include "TileMap.h"
-#include "Tileson.h"
 
 
 using namespace std;

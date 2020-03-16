@@ -5,6 +5,8 @@
 #include "HealthViewer.h"
 #include "InputHandler.h"
 #include "CollisionHandler.h"
+#include "TileMap.h"
+#include "Tileson.h"
 
 PlayState::PlayState()  {
 }
