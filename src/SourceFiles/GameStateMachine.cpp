@@ -1,6 +1,7 @@
 #include "GameStateMachine.h"
 #include "Constants.h"
 #include "PlayState.h"
+#include "PauseState.h"
 
 GameStateMachine::GameStateMachine() {
 	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
@@ -27,6 +28,7 @@ void GameStateMachine::changeToState(int state) {
 				states_[state] = new PlayState();
 				break;
 			case States::pause:
+				states_[state] = new PauseState();
 				break;
 			}
 

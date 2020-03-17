@@ -27,6 +27,7 @@ vector<Resources::ImageInfo> Resources::images_ {
 vector<Resources::TextMsgInfo> Resources::messages_ {
 		//Mensajes predeterminados {nombre_en_enum, texto, color, fuente}. Ejemplo abajo
 		//{ HelloWorld, "Hello World", { COLOR(0xaaffffff) }, ARIAL16 }
+		{ Pause, "PAUSA", { COLOR(0xc7f2edff) }, FontId::NES_Chimera }
 		
 };
 

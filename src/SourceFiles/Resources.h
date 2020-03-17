@@ -27,10 +27,10 @@ public:
 		Grapadora,
 		Piedra,
 		Hands,
-		PinkTinky
+		PinkTinky,
 
 		// text
-		
+		Pause
 	};
 
 	enum AudioId : std::size_t {

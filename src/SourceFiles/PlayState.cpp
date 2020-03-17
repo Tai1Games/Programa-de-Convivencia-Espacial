@@ -13,7 +13,7 @@
 #include "Hands.h"
 #include "PlayerController.h"
 
-PlayState::PlayState()  {
+PlayState::PlayState() : GameState(){
 }
 
 PlayState::~PlayState() {
@@ -93,4 +93,12 @@ void PlayState::update() {
 	collisionHandler_->SolveInteractions();
 	//también debería actualizar la lógica de modo de juego
 	//spawners de monedas, carga de objetivos...
+}
+
+void PlayState::handleInput()
+{
+	GameState::handleInput();
+	if (SDL_Game::instance()->getInputHandler()->isKeyUp(SDLK_ESCAPE)) {
+		SDL_Game::instance()->getStateMachine()->changeToState(pause);
+	}
 }
