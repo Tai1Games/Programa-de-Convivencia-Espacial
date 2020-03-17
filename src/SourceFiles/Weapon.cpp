@@ -20,13 +20,17 @@ void Weapon::update()
 	if (currentHand_ == nullptr) {
 		for (int i = 0; i < playerInfo_.size(); i++) {
 
-			if (!IsPicked() && playerInfo_[i].isNear && ih_->isButtonJustDown(i, SDL_CONTROLLER_BUTTON_Y)) {
+			if (!IsPicked() && playerInfo_[i].isNear && 
+				ih_->getNumControllers()>0 &&
+				ih_->isButtonJustDown(i, SDL_CONTROLLER_BUTTON_Y)) {
 				cout << "inRange";
 				PickObjectBy(playerInfo_[i].playerHands);
 			}
 		}
 	}
-	else if(IsPicked() && ih_->isButtonJustDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_Y))
+	else if(IsPicked() &&
+		ih_->getNumControllers() > 0 &&
+		ih_->isButtonJustDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_Y))
 	{
 		UnPickObject();
 	}

@@ -15,7 +15,10 @@ void PlayerController::init()
 
 void PlayerController::handleInput()
 {
-	if (SDL_Game::instance()->getInputHandler()->isButtonJustUp(playerNumber_, SDL_CONTROLLER_BUTTON_A) && attachesToObj_->isAttached()) {
+	if (SDL_Game::instance()->getInputHandler()->getNumControllers() > 0 && 
+		SDL_Game::instance()->getInputHandler()->isButtonJustUp(playerNumber_, SDL_CONTROLLER_BUTTON_A) && 
+		attachesToObj_->isAttached()) {
+
 		dirImpulse_ = SDL_Game::instance()->getInputHandler()->getStickDir(playerNumber_, InputHandler::GAMEPADSTICK::LEFTSTICK);
 		dirImpulse_ *= IMPULSE_FROM_OBJECT_FORCE;
 		dirImpulse_.y *= -1; //hay que invertirlo para convertirlo en vector compatible con box2D
