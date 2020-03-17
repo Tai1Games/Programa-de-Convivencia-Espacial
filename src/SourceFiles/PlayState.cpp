@@ -11,6 +11,7 @@
 #include "Tileson.h"
 #include "Weapon.h"
 #include "Hands.h"
+#include "PlayerController.h"
 
 PlayState::PlayState()  {
 }
@@ -48,7 +49,7 @@ void PlayState::init() {
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody,    10.5, -0.5, 12,    1,      10,        0,        0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody,     21.5, 10,   1,     10,     10,        1,        0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody,      18,   8,    0.5,   0.5,    1,         10,       0,           0,          0.1,         Collider::CollisionLayer::NormalObject, false, true);
-	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 0,    8.25,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
+	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 0,    8.25,   1,     1,    1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
 
 	//Players
@@ -58,6 +59,7 @@ void PlayState::init() {
 	tinky->addComponent<Hands>(0, Resources::Hands);
 	tinky->addComponent<AttachesToObjects>(0);
 	collTinky->setUserData(tinky);
+	tinky->addComponent<PlayerController>(0);
 
 	tonko->addComponent<Viewer>(Resources::Tinky);
 	tonko->addComponent<Health>(3);
@@ -78,7 +80,7 @@ void PlayState::init() {
 	collJunk->setUserData(spaceJunk);
 
 	//Fuerzas iniciales
-	//collTinky->applyLinearImpulse(b2Vec2(0, 0), b2Vec2(1, 1));
+	collTinky->applyLinearImpulse(b2Vec2(20, -10), b2Vec2(1, 1));
 	//collTonko->applyLinearImpulse(b2Vec2(0, 1000), b2Vec2(0.1, 0));
 	collJunk->applyLinearImpulse(b2Vec2(150, 0), b2Vec2(0.1, 0));
 
