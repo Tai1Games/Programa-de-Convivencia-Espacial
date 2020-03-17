@@ -34,7 +34,6 @@ void PlayState::init() {
 	Entity* rock = entityManager_->addEntity();
 
 
-	//Entity* rock = entityManager_->addEntity();
 	//Entity* spaceJunk = entityManager_->addEntity();
 
 	map->addComponent<TileMap>(WINDOW_WIDTH, WINDOW_HEIGHT,
