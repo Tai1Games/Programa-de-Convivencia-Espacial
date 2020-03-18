@@ -18,7 +18,7 @@ vector<Resources::ImageInfo> Resources::images_ {
 		{ Piedra, "../../assets/game/textures/Piedra.png" },
 		{ Pelota, "../../assets/game/textures/PelotaSaltarina.png" },
 		{ Mancuerna, "../../assets/game/textures/Mancuerna.png" },
-		{ Hands, "../../assets/game/textures/hands.png" },
+		{ Hands, "../../assets/game/textures/hands2.png" },
 		{ PinkTinky, "../../assets/game/textures/PinkTinky.png"},
 		{ TSet_Kenney1bit , "../../assets/game/tilemaps/modded_colored.png"},
 		{ TSet_Dungeon , "../../assets/game/tilemaps/dungeon_ts.png"}

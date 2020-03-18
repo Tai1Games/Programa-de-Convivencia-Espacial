@@ -14,9 +14,11 @@ struct PlayerInfo
 
 enum WeaponID {
 	NoWeapon,
-	BlueTinky,
-	RedTinky,
-	PinkTinky,
+	Piedra,
+	Pelota,
+	Mancuerna,
+	Grapadora,
+	Extintor,
 	Chancla,
 
 	WEAPON_NUMBER

@@ -8,7 +8,7 @@ class Hands : public Component
 private:
 	b2Vec2 pos_ = b2Vec2(0,0);
 	b2Vec2 dir_ = b2Vec2(0,0);
-	double bodyOffset_ = 130;
+	double bodyOffset_ = 110;
 	Texture* tex_ = nullptr;
 	Collider* collider_ = nullptr;
 	int textureId_ = 0;
