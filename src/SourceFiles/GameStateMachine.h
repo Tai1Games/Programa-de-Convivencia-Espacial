@@ -11,6 +11,9 @@ private:
 public:
 	GameStateMachine();
 	virtual ~GameStateMachine();
+	/*Cambia al estado pausa con un owner*/
+	void setPauseOwner(int ownerID);
+
 	void changeToState (int state);
 	void deleteState(int state);
 

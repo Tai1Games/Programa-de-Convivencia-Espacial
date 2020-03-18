@@ -30,7 +30,10 @@ public:
 		PinkTinky,
 
 		// text
-		Pause
+		Pause,
+		Sound,
+		Resume,
+		Exit
 	};
 
 	enum AudioId : std::size_t {

@@ -15,6 +15,13 @@ GameStateMachine::~GameStateMachine() {
 	states_.clear();
 }
 
+void GameStateMachine::setPauseOwner(int ownerID)
+{
+	changeToState(States::pause);
+	if(PauseState* pause = static_cast<PauseState*>(states_[States::pause]))
+	pause->setOwner(ownerID);
+}
+
 void GameStateMachine::changeToState(int state) {
 	if (state != currentState_ && state < States::NUMBER_OF_STATES) {
 		currentState_ = state;

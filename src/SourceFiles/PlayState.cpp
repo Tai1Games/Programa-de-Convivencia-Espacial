@@ -98,7 +98,11 @@ void PlayState::update() {
 void PlayState::handleInput()
 {
 	GameState::handleInput();
-	if (SDL_Game::instance()->getInputHandler()->isKeyUp(SDLK_ESCAPE)) {
-		SDL_Game::instance()->getStateMachine()->changeToState(pause);
+	InputHandler* ih = SDL_Game::instance()->getInputHandler();
+	for (int i = 0; i < ih->getNumControllers(); i++) {
+		if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_START) || 
+			ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_GUIDE)) {
+			SDL_Game::instance()->getStateMachine()->setPauseOwner(i);
+		}
 	}
 }
