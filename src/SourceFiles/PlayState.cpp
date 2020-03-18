@@ -80,7 +80,7 @@ void PlayState::init() {
 	collJunk->setUserData(spaceJunk);
 
 	//Fuerzas iniciales
-	collTinky->applyLinearImpulse(b2Vec2(20, -10), b2Vec2(1, 1));
+	//collTinky->applyLinearImpulse(b2Vec2(20, -10), b2Vec2(1, 1));
 	//collTonko->applyLinearImpulse(b2Vec2(0, 1000), b2Vec2(0.1, 0));
 	collJunk->applyLinearImpulse(b2Vec2(150, 0), b2Vec2(0.1, 0));
 

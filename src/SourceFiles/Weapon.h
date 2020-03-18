@@ -17,6 +17,7 @@ enum WeaponID {
 	BlueTinky,
 	RedTinky,
 	PinkTinky,
+	Chancla,
 
 	WEAPON_NUMBER
 };
