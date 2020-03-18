@@ -20,10 +20,13 @@ private:
 	//HUD
 
 	CollisionHandler* collisionHandler_;
+	vector<Entity*> deadBodies;
+	vector<Collider*> collDeadBodies;
 
 public:
 	PlayState();
 	~PlayState();
 	virtual void init();
 	virtual void update();
+	void createDeadBodies();
 };

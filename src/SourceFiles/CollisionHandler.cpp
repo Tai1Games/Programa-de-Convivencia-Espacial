@@ -1,7 +1,7 @@
 #include "CollisionHandler.h"
 //This method calculates the damage recieved by the impact of an object (or another player) with the player
 
-void CollisionHandler::damageOnImpact(b2Fixture* fix, Health* playerHealth) {
+void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth) {
 	//Measure de impact of an object with the player 
 	b2Vec2 force = fix->GetBody()->GetMass() * fix->GetBody()->GetLinearVelocity();
 
@@ -13,6 +13,24 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, Health* playerHealth) {
 	if (impact >= mediumDamage && impact < hightDamage) {playerHealth->subtractLife(2);}
 
 	if (impact >= hightDamage) {playerHealth->subtractLife(3);}
+
+	if (playerHealth->getHealth() <= 0) 
+	{
+		//reset player
+		playerHealth->resetHealth();
+		b2Body* b = player->GetBody();
+		vecMove.push_back(b);
+		AttachesToObjects* a = static_cast<AttachesToObjects*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects));
+		if (a->isAttached()) a->deAttachFromObject();	
+		//Weapon* w = static_cast<Weapon*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<Weapon>(ComponentType::Weapon));
+		//w->UnPickObject();
+
+		//cuerpo muerto
+		bodyData body;
+		body.pos = player->GetBody()->GetPosition();
+		body.angle = player->GetBody()->GetAngle();
+		vecBody.push_back(body);
+	}
 }
 
 //Handles start of collisions
@@ -38,13 +56,13 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	else if (fixB->GetFilterData().categoryBits){
 		//check collision then do whatever, in this case twice because it might be two players colliding 
 		if (ObjectCollidesWithPlayer(fixA, player_Health)) {
-			damageOnImpact(fixB, player_Health);	//Check the stats of the other object
+			damageOnImpact(fixB, fixA, player_Health);	//Check the stats of the other object
 		}
 
 		player_Health = nullptr;	//Lo reseteamos para evitar problemas
 
 		if (ObjectCollidesWithPlayer(fixB, player_Health)) {
-			damageOnImpact(fixA, player_Health);	//Check the stats of the other object
+			damageOnImpact(fixA, fixB, player_Health);	//Check the stats of the other object
 		}
 	}
 
@@ -129,4 +147,9 @@ void CollisionHandler::SolveInteractions() {
 		vecWeld[k].player->attachToObject(vecWeld[k].bodyToBeAttached, vecWeld[k].collPoint);
 	}
 	vecWeld.clear();
+	for (int k = 0; k < vecMove.size(); k++) { //Recorre el vector resolviendo todos los move y lo limpia al final.
+		vecMove[k]->SetTransform(b2Vec2(20,0), 0);
+		vecMove[k]->SetLinearVelocity(b2Vec2_zero);
+	}
+	vecMove.clear();
 }

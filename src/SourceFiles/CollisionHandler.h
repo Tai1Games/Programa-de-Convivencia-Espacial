@@ -18,8 +18,14 @@ private:
 		b2Vec2 collPoint;
 	};
 	vector<weldData> vecWeld; //Vector donde almacenamos los welds que realizaremos al final del step.
+	vector<b2Body*> vecMove; //Vector donde almacenamos los moves que realizaremos al final del step.
+	struct bodyData {  //Struct donde guardamos los datos necesarios para hacer un cuerpo muerto.
+		b2Vec2 pos;
+		float angle;
+	};
+	vector<bodyData> vecBody; //Vector donde almacenamos los cuerpos muertos que crearemos al final del step.
 
-	void damageOnImpact(b2Fixture* fix, Health* playerHealth);
+	void damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth);
 public:
 
     CollisionHandler() {};
@@ -40,5 +46,9 @@ public:
 	bool AttachableObjectCollidesWithPlayer(b2Fixture* fixA, AttachesToObjects*& player);
 	
     bool PlayerCanPickWeapon(b2Contact* contact, Weapon* &pickableObj, Hands* &player);
+
+	vector<bodyData> getBodyData() { return vecBody; }
+
+	void clearBodyData(){ vecBody.clear(); }
 };
 
