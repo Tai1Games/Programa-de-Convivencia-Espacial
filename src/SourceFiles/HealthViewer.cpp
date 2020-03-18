@@ -22,7 +22,7 @@ void HealthViewer::update()
 void HealthViewer::draw() const
 {
 	for (int i = 1; i <= he->getHealthMax(); i++) {
-		SDL_Rect dest = { pos_.x + (30*i), pos_.y, 40, 50 };
+		SDL_Rect dest = { pos_.x + (LIFE_DRAW_OFFSET*i), pos_.y, LIFE_WIDTH, LIFE_HEIGTH };
 
 		if (i <= he->getHealth()) {		//Si tiene esas X vidas las muertra como llenas
 			full->render(dest, 0, SDL_Rect{ 0, 0, 613,667 });

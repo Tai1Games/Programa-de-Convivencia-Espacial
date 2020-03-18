@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include "GameState.h"
+#include "GameMode.h"
 #include "Entity.h"
 #include "checkML.h"
 #include "collisionHandler.h"
@@ -20,10 +21,14 @@ private:
 	//HUD
 
 	CollisionHandler* collisionHandler_;
+	vector<Entity*> players_;
+	GameMode* gameMode_ = nullptr;
 
 public:
 	PlayState();
 	~PlayState();
 	virtual void init();
 	virtual void update();
+
+	std::vector<Entity*> getPlayers() { return players_; };
 };

@@ -1,4 +1,5 @@
 #include "GameStateMachine.h"
+#include "StocksGameMode.h"
 #include "Constants.h"
 #include "PlayState.h"
 

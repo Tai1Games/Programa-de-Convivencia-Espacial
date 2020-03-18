@@ -15,7 +15,6 @@
 
 PlayState::PlayState()  {
 }
-
 PlayState::~PlayState() {
 }
 

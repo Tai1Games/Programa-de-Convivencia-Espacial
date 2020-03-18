@@ -26,5 +26,6 @@ public:
 	void update()override;
 	void draw() const override;
 	void handleInput()override;
-
+	b2Vec2 getPos(){return pos_;};
+	int getWidth() { return (he->getHealthMax() * (LIFE_DRAW_OFFSET + LIFE_WIDTH)); }
 };

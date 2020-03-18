@@ -24,10 +24,19 @@ const int lowDamage = 35;
 const int mediumDamage = 50;
 const int hightDamage = 70;
 
-
 //Constantes jugador
 const int IMPULSE_FROM_OBJECT_FORCE = 50;
 
+//Constantes referentes al HealthViewer
+const int LIFE_DRAW_OFFSET = 30;
+const int LIFE_WIDTH = 40;
+const int LIFE_HEIGTH = 50;
+
+//Constantes referentes a StoacksGameMode
+const int STOCK_INITIAL_OFFSET = 5;
+const int STOCK_OFFSET = 10;
+const int STOCK_WIDTH = 20;
+const int STOCK_HEIGTH = 20;
 
 //Modos de juegos
 enum States
