@@ -49,7 +49,9 @@ void GameStateMachine::update() {
 }
 
 void GameStateMachine::render() {
+	SDL_RenderClear(SDL_Game::instance()->getRenderer());
 	states_[currentState_]->render();
+	SDL_RenderPresent(SDL_Game::instance()->getRenderer());
 }
 
 void GameStateMachine::handleInput() {

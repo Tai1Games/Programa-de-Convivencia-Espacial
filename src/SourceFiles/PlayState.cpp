@@ -42,6 +42,9 @@ void PlayState::init() {
 	Entity* tonko = entityManager_->addEntity();
 	Entity* spaceJunk = entityManager_->addEntity();
 
+	players_.push_back(tinky);
+	players_.push_back(tonko);
+
 	//Colliders
 	                                                                                      // x,  y,   width, height, density,	friction, restitution, linearDrag, angularDrag,	Layer,							        sensor canBeAttached
 	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    4,    8,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
@@ -62,7 +65,7 @@ void PlayState::init() {
 
 	tonko->addComponent<Viewer>(Resources::Tinky);
 	tonko->addComponent<Health>(3);
-	tonko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(250, 20));
+	tonko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(1050, 20));
 	collTonko->setUserData(tonko);
 	//Muros
 	ground->addComponent<Viewer>();

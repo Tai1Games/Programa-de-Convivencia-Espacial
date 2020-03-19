@@ -33,7 +33,7 @@ const int LIFE_WIDTH = 40;
 const int LIFE_HEIGTH = 50;
 
 //Constantes referentes a StoacksGameMode
-const int STOCK_INITIAL_OFFSET = 5;
+const int STOCK_INITIAL_OFFSET = 15;
 const int STOCK_OFFSET = 10;
 const int STOCK_WIDTH = 20;
 const int STOCK_HEIGTH = 20;

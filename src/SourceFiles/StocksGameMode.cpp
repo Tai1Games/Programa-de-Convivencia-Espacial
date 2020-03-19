@@ -16,6 +16,9 @@ void StocksGameMode::init(PlayState* game){
 		playersHealthViewerPos_.push_back(e->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos());
 		e->getComponent<HealthViewer>(ComponentType::HealthViewer)->getWidth();	
 	}
+	if (!players_.empty()) {
+		healtWidth_ = players_[0]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getWidth();
+	}
 }
 
 void StocksGameMode::update(){
@@ -30,16 +33,16 @@ void StocksGameMode::render(){
 		drawPos.x = playersHealthViewerPos_[i].x;
 		drawPos.y = playersHealthViewerPos_[i].y;
 		if(i%2==0){
-			drawPos.x +=  healtWidth_ + STOCK_INITIAL_OFFSET;
+			drawPos.x +=  healtWidth_ + STOCK_INITIAL_OFFSET - STOCK_WIDTH - STOCK_OFFSET;
 		}
 		else{
-			drawPos.x -=  healtWidth_ - STOCK_WIDTH - STOCK_INITIAL_OFFSET;
+			drawPos.x -=  STOCK_WIDTH - STOCK_INITIAL_OFFSET + STOCK_WIDTH + STOCK_OFFSET;
 		}
 		for(int j = 0;j < playerStocks_[i];j++){
 			if(i%2==0)
-				drawPos.x += STOCK_WIDTH + STOCK_OFFSET;
+				drawPos.x += (STOCK_WIDTH + STOCK_OFFSET);
 			else
-				drawPos.x -= STOCK_WIDTH - STOCK_OFFSET;
+				drawPos.x -= (STOCK_WIDTH + STOCK_OFFSET);
 			SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Tinky)->render(drawPos);
 		}
 	}
