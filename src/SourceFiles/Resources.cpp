@@ -20,6 +20,8 @@ vector<Resources::ImageInfo> Resources::images_ {
 		{ Mancuerna, "../../assets/game/textures/Mancuerna.png" },
 		{ Hands, "../../assets/game/textures/hands.png" },
 		{ PinkTinky, "../../assets/game/textures/PinkTinky.png"},
+		{ Slider, "../../assets/game/textures/Slider.png"},
+		{ SliderControl, "../../assets/game/textures/SliderControl.png"},
 		{ TSet_Kenney1bit , "../../assets/game/tilemaps/modded_colored.png"},
 		{ TSet_Dungeon , "../../assets/game/tilemaps/dungeon_ts.png"}
 };

@@ -28,6 +28,8 @@ public:
 		Piedra,
 		Hands,
 		PinkTinky,
+		Slider,
+		SliderControl,
 
 		// text
 		Pause,

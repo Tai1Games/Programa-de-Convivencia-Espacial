@@ -5,11 +5,18 @@
 
 using namespace std;
 
+enum Buttons {
+	Resume = 0,
+	Sound,
+	Exit
+};
+
 class Viewer;
 class PauseState : public GameState
 {
 private:
-	Viewer* onBtnImage = nullptr;
+	Viewer* onBtnImage_ = nullptr;
+	Viewer* sliderControlImage_ = nullptr;
 	/*Evita que se mueva varias veces hacia arriba/abajo al mantener el joystick*/
 	bool holding_ = false;
 	int ownerPlayerID_ = 0;
@@ -24,5 +31,7 @@ public:
 
 	virtual void init();
 	virtual void handleInput();
+	/*Actualiza la posición de la selección*/
+	void updateSelection();
 };
 
