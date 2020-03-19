@@ -40,7 +40,7 @@ void PauseState::handleInput()
 	switch (selectedBtn_)
 	{
 	case Buttons::Resume:
-		if (ih->isButtonJustDown(ownerPlayerID_, SDL_CONTROLLER_BUTTON_A))
+		if (ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_A))
 		SDL_Game::instance()->getStateMachine()->changeToState(States::play);
 		break;
 	case Buttons::Sound:
@@ -61,7 +61,7 @@ void PauseState::handleInput()
 		break;
 	case Buttons::Exit:
 		/*Salir al menú cuando exista menú*/
-		/*if (ih->isButtonJustDown(ownerPlayerID_, SDL_CONTROLLER_BUTTON_A))*/
+		/*if (ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_A))*/
 		/*SDL_Game::instance()->getStateMachine()->changeToState(States::menu);*/
 		break;
 	}
