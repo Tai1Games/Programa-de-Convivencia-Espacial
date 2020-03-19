@@ -36,7 +36,7 @@ private:
 	std::vector<PlayerInfo> playerInfo_;
 	/*Mano que coge este objeto*/
 	Hands* currentHand_ = nullptr;
-	float throwSpeed_ = 150;
+	float throwSpeed_ = 30;
 	float spinSpeed_ = 8;
 public:
 	Weapon(Weapon::WeaponID wId): Component(ComponentType::Weapon), weaponType_(wId){}
@@ -44,6 +44,9 @@ public:
 	virtual void init() override;
 	/*Se comprueba que jugador ha pulsado Y y está cerca para recoger este objeto*/
 	virtual void update() override;
+
+	virtual void handleInput() override;
+
 	/*Desactiva el arma y se añade a la mano este arma*/
 	void PickObjectBy(Hands* playerHands);
 	/*Muestra si el objeto ya está sujeto por una mano*/
@@ -54,6 +57,7 @@ public:
 	void SavePlayerInfo(int index, Hands* playerH);
 	/*Borra la informacion del jugador que sale del trigger*/
 	void DeletePlayerInfo(int index);
+	void Action();
 	int getWeaponType() { return weaponType_; }
 };
 

@@ -2,6 +2,7 @@
 #include <iostream>
 #include "InputHandler.h"
 #include "Hands.h"
+#include "Health.h"
 
 void Weapon::init()
 {
@@ -17,6 +18,12 @@ void Weapon::init()
 
 void Weapon::update()
 {
+	
+	
+}
+
+void Weapon::handleInput()
+{
 	if (currentHand_ == nullptr) {
 		for (int i = 0; i < playerInfo_.size(); i++) {
 
@@ -26,11 +33,15 @@ void Weapon::update()
 			}
 		}
 	}
-	else if(IsPicked() && ih_->isButtonJustDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_Y))
+	else if (IsPicked() && ih_->isButtonJustDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_Y))
 	{
 		UnPickObject();
 	}
-	
+
+	else if (IsPicked() && ih_->isButtonDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_X))
+	{
+		Action();
+	}
 }
 
 void Weapon::PickObjectBy(Hands* playerH)
@@ -65,4 +76,16 @@ void Weapon::DeletePlayerInfo(int index)
 {
 	playerInfo_[index].isNear = false;
 	playerInfo_[index].playerHands = nullptr;
+}
+
+
+void Weapon::Action() {
+	cout << "Zasca ";
+	Entity* aux = entity_;
+
+	Health* he = aux->getComponent<Health>(ComponentType::Health);
+	//Calculo del daño de la chancla
+	int damage = he->getHealthMax() - he->getHealth() + 1;
+
+	cout << "Fuiste golpeado con " << damage << " al contrincante" << endl;
 }

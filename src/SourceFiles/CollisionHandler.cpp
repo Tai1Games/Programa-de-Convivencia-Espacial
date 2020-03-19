@@ -55,6 +55,8 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		cout << "Picked up weapon" << endl;
 		pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands);
 	}
+
+	
 }
 
 //Handles end of collisions
