@@ -11,6 +11,7 @@ using namespace std;
 // esta clase es equivalente a un nivel del juego
 //se espera que herede de gamestate en un futuro
 //tambien deberia convertirse en un template de modo de juego y mapa
+
 class PlayState : public GameState
 {
 private:
@@ -25,10 +26,11 @@ private:
 	GameMode* gameMode_ = nullptr;
 
 public:
-	PlayState();
+	PlayState(GameMode* gMode);
 	~PlayState();
 	virtual void init();
 	virtual void update();
+	virtual void render();
 
 	std::vector<Entity*> getPlayers() { return players_; };
 };

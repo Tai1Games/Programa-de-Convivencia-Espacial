@@ -25,7 +25,7 @@ void GameStateMachine::changeToState(int state) {
 			case States::menu:
 				break;
 			case States::play:
-				states_[state] = new PlayState();
+				states_[state] = new PlayState(new StocksGameMode());
 				break;
 			case States::pause:
 				break;

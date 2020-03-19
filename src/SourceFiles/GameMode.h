@@ -1,12 +1,14 @@
 #pragma once
-#include "PlayState.h"
+#include <vector>
 
+class Entity;
+class PlayState;
 class GameMode {
 protected:
 	PlayState* game_ = nullptr;
 	GameMode() {};
 	virtual ~GameMode() {};
-	vector<Entity*> players_;
+	std::vector<Entity*> players_;
 private:
 public:
 	virtual void init(PlayState* game);

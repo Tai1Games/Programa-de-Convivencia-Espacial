@@ -13,8 +13,8 @@
 #include "Hands.h"
 #include "PlayerController.h"
 
-PlayState::PlayState()  {
-}
+PlayState::PlayState(GameMode* gMode):GameState(),
+	gameMode_(gMode) {}
 PlayState::~PlayState() {
 }
 
@@ -36,8 +36,8 @@ void PlayState::init() {
 	//Entity* rock = entityManager_->addEntity();
 	//Entity* spaceJunk = entityManager_->addEntity();
 
-	map->addComponent<TileMap>(WINDOW_WIDTH, WINDOW_HEIGHT,
-		"../../assets/game/tilemaps/TD_TilemapBitCSV.json");
+	//map->addComponent<TileMap>(WINDOW_WIDTH, WINDOW_HEIGHT,
+	//	"../../assets/game/tilemaps/TD_TilemapBitCSV.json");
 
 	Entity* tonko = entityManager_->addEntity();
 	Entity* spaceJunk = entityManager_->addEntity();
@@ -83,6 +83,7 @@ void PlayState::init() {
 	//collTonko->applyLinearImpulse(b2Vec2(0, 1000), b2Vec2(0.1, 0));
 	collJunk->applyLinearImpulse(b2Vec2(150, 0), b2Vec2(0.1, 0));
 
+	gameMode_->init(this);
 }
 
 void PlayState::update() {
@@ -92,4 +93,9 @@ void PlayState::update() {
 	collisionHandler_->SolveInteractions();
 	//también debería actualizar la lógica de modo de juego
 	//spawners de monedas, carga de objetivos...
+}
+
+void PlayState::render() {
+	GameState::render();
+	gameMode_->render();
 }
