@@ -15,6 +15,7 @@ const double SECONDS_PER_FRAME = 1.0 / 60.0;
 
 //Constantes Generales
 const double PI = 3.14159265359;
+const int MAX_MUSIC_VOLUME = 100;
 
 //Constantes Escala Render
 const double PIXELS_PER_METER = 60.0;

@@ -32,10 +32,10 @@ public:
 		SliderControl,
 
 		// text
-		Pause,
-		Sound,
-		Resume,
-		Exit
+		PauseText,
+		ResumeText,
+		SoundText,
+		ExitText
 	};
 
 	enum AudioId : std::size_t {

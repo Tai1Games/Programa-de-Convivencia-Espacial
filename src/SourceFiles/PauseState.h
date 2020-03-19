@@ -15,23 +15,29 @@ class Viewer;
 class PauseState : public GameState
 {
 private:
-	Viewer* onBtnImage_ = nullptr;
+	Viewer* buttonSelectorImage_ = nullptr;
 	Viewer* sliderControlImage_ = nullptr;
+	/*Evita que se mueva varias veces hacia izq/derch al mantener el joystick*/
+	bool holdingX_ = false;
 	/*Evita que se mueva varias veces hacia arriba/abajo al mantener el joystick*/
-	bool holding_ = false;
+	bool holdingY_ = false;
 	int ownerPlayerID_ = 0;
 	vector<Viewer*> btns_;
 	/*Indice para el botón seleccionado en el vector de botones*/
 	int selectedBtn_ = 0;
+	int currentMusicVolume_ = MAX_MUSIC_VOLUME;
 public:
 	PauseState() : GameState() {};
 	~PauseState(){};
 
-	void setOwner(int ownerID) { ownerPlayerID_ = ownerID; }
-
 	virtual void init();
 	virtual void handleInput();
-	/*Actualiza la posición de la selección*/
-	void updateSelection();
+
+	void setOwner(int ownerID) { ownerPlayerID_ = ownerID; }
+
+	/*Actualiza la posición de la selección y el botón seleccionado*/
+	void updateSelectedButton();
+	/*Actualiza la posición del slider y el volumen de la música*/
+	void updateMusicVolume();
 };
 
