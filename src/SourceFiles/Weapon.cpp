@@ -21,7 +21,6 @@ void Weapon::update()
 		for (int i = 0; i < playerInfo_.size(); i++) {
 
 			if (!IsPicked() && playerInfo_[i].isNear &&
-				ih_->getNumControllers() > 0 &&
 				ih_->isButtonJustDown(i, SDL_CONTROLLER_BUTTON_Y)) {
 				cout << "inRange";
 				PickObjectBy(playerInfo_[i].playerHands);
@@ -61,16 +60,12 @@ void Weapon::UnPickObject()
 
 void Weapon::SavePlayerInfo(int index, Hands* playerH)
 {
-	if (ih_->getNumControllers() > 0) {
-		playerInfo_[index].isNear = true;
-		playerInfo_[index].playerHands = playerH;
-	}
+	playerInfo_[index].isNear = true;
+	playerInfo_[index].playerHands = playerH;
 }
 
 void Weapon::DeletePlayerInfo(int index)
 {
-	if (ih_->getNumControllers() > 0) {
-		playerInfo_[index].isNear = false;
-		playerInfo_[index].playerHands = nullptr;
-	}
+	playerInfo_[index].isNear = false;
+	playerInfo_[index].playerHands = nullptr;
 }

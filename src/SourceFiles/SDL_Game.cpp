@@ -5,9 +5,9 @@
 
 unique_ptr<SDL_Game> SDL_Game::instance_;
 
-SDL_Game::SDL_Game(){
+SDL_Game::SDL_Game() {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	window_ = SDL_CreateWindow(WINDOW_NAME.c_str(),SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,WINDOW_WIDTH, WINDOW_HEIGHT,SDL_WINDOW_SHOWN);
+	window_ = SDL_CreateWindow(WINDOW_NAME.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 
 	initializeResources();
@@ -37,7 +37,7 @@ SDL_Game::~SDL_Game() {
 	renderer_ = nullptr;
 
 	SDL_DestroyWindow(window_);
-	window_ =  nullptr;
+	window_ = nullptr;
 
 	SDL_Quit();
 }
@@ -93,16 +93,19 @@ void SDL_Game::closeResources() {
 void SDL_Game::start() {
 	exit_ = false;
 	gamestateMachine_->changeToState(States::play);
-	while (!exit_) {
-		Uint32 startTime = getTime();
-		gamestateMachine_->handleInput();
-		gamestateMachine_->update();
-		gamestateMachine_->render();
 
-		Uint32 frameTime = getTime() - startTime;
-		if (frameTime < MS_PER_FRAME)
-			SDL_Delay(MS_PER_FRAME - frameTime);
+	if (inputHandler_->getNumControllers() > 0) {
+		while (!exit_) {
+			Uint32 startTime = getTime();
+			gamestateMachine_->handleInput();
+			gamestateMachine_->update();
+			gamestateMachine_->render();
 
-		//exit_ = !exit_;
+			Uint32 frameTime = getTime() - startTime;
+			if (frameTime < MS_PER_FRAME)
+				SDL_Delay(MS_PER_FRAME - frameTime);
+		}
 	}
+	else std::cout << "A ver inutil, quieres jugar a un juego de mando SIN mando?? Eres tonto o comes piedras?" << endl;
+
 }
