@@ -14,23 +14,38 @@ Viewer::Viewer(int textureId) :
 	textureId_(textureId) {	//
 }
 
-Viewer::Viewer(int textureId, float x, float y, float scale) :
-	Component(ComponentType::Viewer),
-	tex_(nullptr),	//
-	collider_(nullptr),
-	pos_(b2Vec2(x,y)),
-	textureId_(textureId),
-	isUIElement_(true),
-    scale_(scale)//
-{
-}
-
 Viewer::Viewer(int textureId, SDL_Rect clip) :
 	Component(ComponentType::Viewer), //
 	tex_(nullptr),	//
 	collider_(nullptr),
 	clip_(clip),
 	textureId_(textureId) {	//
+}
+
+Viewer::Viewer(int textureId, float x, float y, float scale, float angle) :
+	Component(ComponentType::Viewer),
+	tex_(nullptr),	//
+	collider_(nullptr),
+	pos_(b2Vec2(x, y)),
+	clip_(SDL_Rect{ 0, 0, 0, 0 }),
+	textureId_(textureId),
+	isUIElement_(true),
+	scale_(scale), //
+	angle_(angle)
+{
+}
+
+Viewer::Viewer(int textureId, float x, float y, float scale, float angle, SDL_Rect clip) :
+	Component(ComponentType::Viewer),
+	tex_(nullptr),	//
+	collider_(nullptr),
+	pos_(b2Vec2(x, y)),
+	clip_(clip),
+	textureId_(textureId),
+	isUIElement_(true),
+	scale_(scale), //
+	angle_(angle)
+{
 }
 
 Viewer::~Viewer() {
@@ -56,7 +71,7 @@ void Viewer::draw() const {
 			dest.y = pos_.y;
 			dest.w = tex_->getWidth() * scale_;
 			dest.h = tex_->getHeight() * scale_;
-			tex_->render(dest);
+			tex_->render(dest, angle_, clip_);
 		}
 	}
 }
