@@ -24,6 +24,8 @@ private:
 		float angle;
 	};
 	vector<bodyData> vecBody; //Vector donde almacenamos los cuerpos muertos que crearemos al final del step.
+	vector<Weapon*> vecWeapon; //Vector donde almacenamos las weapons que soltaremos al final del step
+	vector<AttachesToObjects*> vecAttach; //Vector donde almacenamos los agarres que soltaremos al final del step
 
 	void damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth);
 public:
