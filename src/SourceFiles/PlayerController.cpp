@@ -2,10 +2,9 @@
 #include "InputHandler.h"
 #include "Entity.h"
 
-PlayerController::PlayerController(int p) :Component(ComponentType::PlayerController), playerNumber_(p)
-{
-	dirImpulse_ = b2Vec2(1, 0);
-}
+PlayerController::PlayerController(int p) :Component(ComponentType::PlayerController), 
+	coll_(nullptr), attachesToObj_(nullptr), playerNumber_(p), chargeTime(0), dirImpulse_(1,0), impulseForce_(0)
+{}
 
 void PlayerController::init()
 {

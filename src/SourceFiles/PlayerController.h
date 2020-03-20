@@ -14,6 +14,7 @@ private:
 	AttachesToObjects* attachesToObj_;
 	float impulseForce_;
 	int playerNumber_;//Número del jugador (de 1 a 4));
+	Uint16 chargeTime;
 public:
 	PlayerController(int p);
 	~PlayerController() {}
