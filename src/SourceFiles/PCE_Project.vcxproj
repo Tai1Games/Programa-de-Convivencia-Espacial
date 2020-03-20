@@ -209,6 +209,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Viewer.h" />
+    <ClInclude Include="WeaponFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AttachesToObjects.cpp" />

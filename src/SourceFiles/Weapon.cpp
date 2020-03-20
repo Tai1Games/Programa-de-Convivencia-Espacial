@@ -81,11 +81,12 @@ void Weapon::DeletePlayerInfo(int index)
 
 void Weapon::Action() {
 	cout << "Zasca ";
-	Entity* aux = entity_;
+	/*Entity* aux = entity_;
 
 	Health* he = aux->getComponent<Health>(ComponentType::Health);
 	//Calculo del daño de la chancla
 	int damage = he->getHealthMax() - he->getHealth() + 1;
 
 	cout << "Fuiste golpeado con " << damage << " al contrincante" << endl;
+	*/
 }
