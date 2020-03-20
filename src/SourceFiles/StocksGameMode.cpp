@@ -11,13 +11,19 @@ void StocksGameMode::init(PlayState* game){
 	for(int i = 0;i<players_.size();i++){
 		playerStocks_.push_back(maxStocks_);
 	}
-	for(Entity* e:players_){
+	for(int i=0;i<players_.size();i++){
+		Entity* e = players_[i];
 		playersHealth_.push_back(e->getComponent<Health>(ComponentType::Health));
-		playersHealthViewerPos_.push_back(e->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos());
-		e->getComponent<HealthViewer>(ComponentType::HealthViewer)->getWidth();	
-	}
-	if (!players_.empty()) {
-		healtWidth_ = players_[0]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getWidth();
+		HealthViewer* hV = (e->getComponent<HealthViewer>(ComponentType::HealthViewer));
+		b2Vec2 p = hV->getPos();
+		if (i % 2 == 0) {
+
+			p.x += hV->getWidth() + STOCK_INITIAL_OFFSET;
+		}
+		else {
+			p.x -= ((hV->getWidth()-LIFE_WIDTH) + STOCK_INITIAL_OFFSET + STOCK_WIDTH);
+		}
+		playersStocksPos_.push_back(p);
 	}
 }
 
@@ -30,19 +36,18 @@ void StocksGameMode::render(){
 	drawPos.w = STOCK_WIDTH;
 	drawPos.h = STOCK_HEIGTH;		
 	for(int i = 0;i<playerStocks_.size();++i){
-		drawPos.x = playersHealthViewerPos_[i].x;
-		drawPos.y = playersHealthViewerPos_[i].y;
-		if(i%2==0){
-			drawPos.x +=  healtWidth_ + STOCK_INITIAL_OFFSET - STOCK_WIDTH - STOCK_OFFSET;
-		}
-		else{
-			drawPos.x -=  STOCK_WIDTH - STOCK_INITIAL_OFFSET + STOCK_WIDTH + STOCK_OFFSET;
-		}
+		//if(i%2==0){
+		//	drawPos.x +=  healtWidth_ + STOCK_INITIAL_OFFSET - STOCK_WIDTH - STOCK_OFFSET;
+		//}
+		//else{
+		//	drawPos.x -=  STOCK_WIDTH - STOCK_INITIAL_OFFSET + STOCK_WIDTH + STOCK_OFFSET;
+		//}
+		drawPos.y = playersStocksPos_[i].y;
 		for(int j = 0;j < playerStocks_[i];j++){
 			if(i%2==0)
-				drawPos.x += (STOCK_WIDTH + STOCK_OFFSET);
+				drawPos.x = playersStocksPos_[i].x + j*(STOCK_WIDTH + STOCK_OFFSET);
 			else
-				drawPos.x -= (STOCK_WIDTH + STOCK_OFFSET);
+				drawPos.x = playersStocksPos_[i].x - j * (STOCK_WIDTH + STOCK_OFFSET);
 			SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Tinky)->render(drawPos);
 		}
 	}

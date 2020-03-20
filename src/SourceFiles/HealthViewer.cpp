@@ -26,15 +26,15 @@ void HealthViewer::draw() const
 {
 	int player = playerData_->getPlayerNumber();
 	SDL_Rect dest = {pos_.x,pos_.y,LIFE_WIDTH,LIFE_HEIGTH};
-	for (int i = 1; i <= he->getHealthMax(); i++) {
+	for (int i = 0; i < he->getHealthMax(); i++) {
 		if (player % 2 == 0){
-			dest.x += ((LIFE_WIDTH + LIFE_DRAW_OFFSET));
+			dest.x = pos_.x + i*((LIFE_WIDTH + LIFE_DRAW_OFFSET));
 		}
 		else{
-			dest.x -= ((LIFE_WIDTH + LIFE_DRAW_OFFSET));
+			dest.x = pos_.x -(i*((LIFE_WIDTH + LIFE_DRAW_OFFSET)));
 		}
 
-		if (i <= he->getHealth()) {		//Si tiene esas X vidas las muertra como llenas
+		if ((i+1) <= he->getHealth()) {		//Si tiene esas X vidas las muertra como llenas
 			full->render(dest, 0, SDL_Rect{ 0, 0, 613,667 });
 		}
 		else {		//Si no las tiene, se dibujarán como vacias

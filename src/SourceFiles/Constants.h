@@ -28,11 +28,11 @@ const int hightDamage = 70;
 const int IMPULSE_FROM_OBJECT_FORCE = 50;
 
 //Constantes referentes al HealthViewer
-const int LIFE_DRAW_OFFSET = 30;
+const int LIFE_DRAW_OFFSET = 10;
 const int LIFE_WIDTH = 40;
 const int LIFE_HEIGTH = 50;
-const int LIFE_MARGIN_H = 20;
-const int LIFE_MARGIN_V = 20;
+const int LIFE_MARGIN_H = 30;
+const int LIFE_MARGIN_V = 10;
 
 
 //Constantes referentes a StoacksGameMode

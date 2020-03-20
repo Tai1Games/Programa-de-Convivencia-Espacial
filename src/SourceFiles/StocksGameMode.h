@@ -8,7 +8,7 @@ class StocksGameMode : public GameMode
 private:
 	vector<int> playerStocks_;
 	vector<Health*> playersHealth_;
-	vector<b2Vec2> playersHealthViewerPos_;
+	vector<b2Vec2> playersStocksPos_;
 	int healtWidth_;
 	int maxStocks_;
 public:
