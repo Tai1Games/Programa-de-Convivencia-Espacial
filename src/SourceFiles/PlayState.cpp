@@ -12,6 +12,7 @@
 #include "Weapon.h"
 #include "Hands.h"
 #include "PlayerController.h"
+#include "PlayerData.h"
 
 PlayState::PlayState(GameMode* gMode):GameState(),
 	gameMode_(gMode) {}
@@ -55,17 +56,19 @@ void PlayState::init() {
 	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
 
 	//Players
+	tinky->addComponent<PlayerData>(0);
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un cuadrado de debug.
 	tinky->addComponent<Health>(3);
-	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(20, 20));
-	tinky->addComponent<Hands>(0, Resources::Hands);
-	tinky->addComponent<AttachesToObjects>(0);
+	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
+	tinky->addComponent<Hands>(Resources::Hands);
+	tinky->addComponent<AttachesToObjects>();
 	collTinky->setUserData(tinky);
-	tinky->addComponent<PlayerController>(0);
+	tinky->addComponent<PlayerController>();
 
+	tonko->addComponent<PlayerData>(1);
 	tonko->addComponent<Viewer>(Resources::Tinky);
 	tonko->addComponent<Health>(3);
-	tonko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(1050, 20));
+	tonko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
 	collTonko->setUserData(tonko);
 	//Muros
 	ground->addComponent<Viewer>();

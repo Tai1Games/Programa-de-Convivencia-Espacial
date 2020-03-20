@@ -3,19 +3,20 @@
 #include "box2d.h"
 #include "Collider.h"
 #include "AttachesToObjects.h"
-
+#include "PlayerData.h"
 
 
 class PlayerController : public Component
 {
 private:
-	b2Vec2 dirImpulse_;
-	Collider* coll_;
-	AttachesToObjects* attachesToObj_;
 	float impulseForce_;
-	int playerNumber_;//Número del jugador (de 1 a 4));
+	b2Vec2 dirImpulse_;
+	Collider* coll_ = nullptr;
+	AttachesToObjects* attachesToObj_ = nullptr;
+	PlayerData* playerData_ = nullptr;
+
 public:
-	PlayerController(int p);
+	PlayerController();
 	~PlayerController() {}
 
 	void init() override;

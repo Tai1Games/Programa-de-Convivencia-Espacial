@@ -31,6 +31,9 @@ const int IMPULSE_FROM_OBJECT_FORCE = 50;
 const int LIFE_DRAW_OFFSET = 30;
 const int LIFE_WIDTH = 40;
 const int LIFE_HEIGTH = 50;
+const int LIFE_MARGIN_H = 20;
+const int LIFE_MARGIN_V = 20;
+
 
 //Constantes referentes a StoacksGameMode
 const int STOCK_INITIAL_OFFSET = 15;
