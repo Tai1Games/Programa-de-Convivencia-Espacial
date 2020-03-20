@@ -81,6 +81,8 @@ void InputHandler::initialiseJoysticks() {
 				m_triggerValues.push_back(std::make_pair
 				(new double(0.0), new double(0.0)));
 
+				lastLStickValue_.push_back(Vector2D(0, 0));
+
 				std::vector<ButtonState> tempButtons;
 				for (int j = 0; j < SDL_CONTROLLER_BUTTON_MAX; j++)
 				{
@@ -205,10 +207,12 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		if (val > m_joystickDeadZone)
 		{
 			m_joystickValues[whichOne].first->setX(val*normalize);
+			lastLStickValue_[whichOne].setX(m_joystickValues[whichOne].first->getX());
 		}
 		else if (event.jaxis.value < -m_joystickDeadZone)
 		{
 			m_joystickValues[whichOne].first->setX(val * normalize);
+			lastLStickValue_[whichOne].setX(m_joystickValues[whichOne].first->getX());
 		}
 		else
 		{
@@ -221,10 +225,12 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		if (event.jaxis.value > m_joystickDeadZone)
 		{
 			m_joystickValues[whichOne].first->setY(val * normalize);
+			lastLStickValue_[whichOne].setY(m_joystickValues[whichOne].first->getY());
 		}
 		else if (event.jaxis.value < -m_joystickDeadZone)
 		{
 			m_joystickValues[whichOne].first->setY(val * normalize);
+			lastLStickValue_[whichOne].setY(m_joystickValues[whichOne].first->getY());
 		}
 		else
 		{
@@ -373,3 +379,13 @@ b2Vec2 InputHandler::getStickDir(int ctrl, GAMEPADSTICK stick) {
 	return b2Vec2(aux.getX(), aux.getY());
 }
 
+b2Vec2 InputHandler::getLastStickDir(int ctrl, GAMEPADSTICK stick) {
+	Vector2D aux;
+	if (stick == LEFTSTICK)
+		aux = lastLStickValue_[ctrl];
+	else
+		return b2Vec2(0, 0);
+
+	aux = aux.normalize();
+	return b2Vec2(aux.getX(), aux.getY());
+}

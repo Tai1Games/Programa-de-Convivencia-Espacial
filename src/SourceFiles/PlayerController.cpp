@@ -18,10 +18,9 @@ void PlayerController::handleInput()
 	//Empieza la carga
 	if (ih->isButtonJustDown(playerNumber_, SDL_CONTROLLER_BUTTON_A)) { 
 		chargeTimeStart_ = SDL_Game::instance()->getTime();
-		cout << chargeTimeStart_ << endl;
 	}//Soltarse
 	else if (ih->isButtonJustUp(playerNumber_, SDL_CONTROLLER_BUTTON_A)){
-		dirImpulse_ = SDL_Game::instance()->getInputHandler()->getStickDir(playerNumber_, InputHandler::GAMEPADSTICK::LEFTSTICK);
+		dirImpulse_ = SDL_Game::instance()->getInputHandler()->getLastStickDir(playerNumber_, InputHandler::GAMEPADSTICK::LEFTSTICK);
 		dirImpulse_ *= calculateForce(attachesToObj_->isAttached());
 		dirImpulse_.y *= -1; //hay que invertirlo para convertirlo en vector compatible con box2D
 		attachesToObj_->deAttachFromObject();
