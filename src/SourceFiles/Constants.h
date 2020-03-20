@@ -26,7 +26,8 @@ const int hightDamage = 70;
 
 
 //Constantes jugador
-const int IMPULSE_FROM_OBJECT_FORCE = 50;
+const float IMPULSE_GRABBED = 50.0;
+const float IMPULSE_FLOATING = 30.0;
 
 
 //Modos de juegos

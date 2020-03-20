@@ -29,7 +29,7 @@ void GameState::render() {
 
 void GameState::handleInput() {
 	SDL_Game::instance()->getInputHandler()->update();
-	DebugInput();
+	//DebugInput();
 	if(entityManager_!=nullptr)
 		entityManager_->handleInput();
 }
