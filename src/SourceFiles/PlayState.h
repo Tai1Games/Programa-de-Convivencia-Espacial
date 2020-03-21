@@ -31,6 +31,6 @@ public:
 	virtual void init();
 	virtual void update();
 	virtual void render();
-
+	virtual void handleInput();
 	std::vector<Entity*> getPlayers() { return players_; };
 };

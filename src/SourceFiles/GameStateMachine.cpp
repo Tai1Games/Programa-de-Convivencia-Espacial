@@ -2,6 +2,7 @@
 #include "StocksGameMode.h"
 #include "Constants.h"
 #include "PlayState.h"
+#include "PauseState.h"
 
 GameStateMachine::GameStateMachine() {
 	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
@@ -13,6 +14,13 @@ GameStateMachine::~GameStateMachine() {
 		delete state;
 	}
 	states_.clear();
+}
+
+void GameStateMachine::setPauseOwner(int ownerID)
+{
+	changeToState(States::pause);
+	if(PauseState* pause = static_cast<PauseState*>(states_[States::pause]))
+	pause->setOwner(ownerID);
 }
 
 void GameStateMachine::changeToState(int state) {
@@ -28,6 +36,7 @@ void GameStateMachine::changeToState(int state) {
 				states_[state] = new PlayState(new StocksGameMode());
 				break;
 			case States::pause:
+				states_[state] = new PauseState();
 				break;
 			}
 
