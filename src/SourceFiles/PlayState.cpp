@@ -118,6 +118,7 @@ void PlayState::update() {
 	collisionHandler_->SolveInteractions();
 	//también debería actualizar la lógica de modo de juego
 	//spawners de monedas, carga de objetivos...
+	gameMode_->update();
 }
 
 void PlayState::render() {
