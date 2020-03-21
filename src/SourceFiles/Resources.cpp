@@ -38,7 +38,7 @@ vector<Resources::TextMsgInfo> Resources::messages_ {
 
 vector<Resources::MusicInfo> Resources::musics_ {
 		//M�sica {nombre_en_enum, ruta}
-		{ MainTheme , "../../assets/game/sound/mainTheme.mp3" },
+		{ MainTheme , "../../assets/game/sound/mainMenu.mp3" },
 		{Reveal, "../../assets/game/sound/gotem.mp3"}
 };
 
