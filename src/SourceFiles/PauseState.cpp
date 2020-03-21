@@ -33,8 +33,8 @@ void PauseState::handleInput()
 {
 	GameState::handleInput();
 	InputHandler* ih = SDL_Game::instance()->getInputHandler();
-	double rStickXValue;
-	double rStickYValue;
+	double lStickXValue;
+	double lStickYValue;
 
 	//Input específico para el botón seleccionado
 	switch (selectedBtn_)
@@ -44,18 +44,19 @@ void PauseState::handleInput()
 		SDL_Game::instance()->getStateMachine()->changeToState(States::play);
 		break;
 	case Buttons::Sound:
-		rStickXValue = ih->getStickX(ownerPlayerID_, InputHandler::GAMEPADSTICK::RIGHTSTICK);
-		if (currentMusicVolume_> 0 && !holdingX_ && rStickXValue < -0.999) {
+		lStickXValue = ih->getStickX(ownerPlayerID_, InputHandler::GAMEPADSTICK::LEFTSTICK);
+		cout << lStickXValue << endl;
+		if (currentMusicVolume_> 0 && !holdingX_ && lStickXValue < -0.999) {
 			currentMusicVolume_ -= 10;
 			updateMusicVolume();
 			holdingX_ = true;
 		}
-		else if (currentMusicVolume_ < MAX_MUSIC_VOLUME && !holdingX_ && rStickXValue > 0.999) {
+		else if (currentMusicVolume_ < MAX_MUSIC_VOLUME && !holdingX_ && lStickXValue > 0.999) {
 			currentMusicVolume_ += 10;
 			updateMusicVolume();
 			holdingX_ = true;
 		}
-		else if (holdingX_ && rStickXValue == 0) {
+		else if (holdingX_ && lStickXValue == 0) {
 			holdingX_ = false;
 		}
 		break;
@@ -66,20 +67,27 @@ void PauseState::handleInput()
 		break;
 	}
 
-	//Input general para moverse por el menú
-	rStickYValue = ih->getStickY(ownerPlayerID_, InputHandler::GAMEPADSTICK::RIGHTSTICK);
+	//Input general para el menú
+	if (ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_START) ||
+		ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_GUIDE)) {
+		selectedBtn_ = 0;
+		updateSelectedButton();
+		SDL_Game::instance()->getStateMachine()->changeToState(States::play);
+	}
 
-	if (!holdingY_ && rStickYValue > 0.999) {
+	lStickYValue = ih->getStickY(ownerPlayerID_, InputHandler::GAMEPADSTICK::LEFTSTICK);
+
+	if (!holdingY_ && lStickYValue > 0.999) {
 		selectedBtn_++;
 		updateSelectedButton();
 		holdingY_ = true;
 	}
-	else if (!holdingY_ && rStickYValue < -0.999) {
+	else if (!holdingY_ && lStickYValue < -0.999) {
 		selectedBtn_--;
 		updateSelectedButton();
 		holdingY_ = true;
 	}
-	else if (holdingY_ && rStickYValue == 0) {
+	else if (holdingY_ && lStickYValue == 0) {
 		holdingY_ = false;
 	}
 	
