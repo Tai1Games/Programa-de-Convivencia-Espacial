@@ -13,7 +13,7 @@
 #include "Hands.h"
 #include "PlayerController.h"
 
-PlayState::PlayState()  {
+PlayState::PlayState() : GameState(){
 }
 
 PlayState::~PlayState() {
@@ -93,4 +93,16 @@ void PlayState::update() {
 	collisionHandler_->SolveInteractions();
 	//también debería actualizar la lógica de modo de juego
 	//spawners de monedas, carga de objetivos...
+}
+
+void PlayState::handleInput()
+{
+	GameState::handleInput();
+	InputHandler* ih = SDL_Game::instance()->getInputHandler();
+	for (int i = 0; i < ih->getNumControllers(); i++) {
+		if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_START) || 
+			ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_GUIDE)) {
+			SDL_Game::instance()->getStateMachine()->setPauseOwner(i);
+		}
+	}
 }
