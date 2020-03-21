@@ -94,18 +94,23 @@ void SDL_Game::start() {
 	exit_ = false;
 	gamestateMachine_->changeToState(States::play);
 
-	if (inputHandler_->getNumControllers() > 0) {
-		while (!exit_) {
-			Uint32 startTime = getTime();
-			gamestateMachine_->handleInput();
-			gamestateMachine_->update();
-			gamestateMachine_->render();
+	try {
+		if (inputHandler_->getNumControllers() > 0) {
+			while (!exit_) {
+				Uint32 startTime = getTime();
+				gamestateMachine_->handleInput();
+				gamestateMachine_->update();
+				gamestateMachine_->render();
 
-			Uint32 frameTime = getTime() - startTime;
-			if (frameTime < MS_PER_FRAME)
-				SDL_Delay(MS_PER_FRAME - frameTime);
+				Uint32 frameTime = getTime() - startTime;
+				if (frameTime < MS_PER_FRAME)
+					SDL_Delay(MS_PER_FRAME - frameTime);
+			}
 		}
+		else throw 0;
 	}
-	else std::cout << "A ver inutil, quieres jugar a un juego de mando SIN mando?? Eres tonto o comes piedras?" << endl;
-
+	catch (int a)
+	{
+		cout << "Que tal si pones un manso eh? genio\n\n\n";
+	}
 }
