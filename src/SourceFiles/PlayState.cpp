@@ -56,10 +56,10 @@ void PlayState::init() {
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody,    10.5, -0.5, 12,    1,      10,        0,        0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody,     21.5, 10,   1,     10,     10,        1,        0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody,      18,   8,    0.5,   0.5,    1,         10,       0,           0,          0.1,         Collider::CollisionLayer::NormalObject, false, true);
-	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 0,    8.25,   1,     1,    1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
+	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 0,    8.25, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
-	Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 7, 3, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::Player, false, false);
-	Collider* collTanko = tanko->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 7, 3, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::Player, false, false);
+	Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
+	Collider* collTanko = tanko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	  7,	3,	  1,	 1,		 1,		    0.1,	  0.2,		   0,		   0,			Collider::CollisionLayer::Player,		false, false);
 
 	//Players
 	tinky->addComponent<PlayerData>(0);
@@ -68,8 +68,8 @@ void PlayState::init() {
 	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
 	tinky->addComponent<Hands>(Resources::Hands);
 	tinky->addComponent<AttachesToObjects>();
-	collTinky->setUserData(tinky);
 	tinky->addComponent<PlayerController>();
+	collTinky->setUserData(tinky);
 
 	tonko->addComponent<PlayerData>(1);
 	tonko->addComponent<Viewer>(Resources::Tinky);
@@ -88,6 +88,7 @@ void PlayState::init() {
 	tunko->addComponent<Health>(3);
 	tunko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
 	collTunko->setUserData(tunko);
+
 	//Muros
 	ground->addComponent<Viewer>();
 	collSuelo->setUserData(ground);

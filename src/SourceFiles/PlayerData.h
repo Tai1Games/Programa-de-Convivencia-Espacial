@@ -1,5 +1,8 @@
 #pragma once
 #include "Component.h"
+
+//Contains data needed by Player-related components
+//ALWAYS add this component to the player before any other
 class PlayerData : public Component
 {
 private:

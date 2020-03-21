@@ -6,9 +6,10 @@
 class StocksGameMode : public GameMode
 {
 private:
-	vector<int> playerStocks_;
-	vector<Health*> playersHealth_;
-	vector<b2Vec2> playersStocksPos_;
+	vector<int> playerStocks_; //Remaining stocks of each player
+	
+	vector<Health*> playersHealth_; //Reference to the Health component of each player
+	vector<b2Vec2> playersStocksPos_; //Position in which the Stocks will be drawn FOR EACH DIFFERENT PLAYER.
 	int healtWidth_;
 	int maxStocks_;
 public:
@@ -16,6 +17,5 @@ public:
 	virtual void init(PlayState* game);
 	virtual void render();
 	virtual void update();
-	virtual bool onPlayerDead(Health* player);  //returns false when player runs out of stocks
-	virtual bool onPlayerDead(int id);
+	virtual bool onPlayerDead(int id); //Returns false when players runs out of stocks.
 };
