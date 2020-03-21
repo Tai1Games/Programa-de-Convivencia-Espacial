@@ -60,3 +60,11 @@ bool StocksGameMode::onPlayerDead(Health* h){
 	if (playerStocks_[i] <= 0) return false;
 	else return true; 
 }
+
+bool StocksGameMode::onPlayerDead(int id) {
+	if (id < playerStocks_.size()) {
+		playerStocks_[id]--;
+		return playerStocks_[id] > 0;
+	}
+	else return true;
+}

@@ -17,4 +17,5 @@ public:
 	virtual void render();
 	virtual void update();
 	virtual bool onPlayerDead(Health* player);  //returns false when player runs out of stocks
+	virtual bool onPlayerDead(int id);
 };
