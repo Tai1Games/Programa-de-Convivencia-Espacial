@@ -66,12 +66,12 @@ void Weapon::UnPickObject()
 	currentHand_ = nullptr;
 }
 
-void Weapon::SavePlayerInfo(int index, Hands* playerH)
+void Weapon::SavePlayerInfo(int index, Hands* playerH, Health* healthAux)
 {
 	playerInfo_[index].isNear = true;
 	playerInfo_[index].playerHands = playerH;
+	playerInfo_[index].playerHealth = healthAux;
 }
-
 void Weapon::DeletePlayerInfo(int index)
 {
 	playerInfo_[index].isNear = false;
@@ -80,13 +80,10 @@ void Weapon::DeletePlayerInfo(int index)
 
 
 void Weapon::Action() {
-	cout << "Zasca ";
-	/*Entity* aux = entity_;
-
-	Health* he = aux->getComponent<Health>(ComponentType::Health);
 	//Calculo del daño de la chancla
-	int damage = he->getHealthMax() - he->getHealth() + 1;
-
-	cout << "Fuiste golpeado con " << damage << " al contrincante" << endl;
-	*/
+	int damage = playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealthMax() - playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealth() + 1;
+	
+	cout << "Golpeaste con una fuerza de " << damage << " al contrincante" << endl;
+	
+	
 }

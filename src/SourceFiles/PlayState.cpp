@@ -18,6 +18,12 @@ PlayState::PlayState()  {
 }
 
 PlayState::~PlayState() {
+	delete entityManager_;
+	entityManager_ = nullptr;
+	delete collisionHandler_;
+	collisionHandler_ = nullptr;
+	delete physicsWorld_;
+	physicsWorld_ = nullptr;
 }
 
 void PlayState::init() {
