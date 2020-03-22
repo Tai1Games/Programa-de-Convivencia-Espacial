@@ -32,6 +32,24 @@ const int IMPULSE_FROM_OBJECT_FORCE = 50;
 const float WEAPON_THROW_SPEED = 100;
 const float WEAPON_SPIN_SPEED = 8;
 
+const double STAPLER_DENSITY = 1;
+const double STAPLER_FRICTION = 0.1;
+const double STAPLER_RESTITUTION = 0.2;
+const double STAPLER_LINEAR_DRAG = 0;
+const double STAPLER_ANGULAR_DRAG = 0;
+
+const double FLIPFLOP_DENSITY = 1;
+const double FLIPFLOP_FRICTION = 0.1;
+const double FLIPFLOP_RESTITUTION = 0.2;
+const double FLIPFLOP_LINEAR_DRAG = 0;
+const double FLIPFLOP_ANGULAR_DRAG = 0;
+
+const double BOUNCINGBALL_DENSITY = 1;
+const double BOUNCINGBALL_FRICTION = 0;
+const double BOUNCINGBALL_RESTITUTION = 0.99;
+const double BOUNCINGBALL_LINEAR_DRAG = 0;
+const double BOUNCINGBALL_ANGULAR_DRAG = 0;
+
 //Constantes referentes al HealthViewer
 const int LIFE_DRAW_OFFSET = 10;
 const int LIFE_WIDTH = 40;
@@ -45,6 +63,12 @@ const int STOCK_INITIAL_OFFSET = 15;
 const int STOCK_OFFSET = 10;
 const int STOCK_WIDTH = 20;
 const int STOCK_HEIGTH = 20;
+
+//Constantes de hands
+
+const double HAND_BODY_OFFSET = 120;
+
+
 
 //Modos de juegos
 enum States

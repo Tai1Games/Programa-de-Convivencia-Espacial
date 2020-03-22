@@ -60,7 +60,6 @@ void PlayState::init() {
 	Collider* collSuelo2 = ground2->addComponent<Collider>(physicsWorld_, b2_staticBody, 10.5, 12, 12, 1, 10, 0, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody,     21.5, 10,   1,     10,     10,        1,        0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collpared2 = pared2->addComponent<Collider>(physicsWorld_, b2_staticBody, 0, 10, 1, 10, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false, true);
-	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody,      18,   8,    0.5,   0.5,    1,         10,       0,           0,          0.1,         Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 0,    8.25, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
 	Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
