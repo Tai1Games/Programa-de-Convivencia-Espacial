@@ -305,7 +305,7 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 	}
 
 	float lastLx = m_joystickValues[whichOne].first->getX(), lastLy = m_joystickValues[whichOne].first->getY();
-	cout << lastLx << " " << lastLy << endl;
+
 	if ((lastLx == 0 && lastLy >= 0.99) || (lastLx == 0 && lastLy <= -0.99) ||
 		(lastLx >= 0.99 && lastLy == 0) || (lastLx <= -0.99 && lastLy == 0)) {
 		lastLStickValue_[whichOne].x = lastLx;
