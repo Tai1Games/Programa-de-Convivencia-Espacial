@@ -149,12 +149,12 @@ double InputHandler::getStickX(int joy, GAMEPADSTICK stick)
 {
 	if (m_joystickValues.size() > 0)
 	{
-		if (stick == LEFT)
+		if (stick == LEFTSTICK)
 
 		{
 			return m_joystickValues[joy].first->getX();
 		}
-		else if (stick == RIGHT)
+		else if (stick == RIGHTSTICK)
 		{
 			return m_joystickValues[joy].second->getX();
 		}
