@@ -19,6 +19,9 @@ const double PI = 3.141592653589793238;
 //Constantes Escala Render
 const double PIXELS_PER_METER = 60.0;
 
+//UI
+const int IMPULSE_SIZE = 100;
+
 //Limites de fuerza para impactos
 const int lowDamage = 35;
 const int mediumDamage = 50;
