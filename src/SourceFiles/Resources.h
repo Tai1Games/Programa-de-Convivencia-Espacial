@@ -27,7 +27,9 @@ public:
 		Grapadora,
 		Piedra,
 		Hands,
-		PinkTinky
+		PinkTinky,
+		FlechaImpulso,
+		ImpulsoBackground
 
 		// text
 		

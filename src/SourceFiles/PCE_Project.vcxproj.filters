@@ -141,6 +141,9 @@
     <ClInclude Include="CollisionHandler.h">
       <Filter>Header Files\Managers &amp; Handlers</Filter>
     </ClInclude>
+    <ClInclude Include="ImpulseViewer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -226,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="CollisionHandler.cpp">
       <Filter>Source Files\Managers &amp; Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="ImpulseViewer.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

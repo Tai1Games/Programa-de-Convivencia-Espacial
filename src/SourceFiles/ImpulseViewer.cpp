@@ -17,8 +17,11 @@ void ImpulseViewer::init() {
 }
 
 void ImpulseViewer::draw() const {
+	b2Vec2 stickDir = SDL_Game::instance()->getInputHandler()->getLastStickDir(playerNumber_, InputHandler::LEFTSTICK);
 	if (SDL_Game::instance()->getInputHandler()->isButtonDown(playerNumber_,SDL_CONTROLLER_BUTTON_A)) {
-		SDL_Rect colRec = playerCollider_->getRectRender();
-		playerController_->calculateForce();
+		//double angle = std::acos(stickDir.y)*(-180.0/PI);
+		double angle = std::atan2((double)stickDir.x, -(double)stickDir.y) * (180.0 / PI);
+		SDL_Rect destRect{ 1920 / 2,1080 / 2,100,100 };
+		emptyTexture_->render(destRect, angle);
 	}
 }

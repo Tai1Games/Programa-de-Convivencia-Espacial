@@ -14,7 +14,7 @@ const double MS_PER_FRAME = 1000.0/60.0; //Asumiendo 60fps
 const double SECONDS_PER_FRAME = 1.0 / 60.0;
 
 //Constantes Generales
-const double PI = 3.14159265359;
+const double PI = 3.141592653589793238;
 
 //Constantes Escala Render
 const double PIXELS_PER_METER = 60.0;

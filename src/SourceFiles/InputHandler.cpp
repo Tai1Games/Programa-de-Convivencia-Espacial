@@ -207,17 +207,16 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		if (val > m_joystickDeadZone)
 		{
 			m_joystickValues[whichOne].first->setX(val*normalize);
-			lastLStickValue_[whichOne].setX(m_joystickValues[whichOne].first->getX());
 		}
 		else if (event.jaxis.value < -m_joystickDeadZone)
 		{
 			m_joystickValues[whichOne].first->setX(val * normalize);
-			lastLStickValue_[whichOne].setX(m_joystickValues[whichOne].first->getX());
 		}
 		else
 		{
 			m_joystickValues[whichOne].first->setX(0);
 		}
+		lastLStickValue_[whichOne].setX(m_joystickValues[whichOne].first->getX());
 	}
 	// left stick move up or down
 	if (event.jaxis.axis == 1)
@@ -225,17 +224,16 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		if (event.jaxis.value > m_joystickDeadZone)
 		{
 			m_joystickValues[whichOne].first->setY(val * normalize);
-			lastLStickValue_[whichOne].setY(m_joystickValues[whichOne].first->getY());
 		}
 		else if (event.jaxis.value < -m_joystickDeadZone)
 		{
 			m_joystickValues[whichOne].first->setY(val * normalize);
-			lastLStickValue_[whichOne].setY(m_joystickValues[whichOne].first->getY());
 		}
 		else
 		{
 			m_joystickValues[whichOne].first->setY(0);
 		}
+		lastLStickValue_[whichOne].setY(m_joystickValues[whichOne].first->getY());
 	}
 	//left trigger move up or down
 	if (event.jaxis.axis == 2) {
