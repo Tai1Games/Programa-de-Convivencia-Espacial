@@ -31,9 +31,7 @@ void PlayState::init() {
 	Entity* map = entityManager_->addEntity();
 	Entity* tinky = entityManager_->addEntity();
 	Entity* ground = entityManager_->addEntity();
-	Entity* ground2 = entityManager_->addEntity();
 	Entity* pared = entityManager_->addEntity();
-	Entity* pared2 = entityManager_->addEntity();
 	//Entity* rock = entityManager_->addEntity();
 
 
@@ -57,13 +55,17 @@ void PlayState::init() {
 	                                                                                      // x,  y,   width, height, density,	friction, restitution, linearDrag, angularDrag,	Layer,							        sensor canBeAttached
 	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    17,    7,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody,    10.5, -0.5, 12,    1,      10,        0,        0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
-	Collider* collSuelo2 = ground2->addComponent<Collider>(physicsWorld_, b2_staticBody, 10.5, 12, 12, 1, 10, 0, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody,     21.5, 10,   1,     10,     10,        1,        0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
-	Collider* collpared2 = pared2->addComponent<Collider>(physicsWorld_, b2_staticBody, 0, 10, 1, 10, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 0,    8.25, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
 	Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
 	Collider* collTanko = tanko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	  7,	3,	  1,	 1,		 1,		    0.1,	  0.2,		   0,		   0,			Collider::CollisionLayer::Player,		false, false);
+
+	//Muros
+	ground->addComponent<Viewer>();
+	collSuelo->setUserData(ground);
+	pared->addComponent<Viewer>();
+	collpared->setUserData(pared);
 
 	//Players
 	tinky->addComponent<PlayerData>(0);
@@ -92,16 +94,6 @@ void PlayState::init() {
 	tunko->addComponent<Health>(3);
 	tunko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
 	collTunko->setUserData(tunko);
-
-	//Muros
-	ground->addComponent<Viewer>();
-	collSuelo->setUserData(ground);
-	collSuelo2->setUserData(ground2);
-	ground2->addComponent<Viewer>();
-	pared->addComponent<Viewer>();
-	pared2->addComponent<Viewer>();
-	collpared->setUserData(pared);
-	collpared2->setUserData(pared2);
 
 	//Objetos flotantes
 	
