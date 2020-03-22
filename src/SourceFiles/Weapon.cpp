@@ -18,8 +18,11 @@ void Weapon::init()
 
 void Weapon::update()
 {
-	
-	
+	if (currentHand_ != nullptr && mainCollider_->isEnabled()) {
+		double x = currentHand_->getPos().x + currentHand_->getDir().x * (160 / PIXELS_PER_METER);
+		double y = currentHand_->getPos().y + currentHand_->getDir().y * (160 / PIXELS_PER_METER);
+		mainCollider_->setTransform(b2Vec2(x, y), 0.0);
+	}
 }
 
 void Weapon::handleInput()
@@ -50,7 +53,11 @@ void Weapon::PickObjectBy(Hands* playerH)
 		currentHand_ = playerH;
 		picked_ = true;
 		currentHand_->setWeapon(weaponType_);
-		mainCollider_->getBody()->SetEnabled(false);
+		if (weaponType_ == WeaponID::Chancla) {
+			//mainCollider_->createFixture(mainCollider_->getW(0)/2, mainCollider_->getH(0)/2, 1, 0.1, 0, Collider::CollisionLayer::Weapon, true);
+			mainCollider_->getBody()->SetEnabled(false);
+		}
+		else mainCollider_->getBody()->SetEnabled(false);
 		vw_->setDrawable(false);
 	}
 }
@@ -59,7 +66,11 @@ void Weapon::UnPickObject()
 {
 	currentHand_->setWeapon(NoWeapon);
 	picked_ = false;
-	mainCollider_->getBody()->SetEnabled(true);
+	if (weaponType_ == WeaponID::Chancla) {
+		//mainCollider_->createFixture(mainCollider_->getW(0) * 4, mainCollider_->getH(0) * 4, 1, 0.1, 0, Collider::CollisionLayer::Weapon, true);
+		mainCollider_->getBody()->SetEnabled(true);
+	}
+	else mainCollider_->getBody()->SetEnabled(true);
 	vw_->setDrawable(true);
 	mainCollider_->setLinearVelocity(b2Vec2(0, 0));
 	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x, currentHand_->getPos().y), currentHand_->getAngle());
@@ -78,11 +89,19 @@ void Weapon::DeletePlayerInfo(int index)
 {
 	playerInfo_[index].isNear = false;
 	playerInfo_[index].playerHands = nullptr;
-	playerInfo_[index].playerHealth = nullptr;
 }
 
 
 void Weapon::Action() {
 	
-	
+	hit = !hit;
+	cout << "Modo zurra activado" << endl;
+	//Calculo del daño de la chancla
+	damage_ = playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealthMax() - playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealth() + 1;
+
+	cout << "Golpeaste con una fuerza de " << damage_ << " al contrincante" << endl;
+}
+
+int Weapon::getDamage() {
+	return damage_;
 }

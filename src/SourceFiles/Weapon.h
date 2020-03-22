@@ -27,6 +27,11 @@ protected:
 	std::vector<PlayerInfo> playerInfo_;
 	/*Mano que coge este objeto*/
 	Hands* currentHand_ = nullptr;
+
+	int damage_=1;
+	bool hit = false;
+	int index_ = -1;
+
 public:
 	Weapon(WeaponID wId): Component(ComponentType::Weapon), weaponType_(wId){}
 	~Weapon(){};
@@ -47,6 +52,7 @@ public:
 	/*Borra la informacion del jugador que sale del trigger*/
 	void DeletePlayerInfo(int index);
 	virtual void Action();
+	int getDamage();
 	int getWeaponType() { return weaponType_; }
 };
 

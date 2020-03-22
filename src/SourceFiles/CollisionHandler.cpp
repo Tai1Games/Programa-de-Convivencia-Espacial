@@ -49,6 +49,20 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		}
 	}
 	//Melee Weapons collisions
+	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon && contact->GetFixtureA()->IsSensor()
+		&& contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player){
+		cout << "Tocas con un sensor" << endl;
+		ObjectCollidesWithPlayer(contact->GetFixtureB(), player_Health);
+		
+		Entity* aux = static_cast<Entity*>(fixA->GetBody()->GetUserData());
+		Weapon* weAux = aux->getComponent<Weapon>(ComponentType::Weapon);
+		player_Health->subtractLife(weAux->getDamage());
+	}
+	else if(contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon && contact->GetFixtureB()->IsSensor()
+		&& contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player)
+	{
+		cout << "Tocas con un sensor" << endl;
+	}
 
 	//Pickable weapon collisions
 	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon ||
@@ -56,13 +70,18 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		PlayerCanPickWeapon(contact, pickableObj, playerHands)) {
 		cout << "Pickeable weapon" << endl;
 
+		player_Health = nullptr;
 		ObjectCollidesWithPlayer(fixA, player_Health);
 		if (player_Health != nullptr) {
 			pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands, player_Health);
+			
 		}
+		player_Health = nullptr;
+
 		ObjectCollidesWithPlayer(fixB, player_Health);
 		if(player_Health != nullptr) {
 			pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands, player_Health);
+			
 		}
 	}
 
@@ -78,7 +97,7 @@ void CollisionHandler::EndContact(b2Contact * contact){
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon) &&
 		PlayerCanPickWeapon(contact, pickableObj, playerHands)) {
 		pickableObj->DeletePlayerInfo(playerHands->getPlayerId());
-		cout << "Dropped weapon" << endl;
+		cout << "Weapon out of reach" << endl;
 	}
 }
 
