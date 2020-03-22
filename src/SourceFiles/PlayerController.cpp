@@ -21,7 +21,7 @@ void PlayerController::handleInput()
 	}//Soltarse
 	else if (ih->isButtonJustUp(playerNumber_, SDL_CONTROLLER_BUTTON_A)){
 		dirImpulse_ = SDL_Game::instance()->getInputHandler()->getLastStickDir(playerNumber_, InputHandler::GAMEPADSTICK::LEFTSTICK);
-		dirImpulse_ *= calculateForce(attachesToObj_->isAttached());
+		dirImpulse_ *= calculateForce();
 		dirImpulse_.y *= -1; //hay que invertirlo para convertirlo en vector compatible con box2D
 		attachesToObj_->deAttachFromObject();
 		coll_->applyLinearImpulse(dirImpulse_, b2Vec2(0, 0)); //aplica la fuerza
@@ -31,12 +31,12 @@ void PlayerController::handleInput()
 	}
 }
 
-float PlayerController::calculateForce(bool isAttached) {
+float PlayerController::calculateForce() {
 	//Funcion de calculo de fuerza, de momento lineal
 	//El tiempo va dado en milisegundos
 
 	Uint32 newForce = (SDL_Game::instance()->getTime() - chargeTimeStart_) / 100;
-	if (isAttached) {
+	if (attachesToObj_->isAttached()) {
 		if (newForce > IMPULSE_GRABBED)
 			newForce = IMPULSE_GRABBED;
 	}

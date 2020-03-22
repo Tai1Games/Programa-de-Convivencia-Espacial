@@ -17,12 +17,12 @@ private:
 	Uint32 chargeTimeStart_;
 public:
 	PlayerController(int p);
-	~PlayerController() {}
+	virtual ~PlayerController() { Component::~Component(); };
 
 	void init() override;
 	void handleInput() override;
 
 	void setForce(float f) { impulseForce_ = f; }
-	float calculateForce(bool isAttached);
+	float calculateForce();
 };
 
