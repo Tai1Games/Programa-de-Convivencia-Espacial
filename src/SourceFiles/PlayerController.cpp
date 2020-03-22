@@ -2,14 +2,17 @@
 #include "InputHandler.h"
 #include "Entity.h"
 
-PlayerController::PlayerController(int p) :Component(ComponentType::PlayerController), 
-	coll_(nullptr), attachesToObj_(nullptr), playerNumber_(p), chargeTimeStart_(0), dirImpulse_(1,0), impulseForce_(0)
-{}
+PlayerController::PlayerController() : Component(ComponentType::PlayerController),
+coll_(nullptr), attachesToObj_(nullptr), playerNumber_(-1), chargeTimeStart_(0), dirImpulse_(1, 0), impulseForce_(0)
+{
+}
 
 void PlayerController::init()
 {
+	playerData_ = GETCMP1_(PlayerData);
 	coll_ = GETCMP1_(Collider); //pilla referencia al collider
 	attachesToObj_ = GETCMP1_(AttachesToObjects);
+	playerNumber_ = playerData_->getPlayerNumber();
 }
 
 void PlayerController::handleInput()
@@ -27,7 +30,6 @@ void PlayerController::handleInput()
 		coll_->applyLinearImpulse(dirImpulse_, b2Vec2(0, 0)); //aplica la fuerza
 
 		chargeTimeStart_ = 0;
-		impulseForce_ = 0;
 	}
 }
 

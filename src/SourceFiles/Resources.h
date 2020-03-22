@@ -30,9 +30,14 @@ public:
 		PinkTinky,
 		FlechaImpulso,
 		ImpulsoBackground
+		Slider,
+		SliderControl,
 
 		// text
-		
+		PauseText,
+		ResumeText,
+		SoundText,
+		ExitText
 	};
 
 	enum AudioId : std::size_t {
