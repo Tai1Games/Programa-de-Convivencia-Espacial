@@ -56,7 +56,7 @@ void PlayState::init() {
 	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    4,    8,    1,     1.55,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody,    15, -0.2, 20,    1,      10,        0,        0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody,     32, 10,   1,     10,     10,        1,        0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
-	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody,      18,   8,    0.5,   0.5,    1,         10,       0,           0,          0.1,         Collider::CollisionLayer::NormalObject, false, true);
+	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody,      18,   8,    0.7,   0.7,    0.8,         10,       0,           0,          0.1,         Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 0,    8.25, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
 	Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
@@ -98,7 +98,7 @@ void PlayState::init() {
 	collpared->setUserData(pared);
 
 	//Objetos flotantes
-	rock->addComponent <Viewer>(Resources::PinkTinky);
+	rock->addComponent <Viewer>(Resources::Chancla);
 	rock->addComponent<Weapon>(WeaponID::PinkTinky);
 	collRock->setUserData(rock);
 
