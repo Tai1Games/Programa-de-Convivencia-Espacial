@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include "GameState.h"
+#include "GameMode.h"
 #include "Entity.h"
 #include "checkML.h"
 #include "collisionHandler.h"
@@ -10,6 +11,7 @@ using namespace std;
 // esta clase es equivalente a un nivel del juego
 //se espera que herede de gamestate en un futuro
 //tambien deberia convertirse en un template de modo de juego y mapa
+
 class PlayState : public GameState
 {
 private:
@@ -20,11 +22,15 @@ private:
 	//HUD
 
 	CollisionHandler* collisionHandler_;
+	vector<Entity*> players_;
+	GameMode* gameMode_ = nullptr;
 
 public:
-	PlayState();
+	PlayState(GameMode* gMode);
 	~PlayState();
 	virtual void init();
 	virtual void update();
+	virtual void render();
 	virtual void handleInput();
+	std::vector<Entity*> getPlayers() { return players_; };
 };
