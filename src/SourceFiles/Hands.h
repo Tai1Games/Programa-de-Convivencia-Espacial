@@ -29,5 +29,6 @@ public:
 	b2Vec2 getPos() { return pos_; }
 	b2Vec2 getDir() { return dir_; }
 	float getAngle() { return angle_; }
+	WeaponID getWeapon() { return currentWeapon_; }
 };
 

@@ -28,6 +28,10 @@ const int hightDamage = 70;
 //Constantes jugador
 const int IMPULSE_FROM_OBJECT_FORCE = 50;
 
+//Constantes de armas
+const float WEAPON_THROW_SPEED = 100;
+const float WEAPON_SPIN_SPEED = 8;
+
 
 //Modos de juegos
 enum States
@@ -37,4 +41,16 @@ enum States
 	pause,
 	//No toques
 	NUMBER_OF_STATES
+};
+
+enum WeaponID {
+	NoWeapon,
+	Piedra,
+	Pelota,
+	Mancuerna,
+	Grapadora,
+	Extintor,
+	Chancla,
+
+	WEAPON_NUMBER
 };

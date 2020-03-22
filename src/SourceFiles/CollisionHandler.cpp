@@ -52,7 +52,6 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon ||
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon) &&
 		PlayerCanPickWeapon(contact, pickableObj, playerHands)) {
-		cout << "Picked up weapon" << endl;
 		pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands);
 	}
 

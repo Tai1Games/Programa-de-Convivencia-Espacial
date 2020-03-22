@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "Collider.h"
 #include "Viewer.h"
+#include "Constants.h"
 
 class Hands;
 
@@ -10,18 +11,6 @@ struct PlayerInfo
 {
 	bool isNear = false;
 	Hands* playerHands = nullptr;
-};
-
-enum WeaponID {
-	NoWeapon,
-	Piedra,
-	Pelota,
-	Mancuerna,
-	Grapadora,
-	Extintor,
-	Chancla,
-
-	WEAPON_NUMBER
 };
 
 class Weapon : public Component
@@ -36,8 +25,6 @@ private:
 	std::vector<PlayerInfo> playerInfo_;
 	/*Mano que coge este objeto*/
 	Hands* currentHand_ = nullptr;
-	float throwSpeed_ = 30;
-	float spinSpeed_ = 8;
 public:
 	Weapon(Weapon::WeaponID wId): Component(ComponentType::Weapon), weaponType_(wId){}
 	~Weapon(){};

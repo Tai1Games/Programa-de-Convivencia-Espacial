@@ -46,11 +46,13 @@ void Weapon::handleInput()
 
 void Weapon::PickObjectBy(Hands* playerH)
 {
-	currentHand_ = playerH;
-	picked_ = true;
-	currentHand_->setWeapon(weaponType_);
-	mainCollider_->getBody()->SetEnabled(false);
-	vw_->setDrawable(false);
+	if (playerH->getWeapon() == NoWeapon) {
+		currentHand_ = playerH;
+		picked_ = true;
+		currentHand_->setWeapon(weaponType_);
+		mainCollider_->getBody()->SetEnabled(false);
+		vw_->setDrawable(false);
+	}
 }
 
 void Weapon::UnPickObject()
@@ -61,8 +63,8 @@ void Weapon::UnPickObject()
 	vw_->setDrawable(true);
 	mainCollider_->setLinearVelocity(b2Vec2(0, 0));
 	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x, currentHand_->getPos().y), currentHand_->getAngle());
-	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * throwSpeed_, -currentHand_->getDir().y * throwSpeed_), mainCollider_->getBody()->GetLocalCenter());
-	mainCollider_->getBody()->SetAngularVelocity(spinSpeed_);
+	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * WEAPON_THROW_SPEED, -currentHand_->getDir().y * WEAPON_THROW_SPEED), mainCollider_->getBody()->GetLocalCenter());
+	mainCollider_->getBody()->SetAngularVelocity(WEAPON_SPIN_SPEED);
 	currentHand_ = nullptr;
 }
 

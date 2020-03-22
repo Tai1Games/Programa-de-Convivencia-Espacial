@@ -35,7 +35,10 @@ public:
 	//Crea una pelota saltarina (Podemos pasarle los párametros que queramos segun las necesidades del objeto)
 	static void makePelota(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 		Entity* e = entityManager->addEntity();
-		Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false, true);
+		// x,  y,   width, height, density,	friction, restitution, linearDrag, angularDrag,	Layer,							        sensor canBeAttached
+		Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, 0.5, 0, 0.99, 0, 0, Collider::CollisionLayer::NormalObject, false, true);
+		aux->getBody()->SetLinearDamping(0);
+		aux->getBody()->SetAngularDamping(0);
 		e->addComponent <Viewer>(Resources::Pelota);
 		e->addComponent<Weapon>(WeaponID::Pelota);
 		aux->setUserData(e);
