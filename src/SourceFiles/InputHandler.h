@@ -53,7 +53,7 @@ private:
 	bool isButtonUpEvent_;
 	bool isAxisMovementEvent_;
 
-	std::vector<Vector2D> lastLStickValue_;
+	std::vector<b2Vec2> lastLStickValue_;
 	//
 	//Methods
 	//
