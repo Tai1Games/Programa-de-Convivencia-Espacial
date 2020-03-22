@@ -28,6 +28,8 @@ public:
 		Piedra,
 		Hands,
 		PinkTinky,
+		FlechaImpulso,
+		ImpulsoBackground,
 		Slider,
 		SliderControl,
 
