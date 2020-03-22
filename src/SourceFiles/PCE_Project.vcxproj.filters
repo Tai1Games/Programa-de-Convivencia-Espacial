@@ -150,11 +150,11 @@
     <ClInclude Include="StocksGameMode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerData.h">
-          <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PauseState.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerData.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -251,11 +251,11 @@
     <ClCompile Include="StocksGameMode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerData.cpp">
-          <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PauseState.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerData.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

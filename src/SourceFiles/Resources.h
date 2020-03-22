@@ -29,7 +29,7 @@ public:
 		Hands,
 		PinkTinky,
 		FlechaImpulso,
-		ImpulsoBackground
+		ImpulsoBackground,
 		Slider,
 		SliderControl,
 

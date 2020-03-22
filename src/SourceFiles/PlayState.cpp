@@ -71,7 +71,7 @@ void PlayState::init() {
 	tinky->addComponent<AttachesToObjects>();
 	tinky->addComponent<PlayerController>();
 	collTinky->setUserData(tinky);
-	tinky->addComponent<ImpulseViewer>(0,Resources::FlechaImpulso,Resources::ImpulsoBackground);
+	tinky->addComponent<ImpulseViewer>(Resources::FlechaImpulso,Resources::ImpulsoBackground);
 
 	tonko->addComponent<PlayerData>(1);
 	tonko->addComponent<Viewer>(Resources::Tinky);

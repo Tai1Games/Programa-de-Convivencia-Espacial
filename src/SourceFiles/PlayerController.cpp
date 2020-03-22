@@ -3,7 +3,7 @@
 #include "Entity.h"
 
 PlayerController::PlayerController() : Component(ComponentType::PlayerController),
-coll_(nullptr), attachesToObj_(nullptr), playerNumber_(-1), chargeTimeStart_(0), dirImpulse_(1, 0), impulseForce_(0)
+coll_(nullptr), attachesToObj_(nullptr), playerNumber_(-1), chargeTimeStart_(0), dirImpulse_(1, 0)
 {
 }
 
@@ -19,10 +19,10 @@ void PlayerController::handleInput()
 {
 	InputHandler* ih = SDL_Game::instance()->getInputHandler();
 	//Empieza la carga
-	if (ih->isButtonJustDown(playerNumber_, SDL_CONTROLLER_BUTTON_A)) { 
+	if (ih->isButtonJustDown(playerNumber_, SDL_CONTROLLER_BUTTON_A)) {
 		chargeTimeStart_ = SDL_Game::instance()->getTime();
 	}//Soltarse
-	else if (ih->isButtonJustUp(playerNumber_, SDL_CONTROLLER_BUTTON_A)){
+	else if (ih->isButtonJustUp(playerNumber_, SDL_CONTROLLER_BUTTON_A)) {
 		dirImpulse_ = SDL_Game::instance()->getInputHandler()->getLastStickDir(playerNumber_, InputHandler::GAMEPADSTICK::LEFTSTICK);
 		dirImpulse_ *= calculateForce();
 		dirImpulse_.y *= -1; //hay que invertirlo para convertirlo en vector compatible con box2D
