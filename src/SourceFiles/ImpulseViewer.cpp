@@ -23,7 +23,6 @@ void ImpulseViewer::draw() const {
 		SDL_Rect destRect{ 1920 / 2,1080 / 2,IMPULSE_SIZE,IMPULSE_SIZE };
 		emptyTexture_->render(destRect, angle);
 		float force = playerController_->calculateForce();
-		cout << force << " " << force / IMPULSE_GRABBED << " " << int((force / IMPULSE_GRABBED) * 11) << endl;
 		chargeTexture_->render(destRect, angle, { emptyTexture_->getWidth() * int((playerController_->calculateForce() / IMPULSE_GRABBED) * 11), 0, emptyTexture_->getWidth(), emptyTexture_->getHeight() });
 	}
 }
