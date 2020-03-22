@@ -17,6 +17,7 @@ namespace ComponentType {
 		HealthViewer,
 		Tilemap,
 		Weapon,
+		MeleeWeapon,
 		Hands,
 		PlayerController,
 		// don't touch the rest of this enum, it is to identify the max

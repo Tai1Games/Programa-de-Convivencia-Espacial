@@ -9,13 +9,12 @@
 #include "HealthViewer.h"
 #include "InputHandler.h"
 #include "Weapon.h"
+#include "MeleeWeapon.h"
 #include "Hands.h"
 
 class WeaponFactory
 {
 private:
-	//b2World* physicsWorld = nullptr;
-	//EntityManager* entityManager = nullptr;
 
 public:
 
@@ -28,7 +27,8 @@ public:
 		Entity* e = entityManager->addEntity();
 		Collider* aux=e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false, true);
 		e->addComponent <Viewer>(Resources::Chancla);
-		e->addComponent<Weapon>(WeaponID::Chancla);
+		//e->addComponent<MeleeWeapon>(WeaponID::Chancla);
+		e->addComponent<Weapon>(WeaponID::Chancla);		//Aun no se como hacerlo
 		aux->setUserData(e);
 	}
 

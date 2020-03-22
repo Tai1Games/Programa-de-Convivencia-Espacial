@@ -78,14 +78,11 @@ void Weapon::DeletePlayerInfo(int index)
 {
 	playerInfo_[index].isNear = false;
 	playerInfo_[index].playerHands = nullptr;
+	playerInfo_[index].playerHealth = nullptr;
 }
 
 
 void Weapon::Action() {
-	//Calculo del daño de la chancla
-	int damage = playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealthMax() - playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealth() + 1;
-	
-	cout << "Golpeaste con una fuerza de " << damage << " al contrincante" << endl;
 	
 	
 }

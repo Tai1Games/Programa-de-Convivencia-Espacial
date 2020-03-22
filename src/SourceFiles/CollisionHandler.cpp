@@ -1,4 +1,5 @@
 #include "CollisionHandler.h"
+#include "MeleeWeapon.h"
 //This method calculates the damage recieved by the impact of an object (or another player) with the player
 
 void CollisionHandler::damageOnImpact(b2Fixture* fix, Health* playerHealth) {
@@ -47,6 +48,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 			damageOnImpact(fixA, player_Health);	//Check the stats of the other object
 		}
 	}
+	//Melee Weapons collisions
 
 	//Pickable weapon collisions
 	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon ||

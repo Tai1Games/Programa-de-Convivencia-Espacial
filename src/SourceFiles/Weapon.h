@@ -17,7 +17,7 @@ struct PlayerInfo
 
 class Weapon : public Component
 {
-private:
+protected:
 	Collider* mainCollider_ = nullptr;
 	bool picked_ = false;
 	InputHandler* ih_ = nullptr;
@@ -28,7 +28,7 @@ private:
 	/*Mano que coge este objeto*/
 	Hands* currentHand_ = nullptr;
 public:
-	Weapon(Weapon::WeaponID wId): Component(ComponentType::Weapon), weaponType_(wId){}
+	Weapon(WeaponID wId): Component(ComponentType::Weapon), weaponType_(wId){}
 	~Weapon(){};
 	virtual void init() override;
 	/*Se comprueba que jugador ha pulsado Y y est� cerca para recoger este objeto*/
@@ -46,7 +46,7 @@ public:
 	void SavePlayerInfo(int index, Hands* playerH, Health* healthAux);
 	/*Borra la informacion del jugador que sale del trigger*/
 	void DeletePlayerInfo(int index);
-	void Action();
+	virtual void Action();
 	int getWeaponType() { return weaponType_; }
 };
 
