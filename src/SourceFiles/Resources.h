@@ -29,6 +29,8 @@ public:
 		Body,
 		Hands,
 		PinkTinky,
+		FlechaImpulso,
+		ImpulsoBackground,
 		Slider,
 		SliderControl,
 

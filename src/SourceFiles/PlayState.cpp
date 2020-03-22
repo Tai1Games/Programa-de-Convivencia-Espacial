@@ -12,6 +12,7 @@
 #include "Weapon.h"
 #include "Hands.h"
 #include "PlayerController.h"
+#include "ImpulseViewer.h"
 #include "PlayerData.h"
 
 PlayState::PlayState(GameMode* gMode):GameState(),
@@ -70,6 +71,7 @@ void PlayState::init() {
 	tinky->addComponent<AttachesToObjects>();
 	tinky->addComponent<PlayerController>();
 	collTinky->setUserData(tinky);
+	tinky->addComponent<ImpulseViewer>(Resources::FlechaImpulso,Resources::ImpulsoBackground);
 
 	tonko->addComponent<PlayerData>(1);
 	tonko->addComponent<Viewer>(Resources::Tinky);
