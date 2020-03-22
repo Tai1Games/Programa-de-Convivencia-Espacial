@@ -18,7 +18,7 @@ const double PI = 3.14159265359;
 const int MAX_MUSIC_VOLUME = 100;
 
 //Constantes Escala Render
-const double PIXELS_PER_METER = 60.0;
+const double PIXELS_PER_METER = 40.0;
 
 //Limites de fuerza para impactos
 const int lowDamage = 35;
@@ -27,6 +27,11 @@ const int hightDamage = 70;
 
 //Constantes jugador
 const int IMPULSE_FROM_OBJECT_FORCE = 50;
+
+//Mano
+const int HAND_BODY_OFFSET = 90;
+const int HAND_WIDTH = 60;
+const int HAND_HEIGHT = 60;
 
 //Constantes referentes al HealthViewer
 const int LIFE_DRAW_OFFSET = 10;
