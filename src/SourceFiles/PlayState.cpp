@@ -24,7 +24,7 @@ void PlayState::init() {
 	//se podría JSONizar para evitar compilar
 	entityManager_ = new EntityManager();
 	physicsWorld_ = new b2World(b2Vec2(0, 0));
-	collisionHandler_ = new CollisionHandler();
+	collisionHandler_ = new CollisionHandler(gameMode_);
 	physicsWorld_->SetContactListener(collisionHandler_);
 
 	Entity* map = entityManager_->addEntity();

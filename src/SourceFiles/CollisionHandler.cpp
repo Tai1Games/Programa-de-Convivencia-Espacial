@@ -1,4 +1,5 @@
 #include "CollisionHandler.h"
+#include "StocksGameMode.h"
 //This method calculates the damage recieved by the impact of an object (or another player) with the player
 
 void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth) {
@@ -17,10 +18,7 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health*
 	if (playerHealth->getHealth() <= 0)
 	{
 		//reset player
-		//respawn
-		playerHealth->resetHealth();
-		b2Body* b = player->GetBody();
-		vecMove.push_back(b);
+
 		//soltar objetos agarrados
 		AttachesToObjects* a = static_cast<AttachesToObjects*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects));
 		if (a != nullptr && a->isAttached()) vecAttach.push_back(a);
@@ -29,6 +27,19 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health*
 		Weapon* w = nullptr;
 		if (h != nullptr) w = h->getWeapon();
 		if (w != nullptr) vecWeapon.push_back(w);
+		//respawn
+		StocksGameMode* s = static_cast<StocksGameMode*>(gMode_);
+		PlayerData* p = static_cast<PlayerData*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<PlayerData>(ComponentType::PlayerData));
+		moveData m;
+		m.body = player->GetBody();
+		m.pos = b2Vec2(1 + p->getPlayerNumber() * 6, 0); //punto de respawn provisional
+		if ((s != nullptr && s->onPlayerDead(p->getPlayerNumber()))) {	//si le quedan vidas
+			playerHealth->resetHealth();
+		}
+		else {	//si no le quedan vidas le mandamos lejos provisionalmente
+			m.pos = b2Vec2((1+p->getPlayerNumber())* 50, 0);
+		}
+		vecMove.push_back(m);
 
 		//cuerpo muerto
 		bodyData body;
@@ -60,13 +71,13 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	}
 	else if (fixB->GetFilterData().categoryBits) {
 		//check collision then do whatever, in this case twice because it might be two players colliding 
-		if (ObjectCollidesWithPlayer(fixA, player_Health)) {
+		if (ObjectCollidesWithPlayer(fixA, player_Health) && !fixB->IsSensor()) {
 			damageOnImpact(fixB, fixA, player_Health);	//Check the stats of the other object
 		}
 
 		player_Health = nullptr;	//Lo reseteamos para evitar problemas
 
-		if (ObjectCollidesWithPlayer(fixB, player_Health)) {
+		if (ObjectCollidesWithPlayer(fixB, player_Health) && !fixA->IsSensor()) {
 			damageOnImpact(fixA, fixB, player_Health);	//Check the stats of the other object
 		}
 	}
@@ -153,8 +164,9 @@ void CollisionHandler::SolveInteractions() {
 	}
 	vecWeld.clear();
 	for (int k = 0; k < vecMove.size(); k++) { //Recorre el vector resolviendo todos los move y lo limpia al final.
-		vecMove[k]->SetTransform(b2Vec2(20, 0), 0);
-		vecMove[k]->SetLinearVelocity(b2Vec2_zero);
+		vecMove[k].body->SetTransform(vecMove[k].pos, 0);
+		vecMove[k].body->SetLinearVelocity(b2Vec2_zero);
+		vecMove[k].body->SetAngularVelocity(0);
 	}
 	vecMove.clear();
 	for (int k = 0; k < vecWeapon.size(); k++) { //Recorre el vector soltando los weapon y lo limpia al final.

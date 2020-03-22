@@ -7,6 +7,7 @@
 #include "Entity.h"
 #include "Hands.h"
 #include "Collider.h"
+#include "GameMode.h"
 
 class CollisionHandler :
 	public b2ContactListener
@@ -18,7 +19,11 @@ private:
 		b2Vec2 collPoint;
 	};
 	vector<weldData> vecWeld; //Vector donde almacenamos los welds que realizaremos al final del step.
-	vector<b2Body*> vecMove; //Vector donde almacenamos los moves que realizaremos al final del step.
+	struct moveData { //Struct donde guardamos los datos necesarios para respawnear a los jugadores
+		b2Body* body;
+		b2Vec2 pos;
+	};
+	vector<moveData> vecMove; //Vector donde almacenamos los moves que realizaremos al final del step.
 	struct bodyData {  //Struct donde guardamos los datos necesarios para hacer un cuerpo muerto.
 		b2Vec2 pos;
 		float angle;
@@ -26,11 +31,12 @@ private:
 	vector<bodyData> vecBody; //Vector donde almacenamos los cuerpos muertos que crearemos al final del step.
 	vector<Weapon*> vecWeapon; //Vector donde almacenamos las weapons que soltaremos al final del step
 	vector<AttachesToObjects*> vecAttach; //Vector donde almacenamos los agarres que soltaremos al final del step
+	GameMode* gMode_;
 
 	void damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth);
 public:
 
-    CollisionHandler() {};
+    CollisionHandler(GameMode* g): gMode_(g) {};
     ~CollisionHandler() {};
 
     void BeginContact(b2Contact* contact);
