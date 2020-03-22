@@ -15,6 +15,7 @@ const double SECONDS_PER_FRAME = 1.0 / 60.0;
 
 //Constantes Generales
 const double PI = 3.14159265359;
+const int MAX_MUSIC_VOLUME = 100;
 
 //Constantes Escala Render
 const double PIXELS_PER_METER = 60.0;
@@ -24,10 +25,22 @@ const int lowDamage = 35;
 const int mediumDamage = 50;
 const int hightDamage = 70;
 
-
 //Constantes jugador
 const int IMPULSE_FROM_OBJECT_FORCE = 50;
 
+//Constantes referentes al HealthViewer
+const int LIFE_DRAW_OFFSET = 10;
+const int LIFE_WIDTH = 40;
+const int LIFE_HEIGTH = 50;
+const int LIFE_MARGIN_H = 30;
+const int LIFE_MARGIN_V = 10;
+
+
+//Constantes referentes a StoacksGameMode
+const int STOCK_INITIAL_OFFSET = 15;
+const int STOCK_OFFSET = 10;
+const int STOCK_WIDTH = 20;
+const int STOCK_HEIGTH = 20;
 
 //Modos de juegos
 enum States

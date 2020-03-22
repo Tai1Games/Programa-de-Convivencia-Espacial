@@ -3,15 +3,15 @@
 #include "Resources.h"
 #include "InputHandler.h"
 
-Hands::Hands(int playerID, int textureId, WeaponID wId) :
+Hands::Hands(int textureId, WeaponID wId) :
 	Component(ComponentType::Hands),
-	textureId_(textureId),
-	playerID_(playerID)
+	textureId_(textureId)
 {
 }
 
 void Hands::init()
 {
+	playerData_ = GETCMP1_(PlayerData);
 	collider_ = GETCMP1_(Collider);
 	ih_ = SDL_Game::instance()->getInputHandler();
 	if (tex_ == nullptr) {
