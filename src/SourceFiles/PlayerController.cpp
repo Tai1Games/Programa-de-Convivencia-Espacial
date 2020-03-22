@@ -15,8 +15,7 @@ void PlayerController::init()
 
 void PlayerController::handleInput()
 {
-	if (SDL_Game::instance()->getInputHandler()->getNumControllers() > 0 && 
-		SDL_Game::instance()->getInputHandler()->isButtonJustUp(playerNumber_, SDL_CONTROLLER_BUTTON_A) && 
+	if (SDL_Game::instance()->getInputHandler()->isButtonJustUp(playerNumber_, SDL_CONTROLLER_BUTTON_A) && 
 		attachesToObj_->isAttached()) {
 
 		dirImpulse_ = SDL_Game::instance()->getInputHandler()->getStickDir(playerNumber_, InputHandler::GAMEPADSTICK::LEFTSTICK);

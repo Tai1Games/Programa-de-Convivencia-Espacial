@@ -31,7 +31,7 @@ void AttachesToObjects::deAttachFromObject() {
 
 bool AttachesToObjects::canAttachToObject() { //Se agarra si está pretando una tecla válida y si no está agarrado a otra cosa.
 	InputHandler* ih = SDL_Game::instance()->getInputHandler();
-	if (ih->getNumControllers() > 0 &&  (ih->isButtonDown(playerNumber_, SDL_CONTROLLER_BUTTON_A ) || ih->isKeyDown(SDLK_SPACE))){
+	if (ih->isButtonDown(playerNumber_, SDL_CONTROLLER_BUTTON_A ) || ih->isKeyDown(SDLK_SPACE)){
 		if (attachedObject_ == nullptr) return true;
 	}
 	return false;

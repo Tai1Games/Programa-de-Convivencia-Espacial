@@ -37,22 +37,20 @@ void Hands::draw() const
 
 void Hands::update()
 {
-	if (ih_->getNumControllers() > 0) { //primero mira si hay mandos conectados pa que no pete el asunto
-		b2Vec2 vI = ih_->getStickDir(getPlayerId(), InputHandler::GAMEPADSTICK::LEFTSTICK);
-		if (vI.Length() != 0) {
-			dir_.Set(vI.x, vI.y);
-			//Cálculo principal del ángulo dependiendo de si está Flipeado o no
-			if (!onFlipped_) angle_ = (std::asin(dir_.x) * -180.0 / PI) + 90;
-			else angle_ = (std::asin(dir_.x) * -180.0 / PI) - 90;
-			//Corrección de sentido de giro cuando se cálcula en la semicircunferencia inferior.
-			if (dir_.y < 0) angle_ = -angle_;
-			//Si apunta a la derecha desactiva el flip, si apunta a la izquierda lo activa
-			if (dir_.x < 0 && !onFlipped_) onFlipped_ = true;
-			else if (dir_.x > 0 && onFlipped_) onFlipped_ = false;
-		}
-		pos_.Set(collider_->getPos().x + dir_.x * (bodyOffset_ / PIXELS_PER_METER),
-			collider_->getPos().y - dir_.y * (bodyOffset_ / PIXELS_PER_METER));
+	b2Vec2 vI = ih_->getStickDir(getPlayerId(), InputHandler::GAMEPADSTICK::LEFTSTICK);
+	if (vI.Length() != 0) {
+		dir_.Set(vI.x, vI.y);
+		//Cálculo principal del ángulo dependiendo de si está Flipeado o no
+		if (!onFlipped_) angle_ = (std::asin(dir_.x) * -180.0 / PI) + 90;
+		else angle_ = (std::asin(dir_.x) * -180.0 / PI) - 90;
+		//Corrección de sentido de giro cuando se cálcula en la semicircunferencia inferior.
+		if (dir_.y < 0) angle_ = -angle_;
+		//Si apunta a la derecha desactiva el flip, si apunta a la izquierda lo activa
+		if (dir_.x < 0 && !onFlipped_) onFlipped_ = true;
+		else if (dir_.x > 0 && onFlipped_) onFlipped_ = false;
 	}
+	pos_.Set(collider_->getPos().x + dir_.x * (bodyOffset_ / PIXELS_PER_METER),
+		collider_->getPos().y - dir_.y * (bodyOffset_ / PIXELS_PER_METER));
 }
 
 void Hands::setWeapon(WeaponID wId, Weapon* w)
