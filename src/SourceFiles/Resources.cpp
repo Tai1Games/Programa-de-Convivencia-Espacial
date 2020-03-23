@@ -18,7 +18,7 @@ vector<Resources::ImageInfo> Resources::images_ {
 		{ Piedra, "../../assets/game/textures/Piedra.png" },
 		{ Pelota, "../../assets/game/textures/PelotaSaltarina.png" },
 		{ Mancuerna, "../../assets/game/textures/Mancuerna.png" },
-		{ Hands, "../../assets/game/textures/hands.png" },
+		{ Hands, "../../assets/game/textures/hands2.png" },
 		{ PinkTinky, "../../assets/game/textures/PinkTinky.png"},
 		{ FlechaImpulso, "../../assets/game/textures/FlechaImpulso.png"},
 		{ ImpulsoBackground, "../../assets/game/textures/ImpulsoBackground.png"},
