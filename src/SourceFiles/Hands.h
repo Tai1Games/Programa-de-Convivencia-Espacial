@@ -4,12 +4,13 @@
 #include "Collider.h"
 #include "PlayerData.h"
 #include "Weapon.h"
+#include "Constants.h"
+
 class Hands : public Component
 {
 private:
 	b2Vec2 pos_ = b2Vec2(0,0);
 	b2Vec2 dir_ = b2Vec2(0,0);
-	double bodyOffset_ = 130;
 	Texture* tex_ = nullptr;
 	Collider* collider_ = nullptr;
 	int textureId_ = 0;
@@ -32,5 +33,6 @@ public:
 	b2Vec2 getDir() { return dir_; }
 	float getAngle() { return angle_; }
 	Weapon* getWeapon() { return currentWeapon_; }
+	WeaponID getWeaponID() { return currentWeaponID_; }
 };
 
