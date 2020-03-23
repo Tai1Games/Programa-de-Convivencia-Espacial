@@ -30,7 +30,7 @@ protected:
 
 	int damage_=0;
 	bool hit = false;
-	int index_ = -1;
+	int index_ = 0;
 
 public:
 	Weapon(WeaponID wId): Component(ComponentType::Weapon), weaponType_(wId){}

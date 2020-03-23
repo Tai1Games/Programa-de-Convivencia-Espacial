@@ -19,7 +19,8 @@ void Weapon::init()
 void Weapon::update()
 {
 	if (currentHand_ != nullptr && mainCollider_->isEnabled()) {
-		mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x, currentHand_->getPos().y), 0.0);
+		mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x, currentHand_->getPos().y), 0.0);	//Colocamos el trigger de golpear
+		Action();	//Calculamos el daño que hace la chancla
 	}
 }
 
@@ -31,20 +32,16 @@ void Weapon::handleInput()
 			if (!IsPicked() && playerInfo_[i].isNear && ih_->isButtonJustDown(i, SDL_CONTROLLER_BUTTON_Y)) {
 				cout << "inRange";
 				PickObjectBy(playerInfo_[i].playerHands);
+				hit = true;
 			}
 		}
 	}
 	else if (IsPicked() && ih_->isButtonJustDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_Y))
 	{
+		hit = false;
 		UnPickObject();
 	}
 
-	else if (IsPicked() && ih_->isButtonDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_X))
-	{
-		
-		Action();
-		
-	}
 }
 
 void Weapon::PickObjectBy(Hands* playerH)
@@ -55,7 +52,10 @@ void Weapon::PickObjectBy(Hands* playerH)
 		currentHand_->setWeapon(weaponType_);
 		if (weaponType_ == WeaponID::Chancla) {
 			mainCollider_->createFixture(mainCollider_->getW(0)*1.05, mainCollider_->getH(0) *1.05, 1, 0.1, 0, Collider::CollisionLayer::Weapon, true);
-			//mainCollider_->getBody()->SetEnabled(false);
+			b2Filter aux = mainCollider_->getFixture(0)->GetFilterData();
+			aux.categoryBits = Collider::CollisionLayer::Weapon;
+			aux.maskBits = Collider::CollisionLayer::Trigger;
+			mainCollider_->getFixture(0)->SetFilterData(aux);
 		}
 		else mainCollider_->getBody()->SetEnabled(false);
 		vw_->setDrawable(false);
@@ -68,6 +68,10 @@ void Weapon::UnPickObject()
 	picked_ = false;
 	if (weaponType_ == WeaponID::Chancla) {
 		mainCollider_->createFixture(mainCollider_->getW(0) * 4, mainCollider_->getH(0) * 4, 1, 0.1, 0, Collider::CollisionLayer::Weapon, true);
+		b2Filter aux = mainCollider_->getFixture(0)->GetFilterData();
+		aux.categoryBits = Collider::CollisionLayer::NormalObject;
+		aux.maskBits= Collider::CollisionLayer::NormalObject | Collider::CollisionLayer::NormalAttachableObject | Collider::CollisionLayer::Player;;
+		mainCollider_->getFixture(0)->SetFilterData(aux);
 	}
 	mainCollider_->getBody()->SetEnabled(true);
 	vw_->setDrawable(true);
@@ -92,8 +96,6 @@ void Weapon::DeletePlayerInfo(int index)
 
 
 void Weapon::Action() {
-	
-	hit = !hit;
 	//Calculo del daño de la chancla
 	damage_ = playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealthMax() - playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealth() + 1;
 
