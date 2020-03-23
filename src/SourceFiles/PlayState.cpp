@@ -61,12 +61,12 @@ void PlayState::init() {
 	Collider* collpared2 = pared2->addComponent<Collider>(physicsWorld_, b2_staticBody, 0, 10, 1, 10, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false, true);
 	//Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody,      18,   5,    0.5,   0.5,    1,         10,       0,           0,          0.1,         Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 0,    8.25,   1,     1,    1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
-	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    16,    10,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
+	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    5,    7,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
 
 	//Players
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un cuadrado de debug.
-	tinky->addComponent<Health>(3)->subtractLife(2);
-	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(20, 20));
+	tinky->addComponent<Health>(3);
+	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(100, 50));
 	tinky->addComponent<Hands>(0, Resources::Hands);
 	tinky->addComponent<AttachesToObjects>(0);
 	collTinky->setUserData(tinky);
@@ -74,7 +74,7 @@ void PlayState::init() {
 	
 	tonko->addComponent<Viewer>(Resources::Tinky);
 	tonko->addComponent<Health>(3);
-	tonko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(250, 20));
+	tonko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(250, 50));
 	collTonko->setUserData(tonko);
 
 	//Muros
@@ -94,7 +94,7 @@ void PlayState::init() {
 
 	//Fuerzas iniciales
 	//collTinky->applyLinearImpulse(b2Vec2(20, -10), b2Vec2(1, 1));
-	//collTonko->applyLinearImpulse(b2Vec2(0, 1000), b2Vec2(0.1, 0));
+	collTonko->applyLinearImpulse(b2Vec2(20, 0), b2Vec2(0.1, 0));
 	//collJunk->applyLinearImpulse(b2Vec2(50, 0), b2Vec2(0.1, 0));
 
 	//Version estática de la factoria

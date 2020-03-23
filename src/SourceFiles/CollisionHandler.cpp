@@ -51,19 +51,47 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	//Melee Weapons collisions
 	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon && contact->GetFixtureA()->IsSensor()
 		&& contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player){
-		cout << "Tocas con un sensor" << endl;
+		//cout << "Tocas con un sensor A" << endl;
+
+		Entity* aux = static_cast<Entity*>(fixA->GetBody()->GetUserData());
+		Entity* aux2 = static_cast<Entity*>(fixB->GetBody()->GetUserData());
+
+		Weapon* weAux = aux->getComponent<Weapon>(ComponentType::Weapon);
+		Hands* haAux = aux2->getComponent<Hands>(ComponentType::Hands);
+		
+		player_Health = nullptr;	//Lo reseteamos para evitar problemas
+
 		ObjectCollidesWithPlayer(contact->GetFixtureB(), player_Health);
 		
-		Entity* aux = static_cast<Entity*>(fixA->GetBody()->GetUserData());
-		Weapon* weAux = aux->getComponent<Weapon>(ComponentType::Weapon);
-		player_Health->subtractLife(weAux->getDamage());
+		if (weAux->isOnHit() && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
+			//Entity* aux2 = static_cast<Entity*>(fixB->GetBody()->GetUserData());
+			//aux2->getComponent<Collider>(ComponentType::Collider)->applyLinearImpulse(b2Vec2(-20, 0), b2Vec2(0.1, 0));
+			player_Health->subtractLife(weAux->getDamage());
+			cout << "Golpeaste al objetivo" << endl;
+		}
 	}
 	else if(contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon && contact->GetFixtureB()->IsSensor()
-		&& contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player)
+	&& contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player)
 	{
-		cout << "Tocas con un sensor" << endl;
-	}
+		//cout << "Tocas con un sensor B" << endl;
+		Entity* aux = static_cast<Entity*>(fixB->GetBody()->GetUserData());
+		Entity* aux2 = static_cast<Entity*>(fixA->GetBody()->GetUserData());
 
+		Weapon* weAux = aux->getComponent<Weapon>(ComponentType::Weapon);
+		Hands* haAux = aux2->getComponent<Hands>(ComponentType::Hands);
+
+		player_Health = nullptr;	//Lo reseteamos para evitar problemas
+
+		ObjectCollidesWithPlayer(contact->GetFixtureA(), player_Health);
+
+		if(weAux->isOnHit() && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
+			//Entity* aux2 = static_cast<Entity*>(fixA->GetBody()->GetUserData());
+			//aux2->getComponent<Collider>(ComponentType::Collider)->applyLinearImpulse(b2Vec2(-20, 0), b2Vec2(0.1, 0));
+			player_Health->subtractLife(weAux->getDamage());
+			cout << "Golpeaste al objetivo" << endl;
+		}
+	}
+	player_Health = nullptr;
 	//Pickable weapon collisions
 	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon ||
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon) &&

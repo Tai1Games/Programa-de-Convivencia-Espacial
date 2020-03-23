@@ -28,7 +28,7 @@ protected:
 	/*Mano que coge este objeto*/
 	Hands* currentHand_ = nullptr;
 
-	int damage_=1;
+	int damage_=0;
 	bool hit = false;
 	int index_ = -1;
 
@@ -54,5 +54,8 @@ public:
 	virtual void Action();
 	int getDamage();
 	int getWeaponType() { return weaponType_; }
+	Hands* getCurrentHand() { return currentHand_; }
+
+	bool isOnHit() { return hit; }
 };
 
