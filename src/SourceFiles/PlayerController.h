@@ -3,24 +3,27 @@
 #include "box2d.h"
 #include "Collider.h"
 #include "AttachesToObjects.h"
-
+#include "PlayerData.h"
 
 
 class PlayerController : public Component
 {
 private:
+	Uint32 chargeTimeStart_;
+
+	int playerNumber_;
 	b2Vec2 dirImpulse_;
-	Collider* coll_;
-	AttachesToObjects* attachesToObj_;
-	float impulseForce_;
-	int playerNumber_;//Número del jugador (de 1 a 4));
+
+	Collider* coll_ = nullptr;
+	AttachesToObjects* attachesToObj_ = nullptr;
+	PlayerData* playerData_ = nullptr;
 public:
-	PlayerController(int p);
-	~PlayerController() {}
+	PlayerController();
+	virtual ~PlayerController() { Component::~Component(); };
 
 	void init() override;
 	void handleInput() override;
 
-	void setForce(float f) { impulseForce_ = f; }
+	float calculateForce();
 };
 

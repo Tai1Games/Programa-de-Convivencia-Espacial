@@ -1,4 +1,5 @@
 #include "GameStateMachine.h"
+#include "StocksGameMode.h"
 #include "Constants.h"
 #include "PlayState.h"
 #include "PauseState.h"
@@ -32,7 +33,7 @@ void GameStateMachine::changeToState(int state) {
 			case States::menu:
 				break;
 			case States::play:
-				states_[state] = new PlayState();
+				states_[state] = new PlayState(new StocksGameMode());
 				break;
 			case States::pause:
 				states_[state] = new PauseState();
@@ -57,7 +58,9 @@ void GameStateMachine::update() {
 }
 
 void GameStateMachine::render() {
+	SDL_RenderClear(SDL_Game::instance()->getRenderer());
 	states_[currentState_]->render();
+	SDL_RenderPresent(SDL_Game::instance()->getRenderer());
 }
 
 void GameStateMachine::handleInput() {

@@ -13,10 +13,11 @@
 #include "Hands.h"
 #include "PlayerController.h"
 #include "WeaponFactory.h"
+#include "ImpulseViewer.h"
+#include "PlayerData.h"
 
-PlayState::PlayState() : GameState(){
-}
-
+PlayState::PlayState(GameMode* gMode):GameState(),
+	gameMode_(gMode) {}
 PlayState::~PlayState() {
 	delete entityManager_;
 	entityManager_ = nullptr;
@@ -47,10 +48,17 @@ void PlayState::init() {
 	//Entity* spaceJunk = entityManager_->addEntity();
 
 	//map->addComponent<TileMap>(WINDOW_WIDTH, WINDOW_HEIGHT,
-		//"../../assets/game/tilemaps/TD_TilemapBitCSV.json");
+	//	"../../assets/game/tilemaps/TD_TilemapBitCSV.json");
 
 	Entity* tonko = entityManager_->addEntity();
+	Entity* tunko = entityManager_->addEntity();
+	Entity* tanko = entityManager_->addEntity();
 	Entity* spaceJunk = entityManager_->addEntity();
+
+	players_.push_back(tinky);
+	players_.push_back(tonko);
+	players_.push_back(tunko);
+	players_.push_back(tanko);
 
 	//Colliders
 	                                                                                      // x,  y,   width, height, density,	friction, restitution, linearDrag, angularDrag,	Layer,							        sensor canBeAttached
@@ -58,24 +66,40 @@ void PlayState::init() {
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody,    10.5, -0.5, 12,    1,      10,        0,        0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collSuelo2 = ground2->addComponent<Collider>(physicsWorld_, b2_staticBody, 10.5, 12, 12, 1, 10, 0, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false, true);
 	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody,     21.5, 10,   1,     10,     10,        1,        0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
-	Collider* collpared2 = pared2->addComponent<Collider>(physicsWorld_, b2_staticBody, 0, 10, 1, 10, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false, true);
-	//Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody,      18,   5,    0.5,   0.5,    1,         10,       0,           0,          0.1,         Collider::CollisionLayer::NormalObject, false, true);
-	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 0,    8.25,   1,     1,    1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
-	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    5,    7,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
+	Collider* collRock = rock->addComponent<Collider>(physicsWorld_, b2_dynamicBody,      18,   8,    0.5,   0.5,    1,         10,       0,           0,          0.1,         Collider::CollisionLayer::NormalObject, false, true);
+	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 0,    8.25, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
+	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
+	Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
+	Collider* collTanko = tanko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	  7,	3,	  1,	 1,		 1,		    0.1,	  0.2,		   0,		   0,			Collider::CollisionLayer::Player,		false, false);
 
 	//Players
+	tinky->addComponent<PlayerData>(0);
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un cuadrado de debug.
 	tinky->addComponent<Health>(3);
-	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(100, 50));
-	tinky->addComponent<Hands>(0, Resources::Hands);
-	tinky->addComponent<AttachesToObjects>(0);
+	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
+	tinky->addComponent<Hands>(Resources::Hands);
+	tinky->addComponent<AttachesToObjects>();
+	tinky->addComponent<PlayerController>();
 	collTinky->setUserData(tinky);
-	tinky->addComponent<PlayerController>(0);
-	
+	tinky->addComponent<ImpulseViewer>(Resources::FlechaImpulso,Resources::ImpulsoBackground);
+
+	tonko->addComponent<PlayerData>(1);
 	tonko->addComponent<Viewer>(Resources::Tinky);
 	tonko->addComponent<Health>(3);
-	tonko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, b2Vec2(250, 50));
+	tonko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
 	collTonko->setUserData(tonko);
+
+	tanko->addComponent<PlayerData>(3);
+	tanko->addComponent<Viewer>(Resources::Tinky);
+	tanko->addComponent<Health>(3);
+	tanko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
+	collTanko->setUserData(tanko);
+
+	tunko->addComponent<PlayerData>(2);
+	tunko->addComponent<Viewer>(Resources::Tinky);
+	tunko->addComponent<Health>(3);
+	tunko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
+	collTunko->setUserData(tunko);
 
 	//Muros
 	ground->addComponent<Viewer>();
@@ -101,6 +125,11 @@ void PlayState::init() {
 	//WeaponFactory::makePelota(entityManager_, physicsWorld_, b2Vec2(18, 5), b2Vec2(0.5, 0.5));
 	WeaponFactory::makeChancla(entityManager_, physicsWorld_, b2Vec2(16, 5), b2Vec2(0.5, 0.5));
 	//WeaponFactory::makeGrapadora(entityManager_, physicsWorld_, b2Vec2(10, 5), b2Vec2(0.5, 0.5));
+	collTinky->applyLinearImpulse(b2Vec2(20, -10), b2Vec2(1, 1));
+	//collTonko->applyLinearImpulse(b2Vec2(0, 1000), b2Vec2(0.1, 0));
+	collJunk->applyLinearImpulse(b2Vec2(150, 0), b2Vec2(0.1, 0));
+
+	gameMode_->init(this);
 }
 
 void PlayState::update() {
@@ -110,6 +139,12 @@ void PlayState::update() {
 	collisionHandler_->SolveInteractions();
 	//también debería actualizar la lógica de modo de juego
 	//spawners de monedas, carga de objetivos...
+	gameMode_->update();
+}
+
+void PlayState::render() {
+	GameState::render();
+	gameMode_->render();
 }
 
 void PlayState::handleInput()

@@ -20,16 +20,14 @@ void GameState::update() {
 }
 
 void GameState::render() {
-	SDL_RenderClear(SDL_Game::instance()->getRenderer());
 
 	entityManager_->render();
 
-	SDL_RenderPresent(SDL_Game::instance()->getRenderer());
 }
 
 void GameState::handleInput() {
 	SDL_Game::instance()->getInputHandler()->update();
-	DebugInput();
+	//DebugInput();
 	if(entityManager_!=nullptr)
 		entityManager_->handleInput();
 }
