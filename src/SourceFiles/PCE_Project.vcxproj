@@ -252,6 +252,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="TileSet.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Viewer.cpp" />
+    <ClCompile Include="WeaponFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PCE_Project.rc" />

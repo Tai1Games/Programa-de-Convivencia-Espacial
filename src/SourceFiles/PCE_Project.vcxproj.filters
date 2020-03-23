@@ -211,7 +211,7 @@
     <ClInclude Include="CollisionHandler.h">
       <Filter>Header Files\Managers &amp; Handlers</Filter>
     </ClInclude>
-    <ClInclude Include="ImpulseViewer.h">
+    <ClInclude Include="WeaponFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameMode.h">
@@ -228,6 +228,9 @@
     </ClInclude>
     <ClInclude Include="InputHandler.h">
       <Filter>Header Files\Managers &amp; Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="ImpulseViewer.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -329,6 +332,9 @@
     </ClCompile>
     <ClCompile Include="PlayerData.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponFactory.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
