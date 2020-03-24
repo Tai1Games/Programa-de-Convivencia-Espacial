@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
 #include "checkML.h"
-
+#include "json.hpp"
+using json = nlohmann::json;
 
 /*Agregar aqu� todas las constantes del juego. Cada vez que haya que hacer uso de las constantes,
 simplemente hay que hacer #include "Constants.h" en el archivo en el que estemos programando.*/
@@ -72,7 +73,17 @@ const int STOCK_HEIGTH = 20;
 
 const double HAND_BODY_OFFSET = 120;
 
+class Constants {
+private:
+	json data;  //coleccion de datos almacenados como json
+	bool initialized_ = false;
+public:
+	Constants(){};
+	Constants(const std::string& load);
+	template<typename T>
+	T getConstant(const std::string& key) const; //devuelve la constante pedida o su valor por defecto
 
+};
 
 //Modos de juegos
 enum States
