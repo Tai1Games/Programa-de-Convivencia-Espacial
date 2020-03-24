@@ -52,6 +52,8 @@ private:
 	bool isButtonDownEvent_;
 	bool isButtonUpEvent_;
 	bool isAxisMovementEvent_;
+
+	std::vector<b2Vec2> lastLStickValue_;
 	//
 	//Methods
 	//
@@ -183,6 +185,7 @@ public:
 	}
 	//get the direction or a value from a stick/trigger given a controller
 	b2Vec2 getStickDir(int ctrl, GAMEPADSTICK stick);
+	b2Vec2 getLastStickDir(int ctrl, GAMEPADSTICK stick);
 	double getStickX(int ctrl, GAMEPADSTICK stick);
 	double getStickY(int ctrl, GAMEPADSTICK stick);
 	double getTrigger(int ctrl, GAMEPADTRIGGER trigger);

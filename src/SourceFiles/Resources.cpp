@@ -18,8 +18,13 @@ vector<Resources::ImageInfo> Resources::images_ {
 		{ Piedra, "../../assets/game/textures/Piedra.png" },
 		{ Pelota, "../../assets/game/textures/PelotaSaltarina.png" },
 		{ Mancuerna, "../../assets/game/textures/Mancuerna.png" },
-		{ Hands, "../../assets/game/textures/hands.png" },
+		{ Hands, "../../assets/game/textures/hands2.png" },
 		{ PinkTinky, "../../assets/game/textures/PinkTinky.png"},
+		{ FlechaImpulso, "../../assets/game/textures/FlechaImpulso.png"},
+		{ ImpulsoBackground, "../../assets/game/textures/ImpulsoBackground.png"},
+		{ Slider, "../../assets/game/textures/Slider.png"},
+		{ SliderControl, "../../assets/game/textures/SliderControl.png"},
+
 		{ TSet_Kenney1bit , "../../assets/game/tilemaps/modded_colored.png"},
 		{ TSet_Dungeon , "../../assets/game/tilemaps/dungeon_ts.png"}
 };
@@ -27,12 +32,16 @@ vector<Resources::ImageInfo> Resources::images_ {
 vector<Resources::TextMsgInfo> Resources::messages_ {
 		//Mensajes predeterminados {nombre_en_enum, texto, color, fuente}. Ejemplo abajo
 		//{ HelloWorld, "Hello World", { COLOR(0xaaffffff) }, ARIAL16 }
+		{ PauseText, "PAUSA", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+		{ ResumeText, "Reanudar", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+		{ SoundText, "Sonido", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+		{ ExitText, "Salir", { COLOR(0xc7f2edff) }, FontId::NES_Chimera }
 		
 };
 
 vector<Resources::MusicInfo> Resources::musics_ {
 		//M�sica {nombre_en_enum, ruta}
-		{ MainTheme , "../../assets/game/sound/mainTheme.mp3" },
+		{ MainTheme , "../../assets/game/sound/mainMenu.mp3" },
 		{Reveal, "../../assets/game/sound/gotem.mp3"}
 };
 

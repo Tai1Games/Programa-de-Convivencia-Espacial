@@ -27,10 +27,17 @@ public:
 		Grapadora,
 		Piedra,
 		Hands,
-		PinkTinky
+		PinkTinky,
+		FlechaImpulso,
+		ImpulsoBackground,
+		Slider,
+		SliderControl,
 
 		// text
-		
+		PauseText,
+		ResumeText,
+		SoundText,
+		ExitText
 	};
 
 	enum AudioId : std::size_t {

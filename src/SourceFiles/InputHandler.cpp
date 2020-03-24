@@ -81,6 +81,8 @@ void InputHandler::initialiseJoysticks() {
 				m_triggerValues.push_back(std::make_pair
 				(new double(0.0), new double(0.0)));
 
+				lastLStickValue_.push_back(b2Vec2(0, 0));
+
 				std::vector<ButtonState> tempButtons;
 				for (int j = 0; j < SDL_CONTROLLER_BUTTON_MAX; j++)
 				{
@@ -149,12 +151,12 @@ double InputHandler::getStickX(int joy, GAMEPADSTICK stick)
 {
 	if (m_joystickValues.size() > 0)
 	{
-		if (stick == LEFT)
+		if (stick == LEFTSTICK)
 
 		{
 			return m_joystickValues[joy].first->getX();
 		}
-		else if (stick == RIGHT)
+		else if (stick == RIGHTSTICK)
 		{
 			return m_joystickValues[joy].second->getX();
 		}
@@ -205,15 +207,18 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		if (val > m_joystickDeadZone)
 		{
 			m_joystickValues[whichOne].first->setX(val*normalize);
+			lastLStickValue_[whichOne].x = (float)m_joystickValues[whichOne].first->getX();
 		}
 		else if (event.jaxis.value < -m_joystickDeadZone)
 		{
 			m_joystickValues[whichOne].first->setX(val * normalize);
+			lastLStickValue_[whichOne].x = (float)m_joystickValues[whichOne].first->getX();
 		}
 		else
 		{
 			m_joystickValues[whichOne].first->setX(0);
 		}
+		
 	}
 	// left stick move up or down
 	if (event.jaxis.axis == 1)
@@ -221,15 +226,19 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		if (event.jaxis.value > m_joystickDeadZone)
 		{
 			m_joystickValues[whichOne].first->setY(val * normalize);
+			lastLStickValue_[whichOne].y = (float)m_joystickValues[whichOne].first->getY();
 		}
 		else if (event.jaxis.value < -m_joystickDeadZone)
 		{
 			m_joystickValues[whichOne].first->setY(val * normalize);
+			lastLStickValue_[whichOne].y = (float)m_joystickValues[whichOne].first->getY();
+
 		}
 		else
 		{
 			m_joystickValues[whichOne].first->setY(0);
 		}
+		
 	}
 	//left trigger move up or down
 	if (event.jaxis.axis == 2) {
@@ -295,6 +304,13 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		}
 	}
 
+	float lastLx = m_joystickValues[whichOne].first->getX(), lastLy = m_joystickValues[whichOne].first->getY();
+
+	if ((lastLx == 0 && lastLy >= 0.99) || (lastLx == 0 && lastLy <= -0.99) ||
+		(lastLx >= 0.99 && lastLy == 0) || (lastLx <= -0.99 && lastLy == 0)) {
+		lastLStickValue_[whichOne].x = lastLx;
+		lastLStickValue_[whichOne].y = lastLy;
+	}
 
 	//cout << "Controller 0:" << endl;
 	//cout << "Triggers " << getTrigger(0, LEFTTRIGGER) << " " << getTrigger(0, RIGHTTRIGGER) << endl;
@@ -373,3 +389,11 @@ b2Vec2 InputHandler::getStickDir(int ctrl, GAMEPADSTICK stick) {
 	return b2Vec2(aux.getX(), aux.getY());
 }
 
+b2Vec2 InputHandler::getLastStickDir(int ctrl, GAMEPADSTICK stick) {
+	if (stick == LEFTSTICK)
+		return lastLStickValue_[ctrl];
+	else
+		return b2Vec2(0, 0);
+
+	//return b2Vec2(aux.getX(), aux.getY());
+}
