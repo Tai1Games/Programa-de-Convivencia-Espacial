@@ -54,6 +54,12 @@ const double BOUNCINGBALL_RESTITUTION = 0.99;
 const double BOUNCINGBALL_LINEAR_DRAG = 0;
 const double BOUNCINGBALL_ANGULAR_DRAG = 0;
 
+const double CONTROLLER_DENSITY = 1;
+const double CONTROLLER_FRICTION = 0.1;
+const double CONTROLLER_RESTITUTION = 0.2;
+const double CONTROLLER_LINEAR_DRAG = 0;
+const double CONTROLLER_ANGULAR_DRAG = 0;
+
 //Constantes referentes al HealthViewer
 const int LIFE_DRAW_OFFSET = 10;
 const int LIFE_WIDTH = 40;
@@ -62,11 +68,14 @@ const int LIFE_MARGIN_H = 30;
 const int LIFE_MARGIN_V = 10;
 
 
-//Constantes referentes a StoacksGameMode
+//Constantes referentes a StonksGameMode
 const int STOCK_INITIAL_OFFSET = 15;
 const int STOCK_OFFSET = 10;
 const int STOCK_WIDTH = 20;
 const int STOCK_HEIGTH = 20;
+
+//Constantes referentes a ControllerGameMode
+const double TIME_TO_WIN = 2;
 
 //Constantes de hands
 
@@ -92,6 +101,7 @@ enum WeaponID {
 	Grapadora,
 	Extintor,
 	Chancla,
+	Mando,
 
 	WEAPON_NUMBER
 };

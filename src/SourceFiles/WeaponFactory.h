@@ -28,5 +28,8 @@ public:
 
 	//Crea una pelota saltarina (Podemos pasarle los párametros que queramos segun las necesidades del objeto)
 	static void makeGrapadora(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
+
+	//Crea un mando de la tele (específico para el modo Pelea Por El Mando)
+	static void makeMando(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 };
 
