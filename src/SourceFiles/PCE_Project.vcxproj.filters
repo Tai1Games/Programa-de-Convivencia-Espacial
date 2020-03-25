@@ -159,6 +159,15 @@
     <ClInclude Include="ImpulseViewer.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="WiFightGameMode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Router.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -261,6 +270,15 @@
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="WeaponFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WiFightGameMode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Router.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

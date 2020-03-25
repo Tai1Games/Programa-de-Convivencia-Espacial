@@ -26,7 +26,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	Hands* playerHands = nullptr;
 
 	//Comprueba que FixA es el jugador, que FixB es un trigger, que el jugador está presionando la tecla A (mando) o Space (teclado) y que no está agarrado a nada más.
-	if (AttachableObjectCollidesWithPlayer(fixA, player_AttachesToObjects) && fixB->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject && player_AttachesToObjects->canAttachToObject()) { 
+	if (AttachableObjectCollidesWithPlayer(fixA, player_AttachesToObjects) && (fixB->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject || fixB->GetFilterData().categoryBits == Collider::Wall) && player_AttachesToObjects->canAttachToObject()) {
 		b2WorldManifold manifold; //Una manifold es un registro donde se guardan todas las colisiones
 		contact->GetWorldManifold(&manifold); //Obtenemos la manifold global
 		weldData newWeld; //Struct donde guardamos los datos necesarios para crear un weld

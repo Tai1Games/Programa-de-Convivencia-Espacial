@@ -25,14 +25,16 @@ public:
 	enum CollisionLayer {
 		NormalObject = 0x0001, //a collision layer can't be zero or else it won't collide
 		NormalAttachableObject,
+		Wall,
 		Player,
 		Trigger,
+		UnInteractableObject, //ONLY collides with walls
 		Weapon
 	};
 
 	//Friccion -> rozamiento al contacto con otros cuerpos   Drag-> rozamiento con el aire
 	Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
-		float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor, bool canBeAttached);
+		float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor);
 
 	~Collider() {
 		world_->DestroyBody(body_); world_ = nullptr;

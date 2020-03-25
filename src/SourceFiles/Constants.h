@@ -72,7 +72,9 @@ const int STOCK_HEIGTH = 20;
 
 const double HAND_BODY_OFFSET = 120;
 
+//Constantes referentes a ProgressBar
 
+const int MAX_PROGRESS = 100;
 
 //Modos de juegos
 enum States
