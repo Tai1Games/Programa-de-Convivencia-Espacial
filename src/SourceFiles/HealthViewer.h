@@ -29,6 +29,6 @@ public:
 	void draw() const override;
 	void handleInput()override;
 	b2Vec2 getPos(){return pos_;};
-	int getWidth() { return (he->getHealthMax() * (LIFE_DRAW_OFFSET + LIFE_WIDTH)); }
+	int getWidth() { return (he->getHealthMax() * (CONST(double, "LIFE_DRAW_OFFSET") + CONST(int,"LIFE_WIDTH"))); }
 	void setPos(int player);
 };

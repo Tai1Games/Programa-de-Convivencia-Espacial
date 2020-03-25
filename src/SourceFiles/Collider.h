@@ -64,10 +64,10 @@ public:
 
 	SDL_Rect getRectRender() const {
 		return SDL_Rect{
-			(int)(getPos().x * PIXELS_PER_METER - (getW(0) * PIXELS_PER_METER)),
-			(int)(WINDOW_HEIGHT - (getPos().y * PIXELS_PER_METER + (getH(0) * PIXELS_PER_METER))),
-			(int)(getW(0) * PIXELS_PER_METER * 2),
-			(int)(getH(0) * PIXELS_PER_METER * 2)
+			(int)(getPos().x * CONST(double,"PIXELS_PER_METER") - (getW(0) * CONST(double,"PIXELS_PER_METER"))),
+			(int)(CONST(double,"WINDOW_HEIGHT") - (getPos().y * CONST(double,"PIXELS_PER_METER") + (getH(0) * CONST(double,"PIXELS_PER_METER")))),
+			(int)(getW(0) * CONST(double,"PIXELS_PER_METER") * 2),
+			(int)(getH(0) * CONST(double,"PIXELS_PER_METER") * 2)
 		};
 	}
 

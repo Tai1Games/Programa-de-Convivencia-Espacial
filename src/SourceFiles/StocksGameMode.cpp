@@ -20,7 +20,7 @@ void StocksGameMode::init(PlayState* game){
 			p.x += hV->getWidth() + CONST(int,"STOCK_INITIAL_OFFSET");
 		}
 		else {
-			p.x -= ((hV->getWidth()-LIFE_WIDTH) + CONST(int,"STOCK_INITIAL_OFFSET") + CONST(int,"STOCK_WIDTH"));
+			p.x -= ((hV->getWidth()-CONST(int,"LIFE_WIDTH")) + CONST(int,"STOCK_INITIAL_OFFSET") + CONST(int,"STOCK_WIDTH"));
 		}
 		playersStocksPos_.push_back(p);
 	}
