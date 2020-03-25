@@ -35,6 +35,7 @@ void Weapon::handleInput()
 		}
 	}
 	else if (IsPicked() && ih_->isButtonJustDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_Y))
+	{
 		UnPickObject();
 	}
 	else if (IsPicked() && ih_->isButtonDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_X))
