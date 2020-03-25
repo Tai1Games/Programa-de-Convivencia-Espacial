@@ -60,7 +60,7 @@ const int LIFE_DRAW_OFFSET = 10;
 const int LIFE_WIDTH = 40;
 const int LIFE_HEIGTH = 50;
 const int LIFE_MARGIN_H = 30;
-const int LIFE_MARGIN_V = 10;
+//const int CONST(double,"LIFE_MARGIN_V") = 10;
 
 
 //Constantes referentes a StoacksGameMode
@@ -71,7 +71,7 @@ const int LIFE_MARGIN_V = 10;
 
 //Constantes de hands
 
-const double HAND_BODY_OFFSET = 120;
+//const double CONST(double,"HAND_BODY_OFFSET") = 120;
 
 class Constants {
 private:

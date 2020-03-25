@@ -50,5 +50,5 @@ void HealthViewer::handleInput() {
 
 void HealthViewer::setPos(int player){
 	pos_.x = (player % 2 == 0) ? (LIFE_MARGIN_H) : (WINDOW_WIDTH - LIFE_MARGIN_H- LIFE_WIDTH);
-	pos_.y = (player < 2) ? (LIFE_MARGIN_V) : (WINDOW_HEIGHT - LIFE_MARGIN_V - LIFE_HEIGTH);
+	pos_.y = (player < 2) ? (CONST(double,"LIFE_MARGIN_V")) : (WINDOW_HEIGHT - CONST(double,"LIFE_MARGIN_V") - LIFE_HEIGTH);
 }
