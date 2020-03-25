@@ -44,9 +44,5 @@ bool AttachesToObjects::isAttached()
 }
 
 void AttachesToObjects::handleInput() { //Si el jugador suelta la tecla de agarre, se suelta.
-	//TODO ESTO NO HACE FALTA, SE DESENGANCHA DESDE EL PLAYER CONTROLLER
-	/*InputHandler* ih = SDL_Game::instance()->getInputHandler();
-	if (ih->isButtonJustUp(playerNumber_, SDL_CONTROLLER_BUTTON_A) || ih->isKeyUp(SDLK_SPACE)) {
-		deAttachFromObject();
-	}*/
+
 }

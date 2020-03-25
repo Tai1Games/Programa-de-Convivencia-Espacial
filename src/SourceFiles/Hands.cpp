@@ -39,7 +39,7 @@ void Hands::update()
 {
 	b2Vec2 vI = ih_->getStickDir(getPlayerId(), InputHandler::GAMEPADSTICK::LEFTSTICK);
 	if (vI.Length() != 0) {
-		dir_.Set(vI.x,vI.y);
+		dir_.Set(vI.x, vI.y);
 		//Cálculo principal del ángulo dependiendo de si está Flipeado o no
 		if (!onFlipped_) angle_ = (std::asin(dir_.x) * -180.0 / PI) + 90;
 		else angle_ = (std::asin(dir_.x) * -180.0 / PI) - 90;
