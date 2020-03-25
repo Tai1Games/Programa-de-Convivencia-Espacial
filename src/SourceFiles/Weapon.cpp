@@ -46,10 +46,10 @@ void Weapon::handleInput()
 
 void Weapon::PickObjectBy(Hands* playerH)
 {
-	if (playerH->getWeapon() == NoWeapon) {
+	if (playerH->getWeaponID() == NoWeapon) {
 		currentHand_ = playerH;
 		picked_ = true;
-		currentHand_->setWeapon(weaponType_);
+		currentHand_->setWeapon(weaponType_, this);
 		mainCollider_->getBody()->SetEnabled(false);
 		vw_->setDrawable(false);
 	}
@@ -57,7 +57,7 @@ void Weapon::PickObjectBy(Hands* playerH)
 
 void Weapon::UnPickObject()
 {
-	currentHand_->setWeapon(NoWeapon);
+	currentHand_->setWeapon(NoWeapon, nullptr);
 	picked_ = false;
 	mainCollider_->getBody()->SetEnabled(true);
 	vw_->setDrawable(true);

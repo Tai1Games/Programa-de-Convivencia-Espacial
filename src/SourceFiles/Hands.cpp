@@ -31,7 +31,7 @@ void Hands::draw() const
 	SDL_Rect clip;
 	clip.w = tex_->getWidth() / WEAPON_NUMBER;
 	clip.h = tex_->getHeight();
-	clip.y = 0; clip.x = clip.w * currentWeapon_;
+	clip.y = 0; clip.x = clip.w * currentWeaponID_;
 	tex_->render(destRect, angle_, clip);
 }
 
@@ -53,7 +53,8 @@ void Hands::update()
 		collider_->getPos().y - dir_.y * (HAND_BODY_OFFSET / PIXELS_PER_METER));
 }
 
-void Hands::setWeapon(WeaponID wId)
+void Hands::setWeapon(WeaponID wId, Weapon* w)
 {
-	currentWeapon_ = wId;
+	currentWeaponID_ = wId;
+	currentWeapon_ = w;
 }
