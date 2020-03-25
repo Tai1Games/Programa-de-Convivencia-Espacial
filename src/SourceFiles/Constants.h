@@ -37,7 +37,7 @@ const float IMPULSE_FLOATING = 30.0;
 const float WEAPON_THROW_SPEED = 100;
 const float WEAPON_SPIN_SPEED = 8;
 
-const double STAPLER_DENSITY = 1;
+//const double CONST(double,"STAPLER_DENSITY") = 1;
 const double STAPLER_FRICTION = 0.1;
 const double STAPLER_RESTITUTION = 0.2;
 const double STAPLER_LINEAR_DRAG = 0;
@@ -64,10 +64,10 @@ const int LIFE_MARGIN_V = 10;
 
 
 //Constantes referentes a StoacksGameMode
-const int STOCK_INITIAL_OFFSET = 15;
-const int STOCK_OFFSET = 10;
-const int STOCK_WIDTH = 20;
-const int STOCK_HEIGTH = 20;
+//const int CONST(int,"STOCK_INITIAL_OFFSET") = 15;
+//const int CONST(int,"CONST(int,"STOCK_OFFSET")") = 10;
+//const int CONST(int,"STOCK_WIDTH") = 20;
+//const int CONST(int,"STOCK_HEIGTH") = 20;
 
 //Constantes de hands
 

@@ -17,10 +17,10 @@ void StocksGameMode::init(PlayState* game){
 		HealthViewer* hV = (e->getComponent<HealthViewer>(ComponentType::HealthViewer)); //Obtains a reference to the HealthViewer component of entity e. This is used to calculate where the stocks will be drawn
 		b2Vec2 p = hV->getPos();
 		if (i % 2 == 0) { //Players 1 & 3 will be drawn on the left side of the screen. Players 2 & 4 will be drawn on the right.
-			p.x += hV->getWidth() + STOCK_INITIAL_OFFSET;
+			p.x += hV->getWidth() + CONST(int,"STOCK_INITIAL_OFFSET");
 		}
 		else {
-			p.x -= ((hV->getWidth()-LIFE_WIDTH) + STOCK_INITIAL_OFFSET + STOCK_WIDTH);
+			p.x -= ((hV->getWidth()-LIFE_WIDTH) + CONST(int,"STOCK_INITIAL_OFFSET") + CONST(int,"STOCK_WIDTH"));
 		}
 		playersStocksPos_.push_back(p);
 	}
@@ -32,15 +32,15 @@ void StocksGameMode::update(){
 
 void StocksGameMode::render(){
 	SDL_Rect drawPos; //Position where the stocks will be drawn
-	drawPos.w = STOCK_WIDTH;
-	drawPos.h = STOCK_HEIGTH;
+	drawPos.w = CONST(int,"STOCK_WIDTH");
+	drawPos.h = CONST(int,"STOCK_HEIGTH");
 	for(int i = 0;i<playerStocks_.size();++i){ //i = player number, j = individual stock to be drawn
 		drawPos.y = playersStocksPos_[i].y; //Stocks and Health are drawn on the same Y coordinate.
 		for(int j = 0;j < playerStocks_[i];j++){ 
 			if(i%2==0) //X coordinate depends on whether the stocks are drawn on the left or the right. 
-				drawPos.x = playersStocksPos_[i].x + j*(STOCK_WIDTH + STOCK_OFFSET);
+				drawPos.x = playersStocksPos_[i].x + j*(CONST(int,"STOCK_WIDTH") + CONST(int,"STOCK_OFFSET"));
 			else
-				drawPos.x = playersStocksPos_[i].x - j * (STOCK_WIDTH + STOCK_OFFSET);
+				drawPos.x = playersStocksPos_[i].x - j * (CONST(int,"STOCK_WIDTH") + CONST(int, "STOCK_OFFSET"));
 			SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Tinky)->render(drawPos);
 		}
 	}

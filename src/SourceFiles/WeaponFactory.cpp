@@ -21,7 +21,7 @@ void WeaponFactory::makePelota(EntityManager* entityManager, b2World* physicsWor
 
 void WeaponFactory::makeGrapadora(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 	Entity* e = entityManager->addEntity();
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, STAPLER_DENSITY, STAPLER_FRICTION, STAPLER_RESTITUTION, STAPLER_LINEAR_DRAG, STAPLER_ANGULAR_DRAG, Collider::CollisionLayer::NormalObject, false, true);
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double,"STAPLER_DENSITY"), STAPLER_FRICTION, STAPLER_RESTITUTION, STAPLER_LINEAR_DRAG, STAPLER_ANGULAR_DRAG, Collider::CollisionLayer::NormalObject, false, true);
 	e->addComponent <Viewer>(Resources::Grapadora);
 	e->addComponent<Weapon>(WeaponID::Grapadora);
 	aux->setUserData(e);
