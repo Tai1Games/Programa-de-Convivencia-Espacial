@@ -40,7 +40,7 @@ SDL_Game::~SDL_Game() {
 	renderer_ = nullptr;
 
 	SDL_DestroyWindow(window_);
-	window_ =  nullptr;
+	window_ = nullptr;
 
 	SDL_Quit();
 }
@@ -96,16 +96,17 @@ void SDL_Game::closeResources() {
 void SDL_Game::start() {
 	exit_ = false;
 	gamestateMachine_->changeToState(States::play);
-	while (!exit_) {
-		Uint32 startTime = getTime();
-		gamestateMachine_->handleInput();
-		gamestateMachine_->update();
-		gamestateMachine_->render();
 
+	if (inputHandler_->getNumControllers() > 0) {
+		while (!exit_) {
+			Uint32 startTime = getTime();
+			gamestateMachine_->handleInput();
+			gamestateMachine_->update();
+			gamestateMachine_->render();
 		Uint32 frameTime = getTime() - startTime;
 		if (frameTime < CONST(double,"MS_PER_FRAME"))
 			SDL_Delay(CONST(double, "MS_PER_FRAME") - frameTime);
-
-		//exit_ = !exit_;
+		}
 	}
+	else std::cout << "Que tal si pones un manso eh? genio\n\n\n";
 }

@@ -10,7 +10,7 @@ void Weapon::init()
 	mainCollider_ = GETCMP1_(Collider);
 	vw_ = GETCMP1_(Viewer);
 	//Fixture Sensor a�adido por el componente
-	mainCollider_->createFixture(mainCollider_->getW(0)*4, mainCollider_->getH(0)*4, 1, 0.1, 0, Collider::CollisionLayer::Weapon, true);
+	mainCollider_->createFixture(mainCollider_->getW(0) * 4, mainCollider_->getH(0) * 4, 1, 0.1, 0, Collider::CollisionLayer::Weapon, true);
 	//Pone la informacion de esta clase en el body, para poder usarla en el Listener
 	//Tama�o del vector segun el numero de jugadores
 	playerInfo_.resize(ih_->getNumControllers());
@@ -27,7 +27,8 @@ void Weapon::handleInput()
 	if (currentHand_ == nullptr) {
 		for (int i = 0; i < playerInfo_.size(); i++) {
 
-			if (!IsPicked() && playerInfo_[i].isNear && ih_->isButtonJustDown(i, SDL_CONTROLLER_BUTTON_Y)) {
+			if (!IsPicked() && playerInfo_[i].isNear &&
+				ih_->isButtonJustDown(i, SDL_CONTROLLER_BUTTON_Y)) {
 				cout << "inRange";
 				PickObjectBy(playerInfo_[i].playerHands);
 			}
@@ -37,7 +38,6 @@ void Weapon::handleInput()
 	{
 		UnPickObject();
 	}
-
 	else if (IsPicked() && ih_->isButtonDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_X))
 	{
 		Action();
@@ -46,10 +46,10 @@ void Weapon::handleInput()
 
 void Weapon::PickObjectBy(Hands* playerH)
 {
-	if (playerH->getWeapon() == NoWeapon) {
+	if (playerH->getWeaponID() == NoWeapon) {
 		currentHand_ = playerH;
 		picked_ = true;
-		currentHand_->setWeapon(weaponType_);
+		currentHand_->setWeapon(weaponType_, this);
 		mainCollider_->getBody()->SetEnabled(false);
 		vw_->setDrawable(false);
 	}
@@ -57,7 +57,7 @@ void Weapon::PickObjectBy(Hands* playerH)
 
 void Weapon::UnPickObject()
 {
-	currentHand_->setWeapon(NoWeapon);
+	currentHand_->setWeapon(NoWeapon, nullptr);
 	picked_ = false;
 	mainCollider_->getBody()->SetEnabled(true);
 	vw_->setDrawable(true);

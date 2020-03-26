@@ -31,7 +31,7 @@ void Hands::draw() const
 	SDL_Rect clip;
 	clip.w = tex_->getWidth() / WEAPON_NUMBER;
 	clip.h = tex_->getHeight();
-	clip.y = 0; clip.x = clip.w * currentWeapon_;
+	clip.y = 0; clip.x = clip.w * currentWeaponID_;
 	tex_->render(destRect, angle_, clip);
 }
 
@@ -39,7 +39,7 @@ void Hands::update()
 {
 	b2Vec2 vI = ih_->getStickDir(getPlayerId(), InputHandler::GAMEPADSTICK::LEFTSTICK);
 	if (vI.Length() != 0) {
-		dir_.Set(vI.x,vI.y);
+		dir_.Set(vI.x, vI.y);
 		//Cálculo principal del ángulo dependiendo de si está Flipeado o no
 		if (!onFlipped_) angle_ = (std::asin(dir_.x) * -180.0 / CONST(double, "PI")) + 90;
 		else angle_ = (std::asin(dir_.x) * -180.0 / CONST(double,"PI")) - 90;
@@ -53,7 +53,8 @@ void Hands::update()
 		collider_->getPos().y - dir_.y * (CONST(double,"HAND_BODY_OFFSET") / CONST(double, "PIXELS_PER_METER")));
 }
 
-void Hands::setWeapon(WeaponID wId)
+void Hands::setWeapon(WeaponID wId, Weapon* w)
 {
-	currentWeapon_ = wId;
+	currentWeaponID_ = wId;
+	currentWeapon_ = w;
 }
