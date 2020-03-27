@@ -115,8 +115,9 @@ void PlayState::init() {
 
 void PlayState::update() {
 	GameState::update();
+	//double d = SDL_Game::instance()->getConstants()->getConstant<double>((std::string)"SECONDS_PER_FRAME");
 	//el que vuelva tocar el step de physicsworld muere
-	physicsWorld_->Step(SECONDS_PER_FRAME, 6, 2);
+	physicsWorld_->Step(CONST(double,"SECONDS_PER_FRAME"), 6, 2);
 	collisionHandler_->SolveInteractions();
 	createDeadBodies();
 	//también debería actualizar la lógica de modo de juego
