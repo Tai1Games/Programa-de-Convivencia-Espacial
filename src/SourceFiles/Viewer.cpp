@@ -64,7 +64,7 @@ void Viewer::init() {
 
 void Viewer::draw() const {
 	if (drawable_) {
-		if (!isUIElement_) tex_->render(collider_->getRectRender(), (collider_->getAngle() * -180 / PI), clip_); // getAngle devuelve radianes, hay que pasarlos a �ngulos
+		if (!isUIElement_) tex_->render(collider_->getRectRender(), (collider_->getAngle() * -180 / CONST(double, "PI")), clip_); // getAngle devuelve radianes, hay que pasarlos a �ngulos
 		else {
 			SDL_Rect dest;
 			dest.x = pos_.x;

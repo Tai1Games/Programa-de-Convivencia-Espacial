@@ -9,12 +9,12 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health*
 	int impact = force.Length();
 
 	//Depending on the force of impact we apply damage to the player
-	if (impact >= lowDamage && impact < mediumDamage) { playerHealth->subtractLife(1); }
+	if (impact >= CONST(int, "LOW_DAMAGE")&& CONST(double, "MEDIUM_DAMAGE")) {playerHealth->subtractLife(1); }
 
-	if (impact >= mediumDamage && impact < hightDamage) { playerHealth->subtractLife(2); }
+	if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) {playerHealth->subtractLife(2);}
 
-	if (impact >= hightDamage) { playerHealth->subtractLife(3); }
-
+	if (impact >= CONST(double, "HIGH_DAMAGE")) {playerHealth->subtractLife(3);}
+    
 	if (playerHealth->getHealth() <= 0)
 	{
 		//reset player

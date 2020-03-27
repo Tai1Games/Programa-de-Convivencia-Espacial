@@ -269,6 +269,9 @@
     <ClCompile Include="StocksGameMode.cpp">
       <Filter>Source Files\Gamemodes</Filter>
     </ClCompile>
+    <ClCompile Include="Constants.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PCE_Project.rc">
