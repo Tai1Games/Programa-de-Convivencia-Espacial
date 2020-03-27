@@ -6,28 +6,31 @@
 unique_ptr<SDL_Game> SDL_Game::instance_;
 
 SDL_Game::SDL_Game(){
+	constants_ =Constants("../config/constants.json");
 	SDL_Init(SDL_INIT_EVERYTHING);
-	window_ = SDL_CreateWindow(WINDOW_NAME.c_str(),SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,WINDOW_WIDTH, WINDOW_HEIGHT,SDL_WINDOW_SHOWN);
+	window_ = SDL_CreateWindow(constants_.getConstant<string>("WINDOW_NAME").c_str(),SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,constants_.getConstant<int>("WINDOW_WIDTH"),
+		constants_.getConstant<int>("WINDOW_HEIGHT"),SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 
 	initializeResources();
 
 	//Prueba multimedia
-	textures_->getTexture(Resources::Tinky)->render({ WINDOW_WIDTH / 2 - 70,WINDOW_HEIGHT / 2 - 135,140,200 });
+	textures_->getTexture(Resources::Tinky)->render({ constants_.getConstant<int>("WINDOW_WIDTH") / 2 - 70,constants_.getConstant<int>("WINDOW_HEIGHT") / 2 - 135,140,200 });
 
 	Texture introText(renderer_,
 		"PROGRAMA DE CONVIVENCIA ESPACIAL",
 		fonts_->getFont(Resources::NES_Chimera),
 		{ COLOR(0xc7f2edff) });
 	introText.render(
-		WINDOW_WIDTH / 2 - introText.getWidth() / 2, WINDOW_HEIGHT - 250);
+		constants_.getConstant<int>("WINDOW_WIDTH") / 2 - introText.getWidth() / 2, constants_.getConstant<int>("WINDOW_HEIGHT") - 250);
 	SDL_RenderPresent(renderer_);
 
 
-	audio_->setMusicVolume(MAX_MUSIC_VOLUME);
+	audio_->setMusicVolume(constants_.getConstant<int>("MAX_MUSIC_VOLUME"));
 	audio_->playMusic(Resources::MainTheme, -1);
 	inputHandler_ = new InputHandler();
 	inputHandler_->initialiseJoysticks();
+
 }
 
 SDL_Game::~SDL_Game() {
@@ -37,7 +40,7 @@ SDL_Game::~SDL_Game() {
 	renderer_ = nullptr;
 
 	SDL_DestroyWindow(window_);
-	window_ =  nullptr;
+	window_ = nullptr;
 
 	SDL_Quit();
 }
@@ -93,16 +96,17 @@ void SDL_Game::closeResources() {
 void SDL_Game::start() {
 	exit_ = false;
 	gamestateMachine_->changeToState(States::play);
-	while (!exit_) {
-		Uint32 startTime = getTime();
-		gamestateMachine_->handleInput();
-		gamestateMachine_->update();
-		gamestateMachine_->render();
 
+	if (inputHandler_->getNumControllers() > 0) {
+		while (!exit_) {
+			Uint32 startTime = getTime();
+			gamestateMachine_->handleInput();
+			gamestateMachine_->update();
+			gamestateMachine_->render();
 		Uint32 frameTime = getTime() - startTime;
-		if (frameTime < MS_PER_FRAME)
-			SDL_Delay(MS_PER_FRAME - frameTime);
-
-		//exit_ = !exit_;
+		if (frameTime < CONST(double,"MS_PER_FRAME"))
+			SDL_Delay(CONST(double, "MS_PER_FRAME") - frameTime);
+		}
 	}
+	else std::cout << "Que tal si pones un manso eh? genio\n\n\n";
 }

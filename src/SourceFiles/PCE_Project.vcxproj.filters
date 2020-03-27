@@ -104,6 +104,12 @@
     <Filter Include="Source Files\Managers &amp; Handlers">
       <UniqueIdentifier>{5349f6f7-5660-40cc-81d5-6621adb53fa1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Gamemodes">
+      <UniqueIdentifier>{af809109-335e-44e8-9531-ba1ce2e0c298}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Gamemodes">
+      <UniqueIdentifier>{29fa6c0b-fdb8-4d0b-b6ad-7d052c1f558e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -214,15 +220,6 @@
     <ClInclude Include="WeaponFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameMode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StocksGameMode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PauseState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerData.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -231,6 +228,15 @@
     </ClInclude>
     <ClInclude Include="ImpulseViewer.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseState.h">
+      <Filter>Header Files\Gamestates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMode.h">
+      <Filter>Header Files\Gamemodes</Filter>
+    </ClInclude>
+    <ClInclude Include="StocksGameMode.h">
+      <Filter>Header Files\Gamemodes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -321,20 +327,23 @@
     <ClCompile Include="ImpulseViewer.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="GameMode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StocksGameMode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PauseState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerData.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="WeaponFactory.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMode.cpp">
+      <Filter>Source Files\Gamemodes</Filter>
+    </ClCompile>
+    <ClCompile Include="StocksGameMode.cpp">
+      <Filter>Source Files\Gamemodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Constants.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
