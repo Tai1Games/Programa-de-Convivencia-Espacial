@@ -20,7 +20,7 @@ void Weapon::update()
 {
 	if (currentHand_ != nullptr && mainCollider_->isEnabled()) {
 		mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x, currentHand_->getPos().y), 0.0);	//Colocamos el trigger de golpear
-		Action();	//Calculamos el daño que hace la chancla
+		Action();	//Calculamos el daño que hace la chancla segun la vida del jugador
 	}
 }
 
@@ -49,7 +49,7 @@ void Weapon::PickObjectBy(Hands* playerH)
 	if (playerH->getWeaponID() == NoWeapon) {
 		currentHand_ = playerH;
 		picked_ = true;
-		currentHand_->setWeapon(weaponType_);
+		currentHand_->setWeapon(weaponType_, this);
 		if (weaponType_ == WeaponID::Chancla) {
 			mainCollider_->createFixture(mainCollider_->getW(0)*1.05, mainCollider_->getH(0) *1.05, 1, 0.1, 0, Collider::CollisionLayer::Weapon, true);
 			b2Filter aux = mainCollider_->getFixture(0)->GetFilterData();
@@ -97,11 +97,15 @@ void Weapon::DeletePlayerInfo(int index)
 
 void Weapon::Action() {
 	//Calculo del daño de la chancla
-	damage_ = playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealthMax() - playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealth() + 1;
-
+	damage_ = playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealthMax() - playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealth();
 	//cout << "Golpeaste con una fuerza de " << damage_ << " al contrincante" << endl;
 }
 
 int Weapon::getDamage() {
 	return damage_;
+}
+
+
+bool Weapon::isOnHit(){
+	return hit;
 }

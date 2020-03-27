@@ -56,6 +56,6 @@ public:
 	int getWeaponType() { return weaponType_; }
 	Hands* getCurrentHand() { return currentHand_; }
 
-	bool isOnHit() { return hit; }
+	bool isOnHit();
 };
 
