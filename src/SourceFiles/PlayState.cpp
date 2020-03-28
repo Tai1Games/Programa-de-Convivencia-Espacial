@@ -54,7 +54,7 @@ void PlayState::init() {
 
 	//Colliders
 	                                                                                      // x,  y,   width, height, density,	friction, restitution, linearDrag, angularDrag,	Layer,											  sensor
-	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    17,    7,    1,     1,      1,         0.1,      0.2,         0,          0,          Collider::CollisionLayer::Player,			   	  false);
+	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    2,    2,    1,     1,      1,         0.1,      0.2,         0,          0,          Collider::CollisionLayer::Player,			   	  false);
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody,    10.5, -0.5, 12,    1,      10,        0,        0.2,         0,          0,           Collider::CollisionLayer::Wall,					  false);
 	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody,     21.5, 10,   1,     10,     10,        1,        0.2,         0,          0,           Collider::CollisionLayer::Wall,					  false);
 	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 0,    8.25, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::NormalAttachableObject, false);
@@ -105,10 +105,10 @@ void PlayState::init() {
 	//Fuerzas iniciales
 	//collTinky->applyLinearImpulse(b2Vec2(20, -10), b2Vec2(1, 1));
 	//collTonko->applyLinearImpulse(b2Vec2(0, 1000), b2Vec2(0.1, 0));
-	collJunk->applyLinearImpulse(b2Vec2(50, 0), b2Vec2(0.1, 0));
+	//collJunk->applyLinearImpulse(b2Vec2(50, 0), b2Vec2(0.1, 0));
 
 	//Version estática de la factoria
-	WeaponFactory::makeChancla(entityManager_, physicsWorld_, b2Vec2(18, 5), b2Vec2(0.5, 0.5));
+	WeaponFactory::makePelota(entityManager_, physicsWorld_, b2Vec2(18, 5), b2Vec2(0.5, 0.5));
 	//WeaponFactory::makeChancla(entityManager_, physicsWorld_, b2Vec2(14, 5), b2Vec2(0.5, 0.5));
 	//WeaponFactory::makeGrapadora(entityManager_, physicsWorld_, b2Vec2(10, 5), b2Vec2(0.5, 0.5));
 	gameMode_->init(this);

@@ -162,10 +162,10 @@
     <ClInclude Include="WiFightGameMode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ProgressBar.h">
+    <ClInclude Include="Router.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Router.h">
+    <ClInclude Include="RouterLogic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -279,6 +279,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Router.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RouterLogic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

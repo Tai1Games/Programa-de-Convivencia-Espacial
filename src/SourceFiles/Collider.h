@@ -7,36 +7,24 @@
 
 class Collider : public Component
 {
-private:
-	//general
-	b2Body* body_;
-	b2World* world_;
-	b2BodyDef bodyDef_;
-
-	//fixtures
-	vector<float> widths_;
-	vector<float> heights_;
-	vector<b2PolygonShape> shapes_;
-	vector<b2FixtureDef> fixtureDefs_;
-	vector<b2Fixture*> fixtures_;
-
 public:
 	//Add the different collision layers as we see fit
 	enum CollisionLayer {
-		NormalObject = 0x0001, //a collision layer can't be zero or else it won't collide
-		NormalAttachableObject,
-		Wall,
-		Player,
-		Trigger,
-		UnInteractableObject, //ONLY collides with walls
-		Weapon
+		NormalObject = 0x0001,
+		UnInteractableObject = 0x0002, //a collision layer can't be zero or else it won't collide
+		NormalAttachableObject = 0x0004,
+		Wall = 0x0008,
+		Player = 0x0016,
+		Trigger = 0x0032,
+		Weapon = 0x0064,
+		RouterSensor = 0x0128
 	};
 
 	//Friccion -> rozamiento al contacto con otros cuerpos   Drag-> rozamiento con el aire
 	Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
 		float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor);
 
-	~Collider() {
+	~Collider() {	
 		world_->DestroyBody(body_); world_ = nullptr;
 	}
 
@@ -83,7 +71,23 @@ public:
 	void setLinearVelocity(b2Vec2 vel) { body_->SetLinearVelocity(vel); }
 	void applyLinearImpulse(b2Vec2 force, b2Vec2 point) { body_->ApplyLinearImpulse(force, body_->GetPosition() + point, true); }
 	void applyForce(b2Vec2 force, b2Vec2 point) { body_->ApplyForce(force, body_->GetPosition() + point, true); }
-	void createFixture(float width, float height, float density,
-		float friction, float restitution, CollisionLayer, bool sensor);
+	void createRectangularFixture(float width, float height, float density,
+		float friction, float restitution, CollisionLayer layer, bool sensor);
+	void createCircularFixture(float radius, float density, float friction, float restitution, CollisionLayer layer, bool sensor);
 	void destroyFixture(int i);
+
+private:
+	//general
+	b2Body* body_;
+	b2World* world_;
+	b2BodyDef bodyDef_;
+
+	//fixtures
+	vector<float> widths_;
+	vector<float> heights_;
+	//vector<b2Shape> shapes_;
+	vector<b2FixtureDef> fixtureDefs_;
+	vector<b2Fixture*> fixtures_;
+
+	b2Filter setCollisionLayer(CollisionLayer c);
 };

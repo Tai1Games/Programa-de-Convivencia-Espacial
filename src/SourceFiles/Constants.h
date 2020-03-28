@@ -68,13 +68,13 @@ const int STOCK_OFFSET = 10;
 const int STOCK_WIDTH = 20;
 const int STOCK_HEIGTH = 20;
 
+//Constantes referentes a Wi-Fight
+
+const int POINTS_TO_WIN = 100;
+
 //Constantes de hands
 
 const double HAND_BODY_OFFSET = 120;
-
-//Constantes referentes a ProgressBar
-
-const int MAX_PROGRESS = 100;
 
 //Modos de juegos
 enum States
