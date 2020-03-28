@@ -2,15 +2,7 @@
 
 #include "Entity.h"
 #include "checkML.h"
-#include "Transform.h"
-#include "Texture.h"
-#include "Viewer.h"
-#include "Health.h"
-#include "HealthViewer.h"
-#include "InputHandler.h"
-#include "Weapon.h"
-#include "MeleeWeapon.h"
-#include "Hands.h"
+
 
 class WeaponFactory
 {

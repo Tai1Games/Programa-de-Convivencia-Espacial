@@ -1,4 +1,13 @@
 #include "WeaponFactory.h"
+#include "Transform.h"
+#include "Texture.h"
+#include "Viewer.h"
+#include "Health.h"
+#include "HealthViewer.h"
+#include "InputHandler.h"
+#include "Weapon.h"
+#include "MeleeWeapon.h"
+#include "Hands.h"
 
 void WeaponFactory::makeChancla(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 	Entity* e = entityManager->addEntity();
