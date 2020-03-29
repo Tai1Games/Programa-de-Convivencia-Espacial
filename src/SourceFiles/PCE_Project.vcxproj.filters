@@ -156,9 +156,6 @@
     <ClInclude Include="ImpulseViewer.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="ControllerGameMode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PauseState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
@@ -166,6 +163,9 @@
       <Filter>Header Files\Gamemodes</Filter>
     </ClInclude>
     <ClInclude Include="StocksGameMode.h">
+      <Filter>Header Files\Gamemodes</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllerGameMode.h">
       <Filter>Header Files\Gamemodes</Filter>
     </ClInclude>
   </ItemGroup>
@@ -276,7 +276,7 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="ControllerGameMode.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Gamemodes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

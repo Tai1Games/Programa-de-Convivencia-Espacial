@@ -31,11 +31,12 @@ void WeaponFactory::makeGrapadora(EntityManager* entityManager, b2World* physics
 	aux->setUserData(e);
 }
 
-void WeaponFactory::makeMando(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
+Weapon* WeaponFactory::makeController(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 	Entity* e = entityManager->addEntity();
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONTROLLER_DENSITY, CONTROLLER_FRICTION, 
-		CONTROLLER_RESTITUTION, CONTROLLER_LINEAR_DRAG, CONTROLLER_ANGULAR_DRAG, Collider::CollisionLayer::NormalObject, false, true);
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "CONTROLLER_DENSITY"), CONST(double, "CONTROLLER_FRICTION"),
+		CONST(double, "CONTROLLER_RESTITUTION"), CONST(double, "CONTROLLER_LINEAR_DRAG"), CONST(double, "CONTROLLER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false, true);
 	e->addComponent<Viewer>();
-	e->addComponent<Weapon>(WeaponID::Mando);
+	Weapon* controller = e->addComponent<Weapon>(WeaponID::Mando);
 	aux->setUserData(e);
+	return controller;
 }

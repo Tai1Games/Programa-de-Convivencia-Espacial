@@ -6,12 +6,17 @@
 #include "box2d.h"
 #include "Hands.h"
 #include "PlayerData.h"
+#include "WeaponFactory.h"
+#include "PlayState.h"
+#include "GameState.h"
+#include "Weapon.h"
 
 class ControllerGameMode : public GameMode
 {
 private:
 	vector<double> controllerTimes_;
 	Entity* winner = nullptr;
+	Weapon* controller_ = nullptr;
 public:
 	ControllerGameMode() {};
 	virtual void init(PlayState* game);

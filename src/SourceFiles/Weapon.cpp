@@ -92,3 +92,8 @@ void Weapon::Action() {
 	cout << "Fuiste golpeado con " << damage << " al contrincante" << endl;
 	*/
 }
+
+//Getter en el cpp por temas de inclusión circular
+int Weapon::getPlayerId() {
+	return currentHand_->getPlayerId();
+}
