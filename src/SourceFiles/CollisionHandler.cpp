@@ -99,6 +99,14 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		ObjectCollidesWithPlayer(contact->GetFixtureA(), player_Health);
 
 		if(weAux->isOnHit() && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
+			Collider* chancla = aux->getComponent<Collider>(ComponentType::Collider);
+			Collider* enemy = aux2->getComponent<Collider>(ComponentType::Collider);
+			//Calculamos direccion para el impulso al ser golpeado por la chancla
+			b2Vec2 knockback = enemy->getPos() - chancla->getPos();
+			knockback.Normalize();
+			knockback *= CONST(double, "WEAPON_MELEE_KNOCKBACK");
+
+			enemy->applyLinearImpulse(knockback, b2Vec2(0, 1));
 			player_Health->subtractLife(weAux->getDamage());
 			cout << "Golpeaste al objetivo" << endl;
 		}
@@ -118,6 +126,15 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		ObjectCollidesWithPlayer(contact->GetFixtureB(), player_Health);
 		
 		if (weAux->isOnHit() && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
+			Collider* chancla = aux->getComponent<Collider>(ComponentType::Collider);
+			Collider* enemy = aux2->getComponent<Collider>(ComponentType::Collider);
+			//Calculamos direccion para el impulso al ser golpeado por la chancla
+			b2Vec2 knockback = enemy->getPos() - chancla->getPos();
+			knockback.Normalize();
+			knockback *= CONST(double, "WEAPON_MELEE_KNOCKBACK");
+
+			enemy->applyLinearImpulse(knockback, b2Vec2(0, 1));
+
 			player_Health->subtractLife(weAux->getDamage());
 			cout << "Golpeaste al objetivo" << endl;
 		}
