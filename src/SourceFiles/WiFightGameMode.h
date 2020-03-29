@@ -7,12 +7,12 @@
 class WiFightGameMode : public GameMode
 {
 private:
-	std::vector<int> playerProgress_;
+	std::vector<double> playerProgress_;
 	Entity* router = nullptr;
 public:
 	WiFightGameMode() {};
 	~WiFightGameMode() {};
 	virtual void init(PlayState* game);
-	void addPoints(int player, int sumPoints);
+	void addPoints(int player, double sumPoints);
 };
 

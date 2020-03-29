@@ -18,11 +18,11 @@ void WiFightGameMode::init(PlayState* game)
 	collRouter->applyForce(b2Vec2(10, 0), b2Vec2(0,0));
 }
 
-void WiFightGameMode::addPoints(int player, int sumPoints)
+void WiFightGameMode::addPoints(int player, double sumPoints)
 {
 	playerProgress_[player] += sumPoints;
-	if (playerProgress_[player] >= CONST(int, "POINTS_TO_WIN")) {
+	if (playerProgress_[player] >= CONST(int, "POINTS_TO_WIN")) { 
+		winner = players_[player];
 		roundFinished_ = true;
-		//Add players to vector of winners in order of morePoints -> lessPoints
 	}
 }

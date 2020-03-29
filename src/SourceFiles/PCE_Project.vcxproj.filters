@@ -156,12 +156,6 @@
     <ClInclude Include="ImpulseViewer.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Router.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RouterLogic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PauseState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
@@ -173,6 +167,9 @@
     </ClInclude>
     <ClInclude Include="StocksGameMode.h">
       <Filter>Header Files\GameModes</Filter>
+    </ClInclude>
+    <ClInclude Include="RouterLogic.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -269,15 +266,6 @@
     <ClCompile Include="WeaponFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ProgressBar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Router.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RouterLogic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PauseState.cpp">
       <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
@@ -289,6 +277,12 @@
     </ClCompile>
     <ClCompile Include="StocksGameMode.cpp">
       <Filter>Source Files\GameModes</Filter>
+    </ClCompile>
+    <ClCompile Include="Constants.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RouterLogic.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
