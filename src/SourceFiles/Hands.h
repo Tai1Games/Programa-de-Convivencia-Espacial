@@ -15,10 +15,11 @@ private:
 	Collider* collider_ = nullptr;
 	int textureId_ = 0;
 	PlayerData* playerData_ = nullptr;
-	WeaponID currentWeapon_ = NoWeapon;
+	WeaponID currentWeaponID_ = NoWeapon;
 	InputHandler* ih_ = nullptr;
 	float angle_ = 0;
 	bool onFlipped_ = false;
+	Weapon* currentWeapon_ = nullptr;
 protected:
 public:
 	Hands(int textureId, WeaponID wId = NoWeapon);
@@ -26,11 +27,12 @@ public:
 	virtual void init() override;
 	virtual void draw() const;
 	virtual void update() override;
-	void setWeapon(WeaponID wId);
+	void setWeapon(WeaponID wId, Weapon* w);
 	int getPlayerId() { return playerData_->getPlayerNumber(); }
 	b2Vec2 getPos() { return pos_; }
 	b2Vec2 getDir() { return dir_; }
 	float getAngle() { return angle_; }
-	WeaponID getWeapon() { return currentWeapon_; }
+	Weapon* getWeapon() { return currentWeapon_; }
+	WeaponID getWeaponID() { return currentWeaponID_; }
 };
 

@@ -18,11 +18,11 @@ void PauseState::init()
 	Entity* miniTinky = entityManager_->addEntity();
 	Entity* sliderControl = entityManager_->addEntity();
 
-	pauseText->addComponent<Viewer>(Resources::PauseText, (WINDOW_WIDTH / 2) - 230, (WINDOW_HEIGHT / 2) - 310, 2.5, 0);
+	pauseText->addComponent<Viewer>(Resources::PauseText, (CONST(int,"WINDOW_WIDTH") / 2) - 230, (CONST(int,"WINDOW_HEIGHT") / 2) - 310, 2.5, 0);
 	
-	btns_.push_back(resumeText->addComponent<Viewer>(Resources::ResumeText, (WINDOW_WIDTH / 2) - 260, (WINDOW_HEIGHT / 2) - 120, 1.5, 0));
-	btns_.push_back(soundText->addComponent<Viewer>(Resources::SoundText, (WINDOW_WIDTH / 2) - 260, (WINDOW_HEIGHT / 2), 1.5, 0));
-	btns_.push_back(exitText->addComponent<Viewer>(Resources::ExitText, (WINDOW_WIDTH / 2) - 260, (WINDOW_HEIGHT / 2) + 120, 1.5, 0));
+	btns_.push_back(resumeText->addComponent<Viewer>(Resources::ResumeText, (CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) - 120, 1.5, 0));
+	btns_.push_back(soundText->addComponent<Viewer>(Resources::SoundText, (CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2), 1.5, 0));
+	btns_.push_back(exitText->addComponent<Viewer>(Resources::ExitText, (CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) + 120, 1.5, 0));
 
 	buttonSelectorImage_ = miniTinky->addComponent<Viewer>(Resources::Tinky, btns_[selectedBtn_]->getPosUIElement().x - 80, btns_[selectedBtn_]->getPosUIElement().y - 15, 0.5, 0);
 	sliderControlImage_ = sliderControl->addComponent<Viewer>(Resources::SliderControl, btns_[Buttons::Sound]->getPosUIElement().x + 645, btns_[Buttons::Sound]->getPosUIElement().y, 2, 0);
@@ -51,7 +51,7 @@ void PauseState::handleInput()
 			updateMusicVolume();
 			holdingX_ = true;
 		}
-		else if (currentMusicVolume_ < MAX_MUSIC_VOLUME && !holdingX_ && lStickXValue > 0.999) {
+		else if (currentMusicVolume_ < CONST(int,"MAX_MUSIC_VOLUME") && !holdingX_ && lStickXValue > 0.999) {
 			currentMusicVolume_ += 10;
 			updateMusicVolume();
 			holdingX_ = true;
@@ -111,7 +111,7 @@ void PauseState::updateMusicVolume()
 {
 	SDL_Game::instance()->getAudioMngr()->setMusicVolume(currentMusicVolume_);
 
-	float newXPos = (btns_[Buttons::Sound]->getPosUIElement().x + 395) + ((currentMusicVolume_ / 10) * (250 / (MAX_MUSIC_VOLUME / 10)));
+	float newXPos = (btns_[Buttons::Sound]->getPosUIElement().x + 395) + ((currentMusicVolume_ / 10) * (250 / (CONST(double, "MAX_MUSIC_VOLUME")/ 10)));
 	sliderControlImage_->setPosUIElement(b2Vec2(newXPos,
 		btns_[Buttons::Sound]->getPosUIElement().y));
 }

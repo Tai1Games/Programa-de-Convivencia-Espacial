@@ -22,6 +22,8 @@ private:
 	//HUD
 
 	CollisionHandler* collisionHandler_;
+	vector<Entity*> deadBodies;
+	vector<Collider*> collDeadBodies;
 	vector<Entity*> players_;
 	GameMode* gameMode_ = nullptr;
 
@@ -30,6 +32,7 @@ public:
 	~PlayState();
 	virtual void init();
 	virtual void update();
+	void createDeadBodies();
 	virtual void render();
 	virtual void handleInput();
 	std::vector<Entity*> getPlayers() { return players_; };

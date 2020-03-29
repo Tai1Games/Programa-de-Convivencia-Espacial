@@ -23,11 +23,11 @@ void ImpulseViewer::init() {
 void ImpulseViewer::draw() const {
 	b2Vec2 stickDir = SDL_Game::instance()->getInputHandler()->getLastStickDir(playerNumber_, InputHandler::LEFTSTICK);
 	if (SDL_Game::instance()->getInputHandler()->isButtonDown(playerNumber_, SDL_CONTROLLER_BUTTON_A)) {
-		double angle = std::atan2((double)stickDir.x, -(double)stickDir.y) * (180.0 / PI);
+		double angle = std::atan2((double)stickDir.x, -(double)stickDir.y) * (180.0 / CONST(double, "PI"));
 		SDL_Rect playerRect = playerCollider_->getRectRender();
-		SDL_Rect destRect{ playerRect.x,playerRect.y,IMPULSE_SIZE,IMPULSE_SIZE };
+		SDL_Rect destRect{ playerRect.x,playerRect.y,CONST(int, "IMPULSE_SIZE"),CONST(int, "IMPULSE_SIZE") };
 		emptyTexture_->render(destRect, angle);
 		float force = playerController_->calculateForce();
-		chargeTexture_->render(destRect, angle, { emptyTexture_->getWidth() * int((playerController_->calculateForce() / IMPULSE_GRABBED) * 11), 0, emptyTexture_->getWidth(), emptyTexture_->getHeight() });
+		chargeTexture_->render(destRect, angle, { emptyTexture_->getWidth() * int((playerController_->calculateForce() / CONST(double, "IMPULSE_GRABBED")) * 11), 0, emptyTexture_->getWidth(), emptyTexture_->getHeight() });
 	}
 }

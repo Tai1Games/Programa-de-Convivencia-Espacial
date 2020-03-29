@@ -25,7 +25,7 @@ private:
 	vector<Viewer*> btns_;
 	/*Indice para el botón seleccionado en el vector de botones*/
 	int selectedBtn_ = 0;
-	int currentMusicVolume_ = MAX_MUSIC_VOLUME;
+	int currentMusicVolume_ = CONST(double, "MAX_MUSIC_VOLUME");
 
 	/*Actualiza la posición de la selección y el botón seleccionado*/
 	void updateSelectedButton();

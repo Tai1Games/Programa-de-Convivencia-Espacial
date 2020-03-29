@@ -39,11 +39,11 @@ float PlayerController::calculateForce() {
 
 	Uint32 newForce = (SDL_Game::instance()->getTime() - chargeTimeStart_) / 100;
 	if (attachesToObj_->isAttached()) {
-		if (newForce > IMPULSE_GRABBED)
-			newForce = IMPULSE_GRABBED;
+		if (newForce > CONST(double, "IMPULSE_GRABBED"))
+			newForce = CONST(double, "IMPULSE_GRABBED");
 	}
-	else if (newForce > IMPULSE_FLOATING)
-		newForce = IMPULSE_FLOATING;
+	else if (newForce > CONST(double, "IMPULSE_FLOATING"))
+		newForce = CONST(double, "IMPULSE_FLOATING");
 
 	return newForce;
 }
