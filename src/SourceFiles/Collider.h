@@ -16,8 +16,7 @@ public:
 		Wall = 0x0008,
 		Player = 0x0016,
 		Trigger = 0x0032,
-		Weapon = 0x0064,
-		RouterSensor = 0x0128
+		Weapon = 0x0064
 	};
 
 	//Friccion -> rozamiento al contacto con otros cuerpos   Drag-> rozamiento con el aire

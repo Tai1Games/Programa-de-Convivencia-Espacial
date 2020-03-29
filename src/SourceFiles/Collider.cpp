@@ -55,34 +55,28 @@ void Collider::createCircularFixture(float radius, float density, float friction
 
 b2Filter Collider::setCollisionLayer(CollisionLayer c) {
 	b2Filter filter;
+	filter.categoryBits = c;
 	switch (c) {
 	case NormalObject:
-		filter.categoryBits = NormalObject;
 		filter.maskBits = NormalObject | NormalAttachableObject | Player | Wall; //what do I collide with?
 		break;
 	case NormalAttachableObject:
-		filter.categoryBits = NormalAttachableObject;
 		filter.maskBits = NormalObject | NormalAttachableObject | Player | Wall; //what do I collide with?
 		break;
 	case Player:
-		filter.categoryBits = Player;
 		filter.maskBits = NormalObject | NormalAttachableObject | Player | Weapon | Wall;
 		break;
 	case Trigger:
-		filter.categoryBits = Trigger;
 		filter.maskBits = Player;
 		break;
 	case Weapon:
-		filter.categoryBits = Weapon;
 		filter.maskBits = Player | Wall;
 		break;
 	case UnInteractableObject:
-		filter.categoryBits = UnInteractableObject;
 		filter.maskBits = Wall;
 		break;
 	case Wall:
-		filter.categoryBits = Wall;
-		filter.maskBits = UnInteractableObject | Wall;
+		filter.maskBits = UnInteractableObject | Player | NormalAttachableObject | NormalObject;
 		break;
 	}
 	return filter;
