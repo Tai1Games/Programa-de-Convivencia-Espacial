@@ -3,7 +3,7 @@
 #include "Resources.h"
 #include "json.hpp"
 
-TileMap::TileMap(int w, int h,string map):Component(ComponentType::Tilemap),
+TileMap::TileMap(int w, int h,string map):Component(ComponentType::Tilemap),  //w y h son de la ventana
 width_(w),
 height_(h),
 tm_(nullptr){

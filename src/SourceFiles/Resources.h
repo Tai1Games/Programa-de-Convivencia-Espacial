@@ -32,6 +32,7 @@ public:
 		ImpulsoBackground,
 		Slider,
 		SliderControl,
+		SalaDeEstar,
 
 		// text
 		PauseText,
