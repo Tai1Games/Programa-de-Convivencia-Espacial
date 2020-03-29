@@ -3,24 +3,13 @@
 
 void ControllerGameMode::init(PlayState* game)  {
 	GameMode::init(game);
+	//Instancia necesaria para poder coger el puntero al mando (si usáramos una función void no haría falta)
 	WeaponFactory wF;
 	controller_ = wF.makeController(state_->getEntityManager(), state_->getPhysicsWorld(), b2Vec2(18, 5), b2Vec2(0.5, 0.5));
 	for (Entity* player : players_) controllerTimes_.push_back(0);
 }
 
 void ControllerGameMode::update() {
-	/*if (!roundFinished_) {
-		for (Entity* player : players_) {
-			Hands* playerHand = player->getComponent<Hands>(ComponentType::Hands);
-			PlayerData* pData = player->getComponent<PlayerData>(ComponentType::PlayerData);
-			if (playerHand != nullptr && playerHand->getWeapon()->getWeaponType() == WeaponID::Mando) controllerTimes_[pData->getPlayerNumber()] += (CONST(double, "MS_PER_FRAME") / 1000);
-			if (controllerTimes_[pData->getPlayerNumber()] >= CONST(double, "TIME_TO_WIN")) {
-				roundFinished_ = true;
-				winner = player;
-			}
-		}
-	}*/
-
 	if (!roundFinished_) {
 		if (controller_->isPicked()) {
 			controllerTimes_[controller_->getPlayerId()] += (CONST(double, "MS_PER_FRAME") / 1000);
@@ -34,6 +23,7 @@ void ControllerGameMode::update() {
 }
 
 void ControllerGameMode::render() {
+	//UI provisional, acabar con esto rápido
 	if (players_[0] != nullptr) {
 		Texture score(SDL_Game::instance()->getRenderer(),
 			to_string(controllerTimes_[0]).substr(0, 4 + log10(controllerTimes_[0])),

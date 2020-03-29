@@ -48,6 +48,6 @@ public:
 	void Action();
 	int getWeaponType() { return weaponType_; }
 	int isPicked() { return picked_; }
-	int getPlayerId();
+	int getPlayerId(); //Cuerpo en el cpp por temas de inclusión circular
 };
 

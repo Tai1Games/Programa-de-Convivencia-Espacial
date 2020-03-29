@@ -93,7 +93,6 @@ void Weapon::Action() {
 	*/
 }
 
-//Getter en el cpp por temas de inclusión circular
 int Weapon::getPlayerId() {
 	return currentHand_->getPlayerId();
 }
