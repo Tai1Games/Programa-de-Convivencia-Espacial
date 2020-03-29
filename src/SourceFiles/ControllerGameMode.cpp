@@ -15,7 +15,7 @@ void ControllerGameMode::update() {
 			controllerTimes_[controller_->getPlayerId()] += (CONST(double, "MS_PER_FRAME") / 1000);
 			if (controllerTimes_[controller_->getPlayerId()] >= CONST(double, "TIME_TO_WIN")) {
 				roundFinished_ = true;
-				winner = players_[controller_->getPlayerId()];
+				winner_ = players_[controller_->getPlayerId()];
 			}
 		}
 
@@ -53,7 +53,7 @@ void ControllerGameMode::render() {
 		score.render(CONST(int, "WINDOW_WIDTH") - score.getWidth(), CONST(int, "WINDOW_HEIGHT") - score.getHeight() - 75);
 	}
 	if (roundFinished_) {
-		string winMsg = "Gana el jugador " + to_string(winner->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber());
+		string winMsg = "Gana el jugador " + to_string(winner_->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber());
 		Texture ganador(SDL_Game::instance()->getRenderer(), winMsg,
 			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
 		ganador.render(CONST(int, "WINDOW_WIDTH") / 2 - ganador.getWidth() / 2, CONST(int, "WINDOW_HEIGHT") / 2);

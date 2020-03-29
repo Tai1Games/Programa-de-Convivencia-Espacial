@@ -15,7 +15,6 @@ class ControllerGameMode : public GameMode
 {
 private:
 	vector<double> controllerTimes_;
-	Entity* winner = nullptr;
 	Weapon* controller_ = nullptr;
 public:
 	ControllerGameMode() {};
