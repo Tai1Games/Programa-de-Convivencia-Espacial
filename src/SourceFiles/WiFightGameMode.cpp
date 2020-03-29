@@ -21,7 +21,7 @@ void WiFightGameMode::init(PlayState* game)
 void WiFightGameMode::addPoints(int player, int sumPoints)
 {
 	playerProgress_[player] += sumPoints;
-	if (playerProgress_[player] >= POINTS_TO_WIN) {
+	if (playerProgress_[player] >= CONST(int, "POINTS_TO_WIN")) {
 		roundFinished_ = true;
 		//Add players to vector of winners in order of morePoints -> lessPoints
 	}
