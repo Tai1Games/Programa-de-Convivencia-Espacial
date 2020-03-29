@@ -18,7 +18,7 @@ TileMap::~TileMap() {
 
 void TileMap::init() {
 	tm_ = SDL_Game::instance()->getTexturesMngr();
-
+	layers_ = tMap_.getLayers();
 	//recorremos todas las capas del mapa
 	for (auto& tileLayer : layers_)
 	{
@@ -35,8 +35,6 @@ void TileMap::init() {
 			}
 		}
 	}
-
-
 }
 
 void TileMap::update() {
