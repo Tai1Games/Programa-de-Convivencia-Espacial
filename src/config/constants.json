@@ -26,7 +26,7 @@
     "HIGH_DAMAGE":70,
 
         "_WEAPONS":null,
-
+    "WEAPON_MELEE_TIME": 80,
     "WEAPON_THROW_SPEED":100,
     "WEAPON_SPIN_SPEED":8,
 

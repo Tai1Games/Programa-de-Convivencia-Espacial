@@ -99,7 +99,6 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		ObjectCollidesWithPlayer(contact->GetFixtureA(), player_Health);
 
 		if(weAux->isOnHit() && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
-			weAux->Action();	//Calcula el daño que va a hacer la chancla
 			player_Health->subtractLife(weAux->getDamage());
 			cout << "Golpeaste al objetivo" << endl;
 		}
@@ -119,7 +118,6 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		ObjectCollidesWithPlayer(contact->GetFixtureB(), player_Health);
 		
 		if (weAux->isOnHit() && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
-			weAux->Action();	//Calcula el daño que va a hacer la chancla
 			player_Health->subtractLife(weAux->getDamage());
 			cout << "Golpeaste al objetivo" << endl;
 		}

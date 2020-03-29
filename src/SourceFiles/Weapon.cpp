@@ -20,6 +20,17 @@ void Weapon::update()
 {
 	if (currentHand_ != nullptr && mainCollider_->isEnabled()) {
 		mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x, currentHand_->getPos().y), 0.0);	//Colocamos el trigger de golpear
+		
+		if (hit == true) {
+			actionTime++; //Incrementamos tiempo de accion de la chancla
+
+			if (actionTime >= CONST(double, "WEAPON_MELEE_TIME")) {
+				hit = false;
+				actionTime = 0;
+			}
+			//else { vw_->setDrawable(true); }
+		}
+		//else { vw_->setDrawable(false); }
 	}
 }
 
@@ -32,7 +43,6 @@ void Weapon::handleInput()
 				ih_->isButtonJustDown(i, SDL_CONTROLLER_BUTTON_Y)) {
 				cout << "inRange";
 				PickObjectBy(playerInfo_[i].playerHands);
-				hit = true;
 			}
 		}
 	}
@@ -40,6 +50,12 @@ void Weapon::handleInput()
 	{
 		hit = false;
 		UnPickObject();
+	}
+	else if (IsPicked() && ih_->isButtonJustDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_X))
+	{
+		hit = true;
+		Action();
+		actionTime = 0;
 	}
 }
 
