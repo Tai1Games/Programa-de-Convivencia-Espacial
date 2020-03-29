@@ -71,6 +71,8 @@ const int STOCK_HEIGTH = 20;
 //Constantes referentes a Wi-Fight
 
 const int POINTS_TO_WIN = 100;
+const int POINTS_WHEN_INSIDE_ROUTER = 5;
+const float MAX_POINTS_PER_TICK = 4;
 
 //Constantes de hands
 

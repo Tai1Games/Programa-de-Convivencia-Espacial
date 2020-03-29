@@ -42,15 +42,15 @@ void PlayState::init() {
 	//map->addComponent<TileMap>(WINDOW_WIDTH, WINDOW_HEIGHT,
 	//	"../../assets/game/tilemaps/TD_TilemapBitCSV.json");
 
-	Entity* tonko = entityManager_->addEntity();
-	Entity* tunko = entityManager_->addEntity();
-	Entity* tanko = entityManager_->addEntity();
+	//Entity* tonko = entityManager_->addEntity();
+	//Entity* tunko = entityManager_->addEntity();
+	//Entity* tanko = entityManager_->addEntity();
 	Entity* spaceJunk = entityManager_->addEntity();
 
 	players_.push_back(tinky);
-	players_.push_back(tonko);
-	players_.push_back(tunko);
-	players_.push_back(tanko);
+	//players_.push_back(tonko);
+	//players_.push_back(tunko);
+	//players_.push_back(tanko);
 
 	//Colliders
 	                                                                                      // x,  y,   width, height, density,	friction, restitution, linearDrag, angularDrag,	Layer,											  sensor
@@ -58,9 +58,9 @@ void PlayState::init() {
 	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody,    10.5, -0.5, 12,    1,      10,        0,        0.2,         0,          0,           Collider::CollisionLayer::Wall,					  false);
 	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody,     21.5, 10,   1,     10,     10,        1,        0.2,         0,          0,           Collider::CollisionLayer::Wall,					  false);
 	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 0,    8.25, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::NormalAttachableObject, false);
-	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,				  false);
-	Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,				  false);
-	Collider* collTanko = tanko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	  7,	3,	  1,	 1,		 1,		    0.1,	  0.2,		   0,		   0,			Collider::CollisionLayer::Player,				  false);
+	//Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,				  false);
+	//Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,				  false);
+	//Collider* collTanko = tanko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	  7,	3,	  1,	 1,		 1,		    0.1,	  0.2,		   0,		   0,			Collider::CollisionLayer::Player,				  false);
 
 	//Muros
 	ground->addComponent<Viewer>();
@@ -79,23 +79,23 @@ void PlayState::init() {
 	collTinky->setUserData(tinky);
 	tinky->addComponent<ImpulseViewer>(Resources::FlechaImpulso,Resources::ImpulsoBackground);
 
-	tonko->addComponent<PlayerData>(1);
-	tonko->addComponent<Viewer>(Resources::Tinky);
-	tonko->addComponent<Health>(3);
-	tonko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
-	collTonko->setUserData(tonko);
+	//tonko->addComponent<PlayerData>(1);
+	//tonko->addComponent<Viewer>(Resources::Tinky);
+	//tonko->addComponent<Health>(3);
+	//tonko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
+	//collTonko->setUserData(tonko);
 
-	tanko->addComponent<PlayerData>(3);
-	tanko->addComponent<Viewer>(Resources::Tinky);
-	tanko->addComponent<Health>(3);
-	tanko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
-	collTanko->setUserData(tanko);
+	//tanko->addComponent<PlayerData>(3);
+	//tanko->addComponent<Viewer>(Resources::Tinky);
+	//tanko->addComponent<Health>(3);
+	//tanko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
+	//collTanko->setUserData(tanko);
 
-	tunko->addComponent<PlayerData>(2);
-	tunko->addComponent<Viewer>(Resources::Tinky);
-	tunko->addComponent<Health>(3);
-	tunko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
-	collTunko->setUserData(tunko);
+	//tunko->addComponent<PlayerData>(2);
+	//tunko->addComponent<Viewer>(Resources::Tinky);
+	//tunko->addComponent<Health>(3);
+	//tunko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
+	//collTunko->setUserData(tunko);
 
 	//Objetos flotantes
 	

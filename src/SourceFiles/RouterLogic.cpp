@@ -25,7 +25,11 @@ void RouterLogic::init()
 
 void RouterLogic::update()
 {	//5 should be a constant and points should be based on distance from the router and number of players in the area. More players inside = less points for everyone else.
-	for (int k = 0; k < playersInsideRange_.size(); k++) {
-		wifightGameMode_->addPoints(playersInsideRange_[k].id, 5); 
+	int numJug = playersInsideRange_.size();
+	for (int k = 0; k < numJug; k++) {
+		// puntos añadidos = 1 / (numJugadores * (distancia + 1) para no dividir entre 0)
+		float points = POINTS_WHEN_INSIDE_ROUTER / (numJug * ((playersInsideRange_[k].posPlayer->getPos() - posRouter_->getPos()).Length() + 1));
+		std::cout << points << "	(at RouterLogic.cpp, method update(), line 32)" << endl;
+		wifightGameMode_->addPoints(playersInsideRange_[k].id, min(points, MAX_POINTS_PER_TICK));
 	}
 }
