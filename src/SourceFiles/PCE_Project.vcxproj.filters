@@ -31,11 +31,11 @@
     <Filter Include="Source Files\Managers &amp; Handlers">
       <UniqueIdentifier>{5349f6f7-5660-40cc-81d5-6621adb53fa1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Gamemodes">
-      <UniqueIdentifier>{af809109-335e-44e8-9531-ba1ce2e0c298}</UniqueIdentifier>
+    <Filter Include="Source Files\GameModes">
+      <UniqueIdentifier>{e1060035-7cfe-47e2-bf41-238cdd336448}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Gamemodes">
-      <UniqueIdentifier>{29fa6c0b-fdb8-4d0b-b6ad-7d052c1f558e}</UniqueIdentifier>
+    <Filter Include="Header Files\GameModes">
+      <UniqueIdentifier>{9268ba75-f622-4e29-98bb-e9bd3f806b13}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -277,17 +277,6 @@
     </ClCompile>
     <ClCompile Include="RouterLogic.cpp">
       <Filter>Source Files</Filter>
-    <ClCompile Include="PauseState.cpp">
-      <Filter>Source Files\Gamestates</Filter>
-    </ClCompile>
-    <ClCompile Include="GameMode.cpp">
-      <Filter>Source Files\Gamemodes</Filter>
-    </ClCompile>
-    <ClCompile Include="StocksGameMode.cpp">
-      <Filter>Source Files\Gamemodes</Filter>
-    </ClCompile>
-    <ClCompile Include="Constants.cpp">
-      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="PauseState.cpp">
       <Filter>Source Files\Gamestates</Filter>

@@ -18,6 +18,6 @@ public:
 	virtual void init(PlayState* state);
 	virtual void render() {};
 	virtual void update() {};
-	virtual void onPlayerDead() {};
+	virtual bool onPlayerDead(int id) { return true; };
 	std::vector<Entity*> getRoundResults() { return roundResults_; }
 };
