@@ -3,10 +3,12 @@
 #include "Resources.h"
 #include "json.hpp"
 
-TileMap::TileMap(int w, int h,string map):Component(ComponentType::Tilemap),  //w y h son de la ventana
+TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW) :Component(ComponentType::Tilemap),  //w y h son de la ventana
 width_(w),
 height_(h),
-tm_(nullptr){
+tm_(nullptr),
+entityManager_(eM),
+physicsWorld_(pW) {
 	loadTileson(map);
 }
 
@@ -16,20 +18,41 @@ TileMap::~TileMap() {
 
 void TileMap::init() {
 	tm_ = SDL_Game::instance()->getTexturesMngr();
+
+	//recorremos todas las capas del mapa
+	for (auto& tileLayer : layers_)
+	{
+		//podemos distinguir entre capas de tiles, objetos, imagenes más adelante
+		if (tileLayer.getType() == tson::Layer::Type::ObjectGroup)
+		{
+			//pos = position in tile units
+			vector<tson::Object> objetos = tileLayer.getObjects();
+			for (int i = 0; i < objetos.size(); i++)
+			{
+				b2Vec2 pos = b2Vec2(objetos[i].getPosition().x / CONST(double, "PIXELS_PER_METER"), objetos[i].getPosition().y / CONST(double, "PIXELS_PER_METER"));
+				b2Vec2 size = b2Vec2(objetos[i].getSize().x / CONST(double, "PIXELS_PER_METER"), objetos[i].getSize().y / CONST(double, "PIXELS_PER_METER"));
+				WeaponFactory::makePared(entityManager_, physicsWorld_, pos, size);
+			}
+		}
+	}
+
+
 }
+
 void TileMap::update() {
 	//apaño para que draw sea const
 	layers_ = tMap_.getLayers();
 }
+
 void TileMap::draw() const {
 	//código bastante modificado basado en https://github.com/SSBMTonberry/tileson 
 	//He añadido sistema de escalado
 	//soporte automático para varios tilesets
 	//soporte de texturas de SDL
-	
+
 	Texture* tilesetT_;//Textura del tileset a utilizar
 	const tson::Tileset* tSet;//Datos del tileset a utilizar
-	
+
 	//recorremos todas las capas del mapa
 	for (auto& tileLayer : layers_)
 	{
@@ -44,9 +67,9 @@ void TileMap::draw() const {
 					//buscamos el tileset correspondiente
 					int i = 0;
 					int id = tile->getId();
-					while (i<tileSets_.size() 
+					while (i < tileSets_.size()
 						&& !(id >= tileSets_[i].getFirstgid()
-						&& id <= (tileSets_[i].getFirstgid() + tileSets_[i].getTileCount()) - 1))
+							&& id <= (tileSets_[i].getFirstgid() + tileSets_[i].getTileCount()) - 1))
 					{
 						i++;
 					}
@@ -67,7 +90,7 @@ void TileMap::draw() const {
 
 					tilesetT_ = tm_->getTexture(Resources::tilesetTag_.find(tSet->getName())->second);;
 					//Posicion de dibujado del vector
-					tson::Vector2i position = { std::get<0>(pos) * width_ /mapCols_,std::get<1>(pos) * height_ / mapRows_ };
+					tson::Vector2i position = { std::get<0>(pos) * width_ / mapCols_,std::get<1>(pos) * height_ / mapRows_ };
 
 					//posicion unidimensional del tile en el tileset
 					int baseTilePosition = (tile->getId() - firstId); //This will determine the base position of the tile.
@@ -77,11 +100,11 @@ void TileMap::draw() const {
 					int currentRow = (baseTilePosition / tSetRows);
 
 					//posiciones del tile en el tileset
-					int offsetX = currentCol * (tileWidth+spacing);
-					int offsetY = (currentRow) * (tileHeight+margin);
+					int offsetX = currentCol * (tileWidth + spacing);
+					int offsetY = (currentRow) * (tileHeight + margin);
 
-					SDL_Rect drawPos = { position.x,position.y,width_ / mapCols_,height_/mapRows_ };
-					SDL_Rect tilesetClip = { offsetX,offsetY,tileWidth ,tileWidth};
+					SDL_Rect drawPos = { position.x,position.y,width_ / mapCols_,height_ / mapRows_ };
+					SDL_Rect tilesetClip = { offsetX,offsetY,tileWidth ,tileWidth };
 					tilesetT_->render(drawPos, tilesetClip);
 				}
 			}

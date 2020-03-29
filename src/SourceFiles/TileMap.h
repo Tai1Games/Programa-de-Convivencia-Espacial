@@ -3,6 +3,9 @@
 #include "Tileson.h"
 #include "Component.h"
 #include "vector"
+#include "EntityManager.h"
+#include "WeaponFactory.h"
+
 class TileMap : public Component
 {
 protected:
@@ -15,8 +18,11 @@ protected:
 private:
 	Texture* debugT_;
 	Texture* tinkyT_; 
+
+	b2World* physicsWorld_;
+	EntityManager* entityManager_;
 public:
-	TileMap(int w,int h,string map);
+	TileMap(int w,int h,string map, EntityManager* entityManager_, b2World* physicsWorld_);
 	~TileMap();
 	virtual void update() override;
 	virtual void init() override;

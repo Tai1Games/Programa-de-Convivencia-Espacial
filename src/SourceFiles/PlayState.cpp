@@ -39,8 +39,9 @@ void PlayState::init() {
 
 	//Entity* spaceJunk = entityManager_->addEntity();
 
-	//map->addComponent<TileMap>(WINDOW_WIDTH, WINDOW_HEIGHT,
-	//	"../../assets/game/tilemaps/TD_TilemapBitCSV.json");
+	map->addComponent<TileMap>(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
+		"../../assets/game/tilemaps/murosExterior.json",
+		entityManager_, physicsWorld_);
 
 	Entity* tonko = entityManager_->addEntity();
 	Entity* tunko = entityManager_->addEntity();
@@ -70,9 +71,7 @@ void PlayState::init() {
 	collSuelo->setUserData(ground);
 	pared->addComponent<Viewer>();
 	collpared->setUserData(pared);
-
-
-
+	   
 	//Players
 	tinky->addComponent<PlayerData>(0);
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un cuadrado de debug.
