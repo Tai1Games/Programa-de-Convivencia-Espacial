@@ -26,7 +26,7 @@ void PlayState::init() {
 	//se podría JSONizar para evitar compilar
 	entityManager_ = new EntityManager();
 	physicsWorld_ = new b2World(b2Vec2(0, 0));
-	collisionHandler_ = new CollisionHandler();
+	collisionHandler_ = new CollisionHandler(gameMode_);
 	physicsWorld_->SetContactListener(collisionHandler_);
 
 	Entity* map = entityManager_->addEntity();
@@ -36,7 +36,6 @@ void PlayState::init() {
 	//Entity* rock = entityManager_->addEntity();
 
 
-	//Entity* rock = entityManager_->addEntity();
 	//Entity* spaceJunk = entityManager_->addEntity();
 
 	//map->addComponent<TileMap>(WINDOW_WIDTH, WINDOW_HEIGHT,
@@ -117,9 +116,11 @@ void PlayState::init() {
 
 void PlayState::update() {
 	GameState::update();
+	//double d = SDL_Game::instance()->getConstants()->getConstant<double>((std::string)"SECONDS_PER_FRAME");
 	//el que vuelva tocar el step de physicsworld muere
-	physicsWorld_->Step(SECONDS_PER_FRAME, 6, 2);
+	physicsWorld_->Step(CONST(double,"SECONDS_PER_FRAME"), 6, 2);
 	collisionHandler_->SolveInteractions();
+	createDeadBodies();
 	//también debería actualizar la lógica de modo de juego
 	//spawners de monedas, carga de objetivos...
 	gameMode_->update();
@@ -140,4 +141,16 @@ void PlayState::handleInput()
 			SDL_Game::instance()->getStateMachine()->setPauseOwner(i);
 		}
 	}
+}
+
+void PlayState::createDeadBodies() {
+	auto bodies = collisionHandler_->getBodyData();
+	for (int i = 0; i < bodies.size(); i++) {
+		deadBodies.push_back(entityManager_->addEntity());
+		collDeadBodies.push_back(deadBodies.back()->addComponent<Collider>(physicsWorld_, b2_dynamicBody, bodies[i].pos.x, bodies[i].pos.y, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false, true));
+		deadBodies.back()->addComponent<Viewer>(Resources::PinkTinky);
+		collDeadBodies.back()->setUserData(deadBodies.back());
+		collDeadBodies.back()->setTransform(b2Vec2(bodies[i].pos.x, bodies[i].pos.y), bodies[i].angle);
+	}
+	collisionHandler_->clearBodyData();
 }
