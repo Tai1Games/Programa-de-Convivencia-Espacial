@@ -21,7 +21,8 @@ void WiFightGameMode::init(PlayState* game)
 void WiFightGameMode::addPoints(int player, double sumPoints)
 {
 	playerProgress_[player] += sumPoints;
-	if (playerProgress_[player] >= CONST(int, "POINTS_TO_WIN")) { 
+	if (playerProgress_[player] >= CONST(int, "POINTS_TO_WIN")) {
+		cout << "Player " << player << " won!" << endl;
 		winner = players_[player];
 		roundFinished_ = true;
 	}
