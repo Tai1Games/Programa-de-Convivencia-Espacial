@@ -33,6 +33,7 @@ public:
 		Slider,
 		SliderControl,
 		SalaDeEstar,
+		Negro,
 
 		// text
 		PauseText,

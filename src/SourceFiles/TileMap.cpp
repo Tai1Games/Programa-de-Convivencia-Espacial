@@ -3,12 +3,14 @@
 #include "Resources.h"
 #include "json.hpp"
 
-TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW) :Component(ComponentType::Tilemap),  //w y h son de la ventana
+
+TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW, GameMode* gMode) :Component(ComponentType::Tilemap),  //w y h son de la ventana
 width_(w),
 height_(h),
 tm_(nullptr),
 entityManager_(eM),
-physicsWorld_(pW) {
+physicsWorld_(pW),
+gameMode_(gMode){
 	loadTileson(map);
 }
 
@@ -27,14 +29,21 @@ void TileMap::init() {
 		{
 			//pos = position in tile units
 			vector<tson::Object> objetos = tileLayer.getObjects();
-			for (auto obj: objetos)
+			for (auto obj : objetos)
 			{
-				tson::Vector2i p, s;
-				s = obj.getSize();
-				b2Vec2 size=b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
-				p = obj.getPosition();
-				b2Vec2 pos = b2Vec2(p.x / CONST(double, "PIXELS_PER_METER")+(size.x/2), (CONST(int, "WINDOW_HEIGHT") - p.y) / CONST(double, "PIXELS_PER_METER")-(size.y/2));
-				WeaponFactory::makePared(entityManager_, physicsWorld_, pos, size);
+				if (tileLayer.getName() == "Paredes") { //muros
+					tson::Vector2i p, s;
+					s = obj.getSize();
+					b2Vec2 size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
+					p = obj.getPosition();
+					b2Vec2 pos = b2Vec2(p.x / CONST(double, "PIXELS_PER_METER") + (size.x / 2), (CONST(int, "WINDOW_HEIGHT") - p.y) / CONST(double, "PIXELS_PER_METER") - (size.y / 2));
+					WeaponFactory::makePared(entityManager_, physicsWorld_, pos, size);
+				}
+				else if (tileLayer.getName() == "Spawns") { //spawns
+					b2Vec2 pos = b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), obj.getPosition().y / CONST(double, "PIXELS_PER_METER"));
+					std::cout << "\n Pos" << pos.x << "," << pos.y;
+					gameMode_->addSpawnPoint(new b2Vec2(pos)); //añade un punto de spawn
+				}
 			}
 		}
 	}

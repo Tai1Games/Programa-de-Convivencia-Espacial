@@ -32,7 +32,7 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health*
 		PlayerData* p = static_cast<PlayerData*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<PlayerData>(ComponentType::PlayerData));
 		moveData m;
 		m.body = player->GetBody();
-		m.pos = b2Vec2(1 + p->getPlayerNumber() * 6, 0); //punto de respawn provisional
+		m.pos = b2Vec2(5, 5); //punto de respawn provisional
 		if ((s != nullptr && s->onPlayerDead(p->getPlayerNumber()))) {	//si le quedan vidas
 			playerHealth->resetHealth();
 		}

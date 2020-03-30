@@ -25,6 +25,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Slider, "../../assets/game/textures/Slider.png"},
 	{ SliderControl, "../../assets/game/textures/SliderControl.png"},
 	{ SalaDeEstar,"../../assets/game/textures/SalaDeEstar.png"},
+	{Negro ,"../../assets/game/textures/Negro.png"},
 
 		{ TSet_Kenney1bit , "../../assets/game/tilemaps/modded_colored.png"},
 		{ TSet_Dungeon , "../../assets/game/tilemaps/dungeon_ts.png"}

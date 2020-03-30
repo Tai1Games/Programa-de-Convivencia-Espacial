@@ -35,6 +35,6 @@ void WeaponFactory::makePared(EntityManager* entityManager, b2World* physicsWorl
 {
 	Entity* e = entityManager->addEntity();								 // x,  y,   width, height, density,friction, restitution, linearDrag, angularDrag,	Layer,    sensor canBeAttached
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false, true);
-	e->addComponent<Viewer>();
+	e->addComponent<Viewer>(Resources::Negro);
 	aux->setUserData(e);
 }

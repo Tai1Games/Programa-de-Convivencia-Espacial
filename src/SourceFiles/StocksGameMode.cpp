@@ -6,6 +6,13 @@ StocksGameMode::StocksGameMode(int stocks) : GameMode()
 	maxStocks_ = stocks;
 }
 
+StocksGameMode::~StocksGameMode()
+{
+	for (int i = 0; i < spawnsPos_.size();i++) {
+		delete spawnsPos_[i];
+	}
+}
+
 void StocksGameMode::init(PlayState* game){
 	GameMode::init(game);
 	for(int i = 0;i<players_.size();i++){
@@ -57,4 +64,10 @@ bool StocksGameMode::onPlayerDead(int id) { //Returns false when player runs out
 		else return true;
 	}
 	else return true;
+}
+
+b2Vec2 StocksGameMode::getSpawnPoint(int id)
+{
+	if (id < spawnsPos_.size()) return *spawnsPos_[id];
+	else return b2Vec2();
 }

@@ -39,7 +39,6 @@ void GameStateMachine::changeToState(int state) {
 				states_[state] = new PauseState();
 				break;
 			}
-
 			//inicializar la nueva escena
 			states_[state]->init();
 		}

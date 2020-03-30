@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "box2d.h"
 
 class Entity;
 class PlayState;
@@ -20,4 +21,6 @@ public:
 	virtual void update() {};
 	virtual void onPlayerDead() {};
 	std::vector<Entity*> getRoundResults() { return roundResults_; }
+	virtual void addSpawnPoint(b2Vec2* pos) {};
+	virtual b2Vec2 getSpawnPoint(int id) { return b2Vec2(); };
 };

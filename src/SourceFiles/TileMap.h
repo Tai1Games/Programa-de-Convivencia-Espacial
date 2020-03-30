@@ -5,6 +5,7 @@
 #include "vector"
 #include "EntityManager.h"
 #include "WeaponFactory.h"
+#include "GameMode.h"
 
 class TileMap : public Component
 {
@@ -21,8 +22,9 @@ private:
 
 	b2World* physicsWorld_;
 	EntityManager* entityManager_;
+	GameMode* gameMode_;
 public:
-	TileMap(int w,int h,string map, EntityManager* entityManager_, b2World* physicsWorld_);
+	TileMap(int w,int h,string map, EntityManager* entityManager_, b2World* physicsWorld_, GameMode* gMode);
 	~TileMap();
 	virtual void update() override;
 	virtual void init() override;
