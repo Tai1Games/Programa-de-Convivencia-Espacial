@@ -27,10 +27,13 @@ void TileMap::init() {
 		{
 			//pos = position in tile units
 			vector<tson::Object> objetos = tileLayer.getObjects();
-			for (int i = 0; i < objetos.size(); i++)
+			for (auto obj: objetos)
 			{
-				b2Vec2 pos = b2Vec2(objetos[i].getPosition().x / CONST(double, "PIXELS_PER_METER"), objetos[i].getPosition().y / CONST(double, "PIXELS_PER_METER"));
-				b2Vec2 size = b2Vec2(objetos[i].getSize().x / CONST(double, "PIXELS_PER_METER"), objetos[i].getSize().y / CONST(double, "PIXELS_PER_METER"));
+				tson::Vector2i p, s;
+				s = obj.getSize();
+				b2Vec2 size=b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
+				p = obj.getPosition();
+				b2Vec2 pos = b2Vec2(p.x / CONST(double, "PIXELS_PER_METER")+(size.x/2), (CONST(int, "WINDOW_HEIGHT") - p.y) / CONST(double, "PIXELS_PER_METER")-(size.y/2));
 				WeaponFactory::makePared(entityManager_, physicsWorld_, pos, size);
 			}
 		}
