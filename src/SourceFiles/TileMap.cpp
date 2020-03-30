@@ -41,7 +41,6 @@ void TileMap::init() {
 				}
 				else if (tileLayer.getName() == "Spawns") { //spawns
 					b2Vec2 pos = b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), obj.getPosition().y / CONST(double, "PIXELS_PER_METER"));
-					std::cout << "\n Pos" << pos.x << "," << pos.y;
 					gameMode_->addSpawnPoint(new b2Vec2(pos)); //añade un punto de spawn
 				}
 			}
