@@ -10,6 +10,7 @@ private:
 	vector<Entity*> roundResults_; //Used to determine winner and mode end
 	vector<Health*> playersHealth_; //Reference to the Health component of each player
 	vector<b2Vec2> playersStocksPos_; //Position in which the Stocks will be drawn FOR EACH DIFFERENT PLAYER.
+	vector<Entity*> roundResults_;
 	int healtWidth_;
 	int maxStocks_;
 public:

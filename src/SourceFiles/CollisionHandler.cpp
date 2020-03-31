@@ -1,4 +1,5 @@
 #include "CollisionHandler.h"
+#include "RouterLogic.h"
 #include "StocksGameMode.h"
 //This method calculates the damage recieved by the impact of an object (or another player) with the player
 
@@ -59,9 +60,12 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	AttachesToObjects* player_AttachesToObjects = nullptr;
 	Weapon* pickableObj = nullptr;
 	Hands* playerHands = nullptr;
+	RouterLogic* routerLogic = nullptr;
+	Collider* playerCollider = nullptr;
+	PlayerData* playerData = nullptr;
 
 	//Comprueba que FixA es el jugador, que FixB es un trigger, que el jugador está presionando la tecla A (mando) o Space (teclado) y que no está agarrado a nada más.
-	if (AttachableObjectCollidesWithPlayer(fixA, player_AttachesToObjects) && fixB->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject && player_AttachesToObjects->canAttachToObject()) {
+	if (AttachableObjectCollidesWithPlayer(fixA, player_AttachesToObjects) && (fixB->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject || fixB->GetFilterData().categoryBits == Collider::Wall) && player_AttachesToObjects->canAttachToObject()) {
 		b2WorldManifold manifold; //Una manifold es un registro donde se guardan todas las colisiones
 		contact->GetWorldManifold(&manifold); //Obtenemos la manifold global
 		weldData newWeld; //Struct donde guardamos los datos necesarios para crear un weld
@@ -90,7 +94,12 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands);
 	}
 
-	
+	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger || //Colisiones entre Triggers y otros objetos
+		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
+		if (PlayerCollidesWithRouterArea(contact, routerLogic, playerCollider, playerData)) {
+			routerLogic->detectPlayer(playerCollider, playerData->getPlayerNumber());
+		}
+	}
 }
 
 //Handles end of collisions
@@ -103,6 +112,17 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 		PlayerCanPickWeapon(contact, pickableObj, playerHands)) {
 		pickableObj->DeletePlayerInfo(playerHands->getPlayerId());
 		cout << "Dropped weapon" << endl;
+	}
+
+	RouterLogic* routerLogic = nullptr;
+	PlayerData* playerData = nullptr;
+	Collider* playerCollider = nullptr;
+
+	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger || //Colisiones entre Triggers y otros objetos
+		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
+		if (PlayerCollidesWithRouterArea(contact, routerLogic, playerCollider, playerData)) {
+			routerLogic->loseContactPlayer(playerCollider, playerData->getId());
+		}
 	}
 }
 
@@ -158,6 +178,30 @@ bool CollisionHandler::PlayerCanPickWeapon(b2Contact* contact, Weapon*& pickable
 
 bool CollisionHandler::AttachableObjectCollidesWithPlayer(b2Fixture* fixA, AttachesToObjects*& player) {
 	return (player = static_cast<AttachesToObjects*>(static_cast<Entity*>(fixA->GetBody()->GetUserData())->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects)));
+}
+
+//Checks if one fixture belongs to a Player (PlayerData and Collider component) and if the other fixture belongs to a Router (RouterLogic component)
+bool CollisionHandler::PlayerCollidesWithRouterArea(b2Contact* contact, RouterLogic*& router, Collider*& collPlayer, PlayerData*& playerData) { 
+	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+	if (fixAentity->hasComponent(ComponentType::RouterLogic) && fixBentity->hasComponent(ComponentType::Collider) && fixBentity->hasComponent(ComponentType::PlayerData)) {
+		router = static_cast<RouterLogic*>(fixAentity->getComponent<RouterLogic>(ComponentType::RouterLogic));
+		playerData = static_cast<PlayerData*>(fixBentity->getComponent<PlayerData>(ComponentType::PlayerData));
+		collPlayer = static_cast<Collider*>(fixBentity->getComponent<Collider>(ComponentType::Collider));
+
+		return true;
+	}
+
+	else if (fixBentity->hasComponent(ComponentType::RouterLogic) && fixAentity->hasComponent(ComponentType::Collider) && fixAentity->hasComponent(ComponentType::PlayerData)) {
+		router = static_cast<RouterLogic*>(fixBentity->getComponent<RouterLogic>(ComponentType::RouterLogic));
+		playerData = static_cast<PlayerData*>(fixAentity->getComponent<PlayerData>(ComponentType::PlayerData));
+		collPlayer = static_cast<Collider*>(fixAentity->getComponent<Collider>(ComponentType::Collider));
+
+		return true;
+	}
+	
+	return false;
 }
 
 void CollisionHandler::SolveInteractions() {

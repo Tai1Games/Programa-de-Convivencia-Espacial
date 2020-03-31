@@ -2,7 +2,7 @@
 
 Collider::Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
 
-	float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor, bool canBeAttached) :
+	float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor) :
 
 	world_(world),
 	Component(ComponentType::Collider)
@@ -13,52 +13,73 @@ Collider::Collider(b2World* world, b2BodyType type, float x, float y, float widt
 	bodyDef_.angularDamping = angDrag;
 	body_ = world_->CreateBody(&bodyDef_);
 
-	if (!canBeAttached) createFixture(width, height, density, friction, restitution, c, sensor);
-	else createFixture(width, height, density, friction, restitution, CollisionLayer::NormalAttachableObject, sensor);
-	/*Este modelo se puede expandir de la siguiente manera.
-	Una situación probable sería necesitar, por ejemplo, una capa Chair y otra AttachableChair, ya que la capa NormalGrabbableObject no nos sirve.
-	A continuación, cambiaríamos estas 2 líneas anteriores de la siguiente manera:
-		if (!canBeAttached) createFixture(width, height, density, friction, restitution, c, sensor);
-		else createFixture(width, height, density, friction, restitution, (CollisionLayer)(c+1), sensor);*/
+	createRectangularFixture(width, height, density, friction, restitution, c, sensor);
 }
 
-void Collider::createFixture(float width, float height, float density,
+void Collider::createRectangularFixture(float width, float height, float density,
 	float friction, float restitution, CollisionLayer c, bool sensor) {
 	widths_.push_back(width);
 	heights_.push_back(height);
 	b2PolygonShape shape;
 	shape.SetAsBox(width, height);
-	shapes_.push_back(shape);
+	//shapes_.push_back(shape);
+
 	b2FixtureDef aux;
-	aux.shape = &shapes_.back();
+	aux.shape = &shape;
 	aux.density = density;
+	aux.filter = setCollisionLayer(c);
 	aux.friction = friction;
-	aux.restitution = restitution;
-	switch (c) {
-	case NormalObject:
-		aux.filter.categoryBits = NormalObject; //what am I?
-		aux.filter.maskBits = NormalObject | NormalAttachableObject | Player; //what do I collide with?
-		break;
-	case NormalAttachableObject:
-		aux.filter.categoryBits = NormalAttachableObject; //what am I?
-		aux.filter.maskBits = NormalObject | NormalAttachableObject | Player; //what do I collide with?
-		break;
-	case Player:
-		aux.filter.categoryBits = Player;
-		aux.filter.maskBits = NormalObject | NormalAttachableObject | Player | Trigger | Weapon;
-		break;
-	case Trigger:
-		aux.filter.categoryBits = Trigger;
-		aux.filter.maskBits = Player;
-		break;
-	case Weapon:
-		aux.filter.categoryBits = Weapon;
-		aux.filter.maskBits = Player;
-		break;
-	}
+	aux.restitution = fmod(restitution, 1.0);
 	aux.isSensor = sensor;
 	fixtureDefs_.push_back(aux);
 	fixtures_.push_back(body_->CreateFixture(&fixtureDefs_.back()));
+}
+
+void Collider::createCircularFixture(float radius, float density, float friction, float restitution, CollisionLayer c, bool sensor) {
+	widths_.push_back(radius);
+	heights_.push_back(radius);
+	b2CircleShape shape;
+	shape.m_radius = radius;
+	//shapes_.push_back(shape);
+
+	b2FixtureDef aux;
+	aux.shape = &shape;
+	aux.density = density;
+	aux.filter = setCollisionLayer(c);
+	aux.friction = friction;
+	aux.restitution = fmod(restitution, 1.0);
+	aux.isSensor = sensor;
+	fixtureDefs_.push_back(aux);
+	fixtures_.push_back(body_->CreateFixture(&fixtureDefs_.back()));
+}
+
+b2Filter Collider::setCollisionLayer(CollisionLayer c) {
+	b2Filter filter;
+	filter.categoryBits = c;
+	switch (c) {
+	case NormalObject:
+		filter.maskBits = NormalObject | NormalAttachableObject | Player | Wall; //what do I collide with?
+		break;
+	case NormalAttachableObject:
+		filter.maskBits = NormalObject | NormalAttachableObject | Player | Wall; //what do I collide with?
+		break;
+	case Player:
+		filter.maskBits = NormalObject | NormalAttachableObject | Player | Weapon | Wall;
+		break;
+	case Trigger:
+		filter.maskBits = Player;
+		break;
+	case Weapon:
+		filter.maskBits = Player | Wall;
+		break;
+	case UnInteractableObject:
+		filter.maskBits = Wall;
+		break;
+	case Wall:
+		filter.maskBits = UnInteractableObject | Player | NormalAttachableObject | NormalObject;
+		break;
+	}
+	return filter;
 }
 
 void Collider::destroyFixture(int i) {

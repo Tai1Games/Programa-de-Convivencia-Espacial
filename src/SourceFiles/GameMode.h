@@ -11,13 +11,13 @@ protected:
 	GameMode() {};
 	virtual ~GameMode() {};
 	std::vector<Entity*> players_; //Player vector. We use Entity because we will need multiple components from them.
-	Entity* winner_ = nullptr; //Winner of the round
+	Entity* winner = nullptr; //Player who wins the round.
 	bool roundFinished_ = false;
 private:
 public:
 	virtual void init(PlayState* state);
 	virtual void render() {};
 	virtual void update() {};
-	virtual void onPlayerDead() {};
-	Entity* getWinner() { return winner_; }
+	virtual bool onPlayerDead(int id) { return true; };
+	Entity* getRoundResults() { return winner; }
 };

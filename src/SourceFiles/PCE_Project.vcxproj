@@ -198,6 +198,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="PCE_Project.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="PlayerData.h" />
+    <ClInclude Include="RouterLogic.h" />
     <ClInclude Include="StocksGameMode.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="PlayState.h" />
@@ -216,6 +217,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Viewer.h" />
     <ClInclude Include="WeaponFactory.h" />
+    <ClInclude Include="WiFightGameMode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AttachesToObjects.cpp" />
@@ -239,6 +241,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="PCE_Project.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="PlayerData.cpp" />
+    <ClCompile Include="RouterLogic.cpp" />
     <ClCompile Include="StocksGameMode.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="PlayState.cpp" />
@@ -254,6 +257,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Viewer.cpp" />
     <ClCompile Include="WeaponFactory.cpp" />
+    <ClCompile Include="WiFightGameMode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PCE_Project.rc" />
@@ -261,6 +265,9 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
   <ItemGroup>
     <Image Include="PCE_Project.ico" />
     <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\config\constants.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
