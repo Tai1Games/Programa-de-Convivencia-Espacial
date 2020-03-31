@@ -4,13 +4,13 @@
 #include "json.hpp"
 
 
-TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW, GameMode* gMode) :Component(ComponentType::Tilemap),  //w y h son de la ventana
+
+TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW) :Component(ComponentType::Tilemap),  //w y h son de la ventana
 width_(w),
 height_(h),
 tm_(nullptr),
 entityManager_(eM),
-physicsWorld_(pW),
-gameMode_(gMode){
+physicsWorld_(pW){
 	loadTileson(map);
 }
 
@@ -40,8 +40,16 @@ void TileMap::init() {
 					WeaponFactory::makePared(entityManager_, physicsWorld_, pos, size);
 				}
 				else if (tileLayer.getName() == "Spawns") { //spawns
-					b2Vec2 pos = b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), obj.getPosition().y / CONST(double, "PIXELS_PER_METER"));
-					gameMode_->addSpawnPoint(new b2Vec2(pos)); //añade un punto de spawn
+					playerSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER"))); //añade la posicion al vector de spawns
+				}
+				else if (tileLayer.getName() == "ObjetoEspecial"){ //objetos espaciales (mando de tele, router...)
+					posObjEspecialSpawnPoint_ = b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER"));
+				}
+				else if (tileLayer.getName() == "ObjetosMapa") { //muebles
+					objetosMapaSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
+				}
+				else if (tileLayer.getName() == "Armas") {
+					armasSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
 				}
 			}
 		}
@@ -134,4 +142,22 @@ bool TileMap::loadTileson(string path) {
 	}
 	else
 		return false;
+}
+
+b2Vec2 TileMap::getPlayerSpawnPoint(int id)
+{
+	if (id < playerSpawnPoints_.size()) return playerSpawnPoints_[id];
+	else return b2Vec2();
+}
+
+b2Vec2 TileMap::getObjSpawnPoint(int id)
+{
+	if (id < objetosMapaSpawnPoints_.size()) return objetosMapaSpawnPoints_[id];
+	else return b2Vec2();
+}
+
+b2Vec2 TileMap::getArmaSpawnPoint(int id)
+{
+	if (id < armasSpawnPoints_.size()) return armasSpawnPoints_[id];
+	return b2Vec2();
 }
