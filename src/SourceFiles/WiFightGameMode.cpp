@@ -15,12 +15,13 @@ void WiFightGameMode::init(PlayState* game)
 	router->addComponent<Viewer>();
 	router->addComponent<RouterLogic>(this);
 
-	collRouter->applyForce(b2Vec2(10, 0), b2Vec2(0,0));
+	collRouter->applyForce(b2Vec2(10, 0), b2Vec2(0, 0));
 }
 
 void WiFightGameMode::addPoints(int player, double sumPoints)
 {
 	playerProgress_[player] += sumPoints;
+	cout << "Player " << player << " progress: " << playerProgress_[player] << endl;
 	if (playerProgress_[player] >= CONST(int, "POINTS_TO_WIN")) {
 		cout << "Player " << player << " won!" << endl;
 		winner = players_[player];

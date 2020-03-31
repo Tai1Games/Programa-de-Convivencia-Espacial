@@ -40,7 +40,7 @@ public:
 	Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
 		float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor);
 
-	~Collider() {	
+	~Collider() {
 		world_->DestroyBody(body_); world_ = nullptr;
 	}
 
