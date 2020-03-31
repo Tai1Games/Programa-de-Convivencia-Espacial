@@ -19,6 +19,23 @@ public:
 		Weapon = 0x0064
 	};
 
+private:
+	//general
+	b2Body* body_;
+	b2World* world_;
+	b2BodyDef bodyDef_;
+
+	//fixtures
+	vector<float> widths_;
+	vector<float> heights_;
+	//vector<b2Shape> shapes_;
+	vector<b2FixtureDef> fixtureDefs_;
+	vector<b2Fixture*> fixtures_;
+
+	b2Filter setCollisionLayer(CollisionLayer c);
+
+public:
+
 	//Friccion -> rozamiento al contacto con otros cuerpos   Drag-> rozamiento con el aire
 	Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
 		float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor);
@@ -75,18 +92,5 @@ public:
 	void createCircularFixture(float radius, float density, float friction, float restitution, CollisionLayer layer, bool sensor);
 	void destroyFixture(int i);
 
-private:
-	//general
-	b2Body* body_;
-	b2World* world_;
-	b2BodyDef bodyDef_;
 
-	//fixtures
-	vector<float> widths_;
-	vector<float> heights_;
-	//vector<b2Shape> shapes_;
-	vector<b2FixtureDef> fixtureDefs_;
-	vector<b2Fixture*> fixtures_;
-
-	b2Filter setCollisionLayer(CollisionLayer c);
 };
