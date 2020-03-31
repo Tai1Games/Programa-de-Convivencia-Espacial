@@ -51,30 +51,38 @@ void InputHandler::update() {
 
 	}
 
+	//if (SDL_GameControllerGetButton(controllers_[0], SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_A) == 1) {
+	//	cout << "Voy a prenderme fuego ahora mismo" << endl;
+	//}
+
 }
 
 void InputHandler::initialiseJoysticks() {
+	if (-1 == SDL_GameControllerAddMappingsFromFile("../config/gamecontrollerdb.txt"))
+		cout << "Error al cargar la base de datos" << endl;
 	if (SDL_WasInit(SDL_INIT_JOYSTICK) == 0) {
 		SDL_InitSubSystem(SDL_INIT_JOYSTICK);
 	}
 	numControllers_ = SDL_NumJoysticks();
 	if (SDL_NumJoysticks() > 0) {
 
-		json mapData;
-		ifstream inData = ifstream("../config/inputMapping.json");
-		if (inData.is_open()) {
-			inData >> mapData;
-			//cout << "loaded Mapping files" << endl;
-		}
+		//json mapData;
+		//ifstream inData = ifstream("../config/inputMapping.json");
+		//if (inData.is_open()) {
+		//	inData >> mapData;
+		//	//cout << "loaded Mapping files" << endl;
+		//}
 		for (int i = 0; i < SDL_NumJoysticks(); i++) {
 			SDL_GameController* gameCtrl = SDL_GameControllerOpen(i);
 			if (gameCtrl)
 			{
 				cout << "--------------" << endl;
 				cout << SDL_GameControllerName(gameCtrl) << endl;
-				if (mapJoystick(gameCtrl, mapData)) {
-					cout << "Controller " << i <<" mapped accordingly" << endl;
-				}
+				//if (mapJoystick(gameCtrl, mapData)) {
+				//	cout << "Controller " << i <<" mapped accordingly" << endl;
+				//}
+				cout << SDL_GameControllerMapping(gameCtrl)<<endl;
+				SDL_GameControllerAddMapping("030000006b1400000306000000007801,Nacon Compact,a:b1,b:b0");
 				m_gameControllers.push_back(gameCtrl);
 				m_joystickValues.push_back(std::make_pair(new
 					Vector2D(0, 0), new Vector2D(0, 0))); // add our pair
@@ -333,18 +341,22 @@ void InputHandler::onJoyButtonChange(SDL_Event& event,ButtonState just) {
 		isButtonUpEvent_ = true;
 	
 	int whichOne = event.jaxis.which;
-	//if (event.cbutton.button != event.jbutton.button)
-	//	cout << "Puto sdl" << endl;
-	//if(SDL_GameControllerGetButton(m_gameControllers[whichOne],SDL_CONTROLLER_BUTTON_B)) {
-	//	cout << "BBBBBBBBB" << endl;
-	//}
 
-	//m_buttonStates[whichOne][event.jbutton.button] = just;
-	//m_buttonStates[whichOne]
-	//	[SDL_GameControllerGetBindForButton
-	//	(m_gameControllers[whichOne],(SDL_GameControllerButton)event.jbutton.button).value] = just;
-	m_buttonStates[whichOne][(int)SDL_GameControllerGetBindForButton
-	(m_gameControllers[whichOne], (SDL_GameControllerButton)event.cbutton.button).value.button] = just;
+	for (int i = 0; i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX;i++) {
+		switch (m_buttonStates[whichOne][i]) {
+		//si un botón está suelto, comprobamos si se ha pulsado
+		case(Up):
+			if (1 == SDL_GameControllerGetButton(m_gameControllers[whichOne], (SDL_GameControllerButton)i))
+				m_buttonStates[whichOne][i] = JustDown;
+			break;
+		//para los botones pulsados, comprobamos si se sueltan
+		case(Down):
+			if (0 == SDL_GameControllerGetButton(m_gameControllers[whichOne], (SDL_GameControllerButton)i))
+				m_buttonStates[whichOne][i] = JustUp;
+			break;
+		}
+	}
+
 
 
 	/*if (just = JustDown)
