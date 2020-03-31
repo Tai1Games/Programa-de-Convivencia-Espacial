@@ -92,3 +92,7 @@ void Weapon::Action() {
 	cout << "Fuiste golpeado con " << damage << " al contrincante" << endl;
 	*/
 }
+
+int Weapon::getPlayerId() {
+	return currentHand_->getPlayerId();
+}

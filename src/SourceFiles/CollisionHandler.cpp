@@ -29,15 +29,16 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health*
 		if (h != nullptr) w = h->getWeapon();
 		if (w != nullptr) vecWeapon.push_back(w);
 		//respawn
-		StocksGameMode* s = static_cast<StocksGameMode*>(gMode_);
+		StocksGameMode* s = nullptr;
+		bool stocks = (s = dynamic_cast<StocksGameMode*>(gMode_));
 		PlayerData* p = static_cast<PlayerData*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<PlayerData>(ComponentType::PlayerData));
 		moveData m;
 		m.body = player->GetBody();
 		m.pos = b2Vec2(1 + p->getPlayerNumber() * 6, 0); //punto de respawn provisional
-		if ((s != nullptr && s->onPlayerDead(p->getPlayerNumber()))) {	//si le quedan vidas
+		if (stocks && s->onPlayerDead(p->getPlayerNumber())|| !stocks) {	//si le quedan vidas
 			playerHealth->resetHealth();
 		}
-		else {	//si no le quedan vidas le mandamos lejos provisionalmente
+		else if(stocks) {	//si no le quedan vidas le mandamos lejos provisionalmente
 			m.pos = b2Vec2((1+p->getPlayerNumber())* 50, 0);
 		}
 		vecMove.push_back(m);

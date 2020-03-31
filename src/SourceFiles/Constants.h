@@ -33,6 +33,7 @@ enum WeaponID {
 	Grapadora,
 	Extintor,
 	Chancla,
+	Mando,
 
 	WEAPON_NUMBER
 };

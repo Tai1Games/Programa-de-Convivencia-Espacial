@@ -36,5 +36,6 @@ public:
 	virtual void render();
 	virtual void handleInput();
 	std::vector<Entity*> getPlayers() { return players_; };
+	EntityManager* getEntityManager() { return entityManager_; }
 	b2World* getPhysicsWorld() { return physicsWorld_; }
 };
