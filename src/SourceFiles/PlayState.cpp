@@ -31,7 +31,9 @@ void PlayState::init() {
 	Entity* map = entityManager_->addEntity();
 	TileMap* tilemap= map->addComponent<TileMap>(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
 		"../../assets/game/tilemaps/mapaPrueba.json",
-		entityManager_, physicsWorld_);;
+		entityManager_, physicsWorld_);
+
+	gameMode_->setTileMap(tilemap);
 
 	collisionHandler_ = new CollisionHandler(gameMode_, tilemap);
 	physicsWorld_->SetContactListener(collisionHandler_);

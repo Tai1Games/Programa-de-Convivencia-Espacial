@@ -34,6 +34,7 @@ public:
 		SliderControl,
 		SalaDeEstar,
 		Negro,
+		Router,
 
 		// text
 		PauseText,

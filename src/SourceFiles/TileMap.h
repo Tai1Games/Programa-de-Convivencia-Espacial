@@ -37,5 +37,6 @@ public:
 	b2Vec2 getPlayerSpawnPoint(int id);
 	b2Vec2 getObjSpawnPoint(int id);
 	b2Vec2 getArmaSpawnPoint(int id);
+	b2Vec2 getObjSpecialSpawnPos() { return posObjEspecialSpawnPoint_; };
 };
 
