@@ -9,6 +9,7 @@ void WiFightGameMode::init(PlayState* game)
 	}
 
 	router = state_->getEntityManager()->addEntity();
+																								  // x, y,width, height, density,	friction, restitution, linearDrag, angularDrag,	 Laye,  sensor,  canBeAttached
 	Collider* collRouter = router->addComponent<Collider>(state_->getPhysicsWorld(), b2_dynamicBody, 5, 5, 1, 1, 0.01, 0, 0.99, 0, 0, Collider::CollisionLayer::UnInteractableObject, false);
 	collRouter->createCircularFixture(5, 1, 0, 0, Collider::CollisionLayer::Trigger, true);
 	collRouter->setUserData(router);
