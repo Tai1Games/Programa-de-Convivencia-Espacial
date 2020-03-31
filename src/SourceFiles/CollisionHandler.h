@@ -7,9 +7,11 @@
 #include "Entity.h"
 #include "Hands.h"
 #include "Collider.h"
+#include "PlayerData.h"
 #include "GameMode.h"
 #include "TileMap.h"
 
+class RouterLogic;
 class CollisionHandler :
 	public b2ContactListener
 {
@@ -53,6 +55,8 @@ public:
 
     bool ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player);
 
+	bool PlayerCollidesWithRouterArea(b2Contact* contact, RouterLogic*& router, Collider*& collPlayer, PlayerData*& playerData);
+
 	bool AttachableObjectCollidesWithPlayer(b2Fixture* fixA, AttachesToObjects*& player);
 	
     bool PlayerCanPickWeapon(b2Contact* contact, Weapon* &pickableObj, Hands* &player);
@@ -61,4 +65,3 @@ public:
 
 	void clearBodyData(){ vecBody.clear(); }
 };
-

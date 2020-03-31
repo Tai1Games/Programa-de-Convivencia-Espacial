@@ -139,7 +139,7 @@ void PlayState::createDeadBodies() {
 	auto bodies = collisionHandler_->getBodyData();
 	for (int i = 0; i < bodies.size(); i++) {
 		deadBodies.push_back(entityManager_->addEntity());
-		collDeadBodies.push_back(deadBodies.back()->addComponent<Collider>(physicsWorld_, b2_dynamicBody, bodies[i].pos.x, bodies[i].pos.y, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false, true));
+		collDeadBodies.push_back(deadBodies.back()->addComponent<Collider>(physicsWorld_, b2_dynamicBody, bodies[i].pos.x, bodies[i].pos.y, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false));
 		deadBodies.back()->addComponent<Viewer>(Resources::PinkTinky);
 		collDeadBodies.back()->setUserData(deadBodies.back());
 		collDeadBodies.back()->setTransform(b2Vec2(bodies[i].pos.x, bodies[i].pos.y), bodies[i].angle);

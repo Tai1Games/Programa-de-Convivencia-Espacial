@@ -1,5 +1,6 @@
 #include "GameStateMachine.h"
 #include "StocksGameMode.h"
+#include "WiFightGameMode.h"
 #include "Constants.h"
 #include "PlayState.h"
 #include "PauseState.h"
@@ -33,7 +34,7 @@ void GameStateMachine::changeToState(int state) {
 			case States::menu:
 				break;
 			case States::play:
-				states_[state] = new PlayState(new StocksGameMode());
+				states_[state] = new PlayState(new WiFightGameMode());
 				break;
 			case States::pause:
 				states_[state] = new PauseState();
