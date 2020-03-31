@@ -210,7 +210,22 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 	const double normalize= 1.0/32768.0;
 	double val = event.jaxis.value;
 	// left stick move left or right
-	if (event.jaxis.axis == 0)
+
+	Uint8 j = 0;
+	bool bindFound = false;
+	int binded;
+	//hay que buscar el botón al que se corresponde
+	//porque SDL es una librería maravillosa y super intuitiva
+	while (!bindFound && j < SDL_GameControllerAxis::SDL_CONTROLLER_AXIS_MAX) {
+		SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForAxis(m_gameControllers[whichOne], (SDL_GameControllerAxis)j);
+		if (b.value.axis == event.jaxis.axis) {
+			binded = j;
+			bindFound = true;
+		}
+		j++;
+	}
+	//left stick right or left
+	if (binded == 0)
 	{
 		if (val > m_joystickDeadZone)
 		{
@@ -229,7 +244,7 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		
 	}
 	// left stick move up or down
-	if (event.jaxis.axis == 1)
+	if (binded == 1)
 	{
 		if (event.jaxis.value > m_joystickDeadZone)
 		{
@@ -249,7 +264,7 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		
 	}
 	//left trigger move up or down
-	if (event.jaxis.axis == 2) {
+	if (binded == 4) {
 		if (event.jaxis.value > m_triggerDeadZone)
 		{
 			*m_triggerValues[whichOne].first=abs(event.jaxis.value);
@@ -264,7 +279,7 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		}
 	}
 	// right stick move left or right
-	if (event.jaxis.axis == 3)
+	if (binded == 2)
 	{
 		if (event.jaxis.value > m_joystickDeadZone)
 		{
@@ -280,7 +295,7 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		}
 	}
 	// right stick move up or down
-	if (event.jaxis.axis == 4)
+	if (binded == 3)
 	{
 		if (event.jaxis.value > m_joystickDeadZone)
 		{
@@ -297,7 +312,7 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		
 	}
 	//right trigger move up or down
-	if (event.jaxis.axis == 5) {
+	if (binded == 5) {
 		if (event.jaxis.value > m_triggerDeadZone)
 		{
 			*m_triggerValues[whichOne].second = abs(event.jaxis.value);
@@ -342,20 +357,46 @@ void InputHandler::onJoyButtonChange(SDL_Event& event,ButtonState just) {
 	
 	int whichOne = event.jaxis.which;
 
-	for (int i = 0; i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX;i++) {
-		switch (m_buttonStates[whichOne][i]) {
-		//si un botón está suelto, comprobamos si se ha pulsado
-		case(Up):
-			if (1 == SDL_GameControllerGetButton(m_gameControllers[whichOne], (SDL_GameControllerButton)i))
-				m_buttonStates[whichOne][i] = JustDown;
-			break;
-		//para los botones pulsados, comprobamos si se sueltan
-		case(Down):
-			if (0 == SDL_GameControllerGetButton(m_gameControllers[whichOne], (SDL_GameControllerButton)i))
-				m_buttonStates[whichOne][i] = JustUp;
-			break;
+	Uint8 j = 0;
+	bool bindFound=false;
+	int binded;
+	//hay que buscar el botón al que se corresponde
+	//porque SDL es una librería maravillosa y super intuitiva
+	while (!bindFound &&j < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX){
+		SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(m_gameControllers[whichOne], (SDL_GameControllerButton)j);
+		if (b.value.button == event.cbutton.button) {
+			binded = j;
+			bindFound = true;
 		}
+		j++;
 	}
+	switch (m_buttonStates[whichOne][binded]) {
+	//si un botón está suelto, comprobamos si se ha pulsado
+	case(Up):
+			m_buttonStates[whichOne][binded] = JustDown;
+		break;
+	//para los botones pulsados, comprobamos si se sueltan
+	case(Down):
+			m_buttonStates[whichOne][binded] = JustUp;
+		break;
+	}
+
+	//hay que iterar por todo el mapeo de input porque event devuelve el botón hardware
+	//y eso no nos gusta
+	//for (int i = 0; i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX;i++) {
+	//	switch (m_buttonStates[whichOne][i]) {
+	//	//si un botón está suelto, comprobamos si se ha pulsado
+	//	case(Up):
+	//		if (1 == SDL_GameControllerGetButton(m_gameControllers[whichOne], (SDL_GameControllerButton)i))
+	//			m_buttonStates[whichOne][i] = JustDown;
+	//		break;
+	//	//para los botones pulsados, comprobamos si se sueltan
+	//	case(Down):
+	//		if (0 == SDL_GameControllerGetButton(m_gameControllers[whichOne], (SDL_GameControllerButton)i))
+	//			m_buttonStates[whichOne][i] = JustUp;
+	//		break;
+	//	}
+	//}
 
 
 
