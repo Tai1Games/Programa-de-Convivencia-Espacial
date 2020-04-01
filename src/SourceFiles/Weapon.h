@@ -8,6 +8,7 @@
 
 class Hands;
 
+
 struct PlayerInfo
 {
 	bool isNear = false;
@@ -57,5 +58,6 @@ public:
 	Hands* getCurrentHand() { return currentHand_; }
 
 	bool isOnHit();
+	int getPlayerId(); //Cuerpo en el cpp por temas de inclusi�n circular
 };
 
