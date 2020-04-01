@@ -28,11 +28,10 @@ void PlayState::init() {
 	physicsWorld_ = new b2World(b2Vec2(0, 0));
 
 	Entity* fondo = entityManager_->addEntity();
-	Entity* map = entityManager_->addEntity();
-	TileMap* tilemap= map->addComponent<TileMap>(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
-		"../../assets/game/tilemaps/mapaPrueba.json",
+	TileMap* tilemap = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
+		"../../assets/game/tilemaps/SalaDeEstar.json",
 		entityManager_, physicsWorld_);
-
+	tilemap->init();
 	gameMode_->setTileMap(tilemap);
 
 	collisionHandler_ = new CollisionHandler(gameMode_, tilemap);
@@ -43,7 +42,7 @@ void PlayState::init() {
 	Entity* tonko = entityManager_->addEntity();
 	Entity* tunko = entityManager_->addEntity();
 	Entity* tanko = entityManager_->addEntity();
-	Entity* spaceJunk = entityManager_->addEntity();
+	//Entity* spaceJunk = entityManager_->addEntity();
 
 	players_.push_back(tinky);
 	players_.push_back(tonko);
@@ -53,11 +52,9 @@ void PlayState::init() {
 	//Colliders
 	                                                                                      //             x,						    	  y,			     	width, height, density,	friction, restitution, linearDrag, angularDrag,	               Layer,			        sensor
 	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody,      tilemap->getPlayerSpawnPoint(0).x, tilemap->getPlayerSpawnPoint(0).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
-	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody,   tilemap->getObjSpawnPoint(0).x,    tilemap->getObjSpawnPoint(0).y,	  1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false);
 	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	    tilemap->getPlayerSpawnPoint(1).x, tilemap->getPlayerSpawnPoint(1).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
 	Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,		tilemap->getPlayerSpawnPoint(2).x, tilemap->getPlayerSpawnPoint(2).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
 	Collider* collTanko = tanko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	    tilemap->getPlayerSpawnPoint(3).x, tilemap->getPlayerSpawnPoint(3).y, 1,	 1,		 1,		    0.1,	  0.2,		   0,		   0,			Collider::CollisionLayer::Player,		false);
-
 
 	//FONDO
 	fondo->addComponent<Viewer>(Resources::SalaDeEstar,0,0,1,0);
@@ -93,19 +90,14 @@ void PlayState::init() {
 
 	//Objetos flotantes
 
-	spaceJunk->addComponent<Viewer>(Resources::Piedra);
-	collJunk->setUserData(spaceJunk);
 
 	//Fuerzas iniciales
 	//collTinky->applyLinearImpulse(b2Vec2(20, -10), b2Vec2(1, 1));
 	//collTonko->applyLinearImpulse(b2Vec2(0, 1000), b2Vec2(0.1, 0));
-	collJunk->applyLinearImpulse(b2Vec2(0, 50), b2Vec2(0.1, 0));
 
 	//Version estática de la factoria
-	WeaponFactory::makePared(entityManager_, physicsWorld_, tilemap->getArmaSpawnPoint(0), b2Vec2(0.1, 1));
-	WeaponFactory::makePelota(entityManager_, physicsWorld_, tilemap->getArmaSpawnPoint(0), b2Vec2(0.5, 0.5));
-	//WeaponFactory::makeChancla(entityManager_, physicsWorld_, b2Vec2(14, 5), b2Vec2(0.5, 0.5));
-	//WeaponFactory::makeGrapadora(entityManager_, physicsWorld_, b2Vec2(10, 5), b2Vec2(0.5, 0.5));
+	tilemap->executeMapFactory();
+
 	gameMode_->init(this);
 }
 

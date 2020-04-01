@@ -2,24 +2,21 @@
 #include "SDL_Game.h"
 #include "Resources.h"
 #include "json.hpp"
-
+#include <string>
 
 
 TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW) :Component(ComponentType::Tilemap),  //w y h son de la ventana
 width_(w),
 height_(h),
-tm_(nullptr),
 entityManager_(eM),
 physicsWorld_(pW){
 	loadTileson(map);
 }
 
 TileMap::~TileMap() {
-	tm_ = nullptr;
 }
 
 void TileMap::init() {
-	tm_ = SDL_Game::instance()->getTexturesMngr();
 	layers_ = tMap_.getLayers();
 	//recorremos todas las capas del mapa
 	for (auto& tileLayer : layers_)
@@ -31,25 +28,22 @@ void TileMap::init() {
 			vector<tson::Object> objetos = tileLayer.getObjects();
 			for (auto obj : objetos)
 			{
-				if (tileLayer.getName() == "Paredes") { //muros
-					tson::Vector2i p, s;
-					s = obj.getSize();
-					b2Vec2 size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
-					p = obj.getPosition();
-					b2Vec2 pos = b2Vec2(p.x / CONST(double, "PIXELS_PER_METER") + (size.x / 2), (CONST(int, "WINDOW_HEIGHT") - p.y) / CONST(double, "PIXELS_PER_METER") - (size.y / 2));
-					WeaponFactory::makePared(entityManager_, physicsWorld_, pos, size);
+				if (tileLayer.getName() == "Walls") { //muros
+					factoryItems_.push_back(obj);
 				}
 				else if (tileLayer.getName() == "Spawns") { //spawns
 					playerSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER"))); //añade la posicion al vector de spawns
 				}
-				else if (tileLayer.getName() == "ObjetoEspecial"){ //objetos espaciales (mando de tele, router...)
-					posObjEspecialSpawnPoint_ = b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER"));
+				else if (tileLayer.getName() == "SpecialObject"){ //objetos espaciales (mando de tele, router...)
+					specialObjectsSpawnPoint_ = b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER"));
 				}
-				else if (tileLayer.getName() == "ObjetosMapa") { //muebles
-					objetosMapaSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
+				else if (tileLayer.getName() == "MapObjects") { //muebles
+					factoryItems_.push_back(obj);
+					mapObjectsSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
 				}
-				else if (tileLayer.getName() == "Armas") {
-					armasSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
+				else if (tileLayer.getName() == "Weapons") {
+					factoryItems_.push_back(obj);
+					weaponsSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
 				}
 			}
 		}
@@ -105,7 +99,7 @@ void TileMap::draw() const {
 					int margin = tSet->getMargin();
 
 
-					tilesetT_ = tm_->getTexture(Resources::tilesetTag_.find(tSet->getName())->second);;
+					tilesetT_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::tilesetTag_.find(tSet->getName())->second);;
 					//Posicion de dibujado del vector
 					tson::Vector2i position = { std::get<0>(pos) * width_ / mapCols_,std::get<1>(pos) * height_ / mapRows_ };
 
@@ -144,6 +138,38 @@ bool TileMap::loadTileson(string path) {
 		return false;
 }
 
+void TileMap::executeMapFactory()
+{
+	for (auto o : factoryItems_) {
+		tson::Vector2i p, s;
+		s = o.getSize();
+		p = o.getPosition();
+		b2Vec2 size;
+		//Calculo de posicion para puntos de Tiled (la mayoria de items)
+		b2Vec2 pos = b2Vec2(p.x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - p.y) / CONST(double, "PIXELS_PER_METER"));
+		string name = o.getName();
+
+		if (name == "Wall") {
+			//calculo de posicion y tamaño para cajas de Tiled
+			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
+			pos = b2Vec2(p.x / CONST(double, "PIXELS_PER_METER") + (size.x / 2), (CONST(int, "WINDOW_HEIGHT") - p.y) / CONST(double, "PIXELS_PER_METER") - (size.y / 2));
+			WeaponFactory::makeWall(entityManager_, physicsWorld_, pos, size);
+		}
+		else if (name == "Ball") {
+			WeaponFactory::makeBall(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
+		}
+		else if (name == "Slipper") {
+			WeaponFactory::makeSlipper(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
+		}
+		else if (name == "Stapler") {
+			WeaponFactory::makeStapler(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
+		}
+		else if (name == "SpaceJunk") {
+			WeaponFactory::makeSpaceJunk(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
+		}
+	}
+}
+
 b2Vec2 TileMap::getPlayerSpawnPoint(int id)
 {
 	if (id < playerSpawnPoints_.size()) return playerSpawnPoints_[id];
@@ -152,12 +178,12 @@ b2Vec2 TileMap::getPlayerSpawnPoint(int id)
 
 b2Vec2 TileMap::getObjSpawnPoint(int id)
 {
-	if (id < objetosMapaSpawnPoints_.size()) return objetosMapaSpawnPoints_[id];
+	if (id < mapObjectsSpawnPoints_.size()) return mapObjectsSpawnPoints_[id];
 	else return b2Vec2();
 }
 
-b2Vec2 TileMap::getArmaSpawnPoint(int id)
+b2Vec2 TileMap::getWeaponSpawnPoint(int id)
 {
-	if (id < armasSpawnPoints_.size()) return armasSpawnPoints_[id];
+	if (id < weaponsSpawnPoints_.size()) return weaponsSpawnPoints_[id];
 	return b2Vec2();
 }

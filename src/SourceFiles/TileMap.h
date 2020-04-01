@@ -9,16 +9,16 @@
 class TileMap : public Component
 {
 protected:
+	tson::Map tMap_;
 	int width_, height_;
 	int mapCols_, mapRows_;
-	tson::Map tMap_;
 	std::vector<tson::Tileset> tileSets_;
-	SDLTexturesManager* tm_;
 	std::vector<tson::Layer> layers_;
+
 	std::vector<b2Vec2> playerSpawnPoints_;
-	b2Vec2 posObjEspecialSpawnPoint_; //mando de la tele, router
-	std::vector<b2Vec2> objetosMapaSpawnPoints_; //muebles
-	std::vector<b2Vec2> armasSpawnPoints_;
+	b2Vec2 specialObjectsSpawnPoint_; //mando de la tele, router
+	std::vector<b2Vec2> mapObjectsSpawnPoints_; //muebles
+	std::vector<b2Vec2> weaponsSpawnPoints_;
 
 private:
 	Texture* debugT_;
@@ -26,6 +26,7 @@ private:
 
 	b2World* physicsWorld_;
 	EntityManager* entityManager_;
+	vector<tson::Object> factoryItems_;
 public:
 	TileMap(int w,int h,string map, EntityManager* entityManager_, b2World* physicsWorld_);
 	~TileMap();
@@ -33,10 +34,11 @@ public:
 	virtual void init() override;
 	virtual void draw() const override;
 	bool loadTileson(string path);
+	void executeMapFactory();
 
 	b2Vec2 getPlayerSpawnPoint(int id);
 	b2Vec2 getObjSpawnPoint(int id);
-	b2Vec2 getArmaSpawnPoint(int id);
-	b2Vec2 getObjSpecialSpawnPos() { return posObjEspecialSpawnPoint_; };
+	b2Vec2 getWeaponSpawnPoint(int id);
+	b2Vec2 getObjSpecialSpawnPos() { return specialObjectsSpawnPoint_; };
 };
 
