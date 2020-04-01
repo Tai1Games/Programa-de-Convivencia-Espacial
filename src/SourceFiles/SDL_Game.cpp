@@ -29,7 +29,7 @@ SDL_Game::SDL_Game(){
 	audio_->setMusicVolume(constants_.getConstant<int>("MAX_MUSIC_VOLUME"));
 	audio_->playMusic(Resources::MainTheme, -1);
 	inputHandler_ = new InputHandler();
-	inputHandler_->initialiseJoysticks();
+	inputHandler_->initialiseGamepads();
 
 }
 
