@@ -43,7 +43,7 @@ void PlayState::init() {
 	Entity* tonko = entityManager_->addEntity();
 	Entity* tunko = entityManager_->addEntity();
 	Entity* tanko = entityManager_->addEntity();
-	Entity* spaceJunk = entityManager_->addEntity();	
+	Entity* spaceJunk = entityManager_->addEntity();
 
 	players_.push_back(tinky);
 	players_.push_back(tonko);
@@ -57,11 +57,11 @@ void PlayState::init() {
 	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	    tilemap->getPlayerSpawnPoint(1).x, tilemap->getPlayerSpawnPoint(1).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
 	Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,		tilemap->getPlayerSpawnPoint(2).x, tilemap->getPlayerSpawnPoint(2).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
 	Collider* collTanko = tanko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	    tilemap->getPlayerSpawnPoint(3).x, tilemap->getPlayerSpawnPoint(3).y, 1,	 1,		 1,		    0.1,	  0.2,		   0,		   0,			Collider::CollisionLayer::Player,		false);
-	
+
 
 	//FONDO
 	fondo->addComponent<Viewer>(Resources::SalaDeEstar,0,0,1,0);
-		   
+
 	//Players
 	tinky->addComponent<PlayerData>(0);
 	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un cuadrado de debug.
@@ -92,7 +92,7 @@ void PlayState::init() {
 	collTunko->setUserData(tunko);
 
 	//Objetos flotantes
-	
+
 	spaceJunk->addComponent<Viewer>(Resources::Piedra);
 	collJunk->setUserData(spaceJunk);
 
@@ -131,7 +131,7 @@ void PlayState::handleInput()
 	GameState::handleInput();
 	InputHandler* ih = SDL_Game::instance()->getInputHandler();
 	for (int i = 0; i < ih->getNumControllers(); i++) {
-		if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_START) || 
+		if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_START) ||
 			ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_GUIDE)) {
 			SDL_Game::instance()->getStateMachine()->setPauseOwner(i);
 		}

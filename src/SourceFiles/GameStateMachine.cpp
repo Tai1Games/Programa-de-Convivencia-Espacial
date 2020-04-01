@@ -4,6 +4,7 @@
 #include "Constants.h"
 #include "PlayState.h"
 #include "PauseState.h"
+#include "ControllerGameMode.h"
 
 GameStateMachine::GameStateMachine() {
 	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
@@ -34,7 +35,7 @@ void GameStateMachine::changeToState(int state) {
 			case States::menu:
 				break;
 			case States::play:
-				states_[state] = new PlayState(new WiFightGameMode());
+				states_[state] = new PlayState(new ControllerGameMode());
 				break;
 			case States::pause:
 				states_[state] = new PauseState();

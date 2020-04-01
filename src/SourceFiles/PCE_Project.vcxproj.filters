@@ -171,6 +171,9 @@
     <ClInclude Include="RouterLogic.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="ControllerGameMode.h">
+      <Filter>Header Files\Gamemodes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -283,6 +286,9 @@
     </ClCompile>
     <ClCompile Include="RouterLogic.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllerGameMode.cpp">
+      <Filter>Source Files\Gamemodes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
