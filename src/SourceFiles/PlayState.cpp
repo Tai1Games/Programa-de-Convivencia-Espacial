@@ -27,7 +27,6 @@ void PlayState::init() {
 	entityManager_ = new EntityManager();
 	physicsWorld_ = new b2World(b2Vec2(0, 0));
 
-	Entity* fondo = entityManager_->addEntity();
 	TileMap* tilemap = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
 		"../../assets/game/tilemaps/SalaDeEstar.json",
 		entityManager_, physicsWorld_);
@@ -57,7 +56,7 @@ void PlayState::init() {
 	Collider* collTanko = tanko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	    tilemap->getPlayerSpawnPoint(3).x, tilemap->getPlayerSpawnPoint(3).y, 1,	 1,		 1,		    0.1,	  0.2,		   0,		   0,			Collider::CollisionLayer::Player,		false);
 
 	//FONDO
-	fondo->addComponent<Viewer>(Resources::SalaDeEstar,0,0,1,0);
+	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SalaDeEstar);
 
 	//Players
 	tinky->addComponent<PlayerData>(0);
@@ -114,6 +113,7 @@ void PlayState::update() {
 }
 
 void PlayState::render() {
+	fondo_->render(0,0);
 	GameState::render();
 	gameMode_->render();
 }

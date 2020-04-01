@@ -17,8 +17,6 @@ protected:
 
 	std::vector<b2Vec2> playerSpawnPoints_;
 	b2Vec2 specialObjectsSpawnPoint_; //mando de la tele, router
-	std::vector<b2Vec2> mapObjectsSpawnPoints_; //muebles
-	std::vector<b2Vec2> weaponsSpawnPoints_;
 
 private:
 	Texture* debugT_;
@@ -37,8 +35,6 @@ public:
 	void executeMapFactory();
 
 	b2Vec2 getPlayerSpawnPoint(int id);
-	b2Vec2 getObjSpawnPoint(int id);
-	b2Vec2 getWeaponSpawnPoint(int id);
 	b2Vec2 getObjSpecialSpawnPos() { return specialObjectsSpawnPoint_; };
 };
 

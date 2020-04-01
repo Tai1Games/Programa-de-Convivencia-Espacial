@@ -39,11 +39,9 @@ void TileMap::init() {
 				}
 				else if (tileLayer.getName() == "MapObjects") { //muebles
 					factoryItems_.push_back(obj);
-					mapObjectsSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
 				}
 				else if (tileLayer.getName() == "Weapons") {
 					factoryItems_.push_back(obj);
-					weaponsSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
 				}
 			}
 		}
@@ -174,16 +172,4 @@ b2Vec2 TileMap::getPlayerSpawnPoint(int id)
 {
 	if (id < playerSpawnPoints_.size()) return playerSpawnPoints_[id];
 	else return b2Vec2();
-}
-
-b2Vec2 TileMap::getObjSpawnPoint(int id)
-{
-	if (id < mapObjectsSpawnPoints_.size()) return mapObjectsSpawnPoints_[id];
-	else return b2Vec2();
-}
-
-b2Vec2 TileMap::getWeaponSpawnPoint(int id)
-{
-	if (id < weaponsSpawnPoints_.size()) return weaponsSpawnPoints_[id];
-	return b2Vec2();
 }
