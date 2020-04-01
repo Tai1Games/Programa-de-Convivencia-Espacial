@@ -62,7 +62,9 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	RouterLogic* routerLogic = nullptr;
 	Collider* playerCollider = nullptr;
 	PlayerData* playerData = nullptr;
-
+	if (AttachableObjectCollidesWithPlayer(fixA, player_AttachesToObjects)) {
+		cout << "truw" << endl;
+	}
 	//Comprueba que FixA es el jugador, que FixB es un trigger, que el jugador está presionando la tecla A (mando) o Space (teclado) y que no está agarrado a nada más.
 	if (AttachableObjectCollidesWithPlayer(fixA, player_AttachesToObjects) && (fixB->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject || fixB->GetFilterData().categoryBits == Collider::Wall) && player_AttachesToObjects->canAttachToObject()) {
 		b2WorldManifold manifold; //Una manifold es un registro donde se guardan todas las colisiones

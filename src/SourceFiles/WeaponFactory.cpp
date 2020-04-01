@@ -34,7 +34,7 @@ void WeaponFactory::makeGrapadora(EntityManager* entityManager, b2World* physics
 void WeaponFactory::makePared(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
 	Entity* e = entityManager->addEntity();								 // x,  y,   width, height, density,friction, restitution, linearDrag, angularDrag,	Layer, sensor
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false);
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::Wall, false);
 	e->addComponent<Viewer>(Resources::Negro);
 	aux->setUserData(e);
 }
