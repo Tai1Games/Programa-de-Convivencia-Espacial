@@ -13,7 +13,6 @@ public:
 	Constants(const std::string& load);
 	template<typename T>
 	T getConstant(const std::string& key) const; //devuelve la constante pedida o su valor por defecto
-
 };
 
 //Modos de juegos
@@ -34,6 +33,7 @@ enum WeaponID {
 	Grapadora,
 	Extintor,
 	Chancla,
+	Mando,
 
 	WEAPON_NUMBER
 };

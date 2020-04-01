@@ -19,5 +19,6 @@ public:
 	virtual void update();
 	virtual void render();
 	virtual void handleInput();
+	EntityManager* getEntityManager() { return entityManager_; }
 };
 
