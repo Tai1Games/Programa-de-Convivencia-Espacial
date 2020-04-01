@@ -94,7 +94,6 @@ private:
 	}
 	//---------------------------------------------
 
-
 public:
 	const int m_joystickDeadZone = 10000;
 	const int m_triggerDeadZone = 10000; //trigger deadzone equals threshold
@@ -150,7 +149,7 @@ public:
 
 	// Joystick
 	//init
-	void initialiseJoysticks();
+	void initialiseGamepads();
 	bool joysticksInitialised() {
 		return m_bJoysticksInitialised;
 	}
