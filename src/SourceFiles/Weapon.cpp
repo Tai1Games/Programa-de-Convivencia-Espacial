@@ -21,11 +21,11 @@ void Weapon::update()
 	if (currentHand_ != nullptr && mainCollider_->isEnabled()) {
 		mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x, currentHand_->getPos().y), 0.0);	//Colocamos el trigger de golpear
 		
-		if (hit == true) {
+		if (coolDown == true) {
 			actionTime++; //Incrementamos tiempo de accion de la chancla
 
 			if (actionTime >= CONST(double, "WEAPON_MELEE_TIME")) {
-				hit = false;
+				coolDown = false;
 				actionTime = 0;
 			}
 			//else { vw_->setDrawable(true); }
@@ -48,12 +48,12 @@ void Weapon::handleInput()
 	}
 	else if (IsPicked() && ih_->isButtonJustDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_Y))
 	{
-		hit = false;
+		coolDown = false;
 		UnPickObject();
 	}
-	else if (IsPicked() && ih_->isButtonJustDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_X))
+	else if (IsPicked() && ih_->isButtonJustDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_X) && !coolDown)
 	{
-		hit = true;
+		coolDown = true;
 		Action();
 		actionTime = 0;
 	}
@@ -66,7 +66,7 @@ void Weapon::PickObjectBy(Hands* playerH)
 		picked_ = true;
 		currentHand_->setWeapon(weaponType_, this);
 		if (weaponType_ == WeaponID::Chancla) {
-			mainCollider_->createFixture(mainCollider_->getW(0), mainCollider_->getH(0), 1, 0.1, 0, Collider::CollisionLayer::Weapon, true);
+			mainCollider_->createRectangularFixture(mainCollider_->getW(0)*3, mainCollider_->getH(0)*2, 1, 0.1, 0, Collider::CollisionLayer::Weapon, true);
 			//Trigger de la Chancla(Cambiamos con quien colisiona)
 			b2Filter aux1 = mainCollider_->getFixture(0)->GetFilterData();
 			aux1.categoryBits = Collider::CollisionLayer::Trigger;
@@ -88,7 +88,7 @@ void Weapon::UnPickObject()
 	currentHand_->setWeapon(NoWeapon, nullptr);
 	picked_ = false;
 	if (weaponType_ == WeaponID::Chancla) {
-		mainCollider_->createFixture(mainCollider_->getW(0) * 4, mainCollider_->getH(0) * 4, 1, 0.1, 0, Collider::CollisionLayer::Weapon, true);
+		mainCollider_->createRectangularFixture(mainCollider_->getW(0) * 4, mainCollider_->getH(0) * 4, 1, 0.1, 0, Collider::CollisionLayer::Weapon, true);
 		//Trigger de la Chancla(Restairamos sus capas de colision)
 		b2Filter aux1 = mainCollider_->getFixture(0)->GetFilterData();
 		aux1.categoryBits = Collider::CollisionLayer::Weapon;
@@ -121,11 +121,45 @@ void Weapon::DeletePlayerInfo(int index)
 	playerInfo_[index].playerHands = nullptr;
 }
 
+void Weapon::detectPlayer(Entity* playerDetected, int id)
+{
+	EnemyData newEnemy;
+	newEnemy.enemy= playerDetected;
+	newEnemy.id = id;
+	playersInsideRange_.push_back(newEnemy);
+}
+
+void Weapon::loseContactPlayer(Entity* playerDetected, int id) {
+	vector<EnemyData>::iterator it = playersInsideRange_.begin();
+	while (it->id != id && it->enemy != playerDetected && it != playersInsideRange_.end()) {
+		++it;
+	}
+	if (it != playersInsideRange_.end()) playersInsideRange_.erase(it);
+}
 
 void Weapon::Action() {
-	//Calculo del daño de la chancla
-	damage_ = playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealthMax() - playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealth() +1;
-	//cout << "Golpeaste con una fuerza de " << damage_ << " al contrincante" << endl;
+	if (weaponType_ == WeaponID::Chancla) {
+		//Calculo del daño de la chancla
+		damage_ = playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealthMax() - playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealth() + 1;
+		//cout << "Golpeaste con una fuerza de " << damage_ << " al contrincante" << endl;
+		vector<EnemyData>::iterator it = playersInsideRange_.begin();
+		while (it != playersInsideRange_.end()) {
+
+			//Patear al enemigo
+			Health* auxHe = it->enemy->getComponent<Health>(ComponentType::Health);
+			Collider* auxCo = it->enemy->getComponent<Collider>(ComponentType::Collider);
+
+			b2Vec2 knockback = auxCo->getPos() - mainCollider_->getPos();
+			knockback.Normalize();
+			knockback *= CONST(double, "WEAPON_MELEE_KNOCKBACK");
+
+			auxCo->applyLinearImpulse(knockback, b2Vec2(0, 1));
+			auxHe->subtractLife(damage_);
+
+
+			++it;
+		}
+	}
 }
 
 int Weapon::getDamage() {
@@ -134,7 +168,7 @@ int Weapon::getDamage() {
 
 
 bool Weapon::isOnHit(){
-	return hit;
+	return coolDown;
 }
 
 int Weapon::getPlayerId() {

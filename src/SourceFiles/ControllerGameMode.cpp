@@ -11,7 +11,7 @@ void ControllerGameMode::init(PlayState* game)  {
 
 void ControllerGameMode::update() {
 	if (!roundFinished_) {
-		if (controller_->isPicked()) {
+		if (controller_->IsPicked()) {
 			controllerTimes_[controller_->getPlayerId()] += (CONST(double, "MS_PER_FRAME") / 1000);
 			if (controllerTimes_[controller_->getPlayerId()] >= CONST(double, "TIME_TO_WIN")) {
 				roundFinished_ = true;

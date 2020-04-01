@@ -102,16 +102,8 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 
 		ObjectCollidesWithPlayer(contact->GetFixtureA(), player_Health);
 
-		if(weAux->isOnHit() && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
-			Collider* chancla = aux->getComponent<Collider>(ComponentType::Collider);
-			Collider* enemy = aux2->getComponent<Collider>(ComponentType::Collider);
-			//Calculamos direccion para el impulso al ser golpeado por la chancla
-			b2Vec2 knockback = enemy->getPos() - chancla->getPos();
-			knockback.Normalize();
-			knockback *= CONST(double, "WEAPON_MELEE_KNOCKBACK");
-
-			enemy->applyLinearImpulse(knockback, b2Vec2(0, 1));
-			player_Health->subtractLife(weAux->getDamage());
+		if(weAux->getCurrentHand() != nullptr && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
+			weAux->detectPlayer(aux2, aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
 			cout << "Golpeaste al objetivo" << endl;
 		}
 	}
@@ -129,17 +121,19 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 
 		ObjectCollidesWithPlayer(contact->GetFixtureB(), player_Health);
 		
-		if (weAux->isOnHit() && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
-			Collider* chancla = aux->getComponent<Collider>(ComponentType::Collider);
-			Collider* enemy = aux2->getComponent<Collider>(ComponentType::Collider);
-			//Calculamos direccion para el impulso al ser golpeado por la chancla
-			b2Vec2 knockback = enemy->getPos() - chancla->getPos();
-			knockback.Normalize();
-			knockback *= CONST(double, "WEAPON_MELEE_KNOCKBACK");
+		if (weAux->getCurrentHand() != nullptr && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
+			//Collider* chancla = aux->getComponent<Collider>(ComponentType::Collider);
+			//Collider* enemy = aux2->getComponent<Collider>(ComponentType::Collider);
+			////Calculamos direccion para el impulso al ser golpeado por la chancla
+			//b2Vec2 knockback = enemy->getPos() - chancla->getPos();
+			//knockback.Normalize();
+			//knockback *= CONST(double, "WEAPON_MELEE_KNOCKBACK");
 
-			enemy->applyLinearImpulse(knockback, b2Vec2(0, 1));
+			//enemy->applyLinearImpulse(knockback, b2Vec2(0, 1));
 
-			player_Health->subtractLife(weAux->getDamage());
+			//player_Health->subtractLife(weAux->getDamage());
+			weAux->detectPlayer(aux2, aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
+
 			cout << "Golpeaste al objetivo" << endl;
 		}
 	}
@@ -195,6 +189,32 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 		if (PlayerCollidesWithRouterArea(contact, routerLogic, playerCollider, playerData)) {
 			routerLogic->loseContactPlayer(playerCollider, playerData->getId());
 		}
+	}
+	
+	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon && contact->GetFixtureA()->IsSensor()
+		&& contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
+		Entity* aux = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
+		Entity* aux2 = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+		Weapon* weAux = aux->getComponent<Weapon>(ComponentType::Weapon);
+		Hands* haAux = aux2->getComponent<Hands>(ComponentType::Hands);
+
+		if (weAux->getCurrentHand() != nullptr && aux2->hasComponent(ComponentType::Health) && weAux->getCurrentHand() != haAux) {
+			weAux->DeletePlayerInfo(aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
+		}
+	}
+	else if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon && contact->GetFixtureA()->IsSensor()
+		&& contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
+		Entity* aux = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
+		Entity* aux2 = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
+
+		Weapon* weAux = aux->getComponent<Weapon>(ComponentType::Weapon);
+		Hands* haAux = aux2->getComponent<Hands>(ComponentType::Hands);
+
+		if (weAux->getCurrentHand() != nullptr && aux2->hasComponent(ComponentType::Health) && weAux->getCurrentHand() != haAux) {
+			weAux->DeletePlayerInfo(aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
+		}
+
 	}
 }
 

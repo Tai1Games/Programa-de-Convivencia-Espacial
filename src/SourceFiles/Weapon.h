@@ -15,6 +15,10 @@ struct PlayerInfo
 	Hands* playerHands = nullptr;
 	Health* playerHealth = nullptr;
 };
+struct EnemyData{
+	int id=-1;
+	Entity* enemy = nullptr;
+};
 
 class Weapon : public Component
 {
@@ -26,11 +30,12 @@ protected:
 	WeaponID weaponType_;
 	/*Vector que informa de los jugadores que est�n cerca/dentro del trigger y su respectivo Weapon*/
 	std::vector<PlayerInfo> playerInfo_;
+	std::vector<EnemyData>playersInsideRange_;
 	/*Mano que coge este objeto*/
 	Hands* currentHand_ = nullptr;
 
 	int damage_=0;
-	bool hit = false;
+	bool coolDown = false;
 	int actionTime = 0;
 
 public:
@@ -52,6 +57,12 @@ public:
 	void SavePlayerInfo(int index, Hands* playerH, Health* healthAux);
 	/*Borra la informacion del jugador que sale del trigger*/
 	void DeletePlayerInfo(int index);
+
+
+	void detectPlayer(Entity* playerDetected, int id);
+	void loseContactPlayer(Entity* playerDetected, int id);
+
+
 	virtual void Action();
 	int getDamage();
 	int getWeaponType() { return weaponType_; }
