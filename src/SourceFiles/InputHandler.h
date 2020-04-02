@@ -34,6 +34,8 @@ private:
 	const Uint8* kbState_;
 	bool isKeyUpEvent_;
 	bool isKeyDownEvent_;
+
+	bool exit_ = false;
 	//---------------------------------------------
 	//mouse
 	bool isMouseMotionEvent_;
@@ -182,6 +184,11 @@ public:
 	inline bool isButtonUp(int ctrl, SDL_GameControllerButton b) {
 		return(m_buttonStates[ctrl][b] == Up);
 	}
+	inline bool isExit() {
+		return exit_;
+	}
+
+
 	//get the direction or a value from a stick/trigger given a controller
 	b2Vec2 getStickDir(int ctrl, GAMEPADSTICK stick);
 	b2Vec2 getLastStickDir(int ctrl, GAMEPADSTICK stick);

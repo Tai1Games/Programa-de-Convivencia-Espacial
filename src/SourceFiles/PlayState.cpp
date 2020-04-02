@@ -101,16 +101,6 @@ void PlayState::init() {
 	spaceJunk->addComponent<Viewer>(Resources::Piedra);
 	collJunk->setUserData(spaceJunk);
 
-	//Fuerzas iniciales
-	//collTinky->applyLinearImpulse(b2Vec2(20, -10), b2Vec2(1, 1));
-	//collTonko->applyLinearImpulse(b2Vec2(0, 1000), b2Vec2(0.1, 0));
-	//collJunk->applyLinearImpulse(b2Vec2(50, 0), b2Vec2(0.1, 0));
-
-	//Version estática de la factoria
-	//WeaponFactory::makePelota(entityManager_, physicsWorld_, b2Vec2(18, 5), b2Vec2(0.5, 0.5));
-	//WeaponFactory::makeMando(entityManager_, physicsWorld_, b2Vec2(18, 5), b2Vec2(0.5, 0.5));
-	//WeaponFactory::makeChancla(entityManager_, physicsWorld_, b2Vec2(14, 5), b2Vec2(0.5, 0.5));
-	//WeaponFactory::makeGrapadora(entityManager_, physicsWorld_, b2Vec2(10, 5), b2Vec2(0.5, 0.5));
 	gameMode_->init(this);
 }
 

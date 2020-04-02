@@ -47,6 +47,9 @@ void InputHandler::update() {
 		case SDL_JOYBUTTONUP:
 			onJoyButtonChange(event, JustUp);
 			break;
+		case SDL_QUIT:
+			exit_ = true;
+			break;
 		}
 
 	}
