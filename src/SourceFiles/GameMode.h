@@ -20,7 +20,7 @@ protected:
 	vector<Viewer*> emptyProgressBars_;
 	vector<Viewer*> progressBars_;
 	void initProgressBars();
-	void updateProgressBar(Viewer& progressBar, const float& progressValue);
+	void updateProgressBar(Viewer& progressBar, const float& progressValue, int player);
 	void renderProgressBars(const std::vector<double>& progressValues, const double& goalScore);
 private:
 public:

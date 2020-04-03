@@ -29,6 +29,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{Router,"../../assets/game/textures/Router.png" },
 	{ EmptyProgressBar, "../../assets/game/textures/EmptyProgressBar.png"},
 	{ ProgressBar, "../../assets/game/textures/ProgressBar.png"},
+	{ EmptyProgressBar2, "../../assets/game/textures/EmptyProgressBar2.png"},
+	{ ProgressBar2, "../../assets/game/textures/ProgressBar2.png"},
 
 		{ TSet_Kenney1bit , "../../assets/game/tilemaps/modded_colored.png"},
 		{ TSet_Dungeon , "../../assets/game/tilemaps/dungeon_ts.png"}

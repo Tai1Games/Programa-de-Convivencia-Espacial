@@ -37,6 +37,8 @@ public:
 		Router,
 		EmptyProgressBar,
 		ProgressBar,
+		EmptyProgressBar2,
+		ProgressBar2,
 
 		// text
 		PauseText,
