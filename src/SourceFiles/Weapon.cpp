@@ -19,7 +19,6 @@ void Weapon::init()
 void Weapon::update()
 {
 	
-	
 }
 
 void Weapon::handleInput()
