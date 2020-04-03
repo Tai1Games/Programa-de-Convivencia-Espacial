@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Vector2D.h"
+#include "checkML.h"
 
 class ParticleEmitter :
 	public Component
