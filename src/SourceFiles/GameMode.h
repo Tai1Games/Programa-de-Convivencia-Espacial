@@ -16,6 +16,12 @@ protected:
 	Entity* winner_ = nullptr; //Player who wins the round.
 	bool roundFinished_ = false;
 	TileMap* tilemap_;
+	//Barras de progreso usadas por WiFightGameMode y ControllerGameMode(subidas a GameMode por herencia para no copiar y pegar dos veces)
+	vector<Viewer*> emptyProgressBars_;
+	vector<Viewer*> progressBars_;
+	void initProgressBars();
+	void updateProgressBar(Viewer& progressBar, const float& progressValue);
+	void renderProgressBars(const std::vector<double>& progressValues, const double& goalScore);
 private:
 public:
 	virtual void init(PlayState* state);

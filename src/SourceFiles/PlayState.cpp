@@ -73,7 +73,11 @@ void PlayState::init() {
 	tonko->addComponent<Viewer>(Resources::Tinky);
 	tonko->addComponent<Health>(3);
 	tonko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
+	tonko->addComponent<Hands>(Resources::Hands);
+	tonko->addComponent<AttachesToObjects>();
+	tonko->addComponent<PlayerController>();
 	collTonko->setUserData(tonko);
+	tonko->addComponent<ImpulseViewer>(Resources::FlechaImpulso, Resources::ImpulsoBackground);
 
 	tanko->addComponent<PlayerData>(3);
 	tanko->addComponent<Viewer>(Resources::Tinky);

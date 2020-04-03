@@ -14,21 +14,7 @@ void ControllerGameMode::init(PlayState* game)  {
 	controller_ = wF.makeController(state_->getEntityManager(), state_->getPhysicsWorld(), b2Vec2(tilemap_->getObjSpecialSpawnPos().x, tilemap_->getObjSpecialSpawnPos().y), b2Vec2(0.5, 0.5));
 	for (Entity* player : players_) controllerTimes_.push_back(0);
 
-	//Posiciones de las barras respecto a los HealthViewer
-	b2Vec2 healthPos = players_[0]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
-	emptyProgressBars_.push_back(new Viewer(Resources::EmptyProgressBar, b2Vec2(healthPos.x-15, healthPos.y+60), 0.08, 0));
-	progressBars_.push_back(new Viewer(Resources::ProgressBar, b2Vec2(healthPos.x - 15, healthPos.y + 60), 0.08, 0));
-	healthPos = players_[1]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
-	emptyProgressBars_.push_back(new Viewer(Resources::EmptyProgressBar, b2Vec2(healthPos.x - 115, healthPos.y + 60), 0.08, 0));
-	progressBars_.push_back(new Viewer(Resources::ProgressBar, b2Vec2(healthPos.x - 115, healthPos.y + 60), 0.08, 0));
-	healthPos = players_[2]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
-	emptyProgressBars_.push_back(new Viewer(Resources::EmptyProgressBar, b2Vec2(healthPos.x + 13, healthPos.y - 40), 0.08, 0));
-	progressBars_.push_back(new Viewer(Resources::ProgressBar, b2Vec2(healthPos.x + 13, healthPos.y - 40), 0.08, 0));
-	healthPos = players_[3]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
-	emptyProgressBars_.push_back(new Viewer(Resources::EmptyProgressBar, b2Vec2(healthPos.x - 90, healthPos.y - 40), 0.08, 0));
-	progressBars_.push_back(new Viewer(Resources::ProgressBar, b2Vec2(healthPos.x - 90, healthPos.y - 40), 0.08, 0));
-
-	for (auto ePB : emptyProgressBars_) ePB->init();
+	GameMode::initProgressBars();
 }
 
 void ControllerGameMode::update() {
@@ -43,29 +29,10 @@ void ControllerGameMode::update() {
 	}
 }
 
-void ControllerGameMode::updateProgressBar(Viewer& progressBar,const float& progressValue)
-{
-	progressBar.init();
-	progressBar.setClipUIElement(SDL_Rect{ 0, 0, int(progressBar.getWHUIElement().x * progressValue), int(progressBar.getWHUIElement().y) });
-	progressBar.setWHUIElement(b2Vec2(progressBar.getWHUIElement().x * progressValue, progressBar.getWHUIElement().y));
-	progressBar.draw();
-}
 
 void ControllerGameMode::render() {
-	for (auto ePB : emptyProgressBars_) ePB->draw();
+	GameMode::renderProgressBars(controllerTimes_, CONST(double, "TIME_TO_WIN"));
 
-	if (players_[0] != nullptr) {
-		updateProgressBar(*progressBars_[0], controllerTimes_[0] / CONST(double, "TIME_TO_WIN"));
-	}
-	if (players_[1] != nullptr) {
-		updateProgressBar(*progressBars_[1], controllerTimes_[1] / CONST(double, "TIME_TO_WIN"));
-	}
-	if (players_[2] != nullptr) {
-		updateProgressBar(*progressBars_[2], controllerTimes_[2] / CONST(double, "TIME_TO_WIN"));
-	}
-	if (players_[3] != nullptr) {
-		updateProgressBar(*progressBars_[3], controllerTimes_[3] / CONST(double, "TIME_TO_WIN"));
-	}
 	if (roundFinished_) {
 		string winMsg = "Gana el jugador " + to_string(winner_->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber());
 		Texture ganador(SDL_Game::instance()->getRenderer(), winMsg,
