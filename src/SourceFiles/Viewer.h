@@ -22,13 +22,14 @@ protected:
 	float scale_;
 	/*En grados*/
 	float angle_;
+	SDL_RendererFlip flip_;
 
 public:
 	Viewer();
 	Viewer(int textureId);
 	Viewer(int textureId, SDL_Rect clip);
 	/*Constructores solo para UI elementos que no necesitan collider*/
-	Viewer(int textureId,b2Vec2 pos, float scale, float angle);
+	Viewer(int textureId, b2Vec2 pos, float scale, float angle, const SDL_RendererFlip& flip = SDL_FLIP_NONE);
 	Viewer(int textureId, b2Vec2 pos, float scale, float angle, SDL_Rect clip);
 	virtual ~Viewer();
 

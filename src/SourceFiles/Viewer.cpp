@@ -22,7 +22,7 @@ Viewer::Viewer(int textureId, SDL_Rect clip) :
 	textureId_(textureId) {	//
 }
 
-Viewer::Viewer(int textureId, b2Vec2 pos, float scale, float angle) :
+Viewer::Viewer(int textureId, b2Vec2 pos, float scale, float angle, const SDL_RendererFlip& flip) :
 	Component(ComponentType::Viewer),
 	tex_(nullptr),	//
 	collider_(nullptr),
@@ -31,7 +31,8 @@ Viewer::Viewer(int textureId, b2Vec2 pos, float scale, float angle) :
 	textureId_(textureId),
 	isUIElement_(true),
 	scale_(scale), //
-	angle_(angle)
+	angle_(angle),
+	flip_(flip)
 {
 }
 
@@ -72,7 +73,7 @@ void Viewer::draw() const {
 			dest.y = pos_.y;
 			dest.w = wH_.x * scale_;
 			dest.h = wH_.y * scale_;
-			tex_->render(dest, angle_, clip_);
+			tex_->render(dest, angle_, clip_, flip_);
 		}
 	}
 }
