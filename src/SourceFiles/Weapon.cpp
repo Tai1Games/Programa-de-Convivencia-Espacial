@@ -87,8 +87,7 @@ void Weapon::UnPickObject()
 	currentHand_->setWeapon(NoWeapon, nullptr);
 	picked_ = false;
 	if (weaponType_ == WeaponID::Chancla) {
-		//Destruimos el trigger de ataque
-		mainCollider_->destroyFixture(2);
+		
 		//Trigger de la Chancla(Restairamos sus capas de colision)
 		b2Filter aux1 = mainCollider_->getFixture(0)->GetFilterData();
 		aux1.categoryBits = Collider::CollisionLayer::Weapon;
@@ -99,6 +98,7 @@ void Weapon::UnPickObject()
 		aux.categoryBits = Collider::CollisionLayer::NormalObject;
 		aux.maskBits= Collider::CollisionLayer::NormalObject | Collider::CollisionLayer::NormalAttachableObject | Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall;
 		mainCollider_->getFixture(0)->SetFilterData(aux);
+		
 	}
 	mainCollider_->getBody()->SetEnabled(true);
 	vw_->setDrawable(true);
@@ -107,6 +107,12 @@ void Weapon::UnPickObject()
 	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * CONST(double, "WEAPON_THROW_SPEED"), -currentHand_->getDir().y * CONST(double, "WEAPON_THROW_SPEED")), mainCollider_->getBody()->GetLocalCenter());
 	mainCollider_->getBody()->SetAngularVelocity(CONST(double, "WEAPON_SPIN_SPEED"));
 	currentHand_ = nullptr;
+	if (weaponType_ == WeaponID::Chancla) {
+		//Destruimos el trigger de ataque
+		mainCollider_->destroyFixture(index);
+		index++;	//Aumenta el index para borrar la colision temporal
+	}
+	
 }
 
 void Weapon::SavePlayerInfo(int index, Hands* playerH, Health* healthAux)

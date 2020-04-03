@@ -37,6 +37,7 @@ protected:
 	int damage_=0;
 	bool coolDown = false;
 	int actionTime = 0;
+	int index = 2;
 
 public:
 	Weapon(WeaponID wId): Component(ComponentType::Weapon), weaponType_(wId){}
