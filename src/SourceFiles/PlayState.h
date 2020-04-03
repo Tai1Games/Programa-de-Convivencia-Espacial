@@ -26,6 +26,7 @@ private:
 	vector<Collider*> collDeadBodies;
 	vector<Entity*> players_;
 	GameMode* gameMode_ = nullptr;
+	Texture* fondo_;
 
 public:
 	PlayState(GameMode* gMode);
