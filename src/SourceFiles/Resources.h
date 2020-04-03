@@ -32,6 +32,8 @@ public:
 		ImpulsoBackground,
 		Slider,
 		SliderControl,
+		EmptyProgressBar,
+		ProgressBar,
 
 		// text
 		PauseText,

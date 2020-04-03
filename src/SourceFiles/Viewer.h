@@ -17,6 +17,7 @@ protected:
 
 	bool isUIElement_ = false;
 	b2Vec2 pos_;
+	b2Vec2 wH_;
 	float scale_;
 	/*En grados*/
 	float angle_;
@@ -26,8 +27,8 @@ public:
 	Viewer(int textureId);
 	Viewer(int textureId, SDL_Rect clip);
 	/*Constructores solo para UI elementos que no necesitan collider*/
-	Viewer(int textureId, float x, float y, float scale, float angle);
-	Viewer(int textureId, float x, float y, float scale, float angle, SDL_Rect clip);
+	Viewer(int textureId,b2Vec2 pos, float scale, float angle);
+	Viewer(int textureId, b2Vec2 pos, float scale, float angle, SDL_Rect clip);
 	virtual ~Viewer();
 
 	virtual void init() override;

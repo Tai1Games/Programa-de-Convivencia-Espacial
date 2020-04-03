@@ -16,6 +16,7 @@ class ControllerGameMode : public GameMode
 private:
 	vector<double> controllerTimes_;
 	Weapon* controller_ = nullptr;
+	vector<Viewer*> emptyProgressBars;
 public:
 	ControllerGameMode() {};
 	virtual void init(PlayState* game);

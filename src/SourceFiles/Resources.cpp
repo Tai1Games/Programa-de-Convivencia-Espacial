@@ -24,6 +24,8 @@ vector<Resources::ImageInfo> Resources::images_ {
 		{ ImpulsoBackground, "../../assets/game/textures/ImpulsoBackground.png"},
 		{ Slider, "../../assets/game/textures/Slider.png"},
 		{ SliderControl, "../../assets/game/textures/SliderControl.png"},
+		{ EmptyProgressBar, "../../assets/game/textures/EmptyProgressBar.png"},
+		{ ProgressBar, "../../assets/game/textures/ProgressBar.png"},
 
 		{ TSet_Kenney1bit , "../../assets/game/tilemaps/modded_colored.png"},
 		{ TSet_Dungeon , "../../assets/game/tilemaps/dungeon_ts.png"}

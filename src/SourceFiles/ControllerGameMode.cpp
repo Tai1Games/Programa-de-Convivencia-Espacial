@@ -7,6 +7,9 @@ void ControllerGameMode::init(PlayState* game)  {
 	WeaponFactory wF;
 	controller_ = wF.makeController(state_->getEntityManager(), state_->getPhysicsWorld(), b2Vec2(18, 5), b2Vec2(0.5, 0.5));
 	for (Entity* player : players_) controllerTimes_.push_back(0);
+
+	emptyProgressBars.push_back(new Viewer(Resources::EmptyProgressBar, b2Vec2(10, 120), 0.1, 0));
+	for (auto ePB : emptyProgressBars) ePB->init();	
 }
 
 void ControllerGameMode::update() {
@@ -23,6 +26,7 @@ void ControllerGameMode::update() {
 }
 
 void ControllerGameMode::render() {
+
 	//UI provisional, acabar con esto rápido
 	if (players_[0] != nullptr) {
 		Texture score(SDL_Game::instance()->getRenderer(),
@@ -30,6 +34,9 @@ void ControllerGameMode::render() {
 			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera),
 			{ COLOR(0xffffffff) });
 		score.render(10, 75);
+		Viewer* progressBar = new Viewer(Resources::ProgressBar, b2Vec2(10, 120), 0.1, 0);
+		progressBar->init();
+		progressBar->draw();
 	}
 	if (players_[1] != nullptr) {
 		Texture score(SDL_Game::instance()->getRenderer(),
