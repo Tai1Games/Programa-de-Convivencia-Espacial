@@ -2,7 +2,6 @@
 #include "GameMode.h"
 #include "Health.h"
 #include "HealthViewer.h"
-#include "box2d.h"
 class StocksGameMode : public GameMode
 {
 private:
@@ -14,6 +13,7 @@ private:
 	int maxStocks_;
 public:
 	StocksGameMode(int stocks = 3);
+	~StocksGameMode();
 	virtual void init(PlayState* game);
 	virtual void render();
 	virtual void update();

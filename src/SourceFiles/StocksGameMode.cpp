@@ -6,6 +6,10 @@ StocksGameMode::StocksGameMode(int stocks) : GameMode()
 	maxStocks_ = stocks;
 }
 
+StocksGameMode::~StocksGameMode()
+{
+}
+
 void StocksGameMode::init(PlayState* game){
 	GameMode::init(game);
 	for(int i = 0;i<players_.size();i++){

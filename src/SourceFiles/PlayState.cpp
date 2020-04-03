@@ -26,25 +26,22 @@ void PlayState::init() {
 	//se podría JSONizar para evitar compilar
 	entityManager_ = new EntityManager();
 	physicsWorld_ = new b2World(b2Vec2(0, 0));
-	collisionHandler_ = new CollisionHandler(gameMode_);
+
+	TileMap* tilemap = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
+		"../../assets/game/tilemaps/SalaDeEstar.json",
+		entityManager_, physicsWorld_);
+	tilemap->init();
+	gameMode_->setTileMap(tilemap);
+
+	collisionHandler_ = new CollisionHandler(gameMode_, tilemap);
 	physicsWorld_->SetContactListener(collisionHandler_);
 
-	Entity* map = entityManager_->addEntity();
+
 	Entity* tinky = entityManager_->addEntity();
-	Entity* ground = entityManager_->addEntity();
-	Entity* pared = entityManager_->addEntity();
-	//Entity* rock = entityManager_->addEntity();
-
-
-	//Entity* spaceJunk = entityManager_->addEntity();
-
-	//map->addComponent<TileMap>(WINDOW_WIDTH, WINDOW_HEIGHT,
-	//	"../../assets/game/tilemaps/TD_TilemapBitCSV.json");
-
 	Entity* tonko = entityManager_->addEntity();
 	Entity* tunko = entityManager_->addEntity();
 	Entity* tanko = entityManager_->addEntity();
-	Entity* spaceJunk = entityManager_->addEntity();
+	//Entity* spaceJunk = entityManager_->addEntity();
 
 	players_.push_back(tinky);
 	players_.push_back(tonko);
@@ -52,20 +49,14 @@ void PlayState::init() {
 	players_.push_back(tanko);
 
 	//Colliders
-	                                                                                      // x,  y,   width, height, density,	friction, restitution, linearDrag, angularDrag,	Layer,											  sensor
-	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    2,    2,    1,     1,      1,         0.1,      0.2,         0,          0,          Collider::CollisionLayer::Player,			   	  false);
-	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody,    10.5, -0.5, 12,    1,      10,        0,        0.2,         0,          0,           Collider::CollisionLayer::Wall,					  false);
-	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody,     21.5, 10,   1,     10,     10,        1,        0.2,         0,          0,           Collider::CollisionLayer::Wall,					  false);
-	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 0,    8.25, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::NormalAttachableObject, false);
-	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,				  false);
-	Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,				  false);
-	Collider* collTanko = tanko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	  7,	3,	  1,	 1,		 1,		    0.1,	  0.2,		   0,		   0,			Collider::CollisionLayer::Player,				  false);
+	                                                                                      //             x,						    	  y,			     	width, height, density,	friction, restitution, linearDrag, angularDrag,	               Layer,			        sensor
+	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody,      tilemap->getPlayerSpawnPoint(0).x, tilemap->getPlayerSpawnPoint(0).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
+	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	    tilemap->getPlayerSpawnPoint(1).x, tilemap->getPlayerSpawnPoint(1).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
+	Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,		tilemap->getPlayerSpawnPoint(2).x, tilemap->getPlayerSpawnPoint(2).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
+	Collider* collTanko = tanko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	    tilemap->getPlayerSpawnPoint(3).x, tilemap->getPlayerSpawnPoint(3).y, 1,	 1,		 1,		    0.1,	  0.2,		   0,		   0,			Collider::CollisionLayer::Player,		false);
 
-	//Muros
-	ground->addComponent<Viewer>();
-	collSuelo->setUserData(ground);
-	pared->addComponent<Viewer>();
-	collpared->setUserData(pared);
+	//FONDO
+	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SalaDeEstar);
 
 	//Players
 	tinky->addComponent<PlayerData>(0);
@@ -97,20 +88,15 @@ void PlayState::init() {
 	collTunko->setUserData(tunko);
 
 	//Objetos flotantes
-	
-	spaceJunk->addComponent<Viewer>(Resources::Piedra);
-	collJunk->setUserData(spaceJunk);
+
 
 	//Fuerzas iniciales
 	//collTinky->applyLinearImpulse(b2Vec2(20, -10), b2Vec2(1, 1));
 	//collTonko->applyLinearImpulse(b2Vec2(0, 1000), b2Vec2(0.1, 0));
-	//collJunk->applyLinearImpulse(b2Vec2(50, 0), b2Vec2(0.1, 0));
 
 	//Version estática de la factoria
-	//WeaponFactory::makePelota(entityManager_, physicsWorld_, b2Vec2(18, 5), b2Vec2(0.5, 0.5));
-	//WeaponFactory::makeMando(entityManager_, physicsWorld_, b2Vec2(18, 5), b2Vec2(0.5, 0.5));
-	//WeaponFactory::makeChancla(entityManager_, physicsWorld_, b2Vec2(14, 5), b2Vec2(0.5, 0.5));
-	//WeaponFactory::makeGrapadora(entityManager_, physicsWorld_, b2Vec2(10, 5), b2Vec2(0.5, 0.5));
+	tilemap->executeMapFactory();
+
 	gameMode_->init(this);
 }
 
@@ -127,6 +113,7 @@ void PlayState::update() {
 }
 
 void PlayState::render() {
+	fondo_->render(0,0);
 	GameState::render();
 	gameMode_->render();
 }
@@ -136,7 +123,7 @@ void PlayState::handleInput()
 	GameState::handleInput();
 	InputHandler* ih = SDL_Game::instance()->getInputHandler();
 	for (int i = 0; i < ih->getNumControllers(); i++) {
-		if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_START) || 
+		if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_START) ||
 			ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_GUIDE)) {
 			SDL_Game::instance()->getStateMachine()->setPauseOwner(i);
 		}

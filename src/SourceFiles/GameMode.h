@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include "box2d.h"
+#include "TileMap.h"
 
 class Entity;
 class PlayState;
@@ -13,6 +15,7 @@ protected:
 	std::vector<Entity*> players_; //Player vector. We use Entity because we will need multiple components from them.
 	Entity* winner_ = nullptr; //Player who wins the round.
 	bool roundFinished_ = false;
+	TileMap* tilemap_;
 private:
 public:
 	virtual void init(PlayState* state);
@@ -20,4 +23,5 @@ public:
 	virtual void update() {};
 	virtual bool onPlayerDead(int id) { return true; };
 	Entity* getRoundResults() { return winner_; }
+	virtual void setTileMap(TileMap* tm) { tilemap_ = tm; };
 };
