@@ -12,6 +12,14 @@ InputHandler::InputHandler() {
 }
 
 InputHandler::~InputHandler() {
+	for (auto e : m_joystickValues) {
+		delete e.first;
+		delete e.second;
+	}
+	for (auto e : m_triggerValues) {
+		delete e.first;
+		delete e.second;
+	}
 }
 
 void InputHandler::update() {

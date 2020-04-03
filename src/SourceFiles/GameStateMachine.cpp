@@ -35,9 +35,11 @@ void GameStateMachine::changeToState(int state) {
 			case States::menu:
 				break;
 			case States::play:
-				states_[state] = new PlayState(new ControllerGameMode());
+				if (states_[state] != nullptr)	delete states_[state];
+				states_[state] = new PlayState(new ControllerGameMode());	// el new ControllerGameMode deja basura!!
 				break;
 			case States::pause:
+				if (states_[state] != nullptr)	delete states_[state];
 				states_[state] = new PauseState();
 				break;
 			}

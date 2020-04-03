@@ -91,6 +91,8 @@ void SDL_Game::closeResources() {
 	audio_ = nullptr;
 	delete gamestateMachine_;
 	gamestateMachine_ = nullptr;
+	delete inputHandler_;
+	inputHandler_ = nullptr;
 }
 
 void SDL_Game::start() {
