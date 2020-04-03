@@ -3,5 +3,4 @@
 
 void GameMode::init(PlayState* state) {
 	state_ = state;
-	players_ = state->getPlayers();
 }

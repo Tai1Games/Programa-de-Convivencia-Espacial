@@ -24,7 +24,6 @@ private:
 	CollisionHandler* collisionHandler_;
 	vector<Entity*> deadBodies;
 	vector<Collider*> collDeadBodies;
-	vector<Entity*> players_;
 	GameMode* gameMode_ = nullptr;
 	Texture* fondo_;
 
@@ -36,7 +35,6 @@ public:
 	void createDeadBodies();
 	virtual void render();
 	virtual void handleInput();
-	std::vector<Entity*> getPlayers() { return players_; };
 	EntityManager* getEntityManager() { return entityManager_; }
 	b2World* getPhysicsWorld() { return physicsWorld_; }
 };

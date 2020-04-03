@@ -37,55 +37,55 @@ void PlayState::init() {
 	physicsWorld_->SetContactListener(collisionHandler_);
 
 
-	Entity* tinky = entityManager_->addEntity();
-	Entity* tonko = entityManager_->addEntity();
-	Entity* tunko = entityManager_->addEntity();
-	Entity* tanko = entityManager_->addEntity();
-	//Entity* spaceJunk = entityManager_->addEntity();
+	//Entity* tinky = entityManager_->addEntity();
+	//Entity* tonko = entityManager_->addEntity();
+	//Entity* tunko = entityManager_->addEntity();
+	//Entity* tanko = entityManager_->addEntity();
+	////Entity* spaceJunk = entityManager_->addEntity();
 
-	players_.push_back(tinky);
-	players_.push_back(tonko);
-	players_.push_back(tunko);
-	players_.push_back(tanko);
+	///*players_.push_back(tinky);
+	//players_.push_back(tonko);
+	//players_.push_back(tunko);
+	//players_.push_back(tanko);*/
 
-	//Colliders
-	                                                                                      //             x,						    	  y,			     	width, height, density,	friction, restitution, linearDrag, angularDrag,	               Layer,			        sensor
-	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody,      tilemap->getPlayerSpawnPoint(0).x, tilemap->getPlayerSpawnPoint(0).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
-	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	    tilemap->getPlayerSpawnPoint(1).x, tilemap->getPlayerSpawnPoint(1).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
-	Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,		tilemap->getPlayerSpawnPoint(2).x, tilemap->getPlayerSpawnPoint(2).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
-	Collider* collTanko = tanko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	    tilemap->getPlayerSpawnPoint(3).x, tilemap->getPlayerSpawnPoint(3).y, 1,	 1,		 1,		    0.1,	  0.2,		   0,		   0,			Collider::CollisionLayer::Player,		false);
+	////Colliders
+	//                                                                                      //             x,						    	  y,			     	width, height, density,	friction, restitution, linearDrag, angularDrag,	               Layer,			        sensor
+	//Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody,      tilemap->getPlayerSpawnPoint(0).x, tilemap->getPlayerSpawnPoint(0).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
+	//Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	    tilemap->getPlayerSpawnPoint(1).x, tilemap->getPlayerSpawnPoint(1).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
+	//Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,		tilemap->getPlayerSpawnPoint(2).x, tilemap->getPlayerSpawnPoint(2).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
+	//Collider* collTanko = tanko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	    tilemap->getPlayerSpawnPoint(3).x, tilemap->getPlayerSpawnPoint(3).y, 1,	 1,		 1,		    0.1,	  0.2,		   0,		   0,			Collider::CollisionLayer::Player,		false);
 
 	//FONDO
 	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SalaDeEstar);
 
-	//Players
-	tinky->addComponent<PlayerData>(0);
-	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un cuadrado de debug.
-	tinky->addComponent<Health>(3);
-	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
-	tinky->addComponent<Hands>(Resources::Hands);
-	tinky->addComponent<AttachesToObjects>();
-	tinky->addComponent<PlayerController>();
-	collTinky->setUserData(tinky);
-	tinky->addComponent<ImpulseViewer>(Resources::FlechaImpulso,Resources::ImpulsoBackground);
+	////Players
+	//tinky->addComponent<PlayerData>(0);
+	//tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un cuadrado de debug.
+	//tinky->addComponent<Health>(3);
+	//tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
+	//tinky->addComponent<Hands>(Resources::Hands);
+	//tinky->addComponent<AttachesToObjects>();
+	//tinky->addComponent<PlayerController>();
+	//collTinky->setUserData(tinky);
+	//tinky->addComponent<ImpulseViewer>(Resources::FlechaImpulso,Resources::ImpulsoBackground);
 
-	tonko->addComponent<PlayerData>(1);
-	tonko->addComponent<Viewer>(Resources::Tinky);
-	tonko->addComponent<Health>(3);
-	tonko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
-	collTonko->setUserData(tonko);
+	//tonko->addComponent<PlayerData>(1);
+	//tonko->addComponent<Viewer>(Resources::Tinky);
+	//tonko->addComponent<Health>(3);
+	//tonko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
+	//collTonko->setUserData(tonko);
 
-	tanko->addComponent<PlayerData>(3);
-	tanko->addComponent<Viewer>(Resources::Tinky);
-	tanko->addComponent<Health>(3);
-	tanko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
-	collTanko->setUserData(tanko);
+	//tanko->addComponent<PlayerData>(3);
+	//tanko->addComponent<Viewer>(Resources::Tinky);
+	//tanko->addComponent<Health>(3);
+	//tanko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
+	//collTanko->setUserData(tanko);
 
-	tunko->addComponent<PlayerData>(2);
-	tunko->addComponent<Viewer>(Resources::Tinky);
-	tunko->addComponent<Health>(3);
-	tunko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
-	collTunko->setUserData(tunko);
+	//tunko->addComponent<PlayerData>(2);
+	//tunko->addComponent<Viewer>(Resources::Tinky);
+	//tunko->addComponent<Health>(3);
+	//tunko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
+	//collTunko->setUserData(tunko);
 
 	//Objetos flotantes
 

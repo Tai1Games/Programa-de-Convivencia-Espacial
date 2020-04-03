@@ -180,6 +180,9 @@
     <ClInclude Include="Wallet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -300,6 +303,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Wallet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

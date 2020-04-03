@@ -10,7 +10,7 @@ private:
 	std::vector<double> playerProgress_;
 	Entity* router = nullptr;
 public:
-	WiFightGameMode() {};
+	WiFightGameMode(int nPlayers): GameMode(nPlayers) {};
 	~WiFightGameMode() {};
 	virtual void init(PlayState* game);
 	void addPoints(int player, double sumPoints);

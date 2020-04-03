@@ -5,7 +5,7 @@ class CapitalismGameMode : public GameMode
 private:
 
 public:
-	CapitalismGameMode() : GameMode() {};
+	CapitalismGameMode(int nPlayers) : GameMode(nPlayers) {};
 	~CapitalismGameMode() {};
 	virtual void init(PlayState* game);
 	virtual void render();

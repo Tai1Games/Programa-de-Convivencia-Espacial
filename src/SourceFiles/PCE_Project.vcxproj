@@ -199,6 +199,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="PCE_Project.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="PlayerData.h" />
+    <ClInclude Include="PlayerFactory.h" />
     <ClInclude Include="RouterLogic.h" />
     <ClInclude Include="StocksGameMode.h" />
     <ClInclude Include="Wallet.h" />
@@ -244,6 +245,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="PCE_Project.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="PlayerData.cpp" />
+    <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="RouterLogic.cpp" />
     <ClCompile Include="StocksGameMode.cpp" />
     <ClCompile Include="Wallet.cpp" />

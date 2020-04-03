@@ -2,6 +2,7 @@
 #include <vector>
 #include "box2d.h"
 #include "TileMap.h"
+#include "PlayerFactory.h"
 
 class Entity;
 class PlayState;
@@ -10,12 +11,13 @@ class PlayState;
 class GameMode {
 protected:
 	PlayState* state_ = nullptr;
-	GameMode() {};
+	GameMode(int nPlayers): nPlayers_(nPlayers) {};
 	virtual ~GameMode() {};
 	std::vector<Entity*> players_; //Player vector. We use Entity because we will need multiple components from them.
 	Entity* winner_ = nullptr; //Player who wins the round.
 	bool roundFinished_ = false;
-	TileMap* tilemap_;
+	TileMap* tilemap_ = nullptr;
+	int nPlayers_ = 0;
 private:
 public:
 	virtual void init(PlayState* state);

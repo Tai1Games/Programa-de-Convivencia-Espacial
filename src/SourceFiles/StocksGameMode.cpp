@@ -1,7 +1,7 @@
 #include "StocksGameMode.h"
 #include "Constants.h"
 
-StocksGameMode::StocksGameMode(int stocks) : GameMode()
+StocksGameMode::StocksGameMode(int nPlayers, int stocks) : GameMode(nPlayers)
 {
 	maxStocks_ = stocks;
 }

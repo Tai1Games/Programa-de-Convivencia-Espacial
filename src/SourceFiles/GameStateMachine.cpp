@@ -35,7 +35,7 @@ void GameStateMachine::changeToState(int state) {
 			case States::menu:
 				break;
 			case States::play:
-				states_[state] = new PlayState(new ControllerGameMode());
+				states_[state] = new PlayState(new ControllerGameMode(4));
 				break;
 			case States::pause:
 				states_[state] = new PauseState();

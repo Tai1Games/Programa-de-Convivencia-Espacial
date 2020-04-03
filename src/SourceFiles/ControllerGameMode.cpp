@@ -3,6 +3,10 @@
 
 void ControllerGameMode::init(PlayState* game)  {
 	GameMode::init(game);
+	for (int i = 0; i < nPlayers_; i++) {
+		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), i, 
+			Resources::Tinky, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, 3));
+	}
 	//Instancia necesaria para poder coger el puntero al mando (si usáramos una función void no haría falta)
 	WeaponFactory wF;
 	controller_ = wF.makeController(state_->getEntityManager(), state_->getPhysicsWorld(), b2Vec2(tilemap_->getObjSpecialSpawnPos().x, tilemap_->getObjSpecialSpawnPos().y), b2Vec2(0.5, 0.5));
