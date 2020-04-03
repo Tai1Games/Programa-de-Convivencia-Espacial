@@ -91,7 +91,6 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	if(contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon && contact->GetFixtureB()->IsSensor()
 	&& contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player)
 	{
-		//cout << "Tocas con un sensor B" << endl;
 		Entity* aux = static_cast<Entity*>(fixB->GetBody()->GetUserData());
 		Entity* aux2 = static_cast<Entity*>(fixA->GetBody()->GetUserData());
 
@@ -104,13 +103,12 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 
 		if(weAux->getCurrentHand() != nullptr && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
 			weAux->detectPlayer(aux2, aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
-			cout << "Golpeaste al objetivo" << endl;
+			//cout << "Golpeaste al objetivo" << endl;
 		}
 	}
 	else if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon && contact->GetFixtureA()->IsSensor()
 		&& contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player){
-		//cout << "Tocas con un sensor A" << endl;
-
+		
 		Entity* aux = static_cast<Entity*>(fixA->GetBody()->GetUserData());
 		Entity* aux2 = static_cast<Entity*>(fixB->GetBody()->GetUserData());
 
@@ -122,19 +120,10 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		ObjectCollidesWithPlayer(contact->GetFixtureB(), player_Health);
 		
 		if (weAux->getCurrentHand() != nullptr && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
-			//Collider* chancla = aux->getComponent<Collider>(ComponentType::Collider);
-			//Collider* enemy = aux2->getComponent<Collider>(ComponentType::Collider);
-			////Calculamos direccion para el impulso al ser golpeado por la chancla
-			//b2Vec2 knockback = enemy->getPos() - chancla->getPos();
-			//knockback.Normalize();
-			//knockback *= CONST(double, "WEAPON_MELEE_KNOCKBACK");
-
-			//enemy->applyLinearImpulse(knockback, b2Vec2(0, 1));
-
-			//player_Health->subtractLife(weAux->getDamage());
+		
 			weAux->detectPlayer(aux2, aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
 
-			cout << "Golpeaste al objetivo" << endl;
+			//cout << "Golpeaste al objetivo" << endl;
 		}
 	}
 	player_Health = nullptr;
@@ -190,31 +179,11 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 			routerLogic->loseContactPlayer(playerCollider, playerData->getId());
 		}
 	}
-	
-	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon && contact->GetFixtureA()->IsSensor()
-		&& contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
-		Entity* aux = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
-		Entity* aux2 = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
-
-		Weapon* weAux = aux->getComponent<Weapon>(ComponentType::Weapon);
-		Hands* haAux = aux2->getComponent<Hands>(ComponentType::Hands);
-
-		if (weAux->getCurrentHand() != nullptr && aux2->hasComponent(ComponentType::Health) && weAux->getCurrentHand() != haAux) {
-			weAux->DeletePlayerInfo(aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
-		}
-	}
-	else if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon && contact->GetFixtureA()->IsSensor()
-		&& contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
-		Entity* aux = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
-		Entity* aux2 = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
-
-		Weapon* weAux = aux->getComponent<Weapon>(ComponentType::Weapon);
-		Hands* haAux = aux2->getComponent<Hands>(ComponentType::Hands);
-
-		if (weAux->getCurrentHand() != nullptr && aux2->hasComponent(ComponentType::Health) && weAux->getCurrentHand() != haAux) {
-			weAux->DeletePlayerInfo(aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
-		}
-
+	//Out of melee weapon trigger
+	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon ||
+		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon) {
+		
+		exitChanclaTrigger(contact);
 	}
 }
 
@@ -294,6 +263,26 @@ bool CollisionHandler::PlayerCollidesWithRouterArea(b2Contact* contact, RouterLo
 	}
 	
 	return false;
+}
+
+void CollisionHandler::exitChanclaTrigger(b2Contact* contact) {
+	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+	if (fixAentity->hasComponent(ComponentType::Health)) {
+		if (fixBentity->hasComponent(ComponentType::Weapon) && fixAentity->hasComponent(ComponentType::PlayerData)) {
+			
+			fixBentity->getComponent<Weapon>(ComponentType::Weapon)->loseContactPlayer(fixAentity, fixAentity->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
+
+		}
+	}
+	else if (fixBentity->hasComponent(ComponentType::Health)) {
+		if (fixAentity->hasComponent(ComponentType::Weapon) && fixBentity->hasComponent(ComponentType::PlayerData)) {
+			
+			fixAentity->getComponent<Weapon>(ComponentType::Weapon)->loseContactPlayer(fixBentity, fixBentity->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
+
+		}
+	}
 }
 
 void CollisionHandler::SolveInteractions() {
