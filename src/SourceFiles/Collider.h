@@ -7,6 +7,18 @@
 
 class Collider : public Component
 {
+public:
+	//Add the different collision layers as we see fit
+	enum CollisionLayer {
+		NormalObject = 0x0001,
+		UnInteractableObject = 0x0002, //a collision layer can't be zero or else it won't collide
+		NormalAttachableObject = 0x0004,
+		Wall = 0x0008,
+		Player = 0x0016,
+		Trigger = 0x0032,
+		Weapon = 0x0064
+	};
+
 private:
 	//general
 	b2Body* body_;
@@ -16,23 +28,17 @@ private:
 	//fixtures
 	vector<float> widths_;
 	vector<float> heights_;
-	vector<b2PolygonShape> shapes_;
+	//vector<b2Shape> shapes_;
 	vector<b2FixtureDef> fixtureDefs_;
 	vector<b2Fixture*> fixtures_;
 
+	b2Filter setCollisionLayer(CollisionLayer c);
+
 public:
-	//Add the different collision layers as we see fit
-	enum CollisionLayer {
-		NormalObject = 0x0001, //a collision layer can't be zero or else it won't collide
-		NormalAttachableObject,
-		Player,
-		Trigger,
-		Weapon
-	};
 
 	//Friccion -> rozamiento al contacto con otros cuerpos   Drag-> rozamiento con el aire
 	Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
-		float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor, bool canBeAttached);
+		float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor);
 
 	~Collider() {
 		world_->DestroyBody(body_); world_ = nullptr;
@@ -64,10 +70,10 @@ public:
 
 	SDL_Rect getRectRender() const {
 		return SDL_Rect{
-			(int)(getPos().x * PIXELS_PER_METER - (getW(0) * PIXELS_PER_METER)),
-			(int)(WINDOW_HEIGHT - (getPos().y * PIXELS_PER_METER + (getH(0) * PIXELS_PER_METER))),
-			(int)(getW(0) * PIXELS_PER_METER * 2),
-			(int)(getH(0) * PIXELS_PER_METER * 2)
+			(int)(getPos().x * CONST(double,"PIXELS_PER_METER") - (getW(0) * CONST(double,"PIXELS_PER_METER"))),
+			(int)(CONST(double,"WINDOW_HEIGHT") - (getPos().y * CONST(double,"PIXELS_PER_METER") + (getH(0) * CONST(double,"PIXELS_PER_METER")))),
+			(int)(getW(0) * CONST(double,"PIXELS_PER_METER") * 2),
+			(int)(getH(0) * CONST(double,"PIXELS_PER_METER") * 2)
 		};
 	}
 
@@ -81,7 +87,10 @@ public:
 	void setLinearVelocity(b2Vec2 vel) { body_->SetLinearVelocity(vel); }
 	void applyLinearImpulse(b2Vec2 force, b2Vec2 point) { body_->ApplyLinearImpulse(force, body_->GetPosition() + point, true); }
 	void applyForce(b2Vec2 force, b2Vec2 point) { body_->ApplyForce(force, body_->GetPosition() + point, true); }
-	void createFixture(float width, float height, float density,
-		float friction, float restitution, CollisionLayer, bool sensor);
+	void createRectangularFixture(float width, float height, float density,
+		float friction, float restitution, CollisionLayer layer, bool sensor);
+	void createCircularFixture(float radius, float density, float friction, float restitution, CollisionLayer layer, bool sensor);
 	void destroyFixture(int i);
+
+
 };

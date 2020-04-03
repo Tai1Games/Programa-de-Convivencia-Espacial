@@ -4,6 +4,8 @@
 void AttachesToObjects::init() {
 	playerData_ = GETCMP1_(PlayerData);
 	mainCollider_ = GETCMP1_(Collider); //Obtiene el collider del cuerpo principal.
+
+	playerNumber_ = playerData_->getPlayerNumber();
 }
 
 void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint) {
@@ -31,7 +33,7 @@ void AttachesToObjects::deAttachFromObject() {
 
 bool AttachesToObjects::canAttachToObject() { //Se agarra si está pretando una tecla válida y si no está agarrado a otra cosa.
 	InputHandler* ih = SDL_Game::instance()->getInputHandler();
-	if (ih->isButtonDown(playerData_->getPlayerNumber(), SDL_CONTROLLER_BUTTON_A ) || ih->isKeyDown(SDLK_SPACE)){
+	if (ih->getTrigger(playerNumber_, InputHandler::GAMEPADTRIGGER::LEFTTRIGGER) || ih->isKeyDown(SDLK_SPACE)){
 		if (attachedObject_ == nullptr) return true;
 	}
 	return false;

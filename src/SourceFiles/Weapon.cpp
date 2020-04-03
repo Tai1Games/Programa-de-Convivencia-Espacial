@@ -10,7 +10,7 @@ void Weapon::init()
 	mainCollider_ = GETCMP1_(Collider);
 	vw_ = GETCMP1_(Viewer);
 	//Fixture Sensor a�adido por el componente
-	mainCollider_->createFixture(mainCollider_->getW(0) * 4, mainCollider_->getH(0) * 4, 1, 0.1, 0, Collider::CollisionLayer::Weapon, true);
+	mainCollider_->createRectangularFixture(mainCollider_->getW(0)*4, mainCollider_->getH(0)*4, 1, 0.1, 0, Collider::CollisionLayer::Weapon, true);
 	//Pone la informacion de esta clase en el body, para poder usarla en el Listener
 	//Tama�o del vector segun el numero de jugadores
 	playerInfo_.resize(ih_->getNumControllers());
@@ -63,8 +63,8 @@ void Weapon::UnPickObject()
 	vw_->setDrawable(true);
 	mainCollider_->setLinearVelocity(b2Vec2(0, 0));
 	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x, currentHand_->getPos().y), currentHand_->getAngle());
-	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * WEAPON_THROW_SPEED, -currentHand_->getDir().y * WEAPON_THROW_SPEED), mainCollider_->getBody()->GetLocalCenter());
-	mainCollider_->getBody()->SetAngularVelocity(WEAPON_SPIN_SPEED);
+	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * CONST(double, "WEAPON_THROW_SPEED"), -currentHand_->getDir().y * CONST(double, "WEAPON_THROW_SPEED")), mainCollider_->getBody()->GetLocalCenter());
+	mainCollider_->getBody()->SetAngularVelocity(CONST(double, "WEAPON_SPIN_SPEED"));
 	currentHand_ = nullptr;
 }
 
@@ -91,4 +91,8 @@ void Weapon::Action() {
 
 	cout << "Fuiste golpeado con " << damage << " al contrincante" << endl;
 	*/
+}
+
+int Weapon::getPlayerId() {
+	return currentHand_->getPlayerId();
 }

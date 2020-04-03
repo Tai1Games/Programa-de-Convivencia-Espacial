@@ -52,14 +52,14 @@ void PlayState::init() {
 	players_.push_back(tanko);
 
 	//Colliders
-	                                                                                      // x,  y,   width, height, density,	friction, restitution, linearDrag, angularDrag,	Layer,							        sensor canBeAttached
-	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    17,    7,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
-	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody,    10.5, -0.5, 12,    1,      10,        0,        0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
-	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody,     21.5, 10,   1,     10,     10,        1,        0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
-	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 0,    8.25, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::NormalObject, false, true);
-	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
-	Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false, false);
-	Collider* collTanko = tanko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	  7,	3,	  1,	 1,		 1,		    0.1,	  0.2,		   0,		   0,			Collider::CollisionLayer::Player,		false, false);
+	                                                                                      // x,  y,   width, height, density,	friction, restitution, linearDrag, angularDrag,	Layer,											  sensor
+	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    2,    2,    1,     1,      1,         0.1,      0.2,         0,          0,          Collider::CollisionLayer::Player,			   	  false);
+	Collider* collSuelo = ground->addComponent<Collider>(physicsWorld_, b2_staticBody,    10.5, -0.5, 12,    1,      10,        0,        0.2,         0,          0,           Collider::CollisionLayer::Wall,					  false);
+	Collider* collpared = pared->addComponent<Collider>(physicsWorld_, b2_staticBody,     21.5, 10,   1,     10,     10,        1,        0.2,         0,          0,           Collider::CollisionLayer::Wall,					  false);
+	Collider* collJunk = spaceJunk->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 0,    8.25, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::NormalAttachableObject, false);
+	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,				  false);
+	Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,    7,    3,    1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,				  false);
+	Collider* collTanko = tanko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	  7,	3,	  1,	 1,		 1,		    0.1,	  0.2,		   0,		   0,			Collider::CollisionLayer::Player,				  false);
 
 	//Muros
 	ground->addComponent<Viewer>();
@@ -104,10 +104,11 @@ void PlayState::init() {
 	//Fuerzas iniciales
 	//collTinky->applyLinearImpulse(b2Vec2(20, -10), b2Vec2(1, 1));
 	//collTonko->applyLinearImpulse(b2Vec2(0, 1000), b2Vec2(0.1, 0));
-	collJunk->applyLinearImpulse(b2Vec2(50, 0), b2Vec2(0.1, 0));
+	//collJunk->applyLinearImpulse(b2Vec2(50, 0), b2Vec2(0.1, 0));
 
 	//Version estática de la factoria
-	WeaponFactory::makePelota(entityManager_, physicsWorld_, b2Vec2(18, 5), b2Vec2(0.5, 0.5));
+	//WeaponFactory::makePelota(entityManager_, physicsWorld_, b2Vec2(18, 5), b2Vec2(0.5, 0.5));
+	//WeaponFactory::makeMando(entityManager_, physicsWorld_, b2Vec2(18, 5), b2Vec2(0.5, 0.5));
 	//WeaponFactory::makeChancla(entityManager_, physicsWorld_, b2Vec2(14, 5), b2Vec2(0.5, 0.5));
 	//WeaponFactory::makeGrapadora(entityManager_, physicsWorld_, b2Vec2(10, 5), b2Vec2(0.5, 0.5));
 	gameMode_->init(this);
@@ -115,8 +116,9 @@ void PlayState::init() {
 
 void PlayState::update() {
 	GameState::update();
+	//double d = SDL_Game::instance()->getConstants()->getConstant<double>((std::string)"SECONDS_PER_FRAME");
 	//el que vuelva tocar el step de physicsworld muere
-	physicsWorld_->Step(SECONDS_PER_FRAME, 6, 2);
+	physicsWorld_->Step(CONST(double,"SECONDS_PER_FRAME"), 6, 2);
 	collisionHandler_->SolveInteractions();
 	createDeadBodies();
 	//también debería actualizar la lógica de modo de juego
@@ -145,7 +147,7 @@ void PlayState::createDeadBodies() {
 	auto bodies = collisionHandler_->getBodyData();
 	for (int i = 0; i < bodies.size(); i++) {
 		deadBodies.push_back(entityManager_->addEntity());
-		collDeadBodies.push_back(deadBodies.back()->addComponent<Collider>(physicsWorld_, b2_dynamicBody, bodies[i].pos.x, bodies[i].pos.y, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false, true));
+		collDeadBodies.push_back(deadBodies.back()->addComponent<Collider>(physicsWorld_, b2_dynamicBody, bodies[i].pos.x, bodies[i].pos.y, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false));
 		deadBodies.back()->addComponent<Viewer>(Resources::PinkTinky);
 		collDeadBodies.back()->setUserData(deadBodies.back());
 		collDeadBodies.back()->setTransform(b2Vec2(bodies[i].pos.x, bodies[i].pos.y), bodies[i].angle);

@@ -7,6 +7,7 @@
 
 class Hands;
 
+
 struct PlayerInfo
 {
 	bool isNear = false;
@@ -46,5 +47,7 @@ public:
 	void DeletePlayerInfo(int index);
 	void Action();
 	int getWeaponType() { return weaponType_; }
+	int isPicked() { return picked_; }
+	int getPlayerId(); //Cuerpo en el cpp por temas de inclusión circular
 };
 
