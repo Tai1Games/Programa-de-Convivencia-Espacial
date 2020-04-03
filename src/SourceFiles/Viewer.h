@@ -15,6 +15,7 @@ protected:
 	SDL_Rect clip_;
 	bool drawable_ = true;
 
+	//Atributos para UI elements
 	bool isUIElement_ = false;
 	b2Vec2 pos_;
 	b2Vec2 wH_;
@@ -36,6 +37,10 @@ public:
 	void setDrawable(bool b) { drawable_ = b; }
 	/*Solo para UI elementos que no necesitan collider*/
 	void setPosUIElement(b2Vec2 pos) { pos_ = pos; }
+	void setWHUIElement(b2Vec2 wH) { wH_ = wH; }
+	void setClipUIElement(SDL_Rect clip) { clip_ = clip; }
 	/*Solo para UI elementos que no necesitan collider*/
 	b2Vec2 getPosUIElement() { return pos_; }
+	b2Vec2 getWHUIElement() { return wH_; }
+	SDL_Rect getClipUIElement() { return clip_; }
 };

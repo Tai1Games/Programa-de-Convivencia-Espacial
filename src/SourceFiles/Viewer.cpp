@@ -60,7 +60,7 @@ void Viewer::init() {
 		if(clip_.w == 0 && clip_.h == 0)
 			clip_ = SDL_Rect{ 0, 0, tex_->getWidth(), tex_->getHeight() };
 	}
-	wH_ = b2Vec2(tex_->getWidth() * scale_, tex_->getHeight() * scale_);
+	wH_ = b2Vec2(tex_->getWidth(), tex_->getHeight());
 }
 
 void Viewer::draw() const {
@@ -70,8 +70,8 @@ void Viewer::draw() const {
 			SDL_Rect dest;
 			dest.x = pos_.x;
 			dest.y = pos_.y;
-			dest.w = wH_.x;
-			dest.h = wH_.y;
+			dest.w = wH_.x * scale_;
+			dest.h = wH_.y * scale_;
 			tex_->render(dest, angle_, clip_);
 		}
 	}
