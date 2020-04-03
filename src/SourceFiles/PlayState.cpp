@@ -16,8 +16,8 @@
 #include "ImpulseViewer.h"
 #include "PlayerData.h"
 
-PlayState::PlayState(GameMode* gMode):GameState(),
-	gameMode_(gMode) {}
+PlayState::PlayState(GameMode* gMode, string tmap):GameState(),
+	gameMode_(gMode), tilemapName_(tmap) {}
 PlayState::~PlayState() {
 }
 
@@ -28,7 +28,7 @@ void PlayState::init() {
 	physicsWorld_ = new b2World(b2Vec2(0, 0));
 
 	TileMap* tilemap = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
-		"../../assets/game/tilemaps/SalaDeEstar.json",
+		"../../assets/game/tilemaps/"+tilemapName_+".json",
 		entityManager_, physicsWorld_);
 	tilemap->init();
 	gameMode_->setTileMap(tilemap);
@@ -36,63 +36,27 @@ void PlayState::init() {
 	collisionHandler_ = new CollisionHandler(gameMode_, tilemap);
 	physicsWorld_->SetContactListener(collisionHandler_);
 
-
-	Entity* tinky = entityManager_->addEntity();
-	Entity* tonko = entityManager_->addEntity();
-	Entity* tunko = entityManager_->addEntity();
-	Entity* tanko = entityManager_->addEntity();
-	//Entity* spaceJunk = entityManager_->addEntity();
-
-	players_.push_back(tinky);
-	players_.push_back(tonko);
-	players_.push_back(tunko);
-	players_.push_back(tanko);
-
-	//Colliders
-	                                                                                      //             x,						    	  y,			     	width, height, density,	friction, restitution, linearDrag, angularDrag,	               Layer,			        sensor
-	Collider* collTinky = tinky->addComponent<Collider>(physicsWorld_, b2_dynamicBody,      tilemap->getPlayerSpawnPoint(0).x, tilemap->getPlayerSpawnPoint(0).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
-	Collider* collTonko = tonko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	    tilemap->getPlayerSpawnPoint(1).x, tilemap->getPlayerSpawnPoint(1).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
-	Collider* collTunko = tunko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,		tilemap->getPlayerSpawnPoint(2).x, tilemap->getPlayerSpawnPoint(2).y, 1,     1,      1,         0.1,      0.2,         0,          0,           Collider::CollisionLayer::Player,       false);
-	Collider* collTanko = tanko->addComponent<Collider>(physicsWorld_, b2_dynamicBody,	    tilemap->getPlayerSpawnPoint(3).x, tilemap->getPlayerSpawnPoint(3).y, 1,	 1,		 1,		    0.1,	  0.2,		   0,		   0,			Collider::CollisionLayer::Player,		false);
+	//PLAYERS
+	vector<Collider*> colliders;
+	for (int i = 0; i < 4; i++) {
+		players_.push_back(entityManager_->addEntity());
+		colliders.push_back(players_[i]->addComponent<Collider>(physicsWorld_, b2_dynamicBody, tilemap->getPlayerSpawnPoint(i).x, tilemap->getPlayerSpawnPoint(i).y,
+			1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::Player, false));
+		players_[i]->addComponent<PlayerData>(i);
+		players_[i]->addComponent<Viewer>(Resources::Tinky);
+		players_[i]->addComponent<Health>(3);
+		players_[i]->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
+		if (i == 0) { //si solo hay un mando
+			players_[i]->addComponent<Hands>(Resources::Hands);
+			players_[i]->addComponent<AttachesToObjects>();
+			players_[i]->addComponent<PlayerController>();
+			players_[i]->addComponent<ImpulseViewer>(Resources::FlechaImpulso, Resources::ImpulsoBackground);
+		}
+		colliders[i]->setUserData(players_[i]);
+	}
 
 	//FONDO
-	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SalaDeEstar);
-
-	//Players
-	tinky->addComponent<PlayerData>(0);
-	tinky->addComponent<Viewer>(Resources::Tinky);		//  <-- se puede poner un sprite con esta constructora, pero por defecto sale un cuadrado de debug.
-	tinky->addComponent<Health>(3);
-	tinky->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
-	tinky->addComponent<Hands>(Resources::Hands);
-	tinky->addComponent<AttachesToObjects>();
-	tinky->addComponent<PlayerController>();
-	collTinky->setUserData(tinky);
-	tinky->addComponent<ImpulseViewer>(Resources::FlechaImpulso,Resources::ImpulsoBackground);
-
-	tonko->addComponent<PlayerData>(1);
-	tonko->addComponent<Viewer>(Resources::Tinky);
-	tonko->addComponent<Health>(3);
-	tonko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
-	collTonko->setUserData(tonko);
-
-	tanko->addComponent<PlayerData>(3);
-	tanko->addComponent<Viewer>(Resources::Tinky);
-	tanko->addComponent<Health>(3);
-	tanko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
-	collTanko->setUserData(tanko);
-
-	tunko->addComponent<PlayerData>(2);
-	tunko->addComponent<Viewer>(Resources::Tinky);
-	tunko->addComponent<Health>(3);
-	tunko->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
-	collTunko->setUserData(tunko);
-
-	//Objetos flotantes
-
-
-	//Fuerzas iniciales
-	//collTinky->applyLinearImpulse(b2Vec2(20, -10), b2Vec2(1, 1));
-	//collTonko->applyLinearImpulse(b2Vec2(0, 1000), b2Vec2(0.1, 0));
+	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(resourceMap_[tilemapName_]);
 
 	//Version estática de la factoria
 	tilemap->executeMapFactory();
