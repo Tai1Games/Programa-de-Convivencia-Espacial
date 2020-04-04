@@ -9,8 +9,8 @@ public:
 	CapitalismGameMode(int nPlayers) : GameMode(nPlayers) {};
 	~CapitalismGameMode() {};
 	virtual void init(PlayState* game);
-	virtual void render();
-	virtual void update();
-	virtual bool onPlayerDead(int id); //Returns false when players runs out of stocks.
+	virtual void render() {};
+	virtual void update() {};
+	virtual bool onPlayerDead(int id) { return true; }; //Returns false when players runs out of stocks.
 };
 

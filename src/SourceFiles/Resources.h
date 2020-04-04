@@ -35,6 +35,7 @@ public:
 		SalaDeEstar,
 		Negro,
 		Router,
+		Coin,
 
 		// text
 		PauseText,

@@ -3,52 +3,61 @@
 #include "StocksGameMode.h"
 //This method calculates the damage recieved by the impact of an object (or another player) with the player
 
-void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth) {
+void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet) {
 	//Measure de impact of an object with the player
 	b2Vec2 force = fix->GetBody()->GetMass() * fix->GetBody()->GetLinearVelocity();
 
 	int impact = force.Length();
 
 	//Depending on the force of impact we apply damage to the player
-	if (impact >= CONST(int, "LOW_DAMAGE")&& CONST(double, "MEDIUM_DAMAGE")) {playerHealth->subtractLife(1); }
+	if (impact >= CONST(int, "LOW_DAMAGE") && CONST(double, "MEDIUM_DAMAGE")) impact = 1;
 
-	if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) {playerHealth->subtractLife(2);}
+	else if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) impact = 2;
 
-	if (impact >= CONST(double, "HIGH_DAMAGE")) {playerHealth->subtractLife(3);}
+	else if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) impact = 3;
 
-	if (playerHealth->getHealth() <= 0)
-	{
-		//reset player
+	//When player has health component
+	if (playerHealth) {
 
-		//soltar objetos agarrados
-		AttachesToObjects* a = static_cast<AttachesToObjects*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects));
-		if (a != nullptr && a->isAttached()) vecAttach.push_back(a);
-		//soltar arma
-		Hands* h = static_cast<Hands*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<Hands>(ComponentType::Hands));
-		Weapon* w = nullptr;
-		if (h != nullptr) w = h->getWeapon();
-		if (w != nullptr) vecWeapon.push_back(w);
-		//respawn
-		StocksGameMode* s = nullptr;
-		bool stocks = (s = dynamic_cast<StocksGameMode*>(gMode_));
-		PlayerData* p = static_cast<PlayerData*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<PlayerData>(ComponentType::PlayerData));
-		moveData m;
-		m.body = player->GetBody();
-		m.pos = b2Vec2(tilemap->getPlayerSpawnPoint(p->getPlayerNumber()).x, tilemap->getPlayerSpawnPoint(p->getPlayerNumber()).y); //punto de respawn provisional
-		if (stocks && s->onPlayerDead(p->getPlayerNumber())|| !stocks) {	//si le quedan vidas
-			playerHealth->resetHealth();
+		playerHealth->subtractLife(impact);
+
+		if (playerHealth->getHealth() <= 0)
+		{
+			//reset player
+
+			//soltar objetos agarrados
+			AttachesToObjects* a = static_cast<AttachesToObjects*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects));
+			if (a != nullptr && a->isAttached()) vecAttach.push_back(a);
+			//soltar arma
+			Hands* h = static_cast<Hands*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<Hands>(ComponentType::Hands));
+			Weapon* w = nullptr;
+			if (h != nullptr) w = h->getWeapon();
+			if (w != nullptr) vecWeapon.push_back(w);
+			//respawn
+			StocksGameMode* s = nullptr;
+			bool stocks = (s = dynamic_cast<StocksGameMode*>(gMode_));
+			PlayerData* p = static_cast<PlayerData*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<PlayerData>(ComponentType::PlayerData));
+			moveData m;
+			m.body = player->GetBody();
+			m.pos = b2Vec2(tilemap->getPlayerSpawnPoint(p->getPlayerNumber()).x, tilemap->getPlayerSpawnPoint(p->getPlayerNumber()).y); //punto de respawn provisional
+			if (stocks && s->onPlayerDead(p->getPlayerNumber()) || !stocks) {	//si le quedan vidas
+				playerHealth->resetHealth();
+			}
+			else if (stocks) {	//si no le quedan vidas le mandamos lejos provisionalmente
+				m.pos = b2Vec2((1 + p->getPlayerNumber()) * 50, 0);
+			}
+			vecMove.push_back(m);
+
+			//cuerpo muerto
+			bodyData body;
+			body.pos = player->GetBody()->GetPosition();
+			body.angle = player->GetBody()->GetAngle();
+			vecBody.push_back(body);
 		}
-		else if(stocks) {	//si no le quedan vidas le mandamos lejos provisionalmente
-			m.pos = b2Vec2((1+p->getPlayerNumber())* 50, 0);
-		}
-		vecMove.push_back(m);
-
-		//cuerpo muerto
-		bodyData body;
-		body.pos = player->GetBody()->GetPosition();
-		body.angle = player->GetBody()->GetAngle();
-		vecBody.push_back(body);
 	}
+
+	//When player has wallet component
+	else playerWallet->dropCoins(impact);
 }
 
 //Handles start of collisions
@@ -63,6 +72,8 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	RouterLogic* routerLogic = nullptr;
 	Collider* playerCollider = nullptr;
 	PlayerData* playerData = nullptr;
+	Wallet* wallet = nullptr;
+	Coin* coin = nullptr;
 
 	//Comprueba que FixA es el jugador, que FixB es un trigger, que el jugador está presionando la tecla A (mando) o Space (teclado) y que no está agarrado a nada más.
 	if (AttachableObjectCollidesWithPlayer(fixA, player_AttachesToObjects) && (fixB->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject || fixB->GetFilterData().categoryBits == Collider::Wall) && player_AttachesToObjects->canAttachToObject()) {
@@ -76,14 +87,14 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	}
 	else if (fixB->GetFilterData().categoryBits) {
 		//check collision then do whatever, in this case twice because it might be two players colliding
-		if (ObjectCollidesWithPlayer(fixA, player_Health) && !fixB->IsSensor()) {
-			damageOnImpact(fixB, fixA, player_Health);	//Check the stats of the other object
+		if (ObjectCollidesWithPlayer(fixA, player_Health, wallet) && !fixB->IsSensor()) {
+			damageOnImpact(fixB, fixA, player_Health, wallet);	//Check the stats of the other object
 		}
 
 		player_Health = nullptr;	//Lo reseteamos para evitar problemas
 
-		if (ObjectCollidesWithPlayer(fixB, player_Health) && !fixA->IsSensor()) {
-			damageOnImpact(fixA, fixB, player_Health);	//Check the stats of the other object
+		if (ObjectCollidesWithPlayer(fixB, player_Health, wallet) && !fixA->IsSensor()) {
+			damageOnImpact(fixA, fixB, player_Health, wallet);	//Check the stats of the other object
 		}
 	}
 
@@ -98,6 +109,16 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
 		if (PlayerCollidesWithRouterArea(contact, routerLogic, playerCollider, playerData)) {
 			routerLogic->detectPlayer(playerCollider, playerData->getPlayerNumber());
+		}
+	}
+
+	//Coin Collisions
+	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player || //Colisiones entre Triggers y otros objetos
+		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::NormalObject) {
+		if (CoinCollidesWithPlayer(contact, wallet, coin)) {
+			wallet->addCoins(coin->getVal());
+			if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player) bodiesToDestroy.push_back(contact->GetFixtureB()->GetBody());
+			else bodiesToDestroy.push_back(contact->GetFixtureA()->GetBody());
 		}
 	}
 }
@@ -138,7 +159,7 @@ void CollisionHandler::PostSolve(b2Contact* contact, const b2ContactImpulse* imp
 //to add a new collision behaviour, make a method that checks if it's the specific collision you want
 //you can distinguish bodies by their user data or make them collide with certain objects only with collision layers
 //if you need to use a component you have to do collider->setUserData(this) in the component's init first
-bool CollisionHandler::ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player)
+bool CollisionHandler::ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& playerHealth, Wallet*& playerWallet)
 {
 	//Obtenemos los datos guardados en el Collider
 	Entity* aux = static_cast<Entity*>(fixA->GetBody()->GetUserData());
@@ -146,10 +167,11 @@ bool CollisionHandler::ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player
 	if (aux != nullptr) {		//Cuidado de que no sea null
 
 	//Cogemos el health si es que lo tiene
-		player = aux->getComponent<Health>(ComponentType::Health);
+		playerHealth = aux->getComponent<Health>(ComponentType::Health);
+		playerWallet = aux->getComponent<Wallet>(ComponentType::Wallet);
 	}
 
-	if (player != nullptr) {	//Si lo tiene es que es un player
+	if (playerHealth != nullptr || playerWallet != nullptr) {	//Si lo tiene es que es un player
 		return true;
 	}
 	else return false;
@@ -173,6 +195,26 @@ bool CollisionHandler::PlayerCanPickWeapon(b2Contact* contact, Weapon*& pickable
 		player = static_cast<Hands*>(fixAentity->getComponent<Hands>(ComponentType::Hands));
 		return true;
 	}
+	return false;
+}
+
+bool CollisionHandler::CoinCollidesWithPlayer(b2Contact* contact, Wallet*& playerWallet, Coin*& coin)
+{
+	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+	if (fixAentity->hasComponent(ComponentType::Wallet) && fixBentity->hasComponent(ComponentType::Coin)) {
+		playerWallet = static_cast<Wallet*>(fixAentity->getComponent<Wallet>(ComponentType::Wallet));
+		coin = static_cast<Coin*>(fixBentity->getComponent<Coin>(ComponentType::Coin));
+		return true;
+	}
+
+	else if (fixAentity->hasComponent(ComponentType::Coin) && fixBentity->hasComponent(ComponentType::Wallet)) {
+		playerWallet = static_cast<Wallet*>(fixBentity->getComponent<Wallet>(ComponentType::Wallet));
+		coin = static_cast<Coin*>(fixAentity->getComponent<Coin>(ComponentType::Coin));
+		return true;
+	}
+
 	return false;
 }
 
@@ -223,4 +265,9 @@ void CollisionHandler::SolveInteractions() {
 		vecAttach[k]->deAttachFromObject();
 	}
 	vecAttach.clear();
+	for (int k = 0; k < bodiesToDestroy.size(); k++) {
+		bodiesToDestroy[k]->GetWorld()->DestroyBody(bodiesToDestroy[k]);
+
+	}
+	bodiesToDestroy.clear();
 }

@@ -5,13 +5,13 @@
 class Wallet : public Component
 {
 private:
-	int numCoins_ = 0;
+	int numCoins_ = 100;
 	Collider* collPlayer_ = nullptr;
 public:
 	Wallet() : Component(ComponentType::Wallet) {};
 	~Wallet() {};
 	virtual void init() override;
-	void dropCoins(int n);
-	void addCoins(int n) { numCoins_ += n; }
+	void dropCoins(int damage);
+	void addCoins(int n) { numCoins_ += n; cout << "HE RECOGIDO " << n << endl; }
 };
 

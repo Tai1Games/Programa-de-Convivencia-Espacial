@@ -10,6 +10,8 @@
 #include "PlayerData.h"
 #include "GameMode.h"
 #include "TileMap.h"
+#include "Wallet.h"
+#include "Coin.h"
 
 class RouterLogic;
 class CollisionHandler :
@@ -34,10 +36,11 @@ private:
 	vector<bodyData> vecBody; //Vector donde almacenamos los cuerpos muertos que crearemos al final del step.
 	vector<Weapon*> vecWeapon; //Vector donde almacenamos las weapons que soltaremos al final del step
 	vector<AttachesToObjects*> vecAttach; //Vector donde almacenamos los agarres que soltaremos al final del step
+	vector<b2Body*> bodiesToDestroy;
 	GameMode* gMode_;
 	TileMap* tilemap;
 
-	void damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth);
+	void damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet);
 public:
 
     CollisionHandler(GameMode* g, TileMap* tm): gMode_(g), tilemap(tm) {};
@@ -53,13 +56,15 @@ public:
 
 	void SolveInteractions();
 
-    bool ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player);
+    bool ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player, Wallet*& wallet);
 
 	bool PlayerCollidesWithRouterArea(b2Contact* contact, RouterLogic*& router, Collider*& collPlayer, PlayerData*& playerData);
 
 	bool AttachableObjectCollidesWithPlayer(b2Fixture* fixA, AttachesToObjects*& player);
 	
     bool PlayerCanPickWeapon(b2Contact* contact, Weapon* &pickableObj, Hands* &player);
+
+	bool CoinCollidesWithPlayer(b2Contact* contact, Wallet*& playerWallet, Coin*& coin);
 
 	vector<bodyData> getBodyData() { return vecBody; }
 

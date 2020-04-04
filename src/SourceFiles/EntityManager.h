@@ -17,6 +17,7 @@ public:
 	void update();
 	void render();
 	void handleInput();
+	void removeEntity(Entity* entityToRemove);
 	Entity* addEntity();
 
 

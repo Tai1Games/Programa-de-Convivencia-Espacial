@@ -6,7 +6,7 @@
 #include "box2d.h"
 #include "Hands.h"
 #include "PlayerData.h"
-#include "WeaponFactory.h"
+#include "ObjectFactory.h"
 #include "PlayState.h"
 #include "GameState.h"
 #include "Weapon.h"

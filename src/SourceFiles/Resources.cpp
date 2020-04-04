@@ -27,6 +27,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SalaDeEstar,"../../assets/game/textures/SalaDeEstar.png"},
 	{Negro ,"../../assets/game/textures/Negro.png"},
 	{Router,"../../assets/game/textures/Router.png" },
+	{Coin, "../../assets/game/textures/DogeCoin.png" },
 
 		{ TSet_Kenney1bit , "../../assets/game/tilemaps/modded_colored.png"},
 		{ TSet_Dungeon , "../../assets/game/tilemaps/dungeon_ts.png"}

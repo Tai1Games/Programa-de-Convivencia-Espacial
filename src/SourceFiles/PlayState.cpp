@@ -12,7 +12,7 @@
 #include "Weapon.h"
 #include "Hands.h"
 #include "PlayerController.h"
-#include "WeaponFactory.h"
+#include "ObjectFactory.h"
 #include "ImpulseViewer.h"
 #include "PlayerData.h"
 

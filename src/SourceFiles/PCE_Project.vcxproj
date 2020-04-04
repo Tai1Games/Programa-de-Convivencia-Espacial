@@ -177,6 +177,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="AttachesToObjects.h" />
     <ClInclude Include="CapitalismGameMode.h" />
     <ClInclude Include="checkML.h" />
+    <ClInclude Include="Coin.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionHandler.h" />
     <ClInclude Include="Component.h" />
@@ -219,12 +220,13 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Viewer.h" />
-    <ClInclude Include="WeaponFactory.h" />
+    <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="WiFightGameMode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AttachesToObjects.cpp" />
     <ClCompile Include="CapitalismGameMode.cpp" />
+    <ClCompile Include="Coin.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionHandler.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -262,7 +264,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="TileSet.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Viewer.cpp" />
-    <ClCompile Include="WeaponFactory.cpp" />
+    <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="WiFightGameMode.cpp" />
   </ItemGroup>
   <ItemGroup>

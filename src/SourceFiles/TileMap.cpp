@@ -151,19 +151,19 @@ void TileMap::executeMapFactory()
 			//calculo de posicion y tamaño para cajas de Tiled
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
 			pos = b2Vec2(p.x / CONST(double, "PIXELS_PER_METER") + (size.x / 2), (CONST(int, "WINDOW_HEIGHT") - p.y) / CONST(double, "PIXELS_PER_METER") - (size.y / 2));
-			WeaponFactory::makeWall(entityManager_, physicsWorld_, pos, size);
+			ObjectFactory::makeWall(entityManager_, physicsWorld_, pos, size);
 		}
 		else if (name == "Ball") {
-			WeaponFactory::makeBall(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
+			ObjectFactory::makeBall(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
 		}
 		else if (name == "Slipper") {
-			WeaponFactory::makeSlipper(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
+			ObjectFactory::makeSlipper(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
 		}
 		else if (name == "Stapler") {
-			WeaponFactory::makeStapler(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
+			ObjectFactory::makeStapler(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
 		}
 		else if (name == "SpaceJunk") {
-			WeaponFactory::makeSpaceJunk(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
+			ObjectFactory::makeSpaceJunk(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
 		}
 	}
 }

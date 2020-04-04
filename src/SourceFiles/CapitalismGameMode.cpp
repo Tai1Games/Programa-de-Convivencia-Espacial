@@ -4,7 +4,8 @@ void CapitalismGameMode::init(PlayState* game)
 {
 	GameMode::init(game);
 	for (int k = 0; k < nPlayers_; k++) {
-		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), k,
-			Resources::Tinky, tilemap_->getPlayerSpawnPoint(k).x, tilemap_->getPlayerSpawnPoint(k).y, 3));
+		players_.push_back(PlayerFactory::createPlayerWithWallet(game->getEntityManager(), game->getPhysicsWorld(), k,
+			Resources::Tinky, tilemap_->getPlayerSpawnPoint(k).x, tilemap_->getPlayerSpawnPoint(k).y));
 	}
+	ObjectFactory::makeCoin(game->getEntityManager(), game->getPhysicsWorld(), b2Vec2(10, 10), 5);
 }

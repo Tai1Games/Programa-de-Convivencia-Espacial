@@ -4,7 +4,7 @@
 #include "Component.h"
 #include "vector"
 #include "EntityManager.h"
-#include "WeaponFactory.h"
+#include "ObjectFactory.h"
 
 class TileMap : public Component
 {
