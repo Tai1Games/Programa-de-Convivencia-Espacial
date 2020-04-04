@@ -35,15 +35,13 @@ void GameStateMachine::changeToState(int state) {
 			case States::menu:
 				break;
 			case States::play:
-				if (states_[state] != nullptr)	delete states_[state];
-				states_[state] = new PlayState(new ControllerGameMode());	// el new ControllerGameMode deja basura!!
+				states_[state] = new PlayState(new ControllerGameMode(), "SalaDeEstar"); //ejemplo "SalaDeEstar"
 				break;
 			case States::pause:
 				if (states_[state] != nullptr)	delete states_[state];
 				states_[state] = new PauseState();
 				break;
 			}
-
 			//inicializar la nueva escena
 			states_[state]->init();
 		}

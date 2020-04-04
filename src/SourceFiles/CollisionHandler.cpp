@@ -4,7 +4,7 @@
 //This method calculates the damage recieved by the impact of an object (or another player) with the player
 
 void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth) {
-	//Measure de impact of an object with the player 
+	//Measure de impact of an object with the player
 	b2Vec2 force = fix->GetBody()->GetMass() * fix->GetBody()->GetLinearVelocity();
 
 	int impact = force.Length();
@@ -15,7 +15,7 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health*
 	if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) {playerHealth->subtractLife(2);}
 
 	if (impact >= CONST(double, "HIGH_DAMAGE")) {playerHealth->subtractLife(3);}
-    
+
 	if (playerHealth->getHealth() <= 0)
 	{
 		//reset player
@@ -34,7 +34,7 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health*
 		PlayerData* p = static_cast<PlayerData*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<PlayerData>(ComponentType::PlayerData));
 		moveData m;
 		m.body = player->GetBody();
-		m.pos = b2Vec2(1 + p->getPlayerNumber() * 6, 0); //punto de respawn provisional
+		m.pos = b2Vec2(tilemap_->getPlayerSpawnPoint(p->getPlayerNumber()).x, tilemap_->getPlayerSpawnPoint(p->getPlayerNumber()).y); //punto de respawn provisional
 		if (stocks && s->onPlayerDead(p->getPlayerNumber())|| !stocks) {	//si le quedan vidas
 			playerHealth->resetHealth();
 		}
@@ -75,7 +75,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		vecWeld.push_back(newWeld); //Metemos el weldData en el vector. La raz�n por la que no hacemos el joint ya es porque no se puede crear un joint en medio de un step.
 	}
 	else if (fixB->GetFilterData().categoryBits) {
-		//check collision then do whatever, in this case twice because it might be two players colliding 
+		//check collision then do whatever, in this case twice because it might be two players colliding
 		if (ObjectCollidesWithPlayer(fixA, player_Health) && !fixB->IsSensor()) {
 			damageOnImpact(fixB, fixA, player_Health);	//Check the stats of the other object
 		}
@@ -181,7 +181,7 @@ bool CollisionHandler::AttachableObjectCollidesWithPlayer(b2Fixture* fixA, Attac
 }
 
 //Checks if one fixture belongs to a Player (PlayerData and Collider component) and if the other fixture belongs to a Router (RouterLogic component)
-bool CollisionHandler::PlayerCollidesWithRouterArea(b2Contact* contact, RouterLogic*& router, Collider*& collPlayer, PlayerData*& playerData) { 
+bool CollisionHandler::PlayerCollidesWithRouterArea(b2Contact* contact, RouterLogic*& router, Collider*& collPlayer, PlayerData*& playerData) {
 	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
 	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
@@ -200,7 +200,7 @@ bool CollisionHandler::PlayerCollidesWithRouterArea(b2Contact* contact, RouterLo
 
 		return true;
 	}
-	
+
 	return false;
 }
 

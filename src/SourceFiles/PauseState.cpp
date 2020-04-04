@@ -45,7 +45,6 @@ void PauseState::handleInput()
 		break;
 	case Buttons::Sound:
 		lStickXValue = ih->getStickX(ownerPlayerID_, InputHandler::GAMEPADSTICK::LEFTSTICK);
-		cout << lStickXValue << endl;
 		if (currentMusicVolume_> 0 && !holdingX_ && lStickXValue < -0.999) {
 			currentMusicVolume_ -= 10;
 			updateMusicVolume();
