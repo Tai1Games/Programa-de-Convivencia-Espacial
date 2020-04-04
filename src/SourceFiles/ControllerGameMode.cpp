@@ -3,8 +3,7 @@
 
 ControllerGameMode::~ControllerGameMode()
 {
-	for (auto ePB : emptyProgressBars_) delete ePB;
-	for (auto pB : progressBars_) delete pB;
+
 }
 
 void ControllerGameMode::init(PlayState* game)  {
