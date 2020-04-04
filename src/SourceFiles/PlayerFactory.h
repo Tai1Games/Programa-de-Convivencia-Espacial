@@ -10,6 +10,7 @@
 #include "AttachesToObjects.h"
 #include "PlayerController.h"
 #include "ImpulseViewer.h"
+#include "Wallet.h"
 #include "Resource.h"
 #include "EntityManager.h"
 #include "b2_world.h"
@@ -22,4 +23,5 @@ public:
 	~PlayerFactory() {}
 
 	static Entity* createPlayerWithHealth(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY, int healthPoints);
+	static Entity* createPlayerWithWallet(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY);
 };

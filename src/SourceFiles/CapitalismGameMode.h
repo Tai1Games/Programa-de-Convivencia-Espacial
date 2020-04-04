@@ -1,5 +1,6 @@
 #pragma once
 #include "GameMode.h"
+#include "PlayState.h"
 class CapitalismGameMode : public GameMode
 {
 private:

@@ -21,3 +21,9 @@ Entity* PlayerFactory::createPlayerWithHealth(EntityManager* eMan, b2World* phys
 	p->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
 	return p;
 }
+
+Entity* PlayerFactory::createPlayerWithWallet(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY) {
+	Entity* p = createBasePlayer(eMan, physicsWorld, playerID, playerTextureID, posX, posY);
+	p->addComponent<Wallet>();
+	return p;
+}

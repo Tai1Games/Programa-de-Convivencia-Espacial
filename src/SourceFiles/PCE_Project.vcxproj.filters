@@ -177,11 +177,11 @@
     <ClInclude Include="CapitalismGameMode.h">
       <Filter>Header Files\GameModes</Filter>
     </ClInclude>
-    <ClInclude Include="Wallet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerFactory.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Wallet.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -299,14 +299,14 @@
     <ClCompile Include="ControllerGameMode.cpp">
       <Filter>Source Files\Gamemodes</Filter>
     </ClCompile>
-    <ClCompile Include="CapitalismGameMode.cpp">
+    <ClCompile Include="PlayerFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Wallet.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerFactory.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="CapitalismGameMode.cpp">
+      <Filter>Source Files\GameModes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
