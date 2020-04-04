@@ -1,45 +1,57 @@
 #pragma once
 #include "Component.h"
 #include "Vector2D.h"
+#include <queue>
 #include "checkML.h"
 
 class ParticleEmitter :
 	public Component
 {
 protected:
-	ComponentType::CmpId id_;
-
 	Vector2D position_;
 	Vector2D direction_;
+
+	bool emitting_ = false;
+
+	int textureId_;
+	Texture* texture_ = nullptr;
 
 	//Velocidad con las que salen las particulas
 	float speed_;
 
 	//Aleatoridad de la velocidad de las particulas
-	float speedVariation_ = 0;
+	float speedVariation_;
 
 	//Maximo angulo de aleatoridad segun el vector direccion
 	//Valores entre [0,180]
-	float emissionConeAngle_ = 10.0;
+	float emissionConeAngle_;
+
+	//Tamaño de la particula en cuadrado
+	Uint16 size_;
+
+	//Tiempo que pasa viva la particula en milisegundos
+	//default 1000 milisegundos
+	Uint16 particleLifetime_;
 
 	//Tiempo que pasa emitiendo en milisegundos
 	//valor 0 para infinito
 	//default 1000 milisegundos
-	Uint16 lifeTime_ = 1000;
+	Uint16 emittingTime_;
 	Uint16 timeEmitted_ = 0;
-	Uint8 msPerFrame;
+	Uint8 msPerFrame_ = 0;
+	Uint8 maxParticles_;
 
-	int frame_ = 0;
+	struct Particle {
+		Vector2D position;
+		Vector2D direction;
+		Uint16 lifeTime;
+		float speed;
+	};
 
-	bool emitting_ = false;
-
-	//Tamaño de la particula en cuadrado
-	Uint16 size_ = 100;
-
-	int textureId_;
-	Texture* texture_;
+	std::list<Particle> particles_;
+	std::queue<list<Particle>::iterator> particlesToDelete_;
 public:
-	ParticleEmitter(Vector2D position, Vector2D direction, int textureId, float speed, Uint16 size, Uint16 lifeTime, float speedVariation, float emissionConeAngle);
+	ParticleEmitter(Vector2D position, Vector2D direction, int textureId, float speed, Uint16 particleLifetime=1000, Uint16 size = 20, Uint16 emittingTime = 1000, float speedVariation = 0, float emissionConeAngle = 10.0);
 	virtual ~ParticleEmitter() { Component::~Component(); };
 
 	virtual void init() override;
@@ -50,6 +62,7 @@ public:
 	bool PlayStop() { timeEmitted_ = 0; return emitting_ = !emitting_; };
 
 	void setSize(Uint16 size) { size_ = size; };
-	void setLifeTime(Uint16 time) { lifeTime_ = time; };
+	void setLifeTime(Uint16 time) { emittingTime_ = time; };
+	void setMaxParticles(Uint8 max) { maxParticles_ = max; };
 };
 
