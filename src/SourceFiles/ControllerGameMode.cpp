@@ -9,9 +9,7 @@ ControllerGameMode::~ControllerGameMode()
 
 void ControllerGameMode::init(PlayState* game)  {
 	GameMode::init(game);
-	//Instancia necesaria para poder coger el puntero al mando (si usáramos una función void no haría falta)
-	WeaponFactory wF;
-	controller_ = wF.makeController(state_->getEntityManager(), state_->getPhysicsWorld(), b2Vec2(tilemap_->getObjSpecialSpawnPos().x, tilemap_->getObjSpecialSpawnPos().y), b2Vec2(0.5, 0.5));
+	controller_ = WeaponFactory::makeController(state_->getEntityManager(), state_->getPhysicsWorld(), b2Vec2(tilemap_->getObjSpecialSpawnPos().x, tilemap_->getObjSpecialSpawnPos().y), b2Vec2(0.5, 0.5));
 	for (Entity* player : players_) controllerTimes_.push_back(0);
 
 	GameMode::initProgressBars();
@@ -32,7 +30,35 @@ void ControllerGameMode::update() {
 
 void ControllerGameMode::render() {
 	GameMode::renderProgressBars(controllerTimes_, CONST(double, "TIME_TO_WIN"));
-
+	//UI provisional, acabar con esto rï¿½pido
+	if (players_.size() > 0) {
+		Texture score(SDL_Game::instance()->getRenderer(),
+			to_string(controllerTimes_[0]).substr(0, 4 + log10(controllerTimes_[0])),
+			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera),
+			{ COLOR(0xffffffff) });
+		score.render(10, 75);
+	}
+	if (players_.size() > 1) {
+		Texture score(SDL_Game::instance()->getRenderer(),
+			to_string(controllerTimes_[1]).substr(0, 4 + log10(controllerTimes_[1])),
+			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera),
+			{ COLOR(0xffffffff) });
+		score.render(CONST(int, "WINDOW_WIDTH") - score.getWidth(), 75);
+	}
+	if (players_.size() > 2) {
+		Texture score(SDL_Game::instance()->getRenderer(),
+			to_string(controllerTimes_[2]).substr(0, 4 + log10(controllerTimes_[2])),
+			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera),
+			{ COLOR(0xffffffff) });
+		score.render(10, CONST(int, "WINDOW_HEIGHT") - score.getHeight() - 75);
+	}
+	if (players_.size() > 3) {
+		Texture score(SDL_Game::instance()->getRenderer(),
+			to_string(controllerTimes_[3]).substr(0, 4 + log10(controllerTimes_[3])),
+			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera),
+			{ COLOR(0xffffffff) });
+		score.render(CONST(int, "WINDOW_WIDTH") - score.getWidth(), CONST(int, "WINDOW_HEIGHT") - score.getHeight() - 75);
+	}
 	if (roundFinished_) {
 		string winMsg = "Gana el jugador " + to_string(winner_->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber()+1);
 		Texture ganador(SDL_Game::instance()->getRenderer(), winMsg,
