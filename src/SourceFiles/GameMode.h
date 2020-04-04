@@ -2,6 +2,7 @@
 #include <vector>
 #include "box2d.h"
 #include "TileMap.h"
+#include "checkML.h"
 
 class Entity;
 class PlayState;

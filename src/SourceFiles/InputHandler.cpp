@@ -12,11 +12,11 @@ InputHandler::InputHandler() {
 }
 
 InputHandler::~InputHandler() {
-	for (auto e : m_joystickValues) {
+	for (std::pair<Vector2D*, Vector2D*> e : m_joystickValues) {
 		delete e.first;
 		delete e.second;
 	}
-	for (auto e : m_triggerValues) {
+	for (std::pair<double*, double*> e : m_triggerValues) {
 		delete e.first;
 		delete e.second;
 	}

@@ -3,6 +3,7 @@
 #include "box2d.h"
 #include "SDL_rect.h"
 #include "Constants.h"
+#include "checkML.h"
 
 
 class Collider : public Component
@@ -42,6 +43,7 @@ public:
 
 	~Collider() {
 		world_->DestroyBody(body_); world_ = nullptr;
+		// el body se destruye automáticamente al destruir el world
 	}
 
 	//getters
