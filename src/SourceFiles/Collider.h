@@ -42,7 +42,7 @@ public:
 		float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor);
 
 	~Collider() {
-		world_->DestroyBody(body_); world_ = nullptr;
+		//world_->DestroyBody(body_); world_ = nullptr;
 		// el body se destruye automáticamente al destruir el world
 	}
 

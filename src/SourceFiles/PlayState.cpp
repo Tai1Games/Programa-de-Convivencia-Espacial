@@ -21,8 +21,8 @@ PlayState::PlayState(GameMode* gMode, string tmap):GameState(),
 
 
 PlayState::~PlayState() {
-	for (Entity* i : deadBodies) { delete i; }
-	for (Collider* i : collDeadBodies) { delete i; }
+	//for (Entity* i : deadBodies) { delete i; }
+	//for (Collider* i : collDeadBodies) { delete i; }
 	delete gameMode_;
 	delete tilemap_;
 	delete collisionHandler_;
