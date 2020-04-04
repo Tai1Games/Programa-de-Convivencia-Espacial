@@ -35,13 +35,12 @@ void GameStateMachine::changeToState(int state) {
 			case States::menu:
 				break;
 			case States::play:
-				states_[state] = new PlayState(new ControllerGameMode());
+				states_[state] = new PlayState(new ControllerGameMode(), "SalaDeEstar"); //ejemplo "SalaDeEstar"
 				break;
 			case States::pause:
 				states_[state] = new PauseState();
 				break;
 			}
-
 			//inicializar la nueva escena
 			states_[state]->init();
 		}

@@ -29,7 +29,7 @@ void Collider::createRectangularFixture(float width, float height, float density
 	aux.density = density;
 	aux.filter = setCollisionLayer(c);
 	aux.friction = friction;
-	aux.restitution = fmod(restitution, 1.0);
+	aux.restitution = restitution;
 	aux.isSensor = sensor;
 	fixtureDefs_.push_back(aux);
 	fixtures_.push_back(body_->CreateFixture(&fixtureDefs_.back()));
@@ -47,7 +47,7 @@ void Collider::createCircularFixture(float radius, float density, float friction
 	aux.density = density;
 	aux.filter = setCollisionLayer(c);
 	aux.friction = friction;
-	aux.restitution = fmod(restitution, 1.0);
+	aux.restitution = restitution;
 	aux.isSensor = sensor;
 	fixtureDefs_.push_back(aux);
 	fixtures_.push_back(body_->CreateFixture(&fixtureDefs_.back()));
