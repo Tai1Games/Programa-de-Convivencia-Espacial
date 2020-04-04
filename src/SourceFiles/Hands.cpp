@@ -21,36 +21,48 @@ void Hands::init()
 
 void Hands::draw() const
 {
-	SDL_Rect colRec = collider_->getRectRender();
-	SDL_Rect destRect;
-	destRect.w = HAND_WIDTH ;
-	destRect.h = HAND_WIDTH ;
-	destRect.x = (colRec.x + colRec.w / 4) + dir_.x * HAND_BODY_OFFSET;
-	destRect.y = (colRec.y + colRec.h / 4) + dir_.y * HAND_BODY_OFFSET;
+	b2Vec2 stickDir = dir_;
+
+	double angle = std::atan2((double)stickDir.x, -(double)stickDir.y) * (180.0 / PI);
+	SDL_Rect playerRect = collider_->getRectRender();
+	int tam = 150;
+	SDL_Rect destRect{ playerRect.x + playerRect.w / 2 - tam / 2,playerRect.y + playerRect.h / 2 - tam / 2 , tam , tam };
 
 	SDL_Rect clip;
 	clip.w = tex_->getWidth() / WEAPON_NUMBER;
 	clip.h = tex_->getHeight();
 	clip.y = 0; clip.x = clip.w * currentWeapon_;
-	tex_->render(destRect, angle_, clip);
+
+	tex_->render(destRect, angle_, clip, Flipped_);
+
 }
 
 void Hands::update()
 {
 	b2Vec2 vI = ih_->getStickDir(getPlayerId(), InputHandler::GAMEPADSTICK::LEFTSTICK);
+
+	double anguloReal;
+
 	if (vI.Length() != 0) {
-		dir_.Set(vI.x,vI.y);
-		//Cálculo principal del ángulo dependiendo de si está Flipeado o no
-		if (!onFlipped_) angle_ = (std::asin(dir_.x) * -180.0 / PI) + 90;
-		else angle_ = (std::asin(dir_.x) * -180.0 / PI) - 90;
-		//Corrección de sentido de giro cuando se cálcula en la semicircunferencia inferior.
-		if (dir_.y < 0) angle_ = -angle_;
-		//Si apunta a la derecha desactiva el flip, si apunta a la izquierda lo activa
-		if (dir_.x < 0 && !onFlipped_) onFlipped_ = true;
-		else if (dir_.x > 0 && onFlipped_) onFlipped_ = false;
+		dir_.Set(vI.x, vI.y);
+
+		angle_ = (std::asin(dir_.x) * -180.0 / PI) - 90;
+
+		//el arcoseno solo nos devuelve angulos en el intervalo 0º - 180º, si apuntamos hacia abajo hay que coger el angulo inverso
+		if (dir_.y < 0) angle_ = (int)(360 - angle_) % 360;
+
+		float dispAngHand = (int)(180 - angle_) % 360;	 //el angulo estandarizado de la mano
+
+		float dispAngPlayer = (360 + (90 + (int)(collider_->getAngle() * 180 / PI) % 360)) % 360;	//el angulo estandarizado del jugador
+
+		if ((dispAngHand < (dispAngPlayer + 180)) && (dispAngHand > dispAngPlayer)) {	//si la mano esta a su espalda
+			Flipped_ = SDL_FLIP_NONE;
+		}
+		else Flipped_ = SDL_FLIP_VERTICAL;
+
 	}
-	pos_.Set(collider_->getPos().x + dir_.x * (HAND_BODY_OFFSET / PIXELS_PER_METER),
-		collider_->getPos().y - dir_.y * (HAND_BODY_OFFSET / PIXELS_PER_METER));
+	pos_.Set(collider_->getPos().x, collider_->getPos().y);
+
 }
 
 void Hands::setWeapon(WeaponID wId)

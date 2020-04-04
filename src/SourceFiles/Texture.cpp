@@ -89,12 +89,19 @@ void Texture::render(const SDL_Rect &dest) const {
 }
 
 
-void Texture::render(const SDL_Rect &dest, double angle,
-		const SDL_Rect &clip) const {
+void Texture::render(const SDL_Rect& dest, double angle, const SDL_Rect& clip, SDL_RendererFlip flip) const
+{
 	if (texture_) {
 		SDL_RenderCopyEx(renderer_, texture_, &clip, &dest, angle, nullptr,
-				SDL_FLIP_NONE);
+			 flip);
 	}
+}
+
+void Texture::render(const SDL_Rect &dest, double angle,
+		const SDL_Rect &clip) const {
+
+		render(dest, angle, clip, SDL_FLIP_NONE);
+
 }
 
 void Texture::render(const SDL_Rect &dest, double angle) const {

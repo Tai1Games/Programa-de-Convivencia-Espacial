@@ -16,7 +16,7 @@ private:
 	WeaponID currentWeapon_ = NoWeapon;
 	InputHandler* ih_ = nullptr;
 	float angle_ = 0;
-	bool onFlipped_ = false;
+	SDL_RendererFlip Flipped_ = SDL_FLIP_NONE; //si las manos estan o no flipeadas
 protected:
 public:
 	Hands(int textureId, WeaponID wId = NoWeapon);
