@@ -41,7 +41,7 @@ private:
 public:
 
     CollisionHandler(GameMode* g, TileMap* tm): gMode_(g), tilemap_(tm) {};
-    ~CollisionHandler() {};
+	~CollisionHandler() {};
 
     void BeginContact(b2Contact* contact);
 

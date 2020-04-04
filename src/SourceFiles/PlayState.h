@@ -31,6 +31,7 @@ private:
 	std::map<string, int> resourceMap_ = { //añadir aquí los mapas que se vayan haciendo
 		{"SalaDeEstar", Resources::SalaDeEstar}
 	};
+	TileMap* tilemap_;
 
 public:
 	PlayState(GameMode* gMode, string tmap);

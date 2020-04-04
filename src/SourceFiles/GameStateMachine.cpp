@@ -27,14 +27,15 @@ void GameStateMachine::setPauseOwner(int ownerID)
 
 void GameStateMachine::changeToState(int state) {
 	if (state != currentState_ && state < States::NUMBER_OF_STATES) {
-		currentState_ = state;
 		if (states_[state] == nullptr) {
 			//create state
 			//states_[state] = new... se necesita struct? o switch tal cual xd
 			switch (state) {
 			case States::menu:
+				deleteState(currentState_);
 				break;
 			case States::play:
+				deleteState(currentState_);
 				states_[state] = new PlayState(new ControllerGameMode(), "SalaDeEstar"); //ejemplo "SalaDeEstar"
 				break;
 			case States::pause:
@@ -45,6 +46,7 @@ void GameStateMachine::changeToState(int state) {
 			//inicializar la nueva escena
 			states_[state]->init();
 		}
+		currentState_ = state;
 	}
 }
 
