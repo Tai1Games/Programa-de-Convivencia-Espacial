@@ -3,18 +3,16 @@
 
 GameMode::~GameMode()
 {
-	for (auto ePB : emptyProgressBars_) delete ePB;
-	for (auto pB : progressBars_) delete pB;
 }
 
 void GameMode::initProgressBars()
 {
 
-	emptyProgressBars_.push_back(new Texture(*SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::EmptyProgressBar)));
-	progressBars_.push_back(new Texture(*SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::ProgressBar)));
+	emptyProgressBars_.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::EmptyProgressBar));
+	progressBars_.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::ProgressBar));
 
-	emptyProgressBars_.push_back(new Texture(*SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::EmptyProgressBar2)));
-	progressBars_.push_back(new Texture(*SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::ProgressBar2)));
+	emptyProgressBars_.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::EmptyProgressBar2));
+	progressBars_.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::ProgressBar2));
 
 	b2Vec2 healthPos = players_[0]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
 	healthViewerPos_.push_back(b2Vec2(healthPos.x - 12, healthPos.y + 60));
