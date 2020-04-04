@@ -4,6 +4,8 @@
 #include "Collider.h"
 #include "PlayerData.h"
 #include "Weapon.h"
+#include "Constants.h"
+
 class Hands : public Component
 {
 private:
@@ -13,10 +15,11 @@ private:
 	Collider* collider_ = nullptr;
 	int textureId_ = 0;
 	PlayerData* playerData_ = nullptr;
-	WeaponID currentWeapon_ = NoWeapon;
+	WeaponID currentWeaponID_ = NoWeapon;
 	InputHandler* ih_ = nullptr;
 	float angle_ = 0;
 	SDL_RendererFlip Flipped_ = SDL_FLIP_NONE; //si las manos estan o no flipeadas
+	Weapon* currentWeapon_ = nullptr;
 protected:
 public:
 	Hands(int textureId, WeaponID wId = NoWeapon);
@@ -24,10 +27,12 @@ public:
 	virtual void init() override;
 	virtual void draw() const;
 	virtual void update() override;
-	void setWeapon(WeaponID wId);
+	void setWeapon(WeaponID wId, Weapon* w);
 	int getPlayerId() { return playerData_->getPlayerNumber(); }
 	b2Vec2 getPos() { return pos_; }
 	b2Vec2 getDir() { return dir_; }
 	float getAngle() { return angle_; }
+	Weapon* getWeapon() { return currentWeapon_; }
+	WeaponID getWeaponID() { return currentWeaponID_; }
 };
 

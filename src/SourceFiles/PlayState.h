@@ -22,15 +22,25 @@ private:
 	//HUD
 
 	CollisionHandler* collisionHandler_;
+	vector<Entity*> deadBodies;
+	vector<Collider*> collDeadBodies;
 	vector<Entity*> players_;
 	GameMode* gameMode_ = nullptr;
+	string tilemapName_;
+	Texture* fondo_;
+	std::map<string, int> resourceMap_ = { //añadir aquí los mapas que se vayan haciendo
+		{"SalaDeEstar", Resources::SalaDeEstar}
+	};
 
 public:
-	PlayState(GameMode* gMode);
+	PlayState(GameMode* gMode, string tmap);
 	~PlayState();
 	virtual void init();
 	virtual void update();
+	void createDeadBodies();
 	virtual void render();
 	virtual void handleInput();
 	std::vector<Entity*> getPlayers() { return players_; };
+	EntityManager* getEntityManager() { return entityManager_; }
+	b2World* getPhysicsWorld() { return physicsWorld_; }
 };

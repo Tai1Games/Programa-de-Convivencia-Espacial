@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Managers &amp; Handlers">
       <UniqueIdentifier>{5349f6f7-5660-40cc-81d5-6621adb53fa1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameModes">
+      <UniqueIdentifier>{e1060035-7cfe-47e2-bf41-238cdd336448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameModes">
+      <UniqueIdentifier>{9268ba75-f622-4e29-98bb-e9bd3f806b13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -138,16 +144,7 @@
     <ClInclude Include="CollisionHandler.h">
       <Filter>Header Files\Managers &amp; Handlers</Filter>
     </ClInclude>
-    <ClInclude Include="ImpulseViewer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameMode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StocksGameMode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PauseState.h">
+    <ClInclude Include="WeaponFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerData.h">
@@ -155,6 +152,27 @@
     </ClInclude>
     <ClInclude Include="InputHandler.h">
       <Filter>Header Files\Managers &amp; Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="ImpulseViewer.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseState.h">
+      <Filter>Header Files\Gamestates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMode.h">
+      <Filter>Header Files\GameModes</Filter>
+    </ClInclude>
+    <ClInclude Include="WiFightGameMode.h">
+      <Filter>Header Files\GameModes</Filter>
+    </ClInclude>
+    <ClInclude Include="StocksGameMode.h">
+      <Filter>Header Files\GameModes</Filter>
+    </ClInclude>
+    <ClInclude Include="RouterLogic.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllerGameMode.h">
+      <Filter>Header Files\Gamemodes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -245,17 +263,32 @@
     <ClCompile Include="ImpulseViewer.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="GameMode.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="PlayerData.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="StocksGameMode.cpp">
+    <ClCompile Include="WeaponFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PauseState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMode.cpp">
+      <Filter>Source Files\GameModes</Filter>
+    </ClCompile>
+    <ClCompile Include="WiFightGameMode.cpp">
+      <Filter>Source Files\GameModes</Filter>
+    </ClCompile>
+    <ClCompile Include="StocksGameMode.cpp">
+      <Filter>Source Files\GameModes</Filter>
+    </ClCompile>
+    <ClCompile Include="Constants.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerData.cpp">
+    <ClCompile Include="RouterLogic.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllerGameMode.cpp">
+      <Filter>Source Files\Gamemodes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -270,5 +303,8 @@
     <Image Include="PCE_Project.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\config\constants.json" />
   </ItemGroup>
 </Project>

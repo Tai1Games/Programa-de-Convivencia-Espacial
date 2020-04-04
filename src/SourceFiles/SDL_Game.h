@@ -18,6 +18,8 @@
 using namespace std;
 //Interfaz entre el juego y el display
 class InputHandler;
+class Constants;
+#define CONST(type,key) SDL_Game::instance()->getConstants()->getConstant<type>(key)
 class SDL_Game
 {
 protected:
@@ -29,6 +31,7 @@ protected:
 	SDL_Window* window_ = nullptr;
 	SDL_Renderer* renderer_ = nullptr;
 	InputHandler* inputHandler_ =  nullptr;
+	Constants constants_;
 
 	static unique_ptr<SDL_Game> instance_;
 private:
@@ -69,4 +72,5 @@ public:
 	SDLFontsManager* getFontMngr() { return fonts_; }
 	GameStateMachine* getStateMachine() { return gamestateMachine_; }
 	SDL_Renderer* getRenderer() { return  renderer_; }
+	const Constants* getConstants() { return &constants_; }
 };

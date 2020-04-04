@@ -51,30 +51,37 @@ void InputHandler::update() {
 
 	}
 
+	//if (SDL_GameControllerGetButton(controllers_[0], SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_A) == 1) {
+	//	cout << "Voy a prenderme fuego ahora mismo" << endl;
+	//}
+
 }
 
-void InputHandler::initialiseJoysticks() {
+void InputHandler::initialiseGamepads() {
+	if (-1 == SDL_GameControllerAddMappingsFromFile("../config/gamecontrollerdb.txt"))
+		cout << "Error al cargar la base de datos" << endl;
 	if (SDL_WasInit(SDL_INIT_JOYSTICK) == 0) {
 		SDL_InitSubSystem(SDL_INIT_JOYSTICK);
 	}
 	numControllers_ = SDL_NumJoysticks();
 	if (SDL_NumJoysticks() > 0) {
 
-		json mapData;
-		ifstream inData = ifstream("../config/inputMapping.json");
-		if (inData.is_open()) {
-			inData >> mapData;
-			//cout << "loaded Mapping files" << endl;
-		}
+		//json mapData;
+		//ifstream inData = ifstream("../config/inputMapping.json");
+		//if (inData.is_open()) {
+		//	inData >> mapData;
+		//	//cout << "loaded Mapping files" << endl;
+		//}
 		for (int i = 0; i < SDL_NumJoysticks(); i++) {
 			SDL_GameController* gameCtrl = SDL_GameControllerOpen(i);
 			if (gameCtrl)
 			{
 				cout << "--------------" << endl;
 				cout << SDL_GameControllerName(gameCtrl) << endl;
-				if (mapJoystick(gameCtrl, mapData)) {
-					cout << "Controller " << i <<" mapped accordingly" << endl;
-				}
+				//if (mapJoystick(gameCtrl, mapData)) {
+				//	cout << "Controller " << i <<" mapped accordingly" << endl;
+				//}
+				cout << SDL_GameControllerMapping(gameCtrl)<<endl;
 				m_gameControllers.push_back(gameCtrl);
 				m_joystickValues.push_back(std::make_pair(new
 					Vector2D(0, 0), new Vector2D(0, 0))); // add our pair
@@ -202,7 +209,22 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 	const double normalize= 1.0/32768.0;
 	double val = event.jaxis.value;
 	// left stick move left or right
-	if (event.jaxis.axis == 0)
+
+	Uint8 i = 0;
+	bool bindFound = false;
+	int bindedAxis;
+	//hay que buscar el botón al que se corresponde
+	//porque SDL es una librería maravillosa y super intuitiva
+	while (!bindFound && i < SDL_GameControllerAxis::SDL_CONTROLLER_AXIS_MAX) {
+		SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForAxis(m_gameControllers[whichOne], (SDL_GameControllerAxis)i);
+		if (b.value.axis == event.jaxis.axis) {
+			bindedAxis = i;
+			bindFound = true;
+		}
+		i++;
+	}
+	//left stick right or left
+	if (bindedAxis == 0)
 	{
 		if (val > m_joystickDeadZone)
 		{
@@ -221,7 +243,7 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		
 	}
 	// left stick move up or down
-	if (event.jaxis.axis == 1)
+	if (bindedAxis == 1)
 	{
 		if (event.jaxis.value > m_joystickDeadZone)
 		{
@@ -241,7 +263,7 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		
 	}
 	//left trigger move up or down
-	if (event.jaxis.axis == 2) {
+	if (bindedAxis == 4) {
 		if (event.jaxis.value > m_triggerDeadZone)
 		{
 			*m_triggerValues[whichOne].first=abs(event.jaxis.value);
@@ -256,7 +278,7 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		}
 	}
 	// right stick move left or right
-	if (event.jaxis.axis == 3)
+	if (bindedAxis == 2)
 	{
 		if (event.jaxis.value > m_joystickDeadZone)
 		{
@@ -272,7 +294,7 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		}
 	}
 	// right stick move up or down
-	if (event.jaxis.axis == 4)
+	if (bindedAxis == 3)
 	{
 		if (event.jaxis.value > m_joystickDeadZone)
 		{
@@ -289,7 +311,7 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		
 	}
 	//right trigger move up or down
-	if (event.jaxis.axis == 5) {
+	if (bindedAxis == 5) {
 		if (event.jaxis.value > m_triggerDeadZone)
 		{
 			*m_triggerValues[whichOne].second = abs(event.jaxis.value);
@@ -305,7 +327,7 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 	}
 
 	float lastLx = m_joystickValues[whichOne].first->getX(), lastLy = m_joystickValues[whichOne].first->getY();
-	cout << lastLx << " " << lastLy << endl;
+
 	if ((lastLx == 0 && lastLy >= 0.99) || (lastLx == 0 && lastLy <= -0.99) ||
 		(lastLx >= 0.99 && lastLy == 0) || (lastLx <= -0.99 && lastLy == 0)) {
 		lastLStickValue_[whichOne].x = lastLx;
@@ -333,18 +355,40 @@ void InputHandler::onJoyButtonChange(SDL_Event& event,ButtonState just) {
 		isButtonUpEvent_ = true;
 	
 	int whichOne = event.jaxis.which;
-	//if (event.cbutton.button != event.jbutton.button)
-	//	cout << "Puto sdl" << endl;
-	//if(SDL_GameControllerGetButton(m_gameControllers[whichOne],SDL_CONTROLLER_BUTTON_B)) {
-	//	cout << "BBBBBBBBB" << endl;
+
+	Uint8 i = 0;
+	bool bindFound=false;
+	int bindedButton;
+	//hay que buscar el botón al que se corresponde
+	//porque SDL es una librería maravillosa y super intuitiva
+	while (!bindFound &&i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX){
+		SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(m_gameControllers[whichOne], (SDL_GameControllerButton)i);
+		if (b.value.button == event.cbutton.button) {
+			bindedButton = i;
+			bindFound = true;
+		}
+		i++;
+	}
+	m_buttonStates[whichOne][bindedButton] = just;
+
+
+	//hay que iterar por todo el mapeo de input porque event devuelve el botón hardware
+	//y eso no nos gusta
+	//for (int i = 0; i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX;i++) {
+	//	switch (m_buttonStates[whichOne][i]) {
+	//	//si un botón está suelto, comprobamos si se ha pulsado
+	//	case(Up):
+	//		if (1 == SDL_GameControllerGetButton(m_gameControllers[whichOne], (SDL_GameControllerButton)i))
+	//			m_buttonStates[whichOne][i] = JustDown;
+	//		break;
+	//	//para los botones pulsados, comprobamos si se sueltan
+	//	case(Down):
+	//		if (0 == SDL_GameControllerGetButton(m_gameControllers[whichOne], (SDL_GameControllerButton)i))
+	//			m_buttonStates[whichOne][i] = JustUp;
+	//		break;
+	//	}
 	//}
 
-	//m_buttonStates[whichOne][event.jbutton.button] = just;
-	//m_buttonStates[whichOne]
-	//	[SDL_GameControllerGetBindForButton
-	//	(m_gameControllers[whichOne],(SDL_GameControllerButton)event.jbutton.button).value] = just;
-	m_buttonStates[whichOne][(int)SDL_GameControllerGetBindForButton
-	(m_gameControllers[whichOne], (SDL_GameControllerButton)event.cbutton.button).value.button] = just;
 
 
 	/*if (just = JustDown)

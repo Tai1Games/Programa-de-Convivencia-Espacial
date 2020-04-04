@@ -48,7 +48,7 @@ void Hands::update()
 
 		angle_ = (std::asin(dir_.x) * -180.0 / PI) - 90;
 
-		//el arcoseno solo nos devuelve angulos en el intervalo 0º - 180º, si apuntamos hacia abajo hay que coger el angulo inverso
+		//el arcoseno solo nos devuelve angulos en el intervalo 0ï¿½ - 180ï¿½, si apuntamos hacia abajo hay que coger el angulo inverso
 		if (dir_.y < 0) angle_ = (int)(360 - angle_) % 360;
 
 		float dispAngHand = (int)(180 - angle_) % 360;	 //el angulo estandarizado de la mano
@@ -65,7 +65,8 @@ void Hands::update()
 
 }
 
-void Hands::setWeapon(WeaponID wId)
+void Hands::setWeapon(WeaponID wId, Weapon* w)
 {
-	currentWeapon_ = wId;
+	currentWeaponID_ = wId;
+	currentWeapon_ = w;
 }

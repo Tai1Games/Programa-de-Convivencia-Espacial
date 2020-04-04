@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include "box2d.h"
+#include "TileMap.h"
 
 class Entity;
 class PlayState;
@@ -11,13 +13,15 @@ protected:
 	GameMode() {};
 	virtual ~GameMode() {};
 	std::vector<Entity*> players_; //Player vector. We use Entity because we will need multiple components from them.
-	std::vector<Entity*> roundResults_; //Player vector ordered by the position they rank at the end of the round.
+	Entity* winner_ = nullptr; //Player who wins the round.
 	bool roundFinished_ = false;
+	TileMap* tilemap_;
 private:
 public:
 	virtual void init(PlayState* state);
 	virtual void render() {};
 	virtual void update() {};
-	virtual void onPlayerDead() {};
-	std::vector<Entity*> getRoundResults() { return roundResults_; }
+	virtual bool onPlayerDead(int id) { return true; };
+	Entity* getRoundResults() { return winner_; }
+	virtual void setTileMap(TileMap* tm) { tilemap_ = tm; };
 };
