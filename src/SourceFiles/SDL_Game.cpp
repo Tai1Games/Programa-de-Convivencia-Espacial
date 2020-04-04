@@ -108,7 +108,9 @@ void SDL_Game::start() {
 			Uint32 frameTime = getTime() - startTime;
 			if (frameTime < CONST(double, "MS_PER_FRAME"))
 				SDL_Delay(CONST(double, "MS_PER_FRAME") - frameTime);
-			if (SDL_Game::instance()->getInputHandler()->isExit()) exit_ = true;
+			if (SDL_Game::instance()->getInputHandler()->isExit() ||
+				gamestateMachine_->isCurrentStateExit())
+				exit_ = true;
 		}
 	}
 	else std::cout << "Que tal si pones un manso eh? genio\n\n\n";
