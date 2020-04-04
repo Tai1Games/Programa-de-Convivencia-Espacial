@@ -35,12 +35,12 @@ private:
 	vector<Weapon*> vecWeapon; //Vector donde almacenamos las weapons que soltaremos al final del step
 	vector<AttachesToObjects*> vecAttach; //Vector donde almacenamos los agarres que soltaremos al final del step
 	GameMode* gMode_;
-	TileMap* tilemap;
+	TileMap* tilemap_;
 
 	void damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth);
 public:
 
-    CollisionHandler(GameMode* g, TileMap* tm): gMode_(g), tilemap(tm) {};
+    CollisionHandler(GameMode* g, TileMap* tm): gMode_(g), tilemap_(tm) {};
     ~CollisionHandler() {};
 
     void BeginContact(b2Contact* contact);
