@@ -7,6 +7,7 @@
 #include <memory>
 #include "../json/single_include/nlohmann/json.hpp"
 #include <box2d.h>
+#include "checkML.h"
 
 using json = nlohmann::json;
 using namespace std;
@@ -34,6 +35,7 @@ private:
 	const Uint8* kbState_;
 	bool isKeyUpEvent_;
 	bool isKeyDownEvent_;
+
 	//---------------------------------------------
 	//mouse
 	bool isMouseMotionEvent_;
@@ -182,6 +184,8 @@ public:
 	inline bool isButtonUp(int ctrl, SDL_GameControllerButton b) {
 		return(m_buttonStates[ctrl][b] == Up);
 	}
+
+
 	//get the direction or a value from a stick/trigger given a controller
 	b2Vec2 getStickDir(int ctrl, GAMEPADSTICK stick);
 	b2Vec2 getLastStickDir(int ctrl, GAMEPADSTICK stick);
