@@ -16,7 +16,7 @@ void StocksGameMode::init(PlayState* game){
 	GameMode::init(game);
 	for (int i = 0; i < nPlayers_; i++) {
 		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), i,
-			Resources::Tinky, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, 3));
+			Resources::Body, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, 3));
 		playerStocks_.push_back(maxStocks_); //Initializes maxStocks vector with 3 on all positions.
 	}
 	for(int i = 0;i<players_.size();i++){

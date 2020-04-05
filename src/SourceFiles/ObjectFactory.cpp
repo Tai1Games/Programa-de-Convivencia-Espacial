@@ -1,5 +1,15 @@
 #include "ObjectFactory.h"
 
+#include "Transform.h"
+#include "Texture.h"
+#include "Viewer.h"
+#include "Health.h"
+#include "HealthViewer.h"
+#include "InputHandler.h"
+#include "Weapon.h"
+#include "Hands.h"
+#include "Coin.h"
+
 void ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 	Entity* e = entityManager->addEntity();
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "FLIPFLOP_DENSITY"),

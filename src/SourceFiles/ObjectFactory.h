@@ -1,22 +1,20 @@
 #pragma once
-
 #include "Entity.h"
 #include "checkML.h"
-#include "Transform.h"
-#include "Texture.h"
-#include "Viewer.h"
-#include "Health.h"
-#include "HealthViewer.h"
-#include "InputHandler.h"
-#include "Weapon.h"
-#include "Hands.h"
-#include "Coin.h"
+
+class Transform;
+class Texture;
+class Viewer;
+class Health;
+class HealthViewer;
+class InputHandler;
+class Weapon;
+class Hands;
+class Coin;
 
 class ObjectFactory
 {
-private:
 public:
-
 	ObjectFactory() {}
 
 	~ObjectFactory(){}

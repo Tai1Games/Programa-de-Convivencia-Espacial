@@ -13,7 +13,6 @@ SDL_Game::SDL_Game() {
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 
 	initializeResources();
-
 	//Prueba multimedia
 	textures_->getTexture(Resources::Tinky)->render({ constants_.getConstant<int>("WINDOW_WIDTH") / 2 - 70,constants_.getConstant<int>("WINDOW_HEIGHT") / 2 - 135,140,200 });
 
@@ -46,8 +45,6 @@ SDL_Game::~SDL_Game() {
 }
 
 void SDL_Game::initializeResources() {
-	rng_ = new SRandBasedGenerator();
-	rng_->init();
 	srand(time(NULL));
 
 	textures_ = new SDLTexturesManager();
