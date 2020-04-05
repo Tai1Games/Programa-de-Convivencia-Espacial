@@ -60,6 +60,7 @@ public:
 		return instance_.get();
 	}
 
+	inline void exitGame() { exit_ = true; }
 
 	inline unsigned int getTime() {
 		return SDL_GetTicks();
