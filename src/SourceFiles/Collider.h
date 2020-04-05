@@ -3,7 +3,6 @@
 #include "box2d.h"
 #include "SDL_rect.h"
 #include "Constants.h"
-#include "Vector2D.h"
 
 
 class Collider : public Component
