@@ -58,6 +58,7 @@ void Hands::update()
 		}
 		else Flipped_ = SDL_FLIP_VERTICAL;
 
+		pos_.Set(collider_->getPos().x, collider_->getPos().y);
 }
 
 void Hands::setWeapon(WeaponID wId, Weapon* w)
