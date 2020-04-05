@@ -51,9 +51,9 @@ void PlayState::init() {
 	for (int i = 0; i < 4; i++) {
 		players_.push_back(entityManager_->addEntity());
 		colliders.push_back(players_[i]->addComponent<Collider>(physicsWorld_, b2_dynamicBody, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y,
-			1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::Player, false));
+			1, 1.55, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::Player, false));
 		players_[i]->addComponent<PlayerData>(i);
-		players_[i]->addComponent<Viewer>(Resources::Tinky);
+		players_[i]->addComponent<Viewer>(Resources::Body);
 		players_[i]->addComponent<Health>(3);
 		players_[i]->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
 		if (i == 0) { //si solo hay un mando
