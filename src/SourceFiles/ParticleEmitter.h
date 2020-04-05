@@ -20,11 +20,12 @@ protected:
 	float speed_;
 
 	//Aleatoridad de la velocidad de las particulas
-	float speedVariation_;
+	int speedVariation_;
 
 	//Maximo angulo de aleatoridad segun el vector direccion
 	//Valores entre [0,180]
-	float emissionConeAngle_;
+	int emissionConeAngle_;
+	double PI;
 
 	//Tamaño de la particula en cuadrado
 	Uint16 size_;
@@ -51,7 +52,7 @@ protected:
 	std::list<Particle> particles_;
 	std::queue<list<Particle>::iterator> particlesToDelete_;
 public:
-	ParticleEmitter(Vector2D position, Vector2D direction, int textureId, float speed, Uint16 particleLifetime=1000, Uint16 size = 20, Uint16 emittingTime = 1000, float speedVariation = 0, float emissionConeAngle = 10.0);
+	ParticleEmitter(Vector2D position, Vector2D direction, int textureId, float speed, Uint16 particleLifetime=1000, Uint16 size = 20, Uint16 emittingTime = 1000, int speedVariation = 0, int emissionConeAngle = 10.0);
 	virtual ~ParticleEmitter() { Component::~Component(); };
 
 	virtual void init() override;

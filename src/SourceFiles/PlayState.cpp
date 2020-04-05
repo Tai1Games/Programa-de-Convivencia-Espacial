@@ -63,7 +63,7 @@ void PlayState::init() {
 	}
 
 	//Particle test
-	ParticleEmitter* test = players_[0]->addComponent<ParticleEmitter>(Vector2D(1280 / 2,720 / 2),Vector2D(0,-1),Resources::Grapadora,3.5);
+	ParticleEmitter* test = players_[0]->addComponent<ParticleEmitter>(Vector2D(1280 / 2,720 / 2),Vector2D(.5,.5),Resources::Grapadora,3.5,1000, 25, 0,2,15);
 	test->PlayStop();
 
 	//FONDO
