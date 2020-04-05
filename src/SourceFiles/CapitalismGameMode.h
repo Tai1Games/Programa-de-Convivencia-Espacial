@@ -7,14 +7,15 @@ class CapitalismGameMode : public GameMode
 {
 private:
 	CoinsPool coinPool_;
+	double timeSinceStart = 0;
 public:
 	CapitalismGameMode(int nPlayers) : GameMode(nPlayers){};
 	~CapitalismGameMode() {};
 	virtual void init(PlayState* game);
 	virtual void render() {};
-	virtual void update() {};
+	virtual void update();
 	virtual bool onPlayerDead(int id) { return true; }; //Returns false when players runs out of stocks.
 
-	void createCoin(b2Vec2 spawnPos, int val = 1);
+	void createCoin(b2Vec2 spawnPos, int player = -1, int val = 1);
 };
 

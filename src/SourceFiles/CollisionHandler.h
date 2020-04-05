@@ -36,12 +36,12 @@ private:
 	vector<bodyData> vecBody; //Vector donde almacenamos los cuerpos muertos que crearemos al final del step.
 	vector<Weapon*> vecWeapon; //Vector donde almacenamos las weapons que soltaremos al final del step
 	vector<AttachesToObjects*> vecAttach; //Vector donde almacenamos los agarres que soltaremos al final del step.
-	vector<pair<Wallet*, int>> vecWallets; //Vector donde almacenamos los impactos entre objetos y wallets.
+	vector<tuple<Wallet*, PlayerData*, int>> vecCoinsToDrop; //Vector donde almacenamos los impactos entre objetos y wallets.
 	vector<Coin*> vecCoin; //Vector donde almacenamos los impactos entre jugador y las monedas a recoger
 	GameMode* gMode_;
 	TileMap* tilemap;
 
-	void damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet);
+	void damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet, PlayerData* playerData);
 public:
 
     CollisionHandler(GameMode* g, TileMap* tm): gMode_(g), tilemap(tm) {};
@@ -57,7 +57,7 @@ public:
 
 	void SolveInteractions();
 
-    bool ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player, Wallet*& wallet);
+    bool ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player, Wallet*& wallet, PlayerData* &playerData);
 
 	bool PlayerCollidesWithRouterArea(b2Contact* contact, RouterLogic*& router, Collider*& collPlayer, PlayerData*& playerData);
 
@@ -65,7 +65,7 @@ public:
 	
     bool PlayerCanPickWeapon(b2Contact* contact, Weapon* &pickableObj, Hands* &player);
 
-	bool CoinCollidesWithPlayer(b2Contact* contact, Wallet*& playerWallet, Coin*& coin);
+	bool CoinCollidesWithPlayer(b2Contact* contact, Wallet*& playerWallet, Coin*& coin, PlayerData*& playerData);
 
 	vector<bodyData> getBodyData() { return vecBody; }
 

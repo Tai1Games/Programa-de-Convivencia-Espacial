@@ -10,10 +10,10 @@ void CoinsPool::init(EntityManager* eMan, b2World* physicsWorld) {
 	}
 }
 
-void CoinsPool::addCoin(b2Vec2 pos, int val) {
+void CoinsPool::addCoin(b2Vec2 pos, int player, int val) {
 	Entity* e = coinsPool_.getObj();
 	if (e != nullptr) {
 		Coin* coin = e->getComponent<Coin>(ComponentType::Coin);
-		coin->setActive(true, pos, val);
+		coin->setActive(true, player, pos, val);
 	}
 }

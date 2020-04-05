@@ -36,7 +36,7 @@ void GameStateMachine::changeToState(int state) {
 			case States::menu:
 				break;
 			case States::play:
-				states_[state] = new PlayState(new CapitalismGameMode(1));
+				states_[state] = new PlayState(new StocksGameMode(2));
 				break;
 			case States::pause:
 				states_[state] = new PauseState();

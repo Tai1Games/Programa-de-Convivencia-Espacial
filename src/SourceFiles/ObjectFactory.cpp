@@ -52,7 +52,7 @@ void ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* physics
 void ObjectFactory::makeCoin(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, int value)
 {
 	entityManager->addExistingEntity(e);
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "COIN_BASE_SIZE"), 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::PickableObject, false);
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "COIN_BASE_SIZE"), CONST(double, "COIN_DENSITY"), CONST(double, "COIN_FRICTION"), CONST(double, "COIN_RESTITUTION"), CONST(double, "COIN_LINEAR_DRAG"), CONST(double, "COIN_ANGULAR_DRAG"), Collider::CollisionLayer::PickableObject, false);
 	e->addComponent<Viewer>(Resources::Coin);
 	e->addComponent<Coin>();
 	aux->setUserData(e);

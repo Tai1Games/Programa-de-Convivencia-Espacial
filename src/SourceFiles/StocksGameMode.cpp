@@ -62,8 +62,11 @@ bool StocksGameMode::onPlayerDead(int id) { //Returns false when player runs out
 		if (playerStocks_[id] <= 0) { 
 			roundResults_.push_back(players_[id]);
 			if (roundResults_.size() == playerStocks_.size() - 1) {
+				int k = 0;
+				while (playerStocks_[k] == 0) { k++; }
+				roundResults_.push_back(players_[k]);
+				winner_ = players_[k];
 				roundFinished_ = true; //Round finishes when only 1 player remains
-				winner_ = roundResults_.back();
 			}
 			return false;
 		}

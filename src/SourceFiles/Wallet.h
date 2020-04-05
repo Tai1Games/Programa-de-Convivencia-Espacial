@@ -10,14 +10,15 @@ class CapitalismGameMode;
 class Wallet : public Component
 {
 private:
-	int numCoins_ = 10;
+	int numCoins_ = 10; //Tendría que empezar a 0 pero es para que lo probeis
 	Collider* collPlayer_ = nullptr;
 	CapitalismGameMode* gameMode_ = nullptr;
 public:
 	Wallet(CapitalismGameMode* gamemode) : Component(ComponentType::Wallet) { gameMode_ = gamemode; };
 	~Wallet() {};
 	virtual void init() override;
-	void dropCoins(int damage);
+	void dropCoins(int damage, int player);
 	void addCoins(int n) { numCoins_ += n; cout << "HE RECOGIDO " << n << endl; }
+	int getCoins() { return numCoins_; }
 };
 

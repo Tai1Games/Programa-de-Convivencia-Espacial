@@ -13,6 +13,23 @@ void CapitalismGameMode::init(PlayState* game)
 	createCoin(b2Vec2(1, 2));
 }
 
-void CapitalismGameMode::createCoin(b2Vec2 spawnPos, int val) {
-	coinPool_.addCoin(spawnPos, val);
+void CapitalismGameMode::update() {
+	timeSinceStart += CONST(double, "MS_PER_FRAME");
+	if (timeSinceStart >= CONST(double, "TIME_TO_END") && !roundFinished_) {
+		int maxPoints = 0;
+		for (int k = 0; k < players_.size(); k++) {
+			Wallet* playerWallet = players_[k]->getComponent<Wallet>(ComponentType::Wallet);
+			if (playerWallet->getCoins() > maxPoints) {
+				winner_ = players_[k];
+				maxPoints = playerWallet->getCoins();
+			}
+			cout << "PLAYER: " << players_[k]->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber() << " HAS " << playerWallet->getCoins() << endl;
+		}
+		roundFinished_ = true;
+		cout << "PLAYER: " << winner_->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber() << "WON." << endl;
+	}
+}
+
+void CapitalismGameMode::createCoin(b2Vec2 spawnPos, int player,int val) {
+	coinPool_.addCoin(spawnPos, player, val);
 }
