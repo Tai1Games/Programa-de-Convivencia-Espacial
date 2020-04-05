@@ -1,12 +1,14 @@
 #include "ParticleEmitter.h"
+#include "Entity.h"
+#include "Collider.h"
 
-ParticleEmitter::ParticleEmitter(Vector2D position, Vector2D direction, int textureId, float speed, Uint16 particleLifetime, Uint16 size, Uint16 emittingTime, int speedVariation, int emissionConeAngle) :
-	Component(ComponentType::ParticleEmitter), position_(position), direction_(direction), textureId_(textureId), speed_(speed),
+ParticleEmitter::ParticleEmitter(Vector2D direction, int textureId, float speed, Uint16 particleLifetime, Uint16 size, Uint16 emittingTime, int speedVariation, int emissionConeAngle) :
+	Component(ComponentType::ParticleEmitter), direction_(direction), textureId_(textureId), speed_(speed),
 	particleLifetime_(particleLifetime), size_(size), emittingTime_(emittingTime), speedVariation_(speedVariation), emissionConeAngle_(emissionConeAngle),
 	msPerFrame_(0), maxParticles_(0), PI(0) {}
 
 void ParticleEmitter::init() {
-
+	collider_ = GETCMP1_(Collider);
 	texture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(textureId_);
 	msPerFrame_ = CONST(float, "MS_PER_FRAME");
 	maxParticles_ = CONST(int, "MAX_PARTICLES_DEFAULT");
@@ -21,12 +23,13 @@ void ParticleEmitter::update() {
 				emitting_ = false;
 		}
 		if (particles_.size() < maxParticles_ && timeEmitted_ % 5 == 0) {
+			SDL_Rect colliderRect = collider_->getRectRender();
 			//direction + angulo random
 			int angle = rand() % int(emissionConeAngle_ * 2) - emissionConeAngle_;
 			Vector2D direction = direction_.rotate(angle);
 			//speed_ + variacion random
 			float speed = speed_ - speedVariation_ + rand() % int(speedVariation_ * 2);
-			particles_.push_back({ position_,direction,0,speed });
+			particles_.push_back({ Vector2D(colliderRect.x + colliderRect.w / 2,colliderRect.y + colliderRect.h / 2),direction,0,speed });
 		}
 	}
 

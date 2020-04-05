@@ -3,6 +3,7 @@
 #include "box2d.h"
 #include "SDL_rect.h"
 #include "Constants.h"
+#include "Vector2D.h"
 
 
 class Collider : public Component
@@ -20,6 +21,8 @@ public:
 	};
 
 private:
+	double PIXELS_PER_METER;
+	int WINDOW_HEIGHT;
 	//general
 	b2Body* body_;
 	b2World* world_;
@@ -43,6 +46,8 @@ public:
 	~Collider() {
 		world_->DestroyBody(body_); world_ = nullptr;
 	}
+
+	virtual void init() override;
 
 	//getters
 	float getW(int i) const { return widths_[i]; }
@@ -70,10 +75,10 @@ public:
 
 	SDL_Rect getRectRender() const {
 		return SDL_Rect{
-			(int)(getPos().x * CONST(double,"PIXELS_PER_METER") - (getW(0) * CONST(double,"PIXELS_PER_METER"))),
-			(int)(CONST(double,"WINDOW_HEIGHT") - (getPos().y * CONST(double,"PIXELS_PER_METER") + (getH(0) * CONST(double,"PIXELS_PER_METER")))),
-			(int)(getW(0) * CONST(double,"PIXELS_PER_METER") * 2),
-			(int)(getH(0) * CONST(double,"PIXELS_PER_METER") * 2)
+			(int)(getPos().x * PIXELS_PER_METER - (getW(0) * PIXELS_PER_METER)),
+			(int)(WINDOW_HEIGHT - (getPos().y * PIXELS_PER_METER + (getH(0) * PIXELS_PER_METER))),
+			(int)(getW(0) * PIXELS_PER_METER * 2),
+			(int)(getH(0) * PIXELS_PER_METER * 2)
 		};
 	}
 
@@ -91,6 +96,4 @@ public:
 		float friction, float restitution, CollisionLayer layer, bool sensor);
 	void createCircularFixture(float radius, float density, float friction, float restitution, CollisionLayer layer, bool sensor);
 	void destroyFixture(int i);
-
-
 };
