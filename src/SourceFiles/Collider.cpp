@@ -16,6 +16,20 @@ Collider::Collider(b2World* world, b2BodyType type, float x, float y, float widt
 	createRectangularFixture(width, height, density, friction, restitution, c, sensor);
 }
 
+Collider::Collider(b2World* world, b2BodyType type, float x, float y, float radius,
+	float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor):
+	world_(world),
+	Component(ComponentType::Collider) {
+
+	bodyDef_.type = type;
+	bodyDef_.position.Set(x, y);
+	bodyDef_.linearDamping = linearDrag;
+	bodyDef_.angularDamping = angDrag;
+	body_ = world_->CreateBody(&bodyDef_);
+
+	createCircularFixture(radius, density, friction, restitution, c, sensor);
+}
+
 void Collider::createRectangularFixture(float width, float height, float density,
 	float friction, float restitution, CollisionLayer c, bool sensor) {
 	widths_.push_back(width);

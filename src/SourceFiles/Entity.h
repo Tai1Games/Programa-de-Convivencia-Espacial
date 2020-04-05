@@ -14,6 +14,7 @@ class Component;
 class Entity
 {
 public:
+	Entity() {};
 	Entity(EntityManager* mngr);
 	virtual ~Entity();
 
@@ -45,11 +46,17 @@ public:
 	void render();
 	void handleInput();
 
+	void setEntityManager(EntityManager* eMan) { entityManager_ = eMan; }
+
+	void setActive(bool active) { active_ = active; }
+	bool isActive() { return active_; }
+
 private:
-	EntityManager* entityManager_;
+	EntityManager* entityManager_ = nullptr;
 
 	std::vector<unique_ptr<Component>> components_;
 	std::array<Component*, ComponentType::maxComponents> componentsArray_ = {};
 
+	bool active_ = true;
 };
 

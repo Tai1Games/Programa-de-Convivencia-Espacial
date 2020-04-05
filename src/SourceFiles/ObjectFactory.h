@@ -34,7 +34,7 @@ public:
 
 	static void makeSpaceJunk(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
-	static void makeCoin(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, int val);
+	static void makeCoin(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, int val);
 	//Crea un mando de la tele (espec�fico para el modo Pelea Por El Mando)
-	Weapon* makeController(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
+	static Weapon* makeController(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 };

@@ -24,22 +24,15 @@ void EntityManager::handleInput() {
 	}
 }
 
-void EntityManager::removeEntity(Entity* entityToRemove)
-{
-	vector<std::unique_ptr<Entity>>::iterator it = entities_.begin();
-
-	while (it->get() != entityToRemove && it != entities_.end()) {
-		++it;
-	}
-	if (it != entities_.end()) {
-		entities_.erase(it);
-	}
-}
-
-
 Entity* EntityManager::addEntity() {
 	Entity* e = new Entity(this);
 	std::unique_ptr<Entity> uPtr(e);
 	entities_.emplace_back(std::move(uPtr));
 	return e;
+}
+
+void EntityManager::addExistingEntity(Entity* e) {
+	e->setEntityManager(this);
+	std::unique_ptr<Entity> uPtr(e);
+	entities_.emplace_back(std::move(uPtr));
 }

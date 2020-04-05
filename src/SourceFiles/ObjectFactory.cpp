@@ -49,12 +49,12 @@ void ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* physics
 	aux->applyLinearImpulse(b2Vec2(0, 50), b2Vec2(0.1, 0));
 }
 
-void ObjectFactory::makeCoin(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, int value)
+void ObjectFactory::makeCoin(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, int value)
 {
-	Entity* e = entityManager->addEntity();
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "COIN_BASE_SIZE") + CONST(double, "COIN_SIZE_GROWTH") * (value - 1), CONST(double, "COIN_BASE_SIZE") + CONST(double, "COIN_SIZE_GROWTH") * (value - 1), 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false);
-	e->addComponent<Coin>(value);
+	entityManager->addExistingEntity(e);
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "COIN_BASE_SIZE"), 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false);
 	e->addComponent<Viewer>(Resources::Coin);
+	e->addComponent<Coin>();
 	aux->setUserData(e);
 }
 

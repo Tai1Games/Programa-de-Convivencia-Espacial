@@ -117,8 +117,9 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::NormalObject) {
 		if (CoinCollidesWithPlayer(contact, wallet, coin)) {
 			wallet->addCoins(coin->getVal());
-			if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player) bodiesToDestroy.push_back(contact->GetFixtureB()->GetBody());
-			else bodiesToDestroy.push_back(contact->GetFixtureA()->GetBody());
+			vecCoin.push_back(coin);
+			if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player) cout << "jajasi";
+			else cout << "sijaja";
 		}
 	}
 }
@@ -247,27 +248,26 @@ bool CollisionHandler::PlayerCollidesWithRouterArea(b2Contact* contact, RouterLo
 }
 
 void CollisionHandler::SolveInteractions() {
-	for (int k = 0; k < vecWeld.size(); k++) { //Recorre el vector resolviendo todos los joint y lo limpia al final.
-		vecWeld[k].player->attachToObject(vecWeld[k].bodyToBeAttached, vecWeld[k].collPoint);
+	for (auto data: vecWeld) { //Recorre el vector resolviendo todos los joint y lo limpia al final.
+		data.player->attachToObject(data.bodyToBeAttached, data.collPoint);
 	}
 	vecWeld.clear();
-	for (int k = 0; k < vecMove.size(); k++) { //Recorre el vector resolviendo todos los move y lo limpia al final.
-		vecMove[k].body->SetTransform(vecMove[k].pos, 0);
-		vecMove[k].body->SetLinearVelocity(b2Vec2_zero);
-		vecMove[k].body->SetAngularVelocity(0);
+	for (auto move: vecMove) { //Recorre el vector resolviendo todos los move y lo limpia al final.
+		move.body->SetTransform(move.pos, 0);
+		move.body->SetLinearVelocity(b2Vec2_zero);
+		move.body->SetAngularVelocity(0);
 	}
 	vecMove.clear();
-	for (int k = 0; k < vecWeapon.size(); k++) { //Recorre el vector soltando los weapon y lo limpia al final.
-		vecWeapon[k]->UnPickObject();
+	for (auto weapon: vecWeapon) { //Recorre el vector soltando los weapon y lo limpia al final.
+		weapon->UnPickObject();
 	}
 	vecWeapon.clear();
-	for (int k = 0; k < vecAttach.size(); k++) { //Recorre el vector soltando los agarres y lo limpia al final.
-		vecAttach[k]->deAttachFromObject();
+	for (auto attach: vecAttach) { //Recorre el vector soltando los agarres y lo limpia al final.
+		attach->deAttachFromObject();
 	}
 	vecAttach.clear();
-	for (int k = 0; k < bodiesToDestroy.size(); k++) {
-		bodiesToDestroy[k]->GetWorld()->DestroyBody(bodiesToDestroy[k]);
-
+	for (auto c : vecCoin) {
+		c->setActive(false);
 	}
-	bodiesToDestroy.clear();
+	vecCoin.clear();
 }
