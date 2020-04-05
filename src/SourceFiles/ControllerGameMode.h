@@ -18,6 +18,7 @@ private:
 	Weapon* controller_ = nullptr;
 public:
 	ControllerGameMode() {};
+	virtual ~ControllerGameMode();
 	virtual void init(PlayState* game);
 	virtual void render();
 	virtual void update();
