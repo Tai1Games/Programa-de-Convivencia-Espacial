@@ -1,4 +1,5 @@
 #include "WiFightGameMode.h"
+#include "Resources.h"
 
 void WiFightGameMode::init(PlayState* game)
 {

@@ -57,6 +57,8 @@ public:
 
 	bool PlayerCollidesWithRouterArea(b2Contact* contact, RouterLogic*& router, Collider*& collPlayer, PlayerData*& playerData);
 
+	void exitChanclaTrigger(b2Contact* contact);
+
 	bool AttachableObjectCollidesWithPlayer(b2Fixture* fixA, AttachesToObjects*& player);
 	
     bool PlayerCanPickWeapon(b2Contact* contact, Weapon* &pickableObj, Hands* &player);
