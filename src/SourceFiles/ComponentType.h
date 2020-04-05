@@ -17,6 +17,7 @@ namespace ComponentType {
 		HealthViewer,
 		Tilemap,
 		Weapon,
+		MeleeWeapon,
 		Hands,
 		PlayerController,
 		ImpulseViewer,

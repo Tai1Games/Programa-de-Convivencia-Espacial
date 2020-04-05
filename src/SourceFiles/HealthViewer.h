@@ -14,6 +14,7 @@ private:
 	Health* he = nullptr;		//Actualizar la lista de Componentes :D
 	PlayerData* playerData_ = nullptr;
 	b2Vec2 pos_;
+	SDL_RendererFlip flip_;
 
 	int activeTextureId_;
 	int disableTextureId_;

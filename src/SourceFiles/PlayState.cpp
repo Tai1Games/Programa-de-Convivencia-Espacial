@@ -20,6 +20,12 @@
 PlayState::PlayState(GameMode* gMode, string tmap):GameState(),
 	gameMode_(gMode), tilemapName_(tmap) {}
 PlayState::~PlayState() {
+	delete entityManager_;
+	entityManager_ = nullptr;
+	delete collisionHandler_;
+	collisionHandler_ = nullptr;
+	delete physicsWorld_;
+	physicsWorld_ = nullptr;
 }
 
 void PlayState::init() {
