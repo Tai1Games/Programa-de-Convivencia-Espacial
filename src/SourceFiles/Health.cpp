@@ -19,8 +19,13 @@ Health::~Health()
 
 bool Health::subtractLife(int damage)
 {
-	lives_ -= damage;
-	if (lives_ > 0) return true;
+	if (lives_ > 0) {
+		lives_ -= damage;
+		if (lives_ <= 0) { 
+			lives_ = 0; 
+			return false;}	//Evitar vidas negativas
+		return true;
+	}
 	else return false;
 }
 

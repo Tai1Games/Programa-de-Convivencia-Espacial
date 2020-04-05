@@ -6,7 +6,7 @@ HealthViewer::HealthViewer(int texActiveId, int texDisabledId) : Component(Compo
 {
 	activeTextureId_ = texActiveId;
 	disableTextureId_ = texDisabledId;
-
+	
 }
 
 void HealthViewer::init()
@@ -16,7 +16,9 @@ void HealthViewer::init()
 	he = GETCMP1_(Health);
 	full = SDL_Game::instance()->getTexturesMngr()->getTexture(activeTextureId_);
 	empty = SDL_Game::instance()->getTexturesMngr()->getTexture(disableTextureId_);
-	setPos(playerData_->getPlayerNumber());
+	int playerNumber = playerData_->getPlayerNumber();
+	setPos(playerNumber);
+	flip_ = (playerNumber % 2 == 0) ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL;
 }
 void HealthViewer::update()
 {
@@ -35,10 +37,10 @@ void HealthViewer::draw() const
 		}
 
 		if ((i+1) <= he->getHealth()) {		//Si tiene esas X vidas las muertra como llenas
-			full->render(dest, 0, SDL_Rect{ 0, 0, 613,667 });
+			full->render(dest, 0, SDL_Rect{ 0, 0, 613,667 },flip_);
 		}
 		else {		//Si no las tiene, se dibujarán como vacias
-			empty->render(dest, 0, SDL_Rect{ 0, 0, 613,667 });
+			empty->render(dest, 0, SDL_Rect{ 0, 0, 613,667 },flip_);
 		}
 	}
 

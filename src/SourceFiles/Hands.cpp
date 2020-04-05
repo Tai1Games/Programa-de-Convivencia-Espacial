@@ -36,16 +36,15 @@ void Hands::draw() const
 
 }
 
-void Hands::update()
+void Hands::handleInput()
 {
 	b2Vec2 vI = ih_->getStickDir(getPlayerId(), InputHandler::GAMEPADSTICK::LEFTSTICK);
+	if (vI.Length() != 0) dir_.Set(vI.x, vI.y);
+}
 
-	double anguloReal;
-
-	if (vI.Length() != 0) {
-		dir_.Set(vI.x, vI.y);
-
-		angle_ = (std::asin(dir_.x) * -180.0 / CONST(double, "PI")) - 90;
+void Hands::update()
+{	
+	angle_ = (std::asin(dir_.x) * -180.0 / CONST(double, "PI")) - 90;
 
 		//el arcoseno solo nos devuelve angulos en el intervalo 0� - 180�, si apuntamos hacia abajo hay que coger el angulo inverso
 		if (dir_.y < 0) angle_ = (int)(360 - angle_) % 360;
@@ -58,9 +57,6 @@ void Hands::update()
 			Flipped_ = SDL_FLIP_NONE;
 		}
 		else Flipped_ = SDL_FLIP_VERTICAL;
-
-	}
-	pos_.Set(collider_->getPos().x, collider_->getPos().y);
 
 }
 

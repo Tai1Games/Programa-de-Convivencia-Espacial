@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "checkML.h"
 #include "collisionHandler.h"
+#include "Resources.h"
 
 using namespace std;
 
@@ -29,8 +30,9 @@ private:
 	string tilemapName_;
 	Texture* fondo_;
 	std::map<string, int> resourceMap_ = { //añadir aquí los mapas que se vayan haciendo
-		{"SalaDeEstar", Resources::SalaDeEstar}
+		{"SalaDeEstar",Resources::SalaDeEstar}
 	};
+	TileMap* tilemap_;
 
 public:
 	PlayState(GameMode* gMode, string tmap);

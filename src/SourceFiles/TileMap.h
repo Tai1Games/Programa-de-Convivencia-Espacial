@@ -5,6 +5,7 @@
 #include "vector"
 #include "EntityManager.h"
 #include "WeaponFactory.h"
+#include "checkML.h"
 
 class TileMap : public Component
 {

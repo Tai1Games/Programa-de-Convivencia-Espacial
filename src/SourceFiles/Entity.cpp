@@ -6,6 +6,7 @@ Entity::Entity(EntityManager* mngr) :
 }
 
 Entity::~Entity() {
+
 }
 
 void Entity::update()
