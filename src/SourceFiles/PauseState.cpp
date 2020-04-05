@@ -63,6 +63,8 @@ void PauseState::handleInput()
 		/*Salir al menú cuando exista menú*/
 		/*if (ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_A))*/
 		/*SDL_Game::instance()->getStateMachine()->changeToState(States::menu);*/
+		if (ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_A))
+			SDL_Game::instance()->exitGame();
 		break;
 	}
 

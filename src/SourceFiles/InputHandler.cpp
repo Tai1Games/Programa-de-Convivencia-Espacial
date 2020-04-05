@@ -2,7 +2,7 @@
 #include <fstream>
 #include <box2d.h>
 #include <iostream>
-
+#include "SDL_Game.h"
 
 using namespace std;
 InputHandler::InputHandler() {
@@ -12,6 +12,14 @@ InputHandler::InputHandler() {
 }
 
 InputHandler::~InputHandler() {
+	for (std::pair<Vector2D*, Vector2D*> e : m_joystickValues) {
+		delete e.first;
+		delete e.second;
+	}
+	for (std::pair<double*, double*> e : m_triggerValues) {
+		delete e.first;
+		delete e.second;
+	}
 }
 
 void InputHandler::update() {
@@ -46,6 +54,9 @@ void InputHandler::update() {
 			break;
 		case SDL_JOYBUTTONUP:
 			onJoyButtonChange(event, JustUp);
+			break;
+		case SDL_QUIT:
+			SDL_Game::instance()->exitGame();
 			break;
 		}
 

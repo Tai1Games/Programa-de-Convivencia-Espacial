@@ -90,6 +90,8 @@ void SDL_Game::closeResources() {
 	audio_ = nullptr;
 	delete gamestateMachine_;
 	gamestateMachine_ = nullptr;
+	delete inputHandler_;
+	inputHandler_ = nullptr;
 }
 
 void SDL_Game::start() {
@@ -109,5 +111,5 @@ void SDL_Game::start() {
 				cout << "LAGGING BEHIND!" << endl << endl;
 		}
 	}
-	else std::cout << "Que tal si pones un mando eh? genio\n\n\n";
+	else std::cout << "No hay mando conectado.\nAt SDL_Game.cpp line 113\n\n";
 }

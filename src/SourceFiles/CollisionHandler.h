@@ -10,6 +10,7 @@
 #include "PlayerData.h"
 #include "GameMode.h"
 #include "TileMap.h"
+#include "checkML.h"
 
 class RouterLogic;
 class CollisionHandler :
@@ -41,7 +42,7 @@ private:
 public:
 
     CollisionHandler(GameMode* g, TileMap* tm): gMode_(g), tilemap_(tm) {};
-    ~CollisionHandler() {};
+	~CollisionHandler() {};
 
     void BeginContact(b2Contact* contact);
 

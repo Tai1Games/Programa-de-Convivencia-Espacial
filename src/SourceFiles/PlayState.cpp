@@ -19,13 +19,16 @@
 
 PlayState::PlayState(GameMode* gMode, string tmap):GameState(),
 	gameMode_(gMode), tilemapName_(tmap) {}
+
+
 PlayState::~PlayState() {
-	delete entityManager_;
-	entityManager_ = nullptr;
-	delete collisionHandler_;
-	collisionHandler_ = nullptr;
-	delete physicsWorld_;
-	physicsWorld_ = nullptr;
+	//for (Entity* i : deadBodies) { delete i; }
+	//for (Collider* i : collDeadBodies) { delete i; }
+	delete gameMode_;			gameMode_ = nullptr;
+	delete tilemap_;			tilemap_ = nullptr;
+	delete entityManager_;		entityManager_ = nullptr;
+	delete collisionHandler_;	collisionHandler_ = nullptr;
+	delete physicsWorld_;		physicsWorld_ = nullptr;
 }
 
 void PlayState::init() {
@@ -34,20 +37,20 @@ void PlayState::init() {
 	entityManager_ = new EntityManager();
 	physicsWorld_ = new b2World(b2Vec2(0, 0));
 
-	TileMap* tilemap = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
+	tilemap_ = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
 		"../../assets/game/tilemaps/"+tilemapName_+".json",
 		entityManager_, physicsWorld_);
-	tilemap->init();
-	gameMode_->setTileMap(tilemap);
+	tilemap_->init();
+	gameMode_->setTileMap(tilemap_);
 
-	collisionHandler_ = new CollisionHandler(gameMode_, tilemap);
+	collisionHandler_ = new CollisionHandler(gameMode_, tilemap_);
 	physicsWorld_->SetContactListener(collisionHandler_);
 
 	//PLAYERS
 	vector<Collider*> colliders;
 	for (int i = 0; i < 4; i++) {
 		players_.push_back(entityManager_->addEntity());
-		colliders.push_back(players_[i]->addComponent<Collider>(physicsWorld_, b2_dynamicBody, tilemap->getPlayerSpawnPoint(i).x, tilemap->getPlayerSpawnPoint(i).y,
+		colliders.push_back(players_[i]->addComponent<Collider>(physicsWorld_, b2_dynamicBody, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y,
 			1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::Player, false));
 		players_[i]->addComponent<PlayerData>(i);
 		players_[i]->addComponent<Viewer>(Resources::Tinky);
@@ -70,7 +73,7 @@ void PlayState::init() {
 	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(resourceMap_[tilemapName_]);
 
 	//Version estática de la factoria
-	tilemap->executeMapFactory();
+	tilemap_->executeMapFactory();
 
 	gameMode_->init(this);
 }
