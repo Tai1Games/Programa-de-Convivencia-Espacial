@@ -204,6 +204,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="PlayerData.h" />
     <ClInclude Include="PlayerFactory.h" />
     <ClInclude Include="RouterLogic.h" />
+    <ClInclude Include="SRandBasedGenerator.h" />
     <ClInclude Include="StocksGameMode.h" />
     <ClInclude Include="Wallet.h" />
     <ClInclude Include="Weapon.h" />
@@ -252,6 +253,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="RouterLogic.cpp" />
+    <ClCompile Include="SRandBasedGenerator.cpp" />
     <ClCompile Include="StocksGameMode.cpp" />
     <ClCompile Include="Wallet.cpp" />
     <ClCompile Include="Weapon.cpp" />

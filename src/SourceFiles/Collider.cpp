@@ -78,12 +78,12 @@ b2Filter Collider::setCollisionLayer(CollisionLayer c) {
 		filter.maskBits = NormalObject | NormalAttachableObject | Player | Wall; //what do I collide with?
 		break;
 	case Player:
-		filter.maskBits = NormalObject | NormalAttachableObject | Player | Weapon | Wall;
+		filter.maskBits = NormalObject | NormalAttachableObject | Player | PickableObject | Wall;
 		break;
 	case Trigger:
 		filter.maskBits = Player;
 		break;
-	case Weapon:
+	case PickableObject:
 		filter.maskBits = Player | Wall;
 		break;
 	case UnInteractableObject:

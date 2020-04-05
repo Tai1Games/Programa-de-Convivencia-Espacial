@@ -198,6 +198,9 @@
     <ClInclude Include="CoinsPool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SRandBasedGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -327,6 +330,9 @@
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="CoinsPool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SRandBasedGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

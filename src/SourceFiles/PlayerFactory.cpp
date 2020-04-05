@@ -1,4 +1,5 @@
 #include "PlayerFactory.h"
+#include "CapitalismGameMode.h"
 
 Entity* PlayerFactory::createBasePlayer(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY) {
 	Entity* p = eMan->addEntity();
@@ -22,8 +23,8 @@ Entity* PlayerFactory::createPlayerWithHealth(EntityManager* eMan, b2World* phys
 	return p;
 }
 
-Entity* PlayerFactory::createPlayerWithWallet(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY) {
+Entity* PlayerFactory::createPlayerWithWallet(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY, CapitalismGameMode* gM) {
 	Entity* p = createBasePlayer(eMan, physicsWorld, playerID, playerTextureID, posX, posY);
-	p->addComponent<Wallet>();
+	p->addComponent<Wallet>(gM);
 	return p;
 }

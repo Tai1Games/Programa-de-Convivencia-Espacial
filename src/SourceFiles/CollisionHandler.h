@@ -35,8 +35,9 @@ private:
 	};
 	vector<bodyData> vecBody; //Vector donde almacenamos los cuerpos muertos que crearemos al final del step.
 	vector<Weapon*> vecWeapon; //Vector donde almacenamos las weapons que soltaremos al final del step
-	vector<Coin*> vecCoin;
-	vector<AttachesToObjects*> vecAttach; //Vector donde almacenamos los agarres que soltaremos al final del step
+	vector<AttachesToObjects*> vecAttach; //Vector donde almacenamos los agarres que soltaremos al final del step.
+	vector<pair<Wallet*, int>> vecWallets; //Vector donde almacenamos los impactos entre objetos y wallets.
+	vector<Coin*> vecCoin; //Vector donde almacenamos los impactos entre jugador y las monedas a recoger
 	GameMode* gMode_;
 	TileMap* tilemap;
 

@@ -46,8 +46,8 @@ SDL_Game::~SDL_Game() {
 }
 
 void SDL_Game::initializeResources() {
-	/*random_ = new SRandBasedGenerator();
-	random_->init();*/
+	rng_ = new SRandBasedGenerator();
+	rng_->init();
 
 	textures_ = new SDLTexturesManager();
 	textures_->init();

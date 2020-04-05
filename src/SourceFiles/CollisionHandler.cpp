@@ -10,11 +10,14 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health*
 	int impact = force.Length();
 
 	//Depending on the force of impact we apply damage to the player
-	if (impact >= CONST(int, "LOW_DAMAGE") && CONST(double, "MEDIUM_DAMAGE")) impact = 1;
+
+	if (impact < CONST(int, "LOW_DAMAGE")) impact = 0;
+
+	else if (impact >= CONST(int, "LOW_DAMAGE") && impact < CONST(double, "MEDIUM_DAMAGE")) impact = 1;
 
 	else if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) impact = 2;
 
-	else if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) impact = 3;
+	else if (impact >= CONST(double, "HIGH_DAMAGE")) /*&& impact < CONST(double, "HIGH_DAMAGE"))*/ impact = 3;
 
 	//When player has health component
 	if (playerHealth) {
@@ -57,7 +60,7 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health*
 	}
 
 	//When player has wallet component
-	else playerWallet->dropCoins(impact);
+	vecWallets.push_back(std::make_pair(playerWallet, impact));
 }
 
 //Handles start of collisions
@@ -98,12 +101,17 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		}
 	}
 
-	//Pickable weapon collisions
-	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon ||
-		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon) &&
-		PlayerCanPickWeapon(contact, pickableObj, playerHands)) {
-		pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands);
+	//Pickable object collisions (Weapons & Coins)
+	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject ||
+		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject)) {
+
+		if (PlayerCanPickWeapon(contact, pickableObj, playerHands)) pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands);
+		else if (CoinCollidesWithPlayer(contact, wallet, coin)) {
+			wallet->addCoins(coin->getVal());
+			vecCoin.push_back(coin);
+		}
 	}
+
 
 	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger || //Colisiones entre Triggers y otros objetos
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
@@ -115,12 +123,6 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	//Coin Collisions
 	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player || //Colisiones entre Triggers y otros objetos
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::NormalObject) {
-		if (CoinCollidesWithPlayer(contact, wallet, coin)) {
-			wallet->addCoins(coin->getVal());
-			vecCoin.push_back(coin);
-			if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player) cout << "jajasi";
-			else cout << "sijaja";
-		}
 	}
 }
 
@@ -129,8 +131,8 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 	//Pickable weapons
 	Weapon* pickableObj = nullptr;
 	Hands* playerHands = nullptr;
-	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon ||
-		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon) &&
+	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject ||
+		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject) &&
 		PlayerCanPickWeapon(contact, pickableObj, playerHands)) {
 		pickableObj->DeletePlayerInfo(playerHands->getPlayerId());
 		cout << "Dropped weapon" << endl;
@@ -270,4 +272,8 @@ void CollisionHandler::SolveInteractions() {
 		c->setActive(false);
 	}
 	vecCoin.clear();
+	for (auto w : vecWallets) {
+		w.first->dropCoins(w.second);
+	}
+	vecWallets.clear();
 }

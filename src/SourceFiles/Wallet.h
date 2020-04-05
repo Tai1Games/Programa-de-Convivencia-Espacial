@@ -2,13 +2,19 @@
 #include "Component.h"
 #include "Collider.h"
 
+//#include "SDL_Game.h"
+
+class Entity;
+class CapitalismGameMode;
+
 class Wallet : public Component
 {
 private:
-	int numCoins_ = 100;
+	int numCoins_ = 10;
 	Collider* collPlayer_ = nullptr;
+	CapitalismGameMode* gameMode_ = nullptr;
 public:
-	Wallet() : Component(ComponentType::Wallet) {};
+	Wallet(CapitalismGameMode* gamemode) : Component(ComponentType::Wallet) { gameMode_ = gamemode; };
 	~Wallet() {};
 	virtual void init() override;
 	void dropCoins(int damage);

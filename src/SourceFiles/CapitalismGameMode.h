@@ -12,11 +12,9 @@ public:
 	~CapitalismGameMode() {};
 	virtual void init(PlayState* game);
 	virtual void render() {};
-	virtual void update() {
-		std::cout << "jajasi";
-	};
+	virtual void update() {};
 	virtual bool onPlayerDead(int id) { return true; }; //Returns false when players runs out of stocks.
 
-	void createCoin(b2Vec2 pos, int val = 1);
+	void createCoin(b2Vec2 spawnPos, int val = 1);
 };
 

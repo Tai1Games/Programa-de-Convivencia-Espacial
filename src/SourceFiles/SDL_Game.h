@@ -9,6 +9,7 @@
 #include "SDLAudioManager.h"
 #include "SDLFontsManager.h"
 #include "GameStateMachine.h"
+#include "SRandBasedGenerator.h"
 
 #include "SDL_macros.h"
 #include "iostream"
@@ -32,6 +33,7 @@ protected:
 	SDL_Renderer* renderer_ = nullptr;
 	InputHandler* inputHandler_ =  nullptr;
 	Constants constants_;
+	SRandBasedGenerator* rng_ = nullptr;
 
 	static unique_ptr<SDL_Game> instance_;
 private:
@@ -72,5 +74,6 @@ public:
 	SDLFontsManager* getFontMngr() { return fonts_; }
 	GameStateMachine* getStateMachine() { return gamestateMachine_; }
 	SDL_Renderer* getRenderer() { return  renderer_; }
+	SRandBasedGenerator* getRng() { return rng_; }
 	const Constants* getConstants() { return &constants_; }
 };

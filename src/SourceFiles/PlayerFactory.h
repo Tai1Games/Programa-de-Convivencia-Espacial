@@ -15,6 +15,8 @@
 #include "EntityManager.h"
 #include "b2_world.h"
 
+class CapitalismGameMode;
+
 class PlayerFactory {
 private:
 	static Entity* createBasePlayer(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY);
@@ -23,5 +25,5 @@ public:
 	~PlayerFactory() {}
 
 	static Entity* createPlayerWithHealth(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY, int healthPoints);
-	static Entity* createPlayerWithWallet(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY);
+	static Entity* createPlayerWithWallet(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY, CapitalismGameMode* gM);
 };
