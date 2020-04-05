@@ -15,6 +15,7 @@
 #include "WeaponFactory.h"
 #include "ImpulseViewer.h"
 #include "PlayerData.h"
+#include "ParticleEmitter.h"
 
 PlayState::PlayState(GameMode* gMode, string tmap):GameState(),
 	gameMode_(gMode), tilemapName_(tmap) {}
@@ -63,6 +64,10 @@ void PlayState::init() {
 		}
 		colliders[i]->setUserData(players_[i]);
 	}
+
+	//Particle test
+	ParticleEmitter* test = players_[0]->addComponent<ParticleEmitter>(Vector2D(.5,.5),Resources::Grapadora,3.5,1000, 25, 0,2,15);
+	test->PlayStop();
 
 	//FONDO
 	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(resourceMap_[tilemapName_]);
