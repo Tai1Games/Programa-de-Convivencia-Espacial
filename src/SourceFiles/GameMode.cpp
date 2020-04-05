@@ -2,10 +2,6 @@
 #include "PlayState.h"
 #include "HealthViewer.h"
 
-GameMode::~GameMode()
-{
-}
-
 void GameMode::initProgressBars()
 {
 

@@ -65,7 +65,7 @@ void Weapon::PickObjectBy(Hands* playerH)
 		currentHand_->setWeapon(weaponType_, this);
 		if (weaponType_ == WeaponID::Chancla) {
 			//Creamos el trigger de ataque
-			mainCollider_->createRectangularFixture(mainCollider_->getW(0)*2, mainCollider_->getH(0)*2, 1, 0.1, 0, Collider::CollisionLayer::Weapon, true);
+			mainCollider_->createRectangularFixture(mainCollider_->getW(0)*2, mainCollider_->getH(0)*2, 1, 0.1, 0, Collider::CollisionLayer::PickableObject, true);
 			//Trigger de la Chancla(Cambiamos con quien colisiona)
 			b2Filter aux1 = mainCollider_->getFixture(0)->GetFilterData();
 			aux1.categoryBits = Collider::CollisionLayer::Trigger;
@@ -90,7 +90,7 @@ void Weapon::UnPickObject()
 		
 		//Trigger de la Chancla(Restairamos sus capas de colision)
 		b2Filter aux1 = mainCollider_->getFixture(0)->GetFilterData();
-		aux1.categoryBits = Collider::CollisionLayer::Weapon;
+		aux1.categoryBits = Collider::CollisionLayer::PickableObject;
 		aux1.maskBits = Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall;
 		mainCollider_->getFixture(1)->SetFilterData(aux1);
 		//Caja colision de la chancla

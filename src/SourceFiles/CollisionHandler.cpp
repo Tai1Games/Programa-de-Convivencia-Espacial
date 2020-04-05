@@ -43,7 +43,7 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health*
 			PlayerData* p = static_cast<PlayerData*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<PlayerData>(ComponentType::PlayerData));
 			moveData m;
 			m.body = player->GetBody();
-			m.pos = b2Vec2(tilemap->getPlayerSpawnPoint(p->getPlayerNumber()).x, tilemap->getPlayerSpawnPoint(p->getPlayerNumber()).y); //punto de respawn provisional
+			m.pos = b2Vec2(tilemap_->getPlayerSpawnPoint(p->getPlayerNumber()).x, tilemap_->getPlayerSpawnPoint(p->getPlayerNumber()).y); //punto de respawn provisional
 			if (stocks && s->onPlayerDead(p->getPlayerNumber()) || !stocks) {	//si le quedan vidas
 				playerHealth->resetHealth();
 			}
@@ -103,7 +103,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	}
 	//Melee Weapons collisions
 	
-	if(contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon && contact->GetFixtureB()->IsSensor()
+	if(contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject && contact->GetFixtureB()->IsSensor()
 	&& contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player)
 	{
 		Entity* aux = static_cast<Entity*>(fixB->GetBody()->GetUserData());
@@ -114,14 +114,14 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 
 		player_Health = nullptr;	//Lo reseteamos para evitar problemas
 
-		ObjectCollidesWithPlayer(contact->GetFixtureA(), player_Health);
+		ObjectCollidesWithPlayer(contact->GetFixtureA(), player_Health, wallet, playerData);
 
-		if(weAux->getCurrentHand() != nullptr && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
+		if(weAux != nullptr && weAux->getCurrentHand() != nullptr && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
 			weAux->detectPlayer(aux2, aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
 			//cout << "Golpeaste al objetivo" << endl;
 		}
 	}
-	else if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon && contact->GetFixtureA()->IsSensor()
+	else if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject && contact->GetFixtureA()->IsSensor()
 		&& contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player){
 		
 		Entity* aux = static_cast<Entity*>(fixA->GetBody()->GetUserData());
@@ -132,7 +132,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		
 		player_Health = nullptr;	//Lo reseteamos para evitar problemas
 
-		ObjectCollidesWithPlayer(contact->GetFixtureB(), player_Health);
+		ObjectCollidesWithPlayer(contact->GetFixtureB(), player_Health, wallet, playerData);
 		
 		if (weAux->getCurrentHand() != nullptr && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
 		
@@ -147,7 +147,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject ||
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject)) {
 
-		if (PlayerCanPickWeapon(contact, pickableObj, playerHands)) pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands); //Collides with weapon
+		if (PlayerCanPickWeapon(contact, pickableObj, playerHands)) pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands, player_Health); //Collides with weapon
 
 		else if (CoinCollidesWithPlayer(contact, wallet, coin, playerData)) { //Collides with Coin
 			if (coin->getPlayerDropped() != playerData->getPlayerNumber()) {
@@ -189,8 +189,8 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 		}
 	}
 	//Out of melee weapon trigger
-	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon ||
-		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon) {
+	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject ||
+		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject) {
 		
 		exitChanclaTrigger(contact);
 	}
