@@ -2,17 +2,24 @@
 
 #include "Entity.h"
 #include "checkML.h"
-
-class Weapon;
+#include "Transform.h"
+#include "Texture.h"
+#include "Viewer.h"
+#include "Health.h"
+#include "HealthViewer.h"
+#include "InputHandler.h"
+#include "Weapon.h"
+#include "Hands.h"
 
 class WeaponFactory
 {
 private:
 public:
 
-	WeaponFactory() {};
+	WeaponFactory() {}
 
-	~WeaponFactory() {};
+	~WeaponFactory(){}
+
 	//Crea una chancla (Podemos pasarle los p�rametros que queramos segun las necesidades del objeto)
 	static void makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 

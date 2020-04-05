@@ -23,11 +23,10 @@ PlayState::PlayState(GameMode* gMode, string tmap):GameState(),
 PlayState::~PlayState() {
 	//for (Entity* i : deadBodies) { delete i; }
 	//for (Collider* i : collDeadBodies) { delete i; }
-	delete gameMode_;			gameMode_ = nullptr;
-	delete tilemap_;			tilemap_ = nullptr;
-	delete entityManager_;		entityManager_ = nullptr;
-	delete collisionHandler_;	collisionHandler_ = nullptr;
-	delete physicsWorld_;		physicsWorld_ = nullptr;
+	delete gameMode_;
+	delete tilemap_;
+	delete collisionHandler_;
+	delete physicsWorld_;	
 }
 
 void PlayState::init() {

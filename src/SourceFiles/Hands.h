@@ -27,7 +27,6 @@ public:
 	~Hands() {};
 	virtual void init() override;
 	virtual void draw() const;
-	virtual void handleInput();
 	virtual void update() override;
 	void setWeapon(WeaponID wId, Weapon* w);
 	int getPlayerId() { return playerData_->getPlayerNumber(); }

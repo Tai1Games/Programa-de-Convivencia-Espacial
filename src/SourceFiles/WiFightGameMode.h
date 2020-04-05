@@ -15,7 +15,6 @@ public:
 	WiFightGameMode() {};
 	~WiFightGameMode() {};
 	virtual void init(PlayState* game);
-	virtual void render();
 	void addPoints(int player, double sumPoints);
 };
 
