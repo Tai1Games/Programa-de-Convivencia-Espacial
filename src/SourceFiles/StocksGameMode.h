@@ -2,6 +2,8 @@
 #include "GameMode.h"
 #include "Health.h"
 #include "HealthViewer.h"
+#include "checkML.h"
+
 class StocksGameMode : public GameMode
 {
 private:

@@ -1,5 +1,6 @@
 #include "GameMode.h"
 #include "PlayState.h"
+#include "HealthViewer.h"
 
 GameMode::~GameMode()
 {

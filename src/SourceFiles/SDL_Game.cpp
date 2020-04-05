@@ -5,11 +5,11 @@
 
 unique_ptr<SDL_Game> SDL_Game::instance_;
 
-SDL_Game::SDL_Game(){
-	constants_ =Constants("../config/constants.json");
+SDL_Game::SDL_Game() {
+	constants_ = Constants("../config/constants.json");
 	SDL_Init(SDL_INIT_EVERYTHING);
-	window_ = SDL_CreateWindow(constants_.getConstant<string>("WINDOW_NAME").c_str(),SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,constants_.getConstant<int>("WINDOW_WIDTH"),
-		constants_.getConstant<int>("WINDOW_HEIGHT"),SDL_WINDOW_SHOWN);
+	window_ = SDL_CreateWindow(constants_.getConstant<string>("WINDOW_NAME").c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, constants_.getConstant<int>("WINDOW_WIDTH"),
+		constants_.getConstant<int>("WINDOW_HEIGHT"), SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 
 	initializeResources();
@@ -91,6 +91,8 @@ void SDL_Game::closeResources() {
 	audio_ = nullptr;
 	delete gamestateMachine_;
 	gamestateMachine_ = nullptr;
+	delete inputHandler_;
+	inputHandler_ = nullptr;
 }
 
 void SDL_Game::start() {
@@ -103,10 +105,10 @@ void SDL_Game::start() {
 			gamestateMachine_->handleInput();
 			gamestateMachine_->update();
 			gamestateMachine_->render();
-		Uint32 frameTime = getTime() - startTime;
-		if (frameTime < CONST(double,"MS_PER_FRAME"))
-			SDL_Delay(CONST(double, "MS_PER_FRAME") - frameTime);
+			Uint32 frameTime = getTime() - startTime;
+			if (frameTime < CONST(double, "MS_PER_FRAME"))
+				SDL_Delay(CONST(double, "MS_PER_FRAME") - frameTime);
 		}
 	}
-	else std::cout << "Que tal si pones un manso eh? genio\n\n\n";
+	else std::cout << "No hay mando conectado.\nAt SDL_Game.cpp line 113\n\n";
 }
