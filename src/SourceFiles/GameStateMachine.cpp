@@ -32,14 +32,14 @@ void GameStateMachine::changeToState(int state) {
 			//states_[state] = new... se necesita struct? o switch tal cual xd
 			switch (state) {
 			case States::menu:
-				deleteState(currentState_);
+				//deleteState(currentState_);
 				break;
 			case States::play:
-				deleteState(currentState_);
+				//deleteState(currentState_);
 				states_[state] = new PlayState(new ControllerGameMode(), "SalaDeEstar"); //ejemplo "SalaDeEstar"
 				break;
 			case States::pause:
-				if (states_[state] != nullptr)	delete states_[state];
+				//if (states_[state] != nullptr)	delete states_[state];
 				states_[state] = new PauseState();
 				break;
 			}
