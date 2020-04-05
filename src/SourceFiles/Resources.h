@@ -15,7 +15,7 @@ public:
 	enum TextureId : std::size_t {
 		// images
 		Debug,
-		Tinky, 
+		Tinky,
 		ActiveHealth,
 		DisableHealth,
 		TSet_Kenney1bit,
@@ -26,6 +26,7 @@ public:
 		Pelota,
 		Grapadora,
 		Piedra,
+		Body,
 		Hands,
 		PinkTinky,
 		FlechaImpulso,
@@ -36,6 +37,10 @@ public:
 		Negro,
 		Router,
 		Coin,
+		EmptyProgressBar,
+		ProgressBar,
+		EmptyProgressBar2,
+		ProgressBar2,
 
 		// text
 		PauseText,
@@ -50,7 +55,7 @@ public:
 		Reveal,
 
 		// sound effects
-		
+
 	};
 
 	enum FontId : std::size_t {

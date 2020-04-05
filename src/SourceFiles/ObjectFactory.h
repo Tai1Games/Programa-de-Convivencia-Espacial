@@ -20,7 +20,7 @@ public:
 	ObjectFactory() {}
 
 	~ObjectFactory(){}
-
+	
 	//Crea una chancla (Podemos pasarle los p�rametros que queramos segun las necesidades del objeto)
 	static void makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 

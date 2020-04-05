@@ -5,6 +5,7 @@
 #include "vector"
 #include "EntityManager.h"
 #include "ObjectFactory.h"
+#include "checkML.h"
 
 class TileMap : public Component
 {

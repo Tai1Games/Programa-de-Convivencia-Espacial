@@ -10,6 +10,7 @@
 #include "PlayState.h"
 #include "GameState.h"
 #include "Weapon.h"
+#include "checkML.h"
 
 class ControllerGameMode : public GameMode
 {
@@ -18,6 +19,7 @@ private:
 	Weapon* controller_ = nullptr;
 public:
 	ControllerGameMode(int nPlayers): GameMode(nPlayers) {};
+	virtual ~ControllerGameMode();
 	virtual void init(PlayState* game);
 	virtual void render();
 	virtual void update();

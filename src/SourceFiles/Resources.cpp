@@ -18,7 +18,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Piedra, "../../assets/game/textures/Piedra.png" },
 	{ Pelota, "../../assets/game/textures/PelotaSaltarina.png" },
 	{ Mancuerna, "../../assets/game/textures/Mancuerna.png" },
-	{ Hands, "../../assets/game/textures/hands2.png" },
+	{ Hands, "../../assets/game/textures/handsActualizadas.png" },
+	{ Body, "../../assets/game/textures/bodyNeutral.png" },
 	{ PinkTinky, "../../assets/game/textures/PinkTinky.png"},
 	{ FlechaImpulso, "../../assets/game/textures/FlechaImpulso.png"},
 	{ ImpulsoBackground, "../../assets/game/textures/ImpulsoBackground.png"},
@@ -28,6 +29,10 @@ vector<Resources::ImageInfo> Resources::images_{
 	{Negro ,"../../assets/game/textures/Negro.png"},
 	{Router,"../../assets/game/textures/Router.png" },
 	{Coin, "../../assets/game/textures/DogeCoin.png" },
+	{ EmptyProgressBar, "../../assets/game/textures/EmptyProgressBar.png"},
+	{ ProgressBar, "../../assets/game/textures/ProgressBar.png"},
+	{ EmptyProgressBar2, "../../assets/game/textures/EmptyProgressBar2.png"},
+	{ ProgressBar2, "../../assets/game/textures/ProgressBar2.png"},
 
 		{ TSet_Kenney1bit , "../../assets/game/tilemaps/modded_colored.png"},
 		{ TSet_Dungeon , "../../assets/game/tilemaps/dungeon_ts.png"}

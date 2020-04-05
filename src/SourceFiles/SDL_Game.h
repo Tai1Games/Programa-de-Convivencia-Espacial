@@ -67,6 +67,8 @@ public:
 		return SDL_GetTicks();
 	}
 
+	inline void exitGame() { exit_ = true; }
+
 	InputHandler* getInputHandler() { return inputHandler_; }
 
 	SDLTexturesManager* getTexturesMngr() { return textures_; }

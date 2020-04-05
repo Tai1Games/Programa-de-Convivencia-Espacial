@@ -5,6 +5,7 @@
 #include "PlayerData.h"
 #include "Weapon.h"
 #include "Constants.h"
+#include "checkML.h"
 
 class Hands : public Component
 {
@@ -18,7 +19,7 @@ private:
 	WeaponID currentWeaponID_ = NoWeapon;
 	InputHandler* ih_ = nullptr;
 	float angle_ = 0;
-	bool onFlipped_ = false;
+	SDL_RendererFlip Flipped_ = SDL_FLIP_NONE; //si las manos estan o no flipeadas
 	Weapon* currentWeapon_ = nullptr;
 protected:
 public:
@@ -26,6 +27,7 @@ public:
 	~Hands() {};
 	virtual void init() override;
 	virtual void draw() const;
+	virtual void handleInput();
 	virtual void update() override;
 	void setWeapon(WeaponID wId, Weapon* w);
 	int getPlayerId() { return playerData_->getPlayerNumber(); }

@@ -17,6 +17,7 @@ namespace ComponentType {
 		HealthViewer,
 		Tilemap,
 		Weapon,
+		MeleeWeapon,
 		Hands,
 		PlayerController,
 		ImpulseViewer,
@@ -24,6 +25,7 @@ namespace ComponentType {
 		RouterLogic,
 		Wallet,
 		Coin,
+		ParticleEmitter,
 		// don't touch the rest of this enum, it is to identify the max
 		// number of components
 		_LastCmptId_

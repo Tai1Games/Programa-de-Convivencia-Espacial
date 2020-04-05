@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "checkML.h"
 #include "collisionHandler.h"
+#include "Resources.h"
 
 using namespace std;
 
@@ -25,10 +26,15 @@ private:
 	vector<Entity*> deadBodies;
 	vector<Collider*> collDeadBodies;
 	GameMode* gameMode_ = nullptr;
+	string tilemapName_;
 	Texture* fondo_;
+	std::map<string, int> resourceMap_ = { //añadir aquí los mapas que se vayan haciendo
+		{"SalaDeEstar",Resources::SalaDeEstar}
+	};
+	TileMap* tilemap_;
 
 public:
-	PlayState(GameMode* gMode);
+	PlayState(GameMode* gMode, string tmap);
 	~PlayState();
 	virtual void init();
 	virtual void update();

@@ -4,7 +4,6 @@
 #include <memory>
 #include "checkML.h"
 
-
 class Entity;
 class SDL_Game;
 

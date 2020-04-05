@@ -6,7 +6,7 @@
 #include "Component.h"
 #include "SDL_Game.h"
 #include "checkML.h"
-
+#include "checkML.h"
 
 class EntityManager;
 class Component;

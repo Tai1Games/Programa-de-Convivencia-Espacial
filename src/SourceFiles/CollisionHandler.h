@@ -12,6 +12,7 @@
 #include "TileMap.h"
 #include "Wallet.h"
 #include "Coin.h"
+#include "checkML.h"
 
 class RouterLogic;
 class CollisionHandler :
@@ -39,13 +40,13 @@ private:
 	vector<tuple<Wallet*, PlayerData*, int>> vecCoinsToDrop; //Vector donde almacenamos los impactos entre objetos y wallets.
 	vector<Coin*> vecCoin; //Vector donde almacenamos los impactos entre jugador y las monedas a recoger
 	GameMode* gMode_;
-	TileMap* tilemap;
+	TileMap* tilemap_;
 
 	void damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet, PlayerData* playerData);
 public:
 
-    CollisionHandler(GameMode* g, TileMap* tm): gMode_(g), tilemap(tm) {};
-    ~CollisionHandler() {};
+    CollisionHandler(GameMode* g, TileMap* tm): gMode_(g), tilemap_(tm) {};
+	~CollisionHandler() {};
 
     void BeginContact(b2Contact* contact);
 
@@ -60,6 +61,8 @@ public:
     bool ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player, Wallet*& wallet, PlayerData* &playerData);
 
 	bool PlayerCollidesWithRouterArea(b2Contact* contact, RouterLogic*& router, Collider*& collPlayer, PlayerData*& playerData);
+
+	void exitChanclaTrigger(b2Contact* contact);
 
 	bool AttachableObjectCollidesWithPlayer(b2Fixture* fixA, AttachesToObjects*& player);
 	
