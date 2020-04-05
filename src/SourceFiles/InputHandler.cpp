@@ -2,7 +2,7 @@
 #include <fstream>
 #include <box2d.h>
 #include <iostream>
-
+#include "SDL_Game.h"
 
 using namespace std;
 InputHandler::InputHandler() {
@@ -56,7 +56,7 @@ void InputHandler::update() {
 			onJoyButtonChange(event, JustUp);
 			break;
 		case SDL_QUIT:
-			exit_ = true;
+			SDL_Game::instance()->exitGame();
 			break;
 		}
 

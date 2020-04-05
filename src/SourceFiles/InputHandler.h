@@ -36,7 +36,6 @@ private:
 	bool isKeyUpEvent_;
 	bool isKeyDownEvent_;
 
-	bool exit_ = false;
 	//---------------------------------------------
 	//mouse
 	bool isMouseMotionEvent_;
@@ -184,9 +183,6 @@ public:
 	}
 	inline bool isButtonUp(int ctrl, SDL_GameControllerButton b) {
 		return(m_buttonStates[ctrl][b] == Up);
-	}
-	inline bool isExit() {
-		return exit_;
 	}
 
 

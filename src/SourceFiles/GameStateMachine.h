@@ -21,6 +21,5 @@ public:
 	void update();
 	void render();
 	void handleInput();
-	bool isCurrentStateExit() const { return states_[currentState_]->isExit(); }
 };
 

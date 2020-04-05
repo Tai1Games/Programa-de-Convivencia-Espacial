@@ -6,7 +6,6 @@
 class GameState
 {
 protected:
-	bool exit_ = false;
 	EntityManager* entityManager_;
 	//HUD
 #pragma region Debug
@@ -20,7 +19,6 @@ public:
 	virtual void update();
 	virtual void render();
 	virtual void handleInput();
-	virtual bool isExit() { return exit_; };
 	EntityManager* getEntityManager() { return entityManager_; }
 };
 

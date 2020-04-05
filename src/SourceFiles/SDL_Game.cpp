@@ -108,10 +108,7 @@ void SDL_Game::start() {
 			Uint32 frameTime = getTime() - startTime;
 			if (frameTime < CONST(double, "MS_PER_FRAME"))
 				SDL_Delay(CONST(double, "MS_PER_FRAME") - frameTime);
-			if (SDL_Game::instance()->getInputHandler()->isExit() ||
-				gamestateMachine_->isCurrentStateExit())
-				exit_ = true;
 		}
 	}
-	else std::cout << "Que tal si pones un manso eh? genio\n\n\n";
+	else std::cout << "No hay mando conectado.\nAt SDL_Game.cpp line 113\n\n";
 }
