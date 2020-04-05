@@ -60,6 +60,7 @@ void GameState::DebugInput() {
 		}
 		b2Vec2 vI = ih->getStickDir(i, InputHandler::GAMEPADSTICK::LEFTSTICK);
 		b2Vec2 vD = ih->getStickDir(i, InputHandler::GAMEPADSTICK::RIGHTSTICK);
+		/*
 		if (vI.Length() != 0 || vD.Length() != 0) {
 			cout << "STICKS" << "--------" << endl;
 			b2Vec2 vI = ih->getStickDir(i, InputHandler::LEFTSTICK);
@@ -68,6 +69,7 @@ void GameState::DebugInput() {
 			cout << "Der: " << vD.x << " " << vD.y << endl;
 			cout << endl;
 		}
+		*/
 		double tD = ih->getTrigger(i, InputHandler::GAMEPADTRIGGER::RIGHTTRIGGER);
 		double tI = ih->getTrigger(i, InputHandler::GAMEPADTRIGGER::LEFTTRIGGER);
 		if (tD != 0 || tI != 0) {

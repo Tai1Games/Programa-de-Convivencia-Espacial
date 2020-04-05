@@ -36,7 +36,7 @@ void GameStateMachine::changeToState(int state) {
 				break;
 			case States::play:
 				//deleteState(currentState_);
-				states_[state] = new PlayState(new ControllerGameMode(), "SalaDeEstar"); //ejemplo "SalaDeEstar"
+				states_[state] = new PlayState(new WiFightGameMode(), "SalaDeEstar"); //ejemplo "SalaDeEstar"
 				break;
 			case States::pause:
 				//if (states_[state] != nullptr)	delete states_[state];
