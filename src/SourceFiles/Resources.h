@@ -26,6 +26,7 @@ public:
 		Pelota,
 		Grapadora,
 		Piedra,
+		Body,
 		Hands,
 		PinkTinky,
 		FlechaImpulso,

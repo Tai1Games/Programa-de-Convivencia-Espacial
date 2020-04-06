@@ -16,6 +16,11 @@ Collider::Collider(b2World* world, b2BodyType type, float x, float y, float widt
 	createRectangularFixture(width, height, density, friction, restitution, c, sensor);
 }
 
+void Collider::init() {
+	PIXELS_PER_METER = CONST(double, "PIXELS_PER_METER");
+	WINDOW_HEIGHT = CONST(int, "WINDOW_HEIGHT");
+}
+
 void Collider::createRectangularFixture(float width, float height, float density,
 	float friction, float restitution, CollisionLayer c, bool sensor) {
 	widths_.push_back(width);

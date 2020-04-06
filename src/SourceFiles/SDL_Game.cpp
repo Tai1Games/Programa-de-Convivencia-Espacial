@@ -46,8 +46,7 @@ SDL_Game::~SDL_Game() {
 }
 
 void SDL_Game::initializeResources() {
-	/*random_ = new SRandBasedGenerator();
-	random_->init();*/
+	srand(time(NULL));
 
 	textures_ = new SDLTexturesManager();
 	textures_->init();
@@ -108,6 +107,8 @@ void SDL_Game::start() {
 			Uint32 frameTime = getTime() - startTime;
 			if (frameTime < CONST(double, "MS_PER_FRAME"))
 				SDL_Delay(CONST(double, "MS_PER_FRAME") - frameTime);
+			else
+				cout << "LAGGING BEHIND!" << endl << endl;
 		}
 	}
 	else std::cout << "No hay mando conectado.\nAt SDL_Game.cpp line 113\n\n";

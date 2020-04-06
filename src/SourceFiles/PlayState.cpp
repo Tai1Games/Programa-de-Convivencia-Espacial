@@ -15,6 +15,7 @@
 #include "WeaponFactory.h"
 #include "ImpulseViewer.h"
 #include "PlayerData.h"
+#include "ParticleEmitter.h"
 
 PlayState::PlayState(GameMode* gMode, string tmap):GameState(),
 	gameMode_(gMode), tilemapName_(tmap) {}
@@ -50,9 +51,9 @@ void PlayState::init() {
 	for (int i = 0; i < 4; i++) {
 		players_.push_back(entityManager_->addEntity());
 		colliders.push_back(players_[i]->addComponent<Collider>(physicsWorld_, b2_dynamicBody, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y,
-			1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::Player, false));
+			1, 1.55, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::Player, false));
 		players_[i]->addComponent<PlayerData>(i);
-		players_[i]->addComponent<Viewer>(Resources::Tinky);
+		players_[i]->addComponent<Viewer>(Resources::Body);
 		players_[i]->addComponent<Health>(3);
 		players_[i]->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
 		if (i == 0) { //si solo hay un mando
@@ -63,6 +64,10 @@ void PlayState::init() {
 		}
 		colliders[i]->setUserData(players_[i]);
 	}
+
+	//Particle test
+	ParticleEmitter* test = players_[0]->addComponent<ParticleEmitter>(Vector2D(.5,.5),Resources::Grapadora,3.5,1000, 25, 0,2,15);
+	test->PlayStop();
 
 	//FONDO
 	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(resourceMap_[tilemapName_]);
