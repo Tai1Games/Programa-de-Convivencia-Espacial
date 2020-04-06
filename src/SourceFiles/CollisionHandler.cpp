@@ -20,48 +20,51 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health*
 
 	else if (impact >= CONST(double, "HIGH_DAMAGE")) /*&& impact < CONST(double, "HIGH_DAMAGE"))*/ impact = 3;
 
-	//When player has health component
-	if (playerHealth) {
+	if (impact > 0) {
+		if (playerHealth) {
 
-		playerHealth->subtractLife(impact);
+			playerHealth->subtractLife(impact);
 
-		if (playerHealth->getHealth() <= 0)
-		{
-			//reset player
+			if (playerHealth->getHealth() <= 0)
+			{
+				//reset player
 
-			//soltar objetos agarrados
-			AttachesToObjects* a = static_cast<AttachesToObjects*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects));
-			if (a != nullptr && a->isAttached()) vecAttach.push_back(a);
-			//soltar arma
-			Hands* h = static_cast<Hands*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<Hands>(ComponentType::Hands));
-			Weapon* w = nullptr;
-			if (h != nullptr) w = h->getWeapon();
-			if (w != nullptr) vecWeapon.push_back(w);
-			//respawn
-			StocksGameMode* s = nullptr;
-			bool stocks = (s = dynamic_cast<StocksGameMode*>(gMode_));
-			PlayerData* p = static_cast<PlayerData*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<PlayerData>(ComponentType::PlayerData));
-			moveData m;
-			m.body = player->GetBody();
-			m.pos = b2Vec2(tilemap_->getPlayerSpawnPoint(p->getPlayerNumber()).x, tilemap_->getPlayerSpawnPoint(p->getPlayerNumber()).y); //punto de respawn provisional
-			if (stocks && s->onPlayerDead(p->getPlayerNumber()) || !stocks) {	//si le quedan vidas
-				playerHealth->resetHealth();
+				//soltar objetos agarrados
+				AttachesToObjects* a = static_cast<AttachesToObjects*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects));
+				if (a != nullptr && a->isAttached()) vecAttach.push_back(a);
+				//soltar arma
+				Hands* h = static_cast<Hands*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<Hands>(ComponentType::Hands));
+				Weapon* w = nullptr;
+				if (h != nullptr) w = h->getWeapon();
+				if (w != nullptr) vecWeapon.push_back(w);
+				//respawn
+				StocksGameMode* s = nullptr;
+				bool stocks = (s = dynamic_cast<StocksGameMode*>(gMode_));
+				PlayerData* p = static_cast<PlayerData*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<PlayerData>(ComponentType::PlayerData));
+				moveData m;
+				m.body = player->GetBody();
+				m.pos = b2Vec2(tilemap_->getPlayerSpawnPoint(p->getPlayerNumber()).x, tilemap_->getPlayerSpawnPoint(p->getPlayerNumber()).y); //punto de respawn provisional
+				if (stocks && s->onPlayerDead(p->getPlayerNumber()) || !stocks) {	//si le quedan vidas
+					playerHealth->resetHealth();
+				}
+				else if (stocks) {	//si no le quedan vidas le mandamos lejos provisionalmente
+					m.pos = b2Vec2((1 + p->getPlayerNumber()) * 50, 0);
+				}
+				vecMove.push_back(m);
+
+				//cuerpo muerto
+				bodyData body;
+				body.pos = player->GetBody()->GetPosition();
+				body.angle = player->GetBody()->GetAngle();
+				vecBody.push_back(body);
 			}
-			else if (stocks) {	//si no le quedan vidas le mandamos lejos provisionalmente
-				m.pos = b2Vec2((1 + p->getPlayerNumber()) * 50, 0);
-			}
-			vecMove.push_back(m);
-
-			//cuerpo muerto
-			bodyData body;
-			body.pos = player->GetBody()->GetPosition();
-			body.angle = player->GetBody()->GetAngle();
-			vecBody.push_back(body);
 		}
-	}
 
-	//When player has wallet component
-	else vecCoinsToDrop.push_back(std::make_tuple(playerWallet, playerData, impact));
+		//When player has wallet component
+		else vecCoinsToDrop.push_back(std::make_tuple(playerWallet, playerData, impact));
+	}
+	//When player has health component
+	
 }
 
 //Handles start of collisions

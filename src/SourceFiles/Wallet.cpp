@@ -10,7 +10,7 @@ void Wallet::init()
 void Wallet::dropCoins(int damage, int player)
 {
 	int coinsToDrop = numCoins_ * (damage * CONST(double, "COIN_DROP_RATE"));
-	if (coinsToDrop == 0 && damage > 0) coinsToDrop = numCoins_;
+	if (coinsToDrop == 0) coinsToDrop = numCoins_;
 	numCoins_ -= coinsToDrop;
 	if (numCoins_ < 0) numCoins_ = 0;
 	cout << "HE SOLTADO " << coinsToDrop << endl;

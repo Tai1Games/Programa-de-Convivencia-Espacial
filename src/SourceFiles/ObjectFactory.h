@@ -2,15 +2,8 @@
 #include "Entity.h"
 #include "checkML.h"
 
-class Transform;
-class Texture;
-class Viewer;
-class Health;
-class HealthViewer;
-class InputHandler;
+class EntityManager;
 class Weapon;
-class Hands;
-class Coin;
 
 class ObjectFactory
 {

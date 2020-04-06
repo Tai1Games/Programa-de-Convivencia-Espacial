@@ -4,7 +4,8 @@ void CapitalismGameMode::init(PlayState* game)
 {
 	GameMode::init(game);
 	coinPool_.init(game->getEntityManager(), game->getPhysicsWorld());
-
+	msPerFrame_ = CONST(double, "MS_PER_FRAME");
+	timeToEnd_ = CONST(double, "TIME_TO_END");
 	for (int k = 0; k < nPlayers_; k++) {
 		players_.push_back(PlayerFactory::createPlayerWithWallet(game->getEntityManager(), game->getPhysicsWorld(), k,
 			Resources::Body, tilemap_->getPlayerSpawnPoint(k).x, tilemap_->getPlayerSpawnPoint(k).y, this));
@@ -12,8 +13,8 @@ void CapitalismGameMode::init(PlayState* game)
 }
 
 void CapitalismGameMode::update() {
-	timeSinceStart += CONST(double, "MS_PER_FRAME");
-	if (timeSinceStart >= CONST(double, "TIME_TO_END") && !roundFinished_) {
+	timeSinceStart += msPerFrame_;
+	if (timeSinceStart >= timeToEnd_ && !roundFinished_) {
 		int maxPoints = 0;
 		bool draw = false;
 		for (int k = 0; k < players_.size(); k++) {

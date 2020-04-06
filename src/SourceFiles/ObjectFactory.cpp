@@ -1,5 +1,6 @@
 #include "ObjectFactory.h"
 
+#include "EntityManager.h"
 #include "Transform.h"
 #include "Texture.h"
 #include "Viewer.h"
