@@ -1,4 +1,7 @@
 #include "CoinsPool.h"
+#include "Coin.h"
+#include "ObjectFactory.h"
+#include "Entity.h"
 
 CoinsPool::CoinsPool() : coinsPool_([](Entity* e) { return e->isActive(); }) {};
 

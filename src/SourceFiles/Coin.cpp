@@ -3,13 +3,14 @@
 void Coin::init() {
 	vw_ = GETCMP1_(Viewer);
 	col_ = GETCMP1_(Collider);
+	repickeableTime_ = CONST(int, "COINS_COOLDOWN_WHEN_DROPPED");
 }
 
 void Coin::update()
 {
 	if (justDroppedByPlayer_ != -1) {
-		timeSinceDropped_ += CONST(double, "MS_PER_FRAME");
-		if (timeSinceDropped_ >= CONST(int, "COINS_COOLDOWN_WHEN_DROPPED")) {
+		timeSinceDropped_ += msPerFrame_;
+		if (timeSinceDropped_ >= repickeableTime_) {
 			justDroppedByPlayer_ = -1;
 			timeSinceDropped_ = 0;
 			col_->getFixture(0)->SetSensor(true);

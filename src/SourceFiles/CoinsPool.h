@@ -1,13 +1,10 @@
 #pragma once
 #include "ObjectPool.h"
 #include "Entity.h"
-#include "SDL_Game.h"
-#include "ObjectFactory.h"
-#include "EntityManager.h"
-#include "b2_world.h"
-#include "Viewer.h"
-#include "Coin.h"
-#include "b2_polygon_shape.h"
+
+class EntityManager;
+class b2World;
+class b2Vec2;
 
 class CoinsPool {
 public:

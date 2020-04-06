@@ -11,6 +11,8 @@ private:
 	int value_ = 0;
 	int justDroppedByPlayer_ = -1;
 	int timeSinceDropped_ = 0;
+	int repickeableTime_ = 0; //Se asigna en init.
+	int msPerFrame_ = 0; //Se asigna en init.
 	Viewer* vw_ = nullptr;
 	Collider* col_ = nullptr;
 public:

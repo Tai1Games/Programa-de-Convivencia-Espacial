@@ -19,8 +19,6 @@ void StocksGameMode::init(PlayState* game){
 			Resources::Body, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, 3));
 		playerStocks_.push_back(maxStocks_); //Initializes maxStocks vector with 3 on all positions.
 	}
-	for(int i = 0;i<players_.size();i++){
-	}
 	for(int i=0;i<players_.size();i++){
 		Entity* e = players_[i];
 		playersHealth_.push_back(e->getComponent<Health>(ComponentType::Health)); //Initializes playersHealth vector catching a reference to Health on entity e.
