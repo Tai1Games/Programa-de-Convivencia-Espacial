@@ -64,7 +64,7 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health*
 		else vecCoinsToDrop.push_back(std::make_tuple(playerWallet, playerData, impact));
 	}
 	//When player has health component
-	
+
 }
 
 //Handles start of collisions
@@ -79,7 +79,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	RouterLogic* routerLogic = nullptr;
 	Collider* playerCollider = nullptr;
 	PlayerData* playerData = nullptr;
-	Wallet* wallet = nullptr;
+	Wallet* playerWallet = nullptr;
 	Coin* coin = nullptr;
 
 	//Comprueba que FixA es el jugador, que FixB es un trigger, que el jugador está presionando la tecla A (mando) o Space (teclado) y que no está agarrado a nada más.
@@ -94,20 +94,20 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	}
 	else if (fixB->GetFilterData().categoryBits) {
 		//check collision then do whatever, in this case twice because it might be two players colliding
-		if (ObjectCollidesWithPlayer(fixA, player_Health, wallet, playerData) && !fixB->IsSensor()) {
-			damageOnImpact(fixB, fixA, player_Health, wallet, playerData);	//Check the stats of the other object
+		if (ObjectCollidesWithPlayer(fixA, player_Health, playerWallet, playerData) && !fixB->IsSensor()) {
+			damageOnImpact(fixB, fixA, player_Health, playerWallet, playerData);	//Check the stats of the other object
 		}
 
 		player_Health = nullptr;	//Lo reseteamos para evitar problemas
 
-		if (ObjectCollidesWithPlayer(fixB, player_Health, wallet, playerData) && !fixA->IsSensor()) {
-			damageOnImpact(fixA, fixB, player_Health, wallet, playerData);	//Check the stats of the other object
+		if (ObjectCollidesWithPlayer(fixB, player_Health, playerWallet, playerData) && !fixA->IsSensor()) {
+			damageOnImpact(fixA, fixB, player_Health, playerWallet, playerData);	//Check the stats of the other object
 		}
 	}
 	//Melee Weapons collisions
-	
-	if(contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject && contact->GetFixtureB()->IsSensor()
-	&& contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player)
+
+	if (contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject && contact->GetFixtureB()->IsSensor()
+		&& contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player)
 	{
 		Entity* aux = static_cast<Entity*>(fixB->GetBody()->GetUserData());
 		Entity* aux2 = static_cast<Entity*>(fixA->GetBody()->GetUserData());
@@ -116,29 +116,31 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		Hands* haAux = aux2->getComponent<Hands>(ComponentType::Hands);
 
 		player_Health = nullptr;	//Lo reseteamos para evitar problemas
+		playerWallet = nullptr;
 
-		ObjectCollidesWithPlayer(contact->GetFixtureA(), player_Health, wallet, playerData);
+		ObjectCollidesWithPlayer(contact->GetFixtureA(), player_Health, playerWallet, playerData);
 
-		if(weAux != nullptr && weAux->getCurrentHand() != nullptr && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
+		if (weAux != nullptr && weAux->getCurrentHand() != nullptr && (player_Health != nullptr || playerWallet != nullptr) && (weAux->getCurrentHand() != haAux)) {
 			weAux->detectPlayer(aux2, aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
 			//cout << "Golpeaste al objetivo" << endl;
 		}
 	}
 	else if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject && contact->GetFixtureA()->IsSensor()
-		&& contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player){
-		
+		&& contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
+
 		Entity* aux = static_cast<Entity*>(fixA->GetBody()->GetUserData());
 		Entity* aux2 = static_cast<Entity*>(fixB->GetBody()->GetUserData());
 
 		Weapon* weAux = aux->getComponent<Weapon>(ComponentType::Weapon);
 		Hands* haAux = aux2->getComponent<Hands>(ComponentType::Hands);
-		
-		player_Health = nullptr;	//Lo reseteamos para evitar problemas
 
-		ObjectCollidesWithPlayer(contact->GetFixtureB(), player_Health, wallet, playerData);
-		
-		if (weAux->getCurrentHand() != nullptr && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
-		
+		player_Health = nullptr;	//Lo reseteamos para evitar problemas
+		playerWallet = nullptr;
+
+		ObjectCollidesWithPlayer(contact->GetFixtureB(), player_Health, playerWallet, playerData);
+
+		if (weAux->getCurrentHand() != nullptr && (player_Health != nullptr || playerWallet != nullptr) && (weAux->getCurrentHand() != haAux)) {
+
 			weAux->detectPlayer(aux2, aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
 
 			//cout << "Golpeaste al objetivo" << endl;
@@ -146,24 +148,24 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	}
 	player_Health = nullptr;
 
-	//Pickable object collisions (Weapons & Coins)
+	//Pickable object collisions (Weapons)
 	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject ||
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject)) {
 
-		if (PlayerCanPickWeapon(contact, pickableObj, playerHands)) pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands, player_Health); //Collides with weapon
+		if (PlayerCanPickWeapon(contact, pickableObj, playerHands)) pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands, player_Health, playerWallet); //Collides with weapon
+	}
 
-		else if (CoinCollidesWithPlayer(contact, wallet, coin, playerData)) { //Collides with Coin
+	//Trigger collisions (Router, Coins)
+	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger || 
+		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
+
+		if (CoinCollidesWithPlayer(contact, playerWallet, coin, playerData)) { //Player collides with coin
 			if (coin->getPlayerDropped() != playerData->getPlayerNumber()) {
-				wallet->addCoins(coin->getVal());
+				playerWallet->addCoins(coin->getVal());
 				vecCoin.push_back(coin);
 			}
 		}
-	}
-
-
-	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger || //Colisiones entre Triggers y otros objetos
-		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
-		if (PlayerCollidesWithRouterArea(contact, routerLogic, playerCollider, playerData)) {
+		else if (PlayerCollidesWithRouterArea(contact, routerLogic, playerCollider, playerData)) { //Player collides with router
 			routerLogic->detectPlayer(playerCollider, playerData->getPlayerNumber());
 		}
 	}
@@ -194,7 +196,7 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 	//Out of melee weapon trigger
 	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject ||
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject) {
-		
+
 		exitChanclaTrigger(contact);
 	}
 }
@@ -211,7 +213,7 @@ void CollisionHandler::PostSolve(b2Contact* contact, const b2ContactImpulse* imp
 //to add a new collision behaviour, make a method that checks if it's the specific collision you want
 //you can distinguish bodies by their user data or make them collide with certain objects only with collision layers
 //if you need to use a component you have to do collider->setUserData(this) in the component's init first
-bool CollisionHandler::ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& playerHealth, Wallet*& playerWallet, PlayerData* &playerData)
+bool CollisionHandler::ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& playerHealth, Wallet*& playerWallet, PlayerData*& playerData)
 {
 	//Obtenemos los datos guardados en el Collider
 	Entity* aux = static_cast<Entity*>(fixA->GetBody()->GetUserData());
@@ -222,7 +224,9 @@ bool CollisionHandler::ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player
 		playerWallet = aux->getComponent<Wallet>(ComponentType::Wallet);
 		playerData = aux->getComponent<PlayerData>(ComponentType::PlayerData);
 
-		if (playerWallet && playerData) return true;
+		if (playerWallet && playerData) {
+			return true;
+		}
 	}
 	return false;
 }
@@ -253,7 +257,7 @@ bool CollisionHandler::CoinCollidesWithPlayer(b2Contact* contact, Wallet*& playe
 	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
 	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
-	if (fixAentity->hasComponent(ComponentType::Wallet) && fixAentity->hasComponent(ComponentType::PlayerData) &&fixBentity->hasComponent(ComponentType::Coin)) {
+	if (fixAentity->hasComponent(ComponentType::Wallet) && fixAentity->hasComponent(ComponentType::PlayerData) && fixBentity->hasComponent(ComponentType::Coin)) {
 		playerWallet = static_cast<Wallet*>(fixAentity->getComponent<Wallet>(ComponentType::Wallet));
 		playerData = static_cast<PlayerData*>(fixAentity->getComponent<PlayerData>(ComponentType::PlayerData));
 		coin = static_cast<Coin*>(fixBentity->getComponent<Coin>(ComponentType::Coin));
@@ -301,38 +305,31 @@ void CollisionHandler::exitChanclaTrigger(b2Contact* contact) {
 	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
 	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
-	if (fixAentity->hasComponent(ComponentType::Health)) {
-		if (fixBentity->hasComponent(ComponentType::Weapon) && fixAentity->hasComponent(ComponentType::PlayerData)) {
-			
-			fixBentity->getComponent<Weapon>(ComponentType::Weapon)->loseContactPlayer(fixAentity, fixAentity->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
-
-		}
+	if (fixAentity->hasComponent(ComponentType::PlayerData) && fixBentity->hasComponent(ComponentType::Weapon)) {
+		fixBentity->getComponent<Weapon>(ComponentType::Weapon)->loseContactPlayer(fixAentity, fixAentity->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
 	}
-	else if (fixBentity->hasComponent(ComponentType::Health)) {
-		if (fixAentity->hasComponent(ComponentType::Weapon) && fixBentity->hasComponent(ComponentType::PlayerData)) {
-			
-			fixAentity->getComponent<Weapon>(ComponentType::Weapon)->loseContactPlayer(fixBentity, fixBentity->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
-
-		}
+	
+	else if (fixBentity->hasComponent(ComponentType::PlayerData) && fixBentity->hasComponent(ComponentType::Weapon)) {
+		fixAentity->getComponent<Weapon>(ComponentType::Weapon)->loseContactPlayer(fixBentity, fixBentity->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
 	}
 }
 
 void CollisionHandler::SolveInteractions() {
-	for (auto data: vecWeld) { //Recorre el vector resolviendo todos los joint y lo limpia al final.
+	for (auto data : vecWeld) { //Recorre el vector resolviendo todos los joint y lo limpia al final.
 		data.player->attachToObject(data.bodyToBeAttached, data.collPoint);
 	}
 	vecWeld.clear();
-	for (auto move: vecMove) { //Recorre el vector resolviendo todos los move y lo limpia al final.
+	for (auto move : vecMove) { //Recorre el vector resolviendo todos los move y lo limpia al final.
 		move.body->SetTransform(move.pos, 0);
 		move.body->SetLinearVelocity(b2Vec2_zero);
 		move.body->SetAngularVelocity(0);
 	}
 	vecMove.clear();
-	for (auto weapon: vecWeapon) { //Recorre el vector soltando los weapon y lo limpia al final.
+	for (auto weapon : vecWeapon) { //Recorre el vector soltando los weapon y lo limpia al final.
 		weapon->UnPickObject();
 	}
 	vecWeapon.clear();
-	for (auto attach: vecAttach) { //Recorre el vector soltando los agarres y lo limpia al final.
+	for (auto attach : vecAttach) { //Recorre el vector soltando los agarres y lo limpia al final.
 		attach->deAttachFromObject();
 	}
 	vecAttach.clear();

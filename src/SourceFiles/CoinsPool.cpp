@@ -18,5 +18,10 @@ void CoinsPool::addCoin(b2Vec2 pos, int player, int val) {
 	if (e != nullptr) {
 		Coin* coin = e->getComponent<Coin>(ComponentType::Coin);
 		coin->setActive(true, player, pos, val);
+		int randDirX = -1;
+		int randDirY = -1;
+		if (rand() % 2 == 1) randDirX = 1;
+		if (rand() % 2 == 1) randDirY = 1;
+		e->getComponent<Collider>(ComponentType::Collider)->applyForce(b2Vec2(rand() % 8 * randDirX, rand() % 8 * randDirY), b2Vec2(0,0));
 	}
 }

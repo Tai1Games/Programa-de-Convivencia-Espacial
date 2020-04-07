@@ -103,8 +103,8 @@ b2Filter Collider::setCollisionLayer(CollisionLayer c) {
 
 void Collider::destroyFixture(int i) {
 	body_->DestroyFixture(fixtures_[i]);
-	/*fixtures_.erase(fixtures_.begin() + i);
-	fixtureDef_.erase(fixtureDef_.begin() + i);
-	shape_.erase(shape_.begin() + i);*/
+	fixtures_.erase(fixtures_.begin() + i);
+	fixtureDefs_.erase(fixtureDefs_.begin() + i);
+	//shape_.erase(shape_.begin() + i);
 
 }

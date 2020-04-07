@@ -3,6 +3,15 @@
 #include "InputHandler.h"
 #include "Hands.h"
 #include "Health.h"
+#include "Wallet.h"
+
+int Weapon::calculateCoinsDropped(int coinsPlayer)
+{
+	if (coinsPlayer <= CONST(int, "WEAPON_HIGH_TIER_COIN_DAMAGE")) return 3;
+	else if (coinsPlayer <= CONST(int, "WEAPON_MID_TIER_COIN_DAMAGE")) return 2;
+	else if (coinsPlayer > CONST(int, "WEAPON_MID_TIER_COIN_DAMAGE")) return 1;
+	return 0;
+}
 
 void Weapon::init()
 {
@@ -13,7 +22,7 @@ void Weapon::init()
 	mainCollider_->createRectangularFixture(mainCollider_->getW(0)*4, mainCollider_->getH(0)*4, 1, 0.1, 0, Collider::CollisionLayer::PickableObject, true);
 	//Pone la informacion de esta clase en el body, para poder usarla en el Listener
 	//Tama�o del vector segun el numero de jugadores
-	playerInfo_.resize(ih_->getNumControllers());
+	playerInfo_.resize(4);
 }
 
 void Weapon::update()
@@ -110,16 +119,17 @@ void Weapon::UnPickObject()
 	if (weaponType_ == WeaponID::Chancla) {
 		//Destruimos el trigger de ataque
 		mainCollider_->destroyFixture(index);
-		index++;	//Aumenta el index para borrar la colision temporal
+		//index++;	//Aumenta el index para borrar la colision temporal
 	}
 	
 }
 
-void Weapon::SavePlayerInfo(int index, Hands* playerH, Health* healthAux)
+void Weapon::SavePlayerInfo(int index, Hands* playerH, Health* healthAux, Wallet* walletAux)
 {
 	playerInfo_[index].isNear = true;
 	playerInfo_[index].playerHands = playerH;
-	playerInfo_[index].playerHealth = healthAux;
+	if (healthAux) playerInfo_[index].playerHealth = healthAux;
+	else playerInfo_[index].playerWallet = walletAux;
 }
 void Weapon::DeletePlayerInfo(int index)
 {
@@ -156,13 +166,19 @@ void Weapon::Action() {
 
 		if (playersInsideRange_.size() > 0) {
 			//Calculo del daño de la chancla
-			damage_ = playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealthMax() - playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealth() + 1;
+			if (playerInfo_[currentHand_->getPlayerId()].playerHealth) {
+				damage_ = playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealthMax() - playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealth() + 1;
+			}
+			else damage_ = calculateCoinsDropped(playerInfo_[currentHand_->getPlayerId()].playerWallet->getCoins());
+			
 			//cout << "Golpeaste con una fuerza de " << damage_ << " al contrincante" << endl;
 			vector<EnemyData>::iterator it = playersInsideRange_.begin();
 			while (it != playersInsideRange_.end()) {
 
 				//Patear al enemigo
 				Health* auxHe = it->enemy->getComponent<Health>(ComponentType::Health);
+				Wallet* auxWa = it->enemy->getComponent<Wallet>(ComponentType::Wallet);
+
 				Collider* auxCo = it->enemy->getComponent<Collider>(ComponentType::Collider);
 
 				b2Vec2 knockback = auxCo->getPos() - mainCollider_->getPos();
@@ -170,8 +186,8 @@ void Weapon::Action() {
 				knockback *= CONST(double, "WEAPON_MELEE_KNOCKBACK");
 
 				auxCo->applyLinearImpulse(knockback, b2Vec2(0, 1));
-				auxHe->subtractLife(damage_);
-
+				if (auxHe) auxHe->subtractLife(damage_);
+				else auxWa->dropCoins(damage_, it->enemy->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber());
 
 				++it;
 			}

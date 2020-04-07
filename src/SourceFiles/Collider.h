@@ -70,6 +70,7 @@ public:
 	bool isSensor(int i) const { return fixtureDefs_[i].isSensor; }
 	bool isEnabled() const { return body_->IsEnabled(); }
 	bool isBullet() const { return body_->IsBullet(); }
+	int getNumFixtures() const { return fixtures_.size(); }
 	SDL_Rect getRect() const {
 		return SDL_Rect{
 			(int)getPos().x, (int)getPos().y,
