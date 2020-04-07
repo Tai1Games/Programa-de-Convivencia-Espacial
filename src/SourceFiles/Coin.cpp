@@ -4,6 +4,7 @@ void Coin::init() {
 	vw_ = GETCMP1_(Viewer);
 	col_ = GETCMP1_(Collider);
 	repickeableTime_ = CONST(int, "COINS_COOLDOWN_WHEN_DROPPED");
+	msPerFrame_ = CONST(double, "MS_PER_FRAME");
 }
 
 void Coin::update()

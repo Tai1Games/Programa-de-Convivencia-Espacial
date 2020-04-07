@@ -14,6 +14,6 @@ public:
 
 	void addCoin(b2Vec2 pos, int player = -1, int val = 1);
 private:
-	ObjectPool<Entity, 1000> coinsPool_;
+	ObjectPool<Entity, 20> coinsPool_;
 };
 
