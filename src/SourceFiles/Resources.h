@@ -40,6 +40,7 @@ public:
 		ProgressBar,
 		EmptyProgressBar2,
 		ProgressBar2,
+		Fireball,
 
 		// text
 		PauseText,

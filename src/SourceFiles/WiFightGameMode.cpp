@@ -1,5 +1,6 @@
 #include "WiFightGameMode.h"
 #include "Resources.h"
+#include "FireBallGenerator.h"
 
 void WiFightGameMode::init(PlayState* game)
 {
@@ -20,6 +21,12 @@ void WiFightGameMode::init(PlayState* game)
 	collRouter->applyLinearImpulse(b2Vec2(100,100), b2Vec2(0, 0));
 
 	GameMode::initProgressBars();
+
+	Entity* lacalderilla = state_->getEntityManager()->addEntity();
+																				//x,                              y								    w,  h  ,density,friction,restitution,linearDrag, angularDrag,	 Laye,  sensor,  canBeAttached
+	Collider* colCaldera = lacalderilla->addComponent<Collider>(state_->getPhysicsWorld(), b2_staticBody, CONST(int, "WINDOW_WIDTH") / 2, CONST(int, "WINDOW_HEIGHT") / 2,10, 10 ,1      ,0        ,0       ,0,0, Collider::CollisionLayer::Trigger,true);
+	colCaldera->setUserData(colCaldera);
+	lacalderilla->addComponent<FireBallGenerator>(state_->getPhysicsWorld());
 }
 
 void WiFightGameMode::render()
