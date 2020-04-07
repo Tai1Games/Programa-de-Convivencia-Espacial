@@ -64,7 +64,7 @@ public:
 
 	void exitChanclaTrigger(b2Contact* contact);
 
-	bool AttachableObjectCollidesWithPlayer(b2Fixture* fixA, AttachesToObjects*& player);
+	bool AttachableObjectCollidesWithPlayer(b2Fixture* fixA, b2Fixture* fixB, AttachesToObjects*& player);
 	
     bool PlayerCanPickWeapon(b2Contact* contact, Weapon* &pickableObj, Hands* &player);
 

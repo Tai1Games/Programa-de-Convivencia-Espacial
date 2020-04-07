@@ -82,16 +82,36 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	Wallet* playerWallet = nullptr;
 	Coin* coin = nullptr;
 
+	if (fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Player && fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Wall) {
+		cout << "sijaja";
+	}
 	//Comprueba que FixA es el jugador, que FixB es un trigger, que el jugador está presionando la tecla A (mando) o Space (teclado) y que no está agarrado a nada más.
-	if (AttachableObjectCollidesWithPlayer(fixA, player_AttachesToObjects) && (fixB->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject || fixB->GetFilterData().categoryBits == Collider::Wall) && player_AttachesToObjects->canAttachToObject()) {
+	/*if (AttachableObjectCollidesWithPlayer(fixB, player_AttachesToObjects) && (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject || fixA->GetFilterData().categoryBits == Collider::Wall) && player_AttachesToObjects->canAttachToObject()) {
 		b2WorldManifold manifold; //Una manifold es un registro donde se guardan todas las colisiones
 		contact->GetWorldManifold(&manifold); //Obtenemos la manifold global
 		weldData newWeld; //Struct donde guardamos los datos necesarios para crear un weld
 		newWeld.player = player_AttachesToObjects;
-		newWeld.bodyToBeAttached = fixB->GetBody();
+		newWeld.bodyToBeAttached = fixA->GetBody();
 		newWeld.collPoint = b2Vec2(manifold.points[0].x, manifold.points[0].y); //Punto de colisi�n. En cualquier colisi�n siempre hay 2 puntos de colisi�n. Con 1 nos basta.
 		vecWeld.push_back(newWeld); //Metemos el weldData en el vector. La raz�n por la que no hacemos el joint ya es porque no se puede crear un joint en medio de un step.
+	}*/
+	if (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Player && (fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Wall || fixB->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject) ||
+		fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Player && (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Wall || fixA->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject)) {
+		
+		if (AttachableObjectCollidesWithPlayer(fixA, fixB, player_AttachesToObjects) && player_AttachesToObjects->canAttachToObject()) {
+			b2Body* bodyToBeAttached = fixA->GetBody();
+			if (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Player) bodyToBeAttached = fixB->GetBody();
+			b2WorldManifold manifold; //Una manifold es un registro donde se guardan todas las colisiones
+			contact->GetWorldManifold(&manifold); //Obtenemos la manifold global
+			weldData newWeld; //Struct donde guardamos los datos necesarios para crear un weld
+			newWeld.player = player_AttachesToObjects;
+			newWeld.bodyToBeAttached = bodyToBeAttached;
+			newWeld.collPoint = b2Vec2(manifold.points[0].x, manifold.points[0].y); //Punto de colisi�n. En cualquier colisi�n siempre hay 2 puntos de colisi�n. Con 1 nos basta.
+			vecWeld.push_back(newWeld); //Metemos el weldData en el vector. La raz�n por la que no hacemos el joint ya es porque no se puede crear un joint en medio de un step.
+		}
 	}
+
+
 	else if (fixB->GetFilterData().categoryBits) {
 		//check collision then do whatever, in this case twice because it might be two players colliding
 		if (ObjectCollidesWithPlayer(fixA, player_Health, playerWallet, playerData) && !fixB->IsSensor()) {
@@ -273,8 +293,10 @@ bool CollisionHandler::CoinCollidesWithPlayer(b2Contact* contact, Wallet*& playe
 	return false;
 }
 
-bool CollisionHandler::AttachableObjectCollidesWithPlayer(b2Fixture* fixA, AttachesToObjects*& player) {
-	return (player = static_cast<AttachesToObjects*>(static_cast<Entity*>(fixA->GetBody()->GetUserData())->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects)));
+bool CollisionHandler::AttachableObjectCollidesWithPlayer(b2Fixture* fixA, b2Fixture* fixB, AttachesToObjects*& player) {
+	if (player = static_cast<AttachesToObjects*>(static_cast<Entity*>(fixA->GetBody()->GetUserData())->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects))) return true;
+	else if (player = static_cast<AttachesToObjects*>(static_cast<Entity*>(fixB->GetBody()->GetUserData())->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects))) return true;
+	return false;
 }
 
 //Checks if one fixture belongs to a Player (PlayerData and Collider component) and if the other fixture belongs to a Router (RouterLogic component)
