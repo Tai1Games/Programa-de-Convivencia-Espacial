@@ -5,23 +5,27 @@ EntityManager::EntityManager() {}
 
 EntityManager::~EntityManager() {
 	entities_.clear();
+	externalEntities_.clear();
 }
 
 void EntityManager::update() {
 	for (auto& e : entities_) {
 		e->update();
 	}
+	for (auto e : externalEntities_) e->update();
 }
 
 void EntityManager::render() {
 	for (auto& e : entities_) {
 		e->render();
 	}
+	for (auto e : externalEntities_) e->render();
 }
 void EntityManager::handleInput() {
 	for (auto& e : entities_) {
 		e->handleInput();
 	}
+	for (auto e : externalEntities_) e->handleInput();
 }
 
 Entity* EntityManager::addEntity() {
@@ -33,6 +37,5 @@ Entity* EntityManager::addEntity() {
 
 void EntityManager::addExistingEntity(Entity* e) {
 	e->setEntityManager(this);
-	std::unique_ptr<Entity> uPtr(e);
-	entities_.emplace_back(std::move(uPtr));
+	externalEntities_.push_back(e);
 }

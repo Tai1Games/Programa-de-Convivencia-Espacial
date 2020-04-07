@@ -13,7 +13,7 @@ private:
 	Entity* router = nullptr;
 public:
 	WiFightGameMode(int nPlayers): GameMode(nPlayers) {};
-	~WiFightGameMode() {};
+	virtual ~WiFightGameMode() {};
 	virtual void init(PlayState* game);
 	virtual void render();
 	void addPoints(int player, double sumPoints);

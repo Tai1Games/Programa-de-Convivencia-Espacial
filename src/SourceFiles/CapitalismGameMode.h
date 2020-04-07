@@ -8,11 +8,11 @@ class CapitalismGameMode : public GameMode
 private:
 	CoinsPool coinPool_;
 	double timeSinceStart = 0;
-	double msPerFrame_; //Se inicializa en el init
-	double timeToEnd_; //Se inicaliza en el init
+	double msPerFrame_ = 0; //Se inicializa en el init
+	double timeToEnd_ = 0; //Se inicaliza en el init
 public:
 	CapitalismGameMode(int nPlayers) : GameMode(nPlayers){};
-	~CapitalismGameMode() {};
+	virtual ~CapitalismGameMode() {};
 	virtual void init(PlayState* game);
 	virtual void render() {};
 	virtual void update();

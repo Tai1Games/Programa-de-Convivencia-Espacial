@@ -22,5 +22,6 @@ public:
 
 private:
 	std::vector<std::unique_ptr<Entity>> entities_;
+	std::vector<Entity*> externalEntities_;
 };
 
