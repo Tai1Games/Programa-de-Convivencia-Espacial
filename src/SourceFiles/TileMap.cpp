@@ -165,6 +165,9 @@ void TileMap::executeMapFactory()
 		else if (name == "SpaceJunk") {
 			WeaponFactory::makeSpaceJunk(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
 		}
+		else if (name == "Dumbbell") {
+			WeaponFactory::makeDumbbell(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
+		}
 	}
 }
 

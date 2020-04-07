@@ -18,6 +18,17 @@ Weapon* WeaponFactory::makeController(EntityManager* entityManager, b2World* phy
 	return controller;
 }
 
+void WeaponFactory::makeDumbbell(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
+{
+	Entity* e = entityManager->addEntity();
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "DUMBBELL_DENSITY"),
+		CONST(double, "DUMBBELL_FRICTION"), CONST(double, "DUMBBELL_RESTITUTION"),
+		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent <Viewer>(Resources::Mancuerna);
+	e->addComponent<Weapon>(WeaponID::Mancuerna);
+	aux->setUserData(e);
+}
+
 
 void WeaponFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 	Entity* e = entityManager->addEntity();
