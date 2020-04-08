@@ -4,8 +4,10 @@
 #include "Collider.h"
 #include "Viewer.h"
 #include "Health.h"
+#include "Wallet.h"
 #include "Constants.h"
 #include "checkML.h"
+
 
 class Hands;
 
@@ -15,6 +17,7 @@ struct PlayerInfo
 	bool isNear = false;
 	Hands* playerHands = nullptr;
 	Health* playerHealth = nullptr;
+	Wallet* playerWallet = nullptr;
 };
 struct EnemyData{
 	int id=-1;
@@ -40,6 +43,8 @@ protected:
 	int actionTime = 0;
 	int index = 2;
 
+	int calculateCoinsDropped(int coinsPlayer);
+
 public:
 	Weapon(WeaponID wId): Component(ComponentType::Weapon), weaponType_(wId){}
 	~Weapon(){};
@@ -56,7 +61,7 @@ public:
 	/*Reactiva el arma y la lanza en direcci�n de la mano*/
 	void UnPickObject();
 	/*Guarda la informacion del jugador que est� dentro del trigger*/
-	void SavePlayerInfo(int index, Hands* playerH, Health* healthAux);
+	void SavePlayerInfo(int index, Hands* playerH, Health* healthAux, Wallet* walletAux);
 	/*Borra la informacion del jugador que sale del trigger*/
 	void DeletePlayerInfo(int index);
 
