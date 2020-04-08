@@ -10,17 +10,19 @@ void CapitalismGameMode::init(PlayState* game)
 	minimumSpawnTime_ = CONST(double, "MINIMUM_SPAWN_COIN_TIME");
 	maxCoins_ = CONST(int, "TOTAL_COIN_NUMBER");
 	currentSpawnTime_ = spawnTime_;
+	coinSpawnersPositions_ = tilemap_->getCoinsSpawnPoints();
+
+	for (b2Vec2 pos : coinSpawnersPositions_) {
+		roombaColliders_.push_back(ObjectFactory::createRoomba(game->getEntityManager(),
+			game->getPhysicsWorld(), pos)->getComponent<Collider>(ComponentType::Collider));
+	}
+
 	for (int k = 0; k < nPlayers_; k++) {
 		players_.push_back(PlayerFactory::createPlayerWithWallet(game->getEntityManager(), game->getPhysicsWorld(), k,
 			Resources::Body, tilemap_->getPlayerSpawnPoint(k).x, tilemap_->getPlayerSpawnPoint(k).y, this));
 	}
 
-	coinSpawnersPositions_ = tilemap_->getCoinsSpawnPoints();
-
-	for (b2Vec2 pos: coinSpawnersPositions_) {
-		roombaColliders_.push_back(ObjectFactory::createRoomba(game->getEntityManager(), 
-			game->getPhysicsWorld(), pos)->getComponent<Collider>(ComponentType::Collider));
-	}
+	
 }
 
 void CapitalismGameMode::update() {
@@ -40,7 +42,7 @@ void CapitalismGameMode::update() {
 		}
 		if (!draw) {
 			roundFinished_ = true;
-			cout << "PLAYER: " << winner_->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber() << "WON." << endl;
+			cout << "PLAYER: " << winner_->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber() << " WON." << endl;
 		}
 
 	}
