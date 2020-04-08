@@ -11,6 +11,7 @@ void CoinsPool::init(EntityManager* eMan, b2World* physicsWorld) {
 		ObjectFactory::makeCoin(e, eMan, physicsWorld, b2Vec2(0, 0), 1);
 		e->getComponent<Coin>(ComponentType::Coin)->setActive(false);
 	}
+	coinMaxSpeed_ = CONST(int, "COIN_MAX_SPEED");
 }
 
 void CoinsPool::addCoin(b2Vec2 pos, int player, int val) {
@@ -22,6 +23,6 @@ void CoinsPool::addCoin(b2Vec2 pos, int player, int val) {
 		int randDirY = -1;
 		if (rand() % 2 == 1) randDirX = 1;
 		if (rand() % 2 == 1) randDirY = 1;
-		e->getComponent<Collider>(ComponentType::Collider)->applyForce(b2Vec2(rand() % 8 * randDirX, rand() % 8 * randDirY), b2Vec2(0,0));
+		e->getComponent<Collider>(ComponentType::Collider)->applyForce(b2Vec2(rand() % coinMaxSpeed_ * randDirX, rand() % coinMaxSpeed_ * randDirY), b2Vec2(0,0));
 	}
 }

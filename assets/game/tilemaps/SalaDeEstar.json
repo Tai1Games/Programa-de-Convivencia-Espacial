@@ -61,74 +61,62 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
         {
          "draworder":"topdown",
          "id":8,
-         "name":"Coins",
+         "name":"CoinSpawners",
          "objects":[
                 {
                  "height":0,
-                 "id":41,
+                 "id":46,
                  "name":"",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":396,
-                 "y":156
+                 "x":310.666666666667,
+                 "y":337.333333333333
                 }, 
                 {
                  "height":0,
-                 "id":42,
+                 "id":47,
                  "name":"",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":488,
-                 "y":240
+                 "x":925.333333333333,
+                 "y":340
                 }, 
                 {
                  "height":0,
-                 "id":43,
+                 "id":48,
                  "name":"",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":617.333333333333,
-                 "y":349.333333333333
+                 "x":626.666666666667,
+                 "y":134.666666666667
                 }, 
                 {
                  "height":0,
-                 "id":44,
+                 "id":49,
                  "name":"",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":729.333333333333,
-                 "y":418.666666666667
-                }, 
-                {
-                 "height":0,
-                 "id":45,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":964,
-                 "y":505.333333333333
+                 "x":610.666666666667,
+                 "y":584
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -313,10 +301,10 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":46,
+ "nextobjectid":50,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.3.3",
+ "tiledversion":"1.3.1",
  "tileheight":16,
  "tilesets":[],
  "tilewidth":16,

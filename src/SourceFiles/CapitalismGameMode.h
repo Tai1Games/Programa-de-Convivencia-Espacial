@@ -2,16 +2,24 @@
 #include "GameMode.h"
 #include "PlayState.h"
 #include "CoinsPool.h"
+#include "Collider.h"
 
 class CapitalismGameMode : public GameMode
 {
 private:
 	CoinsPool coinPool_;
-	double timeSinceStart = 0;
-	double msPerFrame_ = 0; //Se inicializa en el init
+	double timeSinceStart_ = 0;
+	double timeSinceSpawn_ = 0;
+	double spawnTime_ = 0;
+	double currentSpawnTime_ = 0;
+	double minimumSpawnTime_ = 0;
+	double sPerFrame_ = 0; //Se inicializa en el init
 	double timeToEnd_ = 0; //Se inicaliza en el init
+	int coinsSpawned_ = 0;
+	int maxCoins_ = 0;
 
-	std::vector<b2Vec2> coinsSpawnPoints_;
+	std::vector<b2Vec2> coinSpawnersPositions_;
+	std::vector<Collider*> roombaColliders_;
 public:
 	CapitalismGameMode(int nPlayers) : GameMode(nPlayers){};
 	virtual ~CapitalismGameMode() {};
