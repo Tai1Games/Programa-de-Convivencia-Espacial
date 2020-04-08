@@ -18,6 +18,7 @@ protected:
 
 	std::vector<b2Vec2> playerSpawnPoints_;
 	b2Vec2 specialObjectsSpawnPoint_; //mando de la tele, router
+	std::vector<b2Vec2> coinsSpawnPoints_; //guarda posicions monedas
 
 private:
 	Texture* debugT_;
@@ -37,5 +38,6 @@ public:
 
 	b2Vec2 getPlayerSpawnPoint(int id);
 	b2Vec2 getObjSpecialSpawnPos() { return specialObjectsSpawnPoint_; };
+	std::vector<b2Vec2> getCoinsSpawnPoints() { return coinsSpawnPoints_; }
 };
 

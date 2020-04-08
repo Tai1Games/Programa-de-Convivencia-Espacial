@@ -10,6 +10,8 @@ private:
 	double timeSinceStart = 0;
 	double msPerFrame_ = 0; //Se inicializa en el init
 	double timeToEnd_ = 0; //Se inicaliza en el init
+
+	std::vector<b2Vec2> coinsSpawnPoints_;
 public:
 	CapitalismGameMode(int nPlayers) : GameMode(nPlayers){};
 	virtual ~CapitalismGameMode() {};

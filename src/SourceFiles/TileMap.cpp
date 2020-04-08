@@ -43,6 +43,9 @@ void TileMap::init() {
 				else if (tileLayer.getName() == "Weapons") {
 					factoryItems_.push_back(obj);
 				}
+				else if (tileLayer.getName() == "Coins") {
+					coinsSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
+				}
 			}
 		}
 	}

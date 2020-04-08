@@ -10,6 +10,9 @@ void CapitalismGameMode::init(PlayState* game)
 		players_.push_back(PlayerFactory::createPlayerWithWallet(game->getEntityManager(), game->getPhysicsWorld(), k,
 			Resources::Body, tilemap_->getPlayerSpawnPoint(k).x, tilemap_->getPlayerSpawnPoint(k).y, this));
 	}
+
+	coinsSpawnPoints_ = tilemap_->getCoinsSpawnPoints();
+
 }
 
 void CapitalismGameMode::update() {
