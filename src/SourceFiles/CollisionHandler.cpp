@@ -9,29 +9,38 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health*
 
 	int impact = force.Length();
 
-	//Depending on the force of impact we apply damage to the player
-	if (impact >= CONST(int, "LOW_DAMAGE")&& CONST(double, "MEDIUM_DAMAGE")) {playerHealth->subtractLife(1); }
+	Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
+	//Si se impacta con un arma al umbral más alto de fuerza, se recibe su daño de impacto
+	if (w != nullptr) {
+		if(impact >= CONST(double, "HIGH_DAMAGE"))
+		playerHealth->subtractLife(w->getImpactDamage());
+	}
+	else {
+		//Depending on the force of impact we apply damage to the player
+		if (impact >= CONST(int, "LOW_DAMAGE") && CONST(double, "MEDIUM_DAMAGE")) { playerHealth->subtractLife(1); }
 
-	if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) {playerHealth->subtractLife(2);}
+		if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) { playerHealth->subtractLife(2); }
 
-	if (impact >= CONST(double, "HIGH_DAMAGE")) {playerHealth->subtractLife(3);}
-
+		if (impact >= CONST(double, "HIGH_DAMAGE")) { 
+			playerHealth->subtractLife(3); }
+	}
+	
 	if (playerHealth->getHealth() <= 0)
 	{
 		//reset player
 
 		//soltar objetos agarrados
-		AttachesToObjects* a = static_cast<AttachesToObjects*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects));
+		AttachesToObjects* a = GETCMP_FROM_FIXTURE_(player, AttachesToObjects);
 		if (a != nullptr && a->isAttached()) vecAttach.push_back(a);
 		//soltar arma
-		Hands* h = static_cast<Hands*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<Hands>(ComponentType::Hands));
+		Hands* h = GETCMP_FROM_FIXTURE_(player, Hands);
 		Weapon* w = nullptr;
 		if (h != nullptr) w = h->getWeapon();
 		if (w != nullptr) vecWeapon.push_back(w);
 		//respawn
 		StocksGameMode* s = nullptr;
 		bool stocks = (s = dynamic_cast<StocksGameMode*>(gMode_));
-		PlayerData* p = static_cast<PlayerData*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<PlayerData>(ComponentType::PlayerData));
+		PlayerData* p = GETCMP_FROM_FIXTURE_(player, PlayerData);
 		moveData m;
 		m.body = player->GetBody();
 		m.pos = b2Vec2(tilemap_->getPlayerSpawnPoint(p->getPlayerNumber()).x, tilemap_->getPlayerSpawnPoint(p->getPlayerNumber()).y); //punto de respawn provisional
@@ -93,9 +102,9 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	{
 		Entity* aux = static_cast<Entity*>(fixB->GetBody()->GetUserData());
 		Entity* aux2 = static_cast<Entity*>(fixA->GetBody()->GetUserData());
-
-		Weapon* weAux = aux->getComponent<Weapon>(ComponentType::Weapon);
-		Hands* haAux = aux2->getComponent<Hands>(ComponentType::Hands);
+		
+		Weapon* weAux = GETCMP2(aux, Weapon);
+		Hands* haAux = GETCMP2(aux2, Hands);
 
 		player_Health = nullptr;	//Lo reseteamos para evitar problemas
 
@@ -112,8 +121,8 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		Entity* aux = static_cast<Entity*>(fixA->GetBody()->GetUserData());
 		Entity* aux2 = static_cast<Entity*>(fixB->GetBody()->GetUserData());
 
-		Weapon* weAux = aux->getComponent<Weapon>(ComponentType::Weapon);
-		Hands* haAux = aux2->getComponent<Hands>(ComponentType::Hands);
+		Weapon* weAux = GETCMP2(aux, Weapon);
+		Hands* haAux = GETCMP2(aux2, Hands);
 		
 		player_Health = nullptr;	//Lo reseteamos para evitar problemas
 
@@ -221,24 +230,24 @@ bool CollisionHandler::PlayerCanPickWeapon(b2Contact* contact, Weapon*& pickable
 	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
 	if ((fixAentity->hasComponent(ComponentType::Weapon)) &&
-		(pickableObj = static_cast<Weapon*>(fixAentity->getComponent<Weapon>(ComponentType::Weapon))) &&
+		(pickableObj = static_cast<Weapon*>(GETCMP2(fixAentity, Weapon))) &&
 		fixBentity->hasComponent(ComponentType::Hands)) {
 
-		player = static_cast<Hands*>(fixBentity->getComponent<Hands>(ComponentType::Hands));
+		player = static_cast<Hands*>(GETCMP2(fixBentity, Hands));
 		return true;
 	}
 	else if ((fixBentity->hasComponent(ComponentType::Weapon)) &&
-		(pickableObj = static_cast<Weapon*>(fixBentity->getComponent<Weapon>(ComponentType::Weapon))) &&
+		(pickableObj = static_cast<Weapon*>(GETCMP2(fixBentity, Weapon))) &&
 		fixAentity->hasComponent(ComponentType::Hands)) {
 
-		player = static_cast<Hands*>(fixAentity->getComponent<Hands>(ComponentType::Hands));
+		player = static_cast<Hands*>(GETCMP2(fixAentity, Hands));
 		return true;
 	}
 	return false;
 }
 
 bool CollisionHandler::AttachableObjectCollidesWithPlayer(b2Fixture* fixA, AttachesToObjects*& player) {
-	return (player = static_cast<AttachesToObjects*>(static_cast<Entity*>(fixA->GetBody()->GetUserData())->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects)));
+	return (player = GETCMP_FROM_FIXTURE_(fixA,AttachesToObjects));
 }
 
 //Checks if one fixture belongs to a Player (PlayerData and Collider component) and if the other fixture belongs to a Router (RouterLogic component)
@@ -247,17 +256,17 @@ bool CollisionHandler::PlayerCollidesWithRouterArea(b2Contact* contact, RouterLo
 	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
 	if (fixAentity->hasComponent(ComponentType::RouterLogic) && fixBentity->hasComponent(ComponentType::Collider) && fixBentity->hasComponent(ComponentType::PlayerData)) {
-		router = static_cast<RouterLogic*>(fixAentity->getComponent<RouterLogic>(ComponentType::RouterLogic));
-		playerData = static_cast<PlayerData*>(fixBentity->getComponent<PlayerData>(ComponentType::PlayerData));
-		collPlayer = static_cast<Collider*>(fixBentity->getComponent<Collider>(ComponentType::Collider));
+		router = static_cast<RouterLogic*>(GETCMP2(fixAentity, RouterLogic));
+		playerData = static_cast<PlayerData*>(GETCMP2(fixBentity, PlayerData));
+		collPlayer = static_cast<Collider*>(GETCMP2(fixBentity, Collider));
 
 		return true;
 	}
 
 	else if (fixBentity->hasComponent(ComponentType::RouterLogic) && fixAentity->hasComponent(ComponentType::Collider) && fixAentity->hasComponent(ComponentType::PlayerData)) {
-		router = static_cast<RouterLogic*>(fixBentity->getComponent<RouterLogic>(ComponentType::RouterLogic));
-		playerData = static_cast<PlayerData*>(fixAentity->getComponent<PlayerData>(ComponentType::PlayerData));
-		collPlayer = static_cast<Collider*>(fixAentity->getComponent<Collider>(ComponentType::Collider));
+		router = static_cast<RouterLogic*>(GETCMP2(fixBentity, RouterLogic));
+		playerData = static_cast<PlayerData*>(GETCMP2(fixAentity, PlayerData));
+		collPlayer = static_cast<Collider*>(GETCMP2(fixAentity, Collider));
 
 		return true;
 	}
@@ -272,14 +281,14 @@ void CollisionHandler::exitChanclaTrigger(b2Contact* contact) {
 	if (fixAentity->hasComponent(ComponentType::Health)) {
 		if (fixBentity->hasComponent(ComponentType::Weapon) && fixAentity->hasComponent(ComponentType::PlayerData)) {
 			
-			fixBentity->getComponent<Weapon>(ComponentType::Weapon)->loseContactPlayer(fixAentity, fixAentity->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
+			GETCMP2(fixBentity, Weapon)->loseContactPlayer(fixAentity, GETCMP2(fixAentity, PlayerData)->getId());
 
 		}
 	}
 	else if (fixBentity->hasComponent(ComponentType::Health)) {
 		if (fixAentity->hasComponent(ComponentType::Weapon) && fixBentity->hasComponent(ComponentType::PlayerData)) {
 			
-			fixAentity->getComponent<Weapon>(ComponentType::Weapon)->loseContactPlayer(fixBentity, fixBentity->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
+			GETCMP2(fixAentity, Weapon)->loseContactPlayer(fixBentity, GETCMP2(fixBentity, PlayerData)->getId());
 
 		}
 	}
