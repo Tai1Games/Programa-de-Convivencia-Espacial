@@ -1,4 +1,13 @@
-{ "height":45,
+{ "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"SalaDeEstar.json"
+        }
+    },
+ "height":45,
  "infinite":false,
  "layers":[
         {
@@ -166,6 +175,17 @@
                  "width":0,
                  "x":936,
                  "y":156
+                }, 
+                {
+                 "height":54.3333333333333,
+                 "id":41,
+                 "name":"Pad",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":153.666666666667,
+                 "x":157.333333333333,
+                 "y":45.3333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -233,10 +253,10 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":41,
+ "nextobjectid":42,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.0",
+ "tiledversion":"1.3.3",
  "tileheight":16,
  "tilesets":[],
  "tilewidth":16,

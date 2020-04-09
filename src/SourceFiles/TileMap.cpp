@@ -42,7 +42,7 @@ void TileMap::init() {
 				}
 				else if (tileLayer.getName() == "Weapons") {
 					factoryItems_.push_back(obj);
-				}
+				}				
 			}
 		}
 	}
@@ -164,6 +164,9 @@ void TileMap::executeMapFactory()
 		}
 		else if (name == "SpaceJunk") {
 			WeaponFactory::makeSpaceJunk(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
+		}
+		else if (name == "Pad") {
+			WeaponFactory::makePad(entityManager_, physicsWorld_, pos, b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER")));
 		}
 	}
 }

@@ -26,12 +26,13 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Slider, "../../assets/game/textures/Slider.png"},
 	{ SliderControl, "../../assets/game/textures/SliderControl.png"},
 	{ SalaDeEstar,"../../assets/game/textures/SalaDeEstar.png"},
-	{Negro ,"../../assets/game/textures/Negro.png"},
-	{Router,"../../assets/game/textures/Router.png" },
+	{ Negro ,"../../assets/game/textures/Negro.png"},
+	{ Router,"../../assets/game/textures/Router.png" },
 	{ EmptyProgressBar, "../../assets/game/textures/EmptyProgressBar.png"},
 	{ ProgressBar, "../../assets/game/textures/ProgressBar.png"},
 	{ EmptyProgressBar2, "../../assets/game/textures/EmptyProgressBar2.png"},
 	{ ProgressBar2, "../../assets/game/textures/ProgressBar2.png"},
+	{ Pad,"../../assets/game/textures/Colchoneta.png" },
 
 		{ TSet_Kenney1bit , "../../assets/game/tilemaps/modded_colored.png"},
 		{ TSet_Dungeon , "../../assets/game/tilemaps/dungeon_ts.png"}
