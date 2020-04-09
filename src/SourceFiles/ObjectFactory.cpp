@@ -10,6 +10,8 @@
 #include "Weapon.h"
 #include "Hands.h"
 #include "Coin.h"
+#include "ExtinguisherWeapon.h"
+#include "ParticleEmitter.h"
 
 void ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 	Entity* e = entityManager->addEntity();
@@ -46,7 +48,9 @@ void ObjectFactory::makeExtinguisher(EntityManager* entityManager, b2World* phys
 	Entity* entity = entityManager->addEntity();
 	Collider* aux = entity->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "EXTINGUISHER_DENSITY"), CONST(double, "EXTINGUISHER_FRICTION"), CONST(double, "EXTINGUISHER_RESTITUTION"), CONST(double, "EXTINGUISHER_LINEAR_DRAG"), CONST(double, "STAPLER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	entity->addComponent<Viewer>(Resources::Extinguisher);
-	entity->addComponent<Weapon>(WeaponID::Extinguisher);
+	entity->addComponent<ParticleEmitter>(Vector2D(0,-1),Resources::Coin,10);
+	entity->addComponent<ExtinguisherWeapon>(WeaponID::Extinguisher);
+	aux->setUserData(entity);
 }
 
 void ObjectFactory::makeWall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
