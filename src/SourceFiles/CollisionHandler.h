@@ -10,6 +10,7 @@
 #include "PlayerData.h"
 #include "GameMode.h"
 #include "TileMap.h"
+#include "Pad.h"
 #include "checkML.h"
 
 class RouterLogic;
@@ -63,6 +64,8 @@ public:
 	bool AttachableObjectCollidesWithPlayer(b2Fixture* fixA, AttachesToObjects*& player);
 	
     bool PlayerCanPickWeapon(b2Contact* contact, Weapon* &pickableObj, Hands* &player);
+
+	bool PlayerCollidesWithMat(b2Contact* contact, Collider*& playerCollider, Collider*& matCollider, Pad*& pad);
 
 	vector<bodyData> getBodyData() { return vecBody; }
 
