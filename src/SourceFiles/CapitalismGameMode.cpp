@@ -1,12 +1,12 @@
 #include "CapitalismGameMode.h"
 #include "FireBallGenerator.h"
-#include "FireBallPool.h"
+
 
 void CapitalismGameMode::init(PlayState* game)
 {
 	GameMode::init(game);
 	coinPool_.init(game->getEntityManager(), game->getPhysicsWorld());
-	fireballPool_.init();
+	fireballPool_.init(game->getEntityManager(), game->getPhysicsWorld());
 	sPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 	timeToEnd_ = CONST(double, "TIME_TO_END");
 	spawnTime_ = CONST(double, "TIME_TO_SPAWN_COIN");
@@ -25,12 +25,7 @@ void CapitalismGameMode::init(PlayState* game)
 			Resources::Body, tilemap_->getPlayerSpawnPoint(k).x, tilemap_->getPlayerSpawnPoint(k).y, this));
 	}
 
-	Entity* lacalderilla = state_->getEntityManager()->addEntity();
-	//x,y								    w,  h  ,density,friction,restitution,linearDrag, angularDrag,	 Laye,  sensor,  canBeAttached
-	Collider* colCaldera = lacalderilla->addComponent<Collider>(state_->getPhysicsWorld(), b2_staticBody, CONST(int, "WINDOW_WIDTH") / 2, CONST(int, "WINDOW_HEIGHT") / 2, 10, 10, 1, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
-	colCaldera->setUserData(colCaldera);
-	lacalderilla->addComponent<FireBallGenerator>(state_->getPhysicsWorld());
-	lacalderilla->addComponent<Viewer>();
+	ObjectFactory::createBoiler(game->getEntityManager(), game->getPhysicsWorld(), b2Vec2(500, 500));
 
 	
 }

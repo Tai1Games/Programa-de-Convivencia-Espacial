@@ -3,14 +3,13 @@
 #include "PlayState.h"
 #include "CoinsPool.h"
 #include "Collider.h"
-
-class FireballPool;
+#include "FireBallPool.h"
 
 class CapitalismGameMode : public GameMode
 {
 private:
 	CoinsPool coinPool_;
-	FireballPool fireballPool_;
+	FireBallPool fireballPool_;
 	double timeSinceStart_ = 0;
 	double timeSinceSpawn_ = 0;
 	double spawnTime_ = 0;
