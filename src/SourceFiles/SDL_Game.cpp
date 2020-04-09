@@ -13,7 +13,9 @@ SDL_Game::SDL_Game() {
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 
 	initializeResources();
-	//Prueba multimedia
+
+
+	//Splashscreen
 	textures_->getTexture(Resources::Tinky)->render({ constants_.getConstant<int>("WINDOW_WIDTH") / 2 - 70,constants_.getConstant<int>("WINDOW_HEIGHT") / 2 - 135,140,200 });
 
 	Texture introText(renderer_,
@@ -24,6 +26,7 @@ SDL_Game::SDL_Game() {
 		constants_.getConstant<int>("WINDOW_WIDTH") / 2 - introText.getWidth() / 2, constants_.getConstant<int>("WINDOW_HEIGHT") - 250);
 	SDL_RenderPresent(renderer_);
 
+	MS_PER_FRAME_ = constants_.getConstant<double>("MS_PER_FRAME");
 
 	audio_->setMusicVolume(constants_.getConstant<int>("MAX_MUSIC_VOLUME"));
 	//audio_->playMusic(Resources::MainTheme, -1);
@@ -104,8 +107,8 @@ void SDL_Game::start() {
 			gamestateMachine_->update();
 			gamestateMachine_->render();
 			Uint32 frameTime = getTime() - startTime;
-			if (frameTime < CONST(double, "MS_PER_FRAME"))
-				SDL_Delay(CONST(double, "MS_PER_FRAME") - frameTime);
+			if (frameTime < MS_PER_FRAME_)
+				SDL_Delay(MS_PER_FRAME_ - frameTime);
 			else
 				cout << "LAGGING BEHIND!" << endl << endl;
 		}

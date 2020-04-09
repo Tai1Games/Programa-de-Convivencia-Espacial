@@ -201,9 +201,6 @@
     <ClInclude Include="ParticleEmitter.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="MeleeWeapon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -337,9 +334,6 @@
     </ClCompile>
     <ClCompile Include="ParticleEmitter.cpp">
       <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="MeleeWeapon.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

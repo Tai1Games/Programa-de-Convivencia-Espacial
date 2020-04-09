@@ -72,7 +72,7 @@ void Weapon::PickObjectBy(Hands* playerH)
 		currentHand_ = playerH;
 		picked_ = true;
 		currentHand_->setWeapon(weaponType_, this);
-		if (weaponType_ == WeaponID::Chancla) {
+		if (weaponType_ == WeaponID::Slipper) {
 			//Creamos el trigger de ataque
 			mainCollider_->createRectangularFixture(mainCollider_->getW(0)*2, mainCollider_->getH(0)*2, 1, 0.1, 0, Collider::CollisionLayer::PickableObject, true);
 			//Trigger de la Chancla(Cambiamos con quien colisiona)
@@ -95,7 +95,7 @@ void Weapon::UnPickObject()
 {
 	currentHand_->setWeapon(NoWeapon, nullptr);
 	picked_ = false;
-	if (weaponType_ == WeaponID::Chancla) {
+	if (weaponType_ == WeaponID::Slipper) {
 		
 		//Trigger de la Chancla(Restairamos sus capas de colision)
 		b2Filter aux1 = mainCollider_->getFixture(0)->GetFilterData();
@@ -116,7 +116,7 @@ void Weapon::UnPickObject()
 	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * CONST(double, "WEAPON_THROW_SPEED"), -currentHand_->getDir().y * CONST(double, "WEAPON_THROW_SPEED")), mainCollider_->getBody()->GetLocalCenter());
 	mainCollider_->getBody()->SetAngularVelocity(CONST(double, "WEAPON_SPIN_SPEED"));
 	currentHand_ = nullptr;
-	if (weaponType_ == WeaponID::Chancla) {
+	if (weaponType_ == WeaponID::Slipper) {
 		//Destruimos el trigger de ataque
 		mainCollider_->destroyFixture(index);
 		//index++;	//Aumenta el index para borrar la colision temporal
@@ -139,7 +139,7 @@ void Weapon::DeletePlayerInfo(int index)
 
 void Weapon::detectPlayer(Entity* playerDetected, int id)
 {
-	if (weaponType_ == WeaponID::Chancla) {
+	if (weaponType_ == WeaponID::Slipper) {
 		cout << "Enemigo en rango" << endl;
 		EnemyData newEnemy;
 		newEnemy.enemy = playerDetected;
@@ -149,7 +149,7 @@ void Weapon::detectPlayer(Entity* playerDetected, int id)
 }
 
 void Weapon::loseContactPlayer(Entity* playerDetected, int id) {
-	if (weaponType_==WeaponID::Chancla && playersInsideRange_.size() > 0) {	//Salta error ya que el vector está vacio
+	if (weaponType_==WeaponID::Slipper && playersInsideRange_.size() > 0) {	//Salta error ya que el vector está vacio
 		vector<EnemyData>::iterator it = playersInsideRange_.begin();
 		while (it->id != id && it->enemy != playerDetected && it != playersInsideRange_.end()) {
 			++it;
@@ -162,7 +162,7 @@ void Weapon::loseContactPlayer(Entity* playerDetected, int id) {
 }
 
 void Weapon::Action() {
-	if (weaponType_ == WeaponID::Chancla) {
+	if (weaponType_ == WeaponID::Slipper) {
 
 		if (playersInsideRange_.size() > 0) {
 			//Calculo del daño de la chancla
