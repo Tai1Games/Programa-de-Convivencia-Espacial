@@ -28,6 +28,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SalaDeEstar,"../../assets/game/textures/SalaDeEstar.png"},
 	{Negro ,"../../assets/game/textures/Negro.png"},
 	{Router,"../../assets/game/textures/Router.png" },
+	{Coin, "../../assets/game/textures/DogeCoin.png" },
 	{ EmptyProgressBar, "../../assets/game/textures/EmptyProgressBar.png"},
 	{ ProgressBar, "../../assets/game/textures/ProgressBar.png"},
 	{ EmptyProgressBar2, "../../assets/game/textures/EmptyProgressBar2.png"},

@@ -10,6 +10,8 @@
 #include "PlayerData.h"
 #include "GameMode.h"
 #include "TileMap.h"
+#include "Wallet.h"
+#include "Coin.h"
 #include "checkML.h"
 
 class RouterLogic;
@@ -34,11 +36,13 @@ private:
 	};
 	vector<bodyData> vecBody; //Vector donde almacenamos los cuerpos muertos que crearemos al final del step.
 	vector<Weapon*> vecWeapon; //Vector donde almacenamos las weapons que soltaremos al final del step
-	vector<AttachesToObjects*> vecAttach; //Vector donde almacenamos los agarres que soltaremos al final del step
+	vector<AttachesToObjects*> vecAttach; //Vector donde almacenamos los agarres que soltaremos al final del step.
+	vector<tuple<Wallet*, PlayerData*, int>> vecCoinsToDrop; //Vector donde almacenamos los impactos entre objetos y wallets.
+	vector<Coin*> vecCoin; //Vector donde almacenamos los impactos entre jugador y las monedas a recoger
 	GameMode* gMode_;
 	TileMap* tilemap_;
 
-	void damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth);
+	void damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet, PlayerData* playerData);
 public:
 
     CollisionHandler(GameMode* g, TileMap* tm): gMode_(g), tilemap_(tm) {};
@@ -54,15 +58,17 @@ public:
 
 	void SolveInteractions();
 
-    bool ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player);
+    bool ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player, Wallet*& wallet, PlayerData* &playerData);
 
 	bool PlayerCollidesWithRouterArea(b2Contact* contact, RouterLogic*& router, Collider*& collPlayer, PlayerData*& playerData);
 
 	void exitChanclaTrigger(b2Contact* contact);
 
-	bool AttachableObjectCollidesWithPlayer(b2Fixture* fixA, AttachesToObjects*& player);
+	bool AttachableObjectCollidesWithPlayer(b2Fixture* fixA, b2Fixture* fixB, AttachesToObjects*& player);
 	
     bool PlayerCanPickWeapon(b2Contact* contact, Weapon* &pickableObj, Hands* &player);
+
+	bool CoinCollidesWithPlayer(b2Contact* contact, Wallet*& playerWallet, Coin*& coin, PlayerData*& playerData);
 
 	vector<bodyData> getBodyData() { return vecBody; }
 

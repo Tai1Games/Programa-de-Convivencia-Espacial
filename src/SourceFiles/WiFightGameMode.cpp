@@ -5,8 +5,10 @@
 void WiFightGameMode::init(PlayState* game)
 {
 	GameMode::init(game);
-	playerProgress_.reserve(players_.size());
-	for (int k = 0; k < players_.size(); k++) {
+	playerProgress_.reserve(nPlayers_);
+	for (int k = 0; k < nPlayers_; k++) {
+		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), k,
+			Resources::Body, tilemap_->getPlayerSpawnPoint(k).x, tilemap_->getPlayerSpawnPoint(k).y, 3));
 		playerProgress_.push_back(0);
 	}
 

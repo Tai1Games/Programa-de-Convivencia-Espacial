@@ -1,0 +1,106 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="Entrada a la estación_data" version="1.3.0" audacityversion="2.3.3" sel0="90.5566162356" sel1="90.5566162356" vpos="0" h="0.0000000000" zoom="12.5998524175" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags>
+		<tag name="ARTIST" value="TAI1 Games"/>
+		<tag name="TITLE" value="Entrance to the Spacial Station"/>
+		<tag name="ALBUM" value="PCE"/>
+		<tag name="YEAR" value="2020"/>
+		<tag name="TRACKNUMBER" value="1"/>
+		<tag name="GENRE" value="Videogames music"/>
+	</tags>
+	<wavetrack name="Entrada a la estación" isSelected="1" height="150" minimized="0" channel="0" linked="1" mute="0" solo="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="2257526">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808a5a.au" len="262144" min="-0.848633" max="0.877777" rms="0.164677"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="e08086a5.au" len="262144" min="-0.884644" max="0.98996" rms="0.177389"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="e08080a5.au" len="262144" min="-0.949432" max="0.90387" rms="0.191758"/>
+				</waveblock>
+				<waveblock start="786432">
+					<simpleblockfile filename="e0808775.au" len="262144" min="-0.975525" max="0.981659" rms="0.204737"/>
+				</waveblock>
+				<waveblock start="1048576">
+					<simpleblockfile filename="e0808330.au" len="262144" min="-0.826019" max="0.954254" rms="0.152082"/>
+				</waveblock>
+				<waveblock start="1310720">
+					<simpleblockfile filename="e080822a.au" len="262144" min="-0.933014" max="0.910431" rms="0.142854"/>
+				</waveblock>
+				<waveblock start="1572864">
+					<simpleblockfile filename="e080897d.au" len="262144" min="-0.834991" max="0.791809" rms="0.145446"/>
+				</waveblock>
+				<waveblock start="1835008">
+					<simpleblockfile filename="e08080b0.au" len="262144" min="-0.837769" max="0.824127" rms="0.147899"/>
+				</waveblock>
+				<waveblock start="2097152">
+					<simpleblockfile filename="e08080b2.au" len="160374" min="-0.869507" max="0.900299" rms="0.181742"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Entrada a la estación" isSelected="1" height="150" minimized="0" channel="1" linked="0" mute="0" solo="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="2257526">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808cc2.au" len="262144" min="-0.859528" max="0.765961" rms="0.152589"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="e08088e8.au" len="262144" min="-0.777679" max="0.912415" rms="0.166864"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="e0808b0b.au" len="262144" min="-0.838806" max="0.837769" rms="0.180012"/>
+				</waveblock>
+				<waveblock start="786432">
+					<simpleblockfile filename="e0808600.au" len="262144" min="-0.961731" max="0.939697" rms="0.197524"/>
+				</waveblock>
+				<waveblock start="1048576">
+					<simpleblockfile filename="e0808cb8.au" len="262144" min="-0.740723" max="0.849304" rms="0.134836"/>
+				</waveblock>
+				<waveblock start="1310720">
+					<simpleblockfile filename="e08083b4.au" len="262144" min="-0.77063" max="0.807526" rms="0.121266"/>
+				</waveblock>
+				<waveblock start="1572864">
+					<simpleblockfile filename="e08080e0.au" len="262144" min="-0.637634" max="0.720093" rms="0.125294"/>
+				</waveblock>
+				<waveblock start="1835008">
+					<simpleblockfile filename="e08086b1.au" len="262144" min="-0.700256" max="0.727905" rms="0.127947"/>
+				</waveblock>
+				<waveblock start="2097152">
+					<simpleblockfile filename="e0808ba6.au" len="160374" min="-0.828705" max="0.890259" rms="0.167309"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Entrada a la estación" isSelected="0" height="150" minimized="0" channel="0" linked="1" mute="0" solo="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="133002">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808f75.au" len="101770" min="-0.411804" max="0.370941" rms="0.022299"/>
+				</waveblock>
+				<waveblock start="101770">
+					<simpleblockfile filename="e0808134.au" len="31232" min="-0.000336" max="0.000397" rms="0.000072"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Entrada a la estación" isSelected="0" height="150" minimized="0" channel="1" linked="0" mute="0" solo="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="133002">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808c7f.au" len="101770" min="-0.36554" max="0.478546" rms="0.024474"/>
+				</waveblock>
+				<waveblock start="101770">
+					<simpleblockfile filename="e08087f4.au" len="31232" min="-0.000366" max="0.000336" rms="0.000079"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>
