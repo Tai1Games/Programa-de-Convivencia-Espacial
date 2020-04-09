@@ -210,6 +210,9 @@
     <ClInclude Include="MeleeWeapon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FireBallPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -351,6 +354,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FireBallGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FireBallPool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -4,10 +4,13 @@
 #include "CoinsPool.h"
 #include "Collider.h"
 
+class FireballPool;
+
 class CapitalismGameMode : public GameMode
 {
 private:
 	CoinsPool coinPool_;
+	FireballPool fireballPool_;
 	double timeSinceStart_ = 0;
 	double timeSinceSpawn_ = 0;
 	double spawnTime_ = 0;
