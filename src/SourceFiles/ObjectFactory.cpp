@@ -72,8 +72,8 @@ void ObjectFactory::makeCoin(Entity* e, EntityManager* entityManager, b2World* p
 void ObjectFactory::makeFireball(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
 	entityManager->addExistingEntity(e);
-	e->addComponent<Viewer>(Resources::Fireball);
 	Collider* auxCol = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false);
+	e->addComponent<Viewer>(Resources::Fireball);
 	auxCol->setUserData(e);
 }
 
@@ -114,8 +114,8 @@ Entity* ObjectFactory::createBoiler(EntityManager* entityManager, b2World* physi
 	collRoomba->setUserData(e);
 	e->addComponent<Viewer>(Resources::Debug);
 
-	double velocityX = rand() % CONST(int, "ROOMBA_VELOCITY");
-	double velocityY = CONST(int, "ROOMBA_VELOCITY") - velocityX;
+	//double velocityX = rand() % CONST(int, "ROOMBA_VELOCITY");
+	//double velocityY = CONST(int, "ROOMBA_VELOCITY") - velocityX;
 
 	//if (rand() % 2 == 1)velocityX *= -1;
 	//if (rand() % 2 == 1) velocityY *= -1;

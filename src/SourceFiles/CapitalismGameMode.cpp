@@ -7,6 +7,8 @@ void CapitalismGameMode::init(PlayState* game)
 	GameMode::init(game);
 	coinPool_.init(game->getEntityManager(), game->getPhysicsWorld());
 	fireballPool_.init(game->getEntityManager(), game->getPhysicsWorld());
+	ObjectFactory::createBoiler(game->getEntityManager(), game->getPhysicsWorld(), b2Vec2(500, 500));
+
 	sPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 	timeToEnd_ = CONST(double, "TIME_TO_END");
 	spawnTime_ = CONST(double, "TIME_TO_SPAWN_COIN");
@@ -25,7 +27,6 @@ void CapitalismGameMode::init(PlayState* game)
 			Resources::Body, tilemap_->getPlayerSpawnPoint(k).x, tilemap_->getPlayerSpawnPoint(k).y, this));
 	}
 
-	ObjectFactory::createBoiler(game->getEntityManager(), game->getPhysicsWorld(), b2Vec2(500, 500));
 
 	
 }
