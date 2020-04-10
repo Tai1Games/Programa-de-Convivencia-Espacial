@@ -17,7 +17,7 @@ public:
 		Wall = 0x0008,
 		Player = 0x0016,
 		Trigger = 0x0032,
-		Weapon = 0x0064
+		PickableObject = 0x0064
 	};
 
 private:
@@ -41,6 +41,9 @@ public:
 
 	//Friccion -> rozamiento al contacto con otros cuerpos   Drag-> rozamiento con el aire
 	Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
+		float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor);
+
+	Collider(b2World* world, b2BodyType type, float x, float y, float radius,
 		float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor);
 
 	~Collider() {
@@ -67,6 +70,7 @@ public:
 	bool isSensor(int i) const { return fixtureDefs_[i].isSensor; }
 	bool isEnabled() const { return body_->IsEnabled(); }
 	bool isBullet() const { return body_->IsBullet(); }
+	int getNumFixtures() const { return fixtures_.size(); }
 	SDL_Rect getRect() const {
 		return SDL_Rect{
 			(int)getPos().x, (int)getPos().y,

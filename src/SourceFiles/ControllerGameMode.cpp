@@ -8,7 +8,11 @@ ControllerGameMode::~ControllerGameMode()
 
 void ControllerGameMode::init(PlayState* game)  {
 	GameMode::init(game);
-	controller_ = WeaponFactory::makeController(state_->getEntityManager(), state_->getPhysicsWorld(), b2Vec2(tilemap_->getObjSpecialSpawnPos().x, tilemap_->getObjSpecialSpawnPos().y), b2Vec2(0.5, 0.5));
+	for (int i = 0; i < nPlayers_; i++) {
+		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), i, 
+			Resources::Body, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, 3));
+	}
+	controller_ = ObjectFactory::makeController(state_->getEntityManager(), state_->getPhysicsWorld(), b2Vec2(tilemap_->getObjSpecialSpawnPos().x, tilemap_->getObjSpecialSpawnPos().y), b2Vec2(0.5, 0.5));
 	for (Entity* player : players_) controllerTimes_.push_back(0);
 
 	GameMode::initProgressBars();
@@ -17,7 +21,7 @@ void ControllerGameMode::init(PlayState* game)  {
 void ControllerGameMode::update() {
 	if (!roundFinished_) {
 		if (controller_->IsPicked()) {
-			controllerTimes_[controller_->getPlayerId()] += (CONST(double, "MS_PER_FRAME") / 1000);
+			controllerTimes_[controller_->getPlayerId()] += (CONST(double, "MS_PER_FRAME"));
 			if (controllerTimes_[controller_->getPlayerId()] >= CONST(double, "TIME_TO_WIN")) {
 				roundFinished_ = true;
 				winner_ = players_[controller_->getPlayerId()];

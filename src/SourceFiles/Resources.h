@@ -36,6 +36,7 @@ public:
 		SalaDeEstar,
 		Negro,
 		Router,
+		Coin,
 		EmptyProgressBar,
 		ProgressBar,
 		EmptyProgressBar2,

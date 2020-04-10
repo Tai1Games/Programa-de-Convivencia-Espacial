@@ -23,6 +23,8 @@ namespace ComponentType {
 		ImpulseViewer,
 		PlayerData,
 		RouterLogic,
+		Wallet,
+		Coin,
 		ParticleEmitter,
 		Pad,
 

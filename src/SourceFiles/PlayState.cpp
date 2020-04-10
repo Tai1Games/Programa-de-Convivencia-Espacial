@@ -12,7 +12,7 @@
 #include "Weapon.h"
 #include "Hands.h"
 #include "PlayerController.h"
-#include "WeaponFactory.h"
+#include "ObjectFactory.h"
 #include "ImpulseViewer.h"
 #include "PlayerData.h"
 #include "ParticleEmitter.h"
@@ -46,28 +46,9 @@ void PlayState::init() {
 	collisionHandler_ = new CollisionHandler(gameMode_, tilemap_);
 	physicsWorld_->SetContactListener(collisionHandler_);
 
-	//PLAYERS
-	vector<Collider*> colliders;
-	for (int i = 0; i < 4; i++) {
-		players_.push_back(entityManager_->addEntity());
-		colliders.push_back(players_[i]->addComponent<Collider>(physicsWorld_, b2_dynamicBody, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y,
-			1, 1.55, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::Player, false));
-		players_[i]->addComponent<PlayerData>(i);
-		players_[i]->addComponent<Viewer>(Resources::Body);
-		players_[i]->addComponent<Health>(3);
-		players_[i]->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth);
-		if (i == 0) { //si solo hay un mando
-			players_[i]->addComponent<Hands>(Resources::Hands);
-			players_[i]->addComponent<AttachesToObjects>();
-			players_[i]->addComponent<PlayerController>();
-			players_[i]->addComponent<ImpulseViewer>(Resources::FlechaImpulso, Resources::ImpulsoBackground);
-		}
-		colliders[i]->setUserData(players_[i]);
-	}
-
 	//Particle test
-	ParticleEmitter* test = players_[0]->addComponent<ParticleEmitter>(Vector2D(.5,.5),Resources::Grapadora,3.5,1000, 25, 0,2,15);
-	test->PlayStop();
+	/*ParticleEmitter* test = players_[0]->addComponent<ParticleEmitter>(Vector2D(.5,.5),Resources::Grapadora,3.5,1000, 25, 0,2,15);
+	test->PlayStop();*/
 
 	//FONDO
 	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(resourceMap_[tilemapName_]);
