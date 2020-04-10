@@ -107,23 +107,14 @@ Entity* ObjectFactory::createRoomba(EntityManager* entityManager, b2World* physi
 	return e;
 }
 
-Entity* ObjectFactory::createBoiler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
+Entity* ObjectFactory::createBoiler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos,FireBallPool* pool)
 {
 	Entity* e = entityManager->addEntity();
-	Collider* collRoomba = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "ROOMBA_RADIUS"), CONST(double, "ROOMBA_DENSITY"), CONST(double, "ROOMBA_FRICTION"),
+	Collider* collRoomba = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "ROOMBA_RADIUS"), CONST(double, "ROOMBA_DENSITY"), CONST(double, "ROOMBA_FRICTION"),
 		CONST(double, "ROOMBA_RESTITUTION"), CONST(double, "ROOMBA_LINEAR_DRAG"), CONST(double, "ROOMBA_ANGULAR_DRAG"), Collider::CollisionLayer::UnInteractableObject, false);
 	collRoomba->setUserData(e);
-	e->addComponent<Viewer>(Resources::Boiler);
-
-	double velocityX = rand() % CONST(int, "ROOMBA_VELOCITY");
-	double velocityY = CONST(int, "ROOMBA_VELOCITY") - velocityX;
-
-	if (rand() % 2 == 1)velocityX *= -1;
-	if (rand() % 2 == 1) velocityY *= -1;
-
-	collRoomba->applyLinearImpulse(b2Vec2(velocityX, velocityY), b2Vec2(0, 0));
-	
-	e->addComponent<FireBallGenerator>(physicsWorld);
+	e->addComponent<Viewer>(Resources::Boiler);	
+	e->addComponent<FireBallGenerator>(physicsWorld,pool);
 
 	return e;
 }

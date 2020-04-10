@@ -63,8 +63,10 @@ void Viewer::init() {
 	}
 	wH_ = b2Vec2(tex_->getWidth(), tex_->getHeight());
 }
-
 void Viewer::draw() const {
+	if (textureId_ == Resources::Fireball) {
+		cout << "BOLADEFUEGODIBUJANDOSE";
+	}
 	if (drawable_) {
 		if (!isUIElement_) tex_->render(collider_->getRectRender(), (collider_->getAngle() * -180 / CONST(double, "PI")), clip_); // getAngle devuelve radianes, hay que pasarlos a �ngulos
 		else {

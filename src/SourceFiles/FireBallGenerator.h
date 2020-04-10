@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-#include "ObjectPool.h"
+#include "FireBallPool.h"
 
 class Collider;
 class EntityManager;
@@ -13,6 +13,7 @@ private:
 	EntityManager* manager_ = nullptr;
 	Collider* col_ = nullptr;
 	b2World* physicsWorld_ = nullptr;
+	FireBallPool* fireballPool_;
 	b2Vec2 pos_; //centro de la caldera, se cachea porque se supone estático
 	b2Vec2 size_;//tamaño de la caldera, se cachea porque se supone estático
 	uint nextShot_;
@@ -22,7 +23,10 @@ private:
 	void addFireball(int num = 1);
 
 public:
-	FireBallGenerator(b2World* w) :Component(ComponentType::FireBallGenerator),physicsWorld_(w){}
+	FireBallGenerator(b2World* w, FireBallPool* pool) :
+		Component(ComponentType::FireBallGenerator),
+		fireballPool_(pool),
+		physicsWorld_(w){}
 	~FireBallGenerator() {};
 	void init() override;
 	void update() override;

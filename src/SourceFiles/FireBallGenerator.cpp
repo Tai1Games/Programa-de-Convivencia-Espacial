@@ -32,18 +32,9 @@ void FireBallGenerator::update() {
 }
 
 void FireBallGenerator::addFireball(int n) {
+	//fireballPool_->addFireBall(pos_);
 	for (int i = 0; i < n; i++) {
-		Entity* fBall = nullptr;
-		if (fBall != nullptr) {
-			fBall = entity_->getEntityManager()->addEntity();
-			//Collider* col = fBall->addComponent<Collider>
-			//	// x,  y,   width, height, density,friction, restitution, linearDrag, angularDrag,Layer, sensor
-			//	(physicsWorld_, b2_dynamicBody, pos_.x, pos_.y, fireballW_, fireballH_, 1, 0.1, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
-			//fBall->addComponent<Viewer>(Resources::Fireball);
-			//col->applyLinearImpulse(b2Vec2(rand() % 1, rand() % 1), b2Vec2(0, 0));
-			//col->setUserData(fBall);
-			//fBall = nullptr;
-		}
+		fireballPool_->addFireBall(b2Vec2(0,0));
 	}
 
 

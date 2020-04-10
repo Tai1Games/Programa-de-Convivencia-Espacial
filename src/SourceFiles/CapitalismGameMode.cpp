@@ -21,7 +21,7 @@ void CapitalismGameMode::init(PlayState* game)
 			game->getPhysicsWorld(), pos)->getComponent<Collider>(ComponentType::Collider));
 	}
 
-	ObjectFactory::createBoiler(game->getEntityManager(), game->getPhysicsWorld(), b2Vec2(CONST(int, "WINDOW_WIDTH")/2, CONST(int, "WINDOW_HEIGHT") / 2));
+	Entity* boiler = ObjectFactory::createBoiler(game->getEntityManager(), game->getPhysicsWorld(), b2Vec2(5, 5),&fireballPool_);
 
 	for (int k = 0; k < nPlayers_; k++) {
 		players_.push_back(PlayerFactory::createPlayerWithWallet(game->getEntityManager(), game->getPhysicsWorld(), k,

@@ -24,5 +24,8 @@ void FireBallPool::addFireBall(b2Vec2 pos) {
 	Entity* e = fireballPool_.getObj();
 	if (e != nullptr) {
 		e->setActive(true);
+		e->getComponent<Collider>(ComponentType::Collider)->getBody()->SetTransform(b2Vec2(5,5),0);
+		cout << endl;
+		cout << "---- BOLA ACTIVADA ----" << endl;
 	}
 }
