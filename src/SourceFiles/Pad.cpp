@@ -20,9 +20,8 @@ void Pad::update()
 	if (onAnimation_) { //se esta moviendo
 		int pos = 32 * (frame_ / CONST(int, "PAD_ANIMATION_SPEED"));
 		viewer_->setClip(SDL_Rect{ 0, pos ,32,32 });
-
 		frame_++;
-		if (frame_ / CONST(int, "PAD_ANIMATION_SPEED") == 4) { //ha terminado la animacion 
+		if (frame_ / CONST(int, "PAD_ANIMATION_SPEED") == CONST(int, "PAD_ANIMATION_FRAMES")) { //ha terminado la animacion 
 			onAnimation_ = false;
 			viewer_->setClip(SDL_Rect{ 0, 0,32,32 });
 		}
@@ -31,6 +30,6 @@ void Pad::update()
 
 void Pad::startAnim()
 {
-	frame_ = 0;
+	frame_ = CONST(int, "PAD_ANIMATION_SPEED"); //empieza en el segundo frame por que el primero es el statico 
 	onAnimation_ = true;
 }
