@@ -74,7 +74,7 @@ void ObjectFactory::makeCoin(Entity* e, EntityManager* entityManager, b2World* p
 void ObjectFactory::makeFireball(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
 	entityManager->addExistingEntity(e);
-	Collider* auxCol = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false);
+	Collider* auxCol = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "FIREBALL_RADIUS"), CONST(double, "COIN_DENSITY"), CONST(double, "COIN_FRICTION"), CONST(double, "COIN_ANGULAR_DRAG"), 1, 1, Collider::CollisionLayer::Trigger, true);
 	e->addComponent<Viewer>(Resources::Fireball);
 	e->addComponent<Fireball>();
 	auxCol->setUserData(e);

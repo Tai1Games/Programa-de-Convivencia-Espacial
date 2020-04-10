@@ -65,7 +65,12 @@ void Viewer::init() {
 }
 void Viewer::draw() const {
 	if (drawable_) {
-		if (!isUIElement_) tex_->render(collider_->getRectRender(), (collider_->getAngle() * -180 / CONST(double, "PI")), clip_); // getAngle devuelve radianes, hay que pasarlos a �ngulos
+		if (!isUIElement_) {
+			tex_->render(collider_->getRectRender(), (collider_->getAngle() * -180 / CONST(double, "PI")), clip_); // getAngle devuelve radianes, hay que pasarlos a �ngulos
+			//if (textureId_ == Resources::Fireball) {
+			//	cout << "BOLADEFUEGODIBUJANDOSE";
+			//}
+		}
 		else {
 			SDL_Rect dest;
 			dest.x = pos_.x;
@@ -73,9 +78,7 @@ void Viewer::draw() const {
 			dest.w = wH_.x * scale_;
 			dest.h = wH_.y * scale_;
 			tex_->render(dest, angle_, clip_, flip_);
-			if (textureId_ == Resources::Fireball) {
-				cout << "BOLADEFUEGODIBUJANDOSE";
-			}
+
 		}
 	}
 }
