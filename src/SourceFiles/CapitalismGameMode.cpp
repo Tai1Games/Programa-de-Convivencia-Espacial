@@ -7,7 +7,6 @@ void CapitalismGameMode::init(PlayState* game)
 	GameMode::init(game);
 	coinPool_.init(game->getEntityManager(), game->getPhysicsWorld());
 	fireballPool_.init(game->getEntityManager(), game->getPhysicsWorld());
-	ObjectFactory::createBoiler(game->getEntityManager(), game->getPhysicsWorld(), b2Vec2(500, 500));
 
 	sPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 	timeToEnd_ = CONST(double, "TIME_TO_END");
@@ -22,13 +21,15 @@ void CapitalismGameMode::init(PlayState* game)
 			game->getPhysicsWorld(), pos)->getComponent<Collider>(ComponentType::Collider));
 	}
 
+	ObjectFactory::createBoiler(game->getEntityManager(), game->getPhysicsWorld(), b2Vec2(CONST(int, "WINDOW_WIDTH")/2, CONST(int, "WINDOW_HEIGHT") / 2));
+
 	for (int k = 0; k < nPlayers_; k++) {
 		players_.push_back(PlayerFactory::createPlayerWithWallet(game->getEntityManager(), game->getPhysicsWorld(), k,
 			Resources::Body, tilemap_->getPlayerSpawnPoint(k).x, tilemap_->getPlayerSpawnPoint(k).y, this));
 	}
 
 
-	
+
 }
 
 void CapitalismGameMode::update() {

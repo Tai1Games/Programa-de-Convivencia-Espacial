@@ -34,6 +34,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ EmptyProgressBar2, "../../assets/game/textures/EmptyProgressBar2.png"},
 	{ ProgressBar2, "../../assets/game/textures/ProgressBar2.png"},
 	{Fireball,"../../assets/game/textures/ProgressBar2.png"},
+	{Boiler,"../../assets/game/textures/boiler_placeholder.png"},
 
 		{ TSet_Kenney1bit , "../../assets/game/tilemaps/modded_colored.png"},
 		{ TSet_Dungeon , "../../assets/game/tilemaps/dungeon_ts.png"}

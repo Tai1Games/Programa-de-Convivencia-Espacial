@@ -42,6 +42,7 @@ public:
 		EmptyProgressBar2,
 		ProgressBar2,
 		Fireball,
+		Boiler,
 
 		// text
 		PauseText,
