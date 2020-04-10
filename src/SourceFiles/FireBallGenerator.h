@@ -20,6 +20,8 @@ private:
 	uint minCd_;
 	uint maxCd_;
 	int minFireballs_, maxFireballs_;
+	int fireballSpeed_;
+	double radius;
 	void addFireball(int num = 1);
 
 public:
