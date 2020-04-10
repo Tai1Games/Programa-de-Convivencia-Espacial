@@ -97,7 +97,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	}*/
 	if (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Player && (fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Wall || fixB->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject) ||
 		fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Player && (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Wall || fixA->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject)) {
-		
+
 		if (AttachableObjectCollidesWithPlayer(fixA, fixB, player_AttachesToObjects) && player_AttachesToObjects->canAttachToObject()) {
 			b2Body* bodyToBeAttached = fixA->GetBody();
 			if (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Player) bodyToBeAttached = fixB->GetBody();
@@ -140,7 +140,6 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 
 		ObjectCollidesWithPlayer(contact->GetFixtureA(), player_Health, playerWallet, playerData);
 
-		if (weAux->getCurrentHand() != nullptr && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
 		if (weAux != nullptr && weAux->getCurrentHand() != nullptr && (player_Health != nullptr || playerWallet != nullptr) && (weAux->getCurrentHand() != haAux)) {
 			weAux->detectPlayer(aux2, aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
 			//cout << "Golpeaste al objetivo" << endl;
@@ -162,10 +161,6 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 
 		if (weAux->getCurrentHand() != nullptr && (player_Health != nullptr || playerWallet != nullptr) && (weAux->getCurrentHand() != haAux)) {
 
-		ObjectCollidesWithPlayer(contact->GetFixtureB(), player_Health);
-
-		if (weAux->getCurrentHand() != nullptr && player_Health != nullptr && (weAux->getCurrentHand() != haAux)) {
-
 			weAux->detectPlayer(aux2, aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
 
 			//cout << "Golpeaste al objetivo" << endl;
@@ -173,25 +168,6 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	}
 	player_Health = nullptr;
 
-	//Pickable weapon collisions
-	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon ||
-		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon) &&
-		PlayerCanPickWeapon(contact, pickableObj, playerHands)) {
-		cout << "Pickeable weapon" << endl;
-
-		player_Health = nullptr;
-		ObjectCollidesWithPlayer(fixA, player_Health);
-		if (player_Health != nullptr) {
-			pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands, player_Health);
-
-		}
-		player_Health = nullptr;
-
-		ObjectCollidesWithPlayer(fixB, player_Health);
-		if (player_Health != nullptr) {
-			pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands, player_Health);
-
-		}
 	//Pickable object collisions (Weapons)
 	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject ||
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject)) {
@@ -200,7 +176,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	}
 
 	//Trigger collisions (Router, Coins)
-	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger || 
+	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger ||
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
 
 		if (CoinCollidesWithPlayer(contact, playerWallet, coin, playerData)) { //Player collides with coin
@@ -217,14 +193,9 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 
 //Handles end of collisions
 void CollisionHandler::EndContact(b2Contact* contact) {
-	b2Fixture* fixA = contact->GetFixtureA();
-	b2Fixture* fixB = contact->GetFixtureB();
-
 	//Pickable weapons
 	Weapon* pickableObj = nullptr;
 	Hands* playerHands = nullptr;
-	if ((fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon ||
-		fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon) &&
 	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject ||
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject) &&
 		PlayerCanPickWeapon(contact, pickableObj, playerHands)) {
@@ -237,24 +208,21 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 	Collider* playerCollider = nullptr;
 	Pad* pad = nullptr;
 
-	if (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger || //Colisiones entre Triggers y otros objetos
-		fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
+	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger || //Colisiones entre Triggers y otros objetos
+		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
 		if (PlayerCollidesWithRouterArea(contact, routerLogic, playerCollider, playerData)) {
 			routerLogic->loseContactPlayer(playerCollider, playerData->getId());
 		}
 	}
 	//Out of melee weapon trigger
-	if (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon ||
-		fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Weapon) {
 	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject ||
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject) {
 
 		exitChanclaTrigger(contact);
 	}
 
-
-	if (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Wall && fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Player ||
-		fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Wall && fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
+	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Wall && contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player ||
+		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Wall && contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
 
 		if (PlayerCollidesWithPad(contact, pad)) {
 			//animacion cama elastica
@@ -270,9 +238,7 @@ void CollisionHandler::PreSolve(b2Contact* contact, const b2Manifold* oldManifol
 }
 
 //Gather info about impulses
-void CollisionHandler::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
-
-}
+void CollisionHandler::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {}
 
 //to add a new collision behaviour, make a method that checks if it's the specific collision you want
 //you can distinguish bodies by their user data or make them collide with certain objects only with collision layers
@@ -343,23 +309,6 @@ bool CollisionHandler::AttachableObjectCollidesWithPlayer(b2Fixture* fixA, b2Fix
 	return false;
 }
 
-bool CollisionHandler::PlayerCollidesWithPad(b2Contact* contact, Pad*& p)
-{
-	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
-	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
-
-	if (fixAentity->hasComponent(ComponentType::PlayerController) && fixBentity->hasComponent(ComponentType::Pad)) {
-		p = static_cast<Pad*>(fixBentity->getComponent<Pad>(ComponentType::Pad));
-		return true;
-	}
-	else if (fixAentity->hasComponent(ComponentType::Pad) && fixBentity->hasComponent(ComponentType::PlayerController)) {
-		p = static_cast<Pad*>(fixAentity->getComponent<Pad>(ComponentType::Pad));
-		return true;
-	}
-	else return false;
-}
-
-
 //Checks if one fixture belongs to a Player (PlayerData and Collider component) and if the other fixture belongs to a Router (RouterLogic component)
 bool CollisionHandler::PlayerCollidesWithRouterArea(b2Contact* contact, RouterLogic*& router, Collider*& collPlayer, PlayerData*& playerData) {
 	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
@@ -388,23 +337,10 @@ void CollisionHandler::exitChanclaTrigger(b2Contact* contact) {
 	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
 	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
-	if (fixAentity->hasComponent(ComponentType::Health)) {
-		if (fixBentity->hasComponent(ComponentType::Weapon) && fixAentity->hasComponent(ComponentType::PlayerData)) {
-
-			fixBentity->getComponent<Weapon>(ComponentType::Weapon)->loseContactPlayer(fixAentity, fixAentity->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
-
-		}
-	}
-	else if (fixBentity->hasComponent(ComponentType::Health)) {
-		if (fixAentity->hasComponent(ComponentType::Weapon) && fixBentity->hasComponent(ComponentType::PlayerData)) {
-
-			fixAentity->getComponent<Weapon>(ComponentType::Weapon)->loseContactPlayer(fixBentity, fixBentity->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
-
-		}
 	if (fixAentity->hasComponent(ComponentType::PlayerData) && fixBentity->hasComponent(ComponentType::Weapon)) {
 		fixBentity->getComponent<Weapon>(ComponentType::Weapon)->loseContactPlayer(fixAentity, fixAentity->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
 	}
-	
+
 	else if (fixBentity->hasComponent(ComponentType::PlayerData) && fixBentity->hasComponent(ComponentType::Weapon)) {
 		fixAentity->getComponent<Weapon>(ComponentType::Weapon)->loseContactPlayer(fixBentity, fixBentity->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
 	}
@@ -437,4 +373,21 @@ void CollisionHandler::SolveInteractions() {
 		std::get<0>(w)->dropCoins(std::get<2>(w), std::get<1>(w)->getPlayerNumber());
 	}
 	vecCoinsToDrop.clear();
+}
+
+
+bool CollisionHandler::PlayerCollidesWithPad(b2Contact* contact, Pad*& p)
+{
+	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+	if (fixAentity->hasComponent(ComponentType::PlayerController) && fixBentity->hasComponent(ComponentType::Pad)) {
+		p = static_cast<Pad*>(fixBentity->getComponent<Pad>(ComponentType::Pad));
+		return true;
+	}
+	else if (fixAentity->hasComponent(ComponentType::Pad) && fixBentity->hasComponent(ComponentType::PlayerController)) {
+		p = static_cast<Pad*>(fixAentity->getComponent<Pad>(ComponentType::Pad));
+		return true;
+	}
+	else return false;
 }

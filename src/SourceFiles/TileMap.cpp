@@ -171,7 +171,7 @@ void TileMap::executeMapFactory()
 		else if (name == "Pad") {
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
 			pos = b2Vec2(p.x / CONST(double, "PIXELS_PER_METER") + (size.x / 2), (CONST(int, "WINDOW_HEIGHT") - p.y) / CONST(double, "PIXELS_PER_METER") - (size.y / 2));
-			WeaponFactory::makePad(entityManager_, physicsWorld_, pos, size);
+			ObjectFactory::makePad(entityManager_, physicsWorld_, pos, size);
 		}
 	}
 }
