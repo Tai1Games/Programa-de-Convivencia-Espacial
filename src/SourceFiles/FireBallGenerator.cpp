@@ -34,7 +34,7 @@ void FireBallGenerator::update() {
 void FireBallGenerator::addFireball(int n) {
 	//fireballPool_->addFireBall(pos_);
 	for (int i = 0; i < n; i++) {
-		fireballPool_->addFireBall(b2Vec2(0,0));
+		fireballPool_->addFireBall(b2Vec2(3,3));
 	}
 
 

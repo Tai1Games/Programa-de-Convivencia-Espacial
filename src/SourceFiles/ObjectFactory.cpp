@@ -11,6 +11,7 @@
 #include "Hands.h"
 #include "Coin.h"
 #include "FireBallGenerator.h"
+#include "Fireball.h"
 
 void ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 	Entity* e = entityManager->addEntity();
@@ -75,6 +76,7 @@ void ObjectFactory::makeFireball(Entity* e, EntityManager* entityManager, b2Worl
 	entityManager->addExistingEntity(e);
 	Collider* auxCol = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false);
 	e->addComponent<Viewer>(Resources::Fireball);
+	e->addComponent<Fireball>();
 	auxCol->setUserData(e);
 }
 

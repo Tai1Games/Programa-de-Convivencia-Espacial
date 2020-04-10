@@ -5,6 +5,7 @@
 #include "EntityManager.h"
 #include "Viewer.h"
 #include "ObjectFactory.h"
+#include "Fireball.h"
 
 FireBallPool::FireBallPool() :fireballPool_([](Entity* e) {return e->isActive(); }) {};
 
@@ -16,15 +17,15 @@ void FireBallPool::init(EntityManager* eMan, b2World* physicsWorld) {
 	vector<Entity*> fbPool = fireballPool_.getPool();
 	for (Entity* e : fbPool) {
 		ObjectFactory::makeFireball(e, eMan, physicsWorld, b2Vec2(0, 0), b2Vec2(fireballW_, fireballH_));
-		e->setActive(false);
+		GETCMP2(e,Fireball)->setActive(false,b2Vec2(0,0));
 	}
 }
 
 void FireBallPool::addFireBall(b2Vec2 pos) {
 	Entity* e = fireballPool_.getObj();
 	if (e != nullptr) {
-		e->setActive(true);
-		e->getComponent<Collider>(ComponentType::Collider)->getBody()->SetTransform(b2Vec2(5,5),0);
+		GETCMP2(e, Fireball)->setActive(true, pos);
+		//e->getComponent<Collider>(ComponentType::Collider)->getBody()->SetTransform(b2Vec2(5,5),0);
 		cout << endl;
 		cout << "---- BOLA ACTIVADA ----" << endl;
 	}

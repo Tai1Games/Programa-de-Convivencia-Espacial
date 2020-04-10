@@ -10,11 +10,9 @@ EntityManager::~EntityManager() {
 
 void EntityManager::update() {
 	for (auto& e : entities_) {
-		if(e->isActive())
 			e->update();
 	}
 	for (auto e : externalEntities_)
-		if (e->isActive())
 			e->update();
 }
 

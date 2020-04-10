@@ -213,6 +213,9 @@
     <ClInclude Include="FireBallPool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Fireball.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -357,6 +360,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FireBallPool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Fireball.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
