@@ -149,7 +149,7 @@ void TileMap::executeMapFactory()
 
 		if (name == "Wall") {
 			//calculo de posicion y tamaño para cajas de Tiled
-			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
+			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), s.y / CONST(double, "PIXELS_PER_METER"));
 			pos = b2Vec2(p.x / CONST(double, "PIXELS_PER_METER") + (size.x / 2), (CONST(int, "WINDOW_HEIGHT") - p.y) / CONST(double, "PIXELS_PER_METER") - (size.y / 2));
 			WeaponFactory::makeWall(entityManager_, physicsWorld_, pos, size);
 		}
@@ -166,7 +166,9 @@ void TileMap::executeMapFactory()
 			WeaponFactory::makeSpaceJunk(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
 		}
 		else if (name == "Pad") {
-			WeaponFactory::makePad(entityManager_, physicsWorld_, pos, b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER")));
+			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
+			pos = b2Vec2(p.x / CONST(double, "PIXELS_PER_METER") + (size.x / 2), (CONST(int, "WINDOW_HEIGHT") - p.y) / CONST(double, "PIXELS_PER_METER") - (size.y / 2));
+			WeaponFactory::makePad(entityManager_, physicsWorld_, pos, size);
 		}
 	}
 }

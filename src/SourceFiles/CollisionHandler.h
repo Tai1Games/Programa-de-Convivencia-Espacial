@@ -65,7 +65,7 @@ public:
 	
     bool PlayerCanPickWeapon(b2Contact* contact, Weapon* &pickableObj, Hands* &player);
 
-	bool PlayerCollidesWithMat(b2Contact* contact, Collider*& playerCollider, Collider*& matCollider, Pad*& pad);
+	bool PlayerCollidesWithPad(b2Contact* contact, Pad*& p);
 
 	vector<bodyData> getBodyData() { return vecBody; }
 

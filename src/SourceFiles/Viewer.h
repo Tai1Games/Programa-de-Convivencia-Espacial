@@ -36,10 +36,10 @@ public:
 	virtual void init() override;
 	virtual void draw() const override;
 	void setDrawable(bool b) { drawable_ = b; }
+	void setClip(SDL_Rect clip) { clip_ = clip; }
 	/*Solo para UI elementos que no necesitan collider*/
 	void setPosUIElement(b2Vec2 pos) { pos_ = pos; }
 	void setWHUIElement(b2Vec2 wH) { wH_ = wH; }
-	void setClipUIElement(SDL_Rect clip) { clip_ = clip; }
 	/*Solo para UI elementos que no necesitan collider*/
 	b2Vec2 getPosUIElement() { return pos_; }
 	b2Vec2 getWHUIElement() { return wH_; }
