@@ -326,7 +326,7 @@ bool CollisionHandler::FireballCollidesWithSomething(b2Contact* contact,Entity*&
 		with = fixBentity;
 		return true;
 	}
-	else if (fixBentity->hasComponent(ComponentType::Fireball) && !fixAentity->hasComponent(ComponentType::Fireball)&&!fixAentity->hasComponent(ComponentType::FireBallGenerator)) {
+	else if (fixBentity->hasComponent(ComponentType::Fireball) && !fixAentity->hasComponent(ComponentType::Fireball) && !fixAentity->hasComponent(ComponentType::FireBallGenerator)) {
 		fireball = fixBentity;
 		with = fixAentity;
 		return true;
@@ -401,8 +401,9 @@ void CollisionHandler::SolveInteractions() {
 	}
 	vecCoin.clear();
 	for (auto f : fireballsToClear) {
-		f->setActive(false, b2Vec2(-100, -100));
+		f->setActive(false, b2Vec2(3, 3));
 	}
+	fireballsToClear.clear();
 	for (auto w : vecCoinsToDrop) {
 		std::get<0>(w)->dropCoins(std::get<2>(w), std::get<1>(w)->getPlayerNumber());
 	}

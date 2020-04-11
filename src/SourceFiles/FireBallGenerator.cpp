@@ -9,7 +9,7 @@
 void FireBallGenerator::init() {
 	col_ = GETCMP1_(Collider);
 	pos_ = col_->getPos();
-	radius = sqrt(pow(col_->getH(0), 2) + pow(col_->getW(0), 2))/*+0.5*/+1; //JAJA he hecho una hipotenusa despues del instiuto
+	radius = sqrt(pow(col_->getH(0), 2) + pow(col_->getW(0), 2))/*+0.5*/; //JAJA he hecho una hipotenusa despues del instiuto
 	//cout << "radius " << radius << endl;
 
 	//initialize constants
