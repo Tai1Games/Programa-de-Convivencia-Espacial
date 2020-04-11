@@ -18,6 +18,7 @@ void CapitalismGameMode::init(PlayState* game)
 	coinUIMarginY_ = CONST(int, "COIN_UI_MARGIN_Y");
 	coinUISpriteScale_ = CONST(double, "COIN_UI_SPRITE_SCALE");
 	fontCharacterWidth_ = CONST(double, "NES_WIDTH_PER_CHARACTER");
+	suddenDeathRenderTime = CONST(double, "SUDDEN_DEATH_RENDER_TIME");
 
 	currentSpawnTime_ = spawnTime_;
 	coinSpawnersPositions_ = tilemap_->getCoinsSpawnPoints();
@@ -88,13 +89,21 @@ void CapitalismGameMode::render() {
 			ganador.render(winWidth_ / 2 - ganador.getWidth() / 2, winHeigth_ / 2);
 		}
 		else {
-			Texture* suddenDeathTexture = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SuddenDeathText);
-			SDL_Rect suddenDeathRect;
-			suddenDeathRect.x = winWidth_ / 2 - suddenDeathTexture->getWidth() / 2;
-			suddenDeathRect.y = winHeigth_ / 2 - suddenDeathTexture->getHeight() / 2;
-			suddenDeathRect.w = suddenDeathTexture->getWidth();
-			suddenDeathRect.h = suddenDeathTexture->getHeight();
-			suddenDeathTexture->render(suddenDeathRect);
+			suddenDeathRenderTimer += sPerFrame_;
+			if (suddenDeathRenderTimer >= suddenDeathRenderTime) { 
+				suddenDeathRendering = !suddenDeathRendering; 
+				suddenDeathRenderTimer = 0;
+			}
+			if (suddenDeathRendering) {
+				Texture* suddenDeathTexture = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SuddenDeathText);
+				SDL_Rect suddenDeathRect;
+				suddenDeathRect.x = winWidth_ / 2 - suddenDeathTexture->getWidth() / 2;
+				suddenDeathRect.y = winHeigth_ / 2 - suddenDeathTexture->getHeight() / 2;
+				suddenDeathRect.w = suddenDeathTexture->getWidth();
+				suddenDeathRect.h = suddenDeathTexture->getHeight();
+				suddenDeathTexture->render(suddenDeathRect);
+			}
+			
 		}
 	}
 
