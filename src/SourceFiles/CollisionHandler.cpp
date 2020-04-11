@@ -13,8 +13,7 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health*
 	Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
 	//Si se impacta con un arma al umbral más alto de fuerza, se recibe su daño de impacto
 	if (w != nullptr) {
-		if(impact >= CONST(double, "HIGH_DAMAGE"))
-		impact = w->getImpactDamage();
+		impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
 	}
 	else {
 		//Depending on the force of impact we apply damage to the player
