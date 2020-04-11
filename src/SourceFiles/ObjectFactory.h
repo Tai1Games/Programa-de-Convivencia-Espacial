@@ -1,18 +1,17 @@
 #pragma once
-
 #include "Entity.h"
 #include "checkML.h"
 
+class EntityManager;
 class Weapon;
 
-class WeaponFactory
+class ObjectFactory
 {
-private:
 public:
+	ObjectFactory() {}
 
-	WeaponFactory() {};
-
-	~WeaponFactory() {};
+	~ObjectFactory(){}
+	
 	//Crea una chancla (Podemos pasarle los p�rametros que queramos segun las necesidades del objeto)
 	static void makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
@@ -25,6 +24,10 @@ public:
 	static void makeWall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
 	static void makeSpaceJunk(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
+
+	static void makeCoin(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, int val);
 	//Crea un mando de la tele (espec�fico para el modo Pelea Por El Mando)
 	static Weapon* makeController(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
+
+	static Entity* createRoomba(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 };

@@ -23,6 +23,8 @@ namespace ComponentType {
 		ImpulseViewer,
 		PlayerData,
 		RouterLogic,
+		Wallet,
+		Coin,
 		ParticleEmitter,
 		// don't touch the rest of this enum, it is to identify the max
 		// number of components

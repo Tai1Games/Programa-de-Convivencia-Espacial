@@ -16,6 +16,20 @@ Collider::Collider(b2World* world, b2BodyType type, float x, float y, float widt
 	createRectangularFixture(width, height, density, friction, restitution, c, sensor);
 }
 
+Collider::Collider(b2World* world, b2BodyType type, float x, float y, float radius,
+	float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor):
+	world_(world),
+	Component(ComponentType::Collider) {
+
+	bodyDef_.type = type;
+	bodyDef_.position.Set(x, y);
+	bodyDef_.linearDamping = linearDrag;
+	bodyDef_.angularDamping = angDrag;
+	body_ = world_->CreateBody(&bodyDef_);
+
+	createCircularFixture(radius, density, friction, restitution, c, sensor);
+}
+
 void Collider::init() {
 	PIXELS_PER_METER = CONST(double, "PIXELS_PER_METER");
 	WINDOW_HEIGHT = CONST(int, "WINDOW_HEIGHT");
@@ -69,12 +83,12 @@ b2Filter Collider::setCollisionLayer(CollisionLayer c) {
 		filter.maskBits = NormalObject | NormalAttachableObject | Player | Wall; //what do I collide with?
 		break;
 	case Player:
-		filter.maskBits = NormalObject | NormalAttachableObject | Player | Weapon | Wall;
+		filter.maskBits = NormalObject | NormalAttachableObject | Player | PickableObject | Wall;
 		break;
 	case Trigger:
 		filter.maskBits = Player;
 		break;
-	case Weapon:
+	case PickableObject:
 		filter.maskBits = Player | Wall;
 		break;
 	case UnInteractableObject:
@@ -89,8 +103,8 @@ b2Filter Collider::setCollisionLayer(CollisionLayer c) {
 
 void Collider::destroyFixture(int i) {
 	body_->DestroyFixture(fixtures_[i]);
-	/*fixtures_.erase(fixtures_.begin() + i);
-	fixtureDef_.erase(fixtureDef_.begin() + i);
-	shape_.erase(shape_.begin() + i);*/
+	fixtures_.erase(fixtures_.begin() + i);
+	fixtureDefs_.erase(fixtureDefs_.begin() + i);
+	//shape_.erase(shape_.begin() + i);
 
 }

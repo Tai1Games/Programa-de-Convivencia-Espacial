@@ -2,10 +2,6 @@
 #include "PlayState.h"
 #include "HealthViewer.h"
 
-GameMode::~GameMode()
-{
-}
-
 void GameMode::initProgressBars()
 {
 
@@ -49,5 +45,4 @@ void GameMode::renderProgressBars(const std::vector<double>& progressValues, con
 
 void GameMode::init(PlayState* state) {
 	state_ = state;
-	players_ = state->getPlayers();
 }

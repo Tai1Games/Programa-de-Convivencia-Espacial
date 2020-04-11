@@ -17,9 +17,11 @@ public:
 	void render();
 	void handleInput();
 	Entity* addEntity();
+	void addExistingEntity(Entity* e);
 
 
 private:
 	std::vector<std::unique_ptr<Entity>> entities_;
+	std::vector<Entity*> externalEntities_;
 };
 
