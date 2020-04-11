@@ -42,7 +42,7 @@ private:
 	GameMode* gMode_;
 	TileMap* tilemap_;
 
-	void damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet, PlayerData* playerData);
+	void damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet, PlayerData* playerData,int fixedDamage=-1);
 public:
 
     CollisionHandler(GameMode* g, TileMap* tm): gMode_(g), tilemap_(tm) {};

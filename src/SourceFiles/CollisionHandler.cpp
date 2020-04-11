@@ -5,7 +5,7 @@
 #include "Fireball.h"
 //This method calculates the damage recieved by the impact of an object (or another player) with the player
 
-void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet, PlayerData* playerData) {
+void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet, PlayerData* playerData,int fixedDamage) {
 	//Measure de impact of an object with the player
 	b2Vec2 force = fix->GetBody()->GetMass() * fix->GetBody()->GetLinearVelocity();
 
@@ -28,6 +28,9 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health*
 
 		else if (impact >= CONST(double, "HIGH_DAMAGE")) /*&& impact < CONST(double, "HIGH_DAMAGE"))*/ impact = 3;
 	}
+
+	if (fixedDamage > 0)
+		impact = fixedDamage;
 
 	if (impact > 0) {
 		if (playerHealth) {
@@ -204,7 +207,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 			//si choca constra un jugador
 			if (collidedWithFireball->hasComponent(ComponentType::PlayerData)) {
 				damageOnImpact(GETCMP2(fireball,Collider)->getFixture(0), GETCMP2(collidedWithFireball, Collider)->getFixture(0),
-					GETCMP2(collidedWithFireball, Health), GETCMP2(collidedWithFireball, Wallet), GETCMP2(collidedWithFireball,PlayerData));
+					GETCMP2(collidedWithFireball, Health), GETCMP2(collidedWithFireball, Wallet), GETCMP2(collidedWithFireball,PlayerData),99);
 			}
 		}
 	}
