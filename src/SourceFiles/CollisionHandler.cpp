@@ -221,8 +221,8 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 		exitChanclaTrigger(contact);
 	}
 
-	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Wall && contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player ||
-		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Wall && contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
+	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::NormalObject && contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player ||
+		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::NormalObject && contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
 
 		if (PlayerCollidesWithPad(contact, pad)) {
 			//animacion cama elastica

@@ -34,7 +34,6 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ ProgressBar, "../../assets/game/textures/ProgressBar.png"},
 	{ EmptyProgressBar2, "../../assets/game/textures/EmptyProgressBar2.png"},
 	{ ProgressBar2, "../../assets/game/textures/ProgressBar2.png"},
-	{ Pad,"../../assets/game/textures/Colchoneta.png" },
 	{ PadSpriteSheet,"../../assets/game/textures/ColchonetaSpriteSheet.png" },
 
 		{ TSet_Kenney1bit , "../../assets/game/tilemaps/modded_colored.png"},

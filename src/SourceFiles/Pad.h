@@ -8,7 +8,7 @@ class Pad:public Component
 private:
 	Viewer* viewer_;
 	bool onAnimation_;
-	int frame_;
+	int frame_, animationSpeed_, totalFrames_;
 public:
 	Pad();
 	virtual ~Pad();

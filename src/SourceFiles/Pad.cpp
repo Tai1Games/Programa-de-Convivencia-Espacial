@@ -13,15 +13,17 @@ void Pad::init()
 	onAnimation_ = false;
 	frame_ = 0;
 	viewer_ = entity_->getComponent<Viewer>(ComponentType::Viewer); //pilla referencia al viewer
+	animationSpeed_ = CONST(int, "PAD_ANIMATION_SPEED");
+	totalFrames_ = CONST(int, "PAD_ANIMATION_FRAMES");
 }
 
 void Pad::update()
 {
 	if (onAnimation_) { //se esta moviendo
-		int pos = 32 * (frame_ / CONST(int, "PAD_ANIMATION_SPEED"));
+		int pos = 32 * (frame_ / animationSpeed_);
 		viewer_->setClip(SDL_Rect{ 0, pos ,32,32 });
 		frame_++;
-		if (frame_ / CONST(int, "PAD_ANIMATION_SPEED") == CONST(int, "PAD_ANIMATION_FRAMES")) { //ha terminado la animacion 
+		if (frame_ / animationSpeed_ == totalFrames_) { //ha terminado la animacion 
 			onAnimation_ = false;
 			viewer_->setClip(SDL_Rect{ 0, 0,32,32 });
 		}
@@ -30,6 +32,6 @@ void Pad::update()
 
 void Pad::startAnim()
 {
-	frame_ = CONST(int, "PAD_ANIMATION_SPEED"); //empieza en el segundo frame por que el primero es el statico 
+	frame_ = animationSpeed_; //empieza en el segundo frame por que el primero es el statico 
 	onAnimation_ = true;
 }
