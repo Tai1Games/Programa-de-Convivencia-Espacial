@@ -4,13 +4,17 @@ void Coin::init() {
 	vw_ = GETCMP1_(Viewer);
 	col_ = GETCMP1_(Collider);
 	repickeableTime_ = CONST(int, "COINS_COOLDOWN_WHEN_DROPPED");
-	msPerFrame_ = CONST(double, "MS_PER_FRAME");
+	sPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
+	winWidth_ = CONST(int, "WINDOW_WIDTH");
+	winHeigth_ = CONST(int, "WINDOW_HEIGHT");
 }
 
 void Coin::update()
 {
+	if (col_->getPos().x < 0 || col_->getPos().x > winWidth_ || col_->getPos().y > winHeigth_ || col_->getPos().y < 0) setActive(false);
+
 	if (justDroppedByPlayer_ != -1) {
-		timeSinceDropped_ += msPerFrame_;
+		timeSinceDropped_ += sPerFrame_;
 		if (timeSinceDropped_ >= repickeableTime_) {
 			justDroppedByPlayer_ = -1;
 			timeSinceDropped_ = 0;
