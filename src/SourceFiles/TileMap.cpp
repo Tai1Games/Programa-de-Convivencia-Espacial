@@ -169,7 +169,7 @@ void TileMap::executeMapFactory()
 			ObjectFactory::makeSpaceJunk(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
 		}
 		else if (name == "Dumbbell") {
-			WeaponFactory::makeDumbbell(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
+			ObjectFactory::makeDumbbell(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
 		}
 	}
 }
