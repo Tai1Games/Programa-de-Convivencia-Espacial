@@ -16,6 +16,10 @@ private:
 	double spawnTime_ = 0;
 	double currentSpawnTime_ = 0;
 	double minimumSpawnTime_ = 0;
+
+	double suddenDeathRenderTime = 0;
+	double suddenDeathRenderTimer = 0;
+	bool suddenDeathRendering = true;
 	int coinsSpawned_ = 0;
 
 	//Constantes que inicializamos en init.
