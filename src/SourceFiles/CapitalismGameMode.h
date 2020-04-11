@@ -9,7 +9,6 @@ class CapitalismGameMode : public GameMode
 {
 private:
 	CoinsPool coinPool_;
-	FireBallPool fireballPool_;
 	double timeSinceStart_ = 0;
 	double timeSinceSpawn_ = 0;
 	double spawnTime_ = 0;

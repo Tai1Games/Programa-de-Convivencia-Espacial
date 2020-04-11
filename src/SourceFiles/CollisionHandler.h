@@ -70,6 +70,8 @@ public:
 
 	bool CoinCollidesWithPlayer(b2Contact* contact, Wallet*& playerWallet, Coin*& coin, PlayerData*& playerData);
 
+	bool FireballCollidesWithSomething(b2Contact* contact, Entity*& fireball, Entity*& with);
+
 	vector<bodyData> getBodyData() { return vecBody; }
 
 	void clearBodyData(){ vecBody.clear(); }

@@ -199,8 +199,13 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		else if (PlayerCollidesWithRouterArea(contact, routerLogic, playerCollider, playerData)) { //Player collides with router
 			routerLogic->detectPlayer(playerCollider, playerData->getPlayerNumber());
 		}
-		else if (isFireballCollision(contact,fireball,collidedWithFireball)) {
-
+		else if (FireballCollidesWithSomething(contact,fireball,collidedWithFireball)) {
+			fireball->setActive(false);
+			//si choca constra un jugador
+			if (collidedWithFireball->hasComponent(ComponentType::PlayerData)) {
+				damageOnImpact(GETCMP2(fireball,Collider)->getFixture(0), GETCMP2(collidedWithFireball, Collider)->getFixture(0),
+					GETCMP2(collidedWithFireball, Health), GETCMP2(collidedWithFireball, Wallet), GETCMP2(collidedWithFireball,PlayerData));
+			}
 		}
 	}
 }
@@ -307,16 +312,16 @@ bool CollisionHandler::CoinCollidesWithPlayer(b2Contact* contact, Wallet*& playe
 	return false;
 }
 
-bool isFireballCollision(b2Contact* contact,Entity*& fireball,Entity*& with) {
+bool CollisionHandler::FireballCollidesWithSomething(b2Contact* contact,Entity*& fireball,Entity*& with) {
 	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
 	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
-	if (fixAentity->hasComponent(ComponentType::Fireball) || !fixBentity->hasComponent(ComponentType::Fireball)) {
+	if (fixAentity->hasComponent(ComponentType::Fireball) && !fixBentity->hasComponent(ComponentType::Fireball)) {
 		fireball = fixAentity;
 		with = fixBentity;
 		return true;
 	}
-	else if (fixBentity->hasComponent(ComponentType::Fireball)) {
+	else if (fixBentity->hasComponent(ComponentType::Fireball) && !fixAentity->hasComponent(ComponentType::Fireball)) {
 		fireball = fixBentity;
 		with = fixAentity;
 		return true;

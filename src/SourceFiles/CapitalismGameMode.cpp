@@ -6,7 +6,6 @@ void CapitalismGameMode::init(PlayState* game)
 {
 	GameMode::init(game);
 	coinPool_.init(game->getEntityManager(), game->getPhysicsWorld());
-	fireballPool_.init(game->getEntityManager(), game->getPhysicsWorld());
 
 	sPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 	timeToEnd_ = CONST(double, "TIME_TO_END");
@@ -20,8 +19,6 @@ void CapitalismGameMode::init(PlayState* game)
 		roombaColliders_.push_back(ObjectFactory::createRoomba(game->getEntityManager(),
 			game->getPhysicsWorld(), pos)->getComponent<Collider>(ComponentType::Collider));
 	}
-
-	Entity* boiler = ObjectFactory::createBoiler(game->getEntityManager(), game->getPhysicsWorld(), b2Vec2(20,10),&fireballPool_);
 
 	for (int k = 0; k < nPlayers_; k++) {
 		players_.push_back(PlayerFactory::createPlayerWithWallet(game->getEntityManager(), game->getPhysicsWorld(), k,
