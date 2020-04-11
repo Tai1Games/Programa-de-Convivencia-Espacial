@@ -17,7 +17,7 @@ private:
 	//Load of constants
 	int winWidth_ = 0;
 	int winHeigth_ = 0;
-	int pixelsPerMeter_ = 0;
+	double pixelsPerMeter_ = 0;
 	int repickeableTime_ = 0;
 	double sPerFrame_ = 0;
 

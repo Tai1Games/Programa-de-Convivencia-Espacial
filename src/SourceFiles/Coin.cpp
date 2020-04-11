@@ -7,7 +7,7 @@ void Coin::init() {
 	sPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 	winWidth_ = CONST(int, "WINDOW_WIDTH");
 	winHeigth_ = CONST(int, "WINDOW_HEIGHT");
-	pixelsPerMeter_ = CONST(int, "PIXELS_PER_METER");
+	pixelsPerMeter_ = CONST(double, "PIXELS_PER_METER");
 }
 
 void Coin::update()
