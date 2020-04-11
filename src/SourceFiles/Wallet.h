@@ -10,7 +10,7 @@ class CapitalismGameMode;
 class Wallet : public Component
 {
 private:
-	int numCoins_ = 10; //Tendría que empezar a 0 pero es para que lo probeis
+	int numCoins_ = 0; //Se asigna en init.
 	int coinBaseSize_ = 0; //Se asigna en init.
 	double pi_ = 0; //Se asigna en init.
 	Collider* collPlayer_ = nullptr;

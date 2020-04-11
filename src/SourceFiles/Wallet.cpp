@@ -4,6 +4,7 @@
 
 void Wallet::init()
 {
+	numCoins_ = CONST(int, "INITIAL_COINS");
 	collPlayer_ = GETCMP1_(Collider);
 	coinBaseSize_ = CONST(double, "COIN_BASE_SIZE");
 	pi_ = CONST(double, "PI");
