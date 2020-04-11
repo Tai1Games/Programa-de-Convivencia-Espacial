@@ -3,6 +3,7 @@
 #include "StocksGameMode.h"
 #include <tuple>
 #include "Fireball.h"
+#include "FireBallGenerator.h"
 //This method calculates the damage recieved by the impact of an object (or another player) with the player
 
 void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet, PlayerData* playerData,int fixedDamage) {
@@ -202,7 +203,9 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 			routerLogic->detectPlayer(playerCollider, playerData->getPlayerNumber());
 		}
 		else if (FireballCollidesWithSomething(contact,fireball,collidedWithFireball)) {
-			fireball->setActive(false);
+			//la bola desaparece al chocar con algo
+			fireballsToClear.push_back(GETCMP2(fireball, Fireball));
+			cout << "Firecollision" << endl;
 			//si choca constra un jugador
 			if (collidedWithFireball->hasComponent(ComponentType::PlayerData)) {
 				damageOnImpact(GETCMP2(fireball,Collider)->getFixture(0), GETCMP2(collidedWithFireball, Collider)->getFixture(0),
@@ -318,12 +321,12 @@ bool CollisionHandler::FireballCollidesWithSomething(b2Contact* contact,Entity*&
 	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
 	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
-	if (fixAentity->hasComponent(ComponentType::Fireball) && !fixBentity->hasComponent(ComponentType::Fireball)) {
+	if (fixAentity->hasComponent(ComponentType::Fireball) && !fixBentity->hasComponent(ComponentType::Fireball) && !fixBentity->hasComponent(ComponentType::FireBallGenerator)) {
 		fireball = fixAentity;
 		with = fixBentity;
 		return true;
 	}
-	else if (fixBentity->hasComponent(ComponentType::Fireball) && !fixAentity->hasComponent(ComponentType::Fireball)) {
+	else if (fixBentity->hasComponent(ComponentType::Fireball) && !fixAentity->hasComponent(ComponentType::Fireball)&&!fixAentity->hasComponent(ComponentType::FireBallGenerator)) {
 		fireball = fixBentity;
 		with = fixAentity;
 		return true;
@@ -397,6 +400,9 @@ void CollisionHandler::SolveInteractions() {
 		c->setActive(false);
 	}
 	vecCoin.clear();
+	for (auto f : fireballsToClear) {
+		f->setActive(false, b2Vec2(-100, -100));
+	}
 	for (auto w : vecCoinsToDrop) {
 		std::get<0>(w)->dropCoins(std::get<2>(w), std::get<1>(w)->getPlayerNumber());
 	}

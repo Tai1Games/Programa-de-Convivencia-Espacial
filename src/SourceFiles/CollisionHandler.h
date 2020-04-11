@@ -14,6 +14,7 @@
 #include "Coin.h"
 #include "checkML.h"
 
+class Fireball;
 class RouterLogic;
 class CollisionHandler :
 	public b2ContactListener
@@ -39,6 +40,7 @@ private:
 	vector<AttachesToObjects*> vecAttach; //Vector donde almacenamos los agarres que soltaremos al final del step.
 	vector<tuple<Wallet*, PlayerData*, int>> vecCoinsToDrop; //Vector donde almacenamos los impactos entre objetos y wallets.
 	vector<Coin*> vecCoin; //Vector donde almacenamos los impactos entre jugador y las monedas a recoger
+	vector<Fireball*> fireballsToClear;
 	GameMode* gMode_;
 	TileMap* tilemap_;
 
