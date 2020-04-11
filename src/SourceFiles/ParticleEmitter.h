@@ -66,7 +66,7 @@ public:
 	//Devuelve si se ha detenido o empezado
 	bool PlayStop() { timeEmitted_ = 0; return emitting_ = !emitting_; };
 
-	void setPosition(Vector2D pos) { position_ = pos; };
+	void setPositionCollider(Collider* col) { collider_ = col; };
 	void setDirection(Vector2D dir) { direction_ = dir; };
 	void setSize(Uint16 size) { size_ = size; };
 	void setLifeTime(Uint16 time) { emittingTime_ = time; };

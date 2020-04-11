@@ -61,7 +61,7 @@ public:
 	/*Muestra si el objeto ya esta sujeto por una mano*/
 	bool IsPicked() { return picked_; }
 	/*Reactiva el arma y la lanza en direccion de la mano*/
-	void UnPickObject();
+	virtual void UnPickObject();
 	/*Guarda la informacion del jugador que esta dentro del trigger*/
 	void SavePlayerInfo(int index, Hands* playerH, Health* healthAux, Wallet* walletAux);
 	/*Borra la informacion del jugador que sale del trigger*/
