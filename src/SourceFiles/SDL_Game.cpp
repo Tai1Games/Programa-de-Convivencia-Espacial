@@ -13,7 +13,6 @@ SDL_Game::SDL_Game() {
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 
 	initializeResources();
-
 	//Prueba multimedia
 	textures_->getTexture(Resources::Tinky)->render({ constants_.getConstant<int>("WINDOW_WIDTH") / 2 - 70,constants_.getConstant<int>("WINDOW_HEIGHT") / 2 - 135,140,200 });
 
@@ -27,7 +26,7 @@ SDL_Game::SDL_Game() {
 
 
 	audio_->setMusicVolume(constants_.getConstant<int>("MAX_MUSIC_VOLUME"));
-	audio_->playMusic(Resources::MainTheme, -1);
+	//audio_->playMusic(Resources::MainTheme, -1);
 	inputHandler_ = new InputHandler();
 	inputHandler_->initialiseGamepads();
 

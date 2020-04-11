@@ -14,7 +14,7 @@ private:
 	int healtWidth_;
 	int maxStocks_;
 public:
-	StocksGameMode(int stocks = 3);
+	StocksGameMode(int nPlayers, int stocks = 3);
 	~StocksGameMode();
 	virtual void init(PlayState* game);
 	virtual void render();

@@ -1,10 +1,11 @@
 #include "GameStateMachine.h"
 #include "StocksGameMode.h"
 #include "WiFightGameMode.h"
+#include "ControllerGameMode.h"
+#include "CapitalismGameMode.h"
 #include "Constants.h"
 #include "PlayState.h"
 #include "PauseState.h"
-#include "ControllerGameMode.h"
 
 GameStateMachine::GameStateMachine() {
 	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
@@ -36,7 +37,7 @@ void GameStateMachine::changeToState(int state) {
 				break;
 			case States::play:
 				//deleteState(currentState_);
-				states_[state] = new PlayState(new WiFightGameMode(), "SalaDeEstar"); //ejemplo "SalaDeEstar"
+				states_[state] = new PlayState(new CapitalismGameMode(4), "SalaDeEstar"); //ejemplo "SalaDeEstar"
 				break;
 			case States::pause:
 				//if (states_[state] != nullptr)	delete states_[state];
