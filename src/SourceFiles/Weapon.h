@@ -42,7 +42,7 @@ protected:
 	int index = 2;
 
 public:
-	Weapon(WeaponID wId): Component(ComponentType::Weapon), weaponType_(wId){}
+	Weapon(WeaponID wId, int dmg, int impctDmg) : Component(ComponentType::Weapon), weaponType_(wId), damage_(dmg), impactDamage_(impctDmg){}
 	~Weapon(){};
 	virtual void init() override;
 	/*Se comprueba que jugador ha pulsado Y y est� cerca para recoger este objeto*/

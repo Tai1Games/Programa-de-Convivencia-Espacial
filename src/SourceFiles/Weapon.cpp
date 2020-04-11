@@ -9,33 +9,6 @@ void Weapon::init()
 	ih_ = SDL_Game::instance()->getInputHandler();
 	mainCollider_ = GETCMP1_(Collider);
 	vw_ = GETCMP1_(Viewer);
-	//Daño de impacto en funcion del tipo de arma
-	switch (weaponType_)
-	{
-	case NoWeapon:
-		break;
-	case Piedra:
-		impactDamage_ = 1;
-		break;
-	case Pelota:
-		impactDamage_ = 1;
-		break;
-	case Mancuerna:
-		impactDamage_ = 2;
-		break;
-	case Grapadora:
-		break;
-	case Extintor:
-		break;
-	case Chancla:
-		break;
-	case Mando:
-		break;
-	case WEAPON_NUMBER:
-		break;
-	default:
-		break;
-	}
 	//Fixture Sensor a�adido por el componente
 	mainCollider_->createRectangularFixture(mainCollider_->getW(0)*4, mainCollider_->getH(0)*4, 1, 0.1, 0, Collider::CollisionLayer::Weapon, true);
 	//Pone la informacion de esta clase en el body, para poder usarla en el Listener
