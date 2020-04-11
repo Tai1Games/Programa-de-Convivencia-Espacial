@@ -12,7 +12,6 @@ class Wallet : public Component
 private:
 	int numCoins_ = 0; //Se asigna en init.
 	int coinBaseSize_ = 0; //Se asigna en init.
-	double pi_ = 0; //Se asigna en init.
 	Collider* collPlayer_ = nullptr;
 	CapitalismGameMode* gameMode_ = nullptr;
 public:
