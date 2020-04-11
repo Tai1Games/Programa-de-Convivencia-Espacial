@@ -2,6 +2,7 @@
 #include "RouterLogic.h"
 #include "StocksGameMode.h"
 #include <tuple>
+#include "Fireball.h"
 //This method calculates the damage recieved by the impact of an object (or another player) with the player
 
 void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet, PlayerData* playerData) {
@@ -178,6 +179,8 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	//Trigger collisions (Router, Coins)
 	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger || 
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
+		Entity* fireball = nullptr;
+		Entity* collidedWithFireball = nullptr;
 
 		if (CoinCollidesWithPlayer(contact, playerWallet, coin, playerData)) { //Player collides with coin
 			if (coin->getPlayerDropped() != playerData->getPlayerNumber()) {
@@ -187,6 +190,9 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		}
 		else if (PlayerCollidesWithRouterArea(contact, routerLogic, playerCollider, playerData)) { //Player collides with router
 			routerLogic->detectPlayer(playerCollider, playerData->getPlayerNumber());
+		}
+		else if (isFireballCollision(contact,fireball,collidedWithFireball)) {
+
 		}
 	}
 }
@@ -288,6 +294,23 @@ bool CollisionHandler::CoinCollidesWithPlayer(b2Contact* contact, Wallet*& playe
 		playerWallet = static_cast<Wallet*>(fixBentity->getComponent<Wallet>(ComponentType::Wallet));
 		playerData = static_cast<PlayerData*>(fixBentity->getComponent<PlayerData>(ComponentType::PlayerData));
 		coin = static_cast<Coin*>(fixAentity->getComponent<Coin>(ComponentType::Coin));
+		return true;
+	}
+	return false;
+}
+
+bool isFireballCollision(b2Contact* contact,Entity*& fireball,Entity*& with) {
+	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+	if (fixAentity->hasComponent(ComponentType::Fireball) || !fixBentity->hasComponent(ComponentType::Fireball)) {
+		fireball = fixAentity;
+		with = fixBentity;
+		return true;
+	}
+	else if (fixBentity->hasComponent(ComponentType::Fireball)) {
+		fireball = fixBentity;
+		with = fixAentity;
 		return true;
 	}
 	return false;
