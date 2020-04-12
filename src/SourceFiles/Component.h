@@ -43,6 +43,7 @@ public:
 	virtual void draw() const {};
 	virtual void handleInput() {};
 
+	Entity* getEntity() { return entity_; };
 };
 
 

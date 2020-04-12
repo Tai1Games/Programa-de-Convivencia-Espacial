@@ -32,9 +32,9 @@ enum WeaponID {
 	Piedra,
 	Pelota,
 	Mancuerna,
-	Grapadora,
-	Extintor,
-	Chancla,
+	Stapler,
+	Extinguisher,
+	Slipper,
 	Mando,
 
 	WEAPON_NUMBER

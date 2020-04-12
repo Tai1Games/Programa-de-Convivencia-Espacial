@@ -163,7 +163,7 @@ void TileMap::executeMapFactory()
 			ObjectFactory::makeSlipper(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
 		}
 		else if (name == "Stapler") {
-			ObjectFactory::makeStapler(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
+			ObjectFactory::makeExtinguisher(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
 		}
 		else if (name == "SpaceJunk") {
 			ObjectFactory::makeSpaceJunk(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));

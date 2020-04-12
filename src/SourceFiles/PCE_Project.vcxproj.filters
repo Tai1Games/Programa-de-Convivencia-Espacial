@@ -201,8 +201,8 @@
     <ClInclude Include="ParticleEmitter.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="MeleeWeapon.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ExtinguisherWeapon.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Pad.h">
       <Filter>Header Files\Components</Filter>
@@ -341,8 +341,8 @@
     <ClCompile Include="ParticleEmitter.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="MeleeWeapon.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ExtinguisherWeapon.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Pad.cpp">
       <Filter>Source Files\Components</Filter>
