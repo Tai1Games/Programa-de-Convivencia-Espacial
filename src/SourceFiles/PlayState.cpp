@@ -52,6 +52,7 @@ void PlayState::init() {
 
 	//FONDO
 	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(resourceMap_[tilemapName_]);
+	
 
 	//Version estática de la factoria
 	tilemap_->executeMapFactory();

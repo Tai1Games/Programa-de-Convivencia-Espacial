@@ -213,6 +213,7 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 	RouterLogic* routerLogic = nullptr;
 	PlayerData* playerData = nullptr;
 	Collider* playerCollider = nullptr;
+	Pad* pad = nullptr;
 
 	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger || //Colisiones entre Triggers y otros objetos
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
@@ -225,6 +226,15 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject) {
 
 		exitChanclaTrigger(contact);
+	}
+
+	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::NonGrababbleWall && contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player ||
+		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::NonGrababbleWall && contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
+
+		if (PlayerCollidesWithPad(contact, pad)) {
+			//animacion cama elastica
+			pad->startAnim();
+		}
 	}
 }
 
@@ -370,4 +380,21 @@ void CollisionHandler::SolveInteractions() {
 		std::get<0>(w)->dropCoins(std::get<2>(w), std::get<1>(w)->getPlayerNumber());
 	}
 	vecCoinsToDrop.clear();
+}
+
+
+bool CollisionHandler::PlayerCollidesWithPad(b2Contact* contact, Pad*& p)
+{
+	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+	if (fixAentity->hasComponent(ComponentType::PlayerController) && fixBentity->hasComponent(ComponentType::Pad)) {
+		p = static_cast<Pad*>(fixBentity->getComponent<Pad>(ComponentType::Pad));
+		return true;
+	}
+	else if (fixAentity->hasComponent(ComponentType::Pad) && fixBentity->hasComponent(ComponentType::PlayerController)) {
+		p = static_cast<Pad*>(fixAentity->getComponent<Pad>(ComponentType::Pad));
+		return true;
+	}
+	else return false;
 }

@@ -17,7 +17,8 @@ public:
 		Wall = 0x0008,
 		Player = 0x0016,
 		Trigger = 0x0032,
-		PickableObject = 0x0064
+		PickableObject = 0x0064,
+		NonGrababbleWall = 0x0128,
 	};
 
 private:

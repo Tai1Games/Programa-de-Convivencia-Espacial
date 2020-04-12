@@ -29,6 +29,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SalaDeEstar,"../../assets/game/textures/SalaDeEstar.png"},
 	{ Negro ,"../../assets/game/textures/Negro.png"},
 	{ Router,"../../assets/game/textures/Router.png" },
+	{Router,"../../assets/game/textures/Router.png" },
 	{ Coin, "../../assets/game/textures/DogeCoin.png" },
 	{ CoinUI, "../../assets/game/textures/DogeCoinUI.png"},
 	{ CanvasTimer, "../../assets/game/textures/COSO.png"},
@@ -37,6 +38,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ ProgressBar, "../../assets/game/textures/ProgressBar.png"},
 	{ EmptyProgressBar2, "../../assets/game/textures/EmptyProgressBar2.png"},
 	{ ProgressBar2, "../../assets/game/textures/ProgressBar2.png"},
+	{ PadSpriteSheet,"../../assets/game/textures/ColchonetaSpriteSheet.png" },
 
 		{ TSet_Kenney1bit , "../../assets/game/tilemaps/modded_colored.png"},
 		{ TSet_Dungeon , "../../assets/game/tilemaps/dungeon_ts.png"}
