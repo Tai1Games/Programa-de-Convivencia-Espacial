@@ -17,7 +17,6 @@ namespace ComponentType {
 		HealthViewer,
 		Tilemap,
 		Weapon,
-		MeleeWeapon,
 		Hands,
 		PlayerController,
 		ImpulseViewer,
@@ -26,6 +25,7 @@ namespace ComponentType {
 		Wallet,
 		Coin,
 		ParticleEmitter,
+		ExtinguisherWeapon,
 		Pad,
 
 		// don't touch the rest of this enum, it is to identify the max

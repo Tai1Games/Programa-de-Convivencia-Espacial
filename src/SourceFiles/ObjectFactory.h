@@ -10,7 +10,7 @@ class ObjectFactory
 public:
 	ObjectFactory() {}
 
-	~ObjectFactory(){}
+	~ObjectFactory() {}
 
 	//Crea una chancla (Podemos pasarle los p�rametros que queramos segun las necesidades del objeto)
 	static void makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
@@ -18,8 +18,10 @@ public:
 	//Crea una pelota saltarina (Podemos pasarle los p�rametros que queramos segun las necesidades del objeto)
 	static void makeBall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
-	//Crea una pelota saltarina (Podemos pasarle los p�rametros que queramos segun las necesidades del objeto)
+	//Crea una grapadora (Podemos pasarle los p�rametros que queramos segun las necesidades del objeto)
 	static void makeStapler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
+
+	static void makeExtinguisher(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
 	static void makeWall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 

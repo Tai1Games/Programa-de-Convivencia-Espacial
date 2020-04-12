@@ -11,7 +11,7 @@ Entity* PlayerFactory::createBasePlayer(EntityManager* eMan, b2World* physicsWor
 	p->addComponent<Hands>(Resources::Hands);
 	p->addComponent<AttachesToObjects>();
 	p->addComponent<PlayerController>();
-	p->addComponent<ImpulseViewer>(Resources::FlechaImpulso, Resources::ImpulsoBackground);
+	p->addComponent<ImpulseViewer>(Resources::ImpulseArrow, Resources::ImpulseBackground);
 	}
 	return p;
 }
