@@ -8,23 +8,40 @@ class CapitalismGameMode : public GameMode
 {
 private:
 	CoinsPool coinPool_;
+	Texture* coinTextureUI_ = nullptr;
+	Texture* canvasTimerTexture_ = nullptr;
+	SDL_Rect canvasTimerRect_;
 	double timeSinceStart_ = 0;
 	double timeSinceSpawn_ = 0;
 	double spawnTime_ = 0;
 	double currentSpawnTime_ = 0;
 	double minimumSpawnTime_ = 0;
-	double sPerFrame_ = 0; //Se inicializa en el init
-	double timeToEnd_ = 0; //Se inicaliza en el init
+
+	double suddenDeathRenderTime = 0;
+	double suddenDeathRenderTimer = 0;
+	bool suddenDeathRendering = true;
 	int coinsSpawned_ = 0;
+
+	//Constantes que inicializamos en init.
+	double sPerFrame_ = 0;
+	double timeToEnd_ = 0;
+	int winWidth_ = 0;
+	int winHeigth_ = 0;
+	int coinUIRadius_ = 0;
+	int coinUIMarginX_ = 0;
+	int coinUIMarginY_ = 0;
+	double coinUISpriteScale_ = 0;
 	int maxCoins_ = 0;
+	int fontCharacterWidth_ = 0;
 
 	std::vector<b2Vec2> coinSpawnersPositions_;
 	std::vector<Collider*> roombaColliders_;
+	std::vector<Wallet*> playerWallets_;
 public:
 	CapitalismGameMode(int nPlayers) : GameMode(nPlayers){};
 	virtual ~CapitalismGameMode() {};
 	virtual void init(PlayState* game);
-	virtual void render() {};
+	virtual void render();
 	virtual void update();
 	virtual bool onPlayerDead(int id) { return true; }; //Returns false when players runs out of stocks.
 
