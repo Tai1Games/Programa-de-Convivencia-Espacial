@@ -29,7 +29,7 @@
   "HIGH_DAMAGE": 70,
   
   "_PLAYER":  null,
-  "ARM_LENGTH_PHYSICS": 2.5, 
+  "ARM_LENGTH_PHYSICS": 3.2, 
   "HAND_SIZE" :  150,
 
   "_WEAPONS": null,
