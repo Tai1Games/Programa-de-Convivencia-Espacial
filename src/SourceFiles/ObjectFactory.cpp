@@ -50,7 +50,7 @@ void ObjectFactory::makeExtinguisher(EntityManager* entityManager, b2World* phys
 	Collider* aux = entity->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "EXTINGUISHER_DENSITY"), CONST(double, "EXTINGUISHER_FRICTION"), CONST(double, "EXTINGUISHER_RESTITUTION"), CONST(double, "EXTINGUISHER_LINEAR_DRAG"), CONST(double, "STAPLER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	entity->addComponent<Viewer>(Resources::Extinguisher);
 	entity->addComponent<ParticleEmitter>(Vector2D(0,-1),Resources::Coin,10);
-	entity->addComponent<ExtinguisherWeapon>(WeaponID::Extinguisher);
+	entity->addComponent<ExtinguisherWeapon>(WeaponID::Extinguisher, CONST(int, "EXTINGUISHER_DAMAGE"), CONST(int, "EXTINGUISHER_IMPACT_DAMAGE"));
 	aux->setUserData(entity);
 }
 
