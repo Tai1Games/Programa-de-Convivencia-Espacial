@@ -41,6 +41,7 @@ protected:
 	Hands* currentHand_ = nullptr;
 
 	int damage_ = 0;
+	int impactDamage_ = 0;
 	bool coolDown = false;
 	int actionTime = 0;
 	int index = 2;
@@ -48,8 +49,8 @@ protected:
 	int calculateCoinsDropped(int coinsPlayer);
 
 public:
-	Weapon(WeaponID wId) : Component(ComponentType::Weapon), weaponType_(wId) {}
-	~Weapon() {};
+	Weapon(WeaponID wId, int dmg, int impctDmg) : Component(ComponentType::Weapon), weaponType_(wId), damage_(dmg), impactDamage_(impctDmg){}
+	~Weapon(){};
 	virtual void init() override;
 	/*Se comprueba que jugador ha pulsado Y y est� cerca para recoger este objeto*/
 	virtual void update() override;
@@ -71,8 +72,8 @@ public:
 	void loseContactPlayer(Entity* playerDetected, int id);
 
 	virtual void Action();
-
-	int getDamage();
+	int getDamage(){ return damage_; }
+	int getImpactDamage() { return impactDamage_; }
 	int getWeaponType() { return weaponType_; }
 	Hands* getCurrentHand() { return currentHand_; }
 

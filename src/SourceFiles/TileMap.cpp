@@ -57,7 +57,7 @@ void TileMap::update() {
 }
 
 void TileMap::draw() const {
-	//c�digo bastante modificado basado en https://github.com/SSBMTonberry/tileson 
+	//c�digo bastante modificado basado en https://github.com/SSBMTonberry/tileson
 	//He a�adido sistema de escalado
 	//soporte autom�tico para varios tilesets
 	//soporte de texturas de SDL
@@ -168,6 +168,9 @@ void TileMap::executeMapFactory()
 		else if (name == "SpaceJunk") {
 			ObjectFactory::makeSpaceJunk(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
 		}
+		else if (name == "Dumbbell") {
+			ObjectFactory::makeDumbbell(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
+        }
 		else if (name == "Pad") {
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
 			pos = b2Vec2(p.x / CONST(double, "PIXELS_PER_METER") + (size.x / 2), (CONST(int, "WINDOW_HEIGHT") - p.y) / CONST(double, "PIXELS_PER_METER") - (size.y / 2));

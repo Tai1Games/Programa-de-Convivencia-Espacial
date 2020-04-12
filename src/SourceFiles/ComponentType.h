@@ -39,6 +39,8 @@ namespace ComponentType {
 	// entity_
 #define GETCMP2_(id,type)  GETCMP3(entity_,id,type)
 #define GETCMP1_(type)     GETCMP3(entity_,ComponentType::type,type)
+	// this one should be used to get a component via a fixture
+#define GETCMP_FROM_FIXTURE_(fixture, type) static_cast<type*>(GETCMP3(static_cast<Entity*>(fixture->GetBody()->GetUserData()),ComponentType::type,type))
 
 // these two should be used to get a component via an
 // entity e provided as a parameter

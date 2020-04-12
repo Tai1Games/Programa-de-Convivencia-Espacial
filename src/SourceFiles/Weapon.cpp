@@ -201,11 +201,6 @@ void Weapon::Action() {
 	}
 }
 
-int Weapon::getDamage() {
-	return damage_;
-}
-
-
 bool Weapon::isOnHit(){
 	return coolDown;
 }
