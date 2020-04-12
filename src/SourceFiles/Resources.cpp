@@ -27,6 +27,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Slider, "../../assets/game/textures/Slider.png"},
 	{ SliderControl, "../../assets/game/textures/SliderControl.png"},
 	{ SalaDeEstar,"../../assets/game/textures/SalaDeEstar.png"},
+	{ SalaCaldera,"../../assets/game/textures/SalaCaldera720Des.png"},
 	{ Negro ,"../../assets/game/textures/Negro.png"},
 	{ Router,"../../assets/game/textures/Router.png" },
 	{Router,"../../assets/game/textures/Router.png" },
