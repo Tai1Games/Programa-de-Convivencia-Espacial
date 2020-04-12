@@ -9,7 +9,7 @@ class b2Vec2;
 class FireBallPool
 {
 private:
-	ObjectPool<Entity, 20> fireballPool_;
+	ObjectPool<Entity, 1> fireballPool_;
 	int fireballW_, fireballH_, fireballSpeed_;
 public:
 	FireBallPool();

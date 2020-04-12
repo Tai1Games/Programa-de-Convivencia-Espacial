@@ -207,6 +207,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	}
 	else if (FireballCollidesWithSomething(contact, fireball, collidedWithFireball)) {
 		//la bola desaparece al chocar con algo
+		fireball->setActive(false);
 		fireballsToClear.push_back(GETCMP2(fireball, Fireball));
 		cout << "Firecollision with " << GETCMP2(collidedWithFireball, Viewer)->getTextureId() << endl;
 		//si choca constra un jugador
@@ -326,12 +327,12 @@ bool CollisionHandler::FireballCollidesWithSomething(b2Contact* contact,Entity*&
 	if (fixAentity->hasComponent(ComponentType::Fireball) && !fixBentity->hasComponent(ComponentType::Fireball) && !fixBentity->hasComponent(ComponentType::FireBallGenerator)) {
 		fireball = fixAentity;
 		with = fixBentity;
-		return true;
+		return fixAentity->isActive();
 	}
 	else if (fixBentity->hasComponent(ComponentType::Fireball) && !fixAentity->hasComponent(ComponentType::Fireball) && !fixAentity->hasComponent(ComponentType::FireBallGenerator)) {
 		fireball = fixBentity;
 		with = fixAentity;
-		return true;
+		return fixBentity->isActive();
 	}
 	return false;
 }
