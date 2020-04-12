@@ -97,7 +97,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	}*/
 	if (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Player && (fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Wall || fixB->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject) ||
 		fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Player && (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Wall || fixA->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject)) {
-		
+
 		if (AttachableObjectCollidesWithPlayer(fixA, fixB, player_AttachesToObjects) && player_AttachesToObjects->canAttachToObject()) {
 			b2Body* bodyToBeAttached = fixA->GetBody();
 			if (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Player) bodyToBeAttached = fixB->GetBody();
@@ -176,7 +176,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	}
 
 	//Trigger collisions (Router, Coins)
-	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger || 
+	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger ||
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
 
 		if (CoinCollidesWithPlayer(contact, playerWallet, coin, playerData)) { //Player collides with coin
@@ -206,6 +206,7 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 	RouterLogic* routerLogic = nullptr;
 	PlayerData* playerData = nullptr;
 	Collider* playerCollider = nullptr;
+	Pad* pad = nullptr;
 
 	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger || //Colisiones entre Triggers y otros objetos
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
@@ -218,6 +219,15 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject) {
 
 		exitChanclaTrigger(contact);
+	}
+
+	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::NonGrababbleWall && contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player ||
+		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::NonGrababbleWall && contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
+
+		if (PlayerCollidesWithPad(contact, pad)) {
+			//animacion cama elastica
+			pad->startAnim();
+		}
 	}
 }
 
@@ -330,7 +340,7 @@ void CollisionHandler::exitChanclaTrigger(b2Contact* contact) {
 	if (fixAentity->hasComponent(ComponentType::PlayerData) && fixBentity->hasComponent(ComponentType::Weapon)) {
 		fixBentity->getComponent<Weapon>(ComponentType::Weapon)->loseContactPlayer(fixAentity, fixAentity->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
 	}
-	
+
 	else if (fixBentity->hasComponent(ComponentType::PlayerData) && fixBentity->hasComponent(ComponentType::Weapon)) {
 		fixAentity->getComponent<Weapon>(ComponentType::Weapon)->loseContactPlayer(fixBentity, fixBentity->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
 	}
@@ -363,4 +373,21 @@ void CollisionHandler::SolveInteractions() {
 		std::get<0>(w)->dropCoins(std::get<2>(w), std::get<1>(w)->getPlayerNumber());
 	}
 	vecCoinsToDrop.clear();
+}
+
+
+bool CollisionHandler::PlayerCollidesWithPad(b2Contact* contact, Pad*& p)
+{
+	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+	if (fixAentity->hasComponent(ComponentType::PlayerController) && fixBentity->hasComponent(ComponentType::Pad)) {
+		p = static_cast<Pad*>(fixBentity->getComponent<Pad>(ComponentType::Pad));
+		return true;
+	}
+	else if (fixAentity->hasComponent(ComponentType::Pad) && fixBentity->hasComponent(ComponentType::PlayerController)) {
+		p = static_cast<Pad*>(fixAentity->getComponent<Pad>(ComponentType::Pad));
+		return true;
+	}
+	else return false;
 }

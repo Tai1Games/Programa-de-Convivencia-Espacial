@@ -44,6 +44,7 @@ public:
 		ProgressBar,
 		EmptyProgressBar2,
 		ProgressBar2,
+		PadSpriteSheet,
 
 		// text
 		PauseText,

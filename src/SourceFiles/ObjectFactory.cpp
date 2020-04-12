@@ -10,6 +10,7 @@
 #include "Weapon.h"
 #include "Hands.h"
 #include "Coin.h"
+#include "Pad.h"
 
 void ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 	Entity* e = entityManager->addEntity();
@@ -44,7 +45,7 @@ void ObjectFactory::makeStapler(EntityManager* entityManager, b2World* physicsWo
 
 void ObjectFactory::makeWall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
-	Entity* e = entityManager->addEntity();								 // x,  y,   width, height, density,friction, restitution, linearDrag, angularDrag,	Layer, sensor
+	Entity* e = entityManager->addEntity();								 // x, y,width, height, density,friction, restitution, linearDrag, angularDrag,	Layer, sensor
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::Wall, false);
 	e->addComponent<Viewer>(Resources::Negro);
 	aux->setUserData(e);
@@ -58,6 +59,16 @@ void ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* physics
 	aux->setUserData(e);
 
 	aux->applyLinearImpulse(b2Vec2(0, 50), b2Vec2(0.1, 0));
+}
+
+
+void ObjectFactory::makePad(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
+{
+	Entity* e = entityManager->addEntity();
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 1, 0, 0, Collider::CollisionLayer::NonGrababbleWall, false);
+	e->addComponent<Viewer>(Resources::PadSpriteSheet, SDL_Rect{ 0,0,32,32 });
+	aux->setUserData(e);
+	e->addComponent<Pad>();
 }
 
 void ObjectFactory::makeCoin(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, int value)
