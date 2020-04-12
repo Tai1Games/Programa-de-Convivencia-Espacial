@@ -37,6 +37,9 @@ public:
 		Negro,
 		Router,
 		Coin,
+		CoinUI,
+		CanvasTimer,
+		SuddenDeathText,
 		EmptyProgressBar,
 		ProgressBar,
 		EmptyProgressBar2,
@@ -60,7 +63,8 @@ public:
 	};
 
 	enum FontId : std::size_t {
-		NES_Chimera
+		NES_Chimera,
+		Digits_Font
 	};
 
 	struct FontInfo {
