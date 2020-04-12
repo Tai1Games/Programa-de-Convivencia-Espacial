@@ -10,11 +10,17 @@ class Coin : public Component
 private:
 	int value_ = 0;
 	int justDroppedByPlayer_ = -1;
-	int timeSinceDropped_ = 0;
-	int repickeableTime_ = 0; //Se asigna en init.
-	int msPerFrame_ = 0; //Se asigna en init.
+	double timeSinceDropped_ = 0;
 	Viewer* vw_ = nullptr;
 	Collider* col_ = nullptr;
+
+	//Load of constants
+	int winWidth_ = 0;
+	int winHeigth_ = 0;
+	double pixelsPerMeter_ = 0;
+	int repickeableTime_ = 0;
+	double sPerFrame_ = 0;
+
 public:
 	Coin() : Component(ComponentType::Coin) {}
 	~Coin() {};
