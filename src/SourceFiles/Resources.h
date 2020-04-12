@@ -34,6 +34,7 @@ public:
 		Slider,
 		SliderControl,
 		SalaDeEstar,
+		SalaCaldera,
 		Negro,
 		Router,
 		Coin,
@@ -45,6 +46,7 @@ public:
 		EmptyProgressBar2,
 		ProgressBar2,
 		PadSpriteSheet,
+
 
 		// text
 		PauseText,
