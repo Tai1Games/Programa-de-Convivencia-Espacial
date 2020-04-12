@@ -93,6 +93,8 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	PlayerData* playerData = nullptr;
 	Wallet* playerWallet = nullptr;
 	Coin* coin = nullptr;
+	Entity* fireball = nullptr;
+	Entity* collidedWithFireball = nullptr;
 
 	if (fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Player && fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Wall) {
 		cout << "sijaja";
@@ -190,8 +192,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	//Trigger collisions (Router, Coins)
 	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger ||
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
-		Entity* fireball = nullptr;
-		Entity* collidedWithFireball = nullptr;
+
 
 		if (CoinCollidesWithPlayer(contact, playerWallet, coin, playerData)) { //Player collides with coin
 			if (coin->getPlayerDropped() != playerData->getPlayerNumber()) {
@@ -202,15 +203,16 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		else if (PlayerCollidesWithRouterArea(contact, routerLogic, playerCollider, playerData)) { //Player collides with router
 			routerLogic->detectPlayer(playerCollider, playerData->getPlayerNumber());
 		}
-		else if (FireballCollidesWithSomething(contact,fireball,collidedWithFireball)) {
-			//la bola desaparece al chocar con algo
-			fireballsToClear.push_back(GETCMP2(fireball, Fireball));
-			cout << "Firecollision" << endl;
-			//si choca constra un jugador
-			if (collidedWithFireball->hasComponent(ComponentType::PlayerData)) {
-				damageOnImpact(GETCMP2(fireball,Collider)->getFixture(0), GETCMP2(collidedWithFireball, Collider)->getFixture(0),
-					GETCMP2(collidedWithFireball, Health), GETCMP2(collidedWithFireball, Wallet), GETCMP2(collidedWithFireball,PlayerData),99);
-			}
+
+	}
+	else if (FireballCollidesWithSomething(contact, fireball, collidedWithFireball)) {
+		//la bola desaparece al chocar con algo
+		fireballsToClear.push_back(GETCMP2(fireball, Fireball));
+		cout << "Firecollision with " << GETCMP2(collidedWithFireball, Viewer)->getTextureId() << endl;
+		//si choca constra un jugador
+		if (collidedWithFireball->hasComponent(ComponentType::PlayerData)) {
+			damageOnImpact(GETCMP2(fireball, Collider)->getFixture(0), GETCMP2(collidedWithFireball, Collider)->getFixture(0),
+				GETCMP2(collidedWithFireball, Health), GETCMP2(collidedWithFireball, Wallet), GETCMP2(collidedWithFireball, PlayerData), 99);
 		}
 	}
 }

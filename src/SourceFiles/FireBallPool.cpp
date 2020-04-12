@@ -10,12 +10,10 @@
 FireBallPool::FireBallPool() :fireballPool_([](Entity* e) {return e->isActive(); }) {};
 
 void FireBallPool::init(EntityManager* eMan, b2World* physicsWorld) {
-	fireballW_ = CONST(int, "FIREBALL_WIDTH");
-	fireballH_ = CONST(int, "FIREBALL_HEIGTH");
 
 	vector<Entity*> fbPool = fireballPool_.getPool();
 	for (Entity* e : fbPool) {
-		ObjectFactory::makeFireball(e, eMan, physicsWorld, b2Vec2(0, 0), b2Vec2(fireballW_, fireballH_));
+		ObjectFactory::makeFireball(e, eMan, physicsWorld, b2Vec2(0, 0));
 		GETCMP2(e,Fireball)->setActive(false,b2Vec2(0,0));
 	}
 }

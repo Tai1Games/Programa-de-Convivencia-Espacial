@@ -28,7 +28,7 @@ public:
 
 	static void makeCoin(Entity* e,EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, int val);
 	
-	static void makeFireball(Entity* e,EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos,b2Vec2 size);
+	static void makeFireball(Entity* e,EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 	
 	static Entity* createBoiler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos,FireBallPool* pool);
 	//Crea un mando de la tele (espec�fico para el modo Pelea Por El Mando)
