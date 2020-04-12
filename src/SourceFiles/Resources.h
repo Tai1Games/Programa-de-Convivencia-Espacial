@@ -20,27 +20,33 @@ public:
 		DisableHealth,
 		TSet_Kenney1bit,
 		TSet_Dungeon,
-		Chancla,
-		Extintor,
+		Slipper,
+		Extinguisher,
 		Mancuerna,
 		Pelota,
-		Grapadora,
+		Stapler,
 		Piedra,
 		Body,
 		Hands,
 		PinkTinky,
-		FlechaImpulso,
-		ImpulsoBackground,
+		ImpulseArrow,
+		ImpulseBackground,
 		Slider,
 		SliderControl,
 		SalaDeEstar,
+		SalaCaldera,
 		Negro,
 		Router,
 		Coin,
+		CoinUI,
+		CanvasTimer,
+		SuddenDeathText,
 		EmptyProgressBar,
 		ProgressBar,
 		EmptyProgressBar2,
 		ProgressBar2,
+		PadSpriteSheet,
+
 
 		// text
 		PauseText,
@@ -59,7 +65,8 @@ public:
 	};
 
 	enum FontId : std::size_t {
-		NES_Chimera
+		NES_Chimera,
+		Digits_Font
 	};
 
 	struct FontInfo {

@@ -12,6 +12,7 @@ class ParticleEmitter :
 protected:
 	Collider* collider_ = nullptr;
 
+	Vector2D position_;
 	Vector2D direction_;
 
 	bool emitting_ = false;
@@ -55,7 +56,7 @@ protected:
 	std::list<Particle> particles_;
 	std::queue<list<Particle>::iterator> particlesToDelete_;
 public:
-	ParticleEmitter(Vector2D direction, int textureId, float speed, Uint16 particleLifetime=1000, Uint16 size = 20, Uint16 emittingTime = 1000, int speedVariation = 0, int emissionConeAngle = 10.0);
+	ParticleEmitter(Vector2D direction, int textureId, float speed, Uint16 particleLifetime = 1000, Uint16 size = 20, Uint16 emittingTime = 1000, int speedVariation = 0, int emissionConeAngle = 10.0);
 	virtual ~ParticleEmitter() { Component::~Component(); };
 
 	virtual void init() override;
@@ -65,6 +66,8 @@ public:
 	//Devuelve si se ha detenido o empezado
 	bool PlayStop() { timeEmitted_ = 0; return emitting_ = !emitting_; };
 
+	void setPositionCollider(Collider* col) { collider_ = col; };
+	void setDirection(Vector2D dir) { direction_ = dir; };
 	void setSize(Uint16 size) { size_ = size; };
 	void setLifeTime(Uint16 time) { emittingTime_ = time; };
 	void setMaxParticles(Uint8 max) { maxParticles_ = max; };

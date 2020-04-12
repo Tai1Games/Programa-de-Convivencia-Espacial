@@ -33,6 +33,7 @@ public:
 	int getPlayerId() { return playerData_->getPlayerNumber(); }
 	b2Vec2 getPos() { return pos_; }
 	b2Vec2 getDir() { return dir_; }
+	b2Vec2 getVel() { return collider_->getLinearVelocity(); }
 	float getAngle() { return angle_; }
 	Weapon* getWeapon() { return currentWeapon_; }
 	WeaponID getWeaponID() { return currentWeaponID_; }

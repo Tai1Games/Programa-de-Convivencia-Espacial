@@ -47,11 +47,12 @@ void PlayState::init() {
 	physicsWorld_->SetContactListener(collisionHandler_);
 
 	//Particle test
-	/*ParticleEmitter* test = players_[0]->addComponent<ParticleEmitter>(Vector2D(.5,.5),Resources::Grapadora,3.5,1000, 25, 0,2,15);
+	/*ParticleEmitter* test = players_[0]->addComponent<ParticleEmitter>(Vector2D(.5,.5),Resources::Stapler,3.5,1000, 25, 0,2,15);
 	test->PlayStop();*/
 
 	//FONDO
 	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(resourceMap_[tilemapName_]);
+	
 
 	//Version estática de la factoria
 	tilemap_->executeMapFactory();
