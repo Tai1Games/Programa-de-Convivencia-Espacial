@@ -1,0 +1,106 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="Living_room_data" version="1.3.0" audacityversion="2.3.3" sel0="0.0000000000" sel1="0.0000000000" vpos="32" h="0.0000000000" zoom="1.4976759404" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags>
+		<tag name="ARTIST" value="TAI1 Games"/>
+		<tag name="TITLE" value="Living Room Chaos Theme"/>
+		<tag name="ALBUM" value="PCE"/>
+		<tag name="YEAR" value="2020"/>
+		<tag name="TRACKNUMBER" value="2"/>
+		<tag name="GENRE" value="Videogames Music"/>
+	</tags>
+	<wavetrack name="Living_room" isSelected="0" height="150" minimized="0" channel="0" linked="1" mute="0" solo="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="2380954">
+				<waveblock start="0">
+					<simpleblockfile filename="e080822c.au" len="262144" min="-0.877045" max="0.816406" rms="0.133699"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="e08089bb.au" len="262144" min="-0.761993" max="0.866882" rms="0.161807"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="e0808a4c.au" len="262144" min="-0.72229" max="0.837524" rms="0.166912"/>
+				</waveblock>
+				<waveblock start="786432">
+					<simpleblockfile filename="e08083fc.au" len="262144" min="-0.797424" max="0.878845" rms="0.202281"/>
+				</waveblock>
+				<waveblock start="1048576">
+					<simpleblockfile filename="e0808479.au" len="262144" min="-0.574707" max="0.57489" rms="0.141746"/>
+				</waveblock>
+				<waveblock start="1310720">
+					<simpleblockfile filename="e0808cfd.au" len="262144" min="-0.577271" max="0.639343" rms="0.138847"/>
+				</waveblock>
+				<waveblock start="1572864">
+					<simpleblockfile filename="e08083cf.au" len="262144" min="-0.460052" max="0.532959" rms="0.139876"/>
+				</waveblock>
+				<waveblock start="1835008">
+					<simpleblockfile filename="e0808a51.au" len="262144" min="-0.895844" max="0.98996" rms="0.144923"/>
+				</waveblock>
+				<waveblock start="2097152">
+					<simpleblockfile filename="e08081bc.au" len="141901" min="-0.316986" max="0.394989" rms="0.054909"/>
+				</waveblock>
+				<waveblock start="2239053">
+					<simpleblockfile filename="e080877e.au" len="141901" min="-0.61795" max="0.644623" rms="0.131147"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Living_room" isSelected="0" height="150" minimized="0" channel="1" linked="0" mute="0" solo="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="2380954">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808cca.au" len="262144" min="-0.808197" max="0.734741" rms="0.12513"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="e0808927.au" len="262144" min="-0.808929" max="0.793762" rms="0.155601"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="e0808a2b.au" len="262144" min="-0.777344" max="0.783325" rms="0.163263"/>
+				</waveblock>
+				<waveblock start="786432">
+					<simpleblockfile filename="e0808839.au" len="262144" min="-0.864136" max="0.822174" rms="0.183808"/>
+				</waveblock>
+				<waveblock start="1048576">
+					<simpleblockfile filename="e08082c3.au" len="262144" min="-0.634888" max="0.62915" rms="0.13697"/>
+				</waveblock>
+				<waveblock start="1310720">
+					<simpleblockfile filename="e0808c65.au" len="262144" min="-0.539764" max="0.622314" rms="0.132434"/>
+				</waveblock>
+				<waveblock start="1572864">
+					<simpleblockfile filename="e08084fb.au" len="262144" min="-0.490326" max="0.52652" rms="0.132789"/>
+				</waveblock>
+				<waveblock start="1835008">
+					<simpleblockfile filename="e0808a7b.au" len="262144" min="-0.910065" max="0.891785" rms="0.13744"/>
+				</waveblock>
+				<waveblock start="2097152">
+					<simpleblockfile filename="e0808d11.au" len="141901" min="-0.33902" max="0.359467" rms="0.05717"/>
+				</waveblock>
+				<waveblock start="2239053">
+					<simpleblockfile filename="e08085fa.au" len="141901" min="-0.654205" max="0.655304" rms="0.131237"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Living_room" isSelected="1" height="150" minimized="0" channel="0" linked="1" mute="0" solo="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="132966">
+				<waveblock start="0">
+					<simpleblockfile filename="e080884e.au" len="132966" min="-0.188568" max="0.326935" rms="0.018242"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Living_room" isSelected="1" height="150" minimized="0" channel="1" linked="0" mute="0" solo="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="132966">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808246.au" len="132966" min="-0.269867" max="0.28772" rms="0.016107"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>
