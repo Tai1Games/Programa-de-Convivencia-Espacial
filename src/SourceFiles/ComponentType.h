@@ -17,7 +17,6 @@ namespace ComponentType {
 		HealthViewer,
 		Tilemap,
 		Weapon,
-		MeleeWeapon,
 		Hands,
 		PlayerController,
 		ImpulseViewer,
@@ -28,6 +27,9 @@ namespace ComponentType {
 		ParticleEmitter,
 		FireBallGenerator,
 		Fireball,
+		ExtinguisherWeapon,
+		Pad,
+
 		// don't touch the rest of this enum, it is to identify the max
 		// number of components
 		_LastCmptId_

@@ -33,6 +33,8 @@ protected:
 	InputHandler* inputHandler_ =  nullptr;
 	Constants constants_;
 
+	double MS_PER_FRAME_;
+
 	static unique_ptr<SDL_Game> instance_;
 private:
 	bool exit_;

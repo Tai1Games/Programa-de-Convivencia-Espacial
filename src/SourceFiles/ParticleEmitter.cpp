@@ -5,7 +5,7 @@
 ParticleEmitter::ParticleEmitter(Vector2D direction, int textureId, float speed, Uint16 particleLifetime, Uint16 size, Uint16 emittingTime, int speedVariation, int emissionConeAngle) :
 	Component(ComponentType::ParticleEmitter), direction_(direction), textureId_(textureId), speed_(speed),
 	particleLifetime_(particleLifetime), size_(size), emittingTime_(emittingTime), speedVariation_(speedVariation), emissionConeAngle_(emissionConeAngle),
-	msPerFrame_(0), maxParticles_(0), PI(0) {}
+	msPerFrame_(0), maxParticles_(0), PI(0){}
 
 void ParticleEmitter::init() {
 	collider_ = GETCMP1_(Collider);
@@ -28,8 +28,8 @@ void ParticleEmitter::update() {
 			int angle = rand() % int(emissionConeAngle_ * 2) - emissionConeAngle_;
 			Vector2D direction = direction_.rotate(angle);
 			//speed_ + variacion random
-			float speed = speed_ - speedVariation_ + rand() % int(speedVariation_ * 2);
-			particles_.push_back({ Vector2D(colliderRect.x + colliderRect.w / 2,colliderRect.y + colliderRect.h / 2),direction,0,speed });
+			float speed = (speedVariation_ != 0) ? speed_ - speedVariation_ + rand() % int(speedVariation_ * 2) : speed_;
+			particles_.push_back({ Vector2D((double)colliderRect.x + colliderRect.w / 2.0,(double)colliderRect.y + colliderRect.h / 2.0),direction,0,speed });
 		}
 	}
 

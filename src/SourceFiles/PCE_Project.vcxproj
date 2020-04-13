@@ -190,6 +190,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="Fireball.h" />
     <ClInclude Include="FireBallGenerator.h" />
     <ClInclude Include="FireBallPool.h" />
+    <ClInclude Include="ExtinguisherWeapon.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameMode.h" />
@@ -200,9 +201,9 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="HealthViewer.h" />
     <ClInclude Include="ImpulseViewer.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="Pad.h" />
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="ParticleEmitter.h" />
-    <ClInclude Include="MeleeWeapon.h" />
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="PCE_Project.h" />
     <ClInclude Include="PlayerController.h" />
@@ -245,6 +246,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="Fireball.cpp" />
     <ClCompile Include="FireBallGenerator.cpp" />
     <ClCompile Include="FireBallPool.cpp" />
+    <ClCompile Include="ExtinguisherWeapon.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="GameMode.cpp" />
     <ClCompile Include="GameState.cpp" />
@@ -254,8 +256,8 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="HealthViewer.cpp" />
     <ClCompile Include="ImpulseViewer.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="Pad.cpp" />
     <ClCompile Include="ParticleEmitter.cpp" />
-    <ClCompile Include="MeleeWeapon.cpp" />
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="PCE_Project.cpp" />
     <ClCompile Include="PlayerController.cpp" />

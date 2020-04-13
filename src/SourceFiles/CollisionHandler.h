@@ -10,6 +10,7 @@
 #include "PlayerData.h"
 #include "GameMode.h"
 #include "TileMap.h"
+#include "Pad.h"
 #include "Wallet.h"
 #include "Coin.h"
 #include "checkML.h"
@@ -70,6 +71,8 @@ public:
 	
     bool PlayerCanPickWeapon(b2Contact* contact, Weapon* &pickableObj, Hands* &player);
 
+	bool PlayerCollidesWithPad(b2Contact* contact, Pad*& p);
+	
 	bool CoinCollidesWithPlayer(b2Contact* contact, Wallet*& playerWallet, Coin*& coin, PlayerData*& playerData);
 
 	bool FireballCollidesWithSomething(b2Contact* contact, Entity*& fireball, Entity*& with);

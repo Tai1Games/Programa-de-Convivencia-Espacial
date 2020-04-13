@@ -12,14 +12,17 @@
 #include "Coin.h"
 #include "FireBallGenerator.h"
 #include "Fireball.h"
+#include "ExtinguisherWeapon.h"
+#include "ParticleEmitter.h"
+#include "Pad.h"
 
 void ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 	Entity* e = entityManager->addEntity();
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "FLIPFLOP_DENSITY"),
 		CONST(double, "FLIPFLOP_FRICTION"), CONST(double, "FLIPFLOP_RESTITUTION"),
 		CONST(double, "FLIPFLOP_LINEAR_DRAG"), CONST(double, "FLIPFLOP_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent <Viewer>(Resources::Chancla);
-	e->addComponent<Weapon>(WeaponID::Chancla, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"));
+	e->addComponent <Viewer>(Resources::Slipper);
+	e->addComponent<Weapon>(WeaponID::Slipper, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"));
 	aux->setUserData(e);
 }
 
@@ -38,15 +41,24 @@ void ObjectFactory::makeBall(EntityManager* entityManager, b2World* physicsWorld
 
 void ObjectFactory::makeStapler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 	Entity* e = entityManager->addEntity();
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double,"STAPLER_DENSITY"), CONST(double, "STAPLER_FRICTION"), CONST(double, "STAPLER_RESTITUTION"), CONST(double, "STAPLER_LINEAR_DRAG"), CONST(double, "STAPLER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent <Viewer>(Resources::Grapadora);
-	e->addComponent<Weapon>(WeaponID::Grapadora, CONST(int, "STAPLER_DAMAGE"), CONST(int, "STAPLER_IMPACT_DAMAGE"));
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "STAPLER_DENSITY"), CONST(double, "STAPLER_FRICTION"), CONST(double, "STAPLER_RESTITUTION"), CONST(double, "STAPLER_LINEAR_DRAG"), CONST(double, "STAPLER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent <Viewer>(Resources::Stapler);
+	e->addComponent<Weapon>(WeaponID::Stapler, CONST(int, "STAPLER_DAMAGE"), CONST(int, "STAPLER_IMPACT_DAMAGE"));
 	aux->setUserData(e);
+}
+
+void ObjectFactory::makeExtinguisher(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
+	Entity* entity = entityManager->addEntity();
+	Collider* aux = entity->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "EXTINGUISHER_DENSITY"), CONST(double, "EXTINGUISHER_FRICTION"), CONST(double, "EXTINGUISHER_RESTITUTION"), CONST(double, "EXTINGUISHER_LINEAR_DRAG"), CONST(double, "STAPLER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	entity->addComponent<Viewer>(Resources::Extinguisher);
+	entity->addComponent<ParticleEmitter>(Vector2D(0,-1),Resources::Coin,10);
+	entity->addComponent<ExtinguisherWeapon>(WeaponID::Extinguisher, CONST(int, "EXTINGUISHER_DAMAGE"), CONST(int, "EXTINGUISHER_IMPACT_DAMAGE"));
+	aux->setUserData(entity);
 }
 
 void ObjectFactory::makeWall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
-	Entity* e = entityManager->addEntity();								 // x,  y,   width, height, density,friction, restitution, linearDrag, angularDrag,	Layer, sensor
+	Entity* e = entityManager->addEntity();								 // x, y,width, height, density,friction, restitution, linearDrag, angularDrag,	Layer, sensor
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::Wall, false);
 	e->addComponent<Viewer>(Resources::Negro);
 	aux->setUserData(e);
@@ -60,6 +72,16 @@ void ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* physics
 	aux->setUserData(e);
 
 	aux->applyLinearImpulse(b2Vec2(0, 50), b2Vec2(0.1, 0));
+}
+
+
+void ObjectFactory::makePad(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
+{
+	Entity* e = entityManager->addEntity();
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 1, 0, 0, Collider::CollisionLayer::NonGrababbleWall, false);
+	e->addComponent<Viewer>(Resources::PadSpriteSheet, SDL_Rect{ 0,0,32,32 });
+	aux->setUserData(e);
+	e->addComponent<Pad>();
 }
 
 void ObjectFactory::makeCoin(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, int value)
@@ -77,7 +99,7 @@ void ObjectFactory::makeFireball(Entity* e, EntityManager* entityManager, b2Worl
 	Collider* auxCol = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "FIREBALL_RADIUS"), CONST(double, "FIREBALL_DENSITY"), CONST(double, "FIREBALL_FRICTION"), CONST(double, "FIREBALL_ANGULAR_DRAG"), 1, 1, Collider::CollisionLayer::NormalObject, false);
 	e->addComponent<Viewer>(Resources::Fireball);
 	e->addComponent<Fireball>();
-	e->addComponent<Weapon>(WeaponID::Piedra, 999, 999);//Si, el fuego es una piedra muy caliente. Mucho más que el magma, esta caldera echa bolas de PLASMA, el cuarto estado de la materia
+	e->addComponent<Weapon>(WeaponID::Piedra, 999, 999);//Si, el fuego es una piedra muy caliente. Mucho mï¿½s que el magma, esta caldera echa bolas de PLASMA, el cuarto estado de la materia
 	auxCol->setUserData(e);
 }
 
