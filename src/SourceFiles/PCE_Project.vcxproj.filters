@@ -204,9 +204,6 @@
     <ClInclude Include="MeleeWeapon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FireBallGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MeleeWeapon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -214,7 +211,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Fireball.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FireBallGenerator.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -356,13 +356,13 @@
     <ClCompile Include="MeleeWeapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Fireball.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
     <ClCompile Include="FireBallGenerator.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="FireBallPool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Fireball.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

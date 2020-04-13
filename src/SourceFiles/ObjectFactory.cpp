@@ -124,8 +124,8 @@ Entity* ObjectFactory::createRoomba(EntityManager* entityManager, b2World* physi
 Entity* ObjectFactory::createBoiler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos,FireBallPool* pool)
 {
 	Entity* e = entityManager->addEntity();
-	Collider* collRoomba = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "ROOMBA_RADIUS"), CONST(double, "ROOMBA_DENSITY"), CONST(double, "ROOMBA_FRICTION"),
-		CONST(double, "ROOMBA_RESTITUTION"), CONST(double, "ROOMBA_LINEAR_DRAG"), CONST(double, "ROOMBA_ANGULAR_DRAG"), Collider::CollisionLayer::Trigger, false);
+	Collider* collRoomba = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "BOILER_WIDTH"), CONST(double, "BOILER_HEIGHT"), CONST(double, "BOILER_DENSITY"),CONST(double, "BOILER_FRICTION"),
+		CONST(double, "BOILER_RESTITUTION"),CONST(double,"BOILER_LINEAR_DRAG"), CONST(double, "BOILER_ANGULAR_DRAG"), Collider::CollisionLayer::Trigger, false);
 	collRoomba->setUserData(e);
 	e->addComponent<Viewer>(Resources::Boiler);	
 	e->addComponent<FireBallGenerator>(physicsWorld,pool);
