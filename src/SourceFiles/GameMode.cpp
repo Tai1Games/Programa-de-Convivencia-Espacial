@@ -45,5 +45,4 @@ void GameMode::renderProgressBars(const std::vector<double>& progressValues, con
 
 void GameMode::init(PlayState* game) {
 	state_ = game;
-	fireballPool_.init(game->getEntityManager(), game->getPhysicsWorld());
 }

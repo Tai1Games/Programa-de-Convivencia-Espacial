@@ -20,6 +20,7 @@ void FireBallGenerator::init() {
 	fireballSpeed_ = CONST(int, "FIREBALL_SPEED");
 
 	manager_ = entity_->getEntityManager();
+	fbPool_.init(manager_, physicsWorld_);
 	nextShot_ = SDL_Game::instance()->getTime() + CONST(int,"FBGEN_INITIAL_OFFSET") 
 		+ (rand() % maxCd_ + minCd_);
 }
@@ -45,7 +46,7 @@ void FireBallGenerator::addFireball(int n) {
 		spawnDir.Normalize();
 		spawnDir.x *= fireballSpeed_;
 		spawnDir.y *= fireballSpeed_;
-		fireballPool_->addFireBall(spawnPos,spawnDir);
+		fbPool_.addFireBall(spawnPos,spawnDir);
 	}
 
 

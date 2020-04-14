@@ -15,7 +15,7 @@ StocksGameMode::~StocksGameMode()
 void StocksGameMode::init(PlayState* game){
 	GameMode::init(game);
 
-	Entity* boiler = ObjectFactory::createBoiler(game->getEntityManager(), game->getPhysicsWorld(), b2Vec2(20, 10), &fireballPool_);
+	Entity* boiler = ObjectFactory::createBoiler(game->getEntityManager(), game->getPhysicsWorld(), b2Vec2(20, 10));
 
 
 	for (int i = 0; i < nPlayers_; i++) {
