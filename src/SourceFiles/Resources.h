@@ -35,6 +35,7 @@ public:
 		SliderControl,
 		SalaDeEstar,
 		SalaCaldera,
+		SalaGimnasio,
 		Negro,
 		Router,
 		Coin,
