@@ -99,10 +99,10 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 
 		if (aEnt != nullptr && bEnt != nullptr) 
 		{
-			Collision* col = new Collision(fixB, contact, bEnt);
+			Collision* col = new Collision(fixB, contact, bEnt,this);
 			aEnt->onCollisionEnter(col);
 			delete col;
-			col = new Collision(fixA, contact, aEnt);
+			col = new Collision(fixA, contact, aEnt,this);
 			bEnt->onCollisionEnter(col);
 		}
 
@@ -124,17 +124,17 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	if (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Player && (fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Wall || fixB->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject) ||
 		fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Player && (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Wall || fixA->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject)) {
 
-		if (AttachableObjectCollidesWithPlayer(fixA, fixB, player_AttachesToObjects) && player_AttachesToObjects->canAttachToObject()) {
-			b2Body* bodyToBeAttached = fixA->GetBody();
-			if (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Player) bodyToBeAttached = fixB->GetBody();
-			b2WorldManifold manifold; //Una manifold es un registro donde se guardan todas las colisiones
-			contact->GetWorldManifold(&manifold); //Obtenemos la manifold global
-			weldData newWeld; //Struct donde guardamos los datos necesarios para crear un weld
-			newWeld.player = player_AttachesToObjects;
-			newWeld.bodyToBeAttached = bodyToBeAttached;
-			newWeld.collPoint = b2Vec2(manifold.points[0].x, manifold.points[0].y); //Punto de colisi�n. En cualquier colisi�n siempre hay 2 puntos de colisi�n. Con 1 nos basta.
-			vecWeld.push_back(newWeld); //Metemos el weldData en el vector. La raz�n por la que no hacemos el joint ya es porque no se puede crear un joint en medio de un step.
-		}
+		//if (AttachableObjectCollidesWithPlayer(fixA, fixB, player_AttachesToObjects) && player_AttachesToObjects->canAttachToObject()) {
+		//	b2Body* bodyToBeAttached = fixA->GetBody();
+		//	if (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Player) bodyToBeAttached = fixB->GetBody();
+		//	b2WorldManifold manifold; //Una manifold es un registro donde se guardan todas las colisiones
+		//	contact->GetWorldManifold(&manifold); //Obtenemos la manifold global
+		//	weldData newWeld; //Struct donde guardamos los datos necesarios para crear un weld
+		//	newWeld.player = player_AttachesToObjects;
+		//	newWeld.bodyToBeAttached = bodyToBeAttached;
+		//	newWeld.collPoint = b2Vec2(manifold.points[0].x, manifold.points[0].y); //Punto de colisi�n. En cualquier colisi�n siempre hay 2 puntos de colisi�n. Con 1 nos basta.
+		//	vecWeld.push_back(newWeld); //Metemos el weldData en el vector. La raz�n por la que no hacemos el joint ya es porque no se puede crear un joint en medio de un step.
+		//}
 	}
 
 
@@ -219,6 +219,26 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 
 //Handles end of collisions
 void CollisionHandler::EndContact(b2Contact* contact) {
+	b2Fixture* fixA = contact->GetFixtureA();
+	b2Fixture* fixB = contact->GetFixtureB();
+
+	if (fixA == nullptr || fixB == nullptr) return;
+
+	if (true)
+	{
+		Entity* aEnt = static_cast<Entity*>(fixA->GetBody()->GetUserData());
+		Entity* bEnt = static_cast<Entity*>(fixB->GetBody()->GetUserData());
+
+		if (aEnt != nullptr && bEnt != nullptr)
+		{
+			Collision* col = new Collision(fixB, contact, bEnt,this);
+			aEnt->onCollisionExit(col);
+			delete col;
+			col = new Collision(fixA, contact, aEnt,this);
+			bEnt->onCollisionExit(col);
+		}
+
+	}
 	//Pickable weapons
 	Weapon* pickableObj = nullptr;
 	Hands* playerHands = nullptr;
@@ -252,7 +272,7 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 
 		if (PlayerCollidesWithPad(contact, pad)) {
 			//animacion cama elastica
-			pad->startAnim();
+			//pad->startAnim();
 		}
 	}
 }

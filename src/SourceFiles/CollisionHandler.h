@@ -2,7 +2,7 @@
 #include <box2d.h>
 #include <iostream>
 #include "Health.h"
-#include "AttachesToObjects.h"
+//#include "AttachesToObjects.h"
 #include "Weapon.h"
 #include "Entity.h"
 #include "Hands.h"
@@ -20,11 +20,7 @@ class CollisionHandler :
 	public b2ContactListener
 {
 private:
-	struct weldData { //Struct donde guardamos los datos necesarios para hacer un weld.
-		AttachesToObjects* player = nullptr;
-		b2Body* bodyToBeAttached = nullptr;
-		b2Vec2 collPoint;
-	};
+	struct weldData;
 	vector<weldData> vecWeld; //Vector donde almacenamos los welds que realizaremos al final del step.
 	struct moveData { //Struct donde guardamos los datos necesarios para respawnear a los jugadores
 		b2Body* body;
@@ -45,7 +41,14 @@ private:
 
 	void damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet, PlayerData* playerData);
 public:
-
+	struct weldData { //Struct donde guardamos los datos necesarios para hacer un weld.
+		AttachesToObjects* player = nullptr;
+		b2Body* bodyToBeAttached = nullptr;
+		b2Vec2 collPoint;
+		weldData() {};
+		weldData(AttachesToObjects* attach,b2Body* body,b2Vec2 col):
+		player(attach),bodyToBeAttached(body),collPoint(col){}
+	};
     CollisionHandler(GameMode* g, TileMap* tm): gMode_(g), tilemap_(tm) {};
 	~CollisionHandler() {};
 
@@ -76,4 +79,6 @@ public:
 	vector<bodyData> getBodyData() { return vecBody; }
 
 	void clearBodyData(){ vecBody.clear(); }
+
+	void createWeld(weldData w) { vecWeld.push_back(w); }
 };

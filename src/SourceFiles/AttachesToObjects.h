@@ -24,4 +24,5 @@ public:
 
 	virtual void init() override;
 	virtual void handleInput();
+	virtual void onCollisionEnter(Collision* c);
 };

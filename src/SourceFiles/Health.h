@@ -22,5 +22,6 @@ public:
 	int getHealthMax() { return livesMax_; }
 	int getHealth() { return lives_; }
 
+	virtual void onCollisionEnter(Collision* c);
 };
 

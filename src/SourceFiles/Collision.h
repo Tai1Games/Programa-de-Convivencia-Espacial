@@ -1,16 +1,19 @@
 #pragma once
 #include "box2d.h"
 class Entity;
+class CollisionHandler;
 struct Collision
 {
 public:
-	Collision(const  b2Fixture* other, const b2Contact* contactInfo,const Entity* e) :
+	Collision(b2Fixture* other,b2Contact* contactInfo,Entity* e,CollisionHandler* hndler) :
 		entity(e),
 		contact(contactInfo),
-		fixture(other) {}
+		fixture(other),
+		collisionHandler(hndler){}
 	
-	const Entity* entity = nullptr;
-	const b2Contact* contact = nullptr;
-	const b2Fixture* fixture = nullptr;
+	CollisionHandler* collisionHandler = nullptr;
+	Entity* entity = nullptr;
+	b2Contact* contact = nullptr;
+	b2Fixture* fixture = nullptr;
 };
 
