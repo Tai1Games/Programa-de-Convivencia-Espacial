@@ -334,12 +334,14 @@ bool CollisionHandler::FireballCollidesWithSomething(b2Contact* contact,Entity*&
 	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
 	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
-	if (fixAentity->hasComponent(ComponentType::Fireball) && !fixBentity->hasComponent(ComponentType::Fireball) && !fixBentity->hasComponent(ComponentType::FireBallGenerator)) {
+	if (fixAentity->hasComponent(ComponentType::Fireball) && !fixBentity->hasComponent(ComponentType::Fireball) && !fixBentity->hasComponent(ComponentType::FireBallGenerator) &&
+		contact->GetFixtureB()->GetFilterData().categoryBits != Collider::CollisionLayer::Trigger) {
 		fireball = fixAentity;
 		with = fixBentity;
 		return fixAentity->isActive();
 	}
-	else if (fixBentity->hasComponent(ComponentType::Fireball) && !fixAentity->hasComponent(ComponentType::Fireball) && !fixAentity->hasComponent(ComponentType::FireBallGenerator)) {
+	else if (fixBentity->hasComponent(ComponentType::Fireball) && !fixAentity->hasComponent(ComponentType::Fireball) && !fixAentity->hasComponent(ComponentType::FireBallGenerator) &&
+		contact->GetFixtureA()->GetFilterData().categoryBits != Collider::CollisionLayer::Trigger) {
 		fireball = fixBentity;
 		with = fixAentity;
 		return fixBentity->isActive();
