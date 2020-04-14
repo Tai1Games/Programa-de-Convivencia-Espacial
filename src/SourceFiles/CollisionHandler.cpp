@@ -1,6 +1,7 @@
 #include "CollisionHandler.h"
 #include "RouterLogic.h"
 #include "StocksGameMode.h"
+#include "Collision.h"
 #include <tuple>
 //This method calculates the damage recieved by the impact of an object (or another player) with the player
 
@@ -89,8 +90,26 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	Wallet* playerWallet = nullptr;
 	Coin* coin = nullptr;
 
+	if (fixA == nullptr || fixB == nullptr) return;
+
+	if (true)
+	{
+		Entity* aEnt = static_cast<Entity*>(fixA->GetBody()->GetUserData());
+		Entity* bEnt = static_cast<Entity*>(fixB->GetBody()->GetUserData());
+
+		if (aEnt != nullptr && bEnt != nullptr) 
+		{
+			Collision* col = new Collision(fixB, contact, bEnt);
+			aEnt->onCollisionEnter(col);
+			delete col;
+			col = new Collision(fixA, contact, aEnt);
+			bEnt->onCollisionEnter(col);
+		}
+
+	}
+
 	if (fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Player && fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Wall) {
-		cout << "sijaja";
+		cout << "player choca con muro (sijaja)";
 	}
 	//Comprueba que FixA es el jugador, que FixB es un trigger, que el jugador está presionando la tecla A (mando) o Space (teclado) y que no está agarrado a nada más.
 	/*if (AttachableObjectCollidesWithPlayer(fixB, player_AttachesToObjects) && (fixA->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject || fixA->GetFilterData().categoryBits == Collider::Wall) && player_AttachesToObjects->canAttachToObject()) {

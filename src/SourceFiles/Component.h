@@ -7,7 +7,7 @@
 #include "checkML.h"
 
 class Entity;
-
+struct Collision;
 
 class Component {
 protected:
@@ -42,6 +42,9 @@ public:
 	virtual void update() {};
 	virtual void draw() const {};
 	virtual void handleInput() {};
+	virtual void onCollisionEnter(Collision* c) {};
+	virtual void onCollisionStay(Collision* c) {};
+	virtual void onCollisionExit(Collision* c) {};
 
 	Entity* getEntity() { return entity_; };
 };

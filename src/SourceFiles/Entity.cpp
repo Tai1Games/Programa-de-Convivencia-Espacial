@@ -1,5 +1,4 @@
 #include "Entity.h"
-
 Entity::Entity(EntityManager* mngr) :
 	entityManager_(mngr)
 {
@@ -29,3 +28,20 @@ void Entity::handleInput()
 		c->handleInput();
 	}
 }
+
+void Entity::onCollisionEnter(Collision* c)
+{
+	for (auto& cmp : components_)
+		cmp->onCollisionEnter(c);
+}
+void Entity::onCollisionStay(Collision* c)
+{
+	for (auto& cmp : components_)
+		cmp->onCollisionStay(c);
+}
+void Entity::onCollisionExit(Collision* c)
+{
+	for (auto& cmp : components_)
+		cmp->onCollisionExit(c);
+}
+
