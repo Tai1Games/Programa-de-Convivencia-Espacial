@@ -153,7 +153,8 @@ void TileMap::executeMapFactory()
 		if (name == "Wall") {
 			//calculo de posicion y tama�o para cajas de Tiled
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), s.y / CONST(double, "PIXELS_PER_METER"));
-			pos = b2Vec2(p.x / CONST(double, "PIXELS_PER_METER") + (size.x / 2), (CONST(int, "WINDOW_HEIGHT") - p.y) / CONST(double, "PIXELS_PER_METER") - (size.y / 2));
+			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
+			size *= 0.5f;
 			ObjectFactory::makeWall(entityManager_, physicsWorld_, pos, size);
 		}
 		else if (name == "Ball") {
@@ -173,7 +174,8 @@ void TileMap::executeMapFactory()
         }
 		else if (name == "Pad") {
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
-			pos = b2Vec2(p.x / CONST(double, "PIXELS_PER_METER") + (size.x / 2), (CONST(int, "WINDOW_HEIGHT") - p.y) / CONST(double, "PIXELS_PER_METER") - (size.y / 2));
+			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
+			size *= 0.5f;
 			ObjectFactory::makePad(entityManager_, physicsWorld_, pos, size);
 		}
 	}
