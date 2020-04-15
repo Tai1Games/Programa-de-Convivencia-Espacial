@@ -96,4 +96,6 @@ public:
 	void addCorpse(bodyData corpse) { vecBody.push_back(corpse); }
 
 	void addMove(moveData mov) { vecMove.push_back(mov); }
+
+	void addCoinDrop(std::tuple<Wallet*, PlayerData*, int> coin) { vecCoinsToDrop.push_back(coin); }
 };
