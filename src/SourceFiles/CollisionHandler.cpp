@@ -206,13 +206,13 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger ||
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
 
-		if (CoinCollidesWithPlayer(contact, playerWallet, coin, playerData)) { //Player collides with coin
-			if (coin->getPlayerDropped() != playerData->getPlayerNumber()) {
-				playerWallet->addCoins(coin->getVal());
-				vecCoin.push_back(coin);
-			}
-		}
-		else if (PlayerCollidesWithRouterArea(contact, routerLogic, playerCollider, playerData)) { //Player collides with router
+		//if (CoinCollidesWithPlayer(contact, playerWallet, coin, playerData)) { //Player collides with coin
+		//	if (coin->getPlayerDropped() != playerData->getPlayerNumber()) {
+		//		playerWallet->addCoins(coin->getVal());
+		//		vecCoin.push_back(coin);
+		//	}
+		//}
+		/*else*/ if (PlayerCollidesWithRouterArea(contact, routerLogic, playerCollider, playerData)) { //Player collides with router
 			routerLogic->detectPlayer(playerCollider, playerData->getPlayerNumber());
 		}
 	}

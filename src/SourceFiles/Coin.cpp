@@ -1,4 +1,7 @@
 #include "Coin.h"
+#include "Collision.h"
+#include "Wallet.h"
+#include "CollisionHandler.h"
 
 void Coin::init() {
 	vw_ = GETCMP1_(Viewer);
@@ -34,4 +37,14 @@ void Coin::setActive(bool b, int droppedByPlayerNum, b2Vec2 pos, int value) {
 	else if (col_->getNumFixtures() > 1) col_->destroyFixture(1);
 	value_ = value;
 	justDroppedByPlayer_ = droppedByPlayerNum;
+}
+
+void Coin::onCollisionEnter(Collision* c)
+{
+	Wallet* wallet = GETCMP2(c->entity, Wallet);
+
+	if (wallet != nullptr && justDroppedByPlayer_ != GETCMP2(c->entity,PlayerData)->getPlayerNumber()) {
+		wallet->addCoins(value_);
+		c->collisionHandler->addCoinPick(this);
+	}
 }

@@ -98,4 +98,6 @@ public:
 	void addMove(moveData mov) { vecMove.push_back(mov); }
 
 	void addCoinDrop(std::tuple<Wallet*, PlayerData*, int> coin) { vecCoinsToDrop.push_back(coin); }
+
+	void addCoinPick(Coin* coin) { vecCoin.push_back(coin); }
 };
