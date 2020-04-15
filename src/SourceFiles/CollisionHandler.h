@@ -65,7 +65,7 @@ public:
 
 	void SolveInteractions();
 
-    bool ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player, Wallet*& wallet, PlayerData* &playerData);
+   /* bool ObjectCollidesWithPlayer(b2Fixture* fixA, Health*& player, Wallet*& wallet, PlayerData* &playerData);
 
 	bool PlayerCollidesWithRouterArea(b2Contact* contact, RouterLogic*& router, Collider*& collPlayer, PlayerData*& playerData);
 
@@ -77,7 +77,7 @@ public:
 
 	bool PlayerCollidesWithPad(b2Contact* contact, Pad*& p);
 	
-	bool CoinCollidesWithPlayer(b2Contact* contact, Wallet*& playerWallet, Coin*& coin, PlayerData*& playerData);
+	bool CoinCollidesWithPlayer(b2Contact* contact, Wallet*& playerWallet, Coin*& coin, PlayerData*& playerData);*/
 
 	vector<bodyData> getBodyData() { return vecBody; }
 
