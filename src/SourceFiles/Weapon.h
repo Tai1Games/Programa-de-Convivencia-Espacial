@@ -57,6 +57,8 @@ public:
 
 	virtual void handleInput() override;
 
+	virtual void onCollisionEnter(Collision* c);
+
 	/*Desactiva el arma y se anade a la mano este arma*/
 	void PickObjectBy(Hands* playerHands);
 	/*Muestra si el objeto ya esta sujeto por una mano*/

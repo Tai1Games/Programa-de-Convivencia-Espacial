@@ -138,68 +138,69 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	}
 
 
-	else if (fixB->GetFilterData().categoryBits) {
-		//check collision then do whatever, in this case twice because it might be two players colliding
-		if (ObjectCollidesWithPlayer(fixA, player_Health, playerWallet, playerData) && !fixB->IsSensor()) {
-			//damageOnImpact(fixB, fixA, player_Health, playerWallet, playerData);	//Check the stats of the other object
-		}
+	//else if (fixB->GetFilterData().categoryBits) {
+	//	//check collision then do whatever, in this case twice because it might be two players colliding
+	//	if (ObjectCollidesWithPlayer(fixA, player_Health, playerWallet, playerData) && !fixB->IsSensor()) {
+	//		//damageOnImpact(fixB, fixA, player_Health, playerWallet, playerData);	//Check the stats of the other object
+	//	}
 
-		player_Health = nullptr;	//Lo reseteamos para evitar problemas
+	//	player_Health = nullptr;	//Lo reseteamos para evitar problemas
 
-		if (ObjectCollidesWithPlayer(fixB, player_Health, playerWallet, playerData) && !fixA->IsSensor()) {
-			//damageOnImpact(fixA, fixB, player_Health, playerWallet, playerData);	//Check the stats of the other object
-		}
-	}
+	//	if (ObjectCollidesWithPlayer(fixB, player_Health, playerWallet, playerData) && !fixA->IsSensor()) {
+	//		//damageOnImpact(fixA, fixB, player_Health, playerWallet, playerData);	//Check the stats of the other object
+	//	}
+	//}
 	//Melee Weapons collisions
 
-	if (contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject && contact->GetFixtureB()->IsSensor()
-		&& contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player)
-	{
-		Entity* aux = static_cast<Entity*>(fixB->GetBody()->GetUserData());
-		Entity* aux2 = static_cast<Entity*>(fixA->GetBody()->GetUserData());
+	//if (contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject && contact->GetFixtureB()->IsSensor()
+	//	&& contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Player)
+	//{
+	//	Entity* aux = static_cast<Entity*>(fixB->GetBody()->GetUserData());
+	//	Entity* aux2 = static_cast<Entity*>(fixA->GetBody()->GetUserData());
 
-		Weapon* weAux = GETCMP2(aux, Weapon);
-		Hands* haAux = GETCMP2(aux2, Hands);
+	//	Weapon* weAux = GETCMP2(aux, Weapon);
+	//	Hands* haAux = GETCMP2(aux2, Hands);
 
-		player_Health = nullptr;	//Lo reseteamos para evitar problemas
-		playerWallet = nullptr;
+	//	player_Health = nullptr;	//Lo reseteamos para evitar problemas
+	//	playerWallet = nullptr;
 
-		ObjectCollidesWithPlayer(contact->GetFixtureA(), player_Health, playerWallet, playerData);
+	//	ObjectCollidesWithPlayer(contact->GetFixtureA(), player_Health, playerWallet, playerData);
 
-		if (weAux != nullptr && weAux->getCurrentHand() != nullptr && (player_Health != nullptr || playerWallet != nullptr) && (weAux->getCurrentHand() != haAux)) {
-			weAux->detectPlayer(aux2, aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
-			//cout << "Golpeaste al objetivo" << endl;
-		}
-	}
-	else if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject && contact->GetFixtureA()->IsSensor()
-		&& contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
+	//	if (weAux != nullptr && weAux->getCurrentHand() != nullptr && (player_Health != nullptr || playerWallet != nullptr) && (weAux->getCurrentHand() != haAux)) {
+	//		weAux->detectPlayer(aux2, aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
+	//		//cout << "Golpeaste al objetivo" << endl;
+	//	}
+	//}
+	//else if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject && contact->GetFixtureA()->IsSensor()
+	//	&& contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
 
-		Entity* aux = static_cast<Entity*>(fixA->GetBody()->GetUserData());
-		Entity* aux2 = static_cast<Entity*>(fixB->GetBody()->GetUserData());
+	//	Entity* aux = static_cast<Entity*>(fixA->GetBody()->GetUserData());
+	//	Entity* aux2 = static_cast<Entity*>(fixB->GetBody()->GetUserData());
 
-		Weapon* weAux = GETCMP2(aux, Weapon);
-		Hands* haAux = GETCMP2(aux2, Hands);
+	//	Weapon* weAux = GETCMP2(aux, Weapon);
+	//	Hands* haAux = GETCMP2(aux2, Hands);
 
-		player_Health = nullptr;	//Lo reseteamos para evitar problemas
-		playerWallet = nullptr;
+	//	player_Health = nullptr;	//Lo reseteamos para evitar problemas
+	//	playerWallet = nullptr;
 
-		ObjectCollidesWithPlayer(contact->GetFixtureB(), player_Health, playerWallet, playerData);
+	//	ObjectCollidesWithPlayer(contact->GetFixtureB(), player_Health, playerWallet, playerData);
 
-		if (weAux->getCurrentHand() != nullptr && (player_Health != nullptr || playerWallet != nullptr) && (weAux->getCurrentHand() != haAux)) {
+	//	if (weAux->getCurrentHand() != nullptr && (player_Health != nullptr || playerWallet != nullptr) && (weAux->getCurrentHand() != haAux)) {
 
-			weAux->detectPlayer(aux2, aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
+	//		weAux->detectPlayer(aux2, aux2->getComponent<PlayerData>(ComponentType::PlayerData)->getId());
 
-			//cout << "Golpeaste al objetivo" << endl;
-		}
-	}
+	//		//cout << "Golpeaste al objetivo" << endl;
+	//	}
+	//}
 	player_Health = nullptr;
 
 	//Pickable object collisions (Weapons)
-	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject ||
-		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject)) {
+	//if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject ||
+	//	contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject)) {
 
-		if (PlayerCanPickWeapon(contact, pickableObj, playerHands)) pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands, player_Health, playerWallet); //Collides with weapon
-	}
+	//	if (PlayerCanPickWeapon(contact, pickableObj, playerHands)) 
+	//		pickableObj->SavePlayerInfo(playerHands->getPlayerId(), playerHands, player_Health, playerWallet); //Collides with weapon
+	//}
 
 	//Trigger collisions (Router, Coins)
 	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger ||
