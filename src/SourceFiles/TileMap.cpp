@@ -166,6 +166,12 @@ void TileMap::executeMapFactory()
 			size *= 0.5f;
 			ObjectFactory::makePad(entityManager_, physicsWorld_, pos, size);
 		}
+		else if (name == "Boiler") {
+			ObjectFactory::createBoiler(entityManager_, physicsWorld_, pos);
+		}
+		else if (name == "Pipe") {
+			//hacer las tuberias y esas cosas
+		}
 	}
 }
 
