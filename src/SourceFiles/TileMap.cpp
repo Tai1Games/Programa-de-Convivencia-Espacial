@@ -204,7 +204,7 @@ void TileMap::createWeapons()
 		case 4: //rock
 			break;
 		case 5: //dumbbell
-			ObjectFactory::makeSlipper(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "DUMBBELL_X"), CONST(float, "DUMBBELL_Y")));
+			ObjectFactory::makeDumbbell(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "DUMBBELL_X"), CONST(float, "DUMBBELL_Y")));
 			break;
 		case 6: //bananGun
 			break;
