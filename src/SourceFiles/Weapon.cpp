@@ -83,6 +83,20 @@ void Weapon::onCollisionEnter(Collision* c)
 
 }
 
+void Weapon::onCollisionExit(Collision* c)
+{
+	Hands* otherHand = GETCMP2(c->entity, Hands);
+
+	if (otherHand != nullptr) {
+		DeletePlayerInfo(otherHand->getPlayerId());
+	}
+
+	PlayerData* playerData = GETCMP2(c->entity, PlayerData);
+	if (playerData != nullptr) {
+		loseContactPlayer(c->entity, playerData->getPlayerNumber());
+	}
+}
+
 void Weapon::PickObjectBy(Hands* playerH)
 {
 	if (playerH->getWeaponID() == NoWeapon) {

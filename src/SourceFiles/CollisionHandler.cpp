@@ -246,8 +246,8 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 	if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject ||
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject) &&
 		PlayerCanPickWeapon(contact, pickableObj, playerHands)) {
-		pickableObj->DeletePlayerInfo(playerHands->getPlayerId());
-		cout << "Weapon out of reach" << endl;
+		//pickableObj->DeletePlayerInfo(playerHands->getPlayerId());
+		//cout << "Weapon out of reach" << endl;
 	}
 
 	RouterLogic* routerLogic = nullptr;
@@ -265,7 +265,7 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject ||
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject) {
 
-		exitChanclaTrigger(contact);
+		//exitChanclaTrigger(contact);
 	}
 
 	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::NonGrababbleWall && contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Player ||
