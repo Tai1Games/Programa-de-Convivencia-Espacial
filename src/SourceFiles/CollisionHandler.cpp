@@ -46,11 +46,10 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 
 		if (aEnt != nullptr && bEnt != nullptr)
 		{
-			Collision* col = new Collision(fixB, contact, bEnt,this,fixA);
-			aEnt->onCollisionExit(col);
-			delete col;
-			col = new Collision(fixA, contact, aEnt,this,fixB);
-			bEnt->onCollisionExit(col);
+			Collision col = Collision(fixB, contact, bEnt,this,fixA);
+			aEnt->onCollisionExit(&col);
+			col = Collision(fixA, contact, aEnt,this,fixB);
+			bEnt->onCollisionExit(&col);
 		}
 
 	}
