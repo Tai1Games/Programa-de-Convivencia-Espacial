@@ -3,6 +3,7 @@
 #include "PlayState.h"
 #include "CoinsPool.h"
 #include "Collider.h"
+#include "FireBallPool.h"
 
 class CapitalismGameMode : public GameMode
 {

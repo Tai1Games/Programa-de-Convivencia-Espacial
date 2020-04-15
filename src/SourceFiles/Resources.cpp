@@ -28,6 +28,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SliderControl, "../../assets/game/textures/SliderControl.png"},
 	{ SalaDeEstar,"../../assets/game/textures/SalaDeEstar.png"},
 	{ SalaCaldera,"../../assets/game/textures/SalaCaldera720Des.png"},
+	{ SalaGimnasio,"../../assets/game/textures/gimnasio.png"},
 	{ Negro ,"../../assets/game/textures/Negro.png"},
 	{ Router,"../../assets/game/textures/Router.png" },
 	{Router,"../../assets/game/textures/Router.png" },
@@ -39,6 +40,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ ProgressBar, "../../assets/game/textures/ProgressBar.png"},
 	{ EmptyProgressBar2, "../../assets/game/textures/EmptyProgressBar2.png"},
 	{ ProgressBar2, "../../assets/game/textures/ProgressBar2.png"},
+	{Fireball,"../../assets/game/textures/fireball_placeholder.png"},
+	{Boiler,"../../assets/game/textures/boiler_placeholder.png"},
 	{ PadSpriteSheet,"../../assets/game/textures/ColchonetaSpriteSheet.png" },
 
 		{ TSet_Kenney1bit , "../../assets/game/tilemaps/modded_colored.png"},

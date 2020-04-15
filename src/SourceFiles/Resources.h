@@ -35,6 +35,7 @@ public:
 		SliderControl,
 		SalaDeEstar,
 		SalaCaldera,
+		SalaGimnasio,
 		Negro,
 		Router,
 		Coin,
@@ -45,6 +46,8 @@ public:
 		ProgressBar,
 		EmptyProgressBar2,
 		ProgressBar2,
+		Fireball,
+		Boiler,
 		PadSpriteSheet,
 
 

@@ -15,6 +15,7 @@
 #include "Coin.h"
 #include "checkML.h"
 
+class Fireball;
 class RouterLogic;
 class CollisionHandler :
 	public b2ContactListener
@@ -78,6 +79,8 @@ public:
 	bool PlayerCollidesWithPad(b2Contact* contact, Pad*& p);
 	
 	bool CoinCollidesWithPlayer(b2Contact* contact, Wallet*& playerWallet, Coin*& coin, PlayerData*& playerData);*/
+
+	bool FireballCollidesWithSomething(b2Contact* contact, Entity*& fireball, Entity*& with);
 
 	vector<bodyData> getBodyData() { return vecBody; }
 

@@ -10,9 +10,10 @@ EntityManager::~EntityManager() {
 
 void EntityManager::update() {
 	for (auto& e : entities_) {
-		e->update();
+			e->update();
 	}
-	for (auto e : externalEntities_) e->update();
+	for (auto e : externalEntities_)
+			e->update();
 }
 
 void EntityManager::render() {

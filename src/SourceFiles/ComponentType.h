@@ -25,6 +25,8 @@ namespace ComponentType {
 		Wallet,
 		Coin,
 		ParticleEmitter,
+		FireBallGenerator,
+		Fireball,
 		ExtinguisherWeapon,
 		Pad,
 

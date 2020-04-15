@@ -4,6 +4,7 @@
 #include "TileMap.h"
 #include "PlayerFactory.h"
 #include "checkML.h"
+#include "FireBallPool.h"
 
 class Entity;
 class PlayState;
