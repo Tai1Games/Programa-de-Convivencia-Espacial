@@ -7,95 +7,84 @@
 #include "FireBallGenerator.h"
 //This method calculates the damage recieved by the impact of an object (or another player) with the player
 
-void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet, PlayerData* playerData,int fixedDamage) {
-	//Measure de impact of an object with the player
-	b2Vec2 force = fix->GetBody()->GetMass() * fix->GetBody()->GetLinearVelocity();
-
-	int impact = force.Length();
-
-	Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
-	//Si se impacta con un arma al umbral más alto de fuerza, se recibe su daño de impacto
-	if (w != nullptr) {
-		impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
-	}
-	else {
-		//Depending on the force of impact we apply damage to the player
-
-		if (impact < CONST(int, "LOW_DAMAGE")) impact = 0;
-
-		else if (impact >= CONST(int, "LOW_DAMAGE") && impact < CONST(double, "MEDIUM_DAMAGE")) impact = 1;
-
-		else if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) impact = 2;
-
-		else if (impact >= CONST(double, "HIGH_DAMAGE")) /*&& impact < CONST(double, "HIGH_DAMAGE"))*/ impact = 3;
-	}
-
-	if (fixedDamage > 0)
-		impact = fixedDamage;
-
-	if (impact > 0) {
-		if (playerHealth) {
-
-			playerHealth->subtractLife(impact);
-
-			if (playerHealth->getHealth() <= 0)
-			{
-				//reset player
-
-				//soltar objetos agarrados
-				AttachesToObjects* a = static_cast<AttachesToObjects*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects));
-				if (a != nullptr && a->isAttached()) vecAttach.push_back(a);
-				//soltar arma
-				Hands* h = static_cast<Hands*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<Hands>(ComponentType::Hands));
-				Weapon* w = nullptr;
-				if (h != nullptr) w = h->getWeapon();
-				if (w != nullptr) vecWeapon.push_back(w);
-				//respawn
-				StocksGameMode* s = nullptr;
-				bool stocks = (s = dynamic_cast<StocksGameMode*>(gMode_));
-				PlayerData* p = static_cast<PlayerData*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<PlayerData>(ComponentType::PlayerData));
-				moveData m;
-				m.body = player->GetBody();
-				m.pos = b2Vec2(tilemap_->getPlayerSpawnPoint(p->getPlayerNumber()).x, tilemap_->getPlayerSpawnPoint(p->getPlayerNumber()).y); //punto de respawn provisional
-				if (stocks && s->onPlayerDead(p->getPlayerNumber()) || !stocks) {	//si le quedan vidas
-					playerHealth->resetHealth();
-				}
-				else if (stocks) {	//si no le quedan vidas le mandamos lejos provisionalmente
-					m.pos = b2Vec2((1 + p->getPlayerNumber()) * 50, 0);
-				}
-				vecMove.push_back(m);
-
-				//cuerpo muerto
-				bodyData body;
-				body.pos = player->GetBody()->GetPosition();
-				body.angle = player->GetBody()->GetAngle();
-				vecBody.push_back(body);
-			}
-		}
-
-		//When player has wallet component
-		else vecCoinsToDrop.push_back(std::make_tuple(playerWallet, playerData, impact));
-	}
-	//When player has health component
-
-}
+//void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet, PlayerData* playerData,int fixedDamage) {
+//	//Measure de impact of an object with the player
+//	b2Vec2 force = fix->GetBody()->GetMass() * fix->GetBody()->GetLinearVelocity();
+//
+//	int impact = force.Length();
+//
+//	Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
+//	//Si se impacta con un arma al umbral más alto de fuerza, se recibe su daño de impacto
+//	if (w != nullptr) {
+//		impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
+//	}
+//	else {
+//		//Depending on the force of impact we apply damage to the player
+//
+//		if (impact < CONST(int, "LOW_DAMAGE")) impact = 0;
+//
+//		else if (impact >= CONST(int, "LOW_DAMAGE") && impact < CONST(double, "MEDIUM_DAMAGE")) impact = 1;
+//
+//		else if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) impact = 2;
+//
+//		else if (impact >= CONST(double, "HIGH_DAMAGE")) /*&& impact < CONST(double, "HIGH_DAMAGE"))*/ impact = 3;
+//	}
+//
+//	if (fixedDamage > 0)
+//		impact = fixedDamage;
+//
+//	if (impact > 0) {
+//		if (playerHealth) {
+//
+//			playerHealth->subtractLife(impact);
+//
+//			if (playerHealth->getHealth() <= 0)
+//			{
+//				//reset player
+//
+//				//soltar objetos agarrados
+//				AttachesToObjects* a = static_cast<AttachesToObjects*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects));
+//				if (a != nullptr && a->isAttached()) vecAttach.push_back(a);
+//				//soltar arma
+//				Hands* h = static_cast<Hands*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<Hands>(ComponentType::Hands));
+//				Weapon* w = nullptr;
+//				if (h != nullptr) w = h->getWeapon();
+//				if (w != nullptr) vecWeapon.push_back(w);
+//				//respawn
+//				StocksGameMode* s = nullptr;
+//				bool stocks = (s = dynamic_cast<StocksGameMode*>(gMode_));
+//				PlayerData* p = static_cast<PlayerData*>(static_cast<Entity*>(player->GetBody()->GetUserData())->getComponent<PlayerData>(ComponentType::PlayerData));
+//				moveData m;
+//				m.body = player->GetBody();
+//				m.pos = b2Vec2(tilemap_->getPlayerSpawnPoint(p->getPlayerNumber()).x, tilemap_->getPlayerSpawnPoint(p->getPlayerNumber()).y); //punto de respawn provisional
+//				if (stocks && s->onPlayerDead(p->getPlayerNumber()) || !stocks) {	//si le quedan vidas
+//					playerHealth->resetHealth();
+//				}
+//				else if (stocks) {	//si no le quedan vidas le mandamos lejos provisionalmente
+//					m.pos = b2Vec2((1 + p->getPlayerNumber()) * 50, 0);
+//				}
+//				vecMove.push_back(m);
+//
+//				//cuerpo muerto
+//				bodyData body;
+//				body.pos = player->GetBody()->GetPosition();
+//				body.angle = player->GetBody()->GetAngle();
+//				vecBody.push_back(body);
+//			}
+//		}
+//
+//		//When player has wallet component
+//		else vecCoinsToDrop.push_back(std::make_tuple(playerWallet, playerData, impact));
+//	}
+//	//When player has health component
+//
+//}
 
 //Handles start of collisions
 void CollisionHandler::BeginContact(b2Contact* contact)
 {
 	b2Fixture* fixA = contact->GetFixtureA();
 	b2Fixture* fixB = contact->GetFixtureB();
-	Health* player_Health = nullptr;
-	AttachesToObjects* player_AttachesToObjects = nullptr;
-	Weapon* pickableObj = nullptr;
-	Hands* playerHands = nullptr;
-	RouterLogic* routerLogic = nullptr;
-	Collider* playerCollider = nullptr;
-	PlayerData* playerData = nullptr;
-	Wallet* playerWallet = nullptr;
-	Coin* coin = nullptr;
-	Entity* fireball = nullptr;
-	Entity* collidedWithFireball = nullptr;
 
 	if (fixA == nullptr || fixB == nullptr) return;
 
@@ -106,11 +95,10 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 
 		if (aEnt != nullptr && bEnt != nullptr) 
 		{
-			Collision* col = new Collision(fixB, contact, bEnt,this);
-			aEnt->onCollisionEnter(col);
-			delete col;
-			col = new Collision(fixA, contact, aEnt,this);
-			bEnt->onCollisionEnter(col);
+			Collision col = Collision(fixB, contact, bEnt,this,fixA);
+			aEnt->onCollisionEnter(&col);
+			col =Collision(fixA, contact, aEnt,this, fixB);
+			bEnt->onCollisionEnter(&col);
 		}
 
 	}
@@ -199,7 +187,6 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	//		//cout << "Golpeaste al objetivo" << endl;
 	//	}
 	//}
-	player_Health = nullptr;
 
 	//Pickable object collisions (Weapons)
 	//if ((contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::PickableObject ||
@@ -213,17 +200,17 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	//if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger ||
 	//	contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
 
-	else if (FireballCollidesWithSomething(contact, fireball, collidedWithFireball)) {
-		//la bola desaparece al chocar con algo
-		fireball->setActive(false);
-		fireballsToClear.push_back(GETCMP2(fireball, Fireball));
-		cout << "Firecollision with " << GETCMP2(collidedWithFireball, Viewer)->getTextureId() << endl;
-		//si choca constra un jugador
-		if (collidedWithFireball->hasComponent(ComponentType::PlayerData)) {
-			damageOnImpact(GETCMP2(fireball, Collider)->getFixture(0), GETCMP2(collidedWithFireball, Collider)->getFixture(0),
-				GETCMP2(collidedWithFireball, Health), GETCMP2(collidedWithFireball, Wallet), GETCMP2(collidedWithFireball, PlayerData), 99);
-		}
-	}
+	//if (FireballCollidesWithSomething(contact, fireball, collidedWithFireball)) {
+	//	//la bola desaparece al chocar con algo
+	//	fireball->setActive(false);
+	//	fireballsToClear.push_back(GETCMP2(fireball, Fireball));
+	//	cout << "Firecollision with " << GETCMP2(collidedWithFireball, Viewer)->getTextureId() << endl;
+	//	//si choca constra un jugador
+	//	if (collidedWithFireball->hasComponent(ComponentType::PlayerData)) {
+	//		damageOnImpact(GETCMP2(fireball, Collider)->getFixture(0), GETCMP2(collidedWithFireball, Collider)->getFixture(0),
+	//			GETCMP2(collidedWithFireball, Health), GETCMP2(collidedWithFireball, Wallet), GETCMP2(collidedWithFireball, PlayerData), 99);
+	//	}
+	//}
 }
 
 //Handles end of collisions
@@ -240,10 +227,10 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 
 		if (aEnt != nullptr && bEnt != nullptr)
 		{
-			Collision* col = new Collision(fixB, contact, bEnt,this);
+			Collision* col = new Collision(fixB, contact, bEnt,this,fixA);
 			aEnt->onCollisionExit(col);
 			delete col;
-			col = new Collision(fixA, contact, aEnt,this);
+			col = new Collision(fixA, contact, aEnt,this,fixB);
 			bEnt->onCollisionExit(col);
 		}
 

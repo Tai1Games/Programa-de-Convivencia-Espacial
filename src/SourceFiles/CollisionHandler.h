@@ -31,11 +31,12 @@ private:
 	vector<Weapon*> vecWeapon; //Vector donde almacenamos las weapons que soltaremos al final del step
 	vector<AttachesToObjects*> vecAttach; //Vector donde almacenamos los agarres que soltaremos al final del step.
 	vector<tuple<Wallet*, PlayerData*, int>> vecCoinsToDrop; //Vector donde almacenamos los impactos entre objetos y wallets.
+	vector<Fireball*> fireballsToClear; //Bolas de fuego que se eliminaran al final del step
 	vector<Coin*> vecCoin; //Vector donde almacenamos los impactos entre jugador y las monedas a recoger
 	GameMode* gMode_;
 	TileMap* tilemap_;
 
-	void damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet, PlayerData* playerData);
+	//void damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet, PlayerData* playerData, int fixedDamage = -1);
 public:
 	struct weldData { //Struct donde guardamos los datos necesarios para hacer un weld.
 		AttachesToObjects* player = nullptr;
@@ -80,7 +81,7 @@ public:
 	
 	bool CoinCollidesWithPlayer(b2Contact* contact, Wallet*& playerWallet, Coin*& coin, PlayerData*& playerData);*/
 
-	bool FireballCollidesWithSomething(b2Contact* contact, Entity*& fireball, Entity*& with);
+	//bool FireballCollidesWithSomething(b2Contact* contact, Entity*& fireball, Entity*& with);
 
 	vector<bodyData> getBodyData() { return vecBody; }
 
@@ -103,4 +104,6 @@ public:
 	void addCoinDrop(std::tuple<Wallet*, PlayerData*, int> coin) { vecCoinsToDrop.push_back(coin); }
 
 	void addCoinPick(Coin* coin) { vecCoin.push_back(coin); }
+
+	void removeFireball(Fireball* fball) { fireballsToClear.push_back(fball); }
 };

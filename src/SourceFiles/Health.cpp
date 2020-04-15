@@ -75,10 +75,10 @@ void Health::playerDead(Collision* c)
 
 void Health::onCollisionEnter(Collision* c)
 {
-	b2Fixture* fix = c->fixture;
+	b2Fixture* fix = c->hitFixture;
 	if (!fix->IsSensor())
 	{
-		b2Vec2 force = c->fixture->GetBody()->GetMass() * c->fixture->GetBody()->GetLinearVelocity();
+		b2Vec2 force = c->hitFixture->GetBody()->GetMass() * c->hitFixture->GetBody()->GetLinearVelocity();
 		int impact = force.Length();
 		Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
 		//Si se impacta con un arma al umbral más alto de fuerza, se recibe su daño de impacto

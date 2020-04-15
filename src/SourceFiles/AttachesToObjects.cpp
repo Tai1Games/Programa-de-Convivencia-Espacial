@@ -53,12 +53,12 @@ void AttachesToObjects::handleInput() { //Si el jugador suelta la tecla de agarr
 
 void AttachesToObjects::onCollisionEnter(Collision* c){
 	//si chocamos con un objeto que pueda agarrarse
-	if (c->fixture->GetFilterData().categoryBits == Collider::CollisionLayer::Wall || c->fixture->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject) {
+	if (c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Wall || c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject) {
 		if (canAttachToObject()) {
 			b2WorldManifold manifold;
 			c->contact->GetWorldManifold(&manifold);
 			c->collisionHandler->createWeld
-			(CollisionHandler::weldData(this, c->fixture->GetBody(), b2Vec2(manifold.points[0].x, manifold.points[0].y)));
+			(CollisionHandler::weldData(this, c->hitFixture->GetBody(), b2Vec2(manifold.points[0].x, manifold.points[0].y)));
 		}
 		else {
 			cout << "colision sin input con grabbable" << endl;

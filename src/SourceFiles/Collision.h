@@ -5,15 +5,17 @@ class CollisionHandler;
 struct Collision
 {
 public:
-	Collision(b2Fixture* other,b2Contact* contactInfo,Entity* e,CollisionHandler* hndler) :
+	Collision(b2Fixture* other,b2Contact* contactInfo,Entity* e,CollisionHandler* hndler, b2Fixture* mFix) :
 		entity(e),
 		contact(contactInfo),
-		fixture(other),
-		collisionHandler(hndler){}
+		hitFixture(other),
+		collisionHandler(hndler),
+		myFixture(mFix){}
 	
-	CollisionHandler* collisionHandler = nullptr;
+	CollisionHandler* collisionHandler = nullptr;  
 	Entity* entity = nullptr;
 	b2Contact* contact = nullptr;
-	b2Fixture* fixture = nullptr;
+	b2Fixture* hitFixture = nullptr;
+	b2Fixture* myFixture = nullptr;
 };
 

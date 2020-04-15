@@ -12,6 +12,8 @@ void WiFightGameMode::init(PlayState* game)
 	}
 
 	router = state_->getEntityManager()->addEntity();
+
+	Entity* lacalderilla = ObjectFactory::createBoiler(state_->getEntityManager(),state_->getPhysicsWorld(),b2Vec2(5,5));
 																								  //				x,								y,						width, height, density,	friction, restitution, linearDrag, angularDrag,	 Laye,  sensor,  canBeAttached
 	Collider* collRouter = router->addComponent<Collider>(state_->getPhysicsWorld(), b2_dynamicBody, tilemap_->getObjSpecialSpawnPos().x, tilemap_->getObjSpecialSpawnPos().y, 1, 0.7, 1, 0, 1, 0, 0, Collider::CollisionLayer::UnInteractableObject, false);
 	collRouter->createCircularFixture(5, 1, 0, 0, Collider::CollisionLayer::Trigger, true);

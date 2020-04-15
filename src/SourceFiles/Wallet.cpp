@@ -12,6 +12,9 @@ void Wallet::init()
 
 void Wallet::dropCoins(int damage, int player)
 {
+	//hard cap para evitar gastar la pool
+	if (damage > 3)
+		damage = 3;
 	int coinsToDrop = numCoins_ * (damage * CONST(double, "COIN_DROP_RATE"));
 	if (coinsToDrop == 0) coinsToDrop = numCoins_;
 	numCoins_ -= coinsToDrop;
