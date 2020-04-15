@@ -21,16 +21,11 @@ class CollisionHandler :
 {
 private:
 	struct weldData;
+	struct moveData;
+	struct bodyData;
 	vector<weldData> vecWeld; //Vector donde almacenamos los welds que realizaremos al final del step.
-	struct moveData { //Struct donde guardamos los datos necesarios para respawnear a los jugadores
-		b2Body* body;
-		b2Vec2 pos;
-	};
+
 	vector<moveData> vecMove; //Vector donde almacenamos los moves que realizaremos al final del step.
-	struct bodyData {  //Struct donde guardamos los datos necesarios para hacer un cuerpo muerto.
-		b2Vec2 pos;
-		float angle;
-	};
 	vector<bodyData> vecBody; //Vector donde almacenamos los cuerpos muertos que crearemos al final del step.
 	vector<Weapon*> vecWeapon; //Vector donde almacenamos las weapons que soltaremos al final del step
 	vector<AttachesToObjects*> vecAttach; //Vector donde almacenamos los agarres que soltaremos al final del step.
@@ -48,6 +43,14 @@ public:
 		weldData() {};
 		weldData(AttachesToObjects* attach,b2Body* body,b2Vec2 col):
 		player(attach),bodyToBeAttached(body),collPoint(col){}
+	};
+	struct moveData { //Struct donde guardamos los datos necesarios para respawnear a los jugadores
+		b2Body* body;
+		b2Vec2 pos;
+	};
+	struct bodyData {  //Struct donde guardamos los datos necesarios para hacer un cuerpo muerto.
+		b2Vec2 pos;
+		float angle;
 	};
     CollisionHandler(GameMode* g, TileMap* tm): gMode_(g), tilemap_(tm) {};
 	~CollisionHandler() {};
@@ -81,4 +84,16 @@ public:
 	void clearBodyData(){ vecBody.clear(); }
 
 	void createWeld(weldData w) { vecWeld.push_back(w); }
+
+	void breakAttachment(AttachesToObjects* a) { vecAttach.push_back(a); };
+
+	void dropWeapon(Weapon* w) { vecWeapon.push_back(w); }
+
+	GameMode* getGamemode() { return gMode_; }
+
+	b2Vec2 getPlayerRespawnPoint(int player) { return tilemap_->getPlayerSpawnPoint(player); }
+
+	void addCorpse(bodyData corpse) { vecBody.push_back(corpse); }
+
+	void addMove(moveData mov) { vecMove.push_back(mov); }
 };

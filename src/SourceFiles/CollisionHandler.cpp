@@ -141,13 +141,13 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	else if (fixB->GetFilterData().categoryBits) {
 		//check collision then do whatever, in this case twice because it might be two players colliding
 		if (ObjectCollidesWithPlayer(fixA, player_Health, playerWallet, playerData) && !fixB->IsSensor()) {
-			damageOnImpact(fixB, fixA, player_Health, playerWallet, playerData);	//Check the stats of the other object
+			//damageOnImpact(fixB, fixA, player_Health, playerWallet, playerData);	//Check the stats of the other object
 		}
 
 		player_Health = nullptr;	//Lo reseteamos para evitar problemas
 
 		if (ObjectCollidesWithPlayer(fixB, player_Health, playerWallet, playerData) && !fixA->IsSensor()) {
-			damageOnImpact(fixA, fixB, player_Health, playerWallet, playerData);	//Check the stats of the other object
+			//damageOnImpact(fixA, fixB, player_Health, playerWallet, playerData);	//Check the stats of the other object
 		}
 	}
 	//Melee Weapons collisions
