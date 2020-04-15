@@ -6,7 +6,7 @@
 unique_ptr<SDL_Game> SDL_Game::instance_;
 
 SDL_Game::SDL_Game() {
-	constants_ = Constants("../config/constants.json");
+	constants_ = Constants("./config/constants.json");
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window_ = SDL_CreateWindow(constants_.getConstant<string>("WINDOW_NAME").c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, constants_.getConstant<int>("WINDOW_WIDTH"),
 		constants_.getConstant<int>("WINDOW_HEIGHT"), SDL_WINDOW_SHOWN);

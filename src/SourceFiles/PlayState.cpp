@@ -38,7 +38,7 @@ void PlayState::init() {
 	physicsWorld_ = new b2World(b2Vec2(0, 0));
 
 	tilemap_ = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
-		"../../assets/game/tilemaps/"+tilemapName_+".json",
+		"assets/game/tilemaps/"+tilemapName_+".json",
 		entityManager_, physicsWorld_);
 	tilemap_->init();
 	gameMode_->setTileMap(tilemap_);
