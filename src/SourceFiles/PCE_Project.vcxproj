@@ -129,11 +129,8 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
       </Command>
     </PreBuildEvent>
     <PreLinkEvent>
-      <Command>powershell -Command "(gc  $(SolutionDir)SourceFiles\Resources.h) -replace '\"assets/game/', '\"../../assets/game/' | Out-File -encoding ASCII  $(SolutionDir)SourceFiles\Resources.h"
-powershell -Command "(gc  $(SolutionDir)SourceFiles\SDL_Game.cpp) -replace '\"./config/', '\"../config/' | Out-File -encoding ASCII  $(SolutionDir)SourceFiles\SDL_Game.cpp"
-powershell -Command "(gc  $(SolutionDir)SourceFiles\InputHandler.cpp) -replace '\"./config/', '\"../config/' | Out-File -encoding ASCII  $(SolutionDir)SourceFiles\InputHandler.cpp"
-powershell -Command "(gc  $(SolutionDir)SourceFiles\PlayState.cpp) -replace '\"assets/game/', '\"../../assets/game/' | Out-File -encoding ASCII  $(SolutionDir)SourceFiles\PlayState.cpp"
-</Command>
+      <Command>
+      </Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -306,7 +303,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <Target Name="AfterBuild" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+  <Target Name="AfterBuild">
     <ItemGroup>
       <ConfigFiles Include="$(SolutionDir)config\**\*.*" />
       <AssetFiles Include="$(SolutionDir)..\assets\game\**\*.*" />
