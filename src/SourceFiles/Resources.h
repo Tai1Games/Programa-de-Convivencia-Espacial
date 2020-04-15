@@ -9,6 +9,8 @@
 using json = nlohmann::json;
 using namespace std;
 
+static string resourcesPath = "assets/game/";
+
 class Resources {
 public:
 

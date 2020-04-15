@@ -3,49 +3,49 @@
 
 vector<Resources::FontInfo> Resources::fonts_{
 	//Fuentes {nombre_en_enum, ruta, tama�o}
-	{NES_Chimera , "../../assets/game/fonts/NES-Chimera.ttf", 38},
-	{Digits_Font , "../../assets/game/fonts/Digits_Font.ttf", 38}
+	{NES_Chimera , resourcesPath+"fonts/NES-Chimera.ttf", 38},
+	{Digits_Font , resourcesPath+"fonts/Digits_Font.ttf", 38}
 };
 
 vector<Resources::ImageInfo> Resources::images_{
 	//Im�genes {nombre_en_enum, ruta}
-	{ Debug, "../../assets/game/textures/debug.png" },
-	{ Tinky, "../../assets/game/textures/Tinky.png" },
-	{ ActiveHealth, "../../assets/game/textures/VidaActiva.png" },
-	{ DisableHealth, "../../assets/game/textures/VidaInactiva.png" },
-	{ Slipper, "../../assets/game/textures/Chancla.png" },
-	{ Stapler, "../../assets/game/textures/Grapadora.png" },
-	{ Extinguisher, "../../assets/game/textures/Extintor.png" },
-	{ Piedra, "../../assets/game/textures/Piedra.png" },
-	{ Pelota, "../../assets/game/textures/PelotaSaltarina.png" },
-	{ Mancuerna, "../../assets/game/textures/Mancuerna.png" },
-	{ Hands, "../../assets/game/textures/handsActualizadas.png" },
-	{ Body, "../../assets/game/textures/bodyNeutral.png" },
-	{ PinkTinky, "../../assets/game/textures/PinkTinky.png"},
-	{ ImpulseArrow, "../../assets/game/textures/FlechaImpulso.png"},
-	{ ImpulseBackground, "../../assets/game/textures/ImpulsoBackground.png"},
-	{ Slider, "../../assets/game/textures/Slider.png"},
-	{ SliderControl, "../../assets/game/textures/SliderControl.png"},
-	{ SalaDeEstar,"../../assets/game/textures/SalaDeEstar.png"},
-	{ SalaCaldera,"../../assets/game/textures/SalaCaldera720Des.png"},
-	{ SalaGimnasio,"../../assets/game/textures/gimnasio.png"},
-	{ Negro ,"../../assets/game/textures/Negro.png"},
-	{ Router,"../../assets/game/textures/Router.png" },
-	{Router,"../../assets/game/textures/Router.png" },
-	{ Coin, "../../assets/game/textures/DogeCoin.png" },
-	{ CoinUI, "../../assets/game/textures/DogeCoinUI.png"},
-	{ CanvasTimer, "../../assets/game/textures/COSO.png"},
-	{ SuddenDeathText, "../../assets/game/textures/suddenDeathText.png"},
-	{ EmptyProgressBar, "../../assets/game/textures/EmptyProgressBar.png"},
-	{ ProgressBar, "../../assets/game/textures/ProgressBar.png"},
-	{ EmptyProgressBar2, "../../assets/game/textures/EmptyProgressBar2.png"},
-	{ ProgressBar2, "../../assets/game/textures/ProgressBar2.png"},
-	{Fireball,"../../assets/game/textures/fireball_placeholder.png"},
-	{Boiler,"../../assets/game/textures/boiler_placeholder.png"},
-	{ PadSpriteSheet,"../../assets/game/textures/ColchonetaSpriteSheet.png" },
+	{ Debug, resourcesPath+"textures/debug.png" },
+	{ Tinky, resourcesPath+"textures/Tinky.png" },
+	{ ActiveHealth, resourcesPath+"textures/VidaActiva.png" },
+	{ DisableHealth, resourcesPath+"textures/VidaInactiva.png" },
+	{ Slipper, resourcesPath+"textures/Chancla.png" },
+	{ Stapler, resourcesPath+"textures/Grapadora.png" },
+	{ Extinguisher, resourcesPath+"textures/Extintor.png" },
+	{ Piedra, resourcesPath+"textures/Piedra.png" },
+	{ Pelota, resourcesPath+"textures/PelotaSaltarina.png" },
+	{ Mancuerna, resourcesPath+"textures/Mancuerna.png" },
+	{ Hands, resourcesPath+"textures/handsActualizadas.png" },
+	{ Body, resourcesPath+"textures/bodyNeutral.png" },
+	{ PinkTinky, resourcesPath+"textures/PinkTinky.png"},
+	{ ImpulseArrow, resourcesPath+"textures/FlechaImpulso.png"},
+	{ ImpulseBackground, resourcesPath+"textures/ImpulsoBackground.png"},
+	{ Slider, resourcesPath+"textures/Slider.png"},
+	{ SliderControl, resourcesPath+"textures/SliderControl.png"},
+	{ SalaDeEstar,resourcesPath+"textures/SalaDeEstar.png"},
+	{ SalaCaldera,resourcesPath+"textures/SalaCaldera720Des.png"},
+	{ SalaGimnasio,resourcesPath+"textures/gimnasio.png"},
+	{ Negro ,resourcesPath+"textures/Negro.png"},
+	{ Router,resourcesPath+"textures/Router.png" },
+	{Router,resourcesPath+"textures/Router.png" },
+	{ Coin, resourcesPath+"textures/DogeCoin.png" },
+	{ CoinUI, resourcesPath+"textures/DogeCoinUI.png"},
+	{ CanvasTimer, resourcesPath+"textures/COSO.png"},
+	{ SuddenDeathText, resourcesPath+"textures/suddenDeathText.png"},
+	{ EmptyProgressBar, resourcesPath+"textures/EmptyProgressBar.png"},
+	{ ProgressBar, resourcesPath+"textures/ProgressBar.png"},
+	{ EmptyProgressBar2, resourcesPath+"textures/EmptyProgressBar2.png"},
+	{ ProgressBar2, resourcesPath+"textures/ProgressBar2.png"},
+	{Fireball,resourcesPath+"textures/fireball_placeholder.png"},
+	{Boiler,resourcesPath+"textures/boiler_placeholder.png"},
+	{ PadSpriteSheet,resourcesPath+"textures/ColchonetaSpriteSheet.png" },
 
-		{ TSet_Kenney1bit , "../../assets/game/tilemaps/modded_colored.png"},
-		{ TSet_Dungeon , "../../assets/game/tilemaps/dungeon_ts.png"}
+		{ TSet_Kenney1bit , resourcesPath+"tilemaps/modded_colored.png"},
+		{ TSet_Dungeon , resourcesPath+"tilemaps/dungeon_ts.png"}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{
@@ -60,8 +60,8 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 
 vector<Resources::MusicInfo> Resources::musics_{
 	//M�sica {nombre_en_enum, ruta}
-	{ MainTheme , "../../assets/game/sound/mainMenu.mp3" },
-	{Reveal, "../../assets/game/sound/gotem.mp3"}
+	{ MainTheme , resourcesPath+"sound/mainMenu.mp3" },
+	{Reveal, resourcesPath+"sound/gotem.mp3"}
 };
 
 vector<Resources::SoundInfo> Resources::sounds_{
