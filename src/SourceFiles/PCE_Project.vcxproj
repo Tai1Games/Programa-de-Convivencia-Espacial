@@ -124,6 +124,17 @@ copy "$(SolutionDir)SDL2_mixer-2.0.4\lib\$(Platform)\*.dll" "$(TargetDir)"
 copy "$(SolutionDir)SDL2_ttf-2.0.15\lib\$(Platform)\*.dll" "$(TargetDir)"
 copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PreLinkEvent>
+      <Command>powershell -Command "(gc  $(SolutionDir)SourceFiles\Resources.h) -replace '\"assets/game/', '\"../../assets/game/' | Out-File -encoding ASCII  $(SolutionDir)SourceFiles\Resources.h"
+powershell -Command "(gc  $(SolutionDir)SourceFiles\SDL_Game.cpp) -replace '\"./config/', '\"../config/' | Out-File -encoding ASCII  $(SolutionDir)SourceFiles\SDL_Game.cpp"
+powershell -Command "(gc  $(SolutionDir)SourceFiles\InputHandler.cpp) -replace '\"./config/', '\"../config/' | Out-File -encoding ASCII  $(SolutionDir)SourceFiles\InputHandler.cpp"
+powershell -Command "(gc  $(SolutionDir)SourceFiles\PlayState.cpp) -replace '\"assets/game/', '\"../../assets/game/' | Out-File -encoding ASCII  $(SolutionDir)SourceFiles\PlayState.cpp"
+</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -297,8 +308,8 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
   </ImportGroup>
   <Target Name="AfterBuild" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ItemGroup>
-      <ConfigFiles Include="$(SolutionDir)config\**\*.*"/>
-      <AssetFiles Include="$(SolutionDir)..\assets\game\**\*.*"/>
+      <ConfigFiles Include="$(SolutionDir)config\**\*.*" />
+      <AssetFiles Include="$(SolutionDir)..\assets\game\**\*.*" />
     </ItemGroup>
     <Copy SourceFiles="@(ConfigFiles)" DestinationFolder="$(TargetDir)config\" OverwriteReadOnlyFiles="true" SkipUnchangedFiles="false" />
     <Copy SourceFiles="@(AssetFiles)" DestinationFiles="@(AssetFiles->'$(TargetDir)assets\game\%(RecursiveDir)%(Filename)%(Extension)')" OverwriteReadOnlyFiles="true" SkipUnchangedFiles="false" />
