@@ -73,50 +73,50 @@
                 {
                  "height":0,
                  "id":46,
-                 "name":"",
+                 "name":"Roomba",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":310.666666666667,
-                 "y":337.333333333333
+                 "x":310,
+                 "y":360
                 }, 
                 {
                  "height":0,
                  "id":47,
-                 "name":"",
+                 "name":"Roomba",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":925.333333333333,
-                 "y":340
+                 "x":950,
+                 "y":360
                 }, 
                 {
                  "height":0,
                  "id":48,
-                 "name":"",
+                 "name":"Roomba",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":626.666666666667,
-                 "y":134.666666666667
+                 "x":640,
+                 "y":140
                 }, 
                 {
                  "height":0,
                  "id":49,
-                 "name":"",
+                 "name":"Roomba",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":610.666666666667,
-                 "y":584
+                 "x":640,
+                 "y":550
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -132,19 +132,19 @@
                 {
                  "height":0,
                  "id":26,
-                 "name":"",
+                 "name":"Spawn",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":500,
+                 "x":50,
                  "y":360
                 }, 
                 {
                  "height":0,
                  "id":27,
-                 "name":"",
+                 "name":"Spawn",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -156,7 +156,7 @@
                 {
                  "height":0,
                  "id":28,
-                 "name":"",
+                 "name":"Spawn",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -168,14 +168,14 @@
                 {
                  "height":0,
                  "id":29,
-                 "name":"",
+                 "name":"Spawn",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":640,
-                 "y":660
+                 "y":670
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -191,7 +191,7 @@
                 {
                  "height":0,
                  "id":25,
-                 "name":"",
+                 "name":"SpecialObj",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -236,15 +236,38 @@
                  "y":156
                 }, 
                 {
-                 "height":44.3333333333333,
-                 "id":41,
-                 "name":"Pad",
+                 "height":0,
+                 "id":51,
+                 "name":"Boiller",
+                 "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":284.416666666667,
-                 "x":70.8333333333334,
-                 "y":41.3333333333333
+                 "width":0,
+                 "x":640,
+                 "y":224
+                }, 
+                {
+                 "height":29.3333333333333,
+                 "id":52,
+                 "name":"Pipe",
+                 "rotation":-45,
+                 "type":"",
+                 "visible":true,
+                 "width":276,
+                 "x":1032,
+                 "y":674.666666666667
+                }, 
+                {
+                 "height":29.3333,
+                 "id":53,
+                 "name":"Pipe",
+                 "rotation":45,
+                 "type":"",
+                 "visible":true,
+                 "width":276,
+                 "x":38.0000000000001,
+                 "y":482.666683333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -260,7 +283,7 @@
                 {
                  "height":0,
                  "id":36,
-                 "name":"Stapler",
+                 "name":"Weapon",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -272,7 +295,7 @@
                 {
                  "height":0,
                  "id":37,
-                 "name":"Ball",
+                 "name":"Weapon",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -284,7 +307,7 @@
                 {
                  "height":0,
                  "id":39,
-                 "name":"Slipper",
+                 "name":"Weapon",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -296,7 +319,7 @@
                 {
                  "height":0,
                  "id":40,
-                 "name":"Ball",
+                 "name":"Weapon",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -308,7 +331,7 @@
                 {
                  "height":0,
                  "id":50,
-                 "name":"Dumbbell",
+                 "name":"Weapon",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -324,7 +347,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":51,
+ "nextobjectid":54,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.3.3",

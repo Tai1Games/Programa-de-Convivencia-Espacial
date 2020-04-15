@@ -56,6 +56,7 @@ void PlayState::init() {
 
 	//Version estática de la factoria
 	tilemap_->executeMapFactory();
+	tilemap_->createWeapons();
 
 	gameMode_->init(this);
 }

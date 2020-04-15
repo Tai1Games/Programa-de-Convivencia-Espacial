@@ -37,7 +37,7 @@ void GameStateMachine::changeToState(int state) {
 				break;
 			case States::play:
 				//deleteState(currentState_);
-				states_[state] = new PlayState(new StocksGameMode(4), "SalaDeEstar"); //ejemplo "SalaDeEstar"
+				states_[state] = new PlayState(new StocksGameMode(4), "BoilerRoom"); //LivingRoom, BoilerRoom
 				break;
 			case States::pause:
 				//if (states_[state] != nullptr)	delete states_[state];
