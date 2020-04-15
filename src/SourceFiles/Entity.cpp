@@ -6,7 +6,7 @@ Entity::Entity(EntityManager* mngr) :
 }
 
 Entity::~Entity() {
-
+	//cout << "Entity destroyed" << endl;
 }
 
 void Entity::update()

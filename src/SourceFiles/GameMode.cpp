@@ -43,6 +43,6 @@ void GameMode::renderProgressBars(const std::vector<double>& progressValues, con
 	}
 }
 
-void GameMode::init(PlayState* state) {
-	state_ = state;
+void GameMode::init(PlayState* game) {
+	state_ = game;
 }

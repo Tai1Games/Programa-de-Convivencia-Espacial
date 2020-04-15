@@ -2,9 +2,11 @@
 #include "RouterLogic.h"
 #include "StocksGameMode.h"
 #include <tuple>
+#include "Fireball.h"
+#include "FireBallGenerator.h"
 //This method calculates the damage recieved by the impact of an object (or another player) with the player
 
-void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet, PlayerData* playerData) {
+void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health* playerHealth, Wallet* playerWallet, PlayerData* playerData,int fixedDamage) {
 	//Measure de impact of an object with the player
 	b2Vec2 force = fix->GetBody()->GetMass() * fix->GetBody()->GetLinearVelocity();
 
@@ -26,6 +28,9 @@ void CollisionHandler::damageOnImpact(b2Fixture* fix, b2Fixture* player, Health*
 
 		else if (impact >= CONST(double, "HIGH_DAMAGE")) /*&& impact < CONST(double, "HIGH_DAMAGE"))*/ impact = 3;
 	}
+
+	if (fixedDamage > 0)
+		impact = fixedDamage;
 
 	if (impact > 0) {
 		if (playerHealth) {
@@ -88,6 +93,8 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	PlayerData* playerData = nullptr;
 	Wallet* playerWallet = nullptr;
 	Coin* coin = nullptr;
+	Entity* fireball = nullptr;
+	Entity* collidedWithFireball = nullptr;
 
 	if (fixB->GetFilterData().categoryBits == Collider::CollisionLayer::Player && fixA->GetFilterData().categoryBits == Collider::CollisionLayer::Wall) {
 		cout << "sijaja";
@@ -186,6 +193,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger ||
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
 
+
 		if (CoinCollidesWithPlayer(contact, playerWallet, coin, playerData)) { //Player collides with coin
 			if (coin->getPlayerDropped() != playerData->getPlayerNumber()) {
 				playerWallet->addCoins(coin->getVal());
@@ -194,6 +202,18 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		}
 		else if (PlayerCollidesWithRouterArea(contact, routerLogic, playerCollider, playerData)) { //Player collides with router
 			routerLogic->detectPlayer(playerCollider, playerData->getPlayerNumber());
+		}
+
+	}
+	else if (FireballCollidesWithSomething(contact, fireball, collidedWithFireball)) {
+		//la bola desaparece al chocar con algo
+		fireball->setActive(false);
+		fireballsToClear.push_back(GETCMP2(fireball, Fireball));
+		cout << "Firecollision with " << GETCMP2(collidedWithFireball, Viewer)->getTextureId() << endl;
+		//si choca constra un jugador
+		if (collidedWithFireball->hasComponent(ComponentType::PlayerData)) {
+			damageOnImpact(GETCMP2(fireball, Collider)->getFixture(0), GETCMP2(collidedWithFireball, Collider)->getFixture(0),
+				GETCMP2(collidedWithFireball, Health), GETCMP2(collidedWithFireball, Wallet), GETCMP2(collidedWithFireball, PlayerData), 99);
 		}
 	}
 }
@@ -310,6 +330,25 @@ bool CollisionHandler::CoinCollidesWithPlayer(b2Contact* contact, Wallet*& playe
 	return false;
 }
 
+bool CollisionHandler::FireballCollidesWithSomething(b2Contact* contact,Entity*& fireball,Entity*& with) {
+	Entity* fixAentity = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	Entity* fixBentity = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+	if (fixAentity->hasComponent(ComponentType::Fireball) && !fixBentity->hasComponent(ComponentType::Fireball) && !fixBentity->hasComponent(ComponentType::FireBallGenerator) &&
+		contact->GetFixtureB()->GetFilterData().categoryBits != Collider::CollisionLayer::Trigger) {
+		fireball = fixAentity;
+		with = fixBentity;
+		return fixAentity->isActive();
+	}
+	else if (fixBentity->hasComponent(ComponentType::Fireball) && !fixAentity->hasComponent(ComponentType::Fireball) && !fixAentity->hasComponent(ComponentType::FireBallGenerator) &&
+		contact->GetFixtureA()->GetFilterData().categoryBits != Collider::CollisionLayer::Trigger) {
+		fireball = fixBentity;
+		with = fixAentity;
+		return fixBentity->isActive();
+	}
+	return false;
+}
+
 bool CollisionHandler::AttachableObjectCollidesWithPlayer(b2Fixture* fixA, b2Fixture* fixB, AttachesToObjects*& player) {
 	if (player = static_cast<AttachesToObjects*>(static_cast<Entity*>(fixA->GetBody()->GetUserData())->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects))) return true;
 	else if (player = static_cast<AttachesToObjects*>(static_cast<Entity*>(fixB->GetBody()->GetUserData())->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects))) return true;
@@ -376,6 +415,10 @@ void CollisionHandler::SolveInteractions() {
 		c->setActive(false);
 	}
 	vecCoin.clear();
+	for (auto f : fireballsToClear) {
+		f->setActive(false, b2Vec2(3, 3));
+	}
+	fireballsToClear.clear();
 	for (auto w : vecCoinsToDrop) {
 		std::get<0>(w)->dropCoins(std::get<2>(w), std::get<1>(w)->getPlayerNumber());
 	}

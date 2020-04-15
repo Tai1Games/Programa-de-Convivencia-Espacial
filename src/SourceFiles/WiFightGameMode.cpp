@@ -22,6 +22,7 @@ void WiFightGameMode::init(PlayState* game)
 	collRouter->applyLinearImpulse(b2Vec2(100,100), b2Vec2(0, 0));
 
 	GameMode::initProgressBars();
+
 }
 
 void WiFightGameMode::render()

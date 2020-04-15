@@ -10,6 +10,8 @@
 #include "Weapon.h"
 #include "Hands.h"
 #include "Coin.h"
+#include "FireBallGenerator.h"
+#include "Fireball.h"
 #include "ExtinguisherWeapon.h"
 #include "ParticleEmitter.h"
 #include "Pad.h"
@@ -91,10 +93,21 @@ void ObjectFactory::makeCoin(Entity* e, EntityManager* entityManager, b2World* p
 	aux->setUserData(e);
 }
 
+void ObjectFactory::makeFireball(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
+{
+	entityManager->addExistingEntity(e);
+	Collider* auxCol = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "FIREBALL_RADIUS"), CONST(double, "FIREBALL_DENSITY"), CONST(double, "FIREBALL_FRICTION"), CONST(double, "FIREBALL_ANGULAR_DRAG"), 1, 1, Collider::CollisionLayer::NormalObject, false);
+	e->addComponent<Viewer>(Resources::Fireball);
+	e->addComponent<Fireball>();
+	e->addComponent<Weapon>(WeaponID::Piedra, 999, 999);//Si, el fuego es una piedra muy caliente. Mucho m�s que el magma, esta caldera echa bolas de PLASMA, el cuarto estado de la materia
+	auxCol->setUserData(e);
+}
+
+
 Weapon* ObjectFactory::makeController(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 	Entity* e = entityManager->addEntity();
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "CONTROLLER_DENSITY"), CONST(double, "CONTROLLER_FRICTION"),
-		CONST(double, "CONTROLLER_RESTITUTION"), CONST(double, "CONTROLLER_LINEAR_DRAG"), CONST(double, "CONTROLLER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+		CONST(double, "CONTROLLER_RESTITUTION"), CONST(double, "CONTROLLER_LINEAR_DRAG"), CONST(double, "CONTROLLER_ANGULAR_DRAG"), Collider::CollisionLayer::Trigger, false);
 	e->addComponent<Viewer>();
 	Weapon* controller = e->addComponent<Weapon>(WeaponID::Mando, CONST(int, "CONTROLLER_DAMAGE"), CONST(int, "CONTROLLER_IMPACT_DAMAGE"));
 	aux->setUserData(e);
@@ -127,5 +140,17 @@ Entity* ObjectFactory::createRoomba(EntityManager* entityManager, b2World* physi
 	if (rand() % 2 == 1) velocityY *= -1;
 
 	collRoomba->applyLinearImpulse(b2Vec2(velocityX, velocityY), b2Vec2(0, 0));
+	return e;
+}
+
+Entity* ObjectFactory::createBoiler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
+{
+	Entity* e = entityManager->addEntity();
+	Collider* collRoomba = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "BOILER_WIDTH"), CONST(double, "BOILER_HEIGHT"), CONST(double, "BOILER_DENSITY"),CONST(double, "BOILER_FRICTION"),
+		CONST(double, "BOILER_RESTITUTION"),CONST(double,"BOILER_LINEAR_DRAG"), CONST(double, "BOILER_ANGULAR_DRAG"), Collider::CollisionLayer::Trigger, false);
+	collRoomba->setUserData(e);
+	e->addComponent<Viewer>(Resources::Boiler);	
+	e->addComponent<FireBallGenerator>(physicsWorld);
+
 	return e;
 }
