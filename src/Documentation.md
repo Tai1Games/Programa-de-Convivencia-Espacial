@@ -35,4 +35,16 @@ Es muy importante que el mapa tenga un formato específico para el parser Tileso
 
 A demás de cargar la textura como cualquier otra en Resources.h/cpp **también hay que añadirlo a la tabla map tilesetTag_** 
 en Resources.cpp. Esto permite relacionar el nombre con su textura correspondiente y que todo el renderizado sea automático y bonito.
-```
+
+
+## Detección de colisiones
+
+### Métodos de colisión
+
+Cuando dos entidades chocan se llama al método virtual Component::onCollisionEnter(), que por defecto no hace nada y se pasa por parámetros los detalles de la colisión.
+Su método homólogo Component::onCollisionExit() se llama cuando acaba la colisión. Queda declarado un método onCollisionStay por si fuese necesario refactorizar en un futuro las acciones que se gestionan en el update.
+	
+### Struct Collision
+
+Contenedor de la información general relativa a las colisiones, su funcionalidad es tener cacheadas los punteros que se suelen pedir como la entidad con la que se ha chocado o el manager que ha detectado la colisión.
+
