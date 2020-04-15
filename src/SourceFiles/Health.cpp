@@ -76,26 +76,29 @@ void Health::playerDead(Collision* c)
 void Health::onCollisionEnter(Collision* c)
 {
 	b2Fixture* fix = c->fixture;
-	b2Vec2 force = c->fixture->GetBody()->GetMass() * c->fixture->GetBody()->GetLinearVelocity();
-	int impact = force.Length();
-	Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
-	//Si se impacta con un arma al umbral más alto de fuerza, se recibe su daño de impacto
-	if (w != nullptr) {
-		impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
+	if (!fix->IsSensor())
+	{
+		b2Vec2 force = c->fixture->GetBody()->GetMass() * c->fixture->GetBody()->GetLinearVelocity();
+		int impact = force.Length();
+		Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
+		//Si se impacta con un arma al umbral más alto de fuerza, se recibe su daño de impacto
+		if (w != nullptr) {
+			impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
+		}
+		else {
+			//Depending on the force of impact we apply damage to the player
+
+			if (impact < CONST(int, "LOW_DAMAGE")) impact = 0;
+
+			else if (impact >= CONST(int, "LOW_DAMAGE") && impact < CONST(double, "MEDIUM_DAMAGE")) impact = 1;
+
+			else if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) impact = 2;
+
+			else if (impact >= CONST(double, "HIGH_DAMAGE")) /*&& impact < CONST(double, "HIGH_DAMAGE"))*/ impact = 3;
+		}
+
+		if (!subtractLife(impact))
+			playerDead(c);
+
 	}
-	else {
-		//Depending on the force of impact we apply damage to the player
-
-		if (impact < CONST(int, "LOW_DAMAGE")) impact = 0;
-
-		else if (impact >= CONST(int, "LOW_DAMAGE") && impact < CONST(double, "MEDIUM_DAMAGE")) impact = 1;
-
-		else if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) impact = 2;
-
-		else if (impact >= CONST(double, "HIGH_DAMAGE")) /*&& impact < CONST(double, "HIGH_DAMAGE"))*/ impact = 3;
-	}
-
-	if (!subtractLife(impact))
-		playerDead(c);
-
 }

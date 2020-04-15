@@ -213,7 +213,7 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 		//	}
 		//}
 		/*else*/ if (PlayerCollidesWithRouterArea(contact, routerLogic, playerCollider, playerData)) { //Player collides with router
-			routerLogic->detectPlayer(playerCollider, playerData->getPlayerNumber());
+			//routerLogic->detectPlayer(playerCollider, playerData->getPlayerNumber());
 		}
 	}
 }
@@ -258,7 +258,7 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 	if (contact->GetFixtureA()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger || //Colisiones entre Triggers y otros objetos
 		contact->GetFixtureB()->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
 		if (PlayerCollidesWithRouterArea(contact, routerLogic, playerCollider, playerData)) {
-			routerLogic->loseContactPlayer(playerCollider, playerData->getId());
+			//routerLogic->loseContactPlayer(playerCollider, playerData->getId());
 		}
 	}
 	//Out of melee weapon trigger

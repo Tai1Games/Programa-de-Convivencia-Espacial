@@ -27,7 +27,7 @@
   "IMPULSE_FLOATING": 30.0,
 
   "_DAMAGES": null,
-  "LOW_DAMAGE": 1,
+  "LOW_DAMAGE": 35,
   "MEDIUM_DAMAGE": 50,
   "HIGH_DAMAGE": 70,
 
