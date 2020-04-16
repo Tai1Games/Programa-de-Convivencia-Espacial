@@ -27,7 +27,7 @@ void Wallet::dropCoins(int damage, int player)
 
 void Wallet::onCollisionEnter(Collision* c)
 {
-	b2Fixture* fix = GETCMP1_(Collider)->getFixture(0);
+	b2Fixture* fix = c->hitFixture;
 	if (!fix->IsSensor())
 	{
 		//Measure de impact of an object with the player
