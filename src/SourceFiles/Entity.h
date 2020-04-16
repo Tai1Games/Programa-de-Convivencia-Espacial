@@ -10,9 +10,18 @@
 
 class EntityManager;
 class Component;
+struct Collision;
 
 class Entity
 {
+
+private:
+	EntityManager* entityManager_ = nullptr;
+
+	std::vector<unique_ptr<Component>> components_;
+	std::array<Component*, ComponentType::maxComponents> componentsArray_ = {};
+
+	bool active_ = true;
 public:
 	Entity() {};
 	Entity(EntityManager* mngr);
@@ -38,7 +47,7 @@ public:
 		return static_cast<T*>(componentsArray_[id]);
 	}
 
-	bool hasComponent(ComponentType::CmpIdType id) {
+	bool hasComponent(ComponentType::CmpIdType id) const{
 		return componentsArray_[id] != nullptr;
 	}
 
@@ -51,12 +60,8 @@ public:
 	void setActive(bool active) { active_ = active; }
 	bool isActive() { return active_; }
 
-private:
-	EntityManager* entityManager_ = nullptr;
-
-	std::vector<unique_ptr<Component>> components_;
-	std::array<Component*, ComponentType::maxComponents> componentsArray_ = {};
-
-	bool active_ = true;
+	virtual void onCollisionEnter(Collision* c);
+	virtual void onCollisionStay(Collision* c);
+	virtual void onCollisionExit(Collision* c);
 };
 

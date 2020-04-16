@@ -1,5 +1,7 @@
 #include "AttachesToObjects.h"
 #include "InputHandler.h"
+#include "Collision.h"
+#include "CollisionHandler.h"
 
 void AttachesToObjects::init() {
 	playerData_ = GETCMP1_(PlayerData);
@@ -47,4 +49,19 @@ bool AttachesToObjects::isAttached()
 
 void AttachesToObjects::handleInput() { //Si el jugador suelta la tecla de agarre, se suelta.
 
+}
+
+void AttachesToObjects::onCollisionEnter(Collision* c){
+	//si chocamos con un objeto que pueda agarrarse
+	if (c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Wall || c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject) {
+		if (canAttachToObject()) {
+			b2WorldManifold manifold;
+			c->contact->GetWorldManifold(&manifold);
+			c->collisionHandler->createWeld
+			(CollisionHandler::weldData(this, c->hitFixture->GetBody(), b2Vec2(manifold.points[0].x, manifold.points[0].y)));
+		}
+		else {
+			cout << "colision sin input con grabbable" << endl;
+		}
+	}
 }

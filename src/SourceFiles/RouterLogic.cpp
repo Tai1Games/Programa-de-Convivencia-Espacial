@@ -1,6 +1,7 @@
 #include "RouterLogic.h"
 #include "Entity.h"
 #include "WiFightGameMode.h"
+#include "Collision.h"
 
 void RouterLogic::detectPlayer(Collider* playerDetected, int id)
 {
@@ -31,5 +32,21 @@ void RouterLogic::update()
 		double points = CONST(int, "POINTS_WHEN_INSIDE_ROUTER") / (numJug * ((playersInsideRange_[k].posPlayer->getPos() - posRouter_->getPos()).Length() + 1));
 		//std::cout << "Player " << playersInsideRange_[k].id << " won " << points << " points	   (at RouterLogic.cpp, method update(), line 32)" << endl;
 		wifightGameMode_->addPoints(playersInsideRange_[k].id, min(points, CONST(double, "MAX_POINTS_PER_TICK")));
+	}
+}
+
+void RouterLogic::onCollisionEnter(Collision* c)
+{
+	PlayerData* playerData = GETCMP2(c->entity, PlayerData);
+	if (playerData != nullptr) {
+		detectPlayer(GETCMP2(c->entity, Collider), playerData->getPlayerNumber());
+	}
+}
+
+void RouterLogic::onCollisionExit(Collision* c)
+{
+	PlayerData* playerData = GETCMP2(c->entity, PlayerData);
+	if (playerData != nullptr) {
+		loseContactPlayer(GETCMP2(c->entity, Collider), playerData->getPlayerNumber());
 	}
 }

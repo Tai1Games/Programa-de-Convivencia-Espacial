@@ -1,4 +1,5 @@
 #include "Pad.h"
+#include "Collision.h"
 
 Pad::Pad() : Component(ComponentType::Pad)
 {
@@ -34,4 +35,15 @@ void Pad::startAnim()
 {
 	frame_ = animationSpeed_; //empieza en el segundo frame por que el primero es el statico 
 	onAnimation_ = true;
+}
+
+void Pad::onCollisionEnter(Collision* c) {
+	if (c->entity->hasComponent(ComponentType::PlayerController)) {
+		cout << "HAHA player go boink" << endl;
+	}
+}
+
+void Pad::onCollisionExit(Collision* c)
+{
+	startAnim();
 }

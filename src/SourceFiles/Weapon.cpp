@@ -4,6 +4,7 @@
 #include "Hands.h"
 #include "Health.h"
 #include "Wallet.h"
+#include "Collision.h"
 
 int Weapon::calculateCoinsDropped(int coinsPlayer)
 {
@@ -63,6 +64,36 @@ void Weapon::handleInput()
 	else if (IsPicked() && ih_->isButtonJustDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_X) && !coolDown)
 	{
 		Action();
+	}
+}
+
+void Weapon::onCollisionEnter(Collision* c)
+{
+	Entity* other = c->entity;
+	Hands* otherHand = GETCMP2(other, Hands);
+	Hands* myHand = getCurrentHand();
+	
+	if (otherHand != nullptr) {
+		SavePlayerInfo(otherHand->getPlayerId(), otherHand, GETCMP2(other, Health), GETCMP2(other, Wallet));
+		if (myHand != nullptr && otherHand != myHand) {
+			detectPlayer(other, GETCMP2(other, PlayerData)->getId());
+		}
+	}
+
+
+}
+
+void Weapon::onCollisionExit(Collision* c)
+{
+	Hands* otherHand = GETCMP2(c->entity, Hands);
+
+	if (otherHand != nullptr) {
+		DeletePlayerInfo(otherHand->getPlayerId());
+	}
+
+	PlayerData* playerData = GETCMP2(c->entity, PlayerData);
+	if (playerData != nullptr) {
+		loseContactPlayer(c->entity, playerData->getPlayerNumber());
 	}
 }
 
