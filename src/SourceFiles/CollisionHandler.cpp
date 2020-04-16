@@ -16,19 +16,15 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 
 	if (fixA == nullptr || fixB == nullptr) return;
 
-	if (true)
+	Entity* aEnt = static_cast<Entity*>(fixA->GetBody()->GetUserData());
+	Entity* bEnt = static_cast<Entity*>(fixB->GetBody()->GetUserData());
+
+	if (aEnt != nullptr && bEnt != nullptr) 
 	{
-		Entity* aEnt = static_cast<Entity*>(fixA->GetBody()->GetUserData());
-		Entity* bEnt = static_cast<Entity*>(fixB->GetBody()->GetUserData());
-
-		if (aEnt != nullptr && bEnt != nullptr) 
-		{
-			Collision col = Collision(fixB, contact, bEnt,this,fixA);
-			aEnt->onCollisionEnter(&col);
-			col =Collision(fixA, contact, aEnt,this, fixB);
-			bEnt->onCollisionEnter(&col);
-		}
-
+		Collision col = Collision(fixB, contact, bEnt,this,fixA);
+		aEnt->onCollisionEnter(&col);
+		col =Collision(fixA, contact, aEnt,this, fixB);
+		bEnt->onCollisionEnter(&col);
 	}
 }
 
@@ -39,19 +35,15 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 
 	if (fixA == nullptr || fixB == nullptr) return;
 
-	if (true)
+	Entity* aEnt = static_cast<Entity*>(fixA->GetBody()->GetUserData());
+	Entity* bEnt = static_cast<Entity*>(fixB->GetBody()->GetUserData());
+
+	if (aEnt != nullptr && bEnt != nullptr)
 	{
-		Entity* aEnt = static_cast<Entity*>(fixA->GetBody()->GetUserData());
-		Entity* bEnt = static_cast<Entity*>(fixB->GetBody()->GetUserData());
-
-		if (aEnt != nullptr && bEnt != nullptr)
-		{
-			Collision col = Collision(fixB, contact, bEnt,this,fixA);
-			aEnt->onCollisionExit(&col);
-			col = Collision(fixA, contact, aEnt,this,fixB);
-			bEnt->onCollisionExit(&col);
-		}
-
+		Collision col = Collision(fixB, contact, bEnt,this,fixA);
+		aEnt->onCollisionExit(&col);
+		col = Collision(fixA, contact, aEnt,this,fixB);
+		bEnt->onCollisionExit(&col);
 	}
 }
 
