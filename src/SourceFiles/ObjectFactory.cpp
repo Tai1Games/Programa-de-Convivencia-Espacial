@@ -154,3 +154,14 @@ Entity* ObjectFactory::createBoiler(EntityManager* entityManager, b2World* physi
 
 	return e;
 }
+
+Entity* ObjectFactory::makeBoilerButton(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, bool inc_dec) {
+	Entity* e = entityManager->addEntity();
+	Collider* collBoilerButton = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "BOILER_WIDTH"), CONST(double, "BOILER_HEIGHT"), CONST(double, "BOILER_DENSITY"), CONST(double, "BOILER_FRICTION"),
+		CONST(double, "BOILER_RESTITUTION"), CONST(double, "BOILER_LINEAR_DRAG"), CONST(double, "BOILER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, true);
+	collBoilerButton->setUserData(e);
+	if (inc_dec) e->addComponent<Viewer>(Resources::IncreasingFreqButton);
+	else e->addComponent<Viewer>(Resources::DecreasingFreqButton);
+
+	return e;
+}

@@ -31,6 +31,6 @@ public:
 	~FireBallGenerator() {};
 	void init() override;
 	void update() override;
-
+	void modifyGenerationRate(bool inc_dec);
 };
 

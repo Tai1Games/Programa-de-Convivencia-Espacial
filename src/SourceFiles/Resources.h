@@ -51,6 +51,8 @@ public:
 		Fireball,
 		Boiler,
 		PadSpriteSheet,
+		IncreasingFreqButton,
+		DecreasingFreqButton,
 
 
 		// text

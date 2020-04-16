@@ -42,4 +42,6 @@ public:
 	
 	static Entity* createRoomba(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 
+	static Entity* makeBoilerButton(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, bool inc_dec);
+
 };

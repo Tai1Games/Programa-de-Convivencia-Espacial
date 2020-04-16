@@ -48,6 +48,15 @@ void FireBallGenerator::addFireball(int n) {
 		spawnDir.y *= fireballSpeed_;
 		fbPool_.addFireBall(spawnPos,spawnDir);
 	}
+}
 
-
+void FireBallGenerator::modifyGenerationRate(bool inc_dec) {
+	if (inc_dec) {
+		maxCd_ -= 0.2;
+		minCd_ -= 0.2;
+	}
+	else {
+		maxCd_ += 0.2;
+		minCd_ += 0.2;
+	}
 }
