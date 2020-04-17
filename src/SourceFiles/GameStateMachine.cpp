@@ -37,7 +37,7 @@ void GameStateMachine::changeToState(int state) {
 				break;
 			case States::play:
 				//deleteState(currentState_);
-				states_[state] = new PlayState(new WiFightGameMode(4), "SalaDeEstar"); //ejemplo "SalaDeEstar"
+				states_[state] = new PlayState(new CapitalismGameMode(4), "SalaDeEstar"); //ejemplo "SalaDeEstar"
 				break;
 			case States::pause:
 				//if (states_[state] != nullptr)	delete states_[state];

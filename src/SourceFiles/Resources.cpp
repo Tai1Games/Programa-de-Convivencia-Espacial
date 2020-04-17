@@ -31,7 +31,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SalaGimnasio,resourcesPath+"textures/gimnasio.png"},
 	{ Negro ,resourcesPath+"textures/Negro.png"},
 	{ Router,resourcesPath+"textures/Router.png" },
-	{Router,resourcesPath+"textures/Router.png" },
+	{ Router,resourcesPath+"textures/Router.png" },
 	{ Coin, resourcesPath+"textures/DogeCoin.png" },
 	{ CoinUI, resourcesPath+"textures/DogeCoinUI.png"},
 	{ CanvasTimer, resourcesPath+"textures/COSO.png"},
@@ -40,9 +40,11 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ ProgressBar, resourcesPath+"textures/ProgressBar.png"},
 	{ EmptyProgressBar2, resourcesPath+"textures/EmptyProgressBar2.png"},
 	{ ProgressBar2, resourcesPath+"textures/ProgressBar2.png"},
-	{Fireball,resourcesPath+"textures/fireball_placeholder.png"},
-	{Boiler,resourcesPath+"textures/boiler_placeholder.png"},
+	{ Fireball,resourcesPath+"textures/fireball_placeholder.png"},
+	{ Boiler,resourcesPath+"textures/boiler_placeholder.png"},
 	{ PadSpriteSheet,resourcesPath+"textures/ColchonetaSpriteSheet.png" },
+	{ Treadmill, resourcesPath+"textures/Treadmill.png"},
+	{ TreadmillSpriteSheet, resourcesPath + "textures/TreadmillSpriteSheet.png"},
 
 		{ TSet_Kenney1bit , resourcesPath+"tilemaps/modded_colored.png"},
 		{ TSet_Dungeon , resourcesPath+"tilemaps/dungeon_ts.png"}
