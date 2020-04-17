@@ -207,7 +207,7 @@
     <ClInclude Include="Pad.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="MeleeWeapon.h">
+    <ClInclude Include="Collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FireBallPool.h">
@@ -246,9 +246,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Font.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Health.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TileSet.cpp">
@@ -359,8 +356,11 @@
     <ClCompile Include="Pad.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="MeleeWeapon.cpp">
+    <ClCompile Include="Collision.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Fireball.cpp">
       <Filter>Source Files\Components</Filter>

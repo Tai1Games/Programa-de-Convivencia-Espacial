@@ -13,8 +13,10 @@ public:
 	Pad();
 	virtual ~Pad();
 
-	void init() override;
-	void update() override;
+	virtual void init() override;
+	virtual void update() override;
+	virtual void onCollisionEnter(Collision* c);
+	virtual void onCollisionExit(Collision* c);
 	void startAnim();
 };
 

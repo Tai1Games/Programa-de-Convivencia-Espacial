@@ -3,8 +3,8 @@
 
 vector<Resources::FontInfo> Resources::fonts_{
 	//Fuentes {nombre_en_enum, ruta, tama�o}
-	{NES_Chimera , "../../assets/game/fonts/NES-Chimera.ttf", 38},
-	{Digits_Font , "../../assets/game/fonts/Digits_Font.ttf", 38}
+	{NES_Chimera , resourcesPath+"fonts/NES-Chimera.ttf", 38},
+	{Digits_Font , resourcesPath+"fonts/Digits_Font.ttf", 38}
 };
 
 vector<Resources::ImageInfo> Resources::images_{
@@ -44,8 +44,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{Boiler,"../../assets/game/textures/boiler_placeholder.png"},
 	{ PadSpriteSheet,"../../assets/game/textures/ColchonetaSpriteSheet.png" },
 
-		{ TSet_Kenney1bit , "../../assets/game/tilemaps/modded_colored.png"},
-		{ TSet_Dungeon , "../../assets/game/tilemaps/dungeon_ts.png"}
+		{ TSet_Kenney1bit , resourcesPath+"tilemaps/modded_colored.png"},
+		{ TSet_Dungeon , resourcesPath+"tilemaps/dungeon_ts.png"}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{
@@ -60,8 +60,8 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 
 vector<Resources::MusicInfo> Resources::musics_{
 	//M�sica {nombre_en_enum, ruta}
-	{ MainTheme , "../../assets/game/sound/mainMenu.mp3" },
-	{Reveal, "../../assets/game/sound/gotem.mp3"}
+	{ MainTheme , resourcesPath+"sound/mainMenu.mp3" },
+	{Reveal, resourcesPath+"sound/gotem.mp3"}
 };
 
 vector<Resources::SoundInfo> Resources::sounds_{
