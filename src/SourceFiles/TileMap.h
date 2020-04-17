@@ -16,7 +16,7 @@ protected:
 	std::vector<tson::Tileset> tileSets_;
 	std::vector<tson::Layer> layers_;
 
-	std::vector<b2Vec2> playerSpawnPoints_;
+	std::vector<b2Vec2> playerSpawns_;
 	b2Vec2 specialObjectsSpawnPoint_; //mando de la tele, router
 	std::vector<b2Vec2> coinsSpawnPoints_; //guarda posicions monedas
 
@@ -27,6 +27,7 @@ private:
 	b2World* physicsWorld_;
 	EntityManager* entityManager_;
 	vector<tson::Object> factoryItems_;
+	std::vector<b2Vec2> weaponSpawnPoints_;
 public:
 	TileMap(int w,int h,string map, EntityManager* entityManager_, b2World* physicsWorld_);
 	~TileMap();
@@ -35,6 +36,7 @@ public:
 	virtual void draw() const override;
 	bool loadTileson(string path);
 	void executeMapFactory();
+	void createWeapons();
 
 	b2Vec2 getPlayerSpawnPoint(int id);
 	b2Vec2 getObjSpecialSpawnPos() { return specialObjectsSpawnPoint_; };

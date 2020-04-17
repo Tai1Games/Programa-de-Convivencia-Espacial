@@ -29,8 +29,8 @@ private:
 	string tilemapName_;
 	Texture* fondo_;
 	std::map<string, int> resourceMap_ = { //añadir aquí los mapas que se vayan haciendo
-		{"SalaDeEstar",Resources::SalaDeEstar},
-		{"SalaCaldera",Resources::SalaCaldera},
+		{"LivingRoom",Resources::LivingRoom},
+		{"BoilerRoom",Resources::BoilerRoom},
 		{"Gimnasio",Resources::SalaGimnasio}
 	};
 	TileMap* tilemap_;

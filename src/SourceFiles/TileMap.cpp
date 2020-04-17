@@ -32,7 +32,7 @@ void TileMap::init() {
 					factoryItems_.push_back(obj);
 				}
 				else if (tileLayer.getName() == "Spawns") { //spawns
-					playerSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER"))); //a�ade la posicion al vector de spawns
+					playerSpawns_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER"))); //a�ade la posicion al vector de spawns
 				}
 				else if (tileLayer.getName() == "SpecialObject"){ //objetos espaciales (mando de tele, router...)
 					specialObjectsSpawnPoint_ = b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER"));
@@ -41,7 +41,7 @@ void TileMap::init() {
 					factoryItems_.push_back(obj);
 				}
 				else if (tileLayer.getName() == "Weapons") {
-					factoryItems_.push_back(obj);
+					weaponSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
 				}
 				else if (tileLayer.getName() == "CoinSpawners") {
 					coinsSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
@@ -157,32 +157,62 @@ void TileMap::executeMapFactory()
 			size *= 0.5f;
 			ObjectFactory::makeWall(entityManager_, physicsWorld_, pos, size);
 		}
-		else if (name == "Ball") {
-			ObjectFactory::makeBall(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
-		}
-		else if (name == "Slipper") {
-			ObjectFactory::makeSlipper(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
-		}
-		else if (name == "Stapler") {
-			ObjectFactory::makeExtinguisher(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
-		}
 		else if (name == "SpaceJunk") {
 			ObjectFactory::makeSpaceJunk(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
 		}
-		else if (name == "Dumbbell") {
-			ObjectFactory::makeDumbbell(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
-        }
 		else if (name == "Pad") {
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
 			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
 			size *= 0.5f;
 			ObjectFactory::makePad(entityManager_, physicsWorld_, pos, size);
 		}
+		else if (name == "Boiler") {
+			ObjectFactory::createBoiler(entityManager_, physicsWorld_, pos);
+		}
+		else if (name == "Pipe") {
+			//hacer las tuberias y esas cosas
+		}
 	}
 }
 
+
 b2Vec2 TileMap::getPlayerSpawnPoint(int id)
 {
-	if (id < playerSpawnPoints_.size()) return playerSpawnPoints_[id];
+	if (id < playerSpawns_.size()) return playerSpawns_[id];
 	else return b2Vec2();
 }
+
+
+void TileMap::createWeapons()
+{
+	for (b2Vec2 spawnPoint : weaponSpawnPoints_) { //recorre todos los spawn
+		int weapon = rand() % 9;
+		switch (weapon)
+		{
+		case 0: //slipper
+			ObjectFactory::makeSlipper(entityManager_,physicsWorld_, spawnPoint, b2Vec2(CONST(float, "SLIPPER_X"), CONST(float, "SLIPPER_Y")));
+			break;
+		case 1: //ball
+			ObjectFactory::makeBall(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "BALL_X"), CONST(float, "BALL_Y")));
+			break;
+		case 2: //stapler
+			ObjectFactory::makeStapler(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "STAPLER_X"), CONST(float, "STAPLER_Y")));
+			break;
+		case 3: //extinguisher
+			ObjectFactory::makeExtinguisher(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "EXTINGUISHER_X"), CONST(float, "EXTINGUISHER_Y")));
+			break;
+		case 4: //rock
+			break;
+		case 5: //dumbbell
+			ObjectFactory::makeDumbbell(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "DUMBBELL_X"), CONST(float, "DUMBBELL_Y")));
+			break;
+		case 6: //bananGun
+			break;
+		case 7: //TomatoGranade
+			break;
+		case 8: //Confeti
+			break;
+		}
+	}
+}
+
