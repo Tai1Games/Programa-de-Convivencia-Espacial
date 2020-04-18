@@ -190,7 +190,7 @@ void TileMap::solvePostCreationProblems() {
 			boilerButtons_[k]->assignBoiler(boilerAux_);
 		}
 	}
-	else if (!boilerAux_ && boilerButtons_.size() > 0) cout << "WARNING: Can't create buttons without a boiler. On TileMap.cpp - line 190";
+	else if (!boilerAux_ && boilerButtons_.size() > 0) cout << "WARNING: Can't create buttons without a boiler. On TileMap.cpp - line 190" << endl;
 }
 
 b2Vec2 TileMap::getPlayerSpawnPoint(int id)

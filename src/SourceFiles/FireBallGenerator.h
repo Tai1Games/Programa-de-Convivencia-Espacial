@@ -19,9 +19,14 @@ private:
 	uint nextShot_;
 	uint minCd_;
 	uint maxCd_;
+	uint cdVariability;
+	uint limitMinCd_;
+	uint limitMaxCd_;
+	uint cdTimeChange_;
 	int minFireballs_, maxFireballs_;
 	int fireballSpeed_;
 	double radius;
+
 	void addFireball(int num = 1);
 
 public:
