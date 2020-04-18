@@ -2,6 +2,8 @@
 #include "SDL_Game.h"
 #include "Resources.h"
 #include "json.hpp"
+#include "BoilerButtonLogic.h"
+#include "FireBallGenerator.h"
 #include <string>
 
 
@@ -167,14 +169,29 @@ void TileMap::executeMapFactory()
 			ObjectFactory::makePad(entityManager_, physicsWorld_, pos, size);
 		}
 		else if (name == "Boiler") {
-			ObjectFactory::createBoiler(entityManager_, physicsWorld_, pos);
+			boilerAux_ = GETCMP2(ObjectFactory::createBoiler(entityManager_, physicsWorld_, pos), FireBallGenerator);
+		}
+		else if (name == "IncButton") {
+			boilerButtons_.push_back(GETCMP2(ObjectFactory::makeBoilerButton(entityManager_, physicsWorld_, pos, true), BoilerButtonLogic));
+		}
+		else if (name == "DecButton") {
+			boilerButtons_.push_back(GETCMP2(ObjectFactory::makeBoilerButton(entityManager_, physicsWorld_, pos, false), BoilerButtonLogic));
 		}
 		else if (name == "Pipe") {
 			//hacer las tuberias y esas cosas
 		}
 	}
+	solvePostCreationProblems();
 }
 
+void TileMap::solvePostCreationProblems() {
+	if (boilerAux_) {
+		for (int k = 0; k < boilerButtons_.size(); k++) {
+			boilerButtons_[k]->assignBoiler(boilerAux_);
+		}
+	}
+	else if (!boilerAux_ && boilerButtons_.size() > 0) cout << "WARNING: Can't create buttons without a boiler. On TileMap.cpp - line 190";
+}
 
 b2Vec2 TileMap::getPlayerSpawnPoint(int id)
 {

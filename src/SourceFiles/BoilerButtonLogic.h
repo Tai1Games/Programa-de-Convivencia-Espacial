@@ -14,5 +14,6 @@ public:
 	~BoilerButtonLogic() {};
 	
 	virtual void onCollisionEnter(Collision* c);
+	void assignBoiler(FireBallGenerator* fbGen) { fbGen_ = fbGen; }
 };
 

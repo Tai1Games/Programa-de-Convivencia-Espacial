@@ -4,7 +4,7 @@
 #include "FireBallGenerator.h"
 
 
-BoilerButtonLogic::BoilerButtonLogic(bool inc_dec) : Component(ComponentType::BoilerButton) {
+BoilerButtonLogic::BoilerButtonLogic(bool inc_dec) : Component(ComponentType::BoilerButtonLogic) {
 	if (inc_dec) inc_dec_ = true;
 	else inc_dec = false;
 }
