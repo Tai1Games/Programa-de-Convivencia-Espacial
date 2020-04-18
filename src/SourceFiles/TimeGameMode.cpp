@@ -1,5 +1,6 @@
 #include "TimeGameMode.h"
 #include "PlayState.h"
+#include "ThrownByPlayer.h"
 
 TimeGameMode::TimeGameMode(int nPlayers, int time) :
 	GameMode(nPlayers)
@@ -16,7 +17,7 @@ void TimeGameMode::init(PlayState* game)
 	GameMode::init(game);
 
 	sPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
-	timeToEnd_ = CONST(double, "TIME_TO_END");
+	timeToEnd_ = CONST(double, "TIMEMODE_TIME_TO_END");
 	winWidth_ = CONST(int, "WINDOW_WIDTH");
 	winHeigth_ = CONST(int, "WINDOW_HEIGHT");
 	killsMarkerWidth_ = CONST(int, "KILLS_WIDTH");
@@ -26,6 +27,10 @@ void TimeGameMode::init(PlayState* game)
 		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), i,
 			Resources::Body, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, 3));
 		playerKills_.push_back(0); //Initializes kills vector with 0 for all players.
+	}
+
+	for (Entity* e : *(state_->getEntityManager()->getWeaponVector())) {
+		e->addComponent<ThrownByPlayer>(this);
 	}
 
 	for (int i = 0; i < players_.size(); i++) {
@@ -105,13 +110,6 @@ void TimeGameMode::update()
 
 	}
 }
-
-bool TimeGameMode::onPlayerDead(int id)
-{
-
-	return false;
-}
-
 
 void TimeGameMode::renderTimer(int seconds, int minutes) {
 	canvasTimerTexture_->render(canvasTimerRect_);
