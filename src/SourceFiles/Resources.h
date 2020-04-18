@@ -51,6 +51,8 @@ public:
 		Fireball,
 		Boiler,
 		PadSpriteSheet,
+		Treadmill,
+		TreadmillSpriteSheet,
 
 
 		// text
