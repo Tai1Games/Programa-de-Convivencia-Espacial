@@ -51,6 +51,8 @@ public:
 		Fireball,
 		Boiler,
 		PadSpriteSheet,
+		Treadmill,
+		TreadmillSpriteSheet,
 
 
 		// text
@@ -62,8 +64,11 @@ public:
 
 	enum AudioId : std::size_t {
 		// music
-		MainTheme,
-		Reveal,
+		MainMenuMusic,
+		EntranceMusic,
+		LivingRoomMusic,
+		GymMusic,
+		RevealMusic,
 
 		// sound effects
 

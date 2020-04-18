@@ -15,6 +15,7 @@
 #include "ExtinguisherWeapon.h"
 #include "ParticleEmitter.h"
 #include "Pad.h"
+#include "Treadmill.h"
 
 void ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 	Entity* e = entityManager->addEntity();
@@ -153,4 +154,37 @@ Entity* ObjectFactory::createBoiler(EntityManager* entityManager, b2World* physi
 	e->addComponent<FireBallGenerator>(physicsWorld);
 
 	return e;
+}
+
+Entity* ObjectFactory::createTreadmill(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos) 
+{
+	float offset = CONST(double, "TREADMILL_MILL_WIDTH") + CONST(double, "TREADMILL_HANDLE_WIDTH");
+
+	Entity* h = entityManager->addEntity();
+	Collider* collHandle = h->addComponent<Collider>(physicsWorld, b2_kinematicBody, pos.x, pos.y, CONST(double, "TREADMILL_HANDLE_WIDTH"), CONST(double, "TREADMILL_HANDLE_HEIGHT"), CONST(double, "TREADMILL_DENSITY"), CONST(double, "TREADMILL_FRICTION"),
+		CONST(double, "TREADMILL_RESTITUTION"), CONST(double, "TREADMILL_LINEAR_DRAG"), CONST(double, "TREADMILL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false);
+	
+	Entity* m = entityManager->addEntity();
+	Collider* collMill = m->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x + offset, pos.y, CONST(double, "TREADMILL_MILL_WIDTH"), CONST(double, "TREADMILL_MILL_HEIGHT"), CONST(double, "TREADMILL_DENSITY"), CONST(double, "TREADMILL_FRICTION"),
+		CONST(double, "TREADMILL_RESTITUTION"), CONST(double, "TREADMILL_LINEAR_DRAG"), CONST(double, "TREADMILL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, true);
+	
+	collHandle->setUserData(h);
+	collMill->setUserData(m);
+
+	m->addComponent<Viewer>(Resources::TreadmillSpriteSheet, SDL_Rect{ 0,0,82,46 });
+	h->addComponent<Viewer>(Resources::Debug);
+	m->addComponent<Treadmill>(collHandle);
+	
+	b2Vec2 collPoint = b2Vec2(pos.x + offset, pos.y);
+	b2WeldJointDef jointDef; //Definición del nuevo joint.
+	jointDef.bodyA = collMill->getBody(); //Body del jugador.
+	jointDef.bodyB = collHandle->getBody(); //Body del objeto al que se tiene que atar.
+	jointDef.collideConnected = false; //Flag que decide si estos 2 objetos van a ejercer físicas el uno contra el otro.
+	jointDef.localAnchorA = jointDef.bodyA->GetLocalPoint(collPoint); //Punto donde se ata el cuerpo A al cuerpo B
+	jointDef.localAnchorB = jointDef.bodyB->GetLocalPoint(collPoint); //Punto donde se ata el cuerpo B al cuerpo A
+	jointDef.referenceAngle = jointDef.bodyB->GetAngle() - jointDef.bodyA->GetAngle(); //Ángulo conjunto del cuerpo
+	b2World* world = collMill->getWorld(); //Obtenemos el mundo físico para crear el joint
+	world->CreateJoint(&jointDef); //Crea el joint con la definición que hemos definido previamente
+
+	return m;
 }

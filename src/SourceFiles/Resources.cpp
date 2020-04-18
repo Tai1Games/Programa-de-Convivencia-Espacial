@@ -9,7 +9,8 @@ vector<Resources::FontInfo> Resources::fonts_{
 
 vector<Resources::ImageInfo> Resources::images_{
 	//Im�genes {nombre_en_enum, ruta}
-		{ Debug, resourcesPath + "textures/debug.png" },
+
+	{ Debug, resourcesPath + "textures/debug.png" },
 	{ Tinky, resourcesPath + "textures/Tinky.png" },
 	{ ActiveHealth, resourcesPath + "textures/VidaActiva.png" },
 	{ DisableHealth, resourcesPath + "textures/VidaInactiva.png" },
@@ -43,6 +44,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Fireball,resourcesPath + "textures/fireball_placeholder.png"},
 	{ Boiler,resourcesPath + "textures/boiler_placeholder.png"},
 	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png" },
+	{ Treadmill, resourcesPath+"textures/Treadmill.png"},
+	{ TreadmillSpriteSheet, resourcesPath + "textures/TreadmillSpriteSheet.png"},
 
 		{ TSet_Kenney1bit , resourcesPath + "tilemaps/modded_colored.png"},
 		{ TSet_Dungeon , resourcesPath + "tilemaps/dungeon_ts.png"}
@@ -60,8 +63,11 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 
 vector<Resources::MusicInfo> Resources::musics_{
 	//M�sica {nombre_en_enum, ruta}
-	{ MainTheme , resourcesPath+"sound/mainMenu.mp3" },
-	{Reveal, resourcesPath+"sound/gotem.mp3"}
+	{ MainMenuMusic , resourcesPath + "sound/mainMenu.mp3" },
+	{ EntranceMusic , resourcesPath + "sound/entrance.mp3" },
+	{ LivingRoomMusic , resourcesPath + "sound/livingRoom.mp3" },
+	{ GymMusic , resourcesPath + "sound/gym.mp3" },
+	{ RevealMusic, resourcesPath + "sound/gotem.mp3" }
 };
 
 vector<Resources::SoundInfo> Resources::sounds_{
