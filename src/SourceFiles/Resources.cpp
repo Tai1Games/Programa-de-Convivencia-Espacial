@@ -46,8 +46,10 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png" },
 	{ TSet_Kenney1bit , resourcesPath+"tilemaps/modded_colored.png"},
 	{ TSet_Dungeon , resourcesPath+"tilemaps/dungeon_ts.png"},
-	{IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
-	{DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"}
+	{ Treadmill , resourcesPath + "textures/Treadmill.png"},
+	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png"},
+	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
+	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{

@@ -38,7 +38,7 @@ void GameStateMachine::changeToState(int state) {
 			case States::play:
 				//deleteState(currentState_);
 
-				states_[state] = new PlayState(new CapitalismGameMode(4), "LivingRoom"); //LivingRoom, BoilerRoom
+				states_[state] = new PlayState(new CapitalismGameMode(4), "BoilerRoom"); //LivingRoom, BoilerRoom
 
 				break;
 			case States::pause:
