@@ -11,7 +11,7 @@ private:
 	json data;  //coleccion de datos almacenados como json
 	bool initialized_ = false;
 public:
-	Constants(){};
+	Constants() {};
 	Constants(const std::string& load);
 	template<typename T>
 	T getConstant(const std::string& key) const; //devuelve la constante pedida o su valor por defecto
@@ -21,7 +21,7 @@ public:
 const int COIN_POOL_SIZE = 140;
 const int FIREBALL_POOL_SIZE = 5;
 
-//Modos de juegos
+//Estados de juego
 enum States
 {
 	menu,
@@ -29,6 +29,14 @@ enum States
 	pause,
 	//No toques
 	NUMBER_OF_STATES
+};
+
+enum GamemodeID {
+	Capitalism,
+	Controller,
+	Stocks,
+	WiFight,
+	NUMBER_OF_GAMEMODES
 };
 
 enum WeaponID {
