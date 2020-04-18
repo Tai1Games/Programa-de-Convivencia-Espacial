@@ -25,8 +25,8 @@ bool Health::subtractLife(int damage)
 {
 	if (lives_ > 0) {
 		lives_ -= damage;
-		if (lives_ <= 0) { 
-			lives_ = 0; 
+		if (lives_ <= 0) {
+			lives_ = 0;
 			return false;}	//Evitar vidas negativas
 		return true;
 	}
@@ -79,11 +79,11 @@ void Health::onCollisionEnter(Collision* c)
 	b2Fixture* fix = c->hitFixture;
 	if (!fix->IsSensor())
 	{
-		b2Vec2 force = fix->GetBody()->GetMass() * fix->GetBody()->GetLinearVelocity();
+		b2Vec2 force = c->hitFixture->GetBody()->GetMass() * c->hitFixture->GetBody()->GetLinearVelocity();
 		int impact = force.Length();
 		Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
 		ThrownByPlayer* objThrown = nullptr;
-		//Si se impacta con un arma al umbral más alto de fuerza, se recibe su daño de impacto
+		//Si se impacta con un arma al umbral mï¿½s alto de fuerza, se recibe su daï¿½o de impacto
 		if (w != nullptr) {
 			impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
 			objThrown = GETCMP_FROM_FIXTURE_(fix, ThrownByPlayer);

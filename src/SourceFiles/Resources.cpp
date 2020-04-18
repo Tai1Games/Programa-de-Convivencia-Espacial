@@ -28,7 +28,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Slider, resourcesPath + "textures/Slider.png"},
 	{ SliderControl, resourcesPath + "textures/SliderControl.png"},
 	{ LivingRoom,resourcesPath + "textures/SalaDeEstar.png"},
-	{ BoilerRoom,resourcesPath + "textures/SalaCaldera720Des.png"},
+	{ BoilerRoom,resourcesPath + "textures/SalaCaldera.png"},
 	{ SalaGimnasio,resourcesPath + "textures/gimnasio.png"},
 	{ Negro ,resourcesPath + "textures/Negro.png"},
 	{ Router,resourcesPath + "textures/Router.png" },
@@ -46,10 +46,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Boiler,resourcesPath + "textures/boiler_placeholder.png"},
 	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png" },
 	{ Treadmill, resourcesPath+"textures/Treadmill.png"},
-	{ TreadmillSpriteSheet, resourcesPath + "textures/TreadmillSpriteSheet.png"},
-
-		{ TSet_Kenney1bit , resourcesPath + "tilemaps/modded_colored.png"},
-		{ TSet_Dungeon , resourcesPath + "tilemaps/dungeon_ts.png"}
+	{ TreadmillSpriteSheet, resourcesPath + "textures/TreadmillSpriteSheet.png"}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{
@@ -77,6 +74,5 @@ vector<Resources::SoundInfo> Resources::sounds_{
 };
 
 map<std::string, Resources::TextureId> Resources::tilesetTag_{
-	{"modded_colored",TextureId::TSet_Kenney1bit},
-	{"dungeon_ts",TextureId::TSet_Dungeon}
+	
 };
