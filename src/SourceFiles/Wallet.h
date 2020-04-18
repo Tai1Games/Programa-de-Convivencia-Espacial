@@ -21,5 +21,7 @@ public:
 	void dropCoins(int damage, int player);
 	void addCoins(int n) { numCoins_ += n; cout << "HE RECOGIDO " << n << endl; }
 	int getCoins() { return numCoins_; }
+
+	virtual void onCollisionEnter(Collision* c);
 };
 

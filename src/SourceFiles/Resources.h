@@ -35,8 +35,8 @@ public:
 		ImpulseBackground,
 		Slider,
 		SliderControl,
-		SalaDeEstar,
-		SalaCaldera,
+		LivingRoom,
+		BoilerRoom,
 		SalaGimnasio,
 		Negro,
 		Router,
@@ -51,6 +51,8 @@ public:
 		Fireball,
 		Boiler,
 		PadSpriteSheet,
+		Treadmill,
+		TreadmillSpriteSheet,
 
 
 		// text
@@ -62,8 +64,11 @@ public:
 
 	enum AudioId : std::size_t {
 		// music
-		MainTheme,
-		Reveal,
+		MainMenuMusic,
+		EntranceMusic,
+		LivingRoomMusic,
+		GymMusic,
+		RevealMusic,
 
 		// sound effects
 

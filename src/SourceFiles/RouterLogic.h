@@ -23,4 +23,6 @@ public:
 	void loseContactPlayer(Collider* playerDetected, int id);
 	virtual void init();
 	virtual void update();
+	virtual void onCollisionEnter(Collision* c);
+	virtual void onCollisionExit(Collision* c);
 };

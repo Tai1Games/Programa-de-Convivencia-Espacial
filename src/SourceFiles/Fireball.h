@@ -13,7 +13,9 @@ private:
 public:
 	Fireball() :Component(ComponentType::Fireball) {}
 	~Fireball() {};
-	void init() override;
+	virtual void init() override;
 	void setActive(bool to, b2Vec2 pos);
+
+	virtual void onCollisionEnter(Collision* c);
 };
 
