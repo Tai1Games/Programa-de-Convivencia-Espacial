@@ -44,8 +44,6 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Fireball,resourcesPath + "textures/fireball_placeholder.png"},
 	{ Boiler,resourcesPath + "textures/boiler_placeholder.png"},
 	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png" },
-	{ TSet_Kenney1bit , resourcesPath+"tilemaps/modded_colored.png"},
-	{ TSet_Dungeon , resourcesPath+"tilemaps/dungeon_ts.png"},
 	{ Treadmill , resourcesPath + "textures/Treadmill.png"},
 	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png"},
 	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
@@ -77,6 +75,5 @@ vector<Resources::SoundInfo> Resources::sounds_{
 };
 
 map<std::string, Resources::TextureId> Resources::tilesetTag_{
-	{"modded_colored",TextureId::TSet_Kenney1bit},
-	{"dungeon_ts",TextureId::TSet_Dungeon}
+	
 };
