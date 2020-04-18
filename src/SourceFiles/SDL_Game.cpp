@@ -12,6 +12,7 @@ SDL_Game::SDL_Game() {
 		constants_.getConstant<int>("WINDOW_HEIGHT"), SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 
+	//SOLO PARA EL JUEGO FINAL POR QUE SI NOHACE BOOM BOOM
 	//SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN); //si es una pantalla de 1080 ya de por si se pone en full, pero si es 4K se necesita esto
 
 	initializeResources();

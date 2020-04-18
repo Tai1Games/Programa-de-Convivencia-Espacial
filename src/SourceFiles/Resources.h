@@ -78,7 +78,7 @@ public:
 		NES_Chimera,
 		Digits_Font
 	};
-
+	
 	struct FontInfo {
 		FontId id;
 		string fileName;

@@ -58,7 +58,6 @@ void InputHandler::update() {
 		case SDL_QUIT:
 			SDL_Game::instance()->exitGame();
 			break;
-		}
 
 	}
 
