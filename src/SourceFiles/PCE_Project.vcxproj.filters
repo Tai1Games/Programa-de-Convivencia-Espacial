@@ -46,6 +46,9 @@
     <Filter Include="Header Files\Pools">
       <UniqueIdentifier>{b4984d7e-50d1-443f-a7ed-c81eaca88af6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Pools">
+      <UniqueIdentifier>{12a5685c-02f8-4c4a-a990-45844526fa3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -353,9 +356,6 @@
     <ClCompile Include="Coin.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="CoinsPool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ParticleEmitter.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
@@ -377,11 +377,14 @@
     <ClCompile Include="FireBallGenerator.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="FireBallPool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Treadmill.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CoinsPool.cpp">
+      <Filter>Source Files\Pools</Filter>
+    </ClCompile>
+    <ClCompile Include="FireBallPool.cpp">
+      <Filter>Source Files\Pools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
