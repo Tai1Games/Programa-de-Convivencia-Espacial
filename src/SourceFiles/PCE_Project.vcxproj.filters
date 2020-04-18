@@ -43,6 +43,9 @@
     <Filter Include="Source Files\Factories">
       <UniqueIdentifier>{20cde4b2-bee8-4580-bd20-1abc4d157d2f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Pools">
+      <UniqueIdentifier>{b4984d7e-50d1-443f-a7ed-c81eaca88af6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -192,12 +195,6 @@
     <ClInclude Include="Coin.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectPool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CoinsPool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ParticleEmitter.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -210,9 +207,6 @@
     <ClInclude Include="Collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FireBallPool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Fireball.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -221,6 +215,18 @@
     </ClInclude>
     <ClInclude Include="Treadmill.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CoinsPool.h">
+      <Filter>Header Files\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="FireBallPool.h">
+      <Filter>Header Files\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPool.h">
+      <Filter>Header Files\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="PoolSizes.h">
+      <Filter>Header Files\Pools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

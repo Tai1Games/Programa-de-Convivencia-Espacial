@@ -24,7 +24,6 @@ void FireBallPool::addFireBall(b2Vec2 pos, b2Vec2 impulse) {
 		GETCMP2(e, Fireball)->setActive(true, pos);
 		GETCMP2(e, Collider)->applyLinearImpulse(impulse, b2Vec2(0, 0));
 
-		//e->getComponent<Collider>(ComponentType::Collider)->getBody()->SetTransform(b2Vec2(5,5),0);
 		cout << endl;
 		cout << "---- BOLA ACTIVADA ----" << endl;
 	}
