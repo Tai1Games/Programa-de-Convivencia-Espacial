@@ -30,7 +30,8 @@ void TimeGameMode::init(PlayState* game)
 	}
 
 	for (Entity* e : *(state_->getEntityManager()->getWeaponVector())) {
-		e->addComponent<ThrownByPlayer>(this);
+		if(e != nullptr)
+			e->addComponent<ThrownByPlayer>(this);
 	}
 
 	for (int i = 0; i < players_.size(); i++) {

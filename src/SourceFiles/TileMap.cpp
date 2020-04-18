@@ -187,7 +187,7 @@ void TileMap::createWeapons()
 {
 	for (b2Vec2 spawnPoint : weaponSpawnPoints_) { //recorre todos los spawn
 		int weapon = rand() % 9;
-		Entity* e;
+		Entity* e = nullptr;
 		switch (weapon)
 		{
 		case 0: //slipper
@@ -214,7 +214,8 @@ void TileMap::createWeapons()
 		case 8: //Confeti
 			break;
 		}
-		entityManager_->getWeaponVector()->push_back(e);
+		if(e != nullptr)
+			entityManager_->getWeaponVector()->push_back(e);
 	}
 }
 
