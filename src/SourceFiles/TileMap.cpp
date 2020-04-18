@@ -182,7 +182,7 @@ void TileMap::executeMapFactory()
 		}
 		else if (name == "Treadmill") {
 			ObjectFactory::createTreadmill(entityManager_, physicsWorld_, pos);
-		}
+		}	
 	}
 	solvePostCreationProblems();
 }
