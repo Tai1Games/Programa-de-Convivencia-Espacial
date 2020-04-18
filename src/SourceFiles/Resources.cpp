@@ -28,7 +28,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Slider, resourcesPath + "textures/Slider.png"},
 	{ SliderControl, resourcesPath + "textures/SliderControl.png"},
 	{ LivingRoom,resourcesPath + "textures/SalaDeEstar.png"},
-	{ BoilerRoom,resourcesPath + "textures/SalaCaldera720Des.png"},
+	{ BoilerRoom,resourcesPath + "textures/SalaCaldera.png"},
 	{ SalaGimnasio,resourcesPath + "textures/gimnasio.png"},
 	{ Negro ,resourcesPath + "textures/Negro.png"},
 	{ Router,resourcesPath + "textures/Router.png" },

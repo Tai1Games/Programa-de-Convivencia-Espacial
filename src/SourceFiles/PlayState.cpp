@@ -52,8 +52,7 @@ void PlayState::init() {
 
 	//FONDO
 	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(resourceMap_[tilemapName_]);
-	
-	ObjectFactory::createTreadmill(entityManager_, physicsWorld_, b2Vec2(16, 9));
+
 
 	//Version estática de la factoria
 	tilemap_->executeMapFactory();
