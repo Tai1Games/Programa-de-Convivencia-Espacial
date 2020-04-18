@@ -112,6 +112,11 @@ void TimeGameMode::update()
 	}
 }
 
+void TimeGameMode::addPoints(int playerID)
+{
+	playerKills_[playerID]++;
+}
+
 void TimeGameMode::renderTimer(int seconds, int minutes) {
 	canvasTimerTexture_->render(canvasTimerRect_);
 	string timeText;

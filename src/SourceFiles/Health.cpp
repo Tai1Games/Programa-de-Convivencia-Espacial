@@ -5,6 +5,7 @@
 #include "Weapon.h"
 #include "AttachesToObjects.h"
 #include "CollisionHandler.h"
+#include "ThrownByPlayer.h"
 
 Health::Health(int l) : Component(ComponentType::Health)
 {
@@ -78,12 +79,14 @@ void Health::onCollisionEnter(Collision* c)
 	b2Fixture* fix = c->hitFixture;
 	if (!fix->IsSensor())
 	{
-		b2Vec2 force = c->hitFixture->GetBody()->GetMass() * c->hitFixture->GetBody()->GetLinearVelocity();
+		b2Vec2 force = fix->GetBody()->GetMass() * fix->GetBody()->GetLinearVelocity();
 		int impact = force.Length();
 		Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
+		ThrownByPlayer* objThrown = nullptr;
 		//Si se impacta con un arma al umbral más alto de fuerza, se recibe su daño de impacto
 		if (w != nullptr) {
 			impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
+			objThrown = GETCMP_FROM_FIXTURE_(fix, ThrownByPlayer);
 		}
 		else {
 			//Depending on the force of impact we apply damage to the player
@@ -97,8 +100,9 @@ void Health::onCollisionEnter(Collision* c)
 			else if (impact >= CONST(double, "HIGH_DAMAGE")) /*&& impact < CONST(double, "HIGH_DAMAGE"))*/ impact = 3;
 		}
 
-		if (!subtractLife(impact))
+		if (!subtractLife(impact)) {
+			if (objThrown != nullptr) objThrown->addPointsToOwner();
 			playerDead(c);
-
+		}
 	}
 }

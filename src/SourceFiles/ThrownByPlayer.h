@@ -23,4 +23,5 @@ public:
 	void throwObject(int playerId);
 	inline int getOwnerId() const { return lastOwner_; }
 	virtual void onCollisionExit(Collision* c);
+	void addPointsToOwner();
 };

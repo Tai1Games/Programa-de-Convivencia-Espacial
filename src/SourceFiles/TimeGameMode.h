@@ -40,5 +40,6 @@ public:
 	virtual void init(PlayState* game);
 	virtual void render();
 	virtual void update();
+	virtual void addPoints(int playerID);
 };
 

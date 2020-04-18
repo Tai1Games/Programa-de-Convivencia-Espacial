@@ -31,3 +31,8 @@ void ThrownByPlayer::onCollisionExit(Collision* c)
 		}
 	}
 }
+
+void ThrownByPlayer::addPointsToOwner()
+{
+	gameMode_->addPoints(lastOwner_);
+}
