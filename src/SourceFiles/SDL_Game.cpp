@@ -101,7 +101,7 @@ void SDL_Game::closeResources() {
 
 void SDL_Game::start() {
 	exit_ = false;
-	gamestateMachine_->changeToState(States::play);
+	gamestateMachine_->changeToState(States::play, 4, GamemodeID::Controller, "LivingRoom");
 
 	if (inputHandler_->getNumControllers() > 0) {
 		while (!exit_) {
