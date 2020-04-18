@@ -58,7 +58,7 @@ void InputHandler::update() {
 		case SDL_QUIT:
 			SDL_Game::instance()->exitGame();
 			break;
-
+		}
 	}
 
 	//if (SDL_GameControllerGetButton(controllers_[0], SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_A) == 1) {
@@ -223,8 +223,8 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 	Uint8 i = 0;
 	bool bindFound = false;
 	int bindedAxis;
-	//hay que buscar el botón al que se corresponde
-	//porque SDL es una librería maravillosa y super intuitiva
+	//hay que buscar el botÃ³n al que se corresponde
+	//porque SDL es una librerÃ­a maravillosa y super intuitiva
 	while (!bindFound && i < SDL_GameControllerAxis::SDL_CONTROLLER_AXIS_MAX) {
 		SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForAxis(m_gameControllers[whichOne], (SDL_GameControllerAxis)i);
 		if (b.value.axis == event.jaxis.axis) {
@@ -369,8 +369,8 @@ void InputHandler::onJoyButtonChange(SDL_Event& event,ButtonState just) {
 	Uint8 i = 0;
 	bool bindFound=false;
 	int bindedButton;
-	//hay que buscar el botón al que se corresponde
-	//porque SDL es una librería maravillosa y super intuitiva
+	//hay que buscar el botÃ³n al que se corresponde
+	//porque SDL es una librerÃ­a maravillosa y super intuitiva
 	while (!bindFound &&i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX){
 		SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(m_gameControllers[whichOne], (SDL_GameControllerButton)i);
 		if (b.value.button == event.cbutton.button) {
@@ -382,11 +382,11 @@ void InputHandler::onJoyButtonChange(SDL_Event& event,ButtonState just) {
 	m_buttonStates[whichOne][bindedButton] = just;
 
 
-	//hay que iterar por todo el mapeo de input porque event devuelve el botón hardware
+	//hay que iterar por todo el mapeo de input porque event devuelve el botÃ³n hardware
 	//y eso no nos gusta
 	//for (int i = 0; i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX;i++) {
 	//	switch (m_buttonStates[whichOne][i]) {
-	//	//si un botón está suelto, comprobamos si se ha pulsado
+	//	//si un botÃ³n estÃ¡ suelto, comprobamos si se ha pulsado
 	//	case(Up):
 	//		if (1 == SDL_GameControllerGetButton(m_gameControllers[whichOne], (SDL_GameControllerButton)i))
 	//			m_buttonStates[whichOne][i] = JustDown;
