@@ -11,10 +11,10 @@ private:
 	vector<Entity*> roundResults_; //Used to determine winner and mode end
 	vector<Health*> playersHealth_; //Reference to the Health component of each player
 	vector<b2Vec2> playersPointsPos_; //Position in which the Stocks will be drawn FOR EACH DIFFERENT PLAYER.
-	int healtWidth_;
+	int healtWidth_ = 30;
 
 	Texture* canvasTimerTexture_ = nullptr;
-	SDL_Rect canvasTimerRect_;
+	SDL_Rect canvasTimerRect_ = {};
 	double timeSinceStart_ = 0;
 
 	double suddenDeathRenderTime = 0;
@@ -35,7 +35,7 @@ private:
 	int calculateDigits(int points);
 
 public:
-	TimeGameMode(int nPlayers, int time = 6);
+	TimeGameMode(int nPlayers);
 	~TimeGameMode();
 	virtual void init(PlayState* game);
 	virtual void render();

@@ -2,7 +2,7 @@
 #include "PlayState.h"
 #include "ThrownByPlayer.h"
 
-TimeGameMode::TimeGameMode(int nPlayers, int time) :
+TimeGameMode::TimeGameMode(int nPlayers) :
 	GameMode(nPlayers)
 {
 
