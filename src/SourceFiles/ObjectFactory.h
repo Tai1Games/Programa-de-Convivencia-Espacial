@@ -44,4 +44,5 @@ public:
 
 	static Entity* makeBoilerButton(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, bool inc_dec);
 
+	static Entity* createTreadmill(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 };

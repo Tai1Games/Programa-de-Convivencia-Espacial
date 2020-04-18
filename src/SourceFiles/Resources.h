@@ -53,6 +53,8 @@ public:
 		PadSpriteSheet,
 		IncreasingFreqButton,
 		DecreasingFreqButton,
+		Treadmill,
+		TreadmillSpriteSheet,
 
 
 		// text
@@ -64,8 +66,11 @@ public:
 
 	enum AudioId : std::size_t {
 		// music
-		MainTheme,
-		Reveal,
+		MainMenuMusic,
+		EntranceMusic,
+		LivingRoomMusic,
+		GymMusic,
+		RevealMusic,
 
 		// sound effects
 
@@ -75,7 +80,7 @@ public:
 		NES_Chimera,
 		Digits_Font
 	};
-
+	
 	struct FontInfo {
 		FontId id;
 		string fileName;

@@ -180,6 +180,9 @@ void TileMap::executeMapFactory()
 		else if (name == "Pipe") {
 			//hacer las tuberias y esas cosas
 		}
+		else if (name == "Treadmill") {
+			ObjectFactory::createTreadmill(entityManager_, physicsWorld_, pos);
+		}
 	}
 	solvePostCreationProblems();
 }
