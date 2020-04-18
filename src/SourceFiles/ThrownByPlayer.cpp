@@ -22,16 +22,6 @@ void ThrownByPlayer::throwObject(int playerId)
 	lastOwner_ = playerId;
 }
 
-void ThrownByPlayer::onCollisionExit(Collision* c)
-{
-	Health* h = nullptr;
-	if (lastOwner_ != -1 && (h = GETCMP_FROM_FIXTURE_(c->hitFixture, Health))) {
-		if (h->getHealth() <= 0) {
-			cout << "PLAYER MUERTO" << endl;
-		}
-	}
-}
-
 void ThrownByPlayer::addPointsToOwner()
 {
 	gameMode_->addPoints(lastOwner_);

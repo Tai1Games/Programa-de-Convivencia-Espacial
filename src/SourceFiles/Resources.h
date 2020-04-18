@@ -44,6 +44,7 @@ public:
 		CoinUI,
 		CanvasTimer,
 		SuddenDeathText,
+		SuddenDeathTimeModeText,
 		EmptyProgressBar,
 		ProgressBar,
 		EmptyProgressBar2,

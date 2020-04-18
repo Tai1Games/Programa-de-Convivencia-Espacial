@@ -62,8 +62,6 @@ void TimeGameMode::init(PlayState* game)
 	canvasTimerRect_.y = 0;
 	canvasTimerRect_.w = CONST(int, "COUNTDOWN_UI_WIDTH");
 	canvasTimerRect_.h = CONST(int, "COUNTDOWN_UI_HEIGTH");
-
-	roundFinished_ = true;
 }
 
 void TimeGameMode::render()
@@ -71,29 +69,29 @@ void TimeGameMode::render()
 	int minutes = 0, seconds = 0;
 
 	if (timeToEnd_ < timeSinceStart_) {
-		if (roundFinished_) {
+		if (roundFinished_ && winner_ != nullptr) {
 			string winMsg = "Gana el jugador " + to_string(winner_->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber() + 1);
 			Texture ganador(SDL_Game::instance()->getRenderer(), winMsg,
 				SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
 			ganador.render(winWidth_ / 2 - ganador.getWidth() / 2, winHeigth_ / 2);
 		}
-		//else {
-		//	suddenDeathRenderTimer += sPerFrame_;
-		//	if (suddenDeathRenderTimer >= suddenDeathRenderTime) {
-		//		suddenDeathRendering = !suddenDeathRendering;
-		//		suddenDeathRenderTimer = 0;
-		//	}
-		//	if (suddenDeathRendering) {
-		//		Texture* suddenDeathTexture = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SuddenDeathText);
-		//		SDL_Rect suddenDeathRect;
-		//		suddenDeathRect.x = winWidth_ / 2 - suddenDeathTexture->getWidth() / 2;
-		//		suddenDeathRect.y = winHeigth_ / 2 - suddenDeathTexture->getHeight() / 2;
-		//		suddenDeathRect.w = suddenDeathTexture->getWidth();
-		//		suddenDeathRect.h = suddenDeathTexture->getHeight();
-		//		suddenDeathTexture->render(suddenDeathRect);
-		//	}
+		else {
+			suddenDeathRenderTimer += sPerFrame_;
+			if (suddenDeathRenderTimer >= suddenDeathRenderTime) {
+				suddenDeathRendering = !suddenDeathRendering;
+				suddenDeathRenderTimer = 0;
+			}
+			if (suddenDeathRendering) {
+				Texture* suddenDeathTexture = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SuddenDeathText);
+				SDL_Rect suddenDeathRect;
+				suddenDeathRect.x = winWidth_ / 2 - suddenDeathTexture->getWidth() / 2;
+				suddenDeathRect.y = winHeigth_ / 2 - suddenDeathTexture->getHeight() / 2;
+				suddenDeathRect.w = suddenDeathTexture->getWidth();
+				suddenDeathRect.h = suddenDeathTexture->getHeight();
+				suddenDeathTexture->render(suddenDeathRect);
+			}
 
-		//}
+		}
 	}
 
 	else {
@@ -106,8 +104,25 @@ void TimeGameMode::render()
 
 void TimeGameMode::update()
 {
+
 	timeSinceStart_ += sPerFrame_;
 	if (timeSinceStart_ >= timeToEnd_ && !roundFinished_) {
+		int maxPoints = 0;
+		bool suddenDeath = false;
+		for (int i = 0; i < playerKills_.size();i++) {
+			if (playerKills_[i] > maxPoints) {
+				maxPoints = playerKills_[i];
+				winner_ = players_[i];
+				suddenDeath = false;
+			}
+			else if (playerKills_[i]==maxPoints) {
+				suddenDeath = true;
+			}
+		}
+		if (!suddenDeath) {
+			roundFinished_ = true;
+			cout << "PLAYER: " << winner_->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber() << " WON." << endl;
+		}
 
 	}
 }
@@ -115,6 +130,7 @@ void TimeGameMode::update()
 void TimeGameMode::addPoints(int playerID)
 {
 	playerKills_[playerID]++;
+
 }
 
 void TimeGameMode::renderTimer(int seconds, int minutes) {
