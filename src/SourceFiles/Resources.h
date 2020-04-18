@@ -62,8 +62,11 @@ public:
 
 	enum AudioId : std::size_t {
 		// music
-		MainTheme,
-		Reveal,
+		MainMenuMusic,
+		EntranceMusic,
+		LivingRoomMusic,
+		GymMusic,
+		RevealMusic,
 
 		// sound effects
 

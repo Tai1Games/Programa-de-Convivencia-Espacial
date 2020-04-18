@@ -60,8 +60,11 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 
 vector<Resources::MusicInfo> Resources::musics_{
 	//M�sica {nombre_en_enum, ruta}
-	{ MainTheme , resourcesPath+"sound/mainMenu.mp3" },
-	{Reveal, resourcesPath+"sound/gotem.mp3"}
+	{ MainMenuMusic , resourcesPath + "sound/mainMenu.mp3" },
+	{ EntranceMusic , resourcesPath + "sound/entrance.mp3" },
+	{ LivingRoomMusic , resourcesPath + "sound/livingRoom.mp3" },
+	{ GymMusic , resourcesPath + "sound/gym.mp3" },
+	{ RevealMusic, resourcesPath + "sound/gotem.mp3" }
 };
 
 vector<Resources::SoundInfo> Resources::sounds_{
