@@ -1,7 +1,7 @@
 #pragma once
 #include "ObjectPool.h"
 #include "Entity.h"
-#include "PoolSizes.h"
+#include "Constants.h"
 
 class EntityManager;
 class b2World;

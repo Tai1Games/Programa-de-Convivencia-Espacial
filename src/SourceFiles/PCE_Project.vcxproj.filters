@@ -228,9 +228,6 @@
     <ClInclude Include="ObjectPool.h">
       <Filter>Header Files\Pools</Filter>
     </ClInclude>
-    <ClInclude Include="PoolSizes.h">
-      <Filter>Header Files\Pools</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">

@@ -218,7 +218,6 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="PlayerData.h" />
     <ClInclude Include="PlayerFactory.h" />
-    <ClInclude Include="PoolSizes.h" />
     <ClInclude Include="RouterLogic.h" />
     <ClInclude Include="StocksGameMode.h" />
     <ClInclude Include="Treadmill.h" />

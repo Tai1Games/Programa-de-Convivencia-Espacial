@@ -17,6 +17,10 @@ public:
 	T getConstant(const std::string& key) const; //devuelve la constante pedida o su valor por defecto
 };
 
+//Pools
+const int COIN_POOL_SIZE = 140;
+const int FIREBALL_POOL_SIZE = 5;
+
 //Modos de juegos
 enum States
 {
