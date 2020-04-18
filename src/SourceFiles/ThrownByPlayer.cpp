@@ -24,5 +24,6 @@ void ThrownByPlayer::throwObject(int playerId)
 
 void ThrownByPlayer::addPointsToOwner()
 {
-	gameMode_->addPoints(lastOwner_);
+	if (lastOwner_ != -1)
+		gameMode_->addPoints(lastOwner_);
 }
