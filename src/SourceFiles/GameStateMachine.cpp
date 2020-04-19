@@ -3,7 +3,6 @@
 #include "WiFightGameMode.h"
 #include "ControllerGameMode.h"
 #include "CapitalismGameMode.h"
-#include "TimeGameMode.h"
 #include "Constants.h"
 #include "PlayState.h"
 #include "PauseState.h"
@@ -23,11 +22,11 @@ GameStateMachine::~GameStateMachine() {
 void GameStateMachine::setPauseOwner(int ownerID)
 {
 	changeToState(States::pause);
-	if (PauseState* pause = static_cast<PauseState*>(states_[States::pause]))
-		pause->setOwner(ownerID);
+	if(PauseState* pause = static_cast<PauseState*>(states_[States::pause]))
+	pause->setOwner(ownerID);
 }
 
-void GameStateMachine::changeToState(int state, int numberOfPlayers, int gameMode, string tileMap) {
+void GameStateMachine::changeToState(int state) {
 	if (state != currentState_ && state < States::NUMBER_OF_STATES) {
 		if (states_[state] == nullptr) {
 			//create state
@@ -37,28 +36,9 @@ void GameStateMachine::changeToState(int state, int numberOfPlayers, int gameMod
 				//deleteState(currentState_);
 				break;
 			case States::play:
-			{
-				if (gameMode < NUMBER_OF_GAMEMODES) {
-					switch (gameMode) {
-					case (GamemodeID::Capitalism):
-						states_[state] = new PlayState(new CapitalismGameMode(numberOfPlayers), tileMap);
-						break;
-					case (GamemodeID::Controller):
-						states_[state] = new PlayState(new ControllerGameMode(numberOfPlayers), tileMap);
-						break;
-					case (GamemodeID::Stocks):
-						states_[state] = new PlayState(new StocksGameMode(numberOfPlayers), tileMap);
-						break;
-					case (GamemodeID::WiFight):
-						states_[state] = new PlayState(new WiFightGameMode(numberOfPlayers), tileMap);
-						break;
-					case (GamemodeID::Timed):
-						states_[state] = new PlayState(new TimeGameMode(numberOfPlayers), tileMap);
-						break;
-					}
-				}
+				//deleteState(currentState_);
+				states_[state] = new PlayState(new WiFightGameMode(4), "SalaDeEstar"); //ejemplo "SalaDeEstar"
 				break;
-			}
 			case States::pause:
 				//if (states_[state] != nullptr)	delete states_[state];
 				states_[state] = new PauseState();

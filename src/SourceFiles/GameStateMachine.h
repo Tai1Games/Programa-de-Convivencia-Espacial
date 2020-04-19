@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include <string>
 #include "GameState.h"
 #include "checkML.h"
 
@@ -16,7 +15,7 @@ public:
 	/*Cambia al estado pausa con un owner*/
 	void setPauseOwner(int ownerID);
 
-	void changeToState(int state, int numberOfPlayers = 1, int gameMode = 0, std::string tileMap = "");
+	void changeToState (int state);
 	void deleteState(int state);
 
 	void update();

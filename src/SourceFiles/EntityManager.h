@@ -19,11 +19,9 @@ public:
 	Entity* addEntity();
 	void addExistingEntity(Entity* e);
 
-	std::vector<Entity*>* getWeaponVector() { return &weapons_; }
 
 private:
 	std::vector<std::unique_ptr<Entity>> entities_;
 	std::vector<Entity*> externalEntities_;
-	std::vector<Entity*> weapons_;
 };
 

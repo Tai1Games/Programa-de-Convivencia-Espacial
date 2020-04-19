@@ -44,6 +44,5 @@ public:
 	b2Vec2 getPosUIElement() { return pos_; }
 	b2Vec2 getWHUIElement() { return wH_; }
 	SDL_Rect getClipUIElement() { return clip_; }
-	Texture* getTexture() { return tex_; }
 	int getTextureId() { return textureId_; }
 };

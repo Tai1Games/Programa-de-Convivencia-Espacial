@@ -183,7 +183,6 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AttachesToObjects.h" />
-    <ClInclude Include="BoilerButtonLogic.h" />
     <ClInclude Include="CapitalismGameMode.h" />
     <ClInclude Include="checkML.h" />
     <ClInclude Include="Coin.h" />
@@ -221,9 +220,6 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="PlayerFactory.h" />
     <ClInclude Include="RouterLogic.h" />
     <ClInclude Include="StocksGameMode.h" />
-    <ClInclude Include="ThrownByPlayer.h" />
-    <ClInclude Include="TimeGameMode.h" />
-    <ClInclude Include="Treadmill.h" />
     <ClInclude Include="Wallet.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="PlayState.h" />
@@ -246,7 +242,6 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AttachesToObjects.cpp" />
-    <ClCompile Include="BoilerButtonLogic.cpp" />
     <ClCompile Include="CapitalismGameMode.cpp" />
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="CoinsPool.cpp" />
@@ -280,9 +275,6 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="RouterLogic.cpp" />
     <ClCompile Include="StocksGameMode.cpp" />
-    <ClCompile Include="ThrownByPlayer.cpp" />
-    <ClCompile Include="TimeGameMode.cpp" />
-    <ClCompile Include="Treadmill.cpp" />
     <ClCompile Include="Wallet.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="PlayState.cpp" />
@@ -321,9 +313,4 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <Copy SourceFiles="@(ConfigFiles)" DestinationFolder="$(TargetDir)config\" OverwriteReadOnlyFiles="true" SkipUnchangedFiles="false" />
     <Copy SourceFiles="@(AssetFiles)" DestinationFiles="@(AssetFiles->'$(TargetDir)assets\game\%(RecursiveDir)%(Filename)%(Extension)')" OverwriteReadOnlyFiles="true" SkipUnchangedFiles="false" />
   </Target>
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties />
-    </VisualStudio>
-  </ProjectExtensions>
 </Project>

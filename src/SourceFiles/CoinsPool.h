@@ -1,7 +1,6 @@
 #pragma once
 #include "ObjectPool.h"
 #include "Entity.h"
-#include "Constants.h"
 
 class EntityManager;
 class b2World;
@@ -9,7 +8,7 @@ class b2Vec2;
 
 class CoinsPool {
 private:
-	ObjectPool<Entity, COIN_POOL_SIZE> coinsPool_;
+	ObjectPool<Entity, 140> coinsPool_;
 	int coinMaxSpeed_ = 0;
 public:
 	CoinsPool();

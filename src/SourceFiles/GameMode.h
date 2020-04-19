@@ -34,5 +34,4 @@ public:
 	virtual bool onPlayerDead(int id) { return true; };
 	Entity* getRoundResults() { return winner_; }
 	virtual void setTileMap(TileMap* tm) { tilemap_ = tm; };
-	virtual void playerKillsPlayer(int killerId, int deadId = -1) {};
 };

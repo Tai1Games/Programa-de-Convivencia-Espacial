@@ -5,7 +5,6 @@
 #include "Health.h"
 #include "Wallet.h"
 #include "Collision.h"
-#include "ThrownByPlayer.h"
 
 int Weapon::calculateCoinsDropped(int coinsPlayer)
 {
@@ -146,10 +145,6 @@ void Weapon::UnPickObject()
 	
 	cout <<"dirHand: "<< currentHand_->getDir().x <<", "<< currentHand_->getDir().y<<"\n";
 	cout << "dirplayer: " << currentHand_->getVel().x << ", " << currentHand_->getVel().y << "\n";
-	
-	//Si se tira un objeto, se guarda en el objeto lanzado la ID de quien lo lanza.
-	ThrownByPlayer* tObj = GETCMP_FROM_FIXTURE_(mainCollider_->getFixture(0),ThrownByPlayer);
-	if (tObj != nullptr) tObj->throwObject(currentHand_->getPlayerId());
 
 	mainCollider_->setLinearVelocity(b2Vec2(0, 0));
 	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x + currentHand_->getDir().x * CONST(double, "ARM_LENGTH_PHYSICS"), currentHand_->getPos().y -currentHand_->getDir().y * CONST(double, "ARM_LENGTH_PHYSICS")), currentHand_->getAngle());
