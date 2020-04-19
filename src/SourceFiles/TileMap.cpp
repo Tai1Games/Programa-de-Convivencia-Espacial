@@ -177,8 +177,15 @@ void TileMap::executeMapFactory()
 		else if (name == "DecButton") {
 			boilerButtons_.push_back(GETCMP2(ObjectFactory::makeBoilerButton(entityManager_, physicsWorld_, pos, false), BoilerButtonLogic));
 		}
+		
 		else if (name == "Pipe") {
 			//hacer las tuberias y esas cosas
+			float rotation = o.getRotation();
+			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), s.y / CONST(double, "PIXELS_PER_METER"));
+			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
+			size *= 0.5f;
+
+			ObjectFactory::makePipe(entityManager_, physicsWorld_, pos, size, rotation); 
 		}
 		else if (name == "Treadmill") {
 			ObjectFactory::createTreadmill(entityManager_, physicsWorld_, pos);

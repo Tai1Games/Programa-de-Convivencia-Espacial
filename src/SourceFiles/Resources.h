@@ -56,6 +56,8 @@ public:
 		DecreasingFreqButton,
 		Treadmill,
 		TreadmillSpriteSheet,
+		PipeHor,
+		PipeVer,
 
 
 		// text
