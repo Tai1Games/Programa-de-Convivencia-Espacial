@@ -207,24 +207,25 @@ void TileMap::createWeapons()
 {
 	for (b2Vec2 spawnPoint : weaponSpawnPoints_) { //recorre todos los spawn
 		int weapon = rand() % 9;
+		Entity* e = nullptr;
 		switch (weapon)
 		{
 		case 0: //slipper
-			ObjectFactory::makeSlipper(entityManager_,physicsWorld_, spawnPoint, b2Vec2(CONST(float, "SLIPPER_X"), CONST(float, "SLIPPER_Y")));
+			e = ObjectFactory::makeSlipper(entityManager_,physicsWorld_, spawnPoint, b2Vec2(CONST(float, "SLIPPER_X"), CONST(float, "SLIPPER_Y")));
 			break;
 		case 1: //ball
-			ObjectFactory::makeBall(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "BALL_X"), CONST(float, "BALL_Y")));
+			e = ObjectFactory::makeBall(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "BALL_X"), CONST(float, "BALL_Y")));
 			break;
 		case 2: //stapler
-			ObjectFactory::makeStapler(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "STAPLER_X"), CONST(float, "STAPLER_Y")));
+			e = ObjectFactory::makeStapler(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "STAPLER_X"), CONST(float, "STAPLER_Y")));
 			break;
 		case 3: //extinguisher
-			ObjectFactory::makeExtinguisher(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "EXTINGUISHER_X"), CONST(float, "EXTINGUISHER_Y")));
+			e = ObjectFactory::makeExtinguisher(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "EXTINGUISHER_X"), CONST(float, "EXTINGUISHER_Y")));
 			break;
 		case 4: //rock
 			break;
 		case 5: //dumbbell
-			ObjectFactory::makeDumbbell(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "DUMBBELL_X"), CONST(float, "DUMBBELL_Y")));
+			e = ObjectFactory::makeDumbbell(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "DUMBBELL_X"), CONST(float, "DUMBBELL_Y")));
 			break;
 		case 6: //bananGun
 			break;
@@ -233,6 +234,8 @@ void TileMap::createWeapons()
 		case 8: //Confeti
 			break;
 		}
+		if(e != nullptr)
+			entityManager_->getWeaponVector()->push_back(e);
 	}
 }
 

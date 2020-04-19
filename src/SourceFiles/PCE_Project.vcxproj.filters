@@ -225,6 +225,12 @@
     <ClInclude Include="Treadmill.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="ThrownByPlayer.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeGameMode.h">
+      <Filter>Header Files\GameModes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -382,6 +388,12 @@
     </ClCompile>
     <ClCompile Include="Treadmill.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ThrownByPlayer.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeGameMode.cpp">
+      <Filter>Source Files\GameModes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

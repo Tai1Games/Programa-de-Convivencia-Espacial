@@ -37,6 +37,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ CoinUI, resourcesPath + "textures/DogeCoinUI.png"},
 	{ CanvasTimer, resourcesPath + "textures/COSO.png"},
 	{ SuddenDeathText, resourcesPath + "textures/suddenDeathText.png"},
+	{ SuddenDeathTimeModeText, resourcesPath + "textures/suddenDeathTimeModeText.png"},
 	{ EmptyProgressBar, resourcesPath + "textures/EmptyProgressBar.png"},
 	{ ProgressBar, resourcesPath + "textures/ProgressBar.png"},
 	{ EmptyProgressBar2, resourcesPath + "textures/EmptyProgressBar2.png"},
