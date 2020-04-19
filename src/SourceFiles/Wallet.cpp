@@ -8,6 +8,16 @@ void Wallet::init()
 	numCoins_ = CONST(int, "INITIAL_COINS");
 	collPlayer_ = GETCMP1_(Collider);
 	coinBaseSize_ = CONST(double, "COIN_BASE_SIZE");
+	INV_FRAMES_HIT = CONST(int, "INVULNERABILITY_FRAMES_HIT");;
+	INV_FRAMES_RESPAWN = CONST(int, "INVULNERABILITY_FRAMES_RESPAWN");
+	invFrames_ = -1;
+}
+
+void Wallet::update()
+{
+	if (invFrames_ >= 0) {
+		invFrames_--;
+	}
 }
 
 void Wallet::dropCoins(int damage, int player)
@@ -27,33 +37,35 @@ void Wallet::dropCoins(int damage, int player)
 
 void Wallet::onCollisionEnter(Collision* c)
 {
-	b2Fixture* fix = c->hitFixture;
-	if (!fix->IsSensor())
-	{
-		//Measure de impact of an object with the player
-		b2Vec2 force = fix->GetBody()->GetMass() * fix->GetBody()->GetLinearVelocity();
+	if (invFrames_ < 0) {
 
-		int impact = force.Length();
+		b2Fixture* fix = c->hitFixture;
+		if (!fix->IsSensor())
+		{
+			//Measure de impact of an object with the player
+			b2Vec2 force = fix->GetBody()->GetMass() * fix->GetBody()->GetLinearVelocity();
 
-		Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
-		//Si se impacta con un arma al umbral más alto de fuerza, se recibe su daño de impacto
-		if (w != nullptr) {
-			impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
+			int impact = force.Length();
+
+			Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
+			//Si se impacta con un arma al umbral más alto de fuerza, se recibe su daño de impacto
+			if (w != nullptr) {
+				impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
+			}
+			else {
+				//Depending on the force of impact we apply damage to the player
+
+				if (impact < CONST(int, "LOW_DAMAGE")) impact = 0;
+
+				else if (impact >= CONST(int, "LOW_DAMAGE") && impact < CONST(double, "MEDIUM_DAMAGE")) impact = 1;
+
+				else if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) impact = 2;
+
+				else if (impact >= CONST(double, "HIGH_DAMAGE")) /*&& impact < CONST(double, "HIGH_DAMAGE"))*/ impact = 3;
+			}
+
+			if (impact > 0)
+				c->collisionHandler->addCoinDrop(std::make_tuple(this, GETCMP1_(PlayerData), impact));
 		}
-		else {
-			//Depending on the force of impact we apply damage to the player
-
-			if (impact < CONST(int, "LOW_DAMAGE")) impact = 0;
-
-			else if (impact >= CONST(int, "LOW_DAMAGE") && impact < CONST(double, "MEDIUM_DAMAGE")) impact = 1;
-
-			else if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) impact = 2;
-
-			else if (impact >= CONST(double, "HIGH_DAMAGE")) /*&& impact < CONST(double, "HIGH_DAMAGE"))*/ impact = 3;
-		}
-
-		if (impact > 0)
-			c->collisionHandler->addCoinDrop(std::make_tuple(this, GETCMP1_(PlayerData), impact));
 	}
-
 }

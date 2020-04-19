@@ -14,10 +14,14 @@ private:
 	int coinBaseSize_ = 0; //Se asigna en init.
 	Collider* collPlayer_ = nullptr;
 	CapitalismGameMode* gameMode_ = nullptr;
+	int INV_FRAMES_HIT;
+	int INV_FRAMES_RESPAWN;
+	int invFrames_;
 public:
 	Wallet(CapitalismGameMode* gamemode) : Component(ComponentType::Wallet) { gameMode_ = gamemode; };
 	~Wallet() {};
 	virtual void init() override;
+	virtual void update() override;
 	void dropCoins(int damage, int player);
 	void addCoins(int n) { numCoins_ += n; cout << "HE RECOGIDO " << n << endl; }
 	int getCoins() { return numCoins_; }
