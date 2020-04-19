@@ -14,6 +14,7 @@
 #include "Fireball.h"
 #include "ExtinguisherWeapon.h"
 #include "ParticleEmitter.h"
+#include "BoilerButtonLogic.h"
 #include "Pad.h"
 #include "Treadmill.h"
 
@@ -152,6 +153,19 @@ Entity* ObjectFactory::createBoiler(EntityManager* entityManager, b2World* physi
 	collRoomba->setUserData(e);
 	e->addComponent<Viewer>(Resources::Boiler);	
 	e->addComponent<FireBallGenerator>(physicsWorld);
+
+	return e;
+}
+
+Entity* ObjectFactory::makeBoilerButton(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, bool inc_dec) {
+	Entity* e = entityManager->addEntity();
+	Collider* collBoilerButton = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "BOILER_BUTTON_RADIUS"), 0, 0,
+		0, 0, 0, Collider::CollisionLayer::NormalObject, true);
+	collBoilerButton->setUserData(e);
+	if (inc_dec) e->addComponent<Viewer>(Resources::IncreasingFreqButton, SDL_Rect{ 0,0,100,100 });
+	else e->addComponent<Viewer>(Resources::DecreasingFreqButton, SDL_Rect{ 0,0,100,100 });
+	e->addComponent<BoilerButtonLogic>(inc_dec);
+
 
 	return e;
 }

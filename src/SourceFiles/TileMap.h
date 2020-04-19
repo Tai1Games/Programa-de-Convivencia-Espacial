@@ -7,6 +7,9 @@
 #include "ObjectFactory.h"
 #include "checkML.h"
 
+class BoilerButtonLogic;
+class FireBallGenerator;
+
 class TileMap : public Component
 {
 protected:
@@ -19,6 +22,8 @@ protected:
 	std::vector<b2Vec2> playerSpawns_;
 	b2Vec2 specialObjectsSpawnPoint_; //mando de la tele, router
 	std::vector<b2Vec2> coinsSpawnPoints_; //guarda posicions monedas
+	FireBallGenerator* boilerAux_ = nullptr;
+	std::vector<BoilerButtonLogic*> boilerButtons_;
 
 private:
 	Texture* debugT_;
@@ -28,6 +33,8 @@ private:
 	EntityManager* entityManager_;
 	vector<tson::Object> factoryItems_;
 	std::vector<b2Vec2> weaponSpawnPoints_;
+
+	void solvePostCreationProblems(); //Called when reading of tilemap ends. Use this to assign references and solve similar problems.
 public:
 	TileMap(int w,int h,string map, EntityManager* entityManager_, b2World* physicsWorld_);
 	~TileMap();

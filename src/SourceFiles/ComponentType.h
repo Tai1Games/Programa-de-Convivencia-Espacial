@@ -27,6 +27,7 @@ namespace ComponentType {
 		ParticleEmitter,
 		FireBallGenerator,
 		Fireball,
+		BoilerButtonLogic,
 		ExtinguisherWeapon,
 		Pad,
 		Treadmill,
