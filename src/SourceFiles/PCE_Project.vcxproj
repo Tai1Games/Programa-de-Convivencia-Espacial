@@ -183,6 +183,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AttachesToObjects.h" />
+    <ClInclude Include="BoilerButtonLogic.h" />
     <ClInclude Include="CapitalismGameMode.h" />
     <ClInclude Include="checkML.h" />
     <ClInclude Include="Coin.h" />
@@ -245,6 +246,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AttachesToObjects.cpp" />
+    <ClCompile Include="BoilerButtonLogic.cpp" />
     <ClCompile Include="CapitalismGameMode.cpp" />
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="CoinsPool.cpp" />

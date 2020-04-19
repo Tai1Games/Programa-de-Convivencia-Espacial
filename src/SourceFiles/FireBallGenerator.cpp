@@ -18,7 +18,10 @@ void FireBallGenerator::init() {
 	minFireballs_ = CONST(int, "FBGEN_MIN_FIREBALLS");
 	maxFireballs_ = CONST(int, "FBGEN_MIN_FIREBALLS");
 	fireballSpeed_ = CONST(int, "FIREBALL_SPEED");
-
+	limitMinCd_ = CONST(int, "FBGEN_LIMIT_MIN_COOLDOWN");
+	limitMaxCd_ = CONST(int, "FBGEN_LIMIT_MAX_COODLOWN");
+	cdTimeChange_ = CONST(int, "FBGEN_CHANGE_CD_ON_BUTTON_ACTION");
+	cdVariability = maxCd_ - minCd_;
 	manager_ = entity_->getEntityManager();
 	fbPool_.init(manager_, physicsWorld_);
 	nextShot_ = SDL_Game::instance()->getTime() + CONST(int,"FBGEN_INITIAL_OFFSET") 
@@ -48,6 +51,25 @@ void FireBallGenerator::addFireball(int n) {
 		spawnDir.y *= fireballSpeed_;
 		fbPool_.addFireBall(spawnPos,spawnDir);
 	}
+}
 
-
+void FireBallGenerator::modifyGenerationRate(bool inc_dec) {
+	if (inc_dec && minCd_ >= limitMinCd_) {
+		maxCd_ -= cdTimeChange_;
+		minCd_ -= cdTimeChange_;
+		if (minCd_ < limitMinCd_) {
+			minCd_ = limitMinCd_;
+			maxCd_ = minCd_ + cdVariability;
+		}
+		cout << "Generation rate increased to [" << minCd_ << ", " << maxCd_ << "](ms)." << endl;
+	}
+	else if (!inc_dec && maxCd_ <= limitMaxCd_) {
+		maxCd_ += cdTimeChange_;
+		minCd_ += cdTimeChange_;
+		if (maxCd_ > limitMaxCd_) {
+			maxCd_ = limitMaxCd_;
+			minCd_ = limitMaxCd_ - cdVariability;
+		}
+		cout << "Generation rate decreased to [" << minCd_ << ", " << maxCd_ << "](ms)." << endl;
+	}
 }

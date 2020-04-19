@@ -52,6 +52,8 @@ public:
 		Fireball,
 		Boiler,
 		PadSpriteSheet,
+		IncreasingFreqButton,
+		DecreasingFreqButton,
 		Treadmill,
 		TreadmillSpriteSheet,
 

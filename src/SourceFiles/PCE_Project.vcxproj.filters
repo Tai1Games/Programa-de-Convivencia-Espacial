@@ -219,6 +219,9 @@
     <ClInclude Include="FireBallGenerator.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="BoilerButtonLogic.h">
+        <Filter>Header Files\Components</Filter>
+    </ClInclude>
     <ClInclude Include="Treadmill.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -379,6 +382,9 @@
     </ClCompile>
     <ClCompile Include="FireBallPool.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BoilerButtonLogic.cpp">
+          <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Treadmill.cpp">
       <Filter>Source Files\Components</Filter>

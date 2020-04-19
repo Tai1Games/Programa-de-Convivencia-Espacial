@@ -45,8 +45,10 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Fireball,resourcesPath + "textures/fireball_placeholder.png"},
 	{ Boiler,resourcesPath + "textures/boiler_placeholder.png"},
 	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png" },
-	{ Treadmill, resourcesPath+"textures/Treadmill.png"},
-	{ TreadmillSpriteSheet, resourcesPath + "textures/TreadmillSpriteSheet.png"}
+	{ Treadmill , resourcesPath + "textures/Treadmill.png"},
+	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png"},
+	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
+	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{
