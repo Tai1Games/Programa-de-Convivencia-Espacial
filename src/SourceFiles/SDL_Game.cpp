@@ -12,6 +12,9 @@ SDL_Game::SDL_Game() {
 		constants_.getConstant<int>("WINDOW_HEIGHT"), SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 
+	//SOLO PARA EL JUEGO FINAL POR QUE SI NOHACE BOOM BOOM
+	//SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN); //si es una pantalla de 1080 ya de por si se pone en full, pero si es 4K se necesita esto
+
 	initializeResources();
 
 
@@ -29,7 +32,7 @@ SDL_Game::SDL_Game() {
 	MS_PER_FRAME_ = constants_.getConstant<double>("MS_PER_FRAME");
 
 	audio_->setMusicVolume(constants_.getConstant<int>("MAX_MUSIC_VOLUME"));
-	//audio_->playMusic(Resources::MainTheme, -1);
+	audio_->playMusic(Resources::GymMusic, -1);
 	inputHandler_ = new InputHandler();
 	inputHandler_->initialiseGamepads();
 
@@ -98,7 +101,7 @@ void SDL_Game::closeResources() {
 
 void SDL_Game::start() {
 	exit_ = false;
-	gamestateMachine_->changeToState(States::play);
+	gamestateMachine_->changeToState(States::play, 4, GamemodeID::Timed, "LivingRoom");
 
 	if (inputHandler_->getNumControllers() > 0) {
 		while (!exit_) {

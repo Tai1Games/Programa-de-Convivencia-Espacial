@@ -14,9 +14,12 @@
 #include "Fireball.h"
 #include "ExtinguisherWeapon.h"
 #include "ParticleEmitter.h"
+#include "BoilerButtonLogic.h"
 #include "Pad.h"
+#include "Treadmill.h"
 
-void ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
+Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
+	
 	Entity* e = entityManager->addEntity();
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "FLIPFLOP_DENSITY"),
 		CONST(double, "FLIPFLOP_FRICTION"), CONST(double, "FLIPFLOP_RESTITUTION"),
@@ -24,9 +27,12 @@ void ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWo
 	e->addComponent <Viewer>(Resources::Slipper);
 	e->addComponent<Weapon>(WeaponID::Slipper, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"));
 	aux->setUserData(e);
+
+	return e;
 }
 
-void ObjectFactory::makeBall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
+Entity* ObjectFactory::makeBall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
+
 	Entity* e = entityManager->addEntity();
 	// x,  y,   width, height, density,	friction, restitution, linearDrag, angularDrag,	Layer,							        sensor canBeAttached
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "BOUNCINGBALL_DENSITY"),
@@ -37,34 +43,43 @@ void ObjectFactory::makeBall(EntityManager* entityManager, b2World* physicsWorld
 	e->addComponent <Viewer>(Resources::Pelota);
 	e->addComponent<Weapon>(WeaponID::Pelota, CONST(int, "BOUNCINGBALL_DAMAGE"), CONST(int, "BOUNCINGBALL_IMPACT_DAMAGE"));
 	aux->setUserData(e);
+
+	return e;
 }
 
-void ObjectFactory::makeStapler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
+Entity* ObjectFactory::makeStapler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 	Entity* e = entityManager->addEntity();
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "STAPLER_DENSITY"), CONST(double, "STAPLER_FRICTION"), CONST(double, "STAPLER_RESTITUTION"), CONST(double, "STAPLER_LINEAR_DRAG"), CONST(double, "STAPLER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Stapler);
 	e->addComponent<Weapon>(WeaponID::Stapler, CONST(int, "STAPLER_DAMAGE"), CONST(int, "STAPLER_IMPACT_DAMAGE"));
 	aux->setUserData(e);
+
+	return e;
 }
 
-void ObjectFactory::makeExtinguisher(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
+Entity* ObjectFactory::makeExtinguisher(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
+	
 	Entity* entity = entityManager->addEntity();
 	Collider* aux = entity->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "EXTINGUISHER_DENSITY"), CONST(double, "EXTINGUISHER_FRICTION"), CONST(double, "EXTINGUISHER_RESTITUTION"), CONST(double, "EXTINGUISHER_LINEAR_DRAG"), CONST(double, "STAPLER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	entity->addComponent<Viewer>(Resources::Extinguisher);
 	entity->addComponent<ParticleEmitter>(Vector2D(0,-1),Resources::Coin,10);
 	entity->addComponent<ExtinguisherWeapon>(WeaponID::Extinguisher, CONST(int, "EXTINGUISHER_DAMAGE"), CONST(int, "EXTINGUISHER_IMPACT_DAMAGE"));
 	aux->setUserData(entity);
+
+	return entity;
 }
 
-void ObjectFactory::makeWall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
+Entity* ObjectFactory::makeWall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
 	Entity* e = entityManager->addEntity();								 // x, y,width, height, density,friction, restitution, linearDrag, angularDrag,	Layer, sensor
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::Wall, false);
 	e->addComponent<Viewer>(Resources::Negro);
 	aux->setUserData(e);
+
+	return e;
 }
 
-void ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
+Entity* ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
 	Entity* e = entityManager->addEntity();
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false);
@@ -72,28 +87,34 @@ void ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* physics
 	aux->setUserData(e);
 
 	aux->applyLinearImpulse(b2Vec2(0, 50), b2Vec2(0.1, 0));
+
+	return e;
 }
 
 
-void ObjectFactory::makePad(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
+Entity* ObjectFactory::makePad(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
 	Entity* e = entityManager->addEntity();
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 1, 0, 0, Collider::CollisionLayer::NonGrababbleWall, false);
 	e->addComponent<Viewer>(Resources::PadSpriteSheet, SDL_Rect{ 0,0,32,32 });
 	aux->setUserData(e);
 	e->addComponent<Pad>();
+
+	return e;
 }
 
-void ObjectFactory::makeCoin(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, int value)
+Entity* ObjectFactory::makeCoin(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, int value)
 {
 	entityManager->addExistingEntity(e);
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "COIN_BASE_SIZE"), CONST(double, "COIN_DENSITY"), CONST(double, "COIN_FRICTION"), CONST(double, "COIN_ANGULAR_DRAG"), 1, 1, Collider::CollisionLayer::Trigger, true);
 	e->addComponent<Viewer>(Resources::Coin);
 	e->addComponent<Coin>();
 	aux->setUserData(e);
+
+	return e;
 }
 
-void ObjectFactory::makeFireball(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
+Entity* ObjectFactory::makeFireball(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
 {
 	entityManager->addExistingEntity(e);
 	Collider* auxCol = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "FIREBALL_RADIUS"), CONST(double, "FIREBALL_DENSITY"), CONST(double, "FIREBALL_FRICTION"), CONST(double, "FIREBALL_ANGULAR_DRAG"), 1, 1, Collider::CollisionLayer::NormalObject, false);
@@ -101,6 +122,8 @@ void ObjectFactory::makeFireball(Entity* e, EntityManager* entityManager, b2Worl
 	e->addComponent<Fireball>();
 	e->addComponent<Weapon>(WeaponID::Piedra, 999, 999);//Si, el fuego es una piedra muy caliente. Mucho m�s que el magma, esta caldera echa bolas de PLASMA, el cuarto estado de la materia
 	auxCol->setUserData(e);
+
+	return e;
 }
 
 
@@ -114,7 +137,7 @@ Weapon* ObjectFactory::makeController(EntityManager* entityManager, b2World* phy
 	return controller;
 }
 
-void ObjectFactory::makeDumbbell(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
+Entity* ObjectFactory::makeDumbbell(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
 	Entity* e = entityManager->addEntity();
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "DUMBBELL_DENSITY"),
@@ -123,6 +146,8 @@ void ObjectFactory::makeDumbbell(EntityManager* entityManager, b2World* physicsW
 	e->addComponent <Viewer>(Resources::Mancuerna);
 	e->addComponent<Weapon>(WeaponID::Mancuerna, CONST(int, "DUMBBELL_DAMAGE"), CONST(int, "DUMBBELL_IMPACT_DAMAGE"));
 	aux->setUserData(e);
+
+	return e;
 }
 
 Entity* ObjectFactory::createRoomba(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
@@ -153,4 +178,50 @@ Entity* ObjectFactory::createBoiler(EntityManager* entityManager, b2World* physi
 	e->addComponent<FireBallGenerator>(physicsWorld);
 
 	return e;
+}
+
+Entity* ObjectFactory::makeBoilerButton(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, bool inc_dec) {
+	Entity* e = entityManager->addEntity();
+	Collider* collBoilerButton = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "BOILER_BUTTON_RADIUS"), 0, 0,
+		0, 0, 0, Collider::CollisionLayer::NormalObject, true);
+	collBoilerButton->setUserData(e);
+	if (inc_dec) e->addComponent<Viewer>(Resources::IncreasingFreqButton, SDL_Rect{ 0,0,100,100 });
+	else e->addComponent<Viewer>(Resources::DecreasingFreqButton, SDL_Rect{ 0,0,100,100 });
+	e->addComponent<BoilerButtonLogic>(inc_dec);
+
+
+	return e;
+}
+
+Entity* ObjectFactory::createTreadmill(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos) 
+{
+	float offset = CONST(double, "TREADMILL_MILL_WIDTH") + CONST(double, "TREADMILL_HANDLE_WIDTH");
+
+	Entity* h = entityManager->addEntity();
+	Collider* collHandle = h->addComponent<Collider>(physicsWorld, b2_kinematicBody, pos.x, pos.y, CONST(double, "TREADMILL_HANDLE_WIDTH"), CONST(double, "TREADMILL_HANDLE_HEIGHT"), CONST(double, "TREADMILL_DENSITY"), CONST(double, "TREADMILL_FRICTION"),
+		CONST(double, "TREADMILL_RESTITUTION"), CONST(double, "TREADMILL_LINEAR_DRAG"), CONST(double, "TREADMILL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false);
+	
+	Entity* m = entityManager->addEntity();
+	Collider* collMill = m->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x + offset, pos.y, CONST(double, "TREADMILL_MILL_WIDTH"), CONST(double, "TREADMILL_MILL_HEIGHT"), CONST(double, "TREADMILL_DENSITY"), CONST(double, "TREADMILL_FRICTION"),
+		CONST(double, "TREADMILL_RESTITUTION"), CONST(double, "TREADMILL_LINEAR_DRAG"), CONST(double, "TREADMILL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, true);
+	
+	collHandle->setUserData(h);
+	collMill->setUserData(m);
+
+	m->addComponent<Viewer>(Resources::TreadmillSpriteSheet, SDL_Rect{ 0,0,82,46 });
+	h->addComponent<Viewer>(Resources::Debug);
+	m->addComponent<Treadmill>(collHandle);
+	
+	b2Vec2 collPoint = b2Vec2(pos.x + offset, pos.y);
+	b2WeldJointDef jointDef; //Definición del nuevo joint.
+	jointDef.bodyA = collMill->getBody(); //Body del jugador.
+	jointDef.bodyB = collHandle->getBody(); //Body del objeto al que se tiene que atar.
+	jointDef.collideConnected = false; //Flag que decide si estos 2 objetos van a ejercer físicas el uno contra el otro.
+	jointDef.localAnchorA = jointDef.bodyA->GetLocalPoint(collPoint); //Punto donde se ata el cuerpo A al cuerpo B
+	jointDef.localAnchorB = jointDef.bodyB->GetLocalPoint(collPoint); //Punto donde se ata el cuerpo B al cuerpo A
+	jointDef.referenceAngle = jointDef.bodyB->GetAngle() - jointDef.bodyA->GetAngle(); //Ángulo conjunto del cuerpo
+	b2World* world = collMill->getWorld(); //Obtenemos el mundo físico para crear el joint
+	world->CreateJoint(&jointDef); //Crea el joint con la definición que hemos definido previamente
+
+	return m;
 }
