@@ -43,6 +43,12 @@
     <Filter Include="Source Files\Factories">
       <UniqueIdentifier>{20cde4b2-bee8-4580-bd20-1abc4d157d2f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Pools">
+      <UniqueIdentifier>{b4984d7e-50d1-443f-a7ed-c81eaca88af6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Pools">
+      <UniqueIdentifier>{12a5685c-02f8-4c4a-a990-45844526fa3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -192,12 +198,6 @@
     <ClInclude Include="Coin.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectPool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CoinsPool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ParticleEmitter.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -210,9 +210,6 @@
     <ClInclude Include="Collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FireBallPool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Fireball.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -220,16 +217,25 @@
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="BoilerButtonLogic.h">
-        <Filter>Header Files\Components</Filter>
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Treadmill.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="ThrownByPlayer.h">
-      <Filter>Header Files\Components</Filter>
+    <ClInclude Include="CoinsPool.h">
+      <Filter>Header Files\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="FireBallPool.h">
+      <Filter>Header Files\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPool.h">
+      <Filter>Header Files\Pools</Filter>
     </ClInclude>
     <ClInclude Include="TimeGameMode.h">
       <Filter>Header Files\GameModes</Filter>
+    </ClInclude>
+    <ClInclude Include="ThrownByPlayer.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -356,9 +362,6 @@
     <ClCompile Include="Coin.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="CoinsPool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ParticleEmitter.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
@@ -380,14 +383,17 @@
     <ClCompile Include="FireBallGenerator.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="FireBallPool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BoilerButtonLogic.cpp">
-          <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Treadmill.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CoinsPool.cpp">
+      <Filter>Source Files\Pools</Filter>
+    </ClCompile>
+    <ClCompile Include="FireBallPool.cpp">
+      <Filter>Source Files\Pools</Filter>
+    </ClCompile>
+    <ClCompile Include="BoilerButtonLogic.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ThrownByPlayer.cpp">
       <Filter>Source Files\Components</Filter>
