@@ -48,7 +48,9 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Treadmill , resourcesPath + "textures/Treadmill.png"},
 	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png"},
 	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
-	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"}
+	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
+	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
+	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{

@@ -1,13 +1,4 @@
-{ "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"BoilerRoom.json"
-        }
-    },
- "height":135,
+{ "height":135,
  "infinite":false,
  "layers":[
         {
@@ -25,7 +16,7 @@
                  "width":1920,
                  "x":0,
                  "y":0
-                },
+                }, 
                 {
                  "height":30,
                  "id":3,
@@ -36,7 +27,7 @@
                  "width":1920,
                  "x":0,
                  "y":1050
-                },
+                }, 
                 {
                  "height":1080,
                  "id":4,
@@ -47,7 +38,7 @@
                  "width":30,
                  "x":0,
                  "y":0
-                },
+                }, 
                 {
                  "height":1080,
                  "id":5,
@@ -64,7 +55,7 @@
          "visible":true,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
          "id":3,
@@ -81,7 +72,7 @@
                  "width":0,
                  "x":960,
                  "y":428
-                },
+                }, 
                 {
                  "height":0,
                  "id":26,
@@ -93,7 +84,7 @@
                  "width":0,
                  "x":502,
                  "y":270
-                },
+                }, 
                 {
                  "height":0,
                  "id":27,
@@ -103,42 +94,19 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1582,
-                 "y":252
-                },
+                 "x":1400,
+                 "y":372
+                }, 
                 {
-                 "height":40,
-                 "id":28,
-                 "name":"Pipe",
-                 "rotation":-45,
-                 "type":"",
-                 "visible":true,
-                 "width":400,
-                 "x":1588,
-                 "y":1032
-                },
-                {
-                 "height":40,
+                 "height":235,
                  "id":29,
                  "name":"Pipe",
-                 "rotation":45,
-                 "type":"",
-                 "visible":true,
-                 "width":400,
-                 "x":64,
-                 "y":730
-                },
-                {
-                 "height":0,
-                 "id":30,
-                 "name":"Treadmill",
-                 "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":0,
-                 "x":1377.33333333333,
-                 "y":796
+                 "width":574,
+                 "x":185.098234907234,
+                 "y":972.464515049176
                 }, 
                 {
                  "height":0,
@@ -149,8 +117,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":374,
-                 "y":270
+                 "x":60,
+                 "y":534
                 }, 
                 {
                  "height":0,
@@ -161,8 +129,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":366,
-                 "y":738
+                 "x":960,
+                 "y":1014
                 }, 
                 {
                  "height":0,
@@ -173,8 +141,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1622,
-                 "y":758
+                 "x":1848,
+                 "y":554
                 }, 
                 {
                  "height":0,
@@ -185,15 +153,92 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1554,
-                 "y":270
+                 "x":964,
+                 "y":90
+                }, 
+                {
+                 "height":223,
+                 "id":76,
+                 "name":"Pipe",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":574,
+                 "x":1165,
+                 "y":-108
+                }, 
+                {
+                 "height":172,
+                 "id":77,
+                 "name":"Pipe",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":456,
+                 "x":369,
+                 "y":-85
+                }, 
+                {
+                 "height":170,
+                 "id":78,
+                 "name":"Pipe",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":484,
+                 "x":1144,
+                 "y":1011
+                }, 
+                {
+                 "height":406,
+                 "id":79,
+                 "name":"Pipe",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":207,
+                 "x":-85.9999999999999,
+                 "y":641
+                }, 
+                {
+                 "height":406,
+                 "id":80,
+                 "name":"Pipe",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":214,
+                 "x":1788,
+                 "y":40
+                }, 
+                {
+                 "height":438.283997507617,
+                 "id":81,
+                 "name":"Pipe",
+                 "rotation":35,
+                 "type":"",
+                 "visible":true,
+                 "width":224.35479208483,
+                 "x":48.6945480368801,
+                 "y":-54.8684511772645
+                }, 
+                {
+                 "height":417.706288218483,
+                 "id":82,
+                 "name":"Pipe",
+                 "rotation":-155,
+                 "type":"",
+                 "visible":true,
+                 "width":200.928818542081,
+                 "x":1695.39166826372,
+                 "y":664.015557777398
                 }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
          "id":4,
@@ -216,7 +261,7 @@
          "visible":true,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
          "id":5,
@@ -231,9 +276,9 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":960,
-                 "y":75
-                },
+                 "x":1644,
+                 "y":291
+                }, 
                 {
                  "height":0,
                  "id":7,
@@ -243,9 +288,9 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":75,
-                 "y":540
-                },
+                 "x":359,
+                 "y":248
+                }, 
                 {
                  "height":0,
                  "id":8,
@@ -255,9 +300,9 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1845,
-                 "y":540
-                },
+                 "x":1589,
+                 "y":806
+                }, 
                 {
                  "height":0,
                  "id":9,
@@ -267,8 +312,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":960,
-                 "y":1005
+                 "x":308,
+                 "y":819
                 }],
          "offsetx":2,
          "offsety":-2,
@@ -277,7 +322,7 @@
          "visible":true,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
          "id":7,
@@ -294,7 +339,7 @@
                  "width":0,
                  "x":662,
                  "y":376
-                },
+                }, 
                 {
                  "height":0,
                  "id":21,
@@ -306,7 +351,7 @@
                  "width":0,
                  "x":1066,
                  "y":310
-                },
+                }, 
                 {
                  "height":0,
                  "id":22,
@@ -318,7 +363,7 @@
                  "width":0,
                  "x":1294,
                  "y":526
-                },
+                }, 
                 {
                  "height":0,
                  "id":23,
@@ -330,7 +375,7 @@
                  "width":0,
                  "x":1090,
                  "y":730
-                },
+                }, 
                 {
                  "height":0,
                  "id":24,
@@ -348,7 +393,7 @@
          "visible":true,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
          "id":6,
@@ -365,7 +410,7 @@
                  "width":0,
                  "x":960,
                  "y":300
-                },
+                }, 
                 {
                  "height":0,
                  "id":11,
@@ -377,7 +422,7 @@
                  "width":0,
                  "x":540,
                  "y":540
-                },
+                }, 
                 {
                  "height":0,
                  "id":12,
@@ -389,7 +434,7 @@
                  "width":0,
                  "x":960,
                  "y":780
-                },
+                }, 
                 {
                  "height":0,
                  "id":13,
@@ -409,10 +454,10 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":76,
+ "nextobjectid":83,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.3.3",
+ "tiledversion":"1.2.5",
  "tileheight":8,
  "tilesets":[],
  "tilewidth":8,

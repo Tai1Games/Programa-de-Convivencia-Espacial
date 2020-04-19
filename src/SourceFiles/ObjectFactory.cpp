@@ -79,6 +79,36 @@ Entity* ObjectFactory::makeWall(EntityManager* entityManager, b2World* physicsWo
 	return e;
 }
 
+Entity* ObjectFactory::makePipe(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, float rotation) {
+	
+	Entity* e = entityManager->addEntity();								 // x, y,width, height, density,friction, restitution, linearDrag, angularDrag,	Layer, sensor
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::Wall, false);
+	aux->setUserData(e);
+	
+	//Por si se debe de invertir la imagen en tuberias horizontales
+	if (size.x > size.y) {
+		e->addComponent<Viewer>(Resources::PipeHor);
+		if (pos.y > CONST(int, "WINDOW_HEIGHT") / CONST(double, "PIXELS_PER_METER") / 2) {
+			aux->getBody()->SetTransform(pos, CONST(double, "PI"));
+		}
+	}
+//Por si se debe de invertir la imagen en tuberias verticales
+	else {
+		e->addComponent<Viewer>(Resources::PipeVer);
+		if (pos.x > CONST(int, "WINDOW_WIDTH") / CONST(double, "PIXELS_PER_METER") / 2) {
+			aux->getBody()->SetTransform(pos, CONST(double, "PI"));
+		}
+	}
+		//Si la tuberia tiene una rotacion especial se la aplicamos
+	if (rotation != 0) { aux->getBody()->SetTransform(pos, rotation * (-CONST(double, "PI")) / 180); }
+
+	return e;
+}
+
+	
+
+
+
 Entity* ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
 	Entity* e = entityManager->addEntity();
