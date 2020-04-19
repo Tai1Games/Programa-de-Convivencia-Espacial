@@ -217,7 +217,7 @@
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="BoilerButtonLogic.h">
-        <Filter>Header Files\Components</Filter>
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Treadmill.h">
       <Filter>Header Files\Components</Filter>
@@ -230,6 +230,12 @@
     </ClInclude>
     <ClInclude Include="ObjectPool.h">
       <Filter>Header Files\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeGameMode.h">
+      <Filter>Header Files\GameModes</Filter>
+    </ClInclude>
+    <ClInclude Include="ThrownByPlayer.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -385,6 +391,15 @@
     </ClCompile>
     <ClCompile Include="FireBallPool.cpp">
       <Filter>Source Files\Pools</Filter>
+    </ClCompile>
+    <ClCompile Include="BoilerButtonLogic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ThrownByPlayer.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeGameMode.cpp">
+      <Filter>Source Files\GameModes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
