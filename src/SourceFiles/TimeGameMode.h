@@ -41,5 +41,6 @@ public:
 	virtual void render();
 	virtual void update();
 	virtual void addPoints(int playerID);
+	virtual void playerKillsPlayer(int killerId, int deadId = -1);
 };
 

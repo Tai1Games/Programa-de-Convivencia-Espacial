@@ -3,13 +3,10 @@
 #include "ThrownByPlayer.h"
 
 TimeGameMode::TimeGameMode(int nPlayers) :
-	GameMode(nPlayers)
-{
-
+	GameMode(nPlayers) {
 }
 
-TimeGameMode::~TimeGameMode()
-{
+TimeGameMode::~TimeGameMode() {
 }
 
 void TimeGameMode::init(PlayState* game)
@@ -130,7 +127,11 @@ void TimeGameMode::update()
 void TimeGameMode::addPoints(int playerID)
 {
 	playerKills_[playerID]++;
+}
 
+void TimeGameMode::playerKillsPlayer(int killerId, int deadId)
+{
+	addPoints(killerId);
 }
 
 void TimeGameMode::renderTimer(int seconds, int minutes) {

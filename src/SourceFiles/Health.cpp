@@ -83,7 +83,8 @@ void Health::onCollisionEnter(Collision* c)
 		int impact = force.Length();
 		Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
 		ThrownByPlayer* objThrown = nullptr;
-		//Si se impacta con un arma al umbral m�s alto de fuerza, se recibe su da�o de impacto
+		PlayerData* playerWhoHitMe = nullptr;
+		//Si se impacta con un arma al umbral m�s alto de fuerza, se recibe su daño de impacto
 		if (w != nullptr) {
 			impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
 			objThrown = GETCMP_FROM_FIXTURE_(fix, ThrownByPlayer);
@@ -97,11 +98,23 @@ void Health::onCollisionEnter(Collision* c)
 
 			else if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) impact = 2;
 
-			else if (impact >= CONST(double, "HIGH_DAMAGE")) /*&& impact < CONST(double, "HIGH_DAMAGE"))*/ impact = 3;
+			else if (impact >= CONST(double, "HIGH_DAMAGE")) impact = 3;
+
+			// we get the Id of the player who hit me at high speed
+			// (it may not exist, so we check later that it's not nullptr
+			playerWhoHitMe = GETCMP_FROM_FIXTURE_(fix, PlayerData);
 		}
 
 		if (!subtractLife(impact)) {
+			// player is killed by a weapon
 			if (objThrown != nullptr) objThrown->addPointsToOwner();
+
+			// player is killed by another player at high speed
+			else if (playerWhoHitMe != nullptr) {
+				GameMode* s = c->collisionHandler->getGamemode();
+				s->playerKillsPlayer(playerWhoHitMe->getPlayerNumber());
+			}
+
 			playerDead(c);
 		}
 	}
