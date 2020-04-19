@@ -1,6 +1,7 @@
 #pragma once
 #include "ObjectPool.h"
 #include "Entity.h"
+#include "Constants.h"
 
 class EntityManager;
 class b2World;
@@ -9,8 +10,7 @@ class b2Vec2;
 class FireBallPool
 {
 private:
-	ObjectPool<Entity, 5> fireballPool_;
-	int fireballW_, fireballH_, fireballSpeed_;
+	ObjectPool<Entity, FIREBALL_POOL_SIZE> fireballPool_;
 public:
 	FireBallPool();
 	~FireBallPool() {}
