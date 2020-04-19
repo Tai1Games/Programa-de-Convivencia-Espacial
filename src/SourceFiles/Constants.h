@@ -36,6 +36,7 @@ enum GamemodeID {
 	Controller,
 	Stocks,
 	WiFight,
+	Timed,
 	NUMBER_OF_GAMEMODES
 };
 

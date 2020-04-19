@@ -77,7 +77,6 @@ void CapitalismGameMode::update() {
 			coinsSpawned_++;
 		}
 	}
-	
 }
 
 void CapitalismGameMode::render() {

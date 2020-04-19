@@ -3,6 +3,7 @@
 #include "WiFightGameMode.h"
 #include "ControllerGameMode.h"
 #include "CapitalismGameMode.h"
+#include "TimeGameMode.h"
 #include "Constants.h"
 #include "PlayState.h"
 #include "PauseState.h"
@@ -51,9 +52,9 @@ void GameStateMachine::changeToState(int state, int numberOfPlayers, int gameMod
 					case (GamemodeID::WiFight):
 						states_[state] = new PlayState(new WiFightGameMode(numberOfPlayers), tileMap);
 						break;
-						/*case (GamemodeID::Timed):
-							states_[state] = new PlayState(new WiFightGameMode(numberOfPlayers), tileMap);
-							break;*/
+					case (GamemodeID::Timed):
+						states_[state] = new PlayState(new TimeGameMode(numberOfPlayers), tileMap);
+						break;
 					}
 				}
 				break;

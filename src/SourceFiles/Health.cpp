@@ -5,6 +5,7 @@
 #include "Weapon.h"
 #include "AttachesToObjects.h"
 #include "CollisionHandler.h"
+#include "ThrownByPlayer.h"
 
 Health::Health(int l) : Component(ComponentType::Health)
 {
@@ -24,8 +25,8 @@ bool Health::subtractLife(int damage)
 {
 	if (lives_ > 0) {
 		lives_ -= damage;
-		if (lives_ <= 0) { 
-			lives_ = 0; 
+		if (lives_ <= 0) {
+			lives_ = 0;
 			return false;}	//Evitar vidas negativas
 		return true;
 	}
@@ -81,9 +82,12 @@ void Health::onCollisionEnter(Collision* c)
 		b2Vec2 force = c->hitFixture->GetBody()->GetMass() * c->hitFixture->GetBody()->GetLinearVelocity();
 		int impact = force.Length();
 		Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
-		//Si se impacta con un arma al umbral más alto de fuerza, se recibe su daño de impacto
+		ThrownByPlayer* objThrown = nullptr;
+		PlayerData* playerWhoHitMe = nullptr;
+		//Si se impacta con un arma al umbral mï¿½s alto de fuerza, se recibe su daÃ±o de impacto
 		if (w != nullptr) {
 			impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
+			objThrown = GETCMP_FROM_FIXTURE_(fix, ThrownByPlayer);
 		}
 		else {
 			//Depending on the force of impact we apply damage to the player
@@ -94,11 +98,24 @@ void Health::onCollisionEnter(Collision* c)
 
 			else if (impact >= CONST(double, "MEDIUM_DAMAGE") && impact < CONST(double, "HIGH_DAMAGE")) impact = 2;
 
-			else if (impact >= CONST(double, "HIGH_DAMAGE")) /*&& impact < CONST(double, "HIGH_DAMAGE"))*/ impact = 3;
+			else if (impact >= CONST(double, "HIGH_DAMAGE")) impact = 3;
+
+			// we get the Id of the player who hit me at high speed
+			// (it may not exist, so we check later that it's not nullptr
+			playerWhoHitMe = GETCMP_FROM_FIXTURE_(fix, PlayerData);
 		}
 
-		if (!subtractLife(impact))
-			playerDead(c);
+		if (!subtractLife(impact)) {
+			// player is killed by a weapon
+			if (objThrown != nullptr) objThrown->addPointsToOwner();
 
+			// player is killed by another player at high speed
+			else if (playerWhoHitMe != nullptr) {
+				GameMode* s = c->collisionHandler->getGamemode();
+				s->playerKillsPlayer(playerWhoHitMe->getPlayerNumber());
+			}
+
+			playerDead(c);
+		}
 	}
 }

@@ -44,6 +44,7 @@ public:
 		CoinUI,
 		CanvasTimer,
 		SuddenDeathText,
+		SuddenDeathTimeModeText,
 		EmptyProgressBar,
 		ProgressBar,
 		EmptyProgressBar2,
@@ -51,6 +52,8 @@ public:
 		Fireball,
 		Boiler,
 		PadSpriteSheet,
+		IncreasingFreqButton,
+		DecreasingFreqButton,
 		Treadmill,
 		TreadmillSpriteSheet,
 
