@@ -19,6 +19,7 @@ void TimeGameMode::init(PlayState* game)
 	winHeigth_ = CONST(int, "WINDOW_HEIGHT");
 	killsMarkerWidth_ = CONST(int, "KILLS_WIDTH");
 	killsMarkerHeight_ = CONST(int, "KILLS_HEIGHT");
+	suddenDeathRenderTime = CONST(double, "SUDDEN_DEATH_RENDER_TIME");
 
 	for (int i = 0; i < nPlayers_; i++) {
 		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), i,
@@ -35,7 +36,7 @@ void TimeGameMode::init(PlayState* game)
 
 		Entity* e = players_[i];
 		playersHealth_.push_back(e->getComponent<Health>(ComponentType::Health)); //Initializes playersHealth vector catching a reference to Health on entity e.
-		HealthViewer* hV = (e->getComponent<HealthViewer>(ComponentType::HealthViewer)); //Obtains a reference to the HealthViewer component of entity e. This is used to calculate where the stocks will be drawn
+		HealthViewer* hV = (e->getComponent<HealthViewer>(ComponentType::HealthViewer)); //Obtains a reference to the HealthViewer component of entity e. This is used to calculate where the kills will be drawn
 		b2Vec2 p = hV->getPos();
 
 		//Players 1 & 3 will be drawn on the left side of the screen. Players 2 & 4 will be drawn on the right.
