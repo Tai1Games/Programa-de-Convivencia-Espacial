@@ -33,6 +33,7 @@ Collider::Collider(b2World* world, b2BodyType type, float x, float y, float radi
 void Collider::init() {
 	PIXELS_PER_METER = CONST(double, "PIXELS_PER_METER");
 	WINDOW_HEIGHT = CONST(int, "WINDOW_HEIGHT");
+	setUserData(entity_);
 }
 
 void Collider::createRectangularFixture(float width, float height, float density,
