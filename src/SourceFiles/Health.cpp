@@ -14,7 +14,6 @@ Health::Health(int l) : Component(ComponentType::Health)
 
 void Health::init() {
 	//col_ = GETCMP1_(Collider);
-	//col_->setUserData(this);
 }
 
 Health::~Health()
