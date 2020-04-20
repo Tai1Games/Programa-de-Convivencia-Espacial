@@ -237,6 +237,9 @@
     <ClInclude Include="ThrownByPlayer.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="TomatoLogic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -392,14 +395,17 @@
     <ClCompile Include="FireBallPool.cpp">
       <Filter>Source Files\Pools</Filter>
     </ClCompile>
-    <ClCompile Include="BoilerButtonLogic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ThrownByPlayer.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="TimeGameMode.cpp">
       <Filter>Source Files\GameModes</Filter>
+    </ClCompile>
+    <ClCompile Include="TomatoLogic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BoilerButtonLogic.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

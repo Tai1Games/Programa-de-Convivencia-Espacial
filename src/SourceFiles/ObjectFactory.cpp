@@ -17,6 +17,7 @@
 #include "BoilerButtonLogic.h"
 #include "Pad.h"
 #include "Treadmill.h"
+#include "TomatoLogic.h"
 
 Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 	
@@ -164,6 +165,19 @@ Entity* ObjectFactory::makeDumbbell(EntityManager* entityManager, b2World* physi
 		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Mancuerna);
 	e->addComponent<Weapon>(WeaponID::Mancuerna, CONST(int, "DUMBBELL_DAMAGE"), CONST(int, "DUMBBELL_IMPACT_DAMAGE"));
+
+	return e;
+}
+
+Entity* ObjectFactory::makeTomato(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
+{
+	Entity* e = entityManager->addEntity();
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, 1, CONST(double, "DUMBBELL_DENSITY"),
+		CONST(double, "DUMBBELL_FRICTION"), CONST(double, "DUMBBELL_RESTITUTION"),
+		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent <Viewer>(Resources::Tomato);
+	e->addComponent<Weapon>(WeaponID::Tomato, 0, 0);
+	e->addComponent<TomatoLogic>();
 
 	return e;
 }

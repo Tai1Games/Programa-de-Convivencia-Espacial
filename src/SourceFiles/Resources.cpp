@@ -50,7 +50,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
 	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
 	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
-	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"}
+	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
+	{ Tomato, resourcesPath + "textures/Tomato.png"}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{

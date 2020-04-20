@@ -58,7 +58,7 @@ public:
 		TreadmillSpriteSheet,
 		PipeHor,
 		PipeVer,
-
+		Tomato,
 
 		// text
 		PauseText,
