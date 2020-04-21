@@ -30,9 +30,8 @@ protected:
 	bool picked_ = false;
 	WeaponID weaponType_;
 
-	/*Vector que informa de los jugadores que est�n cerca/dentro del trigger y su respectivo Weapon*/
+	/*Vector que informa de los jugadores que están cerca/dentro del trigger y su respectivo Weapon*/
 	std::vector<PlayerInfo> playerInfo_;
-	std::vector<EnemyData>playersInsideRange_;
 
 	Viewer* vw_ = nullptr;
 	Collider* mainCollider_ = nullptr;
@@ -40,9 +39,7 @@ protected:
 	/*Mano que coge este objeto*/
 	Hands* currentHand_ = nullptr;
 
-	int impactDamage_ = 0;
-	int actionTime = 0;
-	int index = 2;
+	int impactDamage_ = 0;	
 
 	int calculateCoinsDropped(int coinsPlayer);
 
@@ -56,27 +53,28 @@ public:
 
 	virtual void handleInput() override;
 
-	virtual void onCollisionEnter(Collision* c);
-	virtual void onCollisionExit(Collision* c);
-
 	/*Desactiva el arma y se anade a la mano este arma*/
-	void PickObjectBy(Hands* playerHands);
+	virtual void PickObjectBy(Hands* playerHands);
 	/*Muestra si el objeto ya esta sujeto por una mano*/
 	bool IsPicked() { return picked_; }
 	/*Reactiva el arma y la lanza en direccion de la mano*/
 	virtual void UnPickObject();
-	/*Guarda la informacion del jugador que esta dentro del trigger*/
-	void SavePlayerInfo(int index, Hands* playerH, Health* healthAux, Wallet* walletAux);
-	/*Borra la informacion del jugador que sale del trigger*/
-	void DeletePlayerInfo(int index);
-
-	void detectPlayer(Entity* playerDetected, int id);
-	void loseContactPlayer(Entity* playerDetected, int id);
 
 	int getImpactDamage() { return impactDamage_; }
 	int getWeaponType() { return weaponType_; }
 	Hands* getCurrentHand() { return currentHand_; }
 
 	int getPlayerId(); //Cuerpo en el cpp por temas de inclusi�n circular
+
+	virtual void onCollisionEnter(Collision* c);
+	virtual void onCollisionExit(Collision* c);
+
+	/*Guarda la informacion del jugador que esta dentro del trigger*/
+	void SavePlayerInfo(int index, Hands* playerH, Health* healthAux, Wallet* walletAux);
+	/*Borra la informacion del jugador que sale del trigger*/
+	void DeletePlayerInfo(int index);
+
+	virtual void detectPlayer(Entity* playerDetected, int id) {};
+	virtual void loseContactPlayer(Entity* playerDetected, int id) {};
 };
 

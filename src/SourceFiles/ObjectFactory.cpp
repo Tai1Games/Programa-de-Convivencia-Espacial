@@ -13,6 +13,7 @@
 #include "FireBallGenerator.h"
 #include "Fireball.h"
 #include "ExtinguisherWeapon.h"
+#include "MeleeWeapon.h"
 #include "ParticleEmitter.h"
 #include "BoilerButtonLogic.h"
 #include "Pad.h"
@@ -25,7 +26,7 @@ Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physic
 		CONST(double, "FLIPFLOP_FRICTION"), CONST(double, "FLIPFLOP_RESTITUTION"),
 		CONST(double, "FLIPFLOP_LINEAR_DRAG"), CONST(double, "FLIPFLOP_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Slipper);
-	//e->addComponent<Weapon>(WeaponID::Slipper, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"));
+	e->addComponent<MeleeWeapon>(WeaponID::Slipper, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"), CONST(int, "FLIPFLOP_COOLDOWN_FRAMES"));
 
 	return e;
 }
@@ -81,7 +82,7 @@ Entity* ObjectFactory::makeDumbbell(EntityManager* entityManager, b2World* physi
 		CONST(double, "DUMBBELL_FRICTION"), CONST(double, "DUMBBELL_RESTITUTION"),
 		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Mancuerna);
-	//e->addComponent<Weapon>(WeaponID::Mancuerna, CONST(int, "DUMBBELL_DAMAGE"), CONST(int, "DUMBBELL_IMPACT_DAMAGE"));
+	e->addComponent<MeleeWeapon>(WeaponID::Mancuerna, CONST(int, "DUMBBELL_DAMAGE"), CONST(int, "DUMBBELL_IMPACT_DAMAGE"), CONST(int,"DUMBBELL_COOLDOWN_FRAMES"));
 
 	return e;
 }
@@ -162,7 +163,7 @@ Entity* ObjectFactory::makeFireball(Entity* e, EntityManager* entityManager, b2W
 	Collider* auxCol = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "FIREBALL_RADIUS"), CONST(double, "FIREBALL_DENSITY"), CONST(double, "FIREBALL_FRICTION"), CONST(double, "FIREBALL_ANGULAR_DRAG"), 1, 1, Collider::CollisionLayer::NormalObject, false);
 	e->addComponent<Viewer>(Resources::Fireball);
 	e->addComponent<Fireball>();
-	//e->addComponent<Weapon>(WeaponID::Piedra, 999, 999);//Si, el fuego es una piedra muy caliente. Mucho m�s que el magma, esta caldera echa bolas de PLASMA, el cuarto estado de la materia
+	e->addComponent<Weapon>(WeaponID::Piedra, 999);//Si, el fuego es una piedra muy caliente. Mucho m�s que el magma, esta caldera echa bolas de PLASMA, el cuarto estado de la materia
 
 	return e;
 }
