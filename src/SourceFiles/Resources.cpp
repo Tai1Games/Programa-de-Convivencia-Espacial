@@ -10,6 +10,11 @@ vector<Resources::FontInfo> Resources::fonts_{
 vector<Resources::ImageInfo> Resources::images_{
 	//Im�genes {nombre_en_enum, ruta}
 
+	// room backgrounds
+	{ LivingRoom,resourcesPath + "textures/Background_LivingRoom.png"},
+	{ BoilerRoom,resourcesPath + "textures/Background_BoilerRoom.png"},
+	{ GymRoom,resourcesPath + "textures/Background_GymRoom.png"},
+
 	{ Debug, resourcesPath + "textures/debug.png" },
 	{ Tinky, resourcesPath + "textures/Tinky.png" },
 	{ ActiveHealth, resourcesPath + "textures/VidaActiva.png" },
@@ -27,9 +32,6 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png"},
 	{ Slider, resourcesPath + "textures/Slider.png"},
 	{ SliderControl, resourcesPath + "textures/SliderControl.png"},
-	{ LivingRoom,resourcesPath + "textures/SalaDeEstar.png"},
-	{ BoilerRoom,resourcesPath + "textures/SalaCaldera.png"},
-	{ GymRoom,resourcesPath + "textures/gimnasio.png"},
 	{ Negro ,resourcesPath + "textures/Negro.png"},
 	{ Router,resourcesPath + "textures/Router.png" },
 	{ Router,resourcesPath + "textures/Router.png" },

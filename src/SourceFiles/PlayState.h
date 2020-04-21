@@ -29,10 +29,10 @@ private:
 	double secondsPerFrame_ = 0.016;
 	string tilemapName_;
 	Texture* fondo_;
-	std::map<string, int> resourceMap_ = { //añadir aquí los mapas que se vayan haciendo
+	std::map<string, Resources::TextureId> resourceMap_ = { //añadir aquí los mapas que se vayan haciendo
 		{"LivingRoom",Resources::LivingRoom},
 		{"BoilerRoom",Resources::BoilerRoom},
-		{"Gimnasio",Resources::GymRoom}
+		{"GymRoom",Resources::GymRoom}
 	};
 	TileMap* tilemap_;
 
