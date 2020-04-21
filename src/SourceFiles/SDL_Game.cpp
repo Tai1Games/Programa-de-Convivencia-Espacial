@@ -32,7 +32,7 @@ SDL_Game::SDL_Game() {
 	MS_PER_FRAME_ = constants_.getConstant<double>("MS_PER_FRAME");
 
 	audio_->setMusicVolume(constants_.getConstant<int>("MAX_MUSIC_VOLUME"));
-	audio_->playMusic(Resources::GymMusic, -1);
+	//audio_->playMusic(Resources::GymMusic, -1);
 	inputHandler_ = new InputHandler();
 	inputHandler_->initialiseGamepads();
 
@@ -101,7 +101,7 @@ void SDL_Game::closeResources() {
 
 void SDL_Game::start() {
 	exit_ = false;
-	gamestateMachine_->changeToState(States::play, 4, GamemodeID::Timed, "GymRoom"); //BoilerRoom, LivingRoom, GymRoom
+	gamestateMachine_->changeToState(States::play, 4, GamemodeID::Timed, "BoilerRoom"); //BoilerRoom, LivingRoom, GymRoom
 
 	if (inputHandler_->getNumControllers() > 0) {
 		while (!exit_) {

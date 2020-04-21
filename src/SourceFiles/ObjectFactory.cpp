@@ -39,7 +39,7 @@ Entity* ObjectFactory::makeBall(EntityManager* entityManager, b2World* physicsWo
 		CONST(double, "BOUNCINGBALL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	aux->getBody()->SetLinearDamping(0);
 	aux->getBody()->SetAngularDamping(0);
-	e->addComponent <Viewer>(Resources::Pelota);
+	e->addComponent <Viewer>(Resources::Ball);
 	e->addComponent<Weapon>(WeaponID::Pelota, CONST(int, "BOUNCINGBALL_DAMAGE"), CONST(int, "BOUNCINGBALL_IMPACT_DAMAGE"));
 
 	return e;
@@ -107,7 +107,7 @@ Entity* ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* phys
 {
 	Entity* e = entityManager->addEntity();
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false);
-	e->addComponent<Viewer>(Resources::Piedra);
+	e->addComponent<Viewer>(Resources::Stone);
 
 	aux->applyLinearImpulse(b2Vec2(0, 50), b2Vec2(0.1, 0));
 
