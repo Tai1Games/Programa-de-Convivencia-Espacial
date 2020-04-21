@@ -2,6 +2,8 @@
 #include "InputHandler.h"
 #include "Collision.h"
 #include "CollisionHandler.h"
+#include "SDL_macros.h"
+#include <math.h>
 
 void AttachesToObjects::init() {
 	playerData_ = GETCMP1_(PlayerData);
@@ -10,9 +12,11 @@ void AttachesToObjects::init() {
 	playerNumber_ = playerData_->getPlayerNumber();
 }
 
-void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint) {
+void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint, b2Vec2 collNormal) {
 	if (joint_ == nullptr) {
 		attachedObject_ = attachedObject;
+		float attachAngle = std::atan2(perpendicularClockwise(collNormal).x, perpendicularClockwise(collNormal).y);
+		mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
 		b2WeldJointDef jointDef; //Definición del nuevo joint.
 		jointDef.bodyA = mainCollider_->getBody(); //Body del jugador.
 		jointDef.bodyB = attachedObject; //Body del objeto al que se tiene que atar.
@@ -20,6 +24,7 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint)
 		jointDef.localAnchorA = jointDef.bodyA->GetLocalPoint(collPoint); //Punto donde se ata el cuerpo A al cuerpo B
 		jointDef.localAnchorB = jointDef.bodyB->GetLocalPoint(collPoint); //Punto donde se ata el cuerpo B al cuerpo A
 		jointDef.referenceAngle = jointDef.bodyB->GetAngle() - jointDef.bodyA->GetAngle(); //Ángulo conjunto del cuerpo
+		cout << "se agarra en " << jointDef.localAnchorA.x << " "<<jointDef.localAnchorA.y<< " con un angulo local de " << jointDef.bodyA->GetAngle() <<  "y global " << jointDef.referenceAngle <<endl;
 		b2World* world = mainCollider_->getWorld(); //Obtenemos el mundo físico para crear el joint
 		joint_ = (b2WeldJoint*)world->CreateJoint(&jointDef); //Crea el joint con la definición que hemos definido previamente
 	}
@@ -58,7 +63,7 @@ void AttachesToObjects::onCollisionEnter(Collision* c){
 			b2WorldManifold manifold;
 			c->contact->GetWorldManifold(&manifold);
 			c->collisionHandler->createWeld
-			(CollisionHandler::weldData(this, c->hitFixture->GetBody(), b2Vec2(manifold.points[0].x, manifold.points[0].y)));
+			(CollisionHandler::weldData(this, c->hitFixture->GetBody(), b2Vec2(manifold.points[0].x, manifold.points[0].y),manifold.normal));
 		}
 		else {
 			cout << "colision sin input con grabbable" << endl;

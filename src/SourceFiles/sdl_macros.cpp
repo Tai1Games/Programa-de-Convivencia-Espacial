@@ -17,3 +17,13 @@ SDL_Color hex2sdlcolor(std::string input) {
     color.a = (value >> 0) & 0xff;
     return color;
 }
+
+b2Vec2 perpendicularClockwise(b2Vec2 v)
+{
+	return b2Vec2(v.y,-v.x);
+}
+
+b2Vec2 perpendicularCounterClockwise(b2Vec2 v)
+{
+    return b2Vec2(-v.y,v.x);
+}
