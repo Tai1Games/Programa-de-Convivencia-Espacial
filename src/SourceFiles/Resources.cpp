@@ -49,7 +49,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SpaceSuit, resourcesPath + "textures/PinkTinky.png"},	// dead body
 
 	// Map elements
-	{ Boiler,resourcesPath + "textures/boiler_placeholder.png"},
+	{ Boiler,resourcesPath + "textures/CalderaPro.png"},
 	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
 	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
 	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png" },
