@@ -13,6 +13,7 @@
 #include "FireBallGenerator.h"
 #include "Fireball.h"
 #include "ExtinguisherWeapon.h"
+#include "SlipperWeapon.h"
 #include "MeleeWeapon.h"
 #include "ParticleEmitter.h"
 #include "BoilerButtonLogic.h"
@@ -26,7 +27,7 @@ Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physic
 		CONST(double, "FLIPFLOP_FRICTION"), CONST(double, "FLIPFLOP_RESTITUTION"),
 		CONST(double, "FLIPFLOP_LINEAR_DRAG"), CONST(double, "FLIPFLOP_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Slipper);
-	e->addComponent<MeleeWeapon>(WeaponID::Slipper, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"), CONST(int, "FLIPFLOP_COOLDOWN_FRAMES"));
+	e->addComponent<SlipperWeapon>(WeaponID::Slipper, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"), CONST(int, "FLIPFLOP_COOLDOWN_FRAMES"));
 
 	return e;
 }

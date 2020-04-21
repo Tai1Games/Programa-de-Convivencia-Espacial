@@ -3,8 +3,9 @@
 #include "Entity.h"
 #include "Collision.h"
 
-MeleeWeapon::MeleeWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : ActionableWeapon(ComponentType::MeleeWeapon, wId, impactDamage_, cooldownFrames),
-damage_(dmg) {};
+MeleeWeapon::MeleeWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : MeleeWeapon(ComponentType::MeleeWeapon, wId, dmg, impactDmg, cooldownFrames) {};
+
+MeleeWeapon::MeleeWeapon(ComponentType::CmpId compType, WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : ActionableWeapon(compType, wId, impactDmg, cooldownFrames), damage_(dmg) {}
 
 void MeleeWeapon::init() {
 	Weapon::init();
@@ -17,12 +18,6 @@ void MeleeWeapon::action() {
 	if (!beenActivated_) {
 		cout << "ACCION ARMA MELEE ACTIVADA" << endl;
 		if (playersInsideRange_.size() > 0) {
-			//Calculo del daño de la chancla
-			if (playerInfo_[currentHand_->getPlayerId()].playerHealth) {
-				damage_ = playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealthMax() - playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealth() + 1;
-			}
-			else damage_ = calculateCoinsDropped(playerInfo_[currentHand_->getPlayerId()].playerWallet->getCoins());
-
 			//cout << "Golpeaste con una fuerza de " << damage_ << " al contrincante" << endl;
 			vector<EnemyData>::iterator it = playersInsideRange_.begin();
 			while (it != playersInsideRange_.end()) {
@@ -60,12 +55,12 @@ void MeleeWeapon::PickObjectBy(Hands* playerHands) {
 		currentHand_->setWeapon(weaponType_, this);
 		//Creamos el trigger de ataque
 		mainCollider_->createRectangularFixture(mainCollider_->getW(0) * 2, mainCollider_->getH(0) * 2, 1, 0.1, 0, Collider::CollisionLayer::PickableObject, true);
-		//Trigger de la Chancla(Cambiamos con quien colisiona)
+		//Trigger del arma(Cambiamos con quien colisiona)
 		b2Filter aux1 = mainCollider_->getFixture(0)->GetFilterData();
 		aux1.categoryBits = Collider::CollisionLayer::Trigger;
 		aux1.maskBits = Collider::CollisionLayer::Player;
 		mainCollider_->getFixture(1)->SetFilterData(aux1);
-		//Caja colision de la chancla
+		//Caja colision
 		b2Filter aux = mainCollider_->getFixture(0)->GetFilterData();
 		aux.categoryBits = Collider::CollisionLayer::UnInteractableObject;
 		aux.maskBits = Collider::CollisionLayer::Wall;
@@ -75,12 +70,12 @@ void MeleeWeapon::PickObjectBy(Hands* playerHands) {
 }
 
 void MeleeWeapon::UnPickObject() {
-	//Trigger de la Chancla(Restairamos sus capas de colision)
+	//Trigger del arma(Restairamos sus capas de colision)
 	b2Filter aux1 = mainCollider_->getFixture(0)->GetFilterData();
 	aux1.categoryBits = Collider::CollisionLayer::PickableObject;
 	aux1.maskBits = Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall;
 	mainCollider_->getFixture(1)->SetFilterData(aux1);
-	//Caja colision de la chancla
+	//Caja colision
 	b2Filter aux = mainCollider_->getFixture(0)->GetFilterData();
 	aux.categoryBits = Collider::CollisionLayer::NormalObject;
 	aux.maskBits = Collider::CollisionLayer::NormalObject | Collider::CollisionLayer::NormalAttachableObject | Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall;
