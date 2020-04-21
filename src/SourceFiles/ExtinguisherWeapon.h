@@ -12,7 +12,7 @@ protected:
 	float PIXELS_PER_METER;
 	int WINDOW_HEIGHT;
 public:
-	ExtinguisherWeapon(WeaponID wId, int dmg, int impctDmg);
+	ExtinguisherWeapon(WeaponID wId, int impctDmg, int cooldownFrames);
 	~ExtinguisherWeapon() {}
 
 	virtual void init() override;

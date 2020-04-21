@@ -8,9 +8,9 @@ protected:
 	int damage_ = 0;
 public:
 	MeleeWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames);
-	virtual ~MeleeWeapon();
+	virtual ~MeleeWeapon() {};
 
-	virtual void init() override;
+	//virtual void init() override;
 	virtual void action() override;
 	//Alterar el viewer
 };
