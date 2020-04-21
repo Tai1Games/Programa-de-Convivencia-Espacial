@@ -15,7 +15,9 @@ void AttachesToObjects::init() {
 void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint, b2Vec2 collNormal) {
 	if (joint_ == nullptr) {
 		attachedObject_ = attachedObject;
-		float attachAngle = std::atan2(perpendicularClockwise(collNormal).x, perpendicularClockwise(collNormal).y);
+		b2Vec2 perp = perpendicularCounterClockwise(collNormal);
+		float attachAngle = std::atanf(perp.y/perp.x);
+		attachAngle += CONST(double,"PI") / 2;
 		mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
 		b2WeldJointDef jointDef; //Definición del nuevo joint.
 		jointDef.bodyA = mainCollider_->getBody(); //Body del jugador.
