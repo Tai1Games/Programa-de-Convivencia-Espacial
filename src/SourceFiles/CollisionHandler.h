@@ -42,9 +42,10 @@ public:
 		AttachesToObjects* player = nullptr;
 		b2Body* bodyToBeAttached = nullptr;
 		b2Vec2 collPoint;
+		b2Vec2 collNormal;
 		weldData() {};
-		weldData(AttachesToObjects* attach,b2Body* body,b2Vec2 col):
-		player(attach),bodyToBeAttached(body),collPoint(col){}
+		weldData(AttachesToObjects* attach,b2Body* body,b2Vec2 colPt,b2Vec2 colNor):
+		player(attach),bodyToBeAttached(body),collPoint(colPt), collNormal(colNor){}
 	};
 	struct moveData { //Struct donde guardamos los datos necesarios para respawnear a los jugadores
 		b2Body* body;

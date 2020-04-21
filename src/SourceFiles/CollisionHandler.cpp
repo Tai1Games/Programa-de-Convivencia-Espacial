@@ -58,7 +58,7 @@ void CollisionHandler::PostSolve(b2Contact* contact, const b2ContactImpulse* imp
 
 void CollisionHandler::SolveInteractions() {
 	for (auto data : vecWeld) { //Recorre el vector resolviendo todos los joint y lo limpia al final.
-		data.player->attachToObject(data.bodyToBeAttached, data.collPoint);
+		data.player->attachToObject(data.bodyToBeAttached, data.collPoint,data.collNormal);
 	}
 	vecWeld.clear();
 	for (auto move : vecMove) { //Recorre el vector resolviendo todos los move y lo limpia al final.
