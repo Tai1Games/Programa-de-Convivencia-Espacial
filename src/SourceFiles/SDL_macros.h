@@ -3,6 +3,7 @@
 #include <string>
 #include <SDL.h>
 #include "checkML.h"
+#include <box2d.h>
 
 
 /*
@@ -33,3 +34,6 @@
 // converts string of the form "#4455AAFF" to a corresponding SDL_Color
 //
 SDL_Color hex2sdlcolor(std::string input);
+
+b2Vec2 perpendicularClockwise(b2Vec2 v);
+b2Vec2 perpendicularCounterClockwise(b2Vec2 v);

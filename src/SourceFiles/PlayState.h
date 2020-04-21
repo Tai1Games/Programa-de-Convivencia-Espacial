@@ -26,12 +26,13 @@ private:
 	vector<Entity*> deadBodies;
 	vector<Collider*> collDeadBodies;
 	GameMode* gameMode_ = nullptr;
+	double secondsPerFrame_ = 0.016;
 	string tilemapName_;
 	Texture* fondo_;
-	std::map<string, int> resourceMap_ = { //añadir aquí los mapas que se vayan haciendo
+	std::map<string, Resources::TextureId> resourceMap_ = { //añadir aquí los mapas que se vayan haciendo
 		{"LivingRoom",Resources::LivingRoom},
 		{"BoilerRoom",Resources::BoilerRoom},
-		{"Gimnasio",Resources::SalaGimnasio}
+		{"GymRoom",Resources::GymRoom}
 	};
 	TileMap* tilemap_;
 
@@ -43,6 +44,6 @@ public:
 	void createDeadBodies();
 	virtual void render();
 	virtual void handleInput();
-	EntityManager* getEntityManager() { return entityManager_; }
-	b2World* getPhysicsWorld() { return physicsWorld_; }
+	EntityManager* getEntityManager() const { return entityManager_; }
+	b2World* getPhysicsWorld() const { return physicsWorld_; }
 };
