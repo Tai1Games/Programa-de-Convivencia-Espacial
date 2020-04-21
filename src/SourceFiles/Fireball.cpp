@@ -35,7 +35,7 @@ void Fireball::onCollisionEnter(Collision* c)
 	if (c->myFixture->IsSensor())
 	{
 		if (health != nullptr) {
-			health->playerDead(c);
+			if (health->subtractLife(3)) health->playerDead(c);
 		}
 		else if (wallet != nullptr) {
 

@@ -40,9 +40,9 @@ Entity* ObjectFactory::makeBall(EntityManager* entityManager, b2World* physicsWo
 		CONST(double, "BOUNCINGBALL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	aux->getBody()->SetLinearDamping(0);
 	aux->getBody()->SetAngularDamping(0);
-	e->addComponent <Viewer>(Resources::Pelota);
+	e->addComponent <Viewer>(Resources::Ball);
 	e->addComponent<Weapon>(WeaponID::Pelota, CONST(int, "BOUNCINGBALL_IMPACT_DAMAGE"));
-
+  
 	return e;
 }
 
@@ -129,7 +129,7 @@ Entity* ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* phys
 {
 	Entity* e = entityManager->addEntity();
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false);
-	e->addComponent<Viewer>(Resources::Piedra);
+	e->addComponent<Viewer>(Resources::Stone);
 
 	aux->applyLinearImpulse(b2Vec2(0, 50), b2Vec2(0.1, 0));
 
@@ -160,7 +160,7 @@ Entity* ObjectFactory::makeCoin(Entity* e, EntityManager* entityManager, b2World
 Entity* ObjectFactory::makeFireball(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
 {
 	entityManager->addExistingEntity(e);
-	Collider* auxCol = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "FIREBALL_RADIUS"), CONST(double, "FIREBALL_DENSITY"), CONST(double, "FIREBALL_FRICTION"), CONST(double, "FIREBALL_ANGULAR_DRAG"), 1, 1, Collider::CollisionLayer::NormalObject, false);
+	Collider* auxCol = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "FIREBALL_RADIUS"), CONST(double, "FIREBALL_DENSITY"), CONST(double, "FIREBALL_FRICTION"), CONST(double, "FIREBALL_RESTITUTION"), CONST(double, "FIREBALL_LINEAR_DRAG"), CONST(double, "FIREBALL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent<Viewer>(Resources::Fireball);
 	e->addComponent<Fireball>();
 	e->addComponent<Weapon>(WeaponID::Piedra, 999);//Si, el fuego es una piedra muy caliente. Mucho m�s que el magma, esta caldera echa bolas de PLASMA, el cuarto estado de la materia

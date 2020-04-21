@@ -37,6 +37,8 @@ void PlayState::init() {
 	entityManager_ = new EntityManager();
 	physicsWorld_ = new b2World(b2Vec2(0, 0));
 
+	secondsPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
+
 	tilemap_ = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
 		"assets/game/tilemaps/"+tilemapName_+".json",
 		entityManager_, physicsWorld_);
@@ -52,6 +54,9 @@ void PlayState::init() {
 
 	//FONDO
 	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(resourceMap_[tilemapName_]);
+	
+	//MÚSICA
+	SDL_Game::instance()->getAudioMngr()->playMusic(resourceMap_[tilemapName_], -1);
 
 	//Version estática de la factoria
 	tilemap_->executeMapFactory();
@@ -64,7 +69,7 @@ void PlayState::update() {
 	GameState::update();
 	//double d = SDL_Game::instance()->getConstants()->getConstant<double>((std::string)"SECONDS_PER_FRAME");
 	//el que vuelva tocar el step de physicsworld muere
-	physicsWorld_->Step(CONST(double,"SECONDS_PER_FRAME"), 6, 2);
+	physicsWorld_->Step(secondsPerFrame_, 6, 2);
 	collisionHandler_->SolveInteractions();
 	createDeadBodies();
 	//también debería actualizar la lógica de modo de juego
@@ -95,7 +100,7 @@ void PlayState::createDeadBodies() {
 	for (int i = 0; i < bodies.size(); i++) {
 		deadBodies.push_back(entityManager_->addEntity());
 		collDeadBodies.push_back(deadBodies.back()->addComponent<Collider>(physicsWorld_, b2_dynamicBody, bodies[i].pos.x, bodies[i].pos.y, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalAttachableObject, false));
-		deadBodies.back()->addComponent<Viewer>(Resources::PinkTinky);
+		deadBodies.back()->addComponent<Viewer>(Resources::SpaceSuit);
 		collDeadBodies.back()->setTransform(b2Vec2(bodies[i].pos.x, bodies[i].pos.y), bodies[i].angle);
 	}
 	collisionHandler_->clearBodyData();
