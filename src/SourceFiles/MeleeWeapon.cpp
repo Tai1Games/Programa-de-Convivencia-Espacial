@@ -43,9 +43,6 @@ void MeleeWeapon::action() {
 
 				++it;
 			}
-			//Activamos el cooldown
-			beenActivated_ = true;
-			framesSinceActivation_ = 0;
 
 			//Tras aplicar el golpe a tol que estén en rango limpiamos el vector
 			playersInsideRange_.clear();

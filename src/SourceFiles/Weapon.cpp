@@ -25,24 +25,6 @@ void Weapon::init()
 	playerInfo_.resize(4);
 }
 
-void Weapon::update()
-{
-	//if (currentHand_ != nullptr && mainCollider_->isEnabled()) {
-	//	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x, currentHand_->getPos().y), 0.0);	//Colocamos el trigger de golpear
-	//	
-	//	if (coolDown == true) {
-	//		actionTime++; //Incrementamos tiempo de accion de la chancla
-
-	//		if (actionTime >= CONST(double, "WEAPON_MELEE_TIME")) {
-	//			coolDown = false;
-	//			actionTime = 0;
-	//		}
-	//		else { vw_->setDrawable(false); }
-	//	}
-	//	else { vw_->setDrawable(true); }
-	//}
-}
-
 void Weapon::handleInput()
 {
 	if (currentHand_ == nullptr) {

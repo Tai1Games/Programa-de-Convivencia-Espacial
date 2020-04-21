@@ -48,8 +48,6 @@ public:
 	Weapon(ComponentType::CmpId compType, WeaponID wId, int impactDmg) : Component(compType), weaponType_(wId), impactDamage_(impactDmg) {}
 	virtual ~Weapon(){};
 	virtual void init() override;
-	/*Se comprueba que jugador ha pulsado Y y est� cerca para recoger este objeto*/
-	virtual void update() override;
 
 	virtual void handleInput() override;
 
