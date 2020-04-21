@@ -37,7 +37,7 @@ public:
 		SliderControl,
 		LivingRoom,
 		BoilerRoom,
-		SalaGimnasio,
+		GymRoom,
 		Negro,
 		Router,
 		Coin,

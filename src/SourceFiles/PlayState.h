@@ -31,7 +31,7 @@ private:
 	std::map<string, int> resourceMap_ = { //añadir aquí los mapas que se vayan haciendo
 		{"LivingRoom",Resources::LivingRoom},
 		{"BoilerRoom",Resources::BoilerRoom},
-		{"Gimnasio",Resources::SalaGimnasio}
+		{"GymRoom",Resources::GymRoom}
 	};
 	TileMap* tilemap_;
 
