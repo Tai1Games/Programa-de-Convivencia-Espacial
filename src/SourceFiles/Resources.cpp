@@ -8,51 +8,64 @@ vector<Resources::FontInfo> Resources::fonts_{
 };
 
 vector<Resources::ImageInfo> Resources::images_{
-	//Im�genes {nombre_en_enum, ruta}
+	//Imágenes {nombre_en_enum, ruta}
 
 	// room backgrounds
-	{ LivingRoom,resourcesPath + "textures/Background_LivingRoom.png"},
 	{ BoilerRoom,resourcesPath + "textures/Background_BoilerRoom.png"},
 	{ GymRoom,resourcesPath + "textures/Background_GymRoom.png"},
+	{ LivingRoom,resourcesPath + "textures/Background_LivingRoom.png"},
 
-	{ Debug, resourcesPath + "textures/debug.png" },
-	{ Tinky, resourcesPath + "textures/Tinky.png" },
+	// UI
 	{ ActiveHealth, resourcesPath + "textures/VidaActiva.png" },
 	{ DisableHealth, resourcesPath + "textures/VidaInactiva.png" },
-	{ Slipper, resourcesPath + "textures/Chancla.png" },
-	{ Stapler, resourcesPath + "textures/Grapadora.png" },
-	{ Extinguisher, resourcesPath + "textures/Extintor.png" },
-	{ Piedra, resourcesPath + "textures/Piedra.png" },
-	{ Pelota, resourcesPath + "textures/PelotaSaltarina.png" },
-	{ Mancuerna, resourcesPath + "textures/Mancuerna.png" },
-	{ Hands, resourcesPath + "textures/handsActualizadas.png" },
-	{ Body, resourcesPath + "textures/bodyNeutral.png" },
-	{ PinkTinky, resourcesPath + "textures/PinkTinky.png"},
-	{ ImpulseArrow, resourcesPath + "textures/FlechaImpulso.png"},
-	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png"},
+
 	{ Slider, resourcesPath + "textures/Slider.png"},
 	{ SliderControl, resourcesPath + "textures/SliderControl.png"},
-	{ Negro ,resourcesPath + "textures/Negro.png"},
-	{ Router,resourcesPath + "textures/Router.png" },
-	{ Router,resourcesPath + "textures/Router.png" },
-	{ Coin, resourcesPath + "textures/DogeCoin.png" },
+
+	{ CanvasTimerBackground, resourcesPath + "textures/canvasTimerBackground.png"},
 	{ CoinUI, resourcesPath + "textures/DogeCoinUI.png"},
-	{ CanvasTimer, resourcesPath + "textures/COSO.png"},
-	{ SuddenDeathText, resourcesPath + "textures/suddenDeathText.png"},
+	{ SuddenDeathCapitalismModeText, resourcesPath + "textures/suddenDeathCapitalismModeText.png"},
 	{ SuddenDeathTimeModeText, resourcesPath + "textures/suddenDeathTimeModeText.png"},
+
 	{ EmptyProgressBar, resourcesPath + "textures/EmptyProgressBar.png"},
-	{ ProgressBar, resourcesPath + "textures/ProgressBar.png"},
 	{ EmptyProgressBar2, resourcesPath + "textures/EmptyProgressBar2.png"},
+	{ ProgressBar, resourcesPath + "textures/ProgressBar.png"},
 	{ ProgressBar2, resourcesPath + "textures/ProgressBar2.png"},
+
+	// Weapons and map items
+	{ Ball, resourcesPath + "textures/PelotaSaltarina.png" },
+	{ Extinguisher, resourcesPath + "textures/Extintor.png" },
 	{ Fireball,resourcesPath + "textures/fireball_placeholder.png"},
+	{ Mancuerna, resourcesPath + "textures/Mancuerna.png" },
+	{ Slipper, resourcesPath + "textures/Chancla.png" },
+	{ Stapler, resourcesPath + "textures/Grapadora.png" },
+	{ Stone, resourcesPath + "textures/Piedra.png" },
+
+	// Players
+	{ Body, resourcesPath + "textures/bodyNeutral.png" },
+	{ Hands, resourcesPath + "textures/handsActualizadas.png" },
+	{ ImpulseArrow, resourcesPath + "textures/FlechaImpulso.png"},
+	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png"},
+	{ SpaceSuit, resourcesPath + "textures/PinkTinky.png"},	// dead body
+
+	// Map elements
 	{ Boiler,resourcesPath + "textures/boiler_placeholder.png"},
+	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
+	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
 	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png" },
+	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
+	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
 	{ Treadmill , resourcesPath + "textures/Treadmill.png"},
 	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png"},
-	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
-	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
-	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
-	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"}
+
+	// Gamemode specific elements
+	{ Coin, resourcesPath + "textures/DogeCoin.png" },
+	{ Router,resourcesPath + "textures/Router.png" },
+
+	// miscelánea
+	{ Debug, resourcesPath + "textures/debug.png" },
+	{ Negro ,resourcesPath + "textures/Negro.png"},
+	{ Tinky, resourcesPath + "textures/Tinky.png" }
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{
