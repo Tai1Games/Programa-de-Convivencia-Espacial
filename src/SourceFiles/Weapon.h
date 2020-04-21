@@ -40,17 +40,16 @@ protected:
 	/*Mano que coge este objeto*/
 	Hands* currentHand_ = nullptr;
 
-	int damage_ = 0;
 	int impactDamage_ = 0;
-	bool coolDown = false;
 	int actionTime = 0;
 	int index = 2;
 
 	int calculateCoinsDropped(int coinsPlayer);
 
 public:
-	Weapon(WeaponID wId, int dmg, int impctDmg) : Component(ComponentType::Weapon), weaponType_(wId), damage_(dmg), impactDamage_(impctDmg){}
-	~Weapon(){};
+	Weapon(WeaponID wId, int impctDmg) : Component(ComponentType::Weapon), weaponType_(wId), impactDamage_(impctDmg){}
+	Weapon(ComponentType::CmpId compType, WeaponID wId, int impactDmg) : Component(ComponentType::Weapon), weaponType_(wId), impactDamage_(impactDmg) {}
+	virtual ~Weapon(){};
 	virtual void init() override;
 	/*Se comprueba que jugador ha pulsado Y y est� cerca para recoger este objeto*/
 	virtual void update() override;
@@ -74,13 +73,10 @@ public:
 	void detectPlayer(Entity* playerDetected, int id);
 	void loseContactPlayer(Entity* playerDetected, int id);
 
-	virtual void Action();
-	int getDamage(){ return damage_; }
 	int getImpactDamage() { return impactDamage_; }
 	int getWeaponType() { return weaponType_; }
 	Hands* getCurrentHand() { return currentHand_; }
 
-	bool isOnHit();
 	int getPlayerId(); //Cuerpo en el cpp por temas de inclusi�n circular
 };
 
