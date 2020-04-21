@@ -8,4 +8,6 @@ void SlipperWeapon::action() {
 		damage_ = playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealthMax() - playerInfo_[currentHand_->getPlayerId()].playerHealth->getHealth() + 1;
 	}
 	else damage_ = calculateCoinsDropped(playerInfo_[currentHand_->getPlayerId()].playerWallet->getCoins());
+	
+	MeleeWeapon::action();
 }
