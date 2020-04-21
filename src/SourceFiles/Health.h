@@ -10,12 +10,17 @@ private:
 	int lives_;
 	int livesMax_;
 	Collider* col_ = nullptr;
+
+	int INV_FRAMES_HIT_;
+	int INV_FRAMES_RESPAWN_;
+	int invFrames_;		//frames de invulnerabilidad restantes
+
 public:
 	Health(int l);
 	~Health();
 
 	virtual void init() override;
-	virtual void update() override {}
+	virtual void update() override;
 	void resetHealth() { lives_ = livesMax_; }
 	bool subtractLife(int damage); //return true si despues del daño sigue vivo
 	void addLife(int sum); //suma sum a la vida siempre y cuando esta no supere la constanteGeneral
