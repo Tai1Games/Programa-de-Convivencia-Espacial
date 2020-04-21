@@ -16,6 +16,12 @@ public:
 
 	enum TextureId : std::size_t {
 		// images
+
+		// ROOMS
+		LivingRoom,
+		BoilerRoom,
+		GymRoom,
+
 		Debug,
 		Tinky,
 		ActiveHealth,
@@ -35,9 +41,6 @@ public:
 		ImpulseBackground,
 		Slider,
 		SliderControl,
-		LivingRoom,
-		BoilerRoom,
-		SalaGimnasio,
 		Negro,
 		Router,
 		Coin,
@@ -71,9 +74,9 @@ public:
 		// music
 		MainMenuMusic,
 		EntranceMusic,
-		LivingRoomMusic,
-		GymMusic,
-		RevealMusic,
+		LivingRoomMusic = TextureId::LivingRoom,
+		GymMusic = TextureId::GymRoom,
+		RevealMusic = TextureId::BoilerRoom,
 
 		// sound effects
 
