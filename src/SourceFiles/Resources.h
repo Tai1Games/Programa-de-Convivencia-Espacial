@@ -71,7 +71,7 @@ public:
 		Coin,
 		Router,
 
-		// miscelánea
+		// miscelï¿½nea
 		Debug,
 		Negro,
 		Tinky,
@@ -99,7 +99,7 @@ public:
 		NES_Chimera,
 		Digits_Font
 	};
-	
+
 	struct FontInfo {
 		FontId id;
 		string fileName;

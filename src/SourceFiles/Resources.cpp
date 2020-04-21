@@ -93,5 +93,5 @@ vector<Resources::SoundInfo> Resources::sounds_{
 };
 
 map<std::string, Resources::TextureId> Resources::tilesetTag_{
-	
+
 };
