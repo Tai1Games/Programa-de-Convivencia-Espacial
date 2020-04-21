@@ -96,7 +96,7 @@ void CapitalismGameMode::render() {
 				suddenDeathRenderTimer = 0;
 			}
 			if (suddenDeathRendering) {
-				Texture* suddenDeathTexture = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SuddenDeathText);
+				Texture* suddenDeathTexture = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SuddenDeathCapitalismModeText);
 				SDL_Rect suddenDeathRect;
 				suddenDeathRect.x = winWidth_ / 2 - suddenDeathTexture->getWidth() / 2;
 				suddenDeathRect.y = winHeigth_ / 2 - suddenDeathTexture->getHeight() / 2;

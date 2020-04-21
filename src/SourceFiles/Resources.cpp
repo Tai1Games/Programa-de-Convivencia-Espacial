@@ -43,7 +43,7 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },
-	{ Hands, resourcesPath + "textures/handsActualizadas.png" },
+	{ Hands, resourcesPath + "textures/hands.png" },
 	{ ImpulseArrow, resourcesPath + "textures/FlechaImpulso.png"},
 	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png"},
 	{ SpaceSuit, resourcesPath + "textures/PinkTinky.png"},	// dead body
