@@ -38,12 +38,11 @@ void TimeGameMode::init(PlayState* game)
 		playersHealth_.push_back(e->getComponent<Health>(ComponentType::Health)); //Initializes playersHealth vector catching a reference to Health on entity e.
 		HealthViewer* hV = (e->getComponent<HealthViewer>(ComponentType::HealthViewer)); //Obtains a reference to the HealthViewer component of entity e. This is used to calculate where the kills will be drawn
 		b2Vec2 p = hV->getPos();
+		int hVW = hV->getWidth();
 
-		//Players 1 & 3 will be drawn on the left side of the screen. Players 2 & 4 will be drawn on the right.
-		if (i % 2 == 0) {}
-			//p.x += CONST(int, "STOCK_INITIAL_OFFSET");
-		else
-			p.x -= killsMarkerWidth_;
+		if (i % 2 != 0) {
+			p.x = p.x - hVW + killsMarkerWidth_;
+		}
 
 		// draws P1 and P2 kill marker below health viewer, P3 and P4 kill marker above health viewer
 		if (i < 2)	
@@ -55,6 +54,8 @@ void TimeGameMode::init(PlayState* game)
 	}
 
 	//UI Elements.
+	skullUISize_ = CONST(int, "SKULL_UI_SIZE");
+	skullUIMarginX_ = CONST(int, "SKULL_UI_OFFSET_X");
 	skullTextureUI_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SkullUI);
 	canvasTimerTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::CanvasTimerBackground);
 	canvasTimerRect_.x = winWidth_ / 2 - CONST(int, "COUNTDOWN_UI_OFFSET_X");
@@ -92,7 +93,6 @@ void TimeGameMode::render()
 
 		}
 	}
-
 	else {
 		minutes = (timeToEnd_ - timeSinceStart_) / 60;
 		seconds = (int)(timeToEnd_ - timeSinceStart_) % 60;
@@ -161,23 +161,22 @@ void TimeGameMode::renderKillMarker() {
 		string killsNumb = "x" + to_string(playerKills_[k]);
 		Texture killsNumbTexture(SDL_Game::instance()->getRenderer(), killsNumb,
 			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
+		
+		SDL_Rect killsTextTexture;
+		killsTextTexture.x = (int)playersPointsPos_[k].x;
+		killsTextTexture.y = (int)playersPointsPos_[k].y;
+		killsTextTexture.w = killsMarkerWidth_ * (calculateDigits(playerKills_[k] / 10) + 2);
+		killsTextTexture.h = killsMarkerHeight_;
 
-		//SDL_Rect coinImageRect;
-		//coinImageRect.x = (k % 2 == 0) ? coinUIMarginX_ : winWidth_ - coinUIMarginX_ - coinUIRadius_;
-		//coinImageRect.y = (k < 2) ? coinUIMarginY_ : winHeigth_ - coinUIMarginY_ - coinUIRadius_;
-		//coinImageRect.w = coinUIRadius_;
-		//coinImageRect.h = coinUIRadius_;
+		killsNumbTexture.render(killsTextTexture);
 
-		//SDL_Rect coinTextRect;
-		//coinTextRect.x = coinImageRect.x + coinUIRadius_ * 0.3 - (fontCharacterWidth_ * (coinNumb.size() - 1));
-		//coinTextRect.y = coinImageRect.y + coinUIRadius_ * 0.3;
-		//coinTextRect.w = coinNumbTexture.getWidth() * coinUISpriteScale_;
-		//coinTextRect.h = coinNumbTexture.getHeight() * coinUISpriteScale_;
+		SDL_Rect coinImageRect;
+		coinImageRect.x = killsTextTexture.x + killsTextTexture.w + skullUIMarginX_;
+		coinImageRect.y = killsTextTexture.y - killsTextTexture.h/2;
+		coinImageRect.w = skullUISize_;
+		coinImageRect.h = skullUISize_;
 
-		//coinTextureUI_->render(coinImageRect);
-
-		killsNumbTexture.render({ (int)playersPointsPos_[k].x, (int)playersPointsPos_[k].y,
-			killsMarkerWidth_ * (calculateDigits(playerKills_[k] / 10) + 2), killsMarkerHeight_ });
+		skullTextureUI_->render(coinImageRect);
 	}
 }
 

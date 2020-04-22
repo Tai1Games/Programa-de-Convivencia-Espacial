@@ -13,6 +13,8 @@ private:
 	vector<b2Vec2> playersPointsPos_; //Position in which the Stocks will be drawn FOR EACH DIFFERENT PLAYER.
 	int healtWidth_ = 30;
 
+	int skullUISize_ = 0;
+	int skullUIMarginX_ = 0;
 	Texture* skullTextureUI_ = nullptr;
 	Texture* canvasTimerTexture_ = nullptr;
 	SDL_Rect canvasTimerRect_ = {};
