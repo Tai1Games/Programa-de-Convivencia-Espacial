@@ -17,7 +17,6 @@ SDL_Game::SDL_Game() {
 
 	initializeResources();
 
-	SDL_SetWindowIcon(window_, IMG_Load(&(constants_.getConstant<string>("ICON_PATH").c_str())[0]));
 
 	//Splashscreen
 	textures_->getTexture(Resources::Tinky)->render({ constants_.getConstant<int>("WINDOW_WIDTH") / 2 - 70,constants_.getConstant<int>("WINDOW_HEIGHT") / 2 - 135,140,200 });
