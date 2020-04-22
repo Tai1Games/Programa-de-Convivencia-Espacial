@@ -40,6 +40,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Slipper, resourcesPath + "textures/Chancla.png" },
 	{ Stapler, resourcesPath + "textures/Grapadora.png" },
 	{ Stone, resourcesPath + "textures/Piedra.png" },
+	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png"},
+	{ TomatoRing, resourcesPath + "textures/TomatoRing.png"},
 
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },
@@ -61,8 +63,6 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
 	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
 	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
-	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png"},
-	{ TomatoRing, resourcesPath + "textures/TomatoRing.png"},
 
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/DogeCoin.png" },

@@ -68,6 +68,20 @@ Entity* ObjectFactory::makeExtinguisher(EntityManager* entityManager, b2World* p
 	return entity;
 }
 
+Entity* ObjectFactory::makeTomato(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
+{
+	Entity* e = entityManager->addEntity();
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, 1, CONST(double, "DUMBBELL_DENSITY"),
+		CONST(double, "DUMBBELL_FRICTION"), CONST(double, "DUMBBELL_RESTITUTION"),
+		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent <Viewer>(Resources::Tomato, SDL_Rect{ 0, 0, 160, 160 });
+	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::TomatoRing, 5, 1000, 20, 100, 0, 360);
+	pE->setMaxParticles(1);
+	e->addComponent<TomatoLogic>();
+
+	return e;
+}
+
 Weapon* ObjectFactory::makeController(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 	Entity* e = entityManager->addEntity();
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "CONTROLLER_DENSITY"), CONST(double, "CONTROLLER_FRICTION"),
@@ -162,21 +176,6 @@ Entity* ObjectFactory::makeFireball(Entity* e, EntityManager* entityManager, b2W
 	e->addComponent<Viewer>(Resources::Fireball);
 	e->addComponent<Fireball>();
 	e->addComponent<Weapon>(WeaponID::Piedra, 999);//Si, el fuego es una piedra muy caliente. Mucho m�s que el magma, esta caldera echa bolas de PLASMA, el cuarto estado de la materia
-
-	return e;
-}
-
-Entity* ObjectFactory::makeTomato(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
-{
-	Entity* e = entityManager->addEntity();
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, 1, CONST(double, "DUMBBELL_DENSITY"),
-		CONST(double, "DUMBBELL_FRICTION"), CONST(double, "DUMBBELL_RESTITUTION"),
-		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent <Viewer>(Resources::Tomato, SDL_Rect{ 0, 0, 160, 160 });
-	e->addComponent<Weapon>(WeaponID::Tomato, 0, 0);
-	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::TomatoRing, 5, 1000, 20, 100, 0, 360);
-	pE->setMaxParticles(1);
-	e->addComponent<TomatoLogic>();
 
 	return e;
 }

@@ -1,22 +1,20 @@
 #pragma once
 #include "Component.h"
+#include "ActionableWeapon.h"
 
 class Collider;
-class Hands;
 class Viewer;
 class ParticleEmitter;
 
-class TomatoLogic : public Component
+class TomatoLogic : public ActionableWeapon
 {
 private:
 	Collider* colTomato_ = nullptr;
-	Hands* playerHands_ = nullptr;
 	Viewer* tomatoViewer_ = nullptr;
 	ParticleEmitter* particleEmitterTomato_ = nullptr;
 
 	bool activated_ = false;
 	bool exploded_ = false;
-	bool STOPYAJODER_ = false;
 	int timeActivated_ = 0;
 	int timeExploded_ = 0;
 	int frame = 0;
@@ -30,12 +28,12 @@ private:
 	int frameSpeedExplosion_ = 0;
 	int frameSize_ = 0;
 public:
-	TomatoLogic() : Component(ComponentType::TomatoLogic){};
+	TomatoLogic() : ActionableWeapon(ComponentType::TomatoLogic, WeaponID::Tomato, 0, 0){};
 	~TomatoLogic() {};
 
 	virtual void init();
 	virtual void update();
-	virtual void handleInput(); //DEBUG
+	virtual void action();
 	virtual void onCollisionEnter(Collision* c);
 };
 
