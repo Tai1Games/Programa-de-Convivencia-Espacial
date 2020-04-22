@@ -14,6 +14,7 @@ public:
 
 	//virtual void init() override;
 	virtual void action() override;
+	virtual void update() override;
 	//Alterar el viewer
 
 	virtual void PickObjectBy(Hands* playerHands) override;

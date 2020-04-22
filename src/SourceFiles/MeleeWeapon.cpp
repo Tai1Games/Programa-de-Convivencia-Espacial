@@ -17,6 +17,18 @@ void MeleeWeapon::action() {
 		cout << "COOLDING DOWN" << endl;
 }
 
+void MeleeWeapon::update() {
+	ActionableWeapon::update();
+
+	if (mainCollider_->getNumFixtures() > 1 && beenActivated_ && framesSinceActivation_>=3) {
+		mainCollider_->destroyFixture(mainCollider_->getNumFixtures()-1);
+	}
+
+	if (currentHand_ != nullptr) {
+		mainCollider_->setTransform(currentHand_->getPointerPos(), 0.0);
+	}
+}
+
 void MeleeWeapon::PickObjectBy(Hands* playerHands) {
 	if (playerHands->getWeaponID() == NoWeapon) {
 		currentHand_ = playerHands;
@@ -32,8 +44,24 @@ void MeleeWeapon::PickObjectBy(Hands* playerHands) {
 }
 
 void MeleeWeapon::onCollisionEnter(Collision* c) {
-	Weapon::onCollisionEnter(c);
-	cout << "COLISION" << endl;
+	ActionableWeapon::onCollisionEnter(c);
+
+	if (picked_ && c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Player && c->entity != currentHand_->getEntity()) {
+		//Restar vida
+		Health* auxHe = GETCMP2(c->entity, Health);
+		Wallet* auxWa = GETCMP2(c->entity, Wallet);
+		Collider* auxCo = GETCMP2(c->entity, Collider);
+
+		b2Vec2 knockback = auxCo->getPos() - mainCollider_->getPos();
+		knockback.Normalize();
+		knockback *= CONST(double, "WEAPON_MELEE_KNOCKBACK");
+
+		auxCo->applyLinearImpulse(knockback, b2Vec2(0, 1));
+		if (auxHe) auxHe->subtractLife(damage_);
+		else auxWa->dropCoins(damage_, GETCMP2(c->entity,PlayerData)->getPlayerNumber());
+		cout << "Golpeado jugador" << endl;
+	}
+	
 }
 
 void MeleeWeapon::UnPickObject() {
@@ -43,5 +71,5 @@ void MeleeWeapon::UnPickObject() {
 	pickUpCollider.maskBits = Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall;
 	mainCollider_->getFixture(0)->SetFilterData(pickUpCollider);
 
-	Weapon::UnPickObject();
+	ActionableWeapon::UnPickObject();
 }
