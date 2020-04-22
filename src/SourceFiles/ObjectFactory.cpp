@@ -100,9 +100,6 @@ Entity* ObjectFactory::makePipe(EntityManager* entityManager, b2World* physicsWo
 	return e;
 }
 
-	
-
-
 
 Entity* ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
@@ -175,7 +172,7 @@ Entity* ObjectFactory::makeTomato(EntityManager* entityManager, b2World* physics
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, 1, CONST(double, "DUMBBELL_DENSITY"),
 		CONST(double, "DUMBBELL_FRICTION"), CONST(double, "DUMBBELL_RESTITUTION"),
 		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent <Viewer>(Resources::Tomato);
+	e->addComponent <Viewer>(Resources::Tomato, SDL_Rect{ 0, 0, 160, 160 });
 	e->addComponent<Weapon>(WeaponID::Tomato, 0, 0);
 	e->addComponent<TomatoLogic>();
 
