@@ -9,7 +9,7 @@ class GameStateMachine
 private:
 	std::vector<GameState*> states_;
 
-	int currentState_ = 0;
+	int currentState_ = -1;
 public:
 	GameStateMachine();
 	virtual ~GameStateMachine();
