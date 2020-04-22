@@ -221,7 +221,7 @@ Entity* ObjectFactory::createTreadmill(EntityManager* entityManager, b2World* ph
 		CONST(double, "TREADMILL_RESTITUTION"), CONST(double, "TREADMILL_LINEAR_DRAG"), CONST(double, "TREADMILL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, true);
 
 	m->addComponent<Viewer>(Resources::TreadmillSpriteSheet, SDL_Rect{ 0,0,82,46 });
-	h->addComponent<Viewer>(Resources::Debug);
+	h->addComponent<Viewer>(Resources::TreadmillPanel);
 	m->addComponent<Treadmill>(collHandle);
 	
 	b2Vec2 collPoint = b2Vec2(pos.x + offset, pos.y);

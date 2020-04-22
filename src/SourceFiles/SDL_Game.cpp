@@ -101,7 +101,7 @@ void SDL_Game::closeResources() {
 
 void SDL_Game::start() {
 	exit_ = false;
-	gamestateMachine_->changeToState(States::play, 4, GamemodeID::Timed, "BoilerRoom"); //BoilerRoom, LivingRoom, GymRoom
+	gamestateMachine_->changeToState(States::play, 4, GamemodeID::Timed, "GymRoom");  //BoilerRoom, LivingRoom, GymRoom
 
 	if (inputHandler_->getNumControllers() > 0) {
 		while (!exit_) {
