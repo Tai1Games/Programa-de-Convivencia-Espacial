@@ -57,7 +57,10 @@ void MeleeWeapon::onCollisionEnter(Collision* c) {
 		knockback *= CONST(double, "WEAPON_MELEE_KNOCKBACK");
 
 		auxCo->applyLinearImpulse(knockback, b2Vec2(0, 1));
-		if (auxHe) auxHe->subtractLife(damage_);
+		if (auxHe != nullptr) {
+			if (!auxHe->subtractLife(damage_))
+				auxHe->playerDead(c);
+		}
 		else auxWa->dropCoins(damage_, GETCMP2(c->entity,PlayerData)->getPlayerNumber());
 		cout << "Golpeado jugador" << endl;
 	}
