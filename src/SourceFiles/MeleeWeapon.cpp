@@ -2,6 +2,7 @@
 #include "Hands.h"
 #include "Entity.h"
 #include "Collision.h"
+#include "CollisionHandler.h"
 
 MeleeWeapon::MeleeWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : MeleeWeapon(ComponentType::MeleeWeapon, wId, dmg, impactDmg, cooldownFrames) {};
 
@@ -61,7 +62,8 @@ void MeleeWeapon::onCollisionEnter(Collision* c) {
 			if (!auxHe->subtractLife(damage_))
 				auxHe->playerDead(c);
 		}
-		else auxWa->dropCoins(damage_, GETCMP2(c->entity,PlayerData)->getPlayerNumber());
+		else
+			c->collisionHandler->addCoinDrop(std::make_tuple(auxWa, GETCMP2(c->entity,PlayerData), damage_));
 		cout << "Golpeado jugador" << endl;
 	}
 	
