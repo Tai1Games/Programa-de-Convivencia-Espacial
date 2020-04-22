@@ -54,7 +54,8 @@ void TimeGameMode::init(PlayState* game)
 		playersPointsPos_.push_back(p);
 	}
 
-	// initialize timer
+	//UI Elements.
+	skullTextureUI_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SkullUI);
 	canvasTimerTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::CanvasTimerBackground);
 	canvasTimerRect_.x = winWidth_ / 2 - CONST(int, "COUNTDOWN_UI_OFFSET_X");
 	canvasTimerRect_.y = 0;
