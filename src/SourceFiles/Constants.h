@@ -53,3 +53,23 @@ enum WeaponID {
 
 	WEAPON_NUMBER
 };
+
+// no sé por qué peta al hacer un array de strings
+/*std::string mapNames[] = {
+	"LivingRoom",
+	"Gym",
+	"BoilerRoom"
+};
+
+enum MapID {
+	LivingRoom,
+	Gym,
+	BoilerRoom,
+	//Menu,
+	//Garden,
+	//Kitchen,
+	//Entrance,
+
+	// No toques
+	NUMBER_OF_MAPS
+};*/

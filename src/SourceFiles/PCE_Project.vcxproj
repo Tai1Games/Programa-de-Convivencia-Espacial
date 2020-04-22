@@ -182,6 +182,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ActionableWeapon.h" />
     <ClInclude Include="AttachesToObjects.h" />
     <ClInclude Include="BoilerButtonLogic.h" />
     <ClInclude Include="CapitalismGameMode.h" />
@@ -211,6 +212,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="HealthViewer.h" />
     <ClInclude Include="ImpulseViewer.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="MeleeWeapon.h" />
     <ClInclude Include="Pad.h" />
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="ParticleEmitter.h" />
@@ -220,6 +222,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="PlayerData.h" />
     <ClInclude Include="PlayerFactory.h" />
     <ClInclude Include="RouterLogic.h" />
+    <ClInclude Include="SlipperWeapon.h" />
     <ClInclude Include="StocksGameMode.h" />
     <ClInclude Include="ThrownByPlayer.h" />
     <ClInclude Include="TimeGameMode.h" />
@@ -246,6 +249,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="WiFightGameMode.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ActionableWeapon.cpp" />
     <ClCompile Include="AttachesToObjects.cpp" />
     <ClCompile Include="BoilerButtonLogic.cpp" />
     <ClCompile Include="CapitalismGameMode.cpp" />
@@ -272,6 +276,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="HealthViewer.cpp" />
     <ClCompile Include="ImpulseViewer.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="MeleeWeapon.cpp" />
     <ClCompile Include="Pad.cpp" />
     <ClCompile Include="ParticleEmitter.cpp" />
     <ClCompile Include="PauseState.cpp" />
@@ -280,6 +285,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="RouterLogic.cpp" />
+    <ClCompile Include="SlipperWeapon.cpp" />
     <ClCompile Include="StocksGameMode.cpp" />
     <ClCompile Include="ThrownByPlayer.cpp" />
     <ClCompile Include="TimeGameMode.cpp" />

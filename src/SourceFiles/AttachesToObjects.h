@@ -17,7 +17,7 @@ public:
 	AttachesToObjects() : Component(ComponentType::AttachesToObjects) {};
 	~AttachesToObjects() {};
 
-	void attachToObject(b2Body* attachableObject, b2Vec2 collPoint); //Ata al jugador a otro collider
+	void attachToObject(b2Body* attachableObject, b2Vec2 collPoint,b2Vec2 collNormal); //Ata al jugador a otro collider
 	void deAttachFromObject(); //Rompe el joint entre el jugador y el otro objeto
 	bool canAttachToObject(); //Comprueba si el jugador está pulsando la tecla válida y si no está sujeto a otro objeto
 	bool isAttached(); //Te dice si actualmente está agarrado a algo o no

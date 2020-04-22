@@ -16,50 +16,67 @@ public:
 
 	enum TextureId : std::size_t {
 		// images
-		Debug,
-		Tinky,
+
+		// room backgrounds
+		BoilerRoom,
+		GymRoom,
+		LivingRoom,
+
+		// UI
 		ActiveHealth,
 		DisableHealth,
+
+		Slider,
+		SliderControl,
+
+		CanvasTimerBackground,
+		CoinUI,
+		SuddenDeathCapitalismModeText,
+		SuddenDeathTimeModeText,
+
+		EmptyProgressBar,
+		EmptyProgressBar2,
+		ProgressBar,
+		ProgressBar2,
+
+		// Weapons and map items
+
+		// Players
+
+		// Map elements
+		IncreasingFreqButton,
+		DecreasingFreqButton,
 		TSet_Kenney1bit,
 		TSet_Dungeon,
 		Slipper,
 		Extinguisher,
 		Mancuerna,
-		Pelota,
+		Ball,
 		Stapler,
-		Piedra,
+		Stone,
 		Body,
 		Hands,
-		PinkTinky,
+		SpaceSuit,
 		ImpulseArrow,
 		ImpulseBackground,
-		Slider,
-		SliderControl,
-		LivingRoom,
-		BoilerRoom,
-		SalaGimnasio,
-		Negro,
-		Router,
-		Coin,
-		CoinUI,
-		CanvasTimer,
-		SuddenDeathText,
-		SuddenDeathTimeModeText,
-		EmptyProgressBar,
-		ProgressBar,
-		EmptyProgressBar2,
-		ProgressBar2,
 		Fireball,
 		Boiler,
 		PadSpriteSheet,
-		IncreasingFreqButton,
-		DecreasingFreqButton,
 		Treadmill,
 		TreadmillSpriteSheet,
 		PipeHor,
 		PipeVer,
 		Tomato,
 		TomatoRing,
+
+		// Gamemode specific elements
+		Coin,
+		Router,
+
+		// miscel�nea
+		Debug,
+		Negro,
+		Tinky,
 
 		// text
 		PauseText,
@@ -72,9 +89,9 @@ public:
 		// music
 		MainMenuMusic,
 		EntranceMusic,
-		LivingRoomMusic,
-		GymMusic,
-		RevealMusic,
+		LivingRoomMusic = TextureId::LivingRoom,
+		GymMusic = TextureId::GymRoom,
+		RevealMusic = TextureId::BoilerRoom,
 
 		// sound effects
 
@@ -84,7 +101,7 @@ public:
 		NES_Chimera,
 		Digits_Font
 	};
-	
+
 	struct FontInfo {
 		FontId id;
 		string fileName;
