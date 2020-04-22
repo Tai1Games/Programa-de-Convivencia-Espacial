@@ -50,19 +50,22 @@ void MenuState::handleInput()
 void MenuState::updatePointer(int n) {
 	switch (menuPointer_) {
 	case 0:
-		modePointer_ += n;
-		if (modePointer_ < 0 || modePointer_ > GamemodeID::NUMBER_OF_GAMEMODES+1) modePointer_ -= n;		
-		else menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (modePointer_ + 2)));
+		if (n == 1) modePointer_++;
+		else modePointer_ += GamemodeID::NUMBER_OF_GAMEMODES;
+		modePointer_ %= (GamemodeID::NUMBER_OF_GAMEMODES + 1);	
+		menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (modePointer_ + 2)));
 		break;
 	case 1:
-		mapPointer_ += n;
-		if (mapPointer_ < 0 || mapPointer_ > maps_.size()-1) mapPointer_ -= n;
-		else menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (mapPointer_ + 2)));
+		if (n == 1) mapPointer_++;
+		else mapPointer_ += maps_.size()-1;
+		mapPointer_ %= maps_.size();
+		menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (mapPointer_ + 2)));
 		break;
 	case 2:
-		playerPointer_ += n;
-		if (playerPointer_ < 0 || playerPointer_ > 3) playerPointer_ -= n;
-		else menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (playerPointer_ + 2)));
+		if (n == 1) playerPointer_++;
+		else playerPointer_ += 3;
+		playerPointer_ %= 4;
+		menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (playerPointer_ + 2)));
 		break;
 	}
 }
