@@ -59,6 +59,7 @@ public:
 		PipeHor,
 		PipeVer,
 		Tomato,
+		TomatoRing,
 
 		// text
 		PauseText,

@@ -51,7 +51,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
 	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
 	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
-	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png"}
+	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png"},
+	{ TomatoRing, resourcesPath + "textures/TomatoRing.png"}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{

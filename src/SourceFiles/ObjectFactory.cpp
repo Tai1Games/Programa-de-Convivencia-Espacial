@@ -174,6 +174,7 @@ Entity* ObjectFactory::makeTomato(EntityManager* entityManager, b2World* physics
 		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Tomato, SDL_Rect{ 0, 0, 160, 160 });
 	e->addComponent<Weapon>(WeaponID::Tomato, 0, 0);
+	e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::TomatoRing, 5, 1000, 20, 100, 0, 360);
 	e->addComponent<TomatoLogic>();
 
 	return e;

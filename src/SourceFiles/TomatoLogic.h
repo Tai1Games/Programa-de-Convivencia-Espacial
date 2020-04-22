@@ -4,6 +4,7 @@
 class Collider;
 class Hands;
 class Viewer;
+class ParticleEmitter;
 
 class TomatoLogic : public Component
 {
@@ -11,6 +12,7 @@ private:
 	Collider* colTomato_ = nullptr;
 	Hands* playerHands_ = nullptr;
 	Viewer* tomatoViewer_ = nullptr;
+	ParticleEmitter* particleEmitterTomato_ = nullptr;
 
 	bool activated_ = false;
 	bool exploded_ = false;

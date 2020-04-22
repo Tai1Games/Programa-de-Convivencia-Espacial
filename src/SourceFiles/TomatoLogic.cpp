@@ -7,10 +7,12 @@
 #include "PlayerData.h"
 #include "Viewer.h"
 #include "InputHandler.h"
+#include "ParticleEmitter.h"
 
 void TomatoLogic::init() {
 	colTomato_ = GETCMP1_(Collider);
 	tomatoViewer_ = GETCMP1_(Viewer);
+	particleEmitterTomato_ = GETCMP1_(ParticleEmitter);
 
 	timeForExplosion_ = CONST(int, "TOMATO_TIME_CHARGE");
 	timeForExplosionExpire_ = CONST(int, "TOMATO_TIME_EXPLOSION");
@@ -82,9 +84,12 @@ void TomatoLogic::onCollisionEnter(Collision* c) {
 void TomatoLogic::handleInput() {
 	InputHandler* ih = SDL_Game::instance()->getInputHandler();
 	//Empieza la carga
-	if (ih->isButtonJustDown(0, SDL_CONTROLLER_BUTTON_B)) {
+	if (ih->isButtonJustDown(0, SDL_CONTROLLER_BUTTON_B) && !activated_) {
 		activated_ = true;
 		timeForExplosion_ = SDL_Game::instance()->getTime() + timeForExplosion_;
 		timeActivated_ = SDL_Game::instance()->getTime();
+		particleEmitterTomato_->setPositionCollider(colTomato_);
+		particleEmitterTomato_->setDirection({ 0, -1 });
+		particleEmitterTomato_->PlayStop();
 	}
 }
