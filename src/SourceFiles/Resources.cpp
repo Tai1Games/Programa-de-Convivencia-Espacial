@@ -90,10 +90,10 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{ BoilerRoomText, "Boiler Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ GymRoomText, "Gym Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	//players
-	{ One, "1", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ Two, "2", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ Three, "3", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ Four, "4", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ One, "1 Player", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Two, "2 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Three, "3 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Four, "4 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 };
 
 vector<Resources::MusicInfo> Resources::musics_{
