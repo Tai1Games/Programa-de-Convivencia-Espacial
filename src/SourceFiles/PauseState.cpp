@@ -61,10 +61,8 @@ void PauseState::handleInput()
 		break;
 	case Buttons::Exit:
 		/*Salir al menú cuando exista menú*/
-		/*if (ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_A))*/
-		/*SDL_Game::instance()->getStateMachine()->changeToState(States::menu);*/
 		if (ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_A))
-			SDL_Game::instance()->exitGame();
+		SDL_Game::instance()->getStateMachine()->changeToState(States::menu, ownerPlayerID_);
 		break;
 	}
 
@@ -78,17 +76,17 @@ void PauseState::handleInput()
 
 	lStickYValue = ih->getStickY(ownerPlayerID_, InputHandler::GAMEPADSTICK::LEFTSTICK);
 
-	if (!holdingY_ && lStickYValue > 0.999) {
+	if (!holdingY_ && lStickYValue > 0.9) {
 		selectedBtn_++;
 		updateSelectedButton();
 		holdingY_ = true;
 	}
-	else if (!holdingY_ && lStickYValue < -0.999) {
+	else if (!holdingY_ && lStickYValue < -0.9) {
 		selectedBtn_--;
 		updateSelectedButton();
 		holdingY_ = true;
 	}
-	else if (holdingY_ && lStickYValue == 0) {
+	else if (holdingY_ && lStickYValue > -0.2 && lStickYValue < 0.2) {
 		holdingY_ = false;
 	}
 	
