@@ -19,7 +19,7 @@ private:
 	int tinkyOffset_ = CONST(int, "WINDOW_WIDTH") / 4;
 
 	int xOffset_ = CONST(int, "WINDOW_WIDTH")/3;
-	int yOffset_ = CONST(int, "WINDOW_HEIGHT")/8;
+	int yOffset_ = CONST(int, "WINDOW_HEIGHT")/9;
 
 	Viewer* menuCursor_ = nullptr;
 	std::vector<Entity*> texts_;

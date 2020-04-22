@@ -4,6 +4,7 @@
 #include "GameStateMachine.h"
 #include "Texture.h"
 #include "Viewer.h"
+#include "Constants.h"
 
 void MenuState::init() {
 	entityManager_ = new EntityManager();
@@ -33,8 +34,11 @@ void MenuState::handleInput()
 
 	if (ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_A)) {
 		if (menuPointer_ < 2) {
-			menuPointer_++;
-			updateText();
+			if (modePointer_ != 5) {
+				menuPointer_++;
+				updateText();
+			}
+			else SDL_Game::instance()->exitGame();
 		}
 		else {
 			SDL_Game::instance()->getStateMachine()->changeToState(States::play, playerPointer_ + 1, modePointer_, maps_[mapPointer_]);
@@ -47,12 +51,12 @@ void MenuState::updatePointer(int n) {
 	switch (menuPointer_) {
 	case 0:
 		modePointer_ += n;
-		if (modePointer_ < 0 || modePointer_ > 4) modePointer_ -= n;		
+		if (modePointer_ < 0 || modePointer_ > GamemodeID::NUMBER_OF_GAMEMODES+1) modePointer_ -= n;		
 		else menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (modePointer_ + 2)));
 		break;
 	case 1:
 		mapPointer_ += n;
-		if (mapPointer_ < 0 || mapPointer_ > 2) mapPointer_ -= n;
+		if (mapPointer_ < 0 || mapPointer_ > maps_.size()-1) mapPointer_ -= n;
 		else menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (mapPointer_ + 2)));
 		break;
 	case 2:

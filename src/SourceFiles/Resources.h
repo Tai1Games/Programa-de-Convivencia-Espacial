@@ -88,6 +88,8 @@ public:
 		Stocks,
 		WiFight,
 		Timed,
+		//exit
+		Exit,
 		//maps
 		LivingRoomText,
 		BoilerRoomText,
