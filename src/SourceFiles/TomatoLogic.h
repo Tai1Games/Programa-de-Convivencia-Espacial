@@ -5,7 +5,6 @@
 class Collider;
 class Viewer;
 class ParticleEmitter;
-class Hands;
 
 class TomatoLogic : public ActionableWeapon
 {
@@ -13,7 +12,7 @@ private:
 	Collider* colTomato_ = nullptr;
 	Viewer* tomatoViewer_ = nullptr;
 	ParticleEmitter* particleEmitterTomato_ = nullptr;
-	Hands* playerHands_ = nullptr;
+	Collider* collPlayerHands_ = nullptr;
 
 	bool activated_ = false;
 	bool exploded_ = false;
@@ -29,6 +28,7 @@ private:
 	int frameSpeedCharge_ = 0;
 	int frameSpeedExplosion_ = 0;
 	int frameSize_ = 0;
+	int damageOnExplosionImpact_ = 0;
 public:
 	TomatoLogic() : ActionableWeapon(ComponentType::TomatoLogic, WeaponID::Tomato, 0, 0){};
 	~TomatoLogic() {};

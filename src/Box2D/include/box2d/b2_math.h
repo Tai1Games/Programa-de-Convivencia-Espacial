@@ -111,7 +111,7 @@ struct b2Vec2
 		return length;
 	}
 
-	b2Vec2 NormalizeVector()
+	b2Vec2 NormalizedVector()
 	{
 		float length = Length();
 		if (length < b2_epsilon)

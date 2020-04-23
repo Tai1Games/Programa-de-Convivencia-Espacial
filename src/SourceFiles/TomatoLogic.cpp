@@ -9,6 +9,7 @@
 #include "InputHandler.h"
 #include "ParticleEmitter.h"
 #include "Hands.h"
+#include "CollisionHandler.h"
 
 void TomatoLogic::init() {
 	ActionableWeapon::init();
@@ -20,6 +21,7 @@ void TomatoLogic::init() {
 	timeForExplosionExpire_ = CONST(int, "TOMATO_TIME_EXPLOSION");
 	nFramesCharge_ = CONST(int, "TOMATO_N_FRAMES_ACTIVATED");
 	nFramesExplosion_ = CONST(int, "TOMATO_N_FRAMES_EXPLOSION");
+	damageOnExplosionImpact_ = CONST(int, "TOMATO_DAMAGE");
 	frameSize_ = tomatoViewer_->getTexture()->getHeight();
 
 	frameSpeedCharge_ = timeForExplosion_ / nFramesCharge_;
@@ -66,12 +68,12 @@ void TomatoLogic::onCollisionEnter(Collision* c) {
 			healthPlayer->subtractLife(1);
 		}
 		else if (walletPlayer && collPlayer) {
-			walletPlayer->dropCoins(1, playerData->getPlayerNumber());
+			c->collisionHandler->addCoinDrop(std::make_tuple(walletPlayer, GETCMP2(c->entity, PlayerData), 3));
 		}
 
 		b2Vec2 dir = (collPlayer->getPos() - colTomato_->getPos()).NormalizedVector();
 		collPlayer->applyForce({ dir.x * 10000, dir.y * 10000 }, { 0,0 });
-	}	
+	}
 }
 
 void TomatoLogic::action() {
@@ -79,7 +81,7 @@ void TomatoLogic::action() {
 		activated_ = true;
 		timeForExplosion_ = SDL_Game::instance()->getTime() + timeForExplosion_;
 		timeActivated_ = SDL_Game::instance()->getTime();
-		particleEmitterTomato_->setPositionCollider(colTomato_);
+		particleEmitterTomato_->setPositionCollider(collPlayerHands_);
 		particleEmitterTomato_->setDirection({ 0, -1 });
 		particleEmitterTomato_->PlayStop();
 	}
@@ -88,5 +90,5 @@ void TomatoLogic::action() {
 void TomatoLogic::PickObjectBy(Hands* playerHands)
 {
 	Weapon::PickObjectBy(playerHands);
-	playerHands_ = playerHands;
+	collPlayerHands_ = playerHands->getColHands_();
 }
