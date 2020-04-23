@@ -11,14 +11,21 @@ void GameMode::initProgressBars()
 	emptyProgressBars_.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::EmptyProgressBar2));
 	progressBars_.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::ProgressBar2));
 
-	b2Vec2 healthPos = players_[0]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
+	b2Vec2 healthPos;
+	healthPos = players_[0]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
 	healthViewerPos_.push_back(b2Vec2(healthPos.x - 12, healthPos.y + 60));
-	healthPos = players_[1]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
-	healthViewerPos_.push_back(b2Vec2(healthPos.x - 60, healthPos.y + 60));
-	healthPos = players_[2]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
-	healthViewerPos_.push_back(b2Vec2(healthPos.x + 20, healthPos.y - 28));
-	healthPos = players_[3]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
-	healthViewerPos_.push_back(b2Vec2(healthPos.x - 92, healthPos.y - 28));
+	if (players_.size() > 1) {
+		healthPos = players_[1]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
+		healthViewerPos_.push_back(b2Vec2(healthPos.x - 60, healthPos.y + 60));
+	}
+	if (players_.size() > 2) {
+		healthPos = players_[2]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
+		healthViewerPos_.push_back(b2Vec2(healthPos.x + 20, healthPos.y - 28));
+	}
+	if (players_.size() > 3) {
+		healthPos = players_[3]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
+		healthViewerPos_.push_back(b2Vec2(healthPos.x - 92, healthPos.y - 28));
+	}
 }
 
 void GameMode::renderProgressBars(const std::vector<double>& progressValues, const double& goalScore)

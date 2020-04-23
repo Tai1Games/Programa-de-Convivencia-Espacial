@@ -71,8 +71,5 @@ public:
 	void SavePlayerInfo(int index, Hands* playerH, Health* healthAux, Wallet* walletAux);
 	/*Borra la informacion del jugador que sale del trigger*/
 	void DeletePlayerInfo(int index);
-
-	virtual void detectPlayer(Entity* playerDetected, int id) {};
-	virtual void loseContactPlayer(Entity* playerDetected, int id) {};
 };
 

@@ -255,6 +255,9 @@
     <ClInclude Include="SlipperWeapon.h">
       <Filter>Header Files\Components\Weapons</Filter>
     </ClInclude>
+    <ClInclude Include="MenuState.h">
+      <Filter>Header Files\Gamestates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -430,6 +433,9 @@
     </ClCompile>
     <ClCompile Include="SlipperWeapon.cpp">
       <Filter>Source Files\Components\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

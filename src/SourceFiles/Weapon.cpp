@@ -31,7 +31,7 @@ void Weapon::handleInput()
 		for (int i = 0; i < playerInfo_.size(); i++) {
 
 			if (!IsPicked() && playerInfo_[i].isNear &&
-				ih_->isButtonJustDown(i, SDL_CONTROLLER_BUTTON_Y)) {
+				ih_->isButtonDown(i, SDL_CONTROLLER_BUTTON_Y)) {
 				cout << "pickedUpWeapon";
 				PickObjectBy(playerInfo_[i].playerHands);
 			}
@@ -87,9 +87,6 @@ void Weapon::onCollisionEnter(Collision* c)
 
 	if (otherHand != nullptr) {
 		SavePlayerInfo(otherHand->getPlayerId(), otherHand, GETCMP2(other, Health), GETCMP2(other, Wallet));
-		if (myHand != nullptr && otherHand != myHand) {
-			detectPlayer(other, GETCMP2(other, PlayerData)->getId());
-		}
 	}
 }
 
@@ -99,11 +96,6 @@ void Weapon::onCollisionExit(Collision* c)
 
 	if (otherHand != nullptr) {
 		DeletePlayerInfo(otherHand->getPlayerId());
-	}
-
-	PlayerData* playerData = GETCMP2(c->entity, PlayerData);
-	if (playerData != nullptr) {
-		loseContactPlayer(c->entity, playerData->getPlayerNumber());
 	}
 }
 

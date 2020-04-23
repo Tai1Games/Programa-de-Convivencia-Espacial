@@ -80,8 +80,26 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{ PauseText, "PAUSA", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ ResumeText, "Reanudar", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ SoundText, "Sonido", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ ExitText, "Salir", { COLOR(0xc7f2edff) }, FontId::NES_Chimera }
+	{ ExitText, "Salir", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 
+	//Menu Provisional
+	//gamemodes
+	{ Capitalism, "Capitalism", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Controller, "Controller", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Stocks, "Stocks", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ WiFight, "WiFight", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Timed, "Timed", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	//exit
+	{ Exit, "Exit Game", { COLOR(0xff0000ff) }, FontId::NES_Chimera },
+	//maps
+	{ LivingRoomText, "Living Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ BoilerRoomText, "Boiler Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ GymRoomText, "Gym Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	//players
+	{ One, "1 Player", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Two, "2 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Three, "3 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Four, "4 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 };
 
 vector<Resources::MusicInfo> Resources::musics_{
