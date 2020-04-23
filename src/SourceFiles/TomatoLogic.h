@@ -5,6 +5,7 @@
 class Collider;
 class Viewer;
 class ParticleEmitter;
+class Hands;
 
 class TomatoLogic : public ActionableWeapon
 {
@@ -12,6 +13,7 @@ private:
 	Collider* colTomato_ = nullptr;
 	Viewer* tomatoViewer_ = nullptr;
 	ParticleEmitter* particleEmitterTomato_ = nullptr;
+	Hands* playerHands_ = nullptr;
 
 	bool activated_ = false;
 	bool exploded_ = false;
@@ -34,6 +36,7 @@ public:
 	virtual void init();
 	virtual void update();
 	virtual void action();
+	virtual void PickObjectBy(Hands* playerHands);
 	virtual void onCollisionEnter(Collision* c);
 };
 

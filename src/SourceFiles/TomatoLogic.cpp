@@ -8,6 +8,7 @@
 #include "Viewer.h"
 #include "InputHandler.h"
 #include "ParticleEmitter.h"
+#include "Hands.h"
 
 void TomatoLogic::init() {
 	ActionableWeapon::init();
@@ -68,7 +69,7 @@ void TomatoLogic::onCollisionEnter(Collision* c) {
 			walletPlayer->dropCoins(1, playerData->getPlayerNumber());
 		}
 
-		b2Vec2 dir = (collPlayer->getPos() - colTomato_->getPos()).NormalizeVector();
+		b2Vec2 dir = (collPlayer->getPos() - colTomato_->getPos()).NormalizedVector();
 		collPlayer->applyForce({ dir.x * 10000, dir.y * 10000 }, { 0,0 });
 	}	
 }
@@ -82,4 +83,10 @@ void TomatoLogic::action() {
 		particleEmitterTomato_->setDirection({ 0, -1 });
 		particleEmitterTomato_->PlayStop();
 	}
+}
+
+void TomatoLogic::PickObjectBy(Hands* playerHands)
+{
+	Weapon::PickObjectBy(playerHands);
+	playerHands_ = playerHands;
 }
