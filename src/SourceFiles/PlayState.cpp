@@ -64,7 +64,7 @@ void PlayState::init() {
 	tilemap_->createWeapons();
 
 	Entity* planta = entityManager_->addEntity();
-	planta->addComponent<Collider>(physicsWorld_, b2_staticBody, 5, 5, 1, 1, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
+	planta->addComponent<Collider>(physicsWorld_, b2_staticBody, 20, 20, 1, 1, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
 	planta->addComponent<Viewer>(Resources::CarnivorousPlant, SDL_Rect{ 0,0,32,32 });
 	planta->addComponent<CarnivorousPlant>();
 

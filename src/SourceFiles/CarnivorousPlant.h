@@ -4,6 +4,7 @@
 #include "Viewer.h"
 #include "Collision.h"
 #include "PlayerData.h"
+#include "Health.h"
 
 class CarnivorousPlant : public Component
 {
@@ -14,6 +15,9 @@ private:
 		timedPassed_;
 	float aumento_, actualSpeed_;
 	bool idle_, playerDetected_;
+	Entity* player_;
+	Collision* playerCollision_;
+
 public:
 	CarnivorousPlant() :Component(ComponentType::CarnivorousPlant) {}
 

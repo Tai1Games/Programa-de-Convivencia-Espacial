@@ -45,6 +45,11 @@ void CarnivorousPlant::update()
 	if (playerDetected_) {
 		if (timedPassed_ >= limitTime_) { //tiene que morder xd
 			idle_ = false;
+			if (player_ != nullptr) {
+				Health* healthPlayer = player_->getComponent<Health>(ComponentType::Health);
+
+				//if (!healthPlayer->subtractLife(1)) healthPlayer->playerDead(playerCollision_);
+			}
 		}
 		else {
 			timedPassed_++;
@@ -58,6 +63,8 @@ void CarnivorousPlant::onCollisionEnter(Collision* c)
 {
 	if (c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
 		playerDetected_ = true;
+		player_ = c->entity;
+		playerCollision_ = c;
 	}
 
 }
@@ -66,5 +73,6 @@ void CarnivorousPlant::onCollisionExit(Collision* c)
 {
 	if (c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
 		playerDetected_ = false;
+		player_ = nullptr;
 	}
 }
