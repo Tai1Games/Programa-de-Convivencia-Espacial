@@ -3,6 +3,7 @@
 #include "checkML.h"
 #include "Health.h"
 #include "HealthViewer.h"
+#include "TomatoPool.h"
 
 class TimeGameMode : public GameMode
 {
@@ -33,6 +34,8 @@ private:
 	void renderTimer(int seconds, int minutes);
 	void renderKillMarker();
 	int calculateDigits(int points);
+
+	TomatoPool tomatoPool_;
 
 public:
 	TimeGameMode(int nPlayers);

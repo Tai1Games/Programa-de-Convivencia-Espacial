@@ -6,7 +6,7 @@ void CapitalismGameMode::init(PlayState* game)
 {
 	GameMode::init(game);
 	coinPool_.init(game->getEntityManager(), game->getPhysicsWorld());
-
+	tomatoPool_.init(game->getEntityManager(), game->getPhysicsWorld());
 	//Load of constants
 	sPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 	timeToEnd_ = CONST(double, "TIME_TO_END");
@@ -43,6 +43,8 @@ void CapitalismGameMode::init(PlayState* game)
 	canvasTimerRect_.y = 0;
 	canvasTimerRect_.w = CONST(int, "COUNTDOWN_UI_WIDTH");
 	canvasTimerRect_.h = CONST(int, "COUNTDOWN_UI_HEIGTH");
+
+	tomatoPool_.addTomato({ 40, 20 });
 }
 
 void CapitalismGameMode::update() {

@@ -1,6 +1,7 @@
 #include "TimeGameMode.h"
 #include "PlayState.h"
 #include "ThrownByPlayer.h"
+#include "TomatoPool.h"
 
 TimeGameMode::TimeGameMode(int nPlayers) :
 	GameMode(nPlayers) {
@@ -12,6 +13,7 @@ TimeGameMode::~TimeGameMode() {
 void TimeGameMode::init(PlayState* game)
 {
 	GameMode::init(game);
+	tomatoPool_.init(game->getEntityManager(), game->getPhysicsWorld());
 
 	sPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 	timeToEnd_ = CONST(double, "TIMEMODE_TIME_TO_END");
@@ -60,6 +62,8 @@ void TimeGameMode::init(PlayState* game)
 	canvasTimerRect_.y = 0;
 	canvasTimerRect_.w = CONST(int, "COUNTDOWN_UI_WIDTH");
 	canvasTimerRect_.h = CONST(int, "COUNTDOWN_UI_HEIGTH");
+
+	tomatoPool_.addTomato({ 40, 20 });
 }
 
 void TimeGameMode::render()

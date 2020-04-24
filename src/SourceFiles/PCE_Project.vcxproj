@@ -228,6 +228,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="ThrownByPlayer.h" />
     <ClInclude Include="TimeGameMode.h" />
     <ClInclude Include="TomatoLogic.h" />
+    <ClInclude Include="TomatoPool.h" />
     <ClInclude Include="Treadmill.h" />
     <ClInclude Include="Wallet.h" />
     <ClInclude Include="Weapon.h" />
@@ -292,6 +293,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="ThrownByPlayer.cpp" />
     <ClCompile Include="TimeGameMode.cpp" />
     <ClCompile Include="TomatoLogic.cpp" />
+    <ClCompile Include="TomatoPool.cpp" />
     <ClCompile Include="Treadmill.cpp" />
     <ClCompile Include="Wallet.cpp" />
     <ClCompile Include="Weapon.cpp" />

@@ -24,7 +24,7 @@ public:
 
 	static Entity* makeExtinguisher(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
-	static Entity* makeTomato(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
+	static Entity* makeTomato(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 
 	static Entity* makeWall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 

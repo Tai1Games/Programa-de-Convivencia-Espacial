@@ -258,6 +258,9 @@
     <ClInclude Include="MenuState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
+    <ClInclude Include="TomatoPool.h">
+      <Filter>Header Files\Pools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -436,6 +439,9 @@
     </ClCompile>
     <ClCompile Include="MenuState.cpp">
       <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="TomatoPool.cpp">
+      <Filter>Source Files\Pools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

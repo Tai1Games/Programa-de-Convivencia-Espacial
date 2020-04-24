@@ -38,5 +38,6 @@ public:
 	virtual void action();
 	virtual void PickObjectBy(Hands* playerHands);
 	virtual void onCollisionEnter(Collision* c);
+	virtual void setActive(bool a, b2Vec2 pos = { 0,0 });
 };
 

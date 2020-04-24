@@ -87,8 +87,6 @@ void PlayState::handleInput()
 {
 	GameState::handleInput();
 	InputHandler* ih = SDL_Game::instance()->getInputHandler();
-	//DEBUG
-	if (ih->isButtonJustUp(0, SDL_CONTROLLER_BUTTON_B)) ObjectFactory::makeTomato(entityManager_, physicsWorld_, { 40, 20 });
 	for (int i = 0; i < ih->getNumControllers(); i++) {
 		if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_START) ||
 			ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_GUIDE)) {

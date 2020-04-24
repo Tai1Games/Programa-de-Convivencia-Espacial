@@ -45,7 +45,7 @@ void TomatoLogic::update() {
 	else if (exploded_) {
 		if (SDL_Game::instance()->getTime() > timeForExplosionExpire_) {
 			colTomato_->destroyFixture(1);
-			exploded_ = false; //Debug temporal. Hay que quitarlo del pool.
+			setActive(false);
 		}
 		frame = 1 + nFramesCharge_ + (SDL_Game::instance()->getTime() - timeExploded_) / frameSpeedExplosion_;
 		tomatoViewer_->setClip(SDL_Rect{ frame * frameSize_, 0, frameSize_, frameSize_ });
@@ -65,7 +65,7 @@ void TomatoLogic::onCollisionEnter(Collision* c) {
 		Collider* collPlayer = GETCMP2(other, Collider);
 
 		if (healthPlayer && collPlayer) {
-			healthPlayer->subtractLife(1);
+			healthPlayer->subtractLife(damageOnExplosionImpact_);
 		}
 		else if (walletPlayer && collPlayer) {
 			c->collisionHandler->addCoinDrop(std::make_tuple(walletPlayer, GETCMP2(c->entity, PlayerData), 3));
@@ -91,4 +91,15 @@ void TomatoLogic::PickObjectBy(Hands* playerHands)
 {
 	Weapon::PickObjectBy(playerHands);
 	collPlayerHands_ = playerHands->getColHands_();
+}
+
+void TomatoLogic::setActive(bool a, b2Vec2 pos) {
+	entity_->setActive(a);
+	tomatoViewer_->setDrawable(a);
+	colTomato_->getBody()->SetEnabled(a);
+	if (a) colTomato_->getBody()->SetTransform(pos, 0);
+	else {
+		exploded_ = false;
+		activated_ = false;
+	}
 }

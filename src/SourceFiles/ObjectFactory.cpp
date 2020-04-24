@@ -68,9 +68,9 @@ Entity* ObjectFactory::makeExtinguisher(EntityManager* entityManager, b2World* p
 	return entity;
 }
 
-Entity* ObjectFactory::makeTomato(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
+Entity* ObjectFactory::makeTomato(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
 {
-	Entity* e = entityManager->addEntity();
+	entityManager->addExistingEntity(e);
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, 1, CONST(double, "DUMBBELL_DENSITY"),
 		CONST(double, "DUMBBELL_FRICTION"), CONST(double, "DUMBBELL_RESTITUTION"),
 		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
