@@ -28,11 +28,9 @@ void PlayerController::handleInput()
 		dirImpulse_.y *= -1; //hay que invertirlo para convertirlo en vector compatible con box2D
 		Collider* attachedObj = attachesToObj_->getAttachedObject();
 		if (attachedObj) {
-			dirImpulse_.x *= -1;
-			dirImpulse_.y *= -1;
+			dirImpulse_ *= -1;
 			attachedObj->applyLinearImpulse(dirImpulse_, b2Vec2(0, 0));
-			dirImpulse_.x *= -1;
-			dirImpulse_.y *= -1;
+			dirImpulse_ *= -1;
 		}
 		attachesToObj_->deAttachFromObject();
 		coll_->applyLinearImpulse(dirImpulse_, b2Vec2(0, 0)); //aplica la fuerza
