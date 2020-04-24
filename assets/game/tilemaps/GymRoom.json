@@ -25,7 +25,7 @@
                  "width":1920,
                  "x":0,
                  "y":0
-                },
+                }, 
                 {
                  "height":30,
                  "id":3,
@@ -36,7 +36,7 @@
                  "width":1920,
                  "x":0,
                  "y":1050
-                },
+                }, 
                 {
                  "height":1080,
                  "id":4,
@@ -47,7 +47,7 @@
                  "width":30,
                  "x":0,
                  "y":0
-                },
+                }, 
                 {
                  "height":1080,
                  "id":5,
@@ -64,7 +64,7 @@
          "visible":true,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
          "id":3,
@@ -81,7 +81,7 @@
                  "width":0,
                  "x":1500,
                  "y":840
-                },
+                }, 
                 {
                  "height":0,
                  "id":27,
@@ -93,7 +93,7 @@
                  "width":0,
                  "x":492,
                  "y":834
-                },
+                }, 
                 {
                  "height":0,
                  "id":83,
@@ -105,13 +105,24 @@
                  "width":0,
                  "x":802,
                  "y":472
+                }, 
+                {
+                 "height":76,
+                 "id":86,
+                 "name":"Pad",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":346,
+                 "x":64,
+                 "y":54
                 }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
          "id":4,
@@ -134,7 +145,7 @@
          "visible":true,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
          "id":5,
@@ -151,7 +162,7 @@
                  "width":0,
                  "x":1644,
                  "y":291
-                },
+                }, 
                 {
                  "height":0,
                  "id":7,
@@ -163,7 +174,7 @@
                  "width":0,
                  "x":359,
                  "y":248
-                },
+                }, 
                 {
                  "height":0,
                  "id":8,
@@ -175,7 +186,7 @@
                  "width":0,
                  "x":1589,
                  "y":806
-                },
+                }, 
                 {
                  "height":0,
                  "id":9,
@@ -195,7 +206,7 @@
          "visible":true,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
          "id":7,
@@ -212,7 +223,7 @@
                  "width":0,
                  "x":502,
                  "y":262
-                },
+                }, 
                 {
                  "height":0,
                  "id":21,
@@ -224,7 +235,7 @@
                  "width":0,
                  "x":1078,
                  "y":242
-                },
+                }, 
                 {
                  "height":0,
                  "id":22,
@@ -236,7 +247,7 @@
                  "width":0,
                  "x":1480,
                  "y":236
-                },
+                }, 
                 {
                  "height":0,
                  "id":23,
@@ -248,7 +259,7 @@
                  "width":0,
                  "x":1480,
                  "y":968
-                },
+                }, 
                 {
                  "height":0,
                  "id":24,
@@ -266,7 +277,7 @@
          "visible":true,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
          "id":6,
@@ -283,7 +294,7 @@
                  "width":0,
                  "x":960,
                  "y":300
-                },
+                }, 
                 {
                  "height":0,
                  "id":11,
@@ -295,7 +306,7 @@
                  "width":0,
                  "x":540,
                  "y":540
-                },
+                }, 
                 {
                  "height":0,
                  "id":12,
@@ -307,7 +318,7 @@
                  "width":0,
                  "x":960,
                  "y":780
-                },
+                }, 
                 {
                  "height":0,
                  "id":13,
@@ -327,7 +338,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":84,
+ "nextobjectid":87,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.3.3",

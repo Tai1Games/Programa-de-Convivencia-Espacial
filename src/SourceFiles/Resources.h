@@ -66,6 +66,7 @@ public:
 		TreadmillSpriteSheet,
 		PipeHor,
 		PipeVer,
+		CarnivorousPlant,
 
 		// Gamemode specific elements
 		Coin,

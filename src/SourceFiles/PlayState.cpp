@@ -16,6 +16,7 @@
 #include "ImpulseViewer.h"
 #include "PlayerData.h"
 #include "ParticleEmitter.h"
+#include "CarnivorousPlant.h"
 
 PlayState::PlayState(GameMode* gMode, string tmap):GameState(),
 	gameMode_(gMode), tilemapName_(tmap) {}
@@ -61,6 +62,11 @@ void PlayState::init() {
 	//Version estática de la factoria
 	tilemap_->executeMapFactory();
 	tilemap_->createWeapons();
+
+	Entity* planta = entityManager_->addEntity();
+	planta->addComponent<Collider>(physicsWorld_, b2_staticBody, 5, 5, 1, 1, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
+	planta->addComponent<Viewer>(Resources::CarnivorousPlant, SDL_Rect{ 0,0,32,32 });
+	planta->addComponent<CarnivorousPlant>();
 
 	gameMode_->init(this);
 }

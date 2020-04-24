@@ -100,9 +100,6 @@ Entity* ObjectFactory::makePipe(EntityManager* entityManager, b2World* physicsWo
 }
 
 	
-
-
-
 Entity* ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
 	Entity* e = entityManager->addEntity();

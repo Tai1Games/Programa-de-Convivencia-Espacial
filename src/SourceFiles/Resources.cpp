@@ -57,6 +57,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
 	{ Treadmill , resourcesPath + "textures/Treadmill.png"},
 	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png"},
+	{ CarnivorousPlant , resourcesPath + "textures/PlantaCarnivora.png"},
 
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/DogeCoin.png" },
