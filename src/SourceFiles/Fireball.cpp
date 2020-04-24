@@ -36,7 +36,7 @@ void Fireball::onCollisionEnter(Collision* c)
 	{
 		if (health != nullptr) {
 			if (!health->subtractLife(15))
-				health->playerDead(c);
+				health->playerDead(c->collisionHandler);
 		}
 		else if (wallet != nullptr) {
 
