@@ -71,6 +71,7 @@ public:
 		// Gamemode specific elements
 		Coin,
 		Router,
+		RoombaSpriteSheet,
 
 		// miscel�nea
 		Debug,

@@ -58,9 +58,11 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Treadmill , resourcesPath + "textures/Treadmill.png"},
 	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png"},
 	{TreadmillPanel, resourcesPath + "textures/TreadmillPanel.png"},
+
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/DogeCoin.png" },
 	{ Router,resourcesPath + "textures/Router.png" },
+	{ RoombaSpriteSheet, resourcesPath + "textures/Roomba.png"},
 
 	// miscelánea
 	{ Debug, resourcesPath + "textures/debug.png" },
