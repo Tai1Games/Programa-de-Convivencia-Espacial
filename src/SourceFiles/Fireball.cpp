@@ -39,7 +39,7 @@ void Fireball::onCollisionEnter(Collision* c)
 				health->playerDead(c);
 		}
 		else if (wallet != nullptr) {
-
+			c->collisionHandler->addCoinDrop(std::make_tuple(wallet, GETCMP2(c->entity, PlayerData), coinDMG));
 		}
 	}
 
