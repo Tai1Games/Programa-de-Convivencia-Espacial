@@ -8,6 +8,7 @@
 #include "../json/single_include/nlohmann/json.hpp"
 #include <box2d.h>
 #include "checkML.h"
+#include <iterator>
 
 using json = nlohmann::json;
 using namespace std;
@@ -41,7 +42,7 @@ private:
 	bool isMouseMotionEvent_;
 	bool isMouseButtonEvent_;
 	b2Vec2 mousePos_;
-	std::array<bool, 3> mbState_;
+	std::array<ButtonState, 3> mbState_;
 	//---------------------------------------------
 	//controllers
 	int numControllers_;
@@ -49,6 +50,9 @@ private:
 	std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
 	std::vector<std::pair<double*, double*>> m_triggerValues;
 	std::vector<std::vector<ButtonState>> m_buttonStates;
+	ButtonState m_mouseButtonStates[3];
+	std::vector<SDL_Scancode> m_keysJustDown; //vector de teclas recien pulsadas
+	std::vector<SDL_Scancode> m_keysJustUp; //vector de teclas recien soltadas
 
 	bool m_bJoysticksInitialised;
 	bool isButtonDownEvent_;
@@ -69,12 +73,13 @@ private:
 	//---------------------------------------------
 	//keyboard
 	inline void onKeyDown(SDL_Event& event) {
-		isKeyDownEvent_ = true;
-		// kbState_ = SDL_GetKeyboardState(0);
+		isKeyDownEvent_  = true;
+		m_keysJustUp.push_back(event.key.keysym.scancode);
 	}
 	inline void onKeyUp(SDL_Event& event) {
 		isKeyUpEvent_ = true;
-		// kbState_ = SDL_GetKeyboardState(0);
+		m_keysJustDown.push_back(event.key.keysym.scancode);
+
 	}
 	//---------------------------------------------
 	//mouse
@@ -85,13 +90,13 @@ private:
 	inline void onMouseButtonChange(SDL_Event& event, bool isDown) {
 		isMouseButtonEvent_ = true;
 		if (event.button.button == SDL_BUTTON_LEFT) {
-			mbState_[LEFT] = isDown;
+			mbState_[LEFT] = (isDown) ? JustDown : JustUp;
 		}
 		else if (event.button.button == SDL_BUTTON_MIDDLE) {
-			mbState_[MIDDLE] = isDown;
+			mbState_[MIDDLE] = (isDown) ? JustDown : JustUp;
 		}
 		else if (event.button.button == SDL_BUTTON_RIGHT) {
-			mbState_[RIGHT] = isDown;
+			mbState_[RIGHT] = (isDown) ? JustDown : JustUp;
 		}
 	}
 	//---------------------------------------------
@@ -131,7 +136,14 @@ public:
 	inline bool isKeyUp(SDL_Keycode key) {
 		return isKeyUp(SDL_GetScancodeFromKey(key));
 	}
-
+	inline bool isKeyJustDown(SDL_Keycode key) {
+		return isKeyDownEvent_ &&
+			std::find(std::begin(m_keysJustDown), std::end(m_keysJustDown), SDL_GetScancodeFromKey(key)) != std::end(m_keysJustDown);
+	}
+	inline bool isKeyJustUp(SDL_Keycode key) {
+		return isKeyDownEvent_ &&
+			std::find(std::begin(m_keysJustUp), std::end(m_keysJustUp), SDL_GetScancodeFromKey(key)) != std::end(m_keysJustUp);
+	}
 	// mouse
 	inline bool mouseMotionEvent() {
 		return isMouseMotionEvent_;
@@ -145,9 +157,19 @@ public:
 		return mousePos_;
 	}
 
-	inline int getMouseButtonState(MOUSEBUTTON b) {
-		return mbState_[b];
+	inline bool isMouseButtonUp(MOUSEBUTTON mb) {
+		return mbState_[mb] == Up || mbState_[mb] == JustUp;
 	}
+	inline bool isMouseButtonDown(MOUSEBUTTON mb) {
+		return mbState_[mb] == Down || mbState_[mb] == JustDown;
+	}
+	inline bool isMouseButtonJustDown(MOUSEBUTTON mb) {
+		return mbState_[mb] == JustDown;
+	}
+	inline bool isMouseButtonJustUp(MOUSEBUTTON mb) {
+		return mbState_[mb] == JustUp;
+	}
+
 
 	// Joystick
 	//init

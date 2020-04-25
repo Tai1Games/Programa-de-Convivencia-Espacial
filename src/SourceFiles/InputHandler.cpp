@@ -144,8 +144,20 @@ void InputHandler::clearState() {
 	isButtonUpEvent_ = false;
 
 	for (int i = 0; i < 3; i++) {
-		mbState_[i] = false;
+		switch (mbState_[i])
+		{
+		case JustUp:
+			mbState_[i] = Up;
+			break;
+		case JustDown:
+			mbState_[i] = Down;
+			break;
+		default:
+			break;
+		}
 	}
+	m_keysJustDown.clear();
+	m_keysJustUp.clear();
 
 	for (int controller = 0; controller < m_gameControllers.size();controller++) {
 		for (int j = 0; j < SDL_CONTROLLER_BUTTON_MAX; j++) {

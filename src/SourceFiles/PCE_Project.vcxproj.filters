@@ -255,7 +255,7 @@
     <ClInclude Include="MenuState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
-    <ClInclude Include="InputTranslator.h">
+    <ClInclude Include="InputBinder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -434,7 +434,7 @@
     <ClCompile Include="MenuState.cpp">
       <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
-    <ClCompile Include="InputTranslator.cpp">
+    <ClCompile Include="InputBinder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
