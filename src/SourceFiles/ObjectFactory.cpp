@@ -71,9 +71,9 @@ Entity* ObjectFactory::makeExtinguisher(EntityManager* entityManager, b2World* p
 Entity* ObjectFactory::makeTomato(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
 {
 	entityManager->addExistingEntity(e);
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, 1, CONST(double, "DUMBBELL_DENSITY"),
-		CONST(double, "DUMBBELL_FRICTION"), CONST(double, "DUMBBELL_RESTITUTION"),
-		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "TOMATO_RADIUS"), CONST(double, "TOMATO_DENSITY"),
+		CONST(double, "TOMATO_FRICTION"), CONST(double, "TOMATO_RESTITUTION"),
+		CONST(double, "TOMATO_LINEAR_DRAG"), CONST(double, "TOMATO_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Tomato, SDL_Rect{ 0, 0, 160, 160 });
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::TomatoRing, 5, 1000, 20, 100, 0, 360);
 	pE->setMaxParticles(1);

@@ -11,8 +11,8 @@ class TomatoLogic : public ActionableWeapon
 private:
 	Collider* colTomato_ = nullptr;
 	Viewer* tomatoViewer_ = nullptr;
+	Texture* textureExplosion_ = nullptr;
 	ParticleEmitter* particleEmitterTomato_ = nullptr;
-	Collider* collPlayerHands_ = nullptr;
 
 	bool activated_ = false;
 	bool exploded_ = false;
@@ -37,6 +37,7 @@ public:
 	virtual void update();
 	virtual void action();
 	virtual void PickObjectBy(Hands* playerHands);
+	virtual void UnPickObject();
 	virtual void onCollisionEnter(Collision* c);
 	virtual void setActive(bool a, b2Vec2 pos = { 0,0 });
 };

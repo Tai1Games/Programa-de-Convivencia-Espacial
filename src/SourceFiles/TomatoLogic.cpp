@@ -22,6 +22,7 @@ void TomatoLogic::init() {
 	nFramesCharge_ = CONST(int, "TOMATO_N_FRAMES_ACTIVATED");
 	nFramesExplosion_ = CONST(int, "TOMATO_N_FRAMES_EXPLOSION");
 	damageOnExplosionImpact_ = CONST(int, "TOMATO_DAMAGE");
+	explosionSize_ = CONST(int, "TOMATO_EXPLOSION_SIZE");
 	frameSize_ = tomatoViewer_->getTexture()->getHeight();
 
 	frameSpeedCharge_ = timeForExplosion_ / nFramesCharge_;
@@ -29,9 +30,12 @@ void TomatoLogic::init() {
 }
 
 void TomatoLogic::update() {
+	if (currentHand_) mainCollider_->setTransform(currentHand_->getPointerPos(), 0.0);
+
 	if (activated_) {
+
 		if (SDL_Game::instance()->getTime() > timeForExplosion_) {
-			colTomato_->createCircularFixture(15, 0, 0, 0, Collider::CollisionLayer::NormalObject, true);
+			colTomato_->createCircularFixture(explosionSize_, 0, 0, 0, Collider::CollisionLayer::NormalObject, true);
 			timeForExplosionExpire_ = SDL_Game::instance()->getTime() + timeForExplosionExpire_;
 			timeExploded_ = SDL_Game::instance()->getTime();
 			exploded_ = true;
@@ -81,7 +85,7 @@ void TomatoLogic::action() {
 		activated_ = true;
 		timeForExplosion_ = SDL_Game::instance()->getTime() + timeForExplosion_;
 		timeActivated_ = SDL_Game::instance()->getTime();
-		particleEmitterTomato_->setPositionCollider(collPlayerHands_);
+		particleEmitterTomato_->setPositionCollider(colTomato_);
 		particleEmitterTomato_->setDirection({ 0, -1 });
 		particleEmitterTomato_->PlayStop();
 	}
@@ -89,8 +93,25 @@ void TomatoLogic::action() {
 
 void TomatoLogic::PickObjectBy(Hands* playerHands)
 {
-	Weapon::PickObjectBy(playerHands);
-	collPlayerHands_ = playerHands->getColHands_();
+	if (playerHands->getWeaponID() == NoWeapon) {
+		currentHand_ = playerHands;
+		picked_ = true;
+		currentHand_->setWeapon(weaponType_, this);
+		vw_->setDrawable(false);
+		b2Filter pickUpCollider = mainCollider_->getFixture(0)->GetFilterData();
+		pickUpCollider.categoryBits = 0;
+		pickUpCollider.maskBits = 0;
+		mainCollider_->getFixture(0)->SetFilterData(pickUpCollider);
+	}
+}
+
+void TomatoLogic::UnPickObject() {
+	ActionableWeapon::UnPickObject();
+	b2Filter pickUpCollider = mainCollider_->getFixture(0)->GetFilterData();
+	pickUpCollider.categoryBits = Collider::CollisionLayer::PickableObject;
+	pickUpCollider.maskBits = Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall;
+	mainCollider_->getFixture(0)->SetFilterData(pickUpCollider);
+
 }
 
 void TomatoLogic::setActive(bool a, b2Vec2 pos) {
