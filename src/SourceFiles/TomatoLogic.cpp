@@ -23,6 +23,7 @@ void TomatoLogic::init() {
 	nFramesExplosion_ = CONST(int, "TOMATO_N_FRAMES_EXPLOSION");
 	damageOnExplosionImpact_ = CONST(int, "TOMATO_DAMAGE");
 	explosionSize_ = CONST(int, "TOMATO_EXPLOSION_SIZE");
+	explosionForce_ = CONST(int, "TOMATO_EXPLOSION_FORCE");
 	frameSize_ = tomatoViewer_->getTexture()->getHeight();
 
 	frameSpeedCharge_ = timeForExplosion_ / nFramesCharge_;
@@ -76,7 +77,7 @@ void TomatoLogic::onCollisionEnter(Collision* c) {
 		}
 
 		b2Vec2 dir = (collPlayer->getPos() - colTomato_->getPos()).NormalizedVector();
-		collPlayer->applyForce({ dir.x * 10000, dir.y * 10000 }, { 0,0 });
+		collPlayer->applyForce({ dir.x * explosionForce_, dir.y * explosionForce_ }, { 0,0 });
 	}
 }
 

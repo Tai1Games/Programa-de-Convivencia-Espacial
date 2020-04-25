@@ -29,6 +29,7 @@ private:
 	int frameSpeedExplosion_ = 0;
 	int frameSize_ = 0;
 	int damageOnExplosionImpact_ = 0;
+	int explosionForce_ = 0;
 public:
 	TomatoLogic() : ActionableWeapon(ComponentType::TomatoLogic, WeaponID::Tomato, 0, 0){};
 	~TomatoLogic() {};
