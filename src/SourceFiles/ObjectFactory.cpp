@@ -71,7 +71,7 @@ Weapon* ObjectFactory::makeController(EntityManager* entityManager, b2World* phy
 	Entity* e = entityManager->addEntity();
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "CONTROLLER_DENSITY"), CONST(double, "CONTROLLER_FRICTION"),
 		CONST(double, "CONTROLLER_RESTITUTION"), CONST(double, "CONTROLLER_LINEAR_DRAG"), CONST(double, "CONTROLLER_ANGULAR_DRAG"), Collider::CollisionLayer::Trigger, false);
-	e->addComponent<Viewer>();
+	e->addComponent<Viewer>(Resources::Remote);
 	Weapon* controller = e->addComponent<Weapon>(WeaponID::Mando, CONST(int, "CONTROLLER_IMPACT_DAMAGE"));
 	return controller;
 }
@@ -84,7 +84,7 @@ Entity* ObjectFactory::makeDumbbell(EntityManager* entityManager, b2World* physi
 		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Mancuerna);
 	e->addComponent<MeleeWeapon>(WeaponID::Mancuerna, CONST(int, "DUMBBELL_DAMAGE"), CONST(int, "DUMBBELL_IMPACT_DAMAGE"), CONST(int,"DUMBBELL_COOLDOWN_FRAMES"));
-
+	
 	return e;
 }
 

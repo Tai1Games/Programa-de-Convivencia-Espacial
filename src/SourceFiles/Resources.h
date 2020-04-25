@@ -73,6 +73,7 @@ public:
 		Coin,
 		Router,
 		RoombaSpriteSheet,
+		Remote,
 
 		// miscel�nea
 		Debug,

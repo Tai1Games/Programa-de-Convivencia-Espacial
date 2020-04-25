@@ -23,7 +23,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SliderControl, resourcesPath + "textures/SliderControl.png"},
 
 	{ CanvasTimerBackground, resourcesPath + "textures/canvasTimerBackground.png"},
-	{ CoinUI, resourcesPath + "textures/DogeCoinUI.png"},
+	{ CoinUI, resourcesPath + "textures/MonedaUI.png"},
 	{ SkullUI, resourcesPath + "textures/SkullUI.png"},
 	{ SuddenDeathCapitalismModeText, resourcesPath + "textures/suddenDeathCapitalismModeText.png"},
 	{ SuddenDeathTimeModeText, resourcesPath + "textures/suddenDeathTimeModeText.png"},
@@ -61,9 +61,10 @@ vector<Resources::ImageInfo> Resources::images_{
 	{TreadmillPanel, resourcesPath + "textures/TreadmillPanel.png"},
 
 	// Gamemode specific elements
-	{ Coin, resourcesPath + "textures/DogeCoin.png" },
-	{ Router,resourcesPath + "textures/Router.png" },
+	{ Coin, resourcesPath + "textures/Moneda.png" },
+	{ Router,resourcesPath + "textures/Router2.png" },
 	{ RoombaSpriteSheet, resourcesPath + "textures/Roomba.png"},
+	{ Remote, resourcesPath + "textures/Mando.png"},
 
 	// miscelánea
 	{ Debug, resourcesPath + "textures/debug.png" },
