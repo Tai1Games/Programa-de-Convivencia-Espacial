@@ -11,7 +11,6 @@ class TomatoLogic : public ActionableWeapon
 private:
 	Collider* colTomato_ = nullptr;
 	Viewer* tomatoViewer_ = nullptr;
-	Texture* textureExplosion_ = nullptr;
 	ParticleEmitter* particleEmitterTomato_ = nullptr;
 
 	bool activated_ = false;
@@ -24,6 +23,7 @@ private:
 	int timeForExplosion_ = 0;
 	int timeForExplosionExpire_ = 0;
 	int nFramesCharge_ = 0;
+	int explosionSize_ = 0;
 	int nFramesExplosion_ = 0;
 	int frameSpeedCharge_ = 0;
 	int frameSpeedExplosion_ = 0;
