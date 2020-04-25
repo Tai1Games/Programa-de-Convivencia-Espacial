@@ -49,6 +49,12 @@
     <Filter Include="Source Files\Pools">
       <UniqueIdentifier>{12a5685c-02f8-4c4a-a990-45844526fa3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components\Weapons">
+      <UniqueIdentifier>{39d5b3da-a3a2-48b6-8d81-da92b20790a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Weapons">
+      <UniqueIdentifier>{be79505f-f448-4b8b-839b-fe624286eeb3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -115,9 +121,6 @@
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="PlayerController.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
@@ -201,9 +204,6 @@
     <ClInclude Include="ParticleEmitter.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="ExtinguisherWeapon.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Pad.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -236,6 +236,24 @@
     </ClInclude>
     <ClInclude Include="ThrownByPlayer.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionableWeapon.h">
+      <Filter>Header Files\Components\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="MeleeWeapon.h">
+      <Filter>Header Files\Components\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Header Files\Components\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="ExtinguisherWeapon.h">
+      <Filter>Header Files\Components\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="SlipperWeapon.h">
+      <Filter>Header Files\Components\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.h">
+      <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -270,9 +288,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Weapon.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Viewer.cpp">
@@ -365,9 +380,6 @@
     <ClCompile Include="ParticleEmitter.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="ExtinguisherWeapon.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Pad.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
@@ -400,6 +412,24 @@
     </ClCompile>
     <ClCompile Include="TimeGameMode.cpp">
       <Filter>Source Files\GameModes</Filter>
+    </ClCompile>
+    <ClCompile Include="ExtinguisherWeapon.cpp">
+      <Filter>Source Files\Components\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="MeleeWeapon.cpp">
+      <Filter>Source Files\Components\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Source Files\Components\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionableWeapon.cpp">
+      <Filter>Source Files\Components\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="SlipperWeapon.cpp">
+      <Filter>Source Files\Components\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@
 #include "Constants.h"
 #include "PlayState.h"
 #include "PauseState.h"
+#include "MenuState.h"
 
 GameStateMachine::GameStateMachine() {
 	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
@@ -34,7 +35,8 @@ void GameStateMachine::changeToState(int state, int numberOfPlayers, int gameMod
 			//states_[state] = new... se necesita struct? o switch tal cual xd
 			switch (state) {
 			case States::menu:
-				//deleteState(currentState_);
+				for (int i = 1; i < states_.size(); i++) deleteState(i); //borrar el playState y menu para poder crear otros
+				states_[state] = new MenuState(numberOfPlayers); //numberOfPlayers usado como ownerID
 				break;
 			case States::play:
 			{

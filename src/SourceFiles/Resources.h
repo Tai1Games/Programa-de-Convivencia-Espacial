@@ -31,6 +31,7 @@ public:
 
 		CanvasTimerBackground,
 		CoinUI,
+		SkullUI,
 		SuddenDeathCapitalismModeText,
 		SuddenDeathTimeModeText,
 
@@ -82,7 +83,26 @@ public:
 		PauseText,
 		ResumeText,
 		SoundText,
-		ExitText
+		ExitText,
+
+		//modes
+		Capitalism,
+		Controller,
+		Stocks,
+		WiFight,
+		Timed,
+		//exit
+		Exit,
+		//maps
+		LivingRoomText,
+		BoilerRoomText,
+		GymRoomText,
+		//players
+		One,
+		Two,
+		Three,
+		Four,
+		Five //es solo para iterar
 	};
 
 	enum AudioId : std::size_t {
