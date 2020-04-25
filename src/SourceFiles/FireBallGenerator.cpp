@@ -8,6 +8,7 @@
 
 void FireBallGenerator::init() {
 	col_ = GETCMP1_(Collider);
+	particleEmitter_ = GETCMP1_(ParticleEmitter);
 	pos_ = col_->getPos();
 	radius = sqrt(pow(col_->getH(0), 2) + pow(col_->getW(0), 2))/*+0.5*/; //JAJA he hecho una hipotenusa despues del instiuto
 	//cout << "radius " << radius << endl;

@@ -4,6 +4,7 @@
 
 class Collider;
 class EntityManager;
+class ParticleEmitter;
 
 using uint = unsigned int;
 class FireBallGenerator :
@@ -12,6 +13,7 @@ class FireBallGenerator :
 private:
 	EntityManager* manager_ = nullptr;
 	Collider* col_ = nullptr;
+	ParticleEmitter* particleEmitter_ = nullptr;
 	b2World* physicsWorld_ = nullptr;
 	FireBallPool fbPool_;
 	b2Vec2 pos_; //centro de la caldera, se cachea porque se supone estático

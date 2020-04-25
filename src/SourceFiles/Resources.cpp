@@ -51,6 +51,7 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	// Map elements
 	{ Boiler,resourcesPath + "textures/boiler_placeholder.png"},
+	{ Smoke, resourcesPath + "textures/SmokeParticles-Sheet.png" },
 	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
 	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
 	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png" },

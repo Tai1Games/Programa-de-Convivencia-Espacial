@@ -192,6 +192,7 @@ Entity* ObjectFactory::createBoiler(EntityManager* entityManager, b2World* physi
 	Collider* collRoomba = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "BOILER_WIDTH"), CONST(double, "BOILER_HEIGHT"), CONST(double, "BOILER_DENSITY"), CONST(double, "BOILER_FRICTION"),
 		CONST(double, "BOILER_RESTITUTION"), CONST(double, "BOILER_LINEAR_DRAG"), CONST(double, "BOILER_ANGULAR_DRAG"), Collider::CollisionLayer::Trigger, false);
 	e->addComponent<Viewer>(Resources::Boiler);
+	e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Smoke, 10);
 	e->addComponent<FireBallGenerator>(physicsWorld);
 
 	return e;

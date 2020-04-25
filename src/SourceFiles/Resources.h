@@ -67,6 +67,7 @@ public:
 		TreadmillSpriteSheet,
 		PipeHor,
 		PipeVer,
+		Smoke,
 
 		// Gamemode specific elements
 		Coin,
