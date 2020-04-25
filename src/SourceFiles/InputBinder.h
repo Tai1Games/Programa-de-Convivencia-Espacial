@@ -7,6 +7,8 @@
 #pragma once
 class b2Vec2;
 enum ActionKey {Grab=0,Throw,Pick,Attack,Impulse};
+
+//Abstracta pura
 class InputBinder
 {
 protected:
@@ -25,22 +27,73 @@ public:
 	virtual bool pressAttack() = 0;
 };
 
-class KBMInputBinder : public InputBinder {
+//Abstracta pura para modos con teclado 
+//para que dejeis
+class KeyboardBinder : public InputBinder {
 protected:
-	Collider* playerCol_ = nullptr;
 public:
-	KBMInputBinder(Collider* c) : InputBinder(), playerCol_(c) {}
+	KeyboardBinder() : InputBinder() {}
 	virtual bool holdGrab() {
 		return ih->isKeyDown(SDLK_SPACE);
 	}
 	virtual bool releaseGrab() {
-		return ih->keyUpEvent() && ih->isKeyUp(SDLK_SPACE);
+		return ih->isKeyJustUp(SDLK_SPACE);
 	}
 	virtual bool pressPick() {
 		return ih->keyDownEvent() && ih->isKeyDown(SDLK_e);
 	}
 	virtual bool pressThrow() {
 		return ih->keyDownEvent() && ih->isKeyDown(SDLK_e);
+	}
+	//como sigamos con la pelea juro que me como a alguien
+	virtual b2Vec2 getAimDir() = 0;
+};
+
+//de llorar todos
+class PureKeyboardBinder : public KeyboardBinder {
+	//Team MMur, PJ, posiblemente Satan
+public:
+	PureKeyboardBinder() : KeyboardBinder() {}
+	virtual b2Vec2 getAimDir() {
+		b2Vec2 dir = b2Vec2(0, 0);
+		if (ih->isKeyDown(SDLK_a))
+			dir.x = -1;
+		else if (ih->isKeyDown(SDLK_d))
+			dir.x = 1;
+		if (ih->isKeyDown(SDLK_w))
+			dir.y = -1;
+		if (ih->isKeyDown(SDLK_s))
+			dir.y = 1;
+		dir.Normalize();
+		return dir;
+	}
+	virtual bool pressImpulse() {
+		return ih->isKeyJustDown(SDLK_c);
+	}
+	virtual bool holdImpulse() {
+		return ih->isKeyDown(SDLK_c);
+	}
+	virtual bool releaseImpulse() {
+		return ih->isKeyJustUp(SDLK_c);
+	}
+	virtual bool pressAttack() {
+		return ih->isKeyJustDown(SDLK_v);
+	}
+};
+
+//de una puta vez
+class MouseKeyboardBinder : public KeyboardBinder {
+	//Team Adri, Esteban, Andres, Jorge
+	Collider* playerCol_ = nullptr;
+public:
+	MouseKeyboardBinder(Collider* c) : KeyboardBinder(), playerCol_(c) {}
+	virtual b2Vec2 getAimDir() {
+		//devolvemos un vector unitario que apunte del jugador al raton
+		SDL_Rect playerDrawPos = playerCol_->getRectRender();
+		b2Vec2 playerPos = b2Vec2(playerDrawPos.x + playerDrawPos.w / 2, playerDrawPos.y + playerDrawPos.h / 2);
+		b2Vec2 dir = ih->getMousePos() - playerPos;
+		dir.Normalize();
+		return dir;
 	}
 	virtual bool pressImpulse() {
 		return ih->isMouseButtonJustDown(InputHandler::MOUSEBUTTON::RIGHT);
@@ -54,16 +107,9 @@ public:
 	virtual bool pressAttack() {
 		return ih->isMouseButtonJustDown(InputHandler::MOUSEBUTTON::LEFT);
 	}
-	virtual b2Vec2 getAimDir() {
-		//devolvemos un vector unitario que apunte del jugador al raton
-		SDL_Rect playerDrawPos = playerCol_->getRectRender();
-		b2Vec2 playerPos = b2Vec2(playerDrawPos.x + playerDrawPos.w / 2, playerDrawPos.y + playerDrawPos.h / 2);
-		b2Vec2 dir = ih->getMousePos() - playerPos;
-		dir.Normalize();
-		return dir;
-	}
 };
 
+//La unica opcion correcta
 class ControllerInputBinder : public InputBinder {
 protected:
 	int id_ = -1;
@@ -98,3 +144,24 @@ public:
 	}
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//pero seguid con los meme xfa

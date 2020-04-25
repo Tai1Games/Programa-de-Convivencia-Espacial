@@ -7,8 +7,11 @@
 using namespace std;
 InputHandler::InputHandler() {
 	clearState();
-	kbState_ = SDL_GetKeyboardState(0);
+	//kbState_ = SDL_GetKeyboardState(0);
 	numControllers_ = 0;
+	for (int i = 0; i < 1000; i++) {
+			kbState_[i] = ButtonState::Up;
+	}
 }
 
 InputHandler::~InputHandler() {
@@ -29,6 +32,7 @@ void InputHandler::update() {
 
 	clearState();
 
+	cout << (int)kbState_[6] << endl;
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 		case SDL_KEYDOWN:
@@ -156,8 +160,12 @@ void InputHandler::clearState() {
 			break;
 		}
 	}
-	m_keysJustDown.clear();
-	m_keysJustUp.clear();
+	for (int i = 0; i < 1000; i++) {
+		if (kbState_[i] == ButtonState::JustUp)
+			kbState_[i] = ButtonState::Up;
+		else if (kbState_[i] == ButtonState::JustDown)
+			kbState_[i] = ButtonState::Down;
+	}
 
 	for (int controller = 0; controller < m_gameControllers.size();controller++) {
 		for (int j = 0; j < SDL_CONTROLLER_BUTTON_MAX; j++) {
@@ -392,30 +400,6 @@ void InputHandler::onJoyButtonChange(SDL_Event& event,ButtonState just) {
 		i++;
 	}
 	m_buttonStates[whichOne][bindedButton] = just;
-
-
-	//hay que iterar por todo el mapeo de input porque event devuelve el botón hardware
-	//y eso no nos gusta
-	//for (int i = 0; i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX;i++) {
-	//	switch (m_buttonStates[whichOne][i]) {
-	//	//si un botón está suelto, comprobamos si se ha pulsado
-	//	case(Up):
-	//		if (1 == SDL_GameControllerGetButton(m_gameControllers[whichOne], (SDL_GameControllerButton)i))
-	//			m_buttonStates[whichOne][i] = JustDown;
-	//		break;
-	//	//para los botones pulsados, comprobamos si se sueltan
-	//	case(Down):
-	//		if (0 == SDL_GameControllerGetButton(m_gameControllers[whichOne], (SDL_GameControllerButton)i))
-	//			m_buttonStates[whichOne][i] = JustUp;
-	//		break;
-	//	}
-	//}
-
-
-
-	/*if (just = JustDown)
-		cout << SDL_GameControllerGetBindForButton
-		(m_gameControllers[whichOne], (SDL_GameControllerButton)event.cbutton.button).value.button << endl;*/
 }
 
 bool InputHandler::mapJoystick(SDL_GameController* ctrl,json mapData) {

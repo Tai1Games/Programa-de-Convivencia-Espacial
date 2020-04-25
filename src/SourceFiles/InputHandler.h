@@ -33,7 +33,7 @@ private:
 	//variables
 	//
 	//keyboard
-	const Uint8* kbState_;
+	//ButtonState kbState_[1000];
 	bool isKeyUpEvent_;
 	bool isKeyDownEvent_;
 
@@ -53,6 +53,8 @@ private:
 	ButtonState m_mouseButtonStates[3];
 	std::vector<SDL_Scancode> m_keysJustDown; //vector de teclas recien pulsadas
 	std::vector<SDL_Scancode> m_keysJustUp; //vector de teclas recien soltadas
+	std::array<ButtonState, 1000> kbState_;
+
 
 	bool m_bJoysticksInitialised;
 	bool isButtonDownEvent_;
@@ -74,12 +76,13 @@ private:
 	//keyboard
 	inline void onKeyDown(SDL_Event& event) {
 		isKeyDownEvent_  = true;
-		m_keysJustUp.push_back(event.key.keysym.scancode);
+		if (kbState_[event.key.keysym.scancode] == ButtonState::Up)
+			kbState_[event.key.keysym.scancode] = ButtonState::JustDown;
 	}
 	inline void onKeyUp(SDL_Event& event) {
 		isKeyUpEvent_ = true;
-		m_keysJustDown.push_back(event.key.keysym.scancode);
-
+		if (kbState_[event.key.keysym.scancode] == ButtonState::Down)
+			kbState_[event.key.keysym.scancode] = ButtonState::JustUp;
 	}
 	//---------------------------------------------
 	//mouse
@@ -124,25 +127,23 @@ public:
 	}
 	inline bool isKeyDown(SDL_Scancode key) {
 		// return kbState_[key] == 1;
-		return keyDownEvent() && kbState_[key] == 1;
+		return kbState_[key] == ButtonState::Down;
 	}
 	inline bool isKeyDown(SDL_Keycode key) {
 		return isKeyDown(SDL_GetScancodeFromKey(key));
 	}
 	inline bool isKeyUp(SDL_Scancode key) {
 		// kbState_[key] == 0;
-		return keyUpEvent() && kbState_[key] == 0;
+		 return kbState_[key] == ButtonState::Up;
 	}
 	inline bool isKeyUp(SDL_Keycode key) {
 		return isKeyUp(SDL_GetScancodeFromKey(key));
 	}
 	inline bool isKeyJustDown(SDL_Keycode key) {
-		return isKeyDownEvent_ &&
-			std::find(std::begin(m_keysJustDown), std::end(m_keysJustDown), SDL_GetScancodeFromKey(key)) != std::end(m_keysJustDown);
+		return kbState_[SDL_GetScancodeFromKey(key)] == ButtonState::JustDown;
 	}
 	inline bool isKeyJustUp(SDL_Keycode key) {
-		return isKeyDownEvent_ &&
-			std::find(std::begin(m_keysJustUp), std::end(m_keysJustUp), SDL_GetScancodeFromKey(key)) != std::end(m_keysJustUp);
+		return kbState_[SDL_GetScancodeFromKey(key)] == ButtonState::JustUp;
 	}
 	// mouse
 	inline bool mouseMotionEvent() {
