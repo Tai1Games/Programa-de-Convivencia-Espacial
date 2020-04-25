@@ -4,7 +4,7 @@
 #include "CoinsPool.h"
 #include "Collider.h"
 #include "FireBallPool.h"
-#include "TomatoPool.h"
+#include "TomatoPool.h" //DELETE THIS
 
 class CapitalismGameMode : public GameMode
 {
@@ -13,7 +13,9 @@ private:
 	Texture* coinTextureUI_ = nullptr;
 	Texture* canvasTimerTexture_ = nullptr;
 	SDL_Rect canvasTimerRect_;
+	//NEED TO DELETE-------
 	TomatoPool tomatoPool_;
+	//---------------------
 	double timeSinceStart_ = 0;
 	double timeSinceSpawn_ = 0;
 	double spawnTime_ = 0;
