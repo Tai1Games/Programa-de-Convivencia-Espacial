@@ -67,9 +67,6 @@ void Viewer::draw() const {
 	if (drawable_) {
 		if (!isUIElement_) {
 			tex_->render(collider_->getRectRender(), (collider_->getAngle() * -180 / CONST(double, "PI")), clip_); // getAngle devuelve radianes, hay que pasarlos a �ngulos
-			//if (textureId_ == Resources::Fireball) {
-			//	cout << "BOLADEFUEGODIBUJANDOSE";
-			//}
 		}
 		else {
 			SDL_Rect dest;

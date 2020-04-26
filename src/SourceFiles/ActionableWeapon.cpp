@@ -1,6 +1,6 @@
 #include "ActionableWeapon.h"
 #include "Hands.h"
-#include "InputHandler.h"
+#include "InputBinder.h"
 
 ActionableWeapon::ActionableWeapon(ComponentType::CmpId compType, WeaponID wId, int impactDmg, int cooldownFrames) : Weapon(compType, wId, impactDmg),
 cooldownFrames_(cooldownFrames) {}
@@ -18,6 +18,6 @@ void ActionableWeapon::update() {
 void ActionableWeapon::handleInput() {
 	Weapon::handleInput();
 
-	if (IsPicked() && ih_->isButtonJustDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_X))
+	if (IsPicked() && playerInfo_[pickedIndex_].playerBinder->pressAttack())
 		action();
 }

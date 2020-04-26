@@ -32,7 +32,6 @@ void InputHandler::update() {
 
 	clearState();
 
-	cout << (int)kbState_[6] << endl;
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 		case SDL_KEYDOWN:
@@ -81,9 +80,6 @@ void InputHandler::initialiseGamepads() {
 			{
 				cout << "--------------" << endl;
 				cout << SDL_GameControllerName(gameCtrl) << endl;
-				//if (mapJoystick(gameCtrl, mapData)) {
-				//	cout << "Controller " << i <<" mapped accordingly" << endl;
-				//}
 				cout << SDL_GameControllerMapping(gameCtrl)<<endl;
 				m_gameControllers.push_back(gameCtrl);
 				m_joystickValues.push_back(std::make_pair(new
@@ -229,7 +225,6 @@ double InputHandler::getTrigger(int joy, GAMEPADTRIGGER trigger) {
 void InputHandler::onJoyAxisChange(SDL_Event& event) {
 	isAxisMovementEvent_ = true;
 	int whichOne = event.jaxis.which;
-	//cout << event.jaxis.value<<endl;
 	const double normalize= 1.0/32768.0;
 	double val = event.jaxis.value;
 	// left stick move left or right
@@ -357,19 +352,6 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		lastLStickValue_[whichOne].x = lastLx;
 		lastLStickValue_[whichOne].y = lastLy;
 	}
-
-	//cout << "Controller 0:" << endl;
-	//cout << "Triggers " << getTrigger(0, LEFTTRIGGER) << " " << getTrigger(0, RIGHTTRIGGER) << endl;
-
-
-	//if (m_joystickValues[whichOne].first->magnitude() != 0 || m_joystickValues[whichOne].second->magnitude()!=0)
-	//{
-	//	cout << whichOne << endl;
-	//	cout << "Left: " <<
-	//		m_joystickValues[whichOne].first->getX() << " " << m_joystickValues[whichOne].first->getY() << endl;
-	//	cout << "Right: " <<
-	//		m_joystickValues[whichOne].second->getX() << " " << m_joystickValues[whichOne].second->getY() << endl;
-	//}
 }
 
 void InputHandler::onJoyButtonChange(SDL_Event& event,ButtonState just) {

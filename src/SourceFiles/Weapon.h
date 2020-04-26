@@ -10,14 +10,16 @@
 
 
 class Hands;
+class InputBinder;
 
-
+//Informacion del jugador que se encuentra en rango del arma
 struct PlayerInfo
 {
 	bool isNear = false;
 	Hands* playerHands = nullptr;
 	Health* playerHealth = nullptr;
 	Wallet* playerWallet = nullptr;
+	InputBinder* playerBinder = nullptr;
 };
 struct EnemyData {
 	int id = -1;
@@ -35,9 +37,10 @@ protected:
 
 	Viewer* vw_ = nullptr;
 	Collider* mainCollider_ = nullptr;
-	InputHandler* ih_ = nullptr;
 	/*Mano que coge este objeto*/
 	Hands* currentHand_ = nullptr;
+
+	int pickedIndex_ = -1; //player que tiene el arma, -1 si no la tiene nadie
 
 	int impactDamage_ = 0;	
 
@@ -52,7 +55,7 @@ public:
 	virtual void handleInput() override;
 
 	/*Desactiva el arma y se anade a la mano este arma*/
-	virtual void PickObjectBy(Hands* playerHands);
+	virtual void PickObjectBy(int index);
 	/*Muestra si el objeto ya esta sujeto por una mano*/
 	bool IsPicked() { return picked_; }
 	/*Reactiva el arma y la lanza en direccion de la mano*/
@@ -68,7 +71,7 @@ public:
 	virtual void onCollisionExit(Collision* c);
 
 	/*Guarda la informacion del jugador que esta dentro del trigger*/
-	void SavePlayerInfo(int index, Hands* playerH, Health* healthAux, Wallet* walletAux);
+	void SavePlayerInfo(int index, Hands* playerH, Health* healthAux, Wallet* walletAux, InputBinder* binderAux);
 	/*Borra la informacion del jugador que sale del trigger*/
 	void DeletePlayerInfo(int index);
 };

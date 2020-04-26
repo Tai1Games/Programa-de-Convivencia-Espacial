@@ -3,6 +3,7 @@
 #include "Collider.h"
 #include "checkML.h"
 #include "PlayerData.h"
+#include "InputBinder.h"
 
 class AttachesToObjects : public Component
 {
@@ -13,6 +14,7 @@ private:
 	b2Body* attachedObject_ = nullptr; //Este será el collider con el que colisionara y se agarrara
 	b2WeldJoint* joint_ = nullptr; //Joint entre el jugador y otro objeto
 	PlayerData* playerData_ = nullptr;
+	InputBinder* ib;
 public:
 	AttachesToObjects() : Component(ComponentType::AttachesToObjects) {};
 	~AttachesToObjects() {};
