@@ -5,7 +5,7 @@
 ParticleEmitter::ParticleEmitter(Vector2D direction, int textureId, float speed, Uint16 particleLifetime, Uint16 size, Uint16 emittingTime, int speedVariation, int emissionConeAngle) :
 	Component(ComponentType::ParticleEmitter), direction_(direction), textureId_(textureId), speed_(speed),
 	particleLifetime_(particleLifetime), size_(size), emittingTime_(emittingTime), speedVariation_(speedVariation), emissionConeAngle_(emissionConeAngle),
-	msPerFrame_(0), maxParticles_(0), PI(0){}
+	msPerFrame_(0), maxParticles_(0){}
 
 void ParticleEmitter::init() {
 	collider_ = GETCMP1_(Collider);
