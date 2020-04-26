@@ -20,8 +20,8 @@ private:
 	int frame = 0;
 	//Constants loaded in Init()
 
-	int timeForExplosion_ = 0;
-	int timeForExplosionExpire_ = 0;
+	int framesForExplosion_ = 0;
+	int framesForExplosionExpire_ = 0;
 	int nFramesCharge_ = 0;
 	int explosionSize_ = 0;
 	int nFramesExplosion_ = 0;

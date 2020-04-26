@@ -17,8 +17,8 @@ void TomatoLogic::init() {
 	tomatoViewer_ = GETCMP1_(Viewer);
 	particleEmitterTomato_ = GETCMP1_(ParticleEmitter);
 
-	timeForExplosion_ = CONST(int, "TOMATO_TIME_CHARGE");
-	timeForExplosionExpire_ = CONST(int, "TOMATO_TIME_EXPLOSION");
+	framesForExplosion_ = CONST(int, "TOMATO_TIME_CHARGE");
+	framesForExplosionExpire_ = CONST(int, "TOMATO_TIME_EXPLOSION");
 	nFramesCharge_ = CONST(int, "TOMATO_N_FRAMES_ACTIVATED");
 	nFramesExplosion_ = CONST(int, "TOMATO_N_FRAMES_EXPLOSION");
 	damageOnExplosionImpact_ = CONST(int, "TOMATO_DAMAGE");
@@ -26,8 +26,8 @@ void TomatoLogic::init() {
 	explosionForce_ = CONST(int, "TOMATO_EXPLOSION_FORCE");
 	frameSize_ = tomatoViewer_->getTexture()->getHeight();
 
-	frameSpeedCharge_ = timeForExplosion_ / nFramesCharge_;
-	frameSpeedExplosion_ = timeForExplosionExpire_ / nFramesExplosion_;
+	frameSpeedCharge_ = framesForExplosion_ / nFramesCharge_;
+	frameSpeedExplosion_ = framesForExplosionExpire_ / nFramesExplosion_;
 }
 
 void TomatoLogic::update() {
@@ -35,9 +35,9 @@ void TomatoLogic::update() {
 
 	if (activated_) {
 
-		if (SDL_Game::instance()->getTime() > timeForExplosion_) {
+		if (SDL_Game::instance()->getTime() > framesForExplosion_) {
 			colTomato_->createCircularFixture(explosionSize_, 0, 0, 0, Collider::CollisionLayer::NormalObject, true);
-			timeForExplosionExpire_ = SDL_Game::instance()->getTime() + timeForExplosionExpire_;
+			framesForExplosionExpire_ = SDL_Game::instance()->getTime() + framesForExplosionExpire_;
 			timeExploded_ = SDL_Game::instance()->getTime();
 			exploded_ = true;
 			activated_ = false;
@@ -48,7 +48,7 @@ void TomatoLogic::update() {
 		tomatoViewer_->setClip(SDL_Rect{ frame * frameSize_, 0, frameSize_, frameSize_ });
 	}
 	else if (exploded_) {
-		if (SDL_Game::instance()->getTime() > timeForExplosionExpire_) {
+		if (SDL_Game::instance()->getTime() > framesForExplosionExpire_) {
 			colTomato_->destroyFixture(1);
 			setActive(false);
 		}
@@ -70,7 +70,9 @@ void TomatoLogic::onCollisionEnter(Collision* c) {
 		Collider* collPlayer = GETCMP2(other, Collider);
 
 		if (healthPlayer && collPlayer) {
-			healthPlayer->subtractLife(damageOnExplosionImpact_);
+			if (!healthPlayer->subtractLife(damageOnExplosionImpact_)) {
+				healthPlayer->playerDead(c);
+			}
 		}
 		else if (walletPlayer && collPlayer) {
 			c->collisionHandler->addCoinDrop(std::make_tuple(walletPlayer, GETCMP2(c->entity, PlayerData), 3));
@@ -84,7 +86,7 @@ void TomatoLogic::onCollisionEnter(Collision* c) {
 void TomatoLogic::action() {
 	if (!activated_) {
 		activated_ = true;
-		timeForExplosion_ = SDL_Game::instance()->getTime() + timeForExplosion_;
+		framesForExplosion_ = SDL_Game::instance()->getTime() + framesForExplosion_;
 		timeActivated_ = SDL_Game::instance()->getTime();
 		particleEmitterTomato_->setPositionCollider(colTomato_);
 		particleEmitterTomato_->setDirection({ 0, -1 });
