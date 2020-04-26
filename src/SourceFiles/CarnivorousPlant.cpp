@@ -13,6 +13,7 @@ void CarnivorousPlant::init()
 	coinDMG = CONST(int, "CARNIVOROUSEPLANT_COIN_DMG");
 	damage = CONST(int, "CARNIVOROUSEPLANT_DMG");
 	timePassed_ = 0;
+	playersInside_ = 0;
 
 	actualSpeed_ = minAnimationSpeed_;
 	aumento_ = (float)(minAnimationSpeed_ - maxAnimationSpeed_) / (CONST(float, "CARNIVOROUSEPLANT_TIME") / 16.66);
@@ -50,8 +51,8 @@ void CarnivorousPlant::update()
 				Health* healthPlayer = player_->getComponent<Health>(ComponentType::Health);
 				if (healthPlayer != nullptr && !healthPlayer->subtractLife(damage)) healthPlayer->playerDead(playerCollHandler_);
 				else if (walletPlayer_ != nullptr) playerCollHandler_->addCoinDrop(std::make_tuple(walletPlayer_, GETCMP2(player_, PlayerData), coinDMG));
-				resetCycle();
 			}
+			resetCycle();
 		}
 		else if (idle_) {
 			actualSpeed_ -= aumento_;
@@ -64,27 +65,34 @@ void CarnivorousPlant::update()
 void CarnivorousPlant::onCollisionEnter(Collision* c)
 {
 	if (c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
-		enterTime_ = SDL_Game::instance()->getTime();
-		if (timePassed_ != 0)limitTime_ = SDL_Game::instance()->getTime() + CONST(float, "CARNIVOROUSEPLANT_TIME") - timePassed_;
-		else resetCycle();
 
-		playerDetected_ = true;
-		player_ = c->entity;
-		playerCollHandler_ = c->collisionHandler;
-		walletPlayer_ = GETCMP2(c->entity, Wallet);
 
+		if (playersInside_ == 0) {
+			playerDetected_ = true;
+			player_ = c->entity;
+			playerCollHandler_ = c->collisionHandler;
+			walletPlayer_ = GETCMP2(c->entity, Wallet);
+			enterTime_ = SDL_Game::instance()->getTime();
+			if (timePassed_ != 0)limitTime_ = SDL_Game::instance()->getTime() + CONST(float, "CARNIVOROUSEPLANT_TIME") - timePassed_;
+			else resetCycle();
+		}
+
+		playersInside_++;
 	}
 }
 
 void CarnivorousPlant::onCollisionExit(Collision* c)
 {
 	if (c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
-		playerDetected_ = false;
-		player_ = nullptr;
-		playerCollHandler_ = nullptr;
-		walletPlayer_ = nullptr;
-		timePassed_ += (SDL_Game::instance()->getTime() - enterTime_);
-		std::cout << timePassed_ << endl;
+		playersInside_--;
+
+		if (playersInside_ == 0) {
+			playerDetected_ = false;
+			player_ = nullptr;
+			playerCollHandler_ = nullptr;
+			walletPlayer_ = nullptr;
+			timePassed_ += (SDL_Game::instance()->getTime() - enterTime_);
+		}
 	}
 }
 
