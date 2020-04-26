@@ -11,7 +11,7 @@ class b2Vec2;
 
 class TomatoPool: public WeaponPool {
 private:
-	ObjectPool<Entity, COIN_POOL_SIZE> tomatoPool_;
+	ObjectPool<Entity, TOMATO_POOL_SIZE> tomatoPool_;
 	int tomatoMaxSpeed_ = 0;
 	int tomatoMinSpeed_ = 0;
 public:
@@ -20,4 +20,3 @@ public:
 	virtual void init(EntityManager* eMan, b2World* physicsWorld) override;
 	virtual void addWeapon(b2Vec2 pos) override;
 };
-

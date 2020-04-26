@@ -1,5 +1,5 @@
 #include "TomatoPool.h"
-#include "TomatoLogic.h"
+#include "TomatoWeapon.h"
 #include "Entity.h"
 #include "ObjectFactory.h"
 
@@ -11,14 +11,14 @@ void TomatoPool::init(EntityManager* eMan, b2World* physicsWorld) {
 	tomatoMinSpeed_ = CONST(int, "TOMATO_MIN_SPEED");
 	for (Entity* e : tomatoPool) {
 		ObjectFactory::makeTomato(e, eMan, physicsWorld, b2Vec2(0, 0));
-		e->getComponent<TomatoLogic>(ComponentType::TomatoLogic)->setActive(false);
+		e->getComponent<TomatoWeapon>(ComponentType::TomatoLogic)->setActive(false);
 	}
 }
 
 void TomatoPool::addWeapon(b2Vec2 pos) {
 	Entity* e = tomatoPool_.getObj();
 	if (e != nullptr) {
-		TomatoLogic* tomato = e->getComponent<TomatoLogic>(ComponentType::TomatoLogic);
+		TomatoWeapon* tomato = e->getComponent<TomatoWeapon>(ComponentType::TomatoLogic);
 		tomato->setActive(true, pos);
 		int randDirX = -1;
 		int randDirY = -1;

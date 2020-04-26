@@ -6,7 +6,7 @@ class Collider;
 class Viewer;
 class ParticleEmitter;
 
-class TomatoLogic : public ActionableWeapon
+class TomatoWeapon : public ActionableWeapon
 {
 private:
 	Collider* colTomato_ = nullptr;
@@ -20,8 +20,8 @@ private:
 	int frame = 0;
 	//Constants loaded in Init()
 
-	int timeForExplosion_ = 0;
-	int timeForExplosionExpire_ = 0;
+	int framesForExplosion_ = 0;
+	int framesForExplosionExpire_ = 0;
 	int nFramesCharge_ = 0;
 	int explosionSize_ = 0;
 	int nFramesExplosion_ = 0;
@@ -31,8 +31,8 @@ private:
 	int damageOnExplosionImpact_ = 0;
 	int explosionForce_ = 0;
 public:
-	TomatoLogic() : ActionableWeapon(ComponentType::TomatoLogic, WeaponID::Tomato, 0, 0){};
-	~TomatoLogic() {};
+	TomatoWeapon() : ActionableWeapon(ComponentType::TomatoLogic, WeaponID::Tomato, 0, 0){};
+	~TomatoWeapon() {};
 
 	virtual void init();
 	virtual void update();

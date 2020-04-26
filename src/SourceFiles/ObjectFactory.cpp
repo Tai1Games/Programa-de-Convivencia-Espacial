@@ -20,7 +20,7 @@
 #include "Pad.h"
 #include "Treadmill.h"
 #include "SpawnTree.h"
-#include "TomatoLogic.h"
+#include "TomatoWeapon.h"
 
 Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 
@@ -78,7 +78,7 @@ Entity* ObjectFactory::makeTomato(Entity* e, EntityManager* entityManager, b2Wor
 	e->addComponent <Viewer>(Resources::Tomato, SDL_Rect{ 0, 0, 160, 160 });
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::TomatoRing, 5, 1000, 20, 100, 0, 360);
 	pE->setMaxParticles(1);
-	e->addComponent<TomatoLogic>();
+	e->addComponent<TomatoWeapon>();
 
 	return e;
 }
