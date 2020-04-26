@@ -5,21 +5,18 @@
 class AnimatedViewer : public Viewer
 {
 private:
-	int frame = 0;
-	int nframes = 0;
-	int time = 0;
-	int timeFrame = 0;
+	int frame_ = 0;
+	int nframes_ = 0;
+	int timeElapsed_ = 0;
+	int timePerFrame_ = 0;
 public:
-	AnimatedViewer(int textureId, SDL_Rect clip, int timeframe) : Viewer(textureId) {
-		timeFrame = timeframe;
-		clip_ = clip;
+	AnimatedViewer(int textureId, SDL_Rect clip, int timeperframe) : Viewer(textureId, clip) {
+		timePerFrame_ = timeperframe;
 	}
 
 	~AnimatedViewer() {}
 
 	virtual void init() override;
 	virtual void update() override;
-	virtual void onCollisionEnter(Collision* c) {};
-	virtual void onCollisionExit(Collision* c) {};
 };
 

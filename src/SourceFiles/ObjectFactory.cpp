@@ -176,7 +176,7 @@ Entity* ObjectFactory::createRoomba(EntityManager* entityManager, b2World* physi
 	Collider* collRoomba = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "ROOMBA_RADIUS"), CONST(double, "ROOMBA_DENSITY"), CONST(double, "ROOMBA_FRICTION"),
 		CONST(double, "ROOMBA_RESTITUTION"), CONST(double, "ROOMBA_LINEAR_DRAG"), CONST(double, "ROOMBA_ANGULAR_DRAG"), Collider::CollisionLayer::UnInteractableObject, false);
 	
-	e->addComponent<AnimatedViewer>(Resources::RoombaSpriteSheet, SDL_Rect{ 0,0,34,34 }, CONST(int, "ROOMBA_FRAMESPAN") );
+	e->addComponent<AnimatedViewer>(Resources::RoombaSpriteSheet, SDL_Rect{ 0,0,34,34 }, CONST(int, "ROOMBA_TIMEPERFRAME") );
 	
 	double velocityX = rand() % CONST(int, "ROOMBA_VELOCITY");
 	double velocityY = CONST(int, "ROOMBA_VELOCITY") - velocityX;
