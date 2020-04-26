@@ -20,6 +20,7 @@ public:
 //Pools
 const int COIN_POOL_SIZE = 140;
 const int FIREBALL_POOL_SIZE = 5;
+const int FRAMES_PER_SECOND = 60;
 
 //Estados de juego
 enum States

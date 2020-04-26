@@ -20,6 +20,8 @@ private:
 	FireBallPool fbPool_;
 	b2Vec2 pos_; //centro de la caldera, se cachea porque se supone estático
 	b2Vec2 size_;//tamaño de la caldera, se cachea porque se supone estático
+
+	//Fireballs spawn
 	uint nextShot_;
 	uint minCd_;
 	uint maxCd_;
@@ -27,11 +29,23 @@ private:
 	uint limitMinCd_;
 	uint limitMaxCd_;
 	uint cdTimeChange_;
-	
 	int minFireballs_, maxFireballs_;
 	int fireballSpeed_;
-	int particleGenOddsModifier_;
+
 	double radius;
+
+	//Smoke particle generation
+	int particleGenOddsModifier_;
+	
+	//Boiler shake
+	int currentFrame = 0;
+	int framesForNextShake = 0;
+	int framesBetweenShakes_ = 0;
+	int incrementFramesShakeFreq_ = 0;
+	int minFramesShake = 0;
+	int maxFramesShake = 0;
+	int shakeOffsetX_ = 0;
+	int shakeOffsetY_ = 0;
 
 	void addFireball(int num = 1);
 
