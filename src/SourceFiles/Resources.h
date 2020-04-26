@@ -18,6 +18,7 @@ public:
 		// images
 
 		// room backgrounds
+		MainMenuRoom,
 		BoilerRoom,
 		GymRoom,
 		LivingRoom,
@@ -105,11 +106,11 @@ public:
 
 	enum AudioId : std::size_t {
 		// music
-		MainMenuMusic,
-		EntranceMusic,
+		MainMenuMusic = TextureId::MainMenuRoom,
 		LivingRoomMusic = TextureId::LivingRoom,
 		GymMusic = TextureId::GymRoom,
-		RevealMusic = TextureId::BoilerRoom,
+		BoilerRoomMusic = TextureId::BoilerRoom,
+		EntranceMusic,
 
 		// sound effects
 

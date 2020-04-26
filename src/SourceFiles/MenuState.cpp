@@ -12,6 +12,9 @@ void MenuState::init() {
 	Entity* miniTinky = entityManager_->addEntity();
 	menuCursor_ = miniTinky->addComponent<Viewer>(Resources::Tinky, b2Vec2(tinkyOffset_, 2*yOffset_), 0.5, 0);
 	updateText();
+
+	//MÚSICA
+	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::AudioId::MainMenuMusic, -1);
 }
 
 void MenuState::handleInput()
