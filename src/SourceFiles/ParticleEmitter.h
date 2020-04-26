@@ -49,7 +49,7 @@ protected:
 	Uint8 maxParticles_;
 
 	//Numero de texturas
-	int numTextures_;
+	int numParticlesInSpriteSheet_;
 	int textureSize_;
 
 	struct Particle {

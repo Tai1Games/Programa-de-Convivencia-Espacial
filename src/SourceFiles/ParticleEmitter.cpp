@@ -3,7 +3,7 @@
 #include "Collider.h"
 
 ParticleEmitter::ParticleEmitter(Vector2D direction, int textureId, float speed, int numTextures, int generationOdds, Uint16 particleLifetime, Uint16 size, Uint16 emittingTime, int speedVariation, int emissionConeAngle) :
-	Component(ComponentType::ParticleEmitter), direction_(direction), textureId_(textureId), speed_(speed), numTextures_(numTextures), generationOdds_(generationOdds),
+	Component(ComponentType::ParticleEmitter), direction_(direction), textureId_(textureId), speed_(speed), numParticlesInSpriteSheet_(numTextures), generationOdds_(generationOdds),
 	particleLifetime_(particleLifetime), size_(size), emittingTime_(emittingTime), speedVariation_(speedVariation), emissionConeAngle_(emissionConeAngle),
 	msPerFrame_(0), maxParticles_(0){}
 
@@ -34,7 +34,9 @@ void ParticleEmitter::update() {
 			//speed_ + variacion random
 			float speed = (speedVariation_ != 0) ? speed_ - speedVariation_ + rand() % int(speedVariation_ * 2) : speed_;
 			//frame
-			int numTexture = rand() % numTextures_;
+			int numTexture = 0;
+			if (numParticlesInSpriteSheet_ > 0) numTexture = rand() % numParticlesInSpriteSheet_;
+
 			particles_.push_back({ Vector2D((double)colliderRect.x + colliderRect.w / 2.0,(double)colliderRect.y + colliderRect.h / 2.0),direction,0,speed, numTexture});
 		}
 	}
