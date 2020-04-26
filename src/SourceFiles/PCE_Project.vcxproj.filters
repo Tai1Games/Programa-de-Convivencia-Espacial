@@ -258,7 +258,7 @@
     <ClInclude Include="TomatoPool.h">
       <Filter>Header Files\Pools</Filter>
     </ClInclude>
-    <ClInclude Include="TomatoLogic.h">
+    <ClInclude Include="TomatoWeapon.h">
       <Filter>Header Files\Components\Weapons</Filter>
     </ClInclude>
   </ItemGroup>
@@ -440,7 +440,7 @@
     <ClCompile Include="TomatoPool.cpp">
       <Filter>Source Files\Pools</Filter>
     </ClCompile>
-    <ClCompile Include="TomatoLogic.cpp">
+    <ClCompile Include="TomatoWeapon.cpp">
       <Filter>Source Files\Components\Weapons</Filter>
     </ClCompile>
   </ItemGroup>

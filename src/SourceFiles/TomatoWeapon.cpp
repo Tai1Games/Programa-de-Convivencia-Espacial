@@ -1,4 +1,4 @@
-#include "TomatoLogic.h"
+#include "TomatoWeapon.h"
 #include "Collider.h"
 #include "Entity.h"
 #include "Collision.h"
@@ -11,7 +11,7 @@
 #include "Hands.h"
 #include "CollisionHandler.h"
 
-void TomatoLogic::init() {
+void TomatoWeapon::init() {
 	ActionableWeapon::init();
 	colTomato_ = GETCMP1_(Collider);
 	tomatoViewer_ = GETCMP1_(Viewer);
@@ -30,7 +30,7 @@ void TomatoLogic::init() {
 	frameSpeedExplosion_ = framesForExplosionExpire_ / nFramesExplosion_;
 }
 
-void TomatoLogic::update() {
+void TomatoWeapon::update() {
 	if (currentHand_) mainCollider_->setTransform(currentHand_->getPointerPos(), 0.0);
 
 	if (activated_) {
@@ -58,7 +58,7 @@ void TomatoLogic::update() {
 	
 }
 
-void TomatoLogic::onCollisionEnter(Collision* c) {
+void TomatoWeapon::onCollisionEnter(Collision* c) {
 	Weapon::onCollisionEnter(c);
 
 	if (exploded_) {
@@ -83,7 +83,7 @@ void TomatoLogic::onCollisionEnter(Collision* c) {
 	}
 }
 
-void TomatoLogic::action() {
+void TomatoWeapon::action() {
 	if (!activated_) {
 		activated_ = true;
 		framesForExplosion_ = SDL_Game::instance()->getTime() + framesForExplosion_;
@@ -94,7 +94,7 @@ void TomatoLogic::action() {
 	}
 }
 
-void TomatoLogic::PickObjectBy(Hands* playerHands)
+void TomatoWeapon::PickObjectBy(Hands* playerHands)
 {
 	if (playerHands->getWeaponID() == NoWeapon) {
 		currentHand_ = playerHands;
@@ -108,7 +108,7 @@ void TomatoLogic::PickObjectBy(Hands* playerHands)
 	}
 }
 
-void TomatoLogic::UnPickObject() {
+void TomatoWeapon::UnPickObject() {
 	b2Filter pickUpCollider = mainCollider_->getFixture(0)->GetFilterData();
 	pickUpCollider.categoryBits = Collider::CollisionLayer::NormalObject;
 	pickUpCollider.maskBits = Collider::CollisionLayer::NormalObject | Collider::CollisionLayer::NormalAttachableObject | Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall;
@@ -117,7 +117,7 @@ void TomatoLogic::UnPickObject() {
 	ActionableWeapon::UnPickObject();
 }
 
-void TomatoLogic::setActive(bool a, b2Vec2 pos) {
+void TomatoWeapon::setActive(bool a, b2Vec2 pos) {
 	entity_->setActive(a);
 	tomatoViewer_->setDrawable(a);
 	colTomato_->getBody()->SetEnabled(a);
