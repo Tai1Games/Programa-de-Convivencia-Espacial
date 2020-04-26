@@ -24,6 +24,7 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	{ CanvasTimerBackground, resourcesPath + "textures/canvasTimerBackground.png"},
 	{ CoinUI, resourcesPath + "textures/DogeCoinUI.png"},
+	{ SkullUI, resourcesPath + "textures/SkullUI.png"},
 	{ SuddenDeathCapitalismModeText, resourcesPath + "textures/suddenDeathCapitalismModeText.png"},
 	{ SuddenDeathTimeModeText, resourcesPath + "textures/suddenDeathTimeModeText.png"},
 

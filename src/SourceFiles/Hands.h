@@ -10,8 +10,12 @@
 class Hands : public Component
 {
 private:
-	b2Vec2 pos_ = b2Vec2(0,0);
-	b2Vec2 dir_ = b2Vec2(0,0);
+	b2Vec2 handPos_ = b2Vec2(0, 0);
+	b2Vec2 pos_ = b2Vec2(0, 0);
+	b2Vec2 dir_ = b2Vec2(0, 0);
+
+	double handSize_ = 0;
+
 	Texture* tex_ = nullptr;
 	Collider* collider_ = nullptr;
 	int textureId_ = 0;
@@ -37,5 +41,6 @@ public:
 	float getAngle() { return angle_; }
 	Weapon* getWeapon() { return currentWeapon_; }
 	WeaponID getWeaponID() { return currentWeaponID_; }
+	b2Vec2 getPointerPos() { return handPos_; };
 };
 

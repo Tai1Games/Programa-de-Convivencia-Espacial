@@ -31,6 +31,7 @@ public:
 
 		CanvasTimerBackground,
 		CoinUI,
+		SkullUI,
 		SuddenDeathCapitalismModeText,
 		SuddenDeathTimeModeText,
 
