@@ -19,6 +19,7 @@ void FireBallGenerator::init() {
 	maxCd_ = CONST(int, "FBGEN_MAX_COOLDOWN");
 	minFireballs_ = CONST(int, "FBGEN_MIN_FIREBALLS");
 	maxFireballs_ = CONST(int, "FBGEN_MIN_FIREBALLS");
+	particleGenOddsModifier_ = CONST(int, "FB_PARTICLE_GEN_ODDS_MODIFIER");
 	fireballSpeed_ = CONST(int, "FIREBALL_SPEED");
 	limitMinCd_ = CONST(int, "FBGEN_LIMIT_MIN_COOLDOWN");
 	limitMaxCd_ = CONST(int, "FBGEN_LIMIT_MAX_COODLOWN");
@@ -30,6 +31,9 @@ void FireBallGenerator::init() {
 		+ (rand() % maxCd_ + minCd_);
 
 	particleEmitter_->setPositionCollider(col_);
+	particleEmitter_->setDirection({ 0,1 });
+	particleEmitter_->PlayStop();
+	
 }
 
 void FireBallGenerator::update() {
@@ -57,7 +61,11 @@ void FireBallGenerator::addFireball(int n) {
 	}
 }
 
-void FireBallGenerator::modifyGenerationRate(bool inc_dec) {
+void FireBallGenerator::onButtonAction(bool inc_dec) {
+
+	if (inc_dec) particleEmitter_->modifyGenerationOdds(particleGenOddsModifier_);
+	else particleEmitter_->modifyGenerationOdds(-particleGenOddsModifier_);
+
 	if (inc_dec && minCd_ >= limitMinCd_) {
 		maxCd_ -= cdTimeChange_;
 		minCd_ -= cdTimeChange_;

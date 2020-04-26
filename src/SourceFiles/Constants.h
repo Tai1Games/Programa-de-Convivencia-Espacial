@@ -49,7 +49,6 @@ enum WeaponID {
 	Extinguisher,
 	Slipper,
 	Mando,
-	Tomato,
 
 	WEAPON_NUMBER
 };

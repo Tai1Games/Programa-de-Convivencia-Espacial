@@ -25,8 +25,10 @@ private:
 	uint limitMinCd_;
 	uint limitMaxCd_;
 	uint cdTimeChange_;
+	
 	int minFireballs_, maxFireballs_;
 	int fireballSpeed_;
+	int particleGenOddsModifier_;
 	double radius;
 
 	void addFireball(int num = 1);
@@ -38,6 +40,6 @@ public:
 	~FireBallGenerator() {};
 	void init() override;
 	void update() override;
-	void modifyGenerationRate(bool inc_dec);
+	void onButtonAction(bool inc_dec);
 };
 
