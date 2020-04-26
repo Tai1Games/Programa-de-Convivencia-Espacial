@@ -9,6 +9,7 @@
 #include <box2d.h>
 #include "checkML.h"
 #include <iterator>
+#include <queue>
 
 using json = nlohmann::json;
 using namespace std;
@@ -47,6 +48,7 @@ private:
 	//controllers
 	int numControllers_;
 	std::vector<SDL_GameController*> m_gameControllers;
+	std::queue<int> m_freeGameControllers;
 	std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
 	std::vector<std::pair<double*, double*>> m_triggerValues;
 	std::vector<std::vector<ButtonState>> m_buttonStates;
@@ -195,16 +197,24 @@ public:
 	}
 	//justup/down for the exact press or release
 	inline bool isButtonJustUp(int ctrl, SDL_GameControllerButton b) {
+		if (ctrl >= m_gameControllers.size())
+			return false;
 		return(isButtonUpEvent_ && m_buttonStates[ctrl][b] == JustUp);
 	}
 	inline bool isButtonJustDown(int ctrl, SDL_GameControllerButton b) {
+		if (ctrl >= m_gameControllers.size())
+			return false;
 		return(isButtonDownEvent_ && m_buttonStates[ctrl][b] == JustDown);
 	}
 	//isup/down for holding a button
 	inline bool isButtonDown(int ctrl, SDL_GameControllerButton b) {
+		if (ctrl >= m_gameControllers.size())
+			return false;
 		return(m_buttonStates[ctrl][b] == Down);
 	}
 	inline bool isButtonUp(int ctrl, SDL_GameControllerButton b) {
+		if (ctrl >= m_gameControllers.size())
+			return false;
 		return(m_buttonStates[ctrl][b] == Up);
 	}
 
@@ -215,6 +225,9 @@ public:
 	double getStickX(int ctrl, GAMEPADSTICK stick);
 	double getStickY(int ctrl, GAMEPADSTICK stick);
 	double getTrigger(int ctrl, GAMEPADTRIGGER trigger);
+
+	int getFreeGamePad();
+	void returnGamePad(int g);
 
 };
 

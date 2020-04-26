@@ -64,11 +64,6 @@ void InputHandler::update() {
 			break;
 		}
 	}
-
-	//if (SDL_GameControllerGetButton(controllers_[0], SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_A) == 1) {
-	//	cout << "Voy a prenderme fuego ahora mismo" << endl;
-	//}
-
 }
 
 void InputHandler::initialiseGamepads() {
@@ -80,12 +75,6 @@ void InputHandler::initialiseGamepads() {
 	numControllers_ = SDL_NumJoysticks();
 	if (SDL_NumJoysticks() > 0) {
 
-		//json mapData;
-		//ifstream inData = ifstream("../config/inputMapping.json");
-		//if (inData.is_open()) {
-		//	inData >> mapData;
-		//	//cout << "loaded Mapping files" << endl;
-		//}
 		for (int i = 0; i < SDL_NumJoysticks(); i++) {
 			SDL_GameController* gameCtrl = SDL_GameControllerOpen(i);
 			if (gameCtrl)
@@ -110,6 +99,7 @@ void InputHandler::initialiseGamepads() {
 					tempButtons.push_back(Up);
 				}
 				m_buttonStates.push_back(tempButtons);
+				m_freeGameControllers.push(i);
 			}
 			else
 			{
@@ -186,6 +176,8 @@ void InputHandler::clearState() {
 
 double InputHandler::getStickX(int joy, GAMEPADSTICK stick)
 {
+	if (joy >= m_gameControllers.size())
+		return 0.0;
 	if (m_joystickValues.size() > 0)
 	{
 		if (stick == LEFTSTICK)
@@ -203,6 +195,8 @@ double InputHandler::getStickX(int joy, GAMEPADSTICK stick)
 
 double InputHandler::getStickY(int joy, GAMEPADSTICK stick)
 {
+	if (joy >= m_gameControllers.size())
+		return 0.0;
 	if (m_joystickValues.size() > joy)
 	{
 		if (stick == LEFTSTICK)
@@ -428,6 +422,8 @@ bool InputHandler::mapJoystick(SDL_GameController* ctrl,json mapData) {
 }
 
 b2Vec2 InputHandler::getStickDir(int ctrl, GAMEPADSTICK stick) {
+	if (ctrl >= m_gameControllers.size())
+		return b2Vec2(0,0);
 	Vector2D aux;
 	if (stick == LEFTSTICK)
 		aux = *m_joystickValues[ctrl].first;
@@ -440,10 +436,25 @@ b2Vec2 InputHandler::getStickDir(int ctrl, GAMEPADSTICK stick) {
 }
 
 b2Vec2 InputHandler::getLastStickDir(int ctrl, GAMEPADSTICK stick) {
+	if (ctrl >= m_gameControllers.size())
+		return b2Vec2(0, 0);
 	if (stick == LEFTSTICK)
 		return lastLStickValue_[ctrl];
 	else
 		return b2Vec2(0, 0);
 
 	//return b2Vec2(aux.getX(), aux.getY());
+}
+
+int InputHandler::getFreeGamePad() {
+	int r = -1;
+	if (!m_freeGameControllers.empty()) {
+		r = m_freeGameControllers.front();
+			m_freeGameControllers.pop();
+	}
+	return r;
+}
+
+void InputHandler::returnGamePad(int g) {
+	m_freeGameControllers.push(g);
 }
