@@ -64,8 +64,6 @@ void TimeGameMode::init(PlayState* game)
 	canvasTimerRect_.y = 0;
 	canvasTimerRect_.w = CONST(int, "COUNTDOWN_UI_WIDTH");
 	canvasTimerRect_.h = CONST(int, "COUNTDOWN_UI_HEIGTH");
-
-	tomatoPool_.addTomato({ 40, 20 });
 }
 
 void TimeGameMode::render()

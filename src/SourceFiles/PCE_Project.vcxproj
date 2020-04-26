@@ -250,6 +250,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Viewer.h" />
     <ClInclude Include="ObjectFactory.h" />
+    <ClInclude Include="WeaponPool.h" />
     <ClInclude Include="WiFightGameMode.h" />
   </ItemGroup>
   <ItemGroup>

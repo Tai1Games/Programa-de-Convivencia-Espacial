@@ -48,8 +48,6 @@ void CapitalismGameMode::init(PlayState* game)
 
 	ObjectFactory::createTomatoTree(game->getEntityManager(), game->getPhysicsWorld(), b2Vec2(5,5), 
 		SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TreeTomato), &tomatoPool_);
-	//NEED TO DELETE
-	tomatoPool_.addTomato({ 40, 20 });
 }
 
 void CapitalismGameMode::update() {

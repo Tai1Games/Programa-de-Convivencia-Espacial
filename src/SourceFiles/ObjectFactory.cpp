@@ -251,7 +251,7 @@ Entity* ObjectFactory::createTreadmill(EntityManager* entityManager, b2World* ph
 	return m;
 }
 
-Entity* ObjectFactory::createTomatoTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, Texture* tomatoTex, TomatoPool* pool) {
+Entity* ObjectFactory::createTomatoTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, Texture* tomatoTex, WeaponPool* pool) {
 	Entity* e = entityManager->addEntity();
 	Collider* col = e->addComponent<Collider>(physicsWorld, b2_kinematicBody, pos.x, pos.y, CONST(double, "SPAWN_TREE_WIDTH"),
 		CONST(double, "SPAWN_TREE_HEIGHT"), CONST(double, "SPAWN_TREE_DENSITY"), CONST(double, "SPAWN_TREE_FRICTION"),

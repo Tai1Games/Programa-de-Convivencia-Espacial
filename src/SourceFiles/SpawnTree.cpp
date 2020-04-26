@@ -1,7 +1,7 @@
 #include "SpawnTree.h"
 #include "Collider.h"
 
-SpawnTree::SpawnTree(Texture* objectText, int objectW, int objectH, TomatoPool* pool, EntityManager* eMan, b2World* pWorld) :
+SpawnTree::SpawnTree(Texture* objectText, int objectW, int objectH, WeaponPool* pool, EntityManager* eMan, b2World* pWorld) :
 	Component(ComponentType::SpawnTree), objectTex_(objectText), pool_(pool), eMan_(eMan), pWorld_(pWorld) {
 	int pixPerMeter = CONST(double, "PIXELS_PER_METER");
 	objectW_ = objectW * pixPerMeter;
@@ -14,9 +14,9 @@ void SpawnTree::init() {
 	sPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 	Collider* coll = GETCMP1_(Collider);
 	SDL_Rect rectRender = coll->getRectRender();
-	double spawnPosX = rectRender.x + (rectRender.w / 2) - (objectTex_->getWidth() / 2);
-	double spawnPosY = rectRender.y + -(objectTex_->getHeight());
-	renderSpawnPos_ = b2Vec2(spawnPosX, spawnPosY);
+	double spawnPosX = rectRender.x + (rectRender.w / 2);
+	double spawnPosY = rectRender.y;
+	renderSpawnPos_ = b2Vec2(spawnPosX - (objectW_/2), spawnPosY - (objectH_/2));
 	physicsSpawnPos_ = b2Vec2((spawnPosX / pixPerM_), (CONST(double, "WINDOW_HEIGHT") - spawnPosY) / pixPerM_);
 }
 
@@ -38,5 +38,5 @@ void SpawnTree::draw() const {
 }
 
 void SpawnTree::SpawnObject() {
-	pool_->addTomato(physicsSpawnPos_);
+	pool_->addWeapon(physicsSpawnPos_);
 }

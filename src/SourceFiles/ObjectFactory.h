@@ -1,7 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "checkML.h"
-#include "TomatoPool.h"
+#include "WeaponPool.h"
 
 class EntityManager;
 class Weapon;
@@ -51,5 +51,5 @@ public:
 
 	static Entity* createTreadmill(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 
-	static Entity* createTomatoTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, Texture* tomatoTex, TomatoPool* pool);
+	static Entity* createTomatoTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, Texture* tomatoTex, WeaponPool* pool);
 };

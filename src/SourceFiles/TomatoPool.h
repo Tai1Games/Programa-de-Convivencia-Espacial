@@ -1,20 +1,23 @@
 #pragma once
+
+#include "WeaponPool.h"
 #include "ObjectPool.h"
-#include "Entity.h"
 #include "Constants.h"
+
 
 class EntityManager;
 class b2World;
 class b2Vec2;
 
-class TomatoPool{
+class TomatoPool: public WeaponPool {
 private:
 	ObjectPool<Entity, COIN_POOL_SIZE> tomatoPool_;
+	int tomatoMaxSpeed_ = 0;
+	int tomatoMinSpeed_ = 0;
 public:
 	TomatoPool();
 	~TomatoPool() {};
-	void init(EntityManager* eMan, b2World* physicsWorld);
-
-	void addTomato(b2Vec2 pos);
+	virtual void init(EntityManager* eMan, b2World* physicsWorld) override;
+	virtual void addWeapon(b2Vec2 pos) override;
 };
 

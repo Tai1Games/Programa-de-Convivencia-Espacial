@@ -4,7 +4,7 @@
 #include "Entity.h"
 #include "Texture.h"
 #include "checkML.h"
-#include "TomatoPool.h"
+#include "WeaponPool.h"
 
 class SpawnTree : public Component {
 private:
@@ -19,12 +19,12 @@ protected:
 	b2Vec2 renderSpawnPos_;
 	b2Vec2 physicsSpawnPos_;
 	EntityManager* eMan_ = nullptr;
-	TomatoPool* pool_ = nullptr;
+	WeaponPool* pool_ = nullptr;
 	b2World* pWorld_ = nullptr;
 
 	void SpawnObject();
 public:
-	SpawnTree(Texture* objectText, int objectW, int objectH, TomatoPool* pool, EntityManager* eMan, b2World* pWorld);
+	SpawnTree(Texture* objectText, int objectW, int objectH, WeaponPool* pool, EntityManager* eMan, b2World* pWorld);
 	~SpawnTree() {}
 	virtual void init() override;
 	virtual void update() override;
