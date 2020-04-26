@@ -237,9 +237,6 @@
     <ClInclude Include="ThrownByPlayer.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="TomatoLogic.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="ActionableWeapon.h">
       <Filter>Header Files\Components\Weapons</Filter>
     </ClInclude>
@@ -260,6 +257,9 @@
     </ClInclude>
     <ClInclude Include="TomatoPool.h">
       <Filter>Header Files\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="TomatoLogic.h">
+      <Filter>Header Files\Components\Weapons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -419,9 +419,6 @@
     <ClCompile Include="BoilerButtonLogic.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="TomatoLogic.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="ExtinguisherWeapon.cpp">
       <Filter>Source Files\Components\Weapons</Filter>
     </ClCompile>
@@ -442,6 +439,9 @@
     </ClCompile>
     <ClCompile Include="TomatoPool.cpp">
       <Filter>Source Files\Pools</Filter>
+    </ClCompile>
+    <ClCompile Include="TomatoLogic.cpp">
+      <Filter>Source Files\Components\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
