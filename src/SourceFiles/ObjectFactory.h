@@ -42,9 +42,11 @@ public:
 	
 	static Entity* makeCoin(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, int val);
 	
-	static Entity* createRoomba(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
+	static Entity* makeRoomba(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 
 	static Entity* makeBoilerButton(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, bool inc_dec);
 
-	static Entity* createTreadmill(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
+	static Entity* makeTreadmill(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
+
+	static Entity* makeCarnivorousePlant(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 };

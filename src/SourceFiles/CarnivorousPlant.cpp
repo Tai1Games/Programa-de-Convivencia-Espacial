@@ -10,10 +10,12 @@ void CarnivorousPlant::init()
 	idleFrames_ = CONST(int, "IDLE_FRAMES");
 	eatingFrames_ = CONST(int, "EATING_FRAMES");
 	frameSize_ = CONST(int, "FRAME_SIZE");
-	limitTime_ = CONST(int, "CARNIVOROUSEPLANT_TIME");
+	coinDMG = CONST(int, "CARNIVOROUSEPLANT_COIN_DMG");
+	damage = CONST(int, "CARNIVOROUSEPLANT_DMG");
+	timePassed_ = 0;
+
 	actualSpeed_ = minAnimationSpeed_;
-	timedPassed_ = 0;
-	aumento_ = (float)(minAnimationSpeed_ - maxAnimationSpeed_) / (float)limitTime_;
+	aumento_ = (float)(minAnimationSpeed_ - maxAnimationSpeed_) / (CONST(float, "CARNIVOROUSEPLANT_TIME") / 16.66);
 	playerDetected_ = false;
 }
 
@@ -36,37 +38,41 @@ void CarnivorousPlant::update()
 		}
 		else {
 			frame_ = 0;
-			idle_ = true;
-			timedPassed_ = 0;
 			actualSpeed_ = minAnimationSpeed_;
+			idle_ = true;
 		}
 	}
 
 	if (playerDetected_) {
-		if (timedPassed_ >= limitTime_) { //tiene que morder xd
+		if (SDL_Game::instance()->getTime() > limitTime_) { //tiene que morder xd
 			idle_ = false;
 			if (player_ != nullptr) {
 				Health* healthPlayer = player_->getComponent<Health>(ComponentType::Health);
-
-				//if (!healthPlayer->subtractLife(1)) healthPlayer->playerDead(playerCollision_);
+				if (healthPlayer != nullptr && !healthPlayer->subtractLife(damage)) healthPlayer->playerDead(playerCollHandler_);
+				else if (walletPlayer_ != nullptr) playerCollHandler_->addCoinDrop(std::make_tuple(walletPlayer_, GETCMP2(player_, PlayerData), coinDMG));
+				resetCycle();
 			}
 		}
-		else {
-			timedPassed_++;
+		else if (idle_) {
 			actualSpeed_ -= aumento_;
 		}
 	}
-
 }
+
+
 
 void CarnivorousPlant::onCollisionEnter(Collision* c)
 {
 	if (c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
+		if (timePassed_ != 0)limitTime_ = SDL_Game::instance()->getTime() + limitTime_ - timePassed_;
+		else resetCycle();
+
 		playerDetected_ = true;
 		player_ = c->entity;
-		playerCollision_ = c;
-	}
+		playerCollHandler_ = c->collisionHandler;
+		walletPlayer_ = GETCMP2(c->entity, Wallet);
 
+	}
 }
 
 void CarnivorousPlant::onCollisionExit(Collision* c)
@@ -74,5 +80,16 @@ void CarnivorousPlant::onCollisionExit(Collision* c)
 	if (c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
 		playerDetected_ = false;
 		player_ = nullptr;
+		playerCollHandler_ = nullptr;
+		walletPlayer_ = nullptr;
+		timePassed_ += (SDL_Game::instance()->getTime() - enterTime_);
+		std::cout << timePassed_ << endl;
 	}
+}
+
+void CarnivorousPlant::resetCycle()
+{
+	enterTime_ = SDL_Game::instance()->getTime();
+	limitTime_ = enterTime_ + CONST(int, "CARNIVOROUSEPLANT_TIME"); //aqui te mete un bocado
+	timePassed_ = 0;
 }

@@ -116,6 +116,17 @@
                  "width":346,
                  "x":64,
                  "y":54
+                }, 
+                {
+                 "height":200,
+                 "id":87,
+                 "name":"CarnivorousePlant",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":200,
+                 "x":80,
+                 "y":416
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -338,7 +349,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":87,
+ "nextobjectid":88,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.3.3",
