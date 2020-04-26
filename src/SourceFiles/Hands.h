@@ -35,6 +35,7 @@ public:
 	virtual void update() override;
 	void setWeapon(WeaponID wId, Weapon* w);
 	int getPlayerId() { return playerData_->getPlayerNumber(); }
+	Collider* getColHands_() { return collider_; }
 	b2Vec2 getPos() { return pos_; }
 	b2Vec2 getDir() { return dir_; }
 	b2Vec2 getVel() { return collider_->getLinearVelocity(); }

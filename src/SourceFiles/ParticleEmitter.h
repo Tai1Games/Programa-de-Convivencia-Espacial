@@ -65,6 +65,7 @@ public:
 	//Devuelve si se ha detenido o empezado
 	bool PlayStop() { timeEmitted_ = 0; return emitting_ = !emitting_; };
 
+	void setMaxPaticles(Uint8 num) { maxParticles_ = num; };
 	void setPositionCollider(Collider* col) { collider_ = col; };
 	void setDirection(Vector2D dir) { direction_ = dir; };
 	void setSize(Uint16 size) { size_ = size; };
