@@ -9,7 +9,7 @@ class b2Vec2;
 
 class TomatoPool{
 private:
-	ObjectPool<Entity, COIN_POOL_SIZE> tomatoPool_;
+	ObjectPool<Entity, TOMATO_POOL_SIZE> tomatoPool_;
 public:
 	TomatoPool();
 	~TomatoPool() {};
@@ -17,4 +17,3 @@ public:
 
 	void addTomato(b2Vec2 pos);
 };
-
