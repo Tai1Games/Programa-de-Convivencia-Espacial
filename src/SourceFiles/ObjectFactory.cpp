@@ -19,6 +19,8 @@
 #include "BoilerButtonLogic.h"
 #include "Pad.h"
 #include "Treadmill.h"
+#include "SpawnTree.h"
+#include "TomatoLogic.h"
 
 Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 
@@ -65,6 +67,20 @@ Entity* ObjectFactory::makeExtinguisher(EntityManager* entityManager, b2World* p
 	entity->addComponent<ExtinguisherWeapon>(WeaponID::Extinguisher, CONST(int, "EXTINGUISHER_IMPACT_DAMAGE"), CONST(int, "EXTINGUISHER_COOLDOWN_FRAMES"));
 
 	return entity;
+}
+
+Entity* ObjectFactory::makeTomato(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
+{
+	entityManager->addExistingEntity(e);
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "TOMATO_RADIUS"), CONST(double, "TOMATO_DENSITY"),
+		CONST(double, "TOMATO_FRICTION"), CONST(double, "TOMATO_RESTITUTION"),
+		CONST(double, "TOMATO_LINEAR_DRAG"), CONST(double, "TOMATO_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent <Viewer>(Resources::Tomato, SDL_Rect{ 0, 0, 160, 160 });
+	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::TomatoRing, 5, 1000, 20, 100, 0, 360);
+	pE->setMaxParticles(1);
+	e->addComponent<TomatoLogic>();
+
+	return e;
 }
 
 Weapon* ObjectFactory::makeController(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
@@ -121,10 +137,6 @@ Entity* ObjectFactory::makePipe(EntityManager* entityManager, b2World* physicsWo
 
 	return e;
 }
-
-
-
-
 
 Entity* ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
@@ -192,7 +204,6 @@ Entity* ObjectFactory::createBoiler(EntityManager* entityManager, b2World* physi
 	Collider* collRoomba = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "BOILER_WIDTH"), CONST(double, "BOILER_HEIGHT"), CONST(double, "BOILER_DENSITY"), CONST(double, "BOILER_FRICTION"),
 		CONST(double, "BOILER_RESTITUTION"), CONST(double, "BOILER_LINEAR_DRAG"), CONST(double, "BOILER_ANGULAR_DRAG"), Collider::CollisionLayer::Trigger, false);
 	e->addComponent<Viewer>(Resources::Boiler);
-	e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Smoke, 10, 500, 20, 1000, 3, 180);
 	e->addComponent<FireBallGenerator>(physicsWorld);
 
 	return e;
@@ -238,4 +249,19 @@ Entity* ObjectFactory::createTreadmill(EntityManager* entityManager, b2World* ph
 	world->CreateJoint(&jointDef); //Crea el joint con la definición que hemos definido previamente
 
 	return m;
+}
+
+Entity* ObjectFactory::createTomatoTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, Texture* tomatoTex, WeaponPool* pool) {
+	Entity* e = entityManager->addEntity();
+	Collider* col = e->addComponent<Collider>(physicsWorld, b2_kinematicBody, pos.x, pos.y, CONST(double, "SPAWN_TREE_WIDTH"),
+		CONST(double, "SPAWN_TREE_HEIGHT"), CONST(double, "SPAWN_TREE_DENSITY"), CONST(double, "SPAWN_TREE_FRICTION"),
+		CONST(double, "SPAWN_TREE_RESTITUTION"), CONST(double, "SPAWN_TREE_LINEAR_DRAG"), CONST(double, "SPAWN_TREE_ANGULAR_DRAG"),
+		Collider::CollisionLayer::UnInteractableObject, false);
+	e->addComponent<Viewer>();
+	SDL_Rect clip;
+	clip.h = tomatoTex->getHeight(); clip.w = tomatoTex->getWidth() / 17;
+	clip.x = 0; clip.y = 0;
+	e->addComponent<SpawnTree>(tomatoTex, CONST(double, "TOMATO_RADIUS"), CONST(double, "TOMATO_RADIUS"), pool, entityManager, physicsWorld);
+
+	return e;
 }
