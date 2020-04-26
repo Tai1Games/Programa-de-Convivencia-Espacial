@@ -62,7 +62,7 @@ void MeleeWeapon::onCollisionEnter(Collision* c) {
 		auxCo->applyLinearImpulse(knockback, b2Vec2(0, 1));
 		if (auxHe != nullptr) {
 			if (!auxHe->subtractLife(damage_))
-				auxHe->playerDead(c);
+				auxHe->playerDead(c->collisionHandler);
 		}
 		else
 			c->collisionHandler->addCoinDrop(std::make_tuple(auxWa, GETCMP2(c->entity,PlayerData), damage_));

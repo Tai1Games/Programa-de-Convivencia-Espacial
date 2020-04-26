@@ -19,7 +19,7 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 		b2Vec2 perp = perpendicularCounterClockwise(collNormal);
 		float attachAngle = std::atanf(perp.y/perp.x);
 		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle())>0) ? -1 : 1;
-		attachAngle += (CONST(double,"PI") / 2)*tilt;
+		attachAngle += (PI / 2)*tilt;
 		mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
 		b2WeldJointDef jointDef; //Definición del nuevo joint.
 		jointDef.bodyA = mainCollider_->getBody(); //Body del jugador.
@@ -39,6 +39,7 @@ void AttachesToObjects::deAttachFromObject() {
 		mainCollider_->getWorld()->DestroyJoint(joint_); //Destruye el joint
 		joint_ = nullptr; //Al hacer la acción de arriba, el puntero a joint_ sigue apuntando a una dirección de memoria que NO es válida. Por eso se iguala a nullptr
 		attachedObject_ = nullptr;
+		attachedCollider_ = nullptr;
 	}
 }
 
@@ -64,6 +65,7 @@ void AttachesToObjects::onCollisionEnter(Collision* c){
 	if (c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Wall || c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject) {
 		if (canAttachToObject()) {
 			b2WorldManifold manifold;
+			attachedCollider_ = GETCMP2(c->entity, Collider);
 			c->contact->GetWorldManifold(&manifold);
 			c->collisionHandler->createWeld
 			(CollisionHandler::weldData(this, c->hitFixture->GetBody(), b2Vec2(manifold.points[0].x, manifold.points[0].y),manifold.normal));

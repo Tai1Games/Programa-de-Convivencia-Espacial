@@ -11,6 +11,7 @@ private:
 	int playerNumber_;
 
 	Collider* mainCollider_ = nullptr; //Collider del objeto principal (el Tinky)
+	Collider* attachedCollider_ = nullptr; //Collider del objeto agarrado
 	b2Body* attachedObject_ = nullptr; //Este será el collider con el que colisionara y se agarrara
 	b2WeldJoint* joint_ = nullptr; //Joint entre el jugador y otro objeto
 	PlayerData* playerData_ = nullptr;
@@ -23,6 +24,7 @@ public:
 	void deAttachFromObject(); //Rompe el joint entre el jugador y el otro objeto
 	bool canAttachToObject(); //Comprueba si el jugador está pulsando la tecla válida y si no está sujeto a otro objeto
 	bool isAttached(); //Te dice si actualmente está agarrado a algo o no
+	Collider* getAttachedObject() { return attachedCollider_; }
 
 	virtual void init() override;
 	virtual void handleInput();

@@ -14,6 +14,10 @@ protected:
 	Collider* playerCollider_;
 	PlayerController* playerController_;
 
+	//constants
+	float maxImpulseGrabbed_;
+	int impulseSize_;
+
 	int playerNumber_;
 	int emptyTextureId_;
 	int chargeTextureId_;
