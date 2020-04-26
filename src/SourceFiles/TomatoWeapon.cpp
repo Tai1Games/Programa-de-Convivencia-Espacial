@@ -80,7 +80,7 @@ void TomatoWeapon::onCollisionEnter(Collision* c) {
 						objThrown->addPointsToOwner();
 				}
 
-				healthPlayer->playerDead(c);
+				healthPlayer->playerDead(c->collisionHandler);
 			}
 		}
 		else if (walletPlayer && collPlayer) {
