@@ -4,6 +4,7 @@
 #include "EntityManager.h"
 #include "Viewer.h"
 #include "Resources.h"
+#include "ParticleEmitter.h"
 #include <math.h>
 
 void FireBallGenerator::init() {
@@ -27,6 +28,8 @@ void FireBallGenerator::init() {
 	fbPool_.init(manager_, physicsWorld_);
 	nextShot_ = SDL_Game::instance()->getTime() + CONST(int,"FBGEN_INITIAL_OFFSET") 
 		+ (rand() % maxCd_ + minCd_);
+
+	particleEmitter_->setPositionCollider(col_);
 }
 
 void FireBallGenerator::update() {

@@ -46,6 +46,10 @@ protected:
 	Uint8 msPerFrame_ = 0;
 	Uint8 maxParticles_;
 
+	//Numero de texturas
+	int numTextures_;
+	int textureSize_;
+
 	struct Particle {
 		Vector2D position;
 		Vector2D direction;
@@ -56,7 +60,7 @@ protected:
 	std::list<Particle> particles_;
 	std::queue<list<Particle>::iterator> particlesToDelete_;
 public:
-	ParticleEmitter(Vector2D direction, int textureId, float speed, Uint16 particleLifetime = 1000, Uint16 size = 20, Uint16 emittingTime = 1000, int speedVariation = 0, int emissionConeAngle = 10.0);
+	ParticleEmitter(Vector2D direction, int textureId, float speed, int numTextures = 1, Uint16 particleLifetime = 1000, Uint16 size = 20, Uint16 emittingTime = 1000, int speedVariation = 0, int emissionConeAngle = 10.0);
 	virtual ~ParticleEmitter() { Component::~Component(); };
 
 	virtual void init() override;

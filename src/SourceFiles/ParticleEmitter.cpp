@@ -2,8 +2,8 @@
 #include "Entity.h"
 #include "Collider.h"
 
-ParticleEmitter::ParticleEmitter(Vector2D direction, int textureId, float speed, Uint16 particleLifetime, Uint16 size, Uint16 emittingTime, int speedVariation, int emissionConeAngle) :
-	Component(ComponentType::ParticleEmitter), direction_(direction), textureId_(textureId), speed_(speed),
+ParticleEmitter::ParticleEmitter(Vector2D direction, int textureId, float speed, int numTextures, Uint16 particleLifetime, Uint16 size, Uint16 emittingTime, int speedVariation, int emissionConeAngle) :
+	Component(ComponentType::ParticleEmitter), direction_(direction), textureId_(textureId), speed_(speed), numTextures_(numTextures),
 	particleLifetime_(particleLifetime), size_(size), emittingTime_(emittingTime), speedVariation_(speedVariation), emissionConeAngle_(emissionConeAngle),
 	msPerFrame_(0), maxParticles_(0), PI(0){}
 
@@ -13,6 +13,7 @@ void ParticleEmitter::init() {
 	msPerFrame_ = CONST(float, "MS_PER_FRAME");
 	maxParticles_ = CONST(int, "MAX_PARTICLES_DEFAULT");
 	PI = CONST(double, "PI");
+	textureSize_ = texture_->getHeight(); //Asumimos que si es un spritesheet, están organizados en vertical.
 }
 
 void ParticleEmitter::update() {
@@ -50,6 +51,10 @@ void ParticleEmitter::update() {
 
 void ParticleEmitter::draw() const {
 	for (Particle part : particles_) {
-		texture_->render({ (int)part.position.getX() - size_ / 2,(int)part.position.getY() - size_ / 2,size_,size_ });
+		int randTexture = 0;
+		if (numTextures_ > 1) {
+			randTexture = rand() % numTextures_;
+		}
+		texture_->render({ (int)part.position.getX() - size_ / 2,(int)part.position.getY() - size_ / 2,size_,size_ }, 0, { randTexture * textureSize_, 0, textureSize_, textureSize_ });
 	}
 }
