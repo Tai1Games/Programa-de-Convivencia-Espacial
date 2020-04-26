@@ -16,7 +16,6 @@ void ParticleEmitter::init() {
 	msPerFrame_ = CONST(float, "MS_PER_FRAME");
 	maxParticles_ = CONST(int, "MAX_PARTICLES_DEFAULT");
 	PI = CONST(double, "PI");
-	generationOdds_ = CONST(int, "PARTICLE_GENERATION_INITIAL_ODDS");
 	minGenerationOdds_ = CONST(int, "PARTICLE_GENERATION_MIN_ODDS");
 	maxGenerationOdds_ = CONST(int, "PARTICLE_GENERATION_MAX_ODDS");
 }
