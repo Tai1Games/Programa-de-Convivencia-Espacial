@@ -43,6 +43,9 @@ void CapitalismGameMode::init(PlayState* game)
 	canvasTimerRect_.y = 0;
 	canvasTimerRect_.w = CONST(int, "COUNTDOWN_UI_WIDTH");
 	canvasTimerRect_.h = CONST(int, "COUNTDOWN_UI_HEIGTH");
+
+	ObjectFactory::createTomatoTree(game->getEntityManager(), game->getPhysicsWorld(), b2Vec2(5,5), 
+		SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Ball));
 }
 
 void CapitalismGameMode::update() {
