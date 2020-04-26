@@ -64,7 +64,8 @@ void CarnivorousPlant::update()
 void CarnivorousPlant::onCollisionEnter(Collision* c)
 {
 	if (c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
-		if (timePassed_ != 0)limitTime_ = SDL_Game::instance()->getTime() + limitTime_ - timePassed_;
+		enterTime_ = SDL_Game::instance()->getTime();
+		if (timePassed_ != 0)limitTime_ = SDL_Game::instance()->getTime() + CONST(float, "CARNIVOROUSEPLANT_TIME") - timePassed_;
 		else resetCycle();
 
 		playerDetected_ = true;
