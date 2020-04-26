@@ -12,7 +12,6 @@ void ParticleEmitter::init() {
 	texture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(textureId_);
 	msPerFrame_ = CONST(float, "MS_PER_FRAME");
 	maxParticles_ = CONST(int, "MAX_PARTICLES_DEFAULT");
-	PI = CONST(double, "PI");
 }
 
 void ParticleEmitter::update() {
