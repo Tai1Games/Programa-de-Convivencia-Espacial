@@ -23,7 +23,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SliderControl, resourcesPath + "textures/SliderControl.png"},
 
 	{ CanvasTimerBackground, resourcesPath + "textures/canvasTimerBackground.png"},
-	{ CoinUI, resourcesPath + "textures/DogeCoinUI.png"},
+	{ CoinUI, resourcesPath + "textures/MonedaUI.png"},
 	{ SkullUI, resourcesPath + "textures/SkullUI.png"},
 	{ SuddenDeathCapitalismModeText, resourcesPath + "textures/suddenDeathCapitalismModeText.png"},
 	{ SuddenDeathTimeModeText, resourcesPath + "textures/suddenDeathTimeModeText.png"},
@@ -50,7 +50,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SpaceSuit, resourcesPath + "textures/PinkTinky.png"},	// dead body
 
 	// Map elements
-	{ Boiler,resourcesPath + "textures/boiler_placeholder.png"},
+	{ Boiler,resourcesPath + "textures/CalderaPro.png"},
 	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
 	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
 	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png" },
@@ -58,10 +58,13 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
 	{ Treadmill , resourcesPath + "textures/Treadmill.png"},
 	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png"},
+	{TreadmillPanel, resourcesPath + "textures/TreadmillPanel.png"},
 
 	// Gamemode specific elements
-	{ Coin, resourcesPath + "textures/DogeCoin.png" },
-	{ Router,resourcesPath + "textures/Router.png" },
+	{ Coin, resourcesPath + "textures/Moneda.png" },
+	{ Router,resourcesPath + "textures/Router2.png" },
+	{ RoombaSpriteSheet, resourcesPath + "textures/Roomba.png"},
+	{ Remote, resourcesPath + "textures/Mando.png"},
 
 	// miscelánea
 	{ Debug, resourcesPath + "textures/debug.png" },

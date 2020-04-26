@@ -67,10 +67,13 @@ public:
 		TreadmillSpriteSheet,
 		PipeHor,
 		PipeVer,
+		TreadmillPanel,
 
 		// Gamemode specific elements
 		Coin,
 		Router,
+		RoombaSpriteSheet,
+		Remote,
 
 		// miscel�nea
 		Debug,
