@@ -6,7 +6,9 @@ void CapitalismGameMode::init(PlayState* game)
 {
 	GameMode::init(game);
 	coinPool_.init(game->getEntityManager(), game->getPhysicsWorld());
-
+	//NEED TO DELETE ---
+	tomatoPool_.init(game->getEntityManager(), game->getPhysicsWorld());
+	//------------------
 	//Load of constants
 	sPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 	timeToEnd_ = CONST(double, "TIME_TO_END");
@@ -46,6 +48,8 @@ void CapitalismGameMode::init(PlayState* game)
 
 	ObjectFactory::createTomatoTree(game->getEntityManager(), game->getPhysicsWorld(), b2Vec2(5,5), 
 		SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Ball));
+	//NEED TO DELETE
+	tomatoPool_.addTomato({ 40, 20 });
 }
 
 void CapitalismGameMode::update() {

@@ -67,6 +67,8 @@ public:
 		TreadmillSpriteSheet,
 		PipeHor,
 		PipeVer,
+		Tomato,
+		TomatoRing,
 
 		// Gamemode specific elements
 		Coin,
