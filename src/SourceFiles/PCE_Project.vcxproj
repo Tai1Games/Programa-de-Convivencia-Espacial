@@ -183,6 +183,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ActionableWeapon.h" />
+    <ClInclude Include="AnimatedViewer.h" />
     <ClInclude Include="AttachesToObjects.h" />
     <ClInclude Include="BoilerButtonLogic.h" />
     <ClInclude Include="CapitalismGameMode.h" />
@@ -227,6 +228,8 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="StocksGameMode.h" />
     <ClInclude Include="ThrownByPlayer.h" />
     <ClInclude Include="TimeGameMode.h" />
+    <ClInclude Include="TomatoWeapon.h" />
+    <ClInclude Include="TomatoPool.h" />
     <ClInclude Include="Treadmill.h" />
     <ClInclude Include="Wallet.h" />
     <ClInclude Include="Weapon.h" />
@@ -250,6 +253,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActionableWeapon.cpp" />
+    <ClCompile Include="AnimatedViewer.cpp" />
     <ClCompile Include="AttachesToObjects.cpp" />
     <ClCompile Include="BoilerButtonLogic.cpp" />
     <ClCompile Include="CapitalismGameMode.cpp" />
@@ -290,6 +294,8 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="StocksGameMode.cpp" />
     <ClCompile Include="ThrownByPlayer.cpp" />
     <ClCompile Include="TimeGameMode.cpp" />
+    <ClCompile Include="TomatoWeapon.cpp" />
+    <ClCompile Include="TomatoPool.cpp" />
     <ClCompile Include="Treadmill.cpp" />
     <ClCompile Include="Wallet.cpp" />
     <ClCompile Include="Weapon.cpp" />

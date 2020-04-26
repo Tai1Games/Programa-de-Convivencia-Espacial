@@ -255,15 +255,21 @@
     <ClInclude Include="MenuState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
+    <ClInclude Include="TomatoPool.h">
+      <Filter>Header Files\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="TomatoWeapon.h">
+      <Filter>Header Files\Components\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedViewer.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SDL_Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Vector2D.cpp">
@@ -404,14 +410,14 @@
     <ClCompile Include="FireBallPool.cpp">
       <Filter>Source Files\Pools</Filter>
     </ClCompile>
-    <ClCompile Include="BoilerButtonLogic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ThrownByPlayer.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="TimeGameMode.cpp">
       <Filter>Source Files\GameModes</Filter>
+    </ClCompile>
+    <ClCompile Include="BoilerButtonLogic.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="ExtinguisherWeapon.cpp">
       <Filter>Source Files\Components\Weapons</Filter>
@@ -430,6 +436,18 @@
     </ClCompile>
     <ClCompile Include="MenuState.cpp">
       <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="TomatoPool.cpp">
+      <Filter>Source Files\Pools</Filter>
+    </ClCompile>
+    <ClCompile Include="TomatoWeapon.cpp">
+      <Filter>Source Files\Components\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedViewer.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

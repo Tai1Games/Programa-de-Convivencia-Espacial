@@ -32,8 +32,10 @@ namespace ComponentType {
 		Pad,
 		ThrownByPlayer,
 		Treadmill,
+		TomatoLogic,
 		MeleeWeapon,
 		SlipperWeapon,
+		AnimatedViewer,
 		// don't touch the rest of this enum, it is to identify the max
 		// number of components
 		_LastCmptId_

@@ -3,10 +3,14 @@
 #include "Health.h"
 #include "HealthViewer.h"
 #include "checkML.h"
+#include "TomatoPool.h" //DELETE THIS
 
 class StocksGameMode : public GameMode
 {
 private:
+	//NEED TO DELETE-------
+	TomatoPool tomatoPool_;
+	//---------------------
 	vector<int> playerStocks_; //Remaining stocks of each player
 	vector<Entity*> roundResults_; //Used to determine winner and mode end
 	vector<Health*> playersHealth_; //Reference to the Health component of each player
