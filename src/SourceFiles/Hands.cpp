@@ -14,7 +14,7 @@ void Hands::init()
 	playerData_ = GETCMP1_(PlayerData);
 	collider_ = GETCMP1_(Collider);
 	handSize_ = (CONST(double, "HAND_SIZE"));
-	ih_ = SDL_Game::instance()->getInputHandler();
+	ib_ = playerData_->getBinder();
 	if (tex_ == nullptr) {
 		tex_ = SDL_Game::instance()->getTexturesMngr()->getTexture(textureId_);
 	}
@@ -38,7 +38,7 @@ void Hands::draw() const
 
 void Hands::handleInput()
 {
-	b2Vec2 vI = ih_->getStickDir(getPlayerId(), InputHandler::GAMEPADSTICK::LEFTSTICK);
+	b2Vec2 vI = ib_->getAimDir();
 	if (vI.Length() != 0) dir_.Set(vI.x, vI.y);
 }
 
