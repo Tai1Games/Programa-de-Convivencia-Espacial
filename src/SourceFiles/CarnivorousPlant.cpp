@@ -47,11 +47,9 @@ void CarnivorousPlant::update()
 	if (playerDetected_) {
 		if (SDL_Game::instance()->getTime() > limitTime_) { //tiene que morder xd
 			idle_ = false;
-			if (player_ != nullptr) {
-				Health* healthPlayer = player_->getComponent<Health>(ComponentType::Health);
-				if (healthPlayer != nullptr && !healthPlayer->subtractLife(damage)) healthPlayer->playerDead(playerCollHandler_);
-				else if (walletPlayer_ != nullptr) playerCollHandler_->addCoinDrop(std::make_tuple(walletPlayer_, GETCMP2(player_, PlayerData), coinDMG));
-			}
+			Health* healthPlayer = player_->getComponent<Health>(ComponentType::Health);
+			if (healthPlayer != nullptr && !healthPlayer->subtractLife(damage)) healthPlayer->playerDead(playerCollHandler_);
+			else if (walletPlayer_ != nullptr) playerCollHandler_->addCoinDrop(std::make_tuple(walletPlayer_, GETCMP2(player_, PlayerData), coinDMG));
 			resetCycle();
 		}
 		else if (idle_) {
@@ -65,13 +63,11 @@ void CarnivorousPlant::update()
 void CarnivorousPlant::onCollisionEnter(Collision* c)
 {
 	if (c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
-
-
+		player_ = c->entity;
+		playerCollHandler_ = c->collisionHandler;
+		walletPlayer_ = GETCMP2(c->entity, Wallet);
 		if (playersInside_ == 0) {
 			playerDetected_ = true;
-			player_ = c->entity;
-			playerCollHandler_ = c->collisionHandler;
-			walletPlayer_ = GETCMP2(c->entity, Wallet);
 			enterTime_ = SDL_Game::instance()->getTime();
 			if (timePassed_ != 0)limitTime_ = SDL_Game::instance()->getTime() + CONST(float, "CARNIVOROUSEPLANT_TIME") - timePassed_;
 			else resetCycle();
