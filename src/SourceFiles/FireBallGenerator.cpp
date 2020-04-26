@@ -10,6 +10,7 @@
 void FireBallGenerator::init() {
 	col_ = GETCMP1_(Collider);
 	particleEmitter_ = GETCMP1_(ParticleEmitter);
+	boilerViewer_ = GETCMP1_(Viewer);
 	pos_ = col_->getPos();
 	radius = sqrt(pow(col_->getH(0), 2) + pow(col_->getW(0), 2))/*+0.5*/; //JAJA he hecho una hipotenusa despues del instiuto
 	//cout << "radius " << radius << endl;
@@ -34,6 +35,8 @@ void FireBallGenerator::init() {
 	particleEmitter_->setDirection({ 0,1 });
 	particleEmitter_->PlayStop();
 	particleEmitter_->setGenerationOddsClamp(CONST(int, "FBGEN_MIN_PARTICLE_GEN_ODDS"), CONST(int, "FBGEN_MAX_PARTICLE_GEN_ODDS"));
+
+	boilerViewer_->setOffset({ 50, 50 });
 }
 
 void FireBallGenerator::update() {
