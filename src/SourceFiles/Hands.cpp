@@ -24,7 +24,7 @@ void Hands::draw() const
 {
 	b2Vec2 stickDir = dir_;
 
-	double angle = std::atan2((double)stickDir.x, -(double)stickDir.y) * (180.0 / CONST(double, "PI"));
+	double angle = std::atan2((double)stickDir.x, -(double)stickDir.y) * (180.0 / PI);
 	SDL_Rect playerRect = collider_->getRectRender();
 	SDL_Rect destRect{ playerRect.x + playerRect.w / 2 - handSize_ / 2,playerRect.y + playerRect.h / 2 - handSize_ / 2 , handSize_ , handSize_ };
 
@@ -44,14 +44,14 @@ void Hands::handleInput()
 
 void Hands::update()
 {
-	angle_ = (std::asin(dir_.x) * -180.0 / CONST(double, "PI")) - 90;
+	angle_ = (std::asin(dir_.x) * -180.0 / PI) - 90;
 
 	//el arcoseno solo nos devuelve angulos en el intervalo 0� - 180�, si apuntamos hacia abajo hay que coger el angulo inverso
 	if (dir_.y < 0) angle_ = (int)(360 - angle_) % 360;
 
 	float dispAngHand = (int)(180 - angle_) % 360;	 //el angulo estandarizado de la mano
 
-	float dispAngPlayer = (360 + (90 + (int)(collider_->getAngle() * 180 / CONST(double, "PI")) % 360)) % 360;	//el angulo estandarizado del jugador
+	float dispAngPlayer = (360 + (90 + (int)(collider_->getAngle() * 180 / PI) % 360)) % 360;	//el angulo estandarizado del jugador
 
 	if ((dispAngHand < (dispAngPlayer + 180)) && (dispAngHand > dispAngPlayer)) {	//si la mano esta a su espalda
 		Flipped_ = SDL_FLIP_NONE;
