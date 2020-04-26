@@ -5,12 +5,12 @@
 ParticleEmitter::ParticleEmitter(Vector2D direction, int textureId, float speed, int numTextures, int generationOdds, Uint16 particleLifetime, Uint16 size, Uint16 emittingTime, int speedVariation, int emissionConeAngle) :
 	Component(ComponentType::ParticleEmitter), direction_(direction), textureId_(textureId), speed_(speed), numTextures_(numTextures), generationOdds_(generationOdds),
 	particleLifetime_(particleLifetime), size_(size), emittingTime_(emittingTime), speedVariation_(speedVariation), emissionConeAngle_(emissionConeAngle),
-	msPerFrame_(0), maxParticles_(0), PI(0){}
+	msPerFrame_(0), maxParticles_(0){}
 
 void ParticleEmitter::init() {
 	collider_ = GETCMP1_(Collider);
 	texture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(textureId_);
-	textureSize_ = texture_->getHeight(); //Asumimos que si es un spritesheet, están organizados en vertical.
+	textureSize_ = texture_->getHeight(); //Asumimos que si es un spritesheet, estï¿½n organizados en vertical.
 
 	//Load of constants
 	msPerFrame_ = CONST(float, "MS_PER_FRAME");

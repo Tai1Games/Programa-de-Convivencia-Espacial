@@ -69,7 +69,7 @@ void Viewer::draw() const {
 			SDL_Rect drawRect = collider_->getRectRender();
 			drawRect.x += renderOffset_.x;
 			drawRect.y += renderOffset_.y;
-			tex_->render(drawRect, (collider_->getAngle() * -180 / CONST(double, "PI")), clip_); // getAngle devuelve radianes, hay que pasarlos a �ngulos
+			tex_->render(drawRect, (collider_->getAngle() * -180 / PI), clip_); // getAngle devuelve radianes, hay que pasarlos a �ngulos
 			//if (textureId_ == Resources::Fireball) {
 			//	cout << "BOLADEFUEGODIBUJANDOSE";
 			//}
