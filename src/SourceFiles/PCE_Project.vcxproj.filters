@@ -255,7 +255,7 @@
     <ClInclude Include="MenuState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationLoop.h">
+    <ClInclude Include="AnimatedViewer.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
@@ -434,7 +434,7 @@
     <ClCompile Include="Component.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationLoop.cpp">
+    <ClCompile Include="AnimatedViewer.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>

@@ -19,7 +19,7 @@
 #include "BoilerButtonLogic.h"
 #include "Pad.h"
 #include "Treadmill.h"
-#include "AnimationLoop.h"
+#include "AnimatedViewer.h"
 
 Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 
@@ -175,8 +175,8 @@ Entity* ObjectFactory::createRoomba(EntityManager* entityManager, b2World* physi
 	Entity* e = entityManager->addEntity();
 	Collider* collRoomba = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "ROOMBA_RADIUS"), CONST(double, "ROOMBA_DENSITY"), CONST(double, "ROOMBA_FRICTION"),
 		CONST(double, "ROOMBA_RESTITUTION"), CONST(double, "ROOMBA_LINEAR_DRAG"), CONST(double, "ROOMBA_ANGULAR_DRAG"), Collider::CollisionLayer::UnInteractableObject, false);
-	e->addComponent<Viewer>(Resources::RoombaSpriteSheet);
-	e->addComponent<AnimationLoop>(CONST(int, "ROOMBA_FRAMES"), CONST(int, "ROOMBA_FRAMESPAN"), SDL_Rect{ 0,0,34,34 });
+	
+	e->addComponent<AnimatedViewer>(Resources::RoombaSpriteSheet, SDL_Rect{ 0,0,34,34 }, CONST(int, "ROOMBA_FRAMESPAN") );
 	
 	double velocityX = rand() % CONST(int, "ROOMBA_VELOCITY");
 	double velocityY = CONST(int, "ROOMBA_VELOCITY") - velocityX;
