@@ -32,7 +32,7 @@ public:
 
 	static Entity* makeFireball(Entity* e,EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 	
-	static Entity* createBoiler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
+	static Entity* makeBoiler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 	//Crea un mando de la tele (espec�fico para el modo Pelea Por El Mando)
 	static Weapon* makeController(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 	
@@ -42,7 +42,7 @@ public:
 	
 	static Entity* makeCoin(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, int val);
 	
-	static Entity* createRoomba(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
+	static Entity* makeRoomba(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 
 	static Entity* makeBoilerButton(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, bool inc_dec);
 

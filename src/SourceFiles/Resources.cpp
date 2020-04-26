@@ -50,7 +50,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SpaceSuit, resourcesPath + "textures/PinkTinky.png"},	// dead body
 
 	// Map elements
-	{ Boiler,resourcesPath + "textures/boiler_placeholder.png"},
+	{ Boiler,resourcesPath + "textures/Boiler.png"},
 	{ Smoke, resourcesPath + "textures/SmokeParticles-Sheet.png" },
 	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
 	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},

@@ -169,7 +169,7 @@ void TileMap::executeMapFactory()
 			ObjectFactory::makePad(entityManager_, physicsWorld_, pos, size);
 		}
 		else if (name == "Boiler") {
-			boilerAux_ = GETCMP2(ObjectFactory::createBoiler(entityManager_, physicsWorld_, pos), FireBallGenerator);
+			boilerAux_ = GETCMP2(ObjectFactory::makeBoiler(entityManager_, physicsWorld_, pos), FireBallGenerator);
 		}
 		else if (name == "IncButton") {
 			boilerButtons_.push_back(GETCMP2(ObjectFactory::makeBoilerButton(entityManager_, physicsWorld_, pos, true), BoilerButtonLogic));

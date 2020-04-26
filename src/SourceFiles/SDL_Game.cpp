@@ -114,7 +114,7 @@ void SDL_Game::start() {
 			if (frameTime < MS_PER_FRAME_)
 				SDL_Delay(MS_PER_FRAME_ - frameTime);
 			else
-				cout << "LAGGING BEHIND!" << endl << endl;
+				cout << "LAGGING BEHIND! " << frameTime << endl << endl;
 		}
 	}
 	else std::cout << "No hay mando conectado.\nAt SDL_Game.cpp line 113\n\n";
