@@ -29,6 +29,7 @@ protected:
 	//Maximo angulo de aleatoridad segun el vector direccion
 	//Valores entre [0,180]
 	int emissionConeAngle_;
+	double PI;
 
 	//Tamaño de la particula en cuadrado
 	Uint16 size_;

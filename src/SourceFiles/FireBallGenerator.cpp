@@ -24,7 +24,7 @@ void FireBallGenerator::init() {
 	cdVariability = maxCd_ - minCd_;
 	manager_ = entity_->getEntityManager();
 	fbPool_.init(manager_, physicsWorld_);
-	nextShot_ = SDL_Game::instance()->getTime() + CONST(int, "FBGEN_INITIAL_OFFSET")
+	nextShot_ = SDL_Game::instance()->getTime() + CONST(int,"FBGEN_INITIAL_OFFSET") 
 		+ (rand() % maxCd_ + minCd_);
 }
 
@@ -41,7 +41,7 @@ void FireBallGenerator::update() {
 void FireBallGenerator::addFireball(int n) {
 	//fireballPool_->addFireBall(pos_);
 	for (int i = 0; i < n; i++) {
-		double radians = (rand() % 360) * (PI / 180.0); //sientete orgulloso, Don Carlos
+		double radians = (rand() % 360)*(CONST(double, "PI")/180.0); //sientete orgulloso, Don Carlos
 		b2Vec2 spawnDir = b2Vec2(cos(radians) * radius, sin(radians) * radius);
 		b2Vec2 spawnPos = pos_ + spawnDir;
 		//cout << radians << endl;
@@ -49,7 +49,7 @@ void FireBallGenerator::addFireball(int n) {
 		spawnDir.Normalize();
 		spawnDir.x *= fireballSpeed_;
 		spawnDir.y *= fireballSpeed_;
-		fbPool_.addFireBall(spawnPos, spawnDir);
+		fbPool_.addFireBall(spawnPos,spawnDir);
 	}
 }
 
