@@ -10,7 +10,13 @@
 class PlayerController : public Component
 {
 private:
-	Uint32 chargeTimeStart_;
+	bool chargingImpulse_ = false;
+	Uint16 chargedFrames_;
+	float impulseForce_;
+	float chargeMultiplier_;
+	float maxImpulseGrabbed_;
+	float maxImpulseFloating_;
+
 
 	int playerNumber_;
 	b2Vec2 dirImpulse_;
@@ -24,7 +30,8 @@ public:
 
 	void init() override;
 	void handleInput() override;
+	void update() override;
 
-	float calculateForce();
+	float getImpulseForce() { return impulseForce_; };
 };
 

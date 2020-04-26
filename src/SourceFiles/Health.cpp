@@ -54,25 +54,25 @@ void Health::addLife(int sum)
 	else lives_ += sum;
 }
 
-void Health::playerDead(Collision* c)
+void Health::playerDead(CollisionHandler* c)
 {
 	//reset player
 
 	//soltar objetos agarrados
 	AttachesToObjects* a = GETCMP1_(AttachesToObjects);
 	if (a != nullptr && a->isAttached())
-		c->collisionHandler->breakAttachment(a);
+		c->breakAttachment(a);
 	//soltar arma
 	Hands* h = GETCMP1_(Hands);
 	Weapon* w = nullptr;
 	if (h != nullptr) w = h->getWeapon();
-	if (w != nullptr) c->collisionHandler->dropWeapon(w);
+	if (w != nullptr) c->dropWeapon(w);
 	//respawn
-	GameMode* s = c->collisionHandler->getGamemode();
+	GameMode* s = c->getGamemode();
 	PlayerData* p = GETCMP1_(PlayerData);
 	CollisionHandler::moveData mov;
 	mov.body = GETCMP1_(Collider)->getFixture(0)->GetBody();
-	mov.pos = c->collisionHandler->getPlayerRespawnPoint(p->getPlayerNumber());
+	mov.pos = c->getPlayerRespawnPoint(p->getPlayerNumber());
 	if (s->onPlayerDead(p->getPlayerNumber())) {	//avisa al jugador si puede respawnear
 		resetHealth();
 		invFrames_ = INV_FRAMES_RESPAWN_;
@@ -80,14 +80,14 @@ void Health::playerDead(Collision* c)
 	else {	//si no le quedan vidas le mandamos lejos provisionalmente
 		mov.pos = b2Vec2((1 + p->getPlayerNumber()) * 50, 0);
 	}
-	c->collisionHandler->addMove(mov);
+	c->addMove(mov);
 
 	//cuerpo muerto
 	CollisionHandler::bodyData body;
 	b2Fixture* fix = GETCMP1_(Collider)->getFixture(0);
 	body.pos = fix->GetBody()->GetPosition();
 	body.angle = fix->GetBody()->GetAngle();
-	c->collisionHandler->addCorpse(body);
+	c->addCorpse(body);
 }
 
 void Health::onCollisionEnter(Collision* c)
@@ -138,7 +138,7 @@ void Health::onCollisionEnter(Collision* c)
 				}
 			}
 
-				playerDead(c);
+				playerDead(c->collisionHandler);
 			}
 		}
 	}

@@ -69,10 +69,13 @@ public:
 		PipeVer,
 		Tomato,
 		TomatoRing,
+		TreadmillPanel,
 
 		// Gamemode specific elements
 		Coin,
 		Router,
+		RoombaSpriteSheet,
+		Remote,
 
 		// miscel�nea
 		Debug,
