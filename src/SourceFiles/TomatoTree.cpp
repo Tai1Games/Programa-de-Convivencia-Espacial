@@ -1,4 +1,4 @@
-#include "TomatoTree.h"
+/*#include "TomatoTree.h"
 #include "Collider.h"
 #include "ObjectFactory.h"
 
@@ -14,5 +14,5 @@ void TomatoTree::init() {
 }
 
 void TomatoTree::SpawnObject() {
-	ObjectFactory::makeBall(eMan_, pWorld_, spawnPos_, b2Vec2(objectW_ / pixPerM_, objectH_ / pixPerM_));
-}
+	pool_->addTomato(b2Vec2((spawnPos_.x / pixPerM_), (CONST(double, "WINDOW_HEIGHT") - spawnPos_.y) / pixPerM_));
+}*/

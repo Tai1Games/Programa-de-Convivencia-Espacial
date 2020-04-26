@@ -69,6 +69,7 @@ public:
 		PipeVer,
 		Tomato,
 		TomatoRing,
+		TreeTomato,
 
 		// Gamemode specific elements
 		Coin,

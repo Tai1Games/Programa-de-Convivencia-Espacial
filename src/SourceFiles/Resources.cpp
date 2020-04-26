@@ -43,6 +43,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Stone, resourcesPath + "textures/Piedra.png" },
 	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png"},
 	{ TomatoRing, resourcesPath + "textures/TomatoRing.png"},
+	{ TreeTomato, resourcesPath + "textures/TreeTomato.png"},
 
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },

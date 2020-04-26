@@ -47,7 +47,7 @@ void CapitalismGameMode::init(PlayState* game)
 	canvasTimerRect_.h = CONST(int, "COUNTDOWN_UI_HEIGTH");
 
 	ObjectFactory::createTomatoTree(game->getEntityManager(), game->getPhysicsWorld(), b2Vec2(5,5), 
-		SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Ball));
+		SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TreeTomato), &tomatoPool_);
 	//NEED TO DELETE
 	tomatoPool_.addTomato({ 40, 20 });
 }
