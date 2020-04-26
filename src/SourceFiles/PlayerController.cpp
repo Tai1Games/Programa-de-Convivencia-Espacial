@@ -14,7 +14,7 @@ void PlayerController::init()
 	coll_ = GETCMP1_(Collider); //pilla referencia al collider
 	attachesToObj_ = GETCMP1_(AttachesToObjects);
 	playerNumber_ = playerData_->getPlayerNumber();
-	ib = GETCMP1_(PlayerData)->getBinder();
+	ib = playerData_->getBinder();
 
 	maxImpulseGrabbed_ = CONST(float, "IMPULSE_GRABBED");
 	maxImpulseFloating_ = CONST(float, "IMPULSE_FLOATING");

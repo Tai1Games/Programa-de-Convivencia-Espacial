@@ -9,8 +9,8 @@ InputHandler::InputHandler() {
 	clearState();
 	//kbState_ = SDL_GetKeyboardState(0);
 	numControllers_ = 0;
-	for (int i = 0; i < 1000; i++) {
-			kbState_[i] = ButtonState::Up;
+	for (int i = 0; i < kbSize; i++) {
+		kbState_.push_back(ButtonState::Up);
 	}
 }
 
@@ -133,6 +133,7 @@ void InputHandler::clearState() {
 	isButtonDownEvent_ = false;
 	isButtonUpEvent_ = false;
 
+	//Ajustamos los botones y teclas recien pulsados o soltados
 	for (int i = 0; i < 3; i++) {
 		switch (mbState_[i])
 		{
@@ -146,11 +147,13 @@ void InputHandler::clearState() {
 			break;
 		}
 	}
-	for (int i = 0; i < 1000; i++) {
-		if (kbState_[i] == ButtonState::JustUp)
-			kbState_[i] = ButtonState::Up;
-		else if (kbState_[i] == ButtonState::JustDown)
-			kbState_[i] = ButtonState::Down;
+	while (!justDownKeys.empty()) {
+		kbState_[justDownKeys.front()] = ButtonState::Down;
+		justDownKeys.pop();
+	}
+	while (!justUpKeys.empty()) {
+		kbState_[justUpKeys.front()] = ButtonState::Up;
+		justUpKeys.pop();
 	}
 
 	for (int controller = 0; controller < m_gameControllers.size();controller++) {

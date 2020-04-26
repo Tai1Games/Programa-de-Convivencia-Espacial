@@ -55,7 +55,9 @@ private:
 	ButtonState m_mouseButtonStates[3];
 	std::vector<SDL_Scancode> m_keysJustDown; //vector de teclas recien pulsadas
 	std::vector<SDL_Scancode> m_keysJustUp; //vector de teclas recien soltadas
-	std::array<ButtonState, 1000> kbState_;
+	const int kbSize = 300;
+	std::vector<ButtonState> kbState_;
+	std::queue<int> justUpKeys, justDownKeys;
 
 
 	bool m_bJoysticksInitialised;
@@ -78,13 +80,17 @@ private:
 	//keyboard
 	inline void onKeyDown(SDL_Event& event) {
 		isKeyDownEvent_  = true;
-		if (kbState_[event.key.keysym.scancode] == ButtonState::Up)
+		if (kbState_[event.key.keysym.scancode] == ButtonState::Up) {
 			kbState_[event.key.keysym.scancode] = ButtonState::JustDown;
+			justDownKeys.push(event.key.keysym.scancode);
+		}
 	}
 	inline void onKeyUp(SDL_Event& event) {
 		isKeyUpEvent_ = true;
-		if (kbState_[event.key.keysym.scancode] == ButtonState::Down)
+		if (kbState_[event.key.keysym.scancode] == ButtonState::Down) {
 			kbState_[event.key.keysym.scancode] = ButtonState::JustUp;
+			justUpKeys.push(event.key.keysym.scancode);
+		}
 	}
 	//---------------------------------------------
 	//mouse
