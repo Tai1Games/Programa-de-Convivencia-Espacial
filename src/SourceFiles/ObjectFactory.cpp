@@ -4,6 +4,7 @@
 #include "Transform.h"
 #include "Texture.h"
 #include "Viewer.h"
+#include "ColliderViewer.h"
 #include "Health.h"
 #include "HealthViewer.h"
 #include "InputHandler.h"
@@ -67,7 +68,7 @@ Entity* ObjectFactory::makeExtinguisher(EntityManager* entityManager, b2World* p
 	entity->addComponent<Viewer>(Resources::Extinguisher);
 	entity->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Coin, 10);
 	entity->addComponent<ExtinguisherWeapon>(WeaponID::Extinguisher, CONST(int, "EXTINGUISHER_IMPACT_DAMAGE"), CONST(int, "EXTINGUISHER_COOLDOWN_FRAMES"));
-
+	entity->addComponent<ColliderViewer>();
 	return entity;
 }
 

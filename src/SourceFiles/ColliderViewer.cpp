@@ -2,25 +2,28 @@
 #include "Resources.h"
 
 ColliderViewer::ColliderViewer() :
-    Viewer(Resources::Transparent)
-{
+    Viewer(Resources::Transparent) {
 }
 
 void ColliderViewer::init() {
 	Viewer::init();
 	renderer_ = SDL_Game::instance()->getRenderer();
-	points_ = new SDL_Point[4];
+	points_ = new SDL_Point[5];
     body_ = collider_->getBody();
+    int layer = collider_->getCollisionLayer();
+    if(layer > 0 && layer < 256)
+        color = colors[(int)log2(layer)];
 }
 
 void ColliderViewer::drawRect(b2Fixture* fixture) const {
     setPoints(fixture);
-    SDL_RenderDrawLines(renderer_, points_, 4);
+    SDL_RenderDrawLines(renderer_, points_, 5);
 }
 
 void ColliderViewer::setPoints(b2Fixture* fixture) const {
+
     SDL_Rect rect = collider_->getRectRender();
-    float angle = collider_->getAngle();
+    float angle = -collider_->getAngle();
     float diagonalLength = sqrt(rect.w * rect.w + rect.h * rect.h);
 
 	points_[0].x = rect.x;
@@ -29,16 +32,17 @@ void ColliderViewer::setPoints(b2Fixture* fixture) const {
 	points_[1].x = rect.x + rect.w * cos(angle);
 	points_[1].y = rect.y + rect.w * sin(angle);
 
-	points_[2].x = 0;
-	points_[2].y = 0;
+	points_[2].x = points_[1].x + rect.h * cos(90 + angle);
+	points_[2].y = points_[1].y + rect.h * sin(90 + angle);
 
 	points_[3].x = rect.x + rect.h * cos(angle + 90);
 	points_[3].y = rect.y + rect.h * sin(angle + 90);
+
+    points_[4].x = rect.x;
+    points_[4].y = rect.y;
 }
 
 void ColliderViewer::draw() const {
-
-    // si necesita dibujarse su collider...
 	if (drawable_ && !isUIElement_) {
 
         // lista de fixtures del body
@@ -47,8 +51,9 @@ void ColliderViewer::draw() const {
         // recorre todos los fixtures del objeto
         while (f != nullptr) {
 
+            int a = Collider::CollisionLayer::NormalAttachableObject;
             // cambia color de dibujado
-            SDL_SetRenderDrawColor(renderer_, r_, g_, b_, alpha_);
+            SDL_SetRenderDrawColor(renderer_, color.r, color.g, color.b, 255);
 
             // collider circular
             if (f->GetShape()->GetType() == b2Shape::e_circle)

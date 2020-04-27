@@ -264,7 +264,6 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="CoinsPool.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="ColliderViewer.cpp" />
-    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="CollisionHandler.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ControllerGameMode.cpp" />

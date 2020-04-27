@@ -99,6 +99,7 @@ b2Filter Collider::setCollisionLayer(CollisionLayer c) {
 		filter.maskBits = UnInteractableObject | Player | NormalAttachableObject | NormalObject;
 		break;
 	}
+	layer = c;
 	return filter;
 }
 
