@@ -28,10 +28,11 @@ private:
 		{128, 255, 0},
 		{255, 128, 0}
 	};
+	double PIXELS_PER_METER;
 
 	void drawCircle(SDL_Renderer* renderer, int32_t centreX, int32_t centreY, int32_t radius) const;
-	void setPoints(b2Fixture* fixture) const;
-	void drawRect(b2Fixture* fixture) const;
+	void setPoints(double originX, double originY, double width, double height) const;
+	void drawRect(int index) const;
 
 public:
 	ColliderViewer();

@@ -13,33 +13,35 @@ void ColliderViewer::init() {
     int layer = collider_->getCollisionLayer();
     if(layer > 0 && layer < 256)
         color = colors[(int)log2(layer)];
+    PIXELS_PER_METER = CONST(double, "PIXELS_PER_METER");
 }
 
-void ColliderViewer::drawRect(b2Fixture* fixture) const {
-    setPoints(fixture);
-    SDL_RenderDrawLines(renderer_, points_, 5);
+void ColliderViewer::drawRect(int index) const {
+    setPoints(collider_->getRect().x * PIXELS_PER_METER, collider_->getRect().y * PIXELS_PER_METER, collider_->getW(index) * PIXELS_PER_METER, collider_->getH(index) * PIXELS_PER_METER);
+    SDL_RenderDrawLines(renderer_, points_, 2);
 }
 
-void ColliderViewer::setPoints(b2Fixture* fixture) const {
+void ColliderViewer::setPoints(double originX, double originY, double width, double height) const {
 
-    SDL_Rect rect = collider_->getRectRender();
     float angle = -collider_->getAngle();
-    float diagonalLength = sqrt(rect.w * rect.w + rect.h * rect.h);
 
-	points_[0].x = rect.x;
-	points_[0].y = rect.y;
+	points_[0].x = originX;
+	points_[0].y = originY;
 
-	points_[1].x = rect.x + rect.w * cos(angle);
-	points_[1].y = rect.y + rect.w * sin(angle);
 
-	points_[2].x = points_[1].x + rect.h * cos(90 + angle);
-	points_[2].y = points_[1].y + rect.h * sin(90 + angle);
+	points_[1].x = originX + width * cos(angle);
+	points_[1].y = originY + width * sin(angle);
 
-	points_[3].x = rect.x + rect.h * cos(angle + 90);
-	points_[3].y = rect.y + rect.h * sin(angle + 90);
+    //points_[1].x = 0;
+    //points_[1].y = 0;
 
-    points_[4].x = rect.x;
-    points_[4].y = rect.y;
+	points_[2].x = points_[1].x + height * cos(90 + angle);
+	points_[2].y = points_[1].y + width * sin(90 + angle);
+
+	points_[3].x = originX + height * cos(angle + 90);
+	points_[3].y = originY + width * sin(angle + 90);
+
+    points_[4] = points_[0];
 }
 
 void ColliderViewer::draw() const {
@@ -47,23 +49,25 @@ void ColliderViewer::draw() const {
 
         // lista de fixtures del body
         b2Fixture* f = body_->GetFixtureList();
-
+        int i = 0;
         // recorre todos los fixtures del objeto
         while (f != nullptr) {
 
             int a = Collider::CollisionLayer::NormalAttachableObject;
             // cambia color de dibujado
-            SDL_SetRenderDrawColor(renderer_, color.r, color.g, color.b, 255);
+            SDL_SetRenderDrawColor(renderer_, color.r, color.g, color.b, SDL_ALPHA_OPAQUE);
 
             // collider circular
             if (f->GetShape()->GetType() == b2Shape::e_circle)
-                drawCircle(renderer_, 0, 0, 0);
+                drawCircle(renderer_, collider_->getPos().x, collider_->getPos().y, collider_->getW(i) * PIXELS_PER_METER);
 
             // collider rectangular
-            else drawRect(f);
+            else drawRect(i);
 
             f = f->GetNext();   // siguiente fixture del body
+            i++;
         }
+        SDL_SetRenderDrawColor(renderer_, 0, 0, 0, SDL_ALPHA_OPAQUE);
 	}
 }
 
