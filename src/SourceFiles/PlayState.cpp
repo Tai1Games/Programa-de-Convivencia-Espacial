@@ -90,6 +90,7 @@ void PlayState::handleInput()
 	for (int i = 0; i < ih->getNumControllers(); i++) {
 		if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_START) ||
 			ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_GUIDE)) {
+			SDL_Game::instance()->getAudioMngr()->pauseMusic();
 			SDL_Game::instance()->getStateMachine()->setPauseOwner(i);
 		}
 	}
