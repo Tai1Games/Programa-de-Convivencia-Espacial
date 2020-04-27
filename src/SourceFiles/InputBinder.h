@@ -13,6 +13,7 @@ class InputBinder
 {
 protected:
 	InputHandler* ih = nullptr;
+	b2Vec2 lastDir = b2Vec2(0, 0);
 private:
 public:
 	InputBinder() { ih = SDL_Game::instance()->getInputHandler(); }
@@ -65,7 +66,9 @@ public:
 		if (ih->isKeyDown(SDLK_s))
 			dir.y = 1;
 		dir.Normalize();
-		return dir;
+		if (dir.y != 0 || dir.x != 0)
+			lastDir = dir;
+		return lastDir;
 	}
 	virtual bool pressImpulse() {
 		return ih->isKeyJustDown(SDLK_c);
@@ -93,7 +96,9 @@ public:
 		b2Vec2 playerPos = b2Vec2(playerDrawPos.x + playerDrawPos.w / 2, playerDrawPos.y + playerDrawPos.h / 2);
 		b2Vec2 dir = ih->getMousePos() - playerPos;
 		dir.Normalize();
-		return dir;
+		if (dir.y != 0 || dir.x != 0)
+			lastDir = dir;
+		return lastDir;
 	}
 	virtual bool pressImpulse() {
 		return ih->isMouseButtonJustDown(InputHandler::MOUSEBUTTON::RIGHT);
@@ -141,6 +146,7 @@ public:
 	}
 	virtual b2Vec2 getAimDir() {
 		return ih->getLastStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK);
+
 	}
 };
 
