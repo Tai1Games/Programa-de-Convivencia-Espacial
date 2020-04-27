@@ -109,12 +109,12 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 };
 
 vector<Resources::MusicInfo> Resources::musics_{
-	//M�sica {nombre_en_enum, ruta}
+	//Música {nombre_en_enum, ruta}
 	{ MainMenuMusic , resourcesPath + "sound/mainMenu.mp3" },
 	{ EntranceMusic , resourcesPath + "sound/entrance.mp3" },
 	{ LivingRoomMusic , resourcesPath + "sound/livingRoom.mp3" },
 	{ GymMusic , resourcesPath + "sound/gym.mp3" },
-	{ RevealMusic, resourcesPath + "sound/gotem.mp3" }
+	{ BoilerRoomMusic, resourcesPath + "sound/boilerRoom.mp3" }
 };
 
 vector<Resources::SoundInfo> Resources::sounds_{
