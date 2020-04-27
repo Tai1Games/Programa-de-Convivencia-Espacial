@@ -257,6 +257,7 @@
     </ClInclude>
     <ClInclude Include="CarnivorousPlant.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
     <ClInclude Include="TomatoPool.h">
       <Filter>Header Files\Pools</Filter>
     </ClInclude>
@@ -441,6 +442,7 @@
     </ClCompile>
     <ClCompile Include="CarnivorousPlant.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
     <ClCompile Include="TomatoPool.cpp">
       <Filter>Source Files\Pools</Filter>
     </ClCompile>
