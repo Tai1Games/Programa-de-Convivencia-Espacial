@@ -1,13 +1,4 @@
-{ "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"GymRoom.json"
-        }
-    },
- "height":135,
+{ "height":135,
  "infinite":false,
  "layers":[
         {
@@ -148,8 +139,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":960,
-                 "y":540
+                 "x":962,
+                 "y":522
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -352,7 +343,7 @@
  "nextobjectid":88,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.3.3",
+ "tiledversion":"1.2.5",
  "tileheight":8,
  "tilesets":[],
  "tilewidth":8,

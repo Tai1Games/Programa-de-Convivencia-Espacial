@@ -68,10 +68,16 @@ public:
 		PipeHor,
 		PipeVer,
 		CarnivorousPlant,
+		Smoke,
+		Tomato,
+		TomatoRing,
+		TreadmillPanel,
 
 		// Gamemode specific elements
 		Coin,
 		Router,
+		RoombaSpriteSheet,
+		Remote,
 
 		// miscel�nea
 		Debug,
