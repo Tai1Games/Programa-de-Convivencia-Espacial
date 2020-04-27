@@ -4,6 +4,7 @@
 #include "Transform.h"
 #include "Texture.h"
 #include "Viewer.h"
+#include "ColliderViewer.h"
 #include "Health.h"
 #include "HealthViewer.h"
 #include "InputHandler.h"
@@ -32,6 +33,7 @@ Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physic
 		CONST(double, "FLIPFLOP_LINEAR_DRAG"), CONST(double, "FLIPFLOP_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Slipper);
 	e->addComponent<SlipperWeapon>(WeaponID::Slipper, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"), CONST(int, "FLIPFLOP_COOLDOWN_FRAMES"));
+	e->addComponent<ColliderViewer>();
 	
 	return e;
 }
@@ -47,6 +49,7 @@ Entity* ObjectFactory::makeBall(EntityManager* entityManager, b2World* physicsWo
 	aux->getBody()->SetAngularDamping(0);
 	e->addComponent <Viewer>(Resources::Ball);
 	e->addComponent<Weapon>(WeaponID::Pelota, CONST(int, "BOUNCINGBALL_IMPACT_DAMAGE"));
+	e->addComponent<ColliderViewer>();
   
 	return e;
 }
@@ -56,6 +59,7 @@ Entity* ObjectFactory::makeStapler(EntityManager* entityManager, b2World* physic
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "STAPLER_DENSITY"), CONST(double, "STAPLER_FRICTION"), CONST(double, "STAPLER_RESTITUTION"), CONST(double, "STAPLER_LINEAR_DRAG"), CONST(double, "STAPLER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Stapler);
 	e->addComponent<Weapon>(WeaponID::Stapler, CONST(int, "STAPLER_IMPACT_DAMAGE"));
+	e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -67,6 +71,7 @@ Entity* ObjectFactory::makeExtinguisher(EntityManager* entityManager, b2World* p
 	entity->addComponent<Viewer>(Resources::Extinguisher);
 	entity->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Coin, 10);
 	entity->addComponent<ExtinguisherWeapon>(WeaponID::Extinguisher, CONST(int, "EXTINGUISHER_IMPACT_DAMAGE"), CONST(int, "EXTINGUISHER_COOLDOWN_FRAMES"));
+	entity->addComponent<ColliderViewer>();
 
 	return entity;
 }
@@ -81,6 +86,7 @@ Entity* ObjectFactory::makeTomato(Entity* e, EntityManager* entityManager, b2Wor
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::TomatoRing, 5, 1, 5, 1000, 20, 100, 0, 360);
 	pE->setMaxParticles(1);
 	e->addComponent<TomatoWeapon>();
+	e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -91,6 +97,8 @@ Weapon* ObjectFactory::makeController(EntityManager* entityManager, b2World* phy
 		CONST(double, "CONTROLLER_RESTITUTION"), CONST(double, "CONTROLLER_LINEAR_DRAG"), CONST(double, "CONTROLLER_ANGULAR_DRAG"), Collider::CollisionLayer::Trigger, false);
 	e->addComponent<Viewer>(Resources::Remote);
 	Weapon* controller = e->addComponent<Weapon>(WeaponID::Mando, CONST(int, "CONTROLLER_IMPACT_DAMAGE"));
+	e->addComponent<ColliderViewer>();
+
 	return controller;
 }
 
@@ -102,6 +110,7 @@ Entity* ObjectFactory::makeDumbbell(EntityManager* entityManager, b2World* physi
 		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Mancuerna);
 	e->addComponent<MeleeWeapon>(WeaponID::Mancuerna, CONST(int, "DUMBBELL_DAMAGE"), CONST(int, "DUMBBELL_IMPACT_DAMAGE"), CONST(int,"DUMBBELL_COOLDOWN_FRAMES"));
+	e->addComponent<ColliderViewer>();
 	
 	return e;
 }
@@ -111,6 +120,7 @@ Entity* ObjectFactory::makeWall(EntityManager* entityManager, b2World* physicsWo
 	Entity* e = entityManager->addEntity();								 // x, y,width, height, density,friction, restitution, linearDrag, angularDrag,	Layer, sensor
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::Wall, false);
 	e->addComponent<Viewer>(Resources::Negro);
+	e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -137,6 +147,8 @@ Entity* ObjectFactory::makePipe(EntityManager* entityManager, b2World* physicsWo
 	//Si la tuberia tiene una rotacion especial se la aplicamos
 	if (rotation != 0) { aux->getBody()->SetTransform(pos, rotation * (-PI) / 180); }
 
+	e->addComponent<ColliderViewer>();
+
 	return e;
 }
 
@@ -147,6 +159,7 @@ Entity* ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* phys
 	e->addComponent<Viewer>(Resources::Stone);
 
 	aux->applyLinearImpulse(b2Vec2(0, 50), b2Vec2(0.1, 0));
+	e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -158,6 +171,7 @@ Entity* ObjectFactory::makePad(EntityManager* entityManager, b2World* physicsWor
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 1, 0, 0, Collider::CollisionLayer::NonGrababbleWall, false);
 	e->addComponent<Viewer>(Resources::PadSpriteSheet, SDL_Rect{ 0,0,32,32 });
 	e->addComponent<Pad>();
+	e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -168,6 +182,7 @@ Entity* ObjectFactory::makeCoin(Entity* e, EntityManager* entityManager, b2World
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "COIN_BASE_SIZE"), CONST(double, "COIN_DENSITY"), CONST(double, "COIN_FRICTION"), CONST(double, "COIN_ANGULAR_DRAG"), 1, 1, Collider::CollisionLayer::Trigger, true);
 	e->addComponent<Viewer>(Resources::Coin);
 	e->addComponent<Coin>();
+	e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -179,6 +194,7 @@ Entity* ObjectFactory::makeFireball(Entity* e, EntityManager* entityManager, b2W
 	e->addComponent<Viewer>(Resources::Fireball);
 	e->addComponent<Fireball>();
 	e->addComponent<Weapon>(WeaponID::Piedra, 999);//Si, el fuego es una piedra muy caliente. Mucho m�s que el magma, esta caldera echa bolas de PLASMA, el cuarto estado de la materia
+	e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -198,6 +214,8 @@ Entity* ObjectFactory::makeRoomba(EntityManager* entityManager, b2World* physics
 	if (rand() % 2 == 1) velocityY *= -1;
 
 	collRoomba->applyLinearImpulse(b2Vec2(velocityX, velocityY), b2Vec2(0, 0));
+	e->addComponent<ColliderViewer>();
+
 	return e;
 }
 
@@ -210,6 +228,7 @@ Entity* ObjectFactory::makeBoiler(EntityManager* entityManager, b2World* physics
 	e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Smoke, CONST(int, "FBGEN_PARTICLE_SPEED"), nFrames, CONST(int, "FBGEN_PARTICLE_GEN_ODDS"), CONST(int, "FBGEN_PARTICLE_LIFETIME"), CONST(int, "FBGEN_PARTICLE_SIZE"), 0, CONST(int, "FBGEN_PARTICLE_SPEED_VARIATION"), 180);
 	e->addComponent<Viewer>(Resources::Boiler);
 	e->addComponent<FireBallGenerator>(physicsWorld);
+	e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -221,7 +240,7 @@ Entity* ObjectFactory::makeBoilerButton(EntityManager* entityManager, b2World* p
 	if (inc_dec) e->addComponent<Viewer>(Resources::IncreasingFreqButton, SDL_Rect{ 0,0,100,100 });
 	else e->addComponent<Viewer>(Resources::DecreasingFreqButton, SDL_Rect{ 0,0,100,100 });
 	e->addComponent<BoilerButtonLogic>(inc_dec);
-
+	e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -252,6 +271,8 @@ Entity* ObjectFactory::makeTreadmill(EntityManager* entityManager, b2World* phys
 	jointDef.referenceAngle = jointDef.bodyB->GetAngle() - jointDef.bodyA->GetAngle(); //Ángulo conjunto del cuerpo
 	b2World* world = collMill->getWorld(); //Obtenemos el mundo físico para crear el joint
 	world->CreateJoint(&jointDef); //Crea el joint con la definición que hemos definido previamente
+	h->addComponent<ColliderViewer>();
+	m->addComponent<ColliderViewer>();
 
 	return m;
 }
@@ -262,6 +283,7 @@ Entity* ObjectFactory::makeCarnivorousePlant(EntityManager* entityManager, b2Wor
 	planta->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
 	planta->addComponent<Viewer>(Resources::CarnivorousPlant, SDL_Rect{ 0,0,32,32 });
 	planta->addComponent<CarnivorousPlant>();
+	planta->addComponent<ColliderViewer>();
 
 	return planta;
 }

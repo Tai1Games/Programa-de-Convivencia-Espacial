@@ -35,6 +35,8 @@ private:
 	//vector<b2Shape> shapes_;
 	vector<b2FixtureDef> fixtureDefs_;
 	vector<b2Fixture*> fixtures_;
+	
+	CollisionLayer layer;	// utilizado para debug
 
 	b2Filter setCollisionLayer(CollisionLayer c);
 
@@ -66,12 +68,14 @@ public:
 	b2World* getWorld() const { return world_; }
 	b2Fixture* getFixture(int i) const { return fixtures_[i]; }
 	float getAngle() const { return body_->GetAngle(); }
+	float getAngleInDegrees() const { return body_->GetAngle() * -180.0 / PI; }
 	float getMass() const { return body_->GetMass(); }
 	bool isAwake() const { return body_->IsAwake(); }
 	bool isSensor(int i) const { return fixtureDefs_[i].isSensor; }
 	bool isEnabled() const { return body_->IsEnabled(); }
 	bool isBullet() const { return body_->IsBullet(); }
 	int getNumFixtures() const { return fixtures_.size(); }
+	CollisionLayer getCollisionLayer() const { return layer; }
 	SDL_Rect getRect() const {
 		return SDL_Rect{
 			(int)getPos().x, (int)getPos().y,

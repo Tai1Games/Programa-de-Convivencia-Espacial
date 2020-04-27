@@ -84,6 +84,7 @@ public:
 		Debug,
 		Negro,
 		Tinky,
+		Transparent,
 
 		// text
 		PauseText,

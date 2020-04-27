@@ -77,6 +77,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	// miscelánea
 	{ Debug, resourcesPath + "textures/debug.png" },
 	{ Negro ,resourcesPath + "textures/Negro.png"},
+	{ Transparent ,resourcesPath + "textures/transparent.png"},
 	{ Tinky, resourcesPath + "textures/Tinky.png" }
 };
 

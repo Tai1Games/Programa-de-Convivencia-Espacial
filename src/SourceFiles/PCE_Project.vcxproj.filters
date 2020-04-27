@@ -55,6 +55,12 @@
     <Filter Include="Header Files\Components\Weapons">
       <UniqueIdentifier>{be79505f-f448-4b8b-839b-fe624286eeb3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\Viewers">
+      <UniqueIdentifier>{22a7cef9-3a7d-4430-b47a-13ca68166c7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Viewers">
+      <UniqueIdentifier>{4adbda0a-113e-4aff-b06e-48bc387f3c6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -117,9 +123,6 @@
     <ClInclude Include="Health.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="HealthViewer.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerController.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -127,9 +130,6 @@
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="TileMap.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Viewer.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="GameStateMachine.h">
@@ -164,9 +164,6 @@
     </ClInclude>
     <ClInclude Include="InputHandler.h">
       <Filter>Header Files\Managers &amp; Handlers</Filter>
-    </ClInclude>
-    <ClInclude Include="ImpulseViewer.h">
-      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="PauseState.h">
       <Filter>Header Files\Gamestates</Filter>
@@ -265,7 +262,19 @@
       <Filter>Header Files\Components\Weapons</Filter>
     </ClInclude>
     <ClInclude Include="AnimatedViewer.h">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderViewer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthViewer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="ImpulseViewer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -299,16 +308,10 @@
     <ClCompile Include="TileMap.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Viewer.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="AttachesToObjects.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthViewer.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Hands.cpp">
@@ -343,9 +346,6 @@
     </ClCompile>
     <ClCompile Include="CollisionHandler.cpp">
       <Filter>Source Files\Managers &amp; Handlers</Filter>
-    </ClCompile>
-    <ClCompile Include="ImpulseViewer.cpp">
-      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="PlayerData.cpp">
       <Filter>Source Files\Components</Filter>
@@ -391,9 +391,6 @@
     </ClCompile>
     <ClCompile Include="Pad.cpp">
       <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Health.cpp">
       <Filter>Source Files\Components</Filter>
@@ -453,7 +450,19 @@
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="AnimatedViewer.cpp">
-      <Filter>Source Files\Components</Filter>
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderViewer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthViewer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="ImpulseViewer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
