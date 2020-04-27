@@ -16,7 +16,6 @@ private:
 
 public:
 	ColliderViewer() :
-		Viewer(),
 		Component(ComponentType::ColliderViewer) {
 	};
 

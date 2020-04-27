@@ -14,7 +14,7 @@ void ColliderViewer::drawRect(b2Fixture* fixture) const {
 
 void ColliderViewer::setPoints(b2Fixture* fixture) const {
     SDL_Rect rect = collider_->getRectRender();
-    float angle = collider_->getAngleInDegrees();
+    float angle = collider_->getAngle();
     float diagonalLength = sqrt(rect.w * rect.w + rect.h * rect.h);
 
 	points_[0].x = rect.x;
@@ -31,17 +31,32 @@ void ColliderViewer::setPoints(b2Fixture* fixture) const {
 }
 
 void ColliderViewer::draw() const {
+
+    // si necesita dibujarse su collider...
 	if (drawable_ && !isUIElement_) {
-        for (b2Fixture* f : body_->GetFixtureList()) {
+
+        // lista de fixtures del body
+        b2Fixture* f = body_->GetFixtureList();
+
+        // recorre todos los fixtures del objeto
+        while (f != nullptr) {
+
+            // cambia color de dibujado
             SDL_SetRenderDrawColor(renderer_, r_, g_, b_, alpha_);
-            if (f.GetShape()->GetType() == b2Shape::e_circle)
+
+            // collider circular
+            if (f->GetShape()->GetType() == b2Shape::e_circle)
                 drawCircle(renderer_, 0, 0, 0);
-            else
-                drawRect(f.GetBody());
+
+            // collider rectangular
+            else drawRect(f);
+
+            f = f->GetNext();   // siguiente fixture del body
         }
 	}
 }
 
+// este algoritmo es bastante rápido (~500 microsegundos)
 void ColliderViewer::drawCircle(SDL_Renderer* renderer, int32_t centreX, int32_t centreY, int32_t radius) const
 {
     const int32_t diameter = (radius * 2);
@@ -54,7 +69,6 @@ void ColliderViewer::drawCircle(SDL_Renderer* renderer, int32_t centreX, int32_t
 
     while (x >= y)
     {
-        //  Each of the following renders an octant of the circle
         SDL_RenderDrawPoint(renderer, centreX + x, centreY - y);
         SDL_RenderDrawPoint(renderer, centreX + x, centreY + y);
         SDL_RenderDrawPoint(renderer, centreX - x, centreY - y);
