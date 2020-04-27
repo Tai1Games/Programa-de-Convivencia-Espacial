@@ -7,6 +7,65 @@
 #pragma once
 class b2Vec2;
 enum ActionKey {Grab=0,Throw,Pick,Attack,Impulse};
+struct KeyCursor {
+	SDL_Keycode Up = SDLK_w;
+	SDL_Keycode Left = SDLK_a;
+	SDL_Keycode Down = SDLK_s;
+	SDL_Keycode Right = SDLK_d;
+	KeyCursor() {}
+	KeyCursor(int player) {
+		switch (player)
+		{
+		case 1: {
+		}
+		break;
+		case 2: {
+			Up = SDLK_i;
+			Left = SDLK_j;
+			Down = SDLK_k;
+			Right = SDLK_l;
+		}
+		break;
+		default:
+			break;
+		}
+	}
+	KeyCursor(SDL_Keycode u, SDL_Keycode l, SDL_Keycode d, SDL_Keycode r) {
+		Up = u; Left = l, Down = d; Right = r;
+	}
+};
+struct KeyboardMapping {
+	KeyCursor cursor; //Teclas de movimiento para PureKeyboardBinder
+	//Varias teclas
+	SDL_Keycode grab = SDLK_SPACE,
+		pickWeapon = SDLK_e,
+		throwWeapon = SDLK_e,
+		attack = SDLK_q, 
+		impulse = SDLK_c,
+		pause = SDLK_ESCAPE;
+
+	KeyboardMapping(int player = 1) {
+		switch (player)
+		{
+		case 1: {
+
+		}
+		break;
+		case 2: {
+			cursor = KeyCursor(2);
+			grab = SDLK_RALT,
+			pickWeapon = SDLK_o,
+			throwWeapon = SDLK_o,
+			attack = SDLK_u,
+			impulse = SDLK_PERIOD,
+			pause = SDLK_7;
+		}
+		break;
+		default:
+			break;
+		}
+	}
+};
 
 //Abstracta pura
 class InputBinder
@@ -32,19 +91,21 @@ public:
 //para que dejeis
 class KeyboardBinder : public InputBinder {
 protected:
+	KeyboardMapping map_;
 public:
-	KeyboardBinder() : InputBinder() {}
+	KeyboardBinder(KeyboardMapping m) : InputBinder(), map_(m) {}
+	KeyboardBinder(int defaultMap) : InputBinder(), map_(defaultMap) {}
 	virtual bool holdGrab() {
-		return ih->isKeyDown(SDLK_SPACE);
+		return ih->isKeyDown(map_.grab);
 	}
 	virtual bool releaseGrab() {
-		return ih->isKeyJustUp(SDLK_SPACE);
+		return ih->isKeyJustUp(map_.grab);
 	}
 	virtual bool pressPick() {
-		return ih->keyDownEvent() && ih->isKeyDown(SDLK_e);
+		return ih->keyDownEvent() && ih->isKeyDown(map_.pickWeapon);
 	}
 	virtual bool pressThrow() {
-		return ih->keyDownEvent() && ih->isKeyDown(SDLK_e);
+		return ih->keyDownEvent() && ih->isKeyDown(map_.throwWeapon);
 	}
 	//como sigamos con la pelea juro que me como a alguien
 	virtual b2Vec2 getAimDir() = 0;
@@ -54,16 +115,17 @@ public:
 class PureKeyboardBinder : public KeyboardBinder {
 	//Team MMur, PJ, posiblemente Satan
 public:
-	PureKeyboardBinder() : KeyboardBinder() {}
+	PureKeyboardBinder(KeyboardMapping m) : KeyboardBinder(m) {}
+	PureKeyboardBinder(int defaultMap) : KeyboardBinder(defaultMap) {}
 	virtual b2Vec2 getAimDir() {
 		b2Vec2 dir = b2Vec2(0, 0);
-		if (ih->isKeyDown(SDLK_a))
+		if (ih->isKeyDown(map_.cursor.Left))
 			dir.x = -1;
-		else if (ih->isKeyDown(SDLK_d))
+		else if (ih->isKeyDown(map_.cursor.Right))
 			dir.x = 1;
-		if (ih->isKeyDown(SDLK_w))
+		if (ih->isKeyDown(map_.cursor.Up))
 			dir.y = -1;
-		if (ih->isKeyDown(SDLK_s))
+		if (ih->isKeyDown(map_.cursor.Down))
 			dir.y = 1;
 		dir.Normalize();
 		if (dir.y != 0 || dir.x != 0)
@@ -71,16 +133,16 @@ public:
 		return lastDir;
 	}
 	virtual bool pressImpulse() {
-		return ih->isKeyJustDown(SDLK_c);
+		return ih->isKeyJustDown(map_.impulse);
 	}
 	virtual bool holdImpulse() {
-		return ih->isKeyDown(SDLK_c);
+		return ih->isKeyDown(map_.impulse);
 	}
 	virtual bool releaseImpulse() {
-		return ih->isKeyJustUp(SDLK_c);
+		return ih->isKeyJustUp(map_.impulse);
 	}
 	virtual bool pressAttack() {
-		return ih->isKeyJustDown(SDLK_v);
+		return ih->isKeyJustDown(map_.attack);
 	}
 };
 
@@ -89,7 +151,8 @@ class MouseKeyboardBinder : public KeyboardBinder {
 	//Team Adri, Esteban, Andres, Jorge
 	Collider* playerCol_ = nullptr;
 public:
-	MouseKeyboardBinder(Collider* c) : KeyboardBinder(), playerCol_(c) {}
+	MouseKeyboardBinder(Collider* c, KeyboardMapping m) : KeyboardBinder(m), playerCol_(c) {}
+	MouseKeyboardBinder(Collider* c, int defaultMap) : KeyboardBinder(defaultMap), playerCol_(c) {}
 	virtual b2Vec2 getAimDir() {
 		//devolvemos un vector unitario que apunte del jugador al raton
 		SDL_Rect playerDrawPos = playerCol_->getRectRender();

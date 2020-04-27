@@ -15,7 +15,7 @@ public:
 		playerNumber_ = playerNumber;
 		int gId = SDL_Game::instance()->getInputHandler()->getFreeGamePad();
 		cout << "Player " << playerNumber << " got controller " << gId << endl;
-		ib = new PureKeyboardBinder();
+		ib = new PureKeyboardBinder(1);
 		//ib = new PureKeyboardBinder();
 	}
 	~PlayerData() { delete ib; };
