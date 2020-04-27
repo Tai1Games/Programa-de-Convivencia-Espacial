@@ -28,7 +28,7 @@ void CapitalismGameMode::init(PlayState* game)
 	coinSpawnersPositions_ = tilemap_->getCoinsSpawnPoints();
 
 	for (b2Vec2 pos : coinSpawnersPositions_) {
-		roombaColliders_.push_back(ObjectFactory::createRoomba(game->getEntityManager(),
+		roombaColliders_.push_back(ObjectFactory::makeRoomba(game->getEntityManager(),
 			game->getPhysicsWorld(), pos)->getComponent<Collider>(ComponentType::Collider));
 	}
 

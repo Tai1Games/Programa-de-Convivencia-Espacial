@@ -19,6 +19,7 @@ public:
 
 //Mathz
 const double PI = 3.141592653589793238;
+const int FRAMES_PER_SECOND = 60;
 
 //Pools
 const int COIN_POOL_SIZE = 140;
@@ -58,7 +59,7 @@ enum WeaponID {
 	WEAPON_NUMBER
 };
 
-// no sé por qué peta al hacer un array de strings
+// no sï¿½ por quï¿½ peta al hacer un array de strings
 /*std::string mapNames[] = {
 	"LivingRoom",
 	"Gym",
