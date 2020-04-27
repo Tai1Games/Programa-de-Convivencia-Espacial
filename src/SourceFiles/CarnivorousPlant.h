@@ -13,8 +13,8 @@ class CarnivorousPlant : public Component
 private:
 	Viewer* viewer_;
 	int frame_, minAnimationSpeed_, maxAnimationSpeed_, playersInside_,
-		idleFrames_, eatingFrames_, frameSize_, coinDMG, damage;
-	float aumento_, actualSpeed_, timePassed_, enterTime_, limitTime_;
+		idleFrames_, eatingFrames_, frameSize_, coinDMG, damage, maxFrames_, frameCount_;
+	float increase_, actualSpeed_;
 	bool idle_, playerDetected_;
 	Entity* player_;
 	CollisionHandler* playerCollHandler_;
@@ -27,7 +27,5 @@ public:
 	virtual void update() override;
 	virtual void onCollisionEnter(Collision* c);
 	virtual void onCollisionExit(Collision* c);
-
-	void resetCycle();
 };
 
