@@ -1,7 +1,6 @@
 #pragma once
 #include "Viewer.h"
 #include "checkML.h"
-#include <vector>
 
 struct DebugColor {
 	DebugColor(Uint8 r, Uint8 g, Uint8 b) :

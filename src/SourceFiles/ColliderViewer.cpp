@@ -11,7 +11,7 @@ void ColliderViewer::init() {
 	points_ = new SDL_Point[5];
     body_ = collider_->getBody();
     int layer = collider_->getCollisionLayer();
-    if(layer > 0 && layer < 256)
+    if(layer > 0)
         color = colors[(int)log2(layer)];
     PIXELS_PER_METER = CONST(double, "PIXELS_PER_METER");
 }
