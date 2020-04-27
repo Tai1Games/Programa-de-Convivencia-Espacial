@@ -66,6 +66,7 @@ public:
 	b2World* getWorld() const { return world_; }
 	b2Fixture* getFixture(int i) const { return fixtures_[i]; }
 	float getAngle() const { return body_->GetAngle(); }
+	float getAngleInDegrees() const { return body_->GetAngle() * -180.0 / PI; }
 	float getMass() const { return body_->GetMass(); }
 	bool isAwake() const { return body_->IsAwake(); }
 	bool isSensor(int i) const { return fixtureDefs_[i].isSensor; }
