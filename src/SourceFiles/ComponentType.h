@@ -12,7 +12,6 @@ namespace ComponentType {
 		Transform = 0,
 		Health,
 		Viewer,
-		ColliderViewer,
 		Collider,
 		AttachesToObjects,
 		HealthViewer,
