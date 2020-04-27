@@ -19,6 +19,7 @@
 #include "BoilerButtonLogic.h"
 #include "Pad.h"
 #include "Treadmill.h"
+#include "CarnivorousPlant.h"
 #include "TomatoWeapon.h"
 #include "AnimatedViewer.h"
 
@@ -225,7 +226,7 @@ Entity* ObjectFactory::makeBoilerButton(EntityManager* entityManager, b2World* p
 	return e;
 }
 
-Entity* ObjectFactory::createTreadmill(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
+Entity* ObjectFactory::makeTreadmill(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
 {
 	float offset = CONST(double, "TREADMILL_MILL_WIDTH") + CONST(double, "TREADMILL_HANDLE_WIDTH");
 
@@ -253,4 +254,14 @@ Entity* ObjectFactory::createTreadmill(EntityManager* entityManager, b2World* ph
 	world->CreateJoint(&jointDef); //Crea el joint con la definición que hemos definido previamente
 
 	return m;
+}
+
+Entity* ObjectFactory::makeCarnivorousePlant(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
+{
+	Entity* planta = entityManager->addEntity();
+	planta->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
+	planta->addComponent<Viewer>(Resources::CarnivorousPlant, SDL_Rect{ 0,0,32,32 });
+	planta->addComponent<CarnivorousPlant>();
+
+	return planta;
 }

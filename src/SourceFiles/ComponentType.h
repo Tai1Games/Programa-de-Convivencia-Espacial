@@ -32,6 +32,7 @@ namespace ComponentType {
 		Pad,
 		ThrownByPlayer,
 		Treadmill,
+		CarnivorousPlant,
 		TomatoLogic,
 		MeleeWeapon,
 		SlipperWeapon,

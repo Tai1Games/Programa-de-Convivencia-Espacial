@@ -255,6 +255,8 @@
     <ClInclude Include="MenuState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
+    <ClInclude Include="CarnivorousPlant.h">
+      <Filter>Header Files\Components</Filter>
     <ClInclude Include="TomatoPool.h">
       <Filter>Header Files\Pools</Filter>
     </ClInclude>
@@ -437,6 +439,8 @@
     <ClCompile Include="MenuState.cpp">
       <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
+    <ClCompile Include="CarnivorousPlant.cpp">
+      <Filter>Source Files\Components</Filter>
     <ClCompile Include="TomatoPool.cpp">
       <Filter>Source Files\Pools</Filter>
     </ClCompile>

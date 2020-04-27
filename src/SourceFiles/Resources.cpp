@@ -61,6 +61,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
 	{ Treadmill , resourcesPath + "textures/Treadmill.png"},
 	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png"},
+	{ CarnivorousPlant , resourcesPath + "textures/PlantaCarnivora.png"},
 	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
 	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
 	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},

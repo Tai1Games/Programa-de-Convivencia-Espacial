@@ -70,8 +70,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1500,
-                 "y":840
+                 "x":1060,
+                 "y":114
                 }, 
                 {
                  "height":0,
@@ -82,8 +82,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":492,
-                 "y":834
+                 "x":882,
+                 "y":154
                 }, 
                 {
                  "height":0,
@@ -94,8 +94,30 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":792,
-                 "y":460
+                 "x":802,
+                 "y":472
+                }, 
+                {
+                 "height":76,
+                 "id":86,
+                 "name":"Pad",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":346,
+                 "x":64,
+                 "y":54
+                }, 
+                {
+                 "height":200,
+                 "id":87,
+                 "name":"CarnivorousePlant",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":200,
+                 "x":80,
+                 "y":416
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -176,8 +198,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":308,
-                 "y":819
+                 "x":506,
+                 "y":829
                 }],
          "offsetx":2,
          "offsety":-2,
@@ -273,7 +295,7 @@
                  "visible":true,
                  "width":0,
                  "x":960,
-                 "y":284
+                 "y":300
                 }, 
                 {
                  "height":0,
@@ -318,7 +340,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":84,
+ "nextobjectid":88,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.5",
