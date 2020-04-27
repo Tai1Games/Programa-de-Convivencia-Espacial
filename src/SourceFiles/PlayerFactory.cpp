@@ -12,6 +12,8 @@ Entity* PlayerFactory::createBasePlayer(EntityManager* eMan, b2World* physicsWor
 	p->addComponent<PlayerController>();
 	p->addComponent<ImpulseViewer>(Resources::ImpulseArrow, Resources::ImpulseBackground);
 	}
+	p->addComponent<ColliderViewer>();
+
 	return p;
 }
 

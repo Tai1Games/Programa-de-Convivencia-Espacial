@@ -23,21 +23,21 @@ void ColliderViewer::drawRect(int index) const {
 
 void ColliderViewer::setPoints(double originX, double originY, double width, double height) const {
 
-    b2Vec2 midPoint = { (float)(originX + width), (float)(originY + height) };
+    b2Vec2 center = { (float)(originX + width), (float)(originY + height) };
     float angle = -collider_->getAngle();
 
-	points_[0].x = midPoint.x - width * cos(angle) - height * sin(angle);
-    points_[0].y = midPoint.y - width * sin(angle) + height * cos(angle);
+	points_[0].x = center.x - width * cos(angle) - height * sin(angle);
+    points_[0].y = center.y - width * sin(angle) + height * cos(angle);
 
 
-    points_[1].x = midPoint.x + width * cos(angle) - height * sin(angle);
-    points_[1].y = midPoint.y + width * sin(angle) + height * cos(angle);
+    points_[1].x = center.x + width * cos(angle) - height * sin(angle);
+    points_[1].y = center.y + width * sin(angle) + height * cos(angle);
 
-    points_[2].x = midPoint.x + width * cos(angle) + height * sin(angle);
-    points_[2].y = midPoint.y + width * sin(angle) - height * cos(angle);
+    points_[2].x = center.x + width * cos(angle) + height * sin(angle);
+    points_[2].y = center.y + width * sin(angle) - height * cos(angle);
 
-    points_[3].x = midPoint.x - width * cos(angle) + height * sin(angle);
-    points_[3].y = midPoint.y - width * sin(angle) - height * cos(angle);
+    points_[3].x = center.x - width * cos(angle) + height * sin(angle);
+    points_[3].y = center.y - width * sin(angle) - height * cos(angle);
 
     points_[4] = points_[0];
 }
@@ -56,8 +56,9 @@ void ColliderViewer::draw() const {
             SDL_SetRenderDrawColor(renderer_, color.r, color.g, color.b, SDL_ALPHA_OPAQUE);
 
             // collider circular
-            if (f->GetShape()->GetType() == b2Shape::e_circle)
-                drawCircle(renderer_, collider_->getPos().x, collider_->getPos().y, collider_->getW(i) * PIXELS_PER_METER);
+            if (f->GetShape()->GetType() == b2Shape::e_circle) {
+                drawCircle(renderer_, collider_->getRectRender().x, collider_->getRectRender().y, collider_->getW(i) * PIXELS_PER_METER);
+            }
 
             // collider rectangular
             else drawRect(i);
@@ -70,8 +71,10 @@ void ColliderViewer::draw() const {
 }
 
 // este algoritmo es bastante rápido (~500 microsegundos)
-void ColliderViewer::drawCircle(SDL_Renderer* renderer, int32_t centreX, int32_t centreY, int32_t radius) const
+void ColliderViewer::drawCircle(SDL_Renderer* renderer, int32_t originX, int32_t originY, int32_t radius) const
 {
+    b2Vec2 center = { (float)(originX + radius), (float)(originY + radius) };
+
     const int32_t diameter = (radius * 2);
 
     int32_t x = (radius - 1);
@@ -82,14 +85,14 @@ void ColliderViewer::drawCircle(SDL_Renderer* renderer, int32_t centreX, int32_t
 
     while (x >= y)
     {
-        SDL_RenderDrawPoint(renderer, centreX + x, centreY - y);
-        SDL_RenderDrawPoint(renderer, centreX + x, centreY + y);
-        SDL_RenderDrawPoint(renderer, centreX - x, centreY - y);
-        SDL_RenderDrawPoint(renderer, centreX - x, centreY + y);
-        SDL_RenderDrawPoint(renderer, centreX + y, centreY - x);
-        SDL_RenderDrawPoint(renderer, centreX + y, centreY + x);
-        SDL_RenderDrawPoint(renderer, centreX - y, centreY - x);
-        SDL_RenderDrawPoint(renderer, centreX - y, centreY + x);
+        SDL_RenderDrawPoint(renderer, center.x + x, center.y - y);
+        SDL_RenderDrawPoint(renderer, center.x + x, center.y + y);
+        SDL_RenderDrawPoint(renderer, center.x - x, center.y - y);
+        SDL_RenderDrawPoint(renderer, center.x - x, center.y + y);
+        SDL_RenderDrawPoint(renderer, center.x + y, center.y - x);
+        SDL_RenderDrawPoint(renderer, center.x + y, center.y + x);
+        SDL_RenderDrawPoint(renderer, center.x - y, center.y - x);
+        SDL_RenderDrawPoint(renderer, center.x - y, center.y + x);
 
         if (error <= 0)
         {
