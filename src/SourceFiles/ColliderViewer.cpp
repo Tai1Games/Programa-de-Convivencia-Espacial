@@ -17,29 +17,27 @@ void ColliderViewer::init() {
 }
 
 void ColliderViewer::drawRect(int index) const {
-    setPoints(collider_->getRect().x * PIXELS_PER_METER, collider_->getRect().y * PIXELS_PER_METER, collider_->getW(index) * PIXELS_PER_METER, collider_->getH(index) * PIXELS_PER_METER);
-    SDL_RenderDrawLines(renderer_, points_, 2);
+    setPoints(collider_->getRectRender().x, collider_->getRectRender().y, collider_->getW(index) * PIXELS_PER_METER, collider_->getH(index) * PIXELS_PER_METER);
+    SDL_RenderDrawLines(renderer_, points_, 5);
 }
 
 void ColliderViewer::setPoints(double originX, double originY, double width, double height) const {
 
+    b2Vec2 midPoint = { (float)(originX + width), (float)(originY + height) };
     float angle = -collider_->getAngle();
 
-	points_[0].x = originX;
-	points_[0].y = originY;
+	points_[0].x = midPoint.x - width * cos(angle) - height * sin(angle);
+    points_[0].y = midPoint.y - width * sin(angle) + height * cos(angle);
 
 
-	points_[1].x = originX + width * cos(angle);
-	points_[1].y = originY + width * sin(angle);
+    points_[1].x = midPoint.x + width * cos(angle) - height * sin(angle);
+    points_[1].y = midPoint.y + width * sin(angle) + height * cos(angle);
 
-    //points_[1].x = 0;
-    //points_[1].y = 0;
+    points_[2].x = midPoint.x + width * cos(angle) + height * sin(angle);
+    points_[2].y = midPoint.y + width * sin(angle) - height * cos(angle);
 
-	points_[2].x = points_[1].x + height * cos(90 + angle);
-	points_[2].y = points_[1].y + width * sin(90 + angle);
-
-	points_[3].x = originX + height * cos(angle + 90);
-	points_[3].y = originY + width * sin(angle + 90);
+    points_[3].x = midPoint.x - width * cos(angle) + height * sin(angle);
+    points_[3].y = midPoint.y - width * sin(angle) - height * cos(angle);
 
     points_[4] = points_[0];
 }
