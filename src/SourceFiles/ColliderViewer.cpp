@@ -1,4 +1,10 @@
 #include "ColliderViewer.h"
+#include "Resources.h"
+
+ColliderViewer::ColliderViewer() :
+    Viewer(Resources::Transparent)
+{
+}
 
 void ColliderViewer::init() {
 	Viewer::init();
