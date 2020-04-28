@@ -102,10 +102,10 @@ public:
 		return ih->isKeyJustUp(map_.grab);
 	}
 	virtual bool pressPick() {
-		return ih->keyDownEvent() && ih->isKeyDown(map_.pickWeapon);
+		return ih->isKeyJustDown(map_.pickWeapon);
 	}
 	virtual bool pressThrow() {
-		return ih->keyDownEvent() && ih->isKeyDown(map_.throwWeapon);
+		return ih->isKeyJustDown(map_.throwWeapon);
 	}
 	//como sigamos con la pelea juro que me como a alguien
 	virtual b2Vec2 getAimDir() = 0;
