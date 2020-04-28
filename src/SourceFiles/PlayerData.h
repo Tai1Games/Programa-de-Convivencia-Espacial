@@ -14,8 +14,6 @@ private:
 public:
 	PlayerData(int playerNumber) : Component(ComponentType::PlayerData) {
 		playerNumber_ = playerNumber;
-		int gId = SDL_Game::instance()->getInputHandler()->getFreeGamePad();
-		cout << "Player " << playerNumber << " got controller " << gId << endl;
 		//ib = new PureKeyboardBinder();
 	}
 	~PlayerData() { delete ib; };
@@ -25,7 +23,9 @@ public:
 
 	void init() override {
 		//se tiene que inicializar aquí para poder coger el collider
-		ib = new MouseKeyboardBinder(GETCMP1_(Collider), 1);
+		int gId = SDL_Game::instance()->getInputHandler()->getFreeGamePad();
+		cout << "Player " << playerNumber_ << " got controller " << gId << endl;
+		ib = new ControllerBinder(gId);
 	}
 };
 

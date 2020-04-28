@@ -178,11 +178,11 @@ public:
 };
 
 //La unica opcion correcta
-class ControllerInputBinder : public InputBinder {
+class ControllerBinder : public InputBinder {
 protected:
 	int id_ = -1;
 public:
-	ControllerInputBinder(int id):InputBinder(),id_(id) {}
+	ControllerBinder(int id) : InputBinder(),id_(id) {}
 	virtual bool holdGrab() {
 		return ih->getTrigger(id_, InputHandler::GAMEPADTRIGGER::RIGHTTRIGGER);
 	}
