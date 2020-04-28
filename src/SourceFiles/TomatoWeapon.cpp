@@ -120,7 +120,7 @@ void TomatoWeapon::PickObjectBy(Hands* playerHands)
 void TomatoWeapon::UnPickObject() {
 	b2Filter pickUpCollider = mainCollider_->getFixture(0)->GetFilterData();
 	pickUpCollider.categoryBits = Collider::CollisionLayer::NormalObject;
-	pickUpCollider.maskBits = Collider::CollisionLayer::NormalObject | Collider::CollisionLayer::NormalAttachableObject | Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall;
+	pickUpCollider.maskBits = Collider::CollisionLayer::NormalObject | Collider::CollisionLayer::NormalAttachableObject | Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall | Collider::CollisionLayer::NonGrababbleWall;
 	mainCollider_->getFixture(0)->SetFilterData(pickUpCollider);
 
 	ActionableWeapon::UnPickObject();

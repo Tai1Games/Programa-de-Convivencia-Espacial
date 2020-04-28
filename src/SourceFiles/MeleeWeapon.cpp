@@ -75,7 +75,7 @@ void MeleeWeapon::UnPickObject() {
 	//Reactivamos el trigger de pickUp
 	b2Filter pickUpCollider = mainCollider_->getFixture(0)->GetFilterData();
 	pickUpCollider.categoryBits = Collider::CollisionLayer::PickableObject;
-	pickUpCollider.maskBits = Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall;
+	pickUpCollider.maskBits = Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall | Collider::CollisionLayer::NonGrababbleWall;
 	mainCollider_->getFixture(0)->SetFilterData(pickUpCollider);
 
 	ActionableWeapon::UnPickObject();

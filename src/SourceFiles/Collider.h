@@ -11,14 +11,15 @@ class Collider : public Component
 public:
 	//Add the different collision layers as we see fit
 	enum CollisionLayer {
-		NormalObject = 0x0001,
-		UnInteractableObject = 0x0002, //a collision layer can't be zero or else it won't collide
-		NormalAttachableObject = 0x0004,
-		Wall = 0x0008,
-		Player = 0x0016,
-		Trigger = 0x0032,
-		PickableObject = 0x0064,
-		NonGrababbleWall = 0x0128
+		//a collision layer can't be zero or else it won't collide
+		NormalObject = 0x0001,				//	= 0000 0000 0000 0001
+		UnInteractableObject = 0x0002,		//	= 0000 0000 0000 0010
+		NormalAttachableObject = 0x0004,	//	= 0000 0000 0000 0100
+		Wall = 0x0008,						//	= 0000 0000 0000 1000
+		Player = 0x0010,					//	= 0000 0000 0001 0000
+		Trigger = 0x0020,					//	= 0000 0000 0010 0000
+		PickableObject = 0x0040,			//	= 0000 0000 0100 0000
+		NonGrababbleWall = 0x0080			//	= 0000 0000 1000 0000
 	};
 
 private:
@@ -35,8 +36,6 @@ private:
 	//vector<b2Shape> shapes_;
 	vector<b2FixtureDef> fixtureDefs_;
 	vector<b2Fixture*> fixtures_;
-	
-	CollisionLayer layer;	// utilizado para debug
 
 	b2Filter setCollisionLayer(CollisionLayer c);
 
@@ -75,7 +74,6 @@ public:
 	bool isEnabled() const { return body_->IsEnabled(); }
 	bool isBullet() const { return body_->IsBullet(); }
 	int getNumFixtures() const { return fixtures_.size(); }
-	CollisionLayer getCollisionLayer() const { return layer; }
 	SDL_Rect getRect() const {
 		return SDL_Rect{
 			(int)getPos().x, (int)getPos().y,
@@ -83,12 +81,12 @@ public:
 		};
 	}
 
-	SDL_Rect getRectRender() const {
+	SDL_Rect getRectRender(int index = 0) const {
 		return SDL_Rect{
-			(int)(getPos().x * PIXELS_PER_METER - (getW(0) * PIXELS_PER_METER)),
-			(int)(WINDOW_HEIGHT - (getPos().y * PIXELS_PER_METER + (getH(0) * PIXELS_PER_METER))),
-			(int)(getW(0) * PIXELS_PER_METER * 2),
-			(int)(getH(0) * PIXELS_PER_METER * 2)
+			(int)(getPos().x * PIXELS_PER_METER - (getW(index) * PIXELS_PER_METER)),
+			(int)(WINDOW_HEIGHT - (getPos().y * PIXELS_PER_METER + (getH(index) * PIXELS_PER_METER))),
+			(int)(getW(index) * PIXELS_PER_METER * 2),
+			(int)(getH(index) * PIXELS_PER_METER * 2)
 		};
 	}
 
