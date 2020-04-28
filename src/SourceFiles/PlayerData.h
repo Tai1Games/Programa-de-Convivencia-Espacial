@@ -2,6 +2,7 @@
 #include "Component.h"
 #include "checkML.h"
 #include "InputBinder.h"
+#include "Entity.h"
 
 //Contains data needed by Player-related components
 //ALWAYS add this component to the player before any other
@@ -15,12 +16,16 @@ public:
 		playerNumber_ = playerNumber;
 		int gId = SDL_Game::instance()->getInputHandler()->getFreeGamePad();
 		cout << "Player " << playerNumber << " got controller " << gId << endl;
-		ib = new PureKeyboardBinder(1);
 		//ib = new PureKeyboardBinder();
 	}
 	~PlayerData() { delete ib; };
 
 	int getPlayerNumber() { return playerNumber_; }
 	InputBinder* getBinder() { return ib; }
+
+	void init() override {
+		//se tiene que inicializar aquí para poder coger el collider
+		ib = new MouseKeyboardBinder(GETCMP1_(Collider), 1);
+	}
 };
 
