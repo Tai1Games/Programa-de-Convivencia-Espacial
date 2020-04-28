@@ -19,7 +19,7 @@ void Weapon::init()
 {
 	mainCollider_ = GETCMP1_(Collider);
 	vw_ = GETCMP1_(Viewer);
-	
+	mainCollider_->createCircularFixture(6, 0, 0, 0, Collider::CollisionLayer::Wall, true);
 	//Tamaño del vector segun el numero de jugadores
 	playerInfo_.resize(4);
 }

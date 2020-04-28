@@ -43,30 +43,28 @@ void ColliderViewer::draw() const {
 
         // lista de fixtures del body
         b2Fixture* f = body_->GetFixtureList();
+        int maxFixtures = collider_->getNumFixtures() - 1;
         int i = 0;
         // recorre todos los fixtures del objeto
         while (f != nullptr) {
 
-            if (f->GetNext() != nullptr)
-                std::cout << ((f->GetShape()->GetType() == b2Shape::e_circle) ? "circle" : "rect") << endl
-                << ((f->GetNext()->GetShape()->GetType() == b2Shape::e_circle) ? "circle" : "rect") << endl;
+            /*if (f->GetNext() != nullptr)    // debug
+                std::cout << "collider: " <<((f->GetShape()->GetType() == b2Shape::e_circle) ? "circle" : "rect") << endl
+                << ((f->GetNext()->GetShape()->GetType() == b2Shape::e_circle) ? "circle" : "rect") << endl;*/
 
-            uint16 layer = f->GetFilterData().categoryBits;
-            int posColor = (layer > 0) ? round(log2(layer)) : 8;        // escoge color de dibujado
-            // cambia color de dibujado
-            SDL_SetRenderDrawColor(renderer_, colors[posColor].r, colors[posColor].g, colors[posColor].b, SDL_ALPHA_OPAQUE);
+            uint16 layer = f->GetFilterData().categoryBits;             // obtiene la capa de la fixture
+            int posColor = (layer > 0) ? round(log2(layer)) : 8;        // escoge color de dibujado según la capa
+            SDL_SetRenderDrawColor(renderer_, colors[posColor].r, colors[posColor].g, colors[posColor].b, SDL_ALPHA_OPAQUE);   // cambia color de dibujado
             
-            SDL_Rect renderRect = collider_->getRectRender(i);
+            SDL_Rect renderRect = collider_->getRectRender(maxFixtures - i);
             (f->GetShape()->GetType() != b2Shape::e_circle) ? // pregunta tipo de collider
-
-                drawRect(&(collider_->getRectRender(i)))        // collider rectangular
-                :                                 
-                drawCircle(&(collider_->getRectRender(i)));     // collider circular
+                drawRect(&renderRect)        // collider rectangular
+                :
+                drawCircle(&renderRect);     // collider circular
 
             f = f->GetNext();   // siguiente fixture del body
             i++;
         }
-        std::cout << endl;
         SDL_SetRenderDrawColor(renderer_, 0, 0, 0, SDL_ALPHA_OPAQUE);
     }
 }
