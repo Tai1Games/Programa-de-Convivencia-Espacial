@@ -1,6 +1,6 @@
 #include "Weapon.h"
 #include <iostream>
-#include "InputHandler.h"
+#include "InputBinder.h"
 #include "Hands.h"
 #include "Health.h"
 #include "Wallet.h"
@@ -17,7 +17,6 @@ int Weapon::calculateCoinsDropped(int coinsPlayer)
 
 void Weapon::init()
 {
-	ih_ = SDL_Game::instance()->getInputHandler();
 	mainCollider_ = GETCMP1_(Collider);
 	vw_ = GETCMP1_(Viewer);
 
@@ -31,23 +30,25 @@ void Weapon::handleInput()
 		for (int i = 0; i < playerInfo_.size(); i++) {
 
 			if (!IsPicked() && playerInfo_[i].isNear &&
-				ih_->isButtonDown(i, SDL_CONTROLLER_BUTTON_Y)) {
+				playerInfo_[i].playerBinder->pressPick()) {
 				cout << "pickedUpWeapon";
-				PickObjectBy(playerInfo_[i].playerHands);
+				PickObjectBy(i);
 			}
 		}
 	}
-	else if (IsPicked() && ih_->isButtonJustDown(currentHand_->getPlayerId(), SDL_CONTROLLER_BUTTON_Y))
+	else if (IsPicked() && playerInfo_[pickedIndex_].playerBinder->pressThrow())
 	{
 		UnPickObject();
 	}
 }
 
-void Weapon::PickObjectBy(Hands* playerH)
+void Weapon::PickObjectBy(int index)
 {
+	Hands* playerH = playerInfo_[index].playerHands;
 	if (playerH->getWeaponID() == NoWeapon) {
 		currentHand_ = playerH;
 		picked_ = true;
+		pickedIndex_ = index;
 		currentHand_->setWeapon(weaponType_, this);
 		mainCollider_->getBody()->SetEnabled(false);
 		vw_->setDrawable(false);
@@ -58,6 +59,7 @@ void Weapon::UnPickObject()
 {
 	currentHand_->setWeapon(NoWeapon, nullptr);
 	picked_ = false;
+	pickedIndex_ = -1;
 	mainCollider_->getBody()->SetEnabled(true);
 	vw_->setDrawable(true);
 
@@ -86,7 +88,7 @@ void Weapon::onCollisionEnter(Collision* c)
 	Hands* myHand = getCurrentHand();
 
 	if (otherHand != nullptr) {
-		SavePlayerInfo(otherHand->getPlayerId(), otherHand, GETCMP2(other, Health), GETCMP2(other, Wallet));
+		SavePlayerInfo(otherHand->getPlayerId(), otherHand, GETCMP2(other, Health), GETCMP2(other, Wallet), GETCMP2(other, PlayerData)->getBinder());
 	}
 }
 
@@ -99,10 +101,11 @@ void Weapon::onCollisionExit(Collision* c)
 	}
 }
 
-void Weapon::SavePlayerInfo(int index, Hands* playerH, Health* healthAux, Wallet* walletAux)
+void Weapon::SavePlayerInfo(int index, Hands* playerH, Health* healthAux, Wallet* walletAux,InputBinder* binderAux)
 {
 	playerInfo_[index].isNear = true;
 	playerInfo_[index].playerHands = playerH;
+	playerInfo_[index].playerBinder = binderAux;
 	if (healthAux) playerInfo_[index].playerHealth = healthAux;
 	else playerInfo_[index].playerWallet = walletAux;
 }

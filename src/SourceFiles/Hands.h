@@ -21,7 +21,7 @@ private:
 	int textureId_ = 0;
 	PlayerData* playerData_ = nullptr;
 	WeaponID currentWeaponID_ = NoWeapon;
-	InputHandler* ih_ = nullptr;
+	InputBinder* ib_ = nullptr;
 	float angle_ = 0;
 	SDL_RendererFlip Flipped_ = SDL_FLIP_NONE; //si las manos estan o no flipeadas
 	Weapon* currentWeapon_ = nullptr;

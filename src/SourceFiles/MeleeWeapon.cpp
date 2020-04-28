@@ -30,10 +30,12 @@ void MeleeWeapon::update() {
 	}
 }
 
-void MeleeWeapon::PickObjectBy(Hands* playerHands) {
+void MeleeWeapon::PickObjectBy(int index) {
+	Hands* playerHands = playerInfo_[index].playerHands;
 	if (playerHands->getWeaponID() == NoWeapon) {
 		currentHand_ = playerHands;
 		picked_ = true;
+		pickedIndex_ = index;
 		currentHand_->setWeapon(weaponType_, this);
 		vw_->setDrawable(false);
 		//Desactivamos el trigger de pickUp
