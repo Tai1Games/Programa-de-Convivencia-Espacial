@@ -22,11 +22,13 @@ void ImpulseViewer::init() {
 
 	maxImpulseGrabbed_ = CONST(float, "IMPULSE_GRABBED");
 	impulseSize_ = CONST(int, "IMPULSE_SIZE");
+
+	ib_ = playerData_->getBinder();
 }
 
 void ImpulseViewer::draw() const {
-	b2Vec2 stickDir = SDL_Game::instance()->getInputHandler()->getLastStickDir(playerNumber_, InputHandler::LEFTSTICK);
-	if (SDL_Game::instance()->getInputHandler()->isButtonDown(playerNumber_, SDL_CONTROLLER_BUTTON_A)) {
+	b2Vec2 stickDir = ib_->getAimDir();
+	if (ib_->holdImpulse()) {
 		double angle = std::atan2((double)stickDir.x, -(double)stickDir.y) * (180.0 / PI);
 		SDL_Rect playerRect = playerCollider_->getRectRender();
 		SDL_Rect destRect{ playerRect.x,playerRect.y,impulseSize_,impulseSize_ };

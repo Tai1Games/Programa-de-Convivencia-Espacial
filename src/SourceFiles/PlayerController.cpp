@@ -1,5 +1,5 @@
 #include "PlayerController.h"
-#include "InputHandler.h"
+#include "InputBinder.h"
 #include "Entity.h"
 
 PlayerController::PlayerController() : Component(ComponentType::PlayerController),
@@ -14,6 +14,7 @@ void PlayerController::init()
 	coll_ = GETCMP1_(Collider); //pilla referencia al collider
 	attachesToObj_ = GETCMP1_(AttachesToObjects);
 	playerNumber_ = playerData_->getPlayerNumber();
+	ib = playerData_->getBinder();
 
 	maxImpulseGrabbed_ = CONST(float, "IMPULSE_GRABBED");
 	maxImpulseFloating_ = CONST(float, "IMPULSE_FLOATING");
@@ -22,13 +23,12 @@ void PlayerController::init()
 
 void PlayerController::handleInput()
 {
-	InputHandler* ih = SDL_Game::instance()->getInputHandler();
 	//Empieza la carga
-	if (ih->isButtonJustDown(playerNumber_, SDL_CONTROLLER_BUTTON_A)) {
+	if (ib->pressImpulse()) {
 		chargingImpulse_ = true;
 	}//Soltarse
-	else if (ih->isButtonJustUp(playerNumber_, SDL_CONTROLLER_BUTTON_A)) {
-		dirImpulse_ = SDL_Game::instance()->getInputHandler()->getLastStickDir(playerNumber_, InputHandler::GAMEPADSTICK::LEFTSTICK);
+	else if (ib->releaseImpulse()) {
+		dirImpulse_ = ib->getAimDir();
 		dirImpulse_ *= impulseForce_;
 		dirImpulse_.y *= -1; //hay que invertirlo para convertirlo en vector compatible con box2D
 		Collider* attachedObj = attachesToObj_->getAttachedObject();

@@ -5,6 +5,7 @@
 #include "AttachesToObjects.h"
 #include "PlayerData.h"
 #include "checkML.h"
+#include "InputBinder.h"
 
 
 class PlayerController : public Component
@@ -24,6 +25,7 @@ private:
 	Collider* coll_ = nullptr;
 	AttachesToObjects* attachesToObj_ = nullptr;
 	PlayerData* playerData_ = nullptr;
+	InputBinder* ib = nullptr;
 public:
 	PlayerController();
 	virtual ~PlayerController() { Component::~Component(); };

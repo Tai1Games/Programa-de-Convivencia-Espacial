@@ -17,7 +17,7 @@ public:
 	virtual void update() override;
 	//Alterar el viewer
 
-	virtual void PickObjectBy(Hands* playerHands) override;
+	virtual void PickObjectBy(int index) override;
 	virtual void onCollisionEnter(Collision* c) override;
 	virtual void UnPickObject() override;
 
