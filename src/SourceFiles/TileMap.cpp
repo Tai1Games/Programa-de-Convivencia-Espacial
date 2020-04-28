@@ -36,7 +36,7 @@ void TileMap::init() {
 				else if (tileLayer.getName() == "Spawns") { //spawns
 					playerSpawns_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER"))); //a�ade la posicion al vector de spawns
 				}
-				else if (tileLayer.getName() == "SpecialObject"){ //objetos espaciales (mando de tele, router...)
+				else if (tileLayer.getName() == "SpecialObjects"){ //objetos espaciales (mando de tele, router...)
 					specialObjectsSpawnPoint_ = b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER"));
 				}
 				else if (tileLayer.getName() == "MapObjects") { //muebles
