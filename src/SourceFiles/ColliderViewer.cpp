@@ -14,7 +14,7 @@ void ColliderViewer::init() {
 }
 
 void ColliderViewer::drawRect(int index) const {
-    setPoints(collider_->getRectRender().x, collider_->getRectRender().y, collider_->getW(index) * PIXELS_PER_METER, collider_->getH(index) * PIXELS_PER_METER);
+    setPoints(collider_->getRectRender(index).x, collider_->getRectRender(index).y, collider_->getW(index) * PIXELS_PER_METER, collider_->getH(index) * PIXELS_PER_METER);
     SDL_RenderDrawLines(renderer_, points_, 5);
 }
 
@@ -47,6 +47,9 @@ void ColliderViewer::draw() const {
         // recorre todos los fixtures del objeto
         while (f != nullptr) {
 
+            if (f->GetNext() != nullptr)
+                std::cout << "Collider con más de una fixture" << endl;
+
             uint16 layer = f->GetFilterData().categoryBits;
             int posColor = (layer > 0) ? round(log2(layer)) : 8;        // escoge color de dibujado
             // cambia color de dibujado
@@ -54,12 +57,11 @@ void ColliderViewer::draw() const {
 
             (f->GetShape()->GetType() != b2Shape::e_circle) ? // pregunta tipo de collider
 
-                drawRect(i)                                         // collider rectangular
+                drawRect(i)                                           // collider rectangular
                 :                                 
-                drawCircle(renderer_, collider_->getRectRender().x,   // collider circular
-                    collider_->getRectRender().y,
+                drawCircle(renderer_, collider_->getRectRender(i).x,   // collider circular
+                    collider_->getRectRender(i).y,
                     collider_->getW(i) * PIXELS_PER_METER);
-
 
             f = f->GetNext();   // siguiente fixture del body
             i++;

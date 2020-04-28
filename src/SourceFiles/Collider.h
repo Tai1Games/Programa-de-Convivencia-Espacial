@@ -81,12 +81,12 @@ public:
 		};
 	}
 
-	SDL_Rect getRectRender() const {
+	SDL_Rect getRectRender(int index = 0) const {
 		return SDL_Rect{
-			(int)(getPos().x * PIXELS_PER_METER - (getW(0) * PIXELS_PER_METER)),
-			(int)(WINDOW_HEIGHT - (getPos().y * PIXELS_PER_METER + (getH(0) * PIXELS_PER_METER))),
-			(int)(getW(0) * PIXELS_PER_METER * 2),
-			(int)(getH(0) * PIXELS_PER_METER * 2)
+			(int)(getPos().x * PIXELS_PER_METER - (getW(index) * PIXELS_PER_METER)),
+			(int)(WINDOW_HEIGHT - (getPos().y * PIXELS_PER_METER + (getH(index) * PIXELS_PER_METER))),
+			(int)(getW(index) * PIXELS_PER_METER * 2),
+			(int)(getH(index) * PIXELS_PER_METER * 2)
 		};
 	}
 
