@@ -2,16 +2,21 @@
 #include "Entity.h"
 #include "Collider.h"
 
-ParticleEmitter::ParticleEmitter(Vector2D direction, int textureId, float speed, Uint16 particleLifetime, Uint16 size, Uint16 emittingTime, int speedVariation, int emissionConeAngle) :
-	Component(ComponentType::ParticleEmitter), direction_(direction), textureId_(textureId), speed_(speed),
+ParticleEmitter::ParticleEmitter(Vector2D direction, int textureId, float speed, int numTextures, int generationOdds, Uint16 particleLifetime, Uint16 size, Uint16 emittingTime, int speedVariation, int emissionConeAngle) :
+	Component(ComponentType::ParticleEmitter), direction_(direction), textureId_(textureId), speed_(speed), numParticlesInSpriteSheet_(numTextures), generationOdds_(generationOdds),
 	particleLifetime_(particleLifetime), size_(size), emittingTime_(emittingTime), speedVariation_(speedVariation), emissionConeAngle_(emissionConeAngle),
 	msPerFrame_(0), maxParticles_(0){}
 
 void ParticleEmitter::init() {
 	collider_ = GETCMP1_(Collider);
 	texture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(textureId_);
+	textureSize_ = texture_->getHeight(); //Asumimos que si es un spritesheet, est�n organizados en vertical.
+
+	//Load of constants
 	msPerFrame_ = CONST(float, "MS_PER_FRAME");
 	maxParticles_ = CONST(int, "MAX_PARTICLES_DEFAULT");
+	minGenerationOdds_ = CONST(int, "PARTICLE_GENERATION_MIN_ODDS");
+	maxGenerationOdds_ = CONST(int, "PARTICLE_GENERATION_MAX_ODDS");
 }
 
 void ParticleEmitter::update() {
@@ -21,14 +26,18 @@ void ParticleEmitter::update() {
 			if (timeEmitted_ > emittingTime_)
 				emitting_ = false;
 		}
-		if (particles_.size() < maxParticles_ && timeEmitted_ % 5 == 0) {
+		if (particles_.size() < maxParticles_ && timeEmitted_ % generationOdds_ == 0) {
 			SDL_Rect colliderRect = collider_->getRectRender();
 			//direction + angulo random
 			int angle = rand() % int(emissionConeAngle_ * 2) - emissionConeAngle_;
 			Vector2D direction = direction_.rotate(angle);
 			//speed_ + variacion random
 			float speed = (speedVariation_ != 0) ? speed_ - speedVariation_ + rand() % int(speedVariation_ * 2) : speed_;
-			particles_.push_back({ Vector2D((double)colliderRect.x + colliderRect.w / 2.0,(double)colliderRect.y + colliderRect.h / 2.0),direction,0,speed });
+			//frame
+			int numTexture = 0;
+			if (numParticlesInSpriteSheet_ > 0) numTexture = rand() % numParticlesInSpriteSheet_;
+
+			particles_.push_back({ Vector2D((double)colliderRect.x + colliderRect.w / 2.0,(double)colliderRect.y + colliderRect.h / 2.0),direction,0,speed, numTexture});
 		}
 	}
 
@@ -49,6 +58,13 @@ void ParticleEmitter::update() {
 
 void ParticleEmitter::draw() const {
 	for (Particle part : particles_) {
-		texture_->render({ (int)part.position.getX() - size_ / 2,(int)part.position.getY() - size_ / 2,size_,size_ });
+		texture_->render({ (int)part.position.getX() - size_ / 2,(int)part.position.getY() - size_ / 2,size_,size_ }, 0, { part.numTexture * textureSize_, 0, textureSize_, textureSize_ });
 	}
+}
+
+void ParticleEmitter::modifyGenerationOdds(int var)
+{
+	generationOdds_ += var;
+	if (generationOdds_ < minGenerationOdds_) generationOdds_ = minGenerationOdds_;
+	else if (generationOdds_ > maxGenerationOdds_) generationOdds_ = maxGenerationOdds_;
 }

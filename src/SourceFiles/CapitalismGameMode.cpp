@@ -6,7 +6,9 @@ void CapitalismGameMode::init(PlayState* game)
 {
 	GameMode::init(game);
 	coinPool_.init(game->getEntityManager(), game->getPhysicsWorld());
-
+	//NEED TO DELETE ---
+	tomatoPool_.init(game->getEntityManager(), game->getPhysicsWorld());
+	//------------------
 	//Load of constants
 	sPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 	timeToEnd_ = CONST(double, "TIME_TO_END");
@@ -26,7 +28,7 @@ void CapitalismGameMode::init(PlayState* game)
 	coinSpawnersPositions_ = tilemap_->getCoinsSpawnPoints();
 
 	for (b2Vec2 pos : coinSpawnersPositions_) {
-		roombaColliders_.push_back(ObjectFactory::createRoomba(game->getEntityManager(),
+		roombaColliders_.push_back(ObjectFactory::makeRoomba(game->getEntityManager(),
 			game->getPhysicsWorld(), pos)->getComponent<Collider>(ComponentType::Collider));
 	}
 
@@ -43,6 +45,9 @@ void CapitalismGameMode::init(PlayState* game)
 	canvasTimerRect_.y = 0;
 	canvasTimerRect_.w = CONST(int, "COUNTDOWN_UI_WIDTH");
 	canvasTimerRect_.h = CONST(int, "COUNTDOWN_UI_HEIGTH");
+
+	//NEED TO DELETE
+	tomatoPool_.addTomato({ 40, 20 });
 }
 
 void CapitalismGameMode::update() {

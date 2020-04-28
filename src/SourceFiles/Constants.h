@@ -18,11 +18,13 @@ public:
 };
 
 //Mathz
-const double PI = 3.141592653589793238;
+const double PI = 3.14159265358979323846264338327950288;
+const int FRAMES_PER_SECOND = 60;
 
 //Pools
 const int COIN_POOL_SIZE = 140;
 const int FIREBALL_POOL_SIZE = 5;
+const int TOMATO_POOL_SIZE = 10;
 
 //Estados de juego
 enum States
@@ -52,11 +54,12 @@ enum WeaponID {
 	Extinguisher,
 	Slipper,
 	Mando,
+	Tomato,
 
 	WEAPON_NUMBER
 };
 
-// no sé por qué peta al hacer un array de strings
+// no sï¿½ por quï¿½ peta al hacer un array de strings
 /*std::string mapNames[] = {
 	"LivingRoom",
 	"Gym",

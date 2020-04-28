@@ -23,7 +23,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SliderControl, resourcesPath + "textures/SliderControl.png"},
 
 	{ CanvasTimerBackground, resourcesPath + "textures/canvasTimerBackground.png"},
-	{ CoinUI, resourcesPath + "textures/DogeCoinUI.png"},
+	{ CoinUI, resourcesPath + "textures/MonedaUI.png"},
 	{ SkullUI, resourcesPath + "textures/SkullUI.png"},
 	{ SuddenDeathCapitalismModeText, resourcesPath + "textures/suddenDeathCapitalismModeText.png"},
 	{ SuddenDeathTimeModeText, resourcesPath + "textures/suddenDeathTimeModeText.png"},
@@ -41,6 +41,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Slipper, resourcesPath + "textures/Chancla.png" },
 	{ Stapler, resourcesPath + "textures/Grapadora.png" },
 	{ Stone, resourcesPath + "textures/Piedra.png" },
+	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png"},
+	{ TomatoRing, resourcesPath + "textures/TomatoRing.png"},
 
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },
@@ -50,7 +52,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SpaceSuit, resourcesPath + "textures/PinkTinky.png"},	// dead body
 
 	// Map elements
-	{ Boiler,resourcesPath + "textures/boiler_placeholder.png"},
+	{ Smoke, resourcesPath + "textures/SmokeParticles-Sheet.png" },
+	{ Boiler,resourcesPath + "textures/CalderaPro.png"},
 	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
 	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
 	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png" },
@@ -58,14 +61,23 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
 	{ Treadmill , resourcesPath + "textures/Treadmill.png"},
 	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png"},
+	{ CarnivorousPlant , resourcesPath + "textures/PlantaCarnivora.png"},
+	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
+	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
+	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
+	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
+	{TreadmillPanel, resourcesPath + "textures/TreadmillPanel.png"},
 
 	// Gamemode specific elements
-	{ Coin, resourcesPath + "textures/DogeCoin.png" },
-	{ Router,resourcesPath + "textures/Router.png" },
+	{ Coin, resourcesPath + "textures/Moneda.png" },
+	{ Router,resourcesPath + "textures/Router2.png" },
+	{ RoombaSpriteSheet, resourcesPath + "textures/Roomba.png"},
+	{ Remote, resourcesPath + "textures/Mando.png"},
 
 	// miscelánea
 	{ Debug, resourcesPath + "textures/debug.png" },
 	{ Negro ,resourcesPath + "textures/Negro.png"},
+	{ Transparent ,resourcesPath + "textures/transparent.png"},
 	{ Tinky, resourcesPath + "textures/Tinky.png" }
 };
 
@@ -98,12 +110,12 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 };
 
 vector<Resources::MusicInfo> Resources::musics_{
-	//M�sica {nombre_en_enum, ruta}
+	//Música {nombre_en_enum, ruta}
 	{ MainMenuMusic , resourcesPath + "sound/mainMenu.mp3" },
 	{ EntranceMusic , resourcesPath + "sound/entrance.mp3" },
 	{ LivingRoomMusic , resourcesPath + "sound/livingRoom.mp3" },
 	{ GymMusic , resourcesPath + "sound/gym.mp3" },
-	{ RevealMusic, resourcesPath + "sound/gotem.mp3" }
+	{ BoilerRoomMusic, resourcesPath + "sound/boilerRoom.mp3" }
 };
 
 vector<Resources::SoundInfo> Resources::sounds_{

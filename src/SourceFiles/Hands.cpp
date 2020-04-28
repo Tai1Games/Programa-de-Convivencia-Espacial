@@ -51,7 +51,7 @@ void Hands::update()
 
 	float dispAngHand = (int)(180 - angle_) % 360;	 //el angulo estandarizado de la mano
 
-	float dispAngPlayer = (360 + (90 + (int)(collider_->getAngle() * 180 / PI) % 360)) % 360;	//el angulo estandarizado del jugador
+	float dispAngPlayer = (360 + (90 + (int)(-collider_->getAngleInDegrees()) % 360)) % 360;	//el angulo estandarizado del jugador
 
 	if ((dispAngHand < (dispAngPlayer + 180)) && (dispAngHand > dispAngPlayer)) {	//si la mano esta a su espalda
 		Flipped_ = SDL_FLIP_NONE;

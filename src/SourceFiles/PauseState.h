@@ -31,6 +31,8 @@ private:
 	void updateSelectedButton();
 	/*Actualiza la posición del slider y el volumen de la música*/
 	void updateMusicVolume();
+
+	void resumeGame();
 public:
 	PauseState() : GameState() {};
 	~PauseState(){};

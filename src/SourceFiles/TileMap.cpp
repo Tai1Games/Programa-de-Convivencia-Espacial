@@ -169,7 +169,7 @@ void TileMap::executeMapFactory()
 			ObjectFactory::makePad(entityManager_, physicsWorld_, pos, size);
 		}
 		else if (name == "Boiler") {
-			boilerAux_ = GETCMP2(ObjectFactory::createBoiler(entityManager_, physicsWorld_, pos), FireBallGenerator);
+			boilerAux_ = GETCMP2(ObjectFactory::makeBoiler(entityManager_, physicsWorld_, pos), FireBallGenerator);
 		}
 		else if (name == "IncButton") {
 			boilerButtons_.push_back(GETCMP2(ObjectFactory::makeBoilerButton(entityManager_, physicsWorld_, pos, true), BoilerButtonLogic));
@@ -186,8 +186,14 @@ void TileMap::executeMapFactory()
 			ObjectFactory::makePipe(entityManager_, physicsWorld_, pos, size, rotation); 
 		}
 		else if (name == "Treadmill") {
-			ObjectFactory::createTreadmill(entityManager_, physicsWorld_, pos);
+			ObjectFactory::makeTreadmill(entityManager_, physicsWorld_, pos);
 		}	
+		else if (name == "CarnivorousePlant") {
+			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
+			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
+			size *= 0.5f;
+			ObjectFactory::makeCarnivorousePlant(entityManager_, physicsWorld_, pos, size);
+		}
 	}
 	solvePostCreationProblems();
 }

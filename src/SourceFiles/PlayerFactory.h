@@ -10,6 +10,7 @@
 #include "AttachesToObjects.h"
 #include "PlayerController.h"
 #include "ImpulseViewer.h"
+#include "ColliderViewer.h"
 #include "Wallet.h"
 #include "Resource.h"
 #include "EntityManager.h"
