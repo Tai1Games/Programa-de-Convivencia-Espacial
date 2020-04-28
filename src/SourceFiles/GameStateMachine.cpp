@@ -8,6 +8,7 @@
 #include "PlayState.h"
 #include "PauseState.h"
 #include "MenuState.h"
+#include "MidGameState.h"
 
 GameStateMachine::GameStateMachine() {
 	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
@@ -64,6 +65,9 @@ void GameStateMachine::changeToState(int state, int numberOfPlayers, int gameMod
 			case States::pause:
 				//if (states_[state] != nullptr)	delete states_[state];
 				states_[state] = new PauseState();
+				break;
+			case States::midGame:
+				states_[state] = new MidGameState(numberOfPlayers, 1);
 				break;
 			}
 			//inicializar la nueva escena

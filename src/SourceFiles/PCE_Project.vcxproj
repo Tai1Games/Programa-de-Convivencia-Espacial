@@ -218,6 +218,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="InputBinder.h" />
     <ClInclude Include="MeleeWeapon.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="MidGameState.h" />
     <ClInclude Include="Pad.h" />
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="ParticleEmitter.h" />
@@ -226,6 +227,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="PlayerData.h" />
     <ClInclude Include="PlayerFactory.h" />
+    <ClInclude Include="RocketLogic.h" />
     <ClInclude Include="RouterLogic.h" />
     <ClInclude Include="SlipperWeapon.h" />
     <ClInclude Include="StocksGameMode.h" />
@@ -287,6 +289,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="InputBinder.cpp" />
     <ClCompile Include="MeleeWeapon.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="MidGameState.cpp" />
     <ClCompile Include="Pad.cpp" />
     <ClCompile Include="ParticleEmitter.cpp" />
     <ClCompile Include="PauseState.cpp" />
@@ -294,6 +297,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="PlayerFactory.cpp" />
+    <ClCompile Include="RocketLogic.cpp" />
     <ClCompile Include="RouterLogic.cpp" />
     <ClCompile Include="SlipperWeapon.cpp" />
     <ClCompile Include="StocksGameMode.cpp" />
