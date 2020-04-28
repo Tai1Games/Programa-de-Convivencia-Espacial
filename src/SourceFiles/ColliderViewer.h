@@ -18,7 +18,7 @@ private:
 	b2Body* body_ = nullptr;
 
 	// SE PUEDEN CAMBIAR ESTOS COLORES COMO QUER�IS
-	DebugColor colors[8] = {
+	DebugColor colors[9] = {
 		{0, 255, 255},
 		{255, 0, 255},
 		{255, 255, 0},
@@ -26,7 +26,8 @@ private:
 		{0, 255, 0},
 		{0, 0, 255},
 		{128, 255, 0},
-		{255, 255, 255}
+		{255, 255, 255},
+		{0, 0, 0}
 	};
 	double PIXELS_PER_METER = 1.0;
 

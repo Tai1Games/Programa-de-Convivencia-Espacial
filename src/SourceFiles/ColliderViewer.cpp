@@ -46,20 +46,20 @@ void ColliderViewer::draw() const {
         int i = 0;
         // recorre todos los fixtures del objeto
         while (f != nullptr) {
-            uint16 layer = (f->GetFilterData().categoryBits) & 0xFFFF;
-            if (layer > 0)
-            {
-                int posColor = round(log2(layer));
-                // cambia color de dibujado
-                SDL_SetRenderDrawColor(renderer_, colors[posColor].r, colors[posColor].g, colors[posColor].b, SDL_ALPHA_OPAQUE);
 
-                // collider circular
-                if (f->GetShape()->GetType() == b2Shape::e_circle)
-                    drawCircle(renderer_, collider_->getRectRender().x, collider_->getRectRender().y, collider_->getW(i) * PIXELS_PER_METER);
+            uint16 layer = f->GetFilterData().categoryBits;
+            int posColor = (layer > 0) ? round(log2(layer)) : 8;        // escoge color de dibujado
+            // cambia color de dibujado
+            SDL_SetRenderDrawColor(renderer_, colors[posColor].r, colors[posColor].g, colors[posColor].b, SDL_ALPHA_OPAQUE);
 
-                // collider rectangular
-                else drawRect(i);
-            }
+            (f->GetShape()->GetType() != b2Shape::e_circle) ? // pregunta tipo de collider
+
+                drawRect(i)                                         // collider rectangular
+                :                                 
+                drawCircle(renderer_, collider_->getRectRender().x,   // collider circular
+                    collider_->getRectRender().y,
+                    collider_->getW(i) * PIXELS_PER_METER);
+
 
             f = f->GetNext();   // siguiente fixture del body
             i++;
