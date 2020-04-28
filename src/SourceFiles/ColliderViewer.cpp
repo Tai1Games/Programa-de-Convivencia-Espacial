@@ -14,7 +14,8 @@ void ColliderViewer::init() {
 }
 
 void ColliderViewer::drawRect(int index) const {
-    setPoints(collider_->getRectRender(index).x, collider_->getRectRender(index).y, collider_->getW(index) * PIXELS_PER_METER, collider_->getH(index) * PIXELS_PER_METER);
+    SDL_Rect renderRect = collider_->getRectRender();
+    setPoints(renderRect.x, renderRect.y, renderRect.w / 2, renderRect.h / 2);
     SDL_RenderDrawLines(renderer_, points_, 5);
 }
 
@@ -59,9 +60,9 @@ void ColliderViewer::draw() const {
 
                 drawRect(i)                                           // collider rectangular
                 :                                 
-                drawCircle(renderer_, collider_->getRectRender(i).x,   // collider circular
-                    collider_->getRectRender(i).y,
-                    collider_->getW(i) * PIXELS_PER_METER);
+                drawCircle(renderer_, collider_->getRectRender(0).x,   // collider circular
+                    collider_->getRectRender(0).y,
+                    collider_->getW(0) * PIXELS_PER_METER);
 
             f = f->GetNext();   // siguiente fixture del body
             i++;
