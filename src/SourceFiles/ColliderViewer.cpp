@@ -68,7 +68,7 @@ void ColliderViewer::draw() const {
     }
 }
 
-// este algoritmo es bastante rápido (~500 microsegundos)
+// este algoritmo es bastante rï¿½pido (~500 microsegundos)
 void ColliderViewer::drawCircle(SDL_Renderer* renderer, int32_t originX, int32_t originY, int32_t radius) const
 {
     b2Vec2 center = { (float)(originX + radius), (float)(originY + radius) };
@@ -107,4 +107,3 @@ void ColliderViewer::drawCircle(SDL_Renderer* renderer, int32_t originX, int32_t
         }
     }
 }
-

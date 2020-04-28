@@ -17,7 +17,7 @@ private:
 	SDL_Point* points_ = nullptr;
 	b2Body* body_ = nullptr;
 
-	// SE PUEDEN CAMBIAR ESTOS COLORES COMO QUERÁIS
+	// SE PUEDEN CAMBIAR ESTOS COLORES COMO QUERï¿½IS
 	DebugColor colors[8] = {
 		{0, 255, 255},
 		{255, 0, 255},
