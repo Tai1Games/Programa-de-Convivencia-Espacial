@@ -13,9 +13,8 @@ void ColliderViewer::init() {
     PIXELS_PER_METER = CONST(double, "PIXELS_PER_METER");
 }
 
-void ColliderViewer::drawRect(int index) const {
-    SDL_Rect renderRect = collider_->getRectRender();
-    setPoints(renderRect.x, renderRect.y, renderRect.w / 2, renderRect.h / 2);
+void ColliderViewer::drawRect(SDL_Rect* rect) const {
+    setPoints(rect->x, rect->y, rect->w / 2, rect->h / 2);
     SDL_RenderDrawLines(renderer_, points_, 5);
 }
 
@@ -49,32 +48,34 @@ void ColliderViewer::draw() const {
         while (f != nullptr) {
 
             if (f->GetNext() != nullptr)
-                std::cout << "Collider con más de una fixture" << endl;
+                std::cout << ((f->GetShape()->GetType() == b2Shape::e_circle) ? "circle" : "rect") << endl
+                << ((f->GetNext()->GetShape()->GetType() == b2Shape::e_circle) ? "circle" : "rect") << endl;
 
             uint16 layer = f->GetFilterData().categoryBits;
             int posColor = (layer > 0) ? round(log2(layer)) : 8;        // escoge color de dibujado
             // cambia color de dibujado
             SDL_SetRenderDrawColor(renderer_, colors[posColor].r, colors[posColor].g, colors[posColor].b, SDL_ALPHA_OPAQUE);
-
+            
+            SDL_Rect renderRect = collider_->getRectRender(i);
             (f->GetShape()->GetType() != b2Shape::e_circle) ? // pregunta tipo de collider
 
-                drawRect(i)                                           // collider rectangular
+                drawRect(&(collider_->getRectRender(i)))        // collider rectangular
                 :                                 
-                drawCircle(renderer_, collider_->getRectRender(0).x,   // collider circular
-                    collider_->getRectRender(0).y,
-                    collider_->getW(0) * PIXELS_PER_METER);
+                drawCircle(&(collider_->getRectRender(i)));     // collider circular
 
             f = f->GetNext();   // siguiente fixture del body
             i++;
         }
+        std::cout << endl;
         SDL_SetRenderDrawColor(renderer_, 0, 0, 0, SDL_ALPHA_OPAQUE);
     }
 }
 
 // este algoritmo es bastante r�pido (~500 microsegundos)
-void ColliderViewer::drawCircle(SDL_Renderer* renderer, int32_t originX, int32_t originY, int32_t radius) const
+void ColliderViewer::drawCircle(SDL_Rect* rect) const
 {
-    b2Vec2 center = { (float)(originX + radius), (float)(originY + radius) };
+    int32_t radius = rect->w / 2;
+    b2Vec2 center = { (float)(rect->x + radius), (float)(rect->y + radius) };
 
     const int32_t diameter = (radius * 2);
 
@@ -86,14 +87,14 @@ void ColliderViewer::drawCircle(SDL_Renderer* renderer, int32_t originX, int32_t
 
     while (x >= y)
     {
-        SDL_RenderDrawPoint(renderer, center.x + x, center.y - y);
-        SDL_RenderDrawPoint(renderer, center.x + x, center.y + y);
-        SDL_RenderDrawPoint(renderer, center.x - x, center.y - y);
-        SDL_RenderDrawPoint(renderer, center.x - x, center.y + y);
-        SDL_RenderDrawPoint(renderer, center.x + y, center.y - x);
-        SDL_RenderDrawPoint(renderer, center.x + y, center.y + x);
-        SDL_RenderDrawPoint(renderer, center.x - y, center.y - x);
-        SDL_RenderDrawPoint(renderer, center.x - y, center.y + x);
+        SDL_RenderDrawPoint(renderer_, center.x + x, center.y - y);
+        SDL_RenderDrawPoint(renderer_, center.x + x, center.y + y);
+        SDL_RenderDrawPoint(renderer_, center.x - x, center.y - y);
+        SDL_RenderDrawPoint(renderer_, center.x - x, center.y + y);
+        SDL_RenderDrawPoint(renderer_, center.x + y, center.y - x);
+        SDL_RenderDrawPoint(renderer_, center.x + y, center.y + x);
+        SDL_RenderDrawPoint(renderer_, center.x - y, center.y - x);
+        SDL_RenderDrawPoint(renderer_, center.x - y, center.y + x);
 
         if (error <= 0)
         {

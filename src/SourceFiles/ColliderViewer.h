@@ -31,9 +31,9 @@ private:
 	};
 	double PIXELS_PER_METER = 1.0;
 
-	void drawCircle(SDL_Renderer* renderer, int32_t centreX, int32_t centreY, int32_t radius) const;
+	void drawCircle(SDL_Rect* rect) const;
 	void setPoints(double originX, double originY, double width, double height) const;
-	void drawRect(int index) const;
+	void drawRect(SDL_Rect* rect) const;
 
 public:
 	ColliderViewer();
