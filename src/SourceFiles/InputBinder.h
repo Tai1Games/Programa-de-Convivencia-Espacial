@@ -184,10 +184,10 @@ protected:
 public:
 	ControllerBinder(int id) : InputBinder(),id_(id) {}
 	virtual bool holdGrab() {
-		return ih->getTrigger(id_, InputHandler::GAMEPADTRIGGER::RIGHTTRIGGER);
+		return ih->getTrigger(id_, InputHandler::GAMEPADTRIGGER::LEFTTRIGGER);
 	}
 	virtual bool releaseGrab() {
-		return !ih->getTrigger(id_, InputHandler::GAMEPADTRIGGER::RIGHTTRIGGER);
+		return !ih->getTrigger(id_, InputHandler::GAMEPADTRIGGER::LEFTTRIGGER);
 	}
 	virtual bool pressPick() {
 		return ih->isButtonJustDown(id_,SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_Y);
