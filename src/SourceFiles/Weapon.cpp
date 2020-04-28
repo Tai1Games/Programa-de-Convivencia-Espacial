@@ -19,7 +19,7 @@ void Weapon::init()
 {
 	mainCollider_ = GETCMP1_(Collider);
 	vw_ = GETCMP1_(Viewer);
-	mainCollider_->createCircularFixture(6, 0, 0, 0, Collider::CollisionLayer::Wall, true);
+	mainCollider_->createCircularFixture(2, 0, 0, 0, Collider::CollisionLayer::Trigger , true);
 	//Tamaño del vector segun el numero de jugadores
 	playerInfo_.resize(4);
 }
@@ -85,9 +85,11 @@ void Weapon::onCollisionEnter(Collision* c)
 {
 	Entity* other = c->entity;
 	Hands* otherHand = GETCMP2(other, Hands);
-	Hands* myHand = getCurrentHand();
+	Collider* coll = GETCMP1_(Collider);
+	b2Fixture* auxF = coll->getFixture(1);
 
-	if (otherHand != nullptr) {
+	if (otherHand != nullptr &&
+		auxF->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
 		SavePlayerInfo(otherHand->getPlayerId(), otherHand, GETCMP2(other, Health), GETCMP2(other, Wallet), GETCMP2(other, PlayerData)->getBinder());
 	}
 }
