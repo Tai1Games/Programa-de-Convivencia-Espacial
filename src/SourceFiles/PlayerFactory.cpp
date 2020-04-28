@@ -1,5 +1,10 @@
 #include "PlayerFactory.h"
 #include "CapitalismGameMode.h"
+#include "ColliderViewer.h"
+#include "ImpulseViewer.h"
+#include "HealthViewer.h"
+#include "Viewer.h"
+#include "PlayerData.h"
 
 Entity* PlayerFactory::createBasePlayer(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY) {
 	Entity* p = eMan->addEntity();

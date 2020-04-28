@@ -10,9 +10,6 @@ void ColliderViewer::init() {
 	renderer_ = SDL_Game::instance()->getRenderer();
 	points_ = new SDL_Point[5];
     body_ = collider_->getBody();
-    int layer = collider_->getCollisionLayer();
-    if(layer > 0)
-        color = colors[(int)log2(layer)];
     PIXELS_PER_METER = CONST(double, "PIXELS_PER_METER");
 }
 
@@ -29,7 +26,6 @@ void ColliderViewer::setPoints(double originX, double originY, double width, dou
 	points_[0].x = center.x - width * cos(angle) - height * sin(angle);
     points_[0].y = center.y - width * sin(angle) + height * cos(angle);
 
-
     points_[1].x = center.x + width * cos(angle) - height * sin(angle);
     points_[1].y = center.y + width * sin(angle) + height * cos(angle);
 
@@ -43,31 +39,33 @@ void ColliderViewer::setPoints(double originX, double originY, double width, dou
 }
 
 void ColliderViewer::draw() const {
-	if (drawable_ && !isUIElement_) {
+    if (drawable_ && !isUIElement_) {
 
         // lista de fixtures del body
         b2Fixture* f = body_->GetFixtureList();
         int i = 0;
         // recorre todos los fixtures del objeto
         while (f != nullptr) {
+            uint16 layer = (f->GetFilterData().categoryBits) & 0xFFFF;
+            if (layer > 0)
+            {
+                int posColor = round(log2(layer));
+                // cambia color de dibujado
+                SDL_SetRenderDrawColor(renderer_, colors[posColor].r, colors[posColor].g, colors[posColor].b, SDL_ALPHA_OPAQUE);
 
-            int a = Collider::CollisionLayer::NormalAttachableObject;
-            // cambia color de dibujado
-            SDL_SetRenderDrawColor(renderer_, color.r, color.g, color.b, SDL_ALPHA_OPAQUE);
+                // collider circular
+                if (f->GetShape()->GetType() == b2Shape::e_circle)
+                    drawCircle(renderer_, collider_->getRectRender().x, collider_->getRectRender().y, collider_->getW(i) * PIXELS_PER_METER);
 
-            // collider circular
-            if (f->GetShape()->GetType() == b2Shape::e_circle) {
-                drawCircle(renderer_, collider_->getRectRender().x, collider_->getRectRender().y, collider_->getW(i) * PIXELS_PER_METER);
+                // collider rectangular
+                else drawRect(i);
             }
-
-            // collider rectangular
-            else drawRect(i);
 
             f = f->GetNext();   // siguiente fixture del body
             i++;
         }
         SDL_SetRenderDrawColor(renderer_, 0, 0, 0, SDL_ALPHA_OPAQUE);
-	}
+    }
 }
 
 // este algoritmo es bastante rápido (~500 microsegundos)
