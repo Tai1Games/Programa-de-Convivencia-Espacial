@@ -21,7 +21,8 @@ void MeleeWeapon::action() {
 void MeleeWeapon::update() {
 	ActionableWeapon::update();
 
-	if (mainCollider_->getNumFixtures() > 1 && beenActivated_ && framesSinceActivation_>=3) {
+	//>2 para no romper el rango del arma para pickup
+	if (mainCollider_->getNumFixtures() > 2 && beenActivated_ && framesSinceActivation_>=3) {
 		mainCollider_->destroyFixture(mainCollider_->getNumFixtures()-1);
 	}
 
@@ -74,8 +75,8 @@ void MeleeWeapon::onCollisionEnter(Collision* c) {
 void MeleeWeapon::UnPickObject() {
 	//Reactivamos el trigger de pickUp
 	b2Filter pickUpCollider = mainCollider_->getFixture(0)->GetFilterData();
-	pickUpCollider.categoryBits = Collider::CollisionLayer::PickableObject;
-	pickUpCollider.maskBits = Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall | Collider::CollisionLayer::NonGrababbleWall;
+	pickUpCollider.categoryBits = Collider::CollisionLayer::NormalObject;
+	pickUpCollider.maskBits = Collider::CollisionLayer::NormalObject | Collider::CollisionLayer::NormalAttachableObject | Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall | Collider::CollisionLayer::NonGrababbleWall;
 	mainCollider_->getFixture(0)->SetFilterData(pickUpCollider);
 
 	ActionableWeapon::UnPickObject();
