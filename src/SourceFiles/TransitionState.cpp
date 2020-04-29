@@ -4,7 +4,6 @@
 
 TransitionState::TransitionState(int fromState, int toState, vector<GameState*>* gameStatesVector) :
 	GameState(), currentState_(fromState), toState_(toState), gameStatesVector_(gameStatesVector) {
-	blackSquare_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Debug);
 
 	SDL_SetRenderDrawBlendMode(SDL_Game::instance()->getRenderer(), SDL_BLENDMODE_BLEND);
 
@@ -15,20 +14,19 @@ TransitionState::TransitionState(int fromState, int toState, vector<GameState*>*
 
 void TransitionState::update() {
 	currentTransitionFrame_++;
-	if (currentTransitionFrame_ == transitionFrames_ / 2)
+	if (currentTransitionFrame_ == transitionFrames_)
 		currentState_ = toState_;
 }
 
 void TransitionState::render() {
-	if (currentTransitionFrame_ < transitionFrames_) {
+	if (currentTransitionFrame_ < transitionFrames_ * 2) {
 		(*gameStatesVector_)[currentState_]->render();
-
-		if (currentTransitionFrame_ <= transitionFrames_ / 2)
-			SDL_SetRenderDrawColor(SDL_Game::instance()->getRenderer(), 0, 0, 0, 128);
+		cout << transitionFrames_ << " " << currentTransitionFrame_ << " " << endl;
+		if (currentTransitionFrame_ <= transitionFrames_)
+			SDL_SetRenderDrawColor(SDL_Game::instance()->getRenderer(), 0, 0, 0, currentTransitionFrame_);
 		else
-			SDL_SetRenderDrawColor(SDL_Game::instance()->getRenderer(), 0, 0, 0, 128);
+			SDL_SetRenderDrawColor(SDL_Game::instance()->getRenderer(), 0, 0, 0, currentTransitionFrame_ - transitionFrames_);
 
-		//blackSquare_->render({ 0,0,WIN_WIDTH,WIN_HEIGHT });
 		SDL_Rect blackScreen = { 0, 0, WIN_WIDTH, WIN_HEIGHT };
 		SDL_RenderFillRect(SDL_Game::instance()->getRenderer(), &blackScreen);
 		//SDL_SetRenderDrawColor(SDL_Game::instance()->getRenderer(), 0, 0, 0, SDL_ALPHA_OPAQUE);

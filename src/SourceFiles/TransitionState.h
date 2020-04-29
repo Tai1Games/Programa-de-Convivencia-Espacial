@@ -11,9 +11,8 @@ private:
 	//Scene transitions
 	int currentState_ = -1, toState_ = -1;
 	int WIN_WIDTH = 0, WIN_HEIGHT = 0;
-	Uint8 currentTransitionFrame_ = 0;
-	Uint8 transitionFrames_ = 0;
-	Texture* blackSquare_ = nullptr;
+	int currentTransitionFrame_ = 0;
+	int transitionFrames_ = 0;
 	vector<GameState*>* gameStatesVector_ = nullptr;
 public:
 	TransitionState(int fromState, int toState, vector<GameState*>* gameStatesVector);
