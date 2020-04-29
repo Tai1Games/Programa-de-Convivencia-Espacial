@@ -13,6 +13,7 @@ private:
 	int WIN_WIDTH = 0, WIN_HEIGHT = 0;
 	int currentTransitionFrame_ = 0;
 	int transitionFrames_ = 0;
+	float frameToAlphaRatio_ = 0.0;
 	vector<GameState*>* gameStatesVector_ = nullptr;
 public:
 	TransitionState(int fromState, int toState, vector<GameState*>* gameStatesVector);
