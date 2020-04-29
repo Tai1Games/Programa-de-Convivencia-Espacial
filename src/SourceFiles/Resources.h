@@ -73,6 +73,9 @@ public:
 		Tomato,
 		TomatoRing,
 		TreadmillPanel,
+		Banana,
+		BananaSkin,
+		BananaNonSkin,
 
 		// Gamemode specific elements
 		Coin,

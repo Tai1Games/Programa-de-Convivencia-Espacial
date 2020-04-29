@@ -279,6 +279,9 @@
     <ClInclude Include="Viewer.h">
       <Filter>Header Files\Components\Viewers</Filter>
     </ClInclude>
+    <ClInclude Include="BananaWeapon.h">
+      <Filter>Header Files\Components\Weapons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -469,6 +472,9 @@
     </ClCompile>
     <ClCompile Include="ImpulseViewer.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="BananaWeapon.cpp">
+      <Filter>Source Files\Components\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
