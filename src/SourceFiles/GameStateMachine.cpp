@@ -48,7 +48,7 @@ void GameStateMachine::transitionToState(int state, int numberOfPlayers, int gam
 }
 
 void GameStateMachine::loadState(int state, int numberOfPlayers, int gameMode, string tileMap) {
-	if (states_[state] == nullptr) {
+	if (state == States::menu || states_[state] == nullptr) {
 		//create state
 		//states_[state] = new... se necesita struct? o switch tal cual xd
 		switch (state) {
