@@ -12,6 +12,9 @@
 GameStateMachine::GameStateMachine() {
 	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
 		states_.push_back(nullptr);
+
+	blackSquare_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Debug);
+	transitionFrames_ = CONST(Uint8, "SCENE_TRANSITION_FRAMES");
 }
 
 GameStateMachine::~GameStateMachine() {
@@ -69,7 +72,8 @@ void GameStateMachine::changeToState(int state, int numberOfPlayers, int gameMod
 			//inicializar la nueva escena
 			states_[state]->init();
 		}
-		currentState_ = state;
+		newState_ = state;
+		stateActive_ = false;
 	}
 }
 
@@ -87,9 +91,30 @@ void GameStateMachine::update() {
 void GameStateMachine::render() {
 	SDL_RenderClear(SDL_Game::instance()->getRenderer());
 	states_[currentState_]->render();
+	if (stateTransitioning_) {
+		if (currentTransitionFrame_ < transitionFrames_) {
+			if (currentTransitionFrame_ == transitionFrames_ / 2)
+				currentState_ = newState_;
+			blackSquare_->render({})
+		}
+		else
+		{
+			currentTransitionFrame_ = 0;
+			stateTransitioning_ = true;
+			stateActive_ = true;
+		}
+	}
 	SDL_RenderPresent(SDL_Game::instance()->getRenderer());
 }
 
 void GameStateMachine::handleInput() {
 	states_[currentState_]->handleInput();
+}
+
+void GameStateMachine::gameCycle() {
+	if (stateActive_) {
+		handleInput();
+		update();
+	}
+	render();
 }
