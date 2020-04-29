@@ -11,14 +11,6 @@ private:
 	std::vector<GameState*> states_;
 
 	int currentState_ = -1;
-	Uint8 newState_ = -1;
-	bool stateActive_ = false;
-
-	//Scene transitions
-	bool stateTransitioning_ = false;
-	Uint8 currentTransitionFrame_ = 0;
-	Uint8 transitionFrames_ = 0;
-	Texture* blackSquare_ = nullptr;
 
 	void update();
 	void render();
@@ -30,9 +22,10 @@ public:
 	void setPauseOwner(int ownerID);
 
 	void changeToState(int state, int numberOfPlayers = 1, int gameMode = 0, std::string tileMap = "");
+	void transitionToState(int state, int numberOfPlayers = 1, int gameMode = 0, std::string tileMap = "");
+	void loadState(int state, int numberOfPlayers, int gameMode, string tileMap);
 	void deleteState(int state);
 
 	void gameCycle();
-	void inline setStateActive(bool active) { stateActive_ = active; };
 };
 

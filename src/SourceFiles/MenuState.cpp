@@ -44,8 +44,8 @@ void MenuState::handleInput()
 			else SDL_Game::instance()->exitGame();
 		}
 		else {
-			SDL_Game::instance()->getStateMachine()->changeToState(States::play, playerPointer_ + 1, modePointer_, maps_[mapPointer_]);
-			SDL_Game::instance()->getStateMachine()->deleteState(States::menu); //se borra a sí mismo para poder volver a crearse
+			SDL_Game::instance()->getStateMachine()->transitionToState(States::play, playerPointer_ + 1, modePointer_, maps_[mapPointer_]);
+			//SDL_Game::instance()->getStateMachine()->deleteState(States::menu); //se borra a sí mismo para poder volver a crearse
 		}
 	}
 }
