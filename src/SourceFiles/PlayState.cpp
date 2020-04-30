@@ -16,8 +16,6 @@
 #include "ImpulseViewer.h"
 #include "PlayerData.h"
 #include "ParticleEmitter.h"
-#include "BananaWeapon.h"
-#include "ColliderViewer.h"
 
 PlayState::PlayState(GameMode* gMode, string tmap):GameState(),
 	gameMode_(gMode), tilemapName_(tmap) {}
@@ -59,16 +57,7 @@ void PlayState::init() {
 	
 	//MÚSICA
 	SDL_Game::instance()->getAudioMngr()->playMusic(resourceMap_[tilemapName_], -1);
-
-	//crear platano
-	Entity* platano = entityManager_->addEntity();
-	Collider* colP = platano->addComponent<Collider>(physicsWorld_, b2_dynamicBody, 5, 5, CONST(double, "TOMATO_RADIUS"), CONST(double, "TOMATO_DENSITY"),
-		CONST(double, "TOMATO_FRICTION"), CONST(double, "TOMATO_RESTITUTION"),
-		CONST(double, "TOMATO_LINEAR_DRAG"), CONST(double, "TOMATO_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	platano->addComponent<Viewer>(Resources::Banana);
-	platano->addComponent<BananaWeapon>();
-	platano->addComponent<ColliderViewer>();
-
+	
 	//Version estática de la factoria
 	tilemap_->executeMapFactory();
 	tilemap_->createWeapons();

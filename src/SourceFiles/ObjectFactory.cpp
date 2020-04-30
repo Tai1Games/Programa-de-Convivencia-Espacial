@@ -23,6 +23,7 @@
 #include "CarnivorousPlant.h"
 #include "TomatoWeapon.h"
 #include "AnimatedViewer.h"
+#include "BananaWeapon.h"
 
 
 Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
@@ -164,7 +165,6 @@ Entity* ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* phys
 	return e;
 }
 
-
 Entity* ObjectFactory::makePad(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
 	Entity* e = entityManager->addEntity();
@@ -286,4 +286,18 @@ Entity* ObjectFactory::makeCarnivorousePlant(EntityManager* entityManager, b2Wor
 	planta->addComponent<ColliderViewer>();
 
 	return planta;
+}
+
+Entity* ObjectFactory::makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
+{
+	entityManager->addExistingEntity(e);
+
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 5, 5, CONST(double, "TOMATO_RADIUS"), CONST(double, "TOMATO_DENSITY"),
+		CONST(double, "TOMATO_FRICTION"), CONST(double, "TOMATO_RESTITUTION"),
+		CONST(double, "TOMATO_LINEAR_DRAG"), CONST(double, "TOMATO_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent<Viewer>(Resources::Banana);
+	e->addComponent<BananaWeapon>();
+	e->addComponent<ColliderViewer>();
+
+	return e;
 }

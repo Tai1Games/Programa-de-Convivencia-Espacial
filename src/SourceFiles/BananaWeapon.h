@@ -9,5 +9,6 @@ public:
 	~BananaWeapon(){}
 
 	virtual void action() override;
+	virtual void setActive(bool a, b2Vec2 pos = { 0,0 });
 };
 

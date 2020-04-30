@@ -5,6 +5,7 @@
 #include "Collider.h"
 #include "FireBallPool.h"
 #include "TomatoPool.h" //DELETE THIS
+#include "BananaPool.h" //DELETE THIS	
 
 class CapitalismGameMode : public GameMode
 {
@@ -15,6 +16,7 @@ private:
 	SDL_Rect canvasTimerRect_;
 	//NEED TO DELETE-------
 	TomatoPool tomatoPool_;
+	BananaPool bananaPool_;
 	//---------------------
 	double timeSinceStart_ = 0;
 	double timeSinceSpawn_ = 0;
