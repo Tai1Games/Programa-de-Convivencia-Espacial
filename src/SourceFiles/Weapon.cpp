@@ -75,7 +75,13 @@ void Weapon::UnPickObject()
 	if (tObj != nullptr) tObj->throwObject(currentHand_->getPlayerId());
 	mainCollider_->setLinearVelocity(b2Vec2(0, 0));
 	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x + currentHand_->getDir().x * currentHand_->getArmLengthPhysics(), currentHand_->getPos().y - currentHand_->getDir().y * currentHand_->getArmLengthPhysics()), currentHand_->getAngle());
-	double resultThrowSpeed = 20;
+	
+	double actualMagnitude = currentHand_->getVel().Length();
+	double resultThrowSpeed = minThrowSpeed_ + 
+		((actualMagnitude*(maxThrowSpeed_ - minThrowSpeed_))/23/*Media de magnitud maxima del jugador*/);
+	/*Hay que tener en cuenta el tamaño de la fixture principal del arma*/
+	float tam =  mainCollider_->getW(0) +  mainCollider_->getH(0);
+	resultThrowSpeed *= tam;
 	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * resultThrowSpeed, -currentHand_->getDir().y * resultThrowSpeed), mainCollider_->getBody()->GetLocalCenter());
 	mainCollider_->getBody()->SetAngularVelocity(spinOnThrowSpeed_);
 	currentHand_ = nullptr;
