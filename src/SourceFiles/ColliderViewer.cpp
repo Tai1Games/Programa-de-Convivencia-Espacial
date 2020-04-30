@@ -10,14 +10,11 @@ void ColliderViewer::init() {
 	renderer_ = SDL_Game::instance()->getRenderer();
 	points_ = new SDL_Point[5];
     body_ = collider_->getBody();
-    int layer = collider_->getCollisionLayer();
-    if(layer > 0)
-        color = colors[(int)log2(layer)];
     PIXELS_PER_METER = CONST(double, "PIXELS_PER_METER");
 }
 
-void ColliderViewer::drawRect(int index) const {
-    setPoints(collider_->getRectRender().x, collider_->getRectRender().y, collider_->getW(index) * PIXELS_PER_METER, collider_->getH(index) * PIXELS_PER_METER);
+void ColliderViewer::drawRect(SDL_Rect* rect) const {
+    setPoints(rect->x, rect->y, rect->w / 2, rect->h / 2);
     SDL_RenderDrawLines(renderer_, points_, 5);
 }
 
@@ -28,7 +25,6 @@ void ColliderViewer::setPoints(double originX, double originY, double width, dou
 
 	points_[0].x = center.x - width * cos(angle) - height * sin(angle);
     points_[0].y = center.y - width * sin(angle) + height * cos(angle);
-
 
     points_[1].x = center.x + width * cos(angle) - height * sin(angle);
     points_[1].y = center.y + width * sin(angle) + height * cos(angle);
@@ -43,37 +39,41 @@ void ColliderViewer::setPoints(double originX, double originY, double width, dou
 }
 
 void ColliderViewer::draw() const {
-	if (drawable_ && !isUIElement_) {
+    if (drawable_ && !isUIElement_) {
 
         // lista de fixtures del body
         b2Fixture* f = body_->GetFixtureList();
+        int maxFixtures = collider_->getNumFixtures() - 1;
         int i = 0;
         // recorre todos los fixtures del objeto
         while (f != nullptr) {
 
-            int a = Collider::CollisionLayer::NormalAttachableObject;
-            // cambia color de dibujado
-            SDL_SetRenderDrawColor(renderer_, color.r, color.g, color.b, SDL_ALPHA_OPAQUE);
+            /*if (f->GetNext() != nullptr)    // debug
+                std::cout << "collider: " <<((f->GetShape()->GetType() == b2Shape::e_circle) ? "circle" : "rect") << endl
+                << ((f->GetNext()->GetShape()->GetType() == b2Shape::e_circle) ? "circle" : "rect") << endl;*/
 
-            // collider circular
-            if (f->GetShape()->GetType() == b2Shape::e_circle) {
-                drawCircle(renderer_, collider_->getRectRender().x, collider_->getRectRender().y, collider_->getW(i) * PIXELS_PER_METER);
-            }
-
-            // collider rectangular
-            else drawRect(i);
+            uint16 layer = f->GetFilterData().categoryBits;             // obtiene la capa de la fixture
+            int posColor = (layer > 0) ? round(log2(layer)) : 8;        // escoge color de dibujado segÃºn la capa
+            SDL_SetRenderDrawColor(renderer_, colors[posColor].r, colors[posColor].g, colors[posColor].b, SDL_ALPHA_OPAQUE);   // cambia color de dibujado
+            
+            SDL_Rect renderRect = collider_->getRectRender(maxFixtures - i);
+            (f->GetShape()->GetType() != b2Shape::e_circle) ? // pregunta tipo de collider
+                drawRect(&renderRect)        // collider rectangular
+                :
+                drawCircle(&renderRect);     // collider circular
 
             f = f->GetNext();   // siguiente fixture del body
             i++;
         }
         SDL_SetRenderDrawColor(renderer_, 0, 0, 0, SDL_ALPHA_OPAQUE);
-	}
+    }
 }
 
-// este algoritmo es bastante rápido (~500 microsegundos)
-void ColliderViewer::drawCircle(SDL_Renderer* renderer, int32_t originX, int32_t originY, int32_t radius) const
+// este algoritmo es bastante rï¿½pido (~500 microsegundos)
+void ColliderViewer::drawCircle(SDL_Rect* rect) const
 {
-    b2Vec2 center = { (float)(originX + radius), (float)(originY + radius) };
+    int32_t radius = rect->w / 2;
+    b2Vec2 center = { (float)(rect->x + radius), (float)(rect->y + radius) };
 
     const int32_t diameter = (radius * 2);
 
@@ -85,14 +85,14 @@ void ColliderViewer::drawCircle(SDL_Renderer* renderer, int32_t originX, int32_t
 
     while (x >= y)
     {
-        SDL_RenderDrawPoint(renderer, center.x + x, center.y - y);
-        SDL_RenderDrawPoint(renderer, center.x + x, center.y + y);
-        SDL_RenderDrawPoint(renderer, center.x - x, center.y - y);
-        SDL_RenderDrawPoint(renderer, center.x - x, center.y + y);
-        SDL_RenderDrawPoint(renderer, center.x + y, center.y - x);
-        SDL_RenderDrawPoint(renderer, center.x + y, center.y + x);
-        SDL_RenderDrawPoint(renderer, center.x - y, center.y - x);
-        SDL_RenderDrawPoint(renderer, center.x - y, center.y + x);
+        SDL_RenderDrawPoint(renderer_, center.x + x, center.y - y);
+        SDL_RenderDrawPoint(renderer_, center.x + x, center.y + y);
+        SDL_RenderDrawPoint(renderer_, center.x - x, center.y - y);
+        SDL_RenderDrawPoint(renderer_, center.x - x, center.y + y);
+        SDL_RenderDrawPoint(renderer_, center.x + y, center.y - x);
+        SDL_RenderDrawPoint(renderer_, center.x + y, center.y + x);
+        SDL_RenderDrawPoint(renderer_, center.x - y, center.y - x);
+        SDL_RenderDrawPoint(renderer_, center.x - y, center.y + x);
 
         if (error <= 0)
         {
@@ -109,4 +109,3 @@ void ColliderViewer::drawCircle(SDL_Renderer* renderer, int32_t originX, int32_t
         }
     }
 }
-
