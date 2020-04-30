@@ -60,7 +60,6 @@ void MidGameState::update()
 		if (playerRockets_[roundWinner_]->getPosUIElement().x > rocketXPositionObjective_) rocketAnimationEnded_ = true;
 	}
 
-	else if ()
 }
 
 void MidGameState::handleInput()
