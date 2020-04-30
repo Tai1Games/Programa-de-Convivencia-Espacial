@@ -296,6 +296,8 @@ Entity* ObjectFactory::makeBanana(Entity* e, EntityManager* entityManager, b2Wor
 		CONST(double, "TOMATO_FRICTION"), CONST(double, "TOMATO_RESTITUTION"),
 		CONST(double, "TOMATO_LINEAR_DRAG"), CONST(double, "TOMATO_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent<Viewer>(Resources::Banana);
+	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::BananaSkin, 100, 1, 5, 1000, 50, 100, 0, 360);
+	pE->setMaxParticles(1);
 	e->addComponent<BananaWeapon>();
 	e->addComponent<ColliderViewer>();
 
