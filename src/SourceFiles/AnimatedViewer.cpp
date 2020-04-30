@@ -3,6 +3,7 @@
 void AnimatedViewer::init() {
 	Viewer::init();
 	nframes_ = tex_->getWidth() / clip_.w;	//Obtenemos el número de frames de la spritesheet
+	Viewer::setNFrames(nframes_);
 }
 
 void AnimatedViewer::update()

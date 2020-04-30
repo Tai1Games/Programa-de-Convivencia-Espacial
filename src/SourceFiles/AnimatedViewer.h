@@ -14,6 +14,10 @@ public:
 		timePerFrame_ = timeperframe;
 	}
 
+	AnimatedViewer(int textureId, SDL_Rect clip, int timeperframe, b2Vec2 pos, float scale, float angle) : Viewer(textureId, pos, scale, angle, clip){
+		timePerFrame_ = timeperframe;
+	}
+
 	~AnimatedViewer() {}
 
 	virtual void init() override;

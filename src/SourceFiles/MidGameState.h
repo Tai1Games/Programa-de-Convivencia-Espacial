@@ -1,25 +1,27 @@
 #pragma once
 #include "GameState.h"
 
-class RocketLogic;
-class b2World;
+class AnimatedViewer;
 
 class MidGameState : public GameState
 {
 private:
-	b2World* b2World_ = nullptr;
-	std::vector<RocketLogic*> playerRockets;
 	int numPlayers_;
 	int roundWinner_;
 
-	bool rocketAnimationStarted = false;
+	bool rocketAnimationStarted_ = false;
+	bool rocketAnimationEnded_ = false;
 	int currentFrame = 0;
 
+	std::vector<AnimatedViewer*> playerRockets_;
+
 	//Load of constants.
-	int distanceBetweenRockets_ = 5;
-	int startingYPosition_ = 5;
-	int distanceGainedByPoint_ = 1;
+	int distanceBetweenRockets_ = 200;
+	int startingXPosition_ = 300;
+	int distanceGainedByPoint_ = 150;
 	int framesUntilAnimationStart_ = 120;
+	int rocketXPositionObjective_ = 0;
+	int distanceGainedPerFrame_ = 2;
 
 public:
 	MidGameState(int numPlayers, int roundWinner) { numPlayers_ = numPlayers; roundWinner_ = roundWinner; };

@@ -1,8 +1,7 @@
 #include "MidGameState.h"
-#include "RocketLogic.h"
 #include "Collider.h"
 #include "Resources.h"
-#include "Viewer.h"
+#include "AnimatedViewer.h"
 #include "Entity.h"
 #include "SDL_Game.h"
 
@@ -10,41 +9,47 @@
 MidGameState::~MidGameState()
 {
 	delete entityManager_;		entityManager_ = nullptr;
-	delete b2World_;		    b2World_ = nullptr;
 }
 
 void MidGameState::init()
 {
 	entityManager_ = new EntityManager();
-	b2World_ = new b2World(b2Vec2(0, 0));
 
-	//int initPos = CONST(int, "WINDOW_WIDTH") / CONST(double, "PIXELS_PER_METER") - distanceBetweenRockets_ / 2 + distanceBetweenRockets_ * numPlayers_;
-	int initPos = (CONST(int, "WINDOW_WIDTH") / 2 / CONST(double, "PIXELS_PER_METER")) - (-distanceBetweenRockets_ / 2 + (distanceBetweenRockets_ / 2 * numPlayers_));
+	int initPos = (CONST(int, "WINDOW_HEIGHT") / 2) - (-distanceBetweenRockets_ / 2 + (distanceBetweenRockets_ / 2 * numPlayers_));
+
+	SDL_Rect textureRect;
+	textureRect.x = textureRect.y = 0;
+	textureRect.w = 34;
+	textureRect.h = 34;
+
 	for (int k = 0; k < numPlayers_; k++) {
 		Entity* newRocket = entityManager_->addEntity();
 		//We could move the rockets using only the Viewer, but this will make
 		//the logic much much easier.
 
-		newRocket->addComponent<Collider>(b2World_, b2_dynamicBody, initPos + (distanceBetweenRockets_ * k) - 0.5,  startingYPosition_ + distanceGainedByPoint_ * k, 1, 1, 1, 1, 1, 1, Collider::CollisionLayer::UnInteractableObject, true);
-		newRocket->addComponent<Viewer>(Resources::Tinky);
-		RocketLogic* rL = newRocket->addComponent<RocketLogic>(k, this);
-		playerRockets.push_back(rL);
+		AnimatedViewer* viewer = newRocket->addComponent<AnimatedViewer>(Resources::RoombaSpriteSheet, textureRect, 1, b2Vec2(startingXPosition_ + k * distanceGainedByPoint_, initPos + (distanceBetweenRockets_ * k) - 0.5), 1, 0);
+		playerRockets_.push_back(viewer);
 	}
 }
 
 void MidGameState::render()
 {
 	GameState::render();
+
 }
 
 void MidGameState::update()
 {
 	GameState::update();
 	currentFrame++;
+	if (currentFrame > framesUntilAnimationStart_ && !rocketAnimationStarted_) {
+		rocketAnimationStarted_ = true;
+		rocketXPositionObjective_ = playerRockets_[roundWinner_]->getPosUIElement().x + distanceGainedByPoint_;
+	}
+	if (rocketAnimationStarted_ && !rocketAnimationEnded_) {
+		playerRockets_[roundWinner_]->setPosUIElement(b2Vec2(playerRockets_[roundWinner_]->getPosUIElement().x + distanceGainedPerFrame_, playerRockets_[roundWinner_]->getPosUIElement().y));
 
-	if (currentFrame > framesUntilAnimationStart_) {
-		rocketAnimationStarted = true;
-		playerRockets[roundWinner_]->startAnimation();
+		if (playerRockets_[roundWinner_]->getPosUIElement().x > rocketXPositionObjective_) rocketAnimationEnded_ = true;
 	}
 }
 

@@ -61,7 +61,7 @@ void Viewer::init() {
 		if(clip_.w == 0 && clip_.h == 0)
 			clip_ = SDL_Rect{ 0, 0, tex_->getWidth(), tex_->getHeight() };
 	}
-	wH_ = b2Vec2(tex_->getWidth(), tex_->getHeight());
+	wH_ = b2Vec2(tex_->getWidth() / nFrames_, tex_->getHeight());
 }
 void Viewer::draw() const {
 	if (drawable_) {
@@ -84,4 +84,10 @@ void Viewer::draw() const {
 
 		}
 	}
+}
+
+void Viewer::setNFrames(int nFrames) //Es esto feo de cojones y nada intuitivo? Absolutamente. Lo vamos a tirar todo en un futuro para hacer cosas de la UI aparte? También.
+{
+	nFrames_ = nFrames;
+	wH_.x = tex_->getWidth() / nFrames;
 }
