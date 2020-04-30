@@ -32,13 +32,16 @@ protected:
 	InputHandler* ih_ = nullptr;
 	std::vector<PlayerLobbyInfo> joinedPlayers_;
 	bool joinedGamepads_[4]; //indica los gamepads que se ha unido
-	bool joinedKb[2]; //indica los teclados que se han unido
-	bool joinedMouse; //indica si se ha unido el mouse
+	bool joinedKb_[2]; //indica los teclados que se han unido
+	bool joinedMouse_; //indica si se ha unido el mouse
+
+	void renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo);
 public:
 	LobbyState() {};
 	~LobbyState() {};
 	void init() override;
 	void handleInput() override;
 	void update() override;
+	void render() override;
 };
 

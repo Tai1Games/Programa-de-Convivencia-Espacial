@@ -7,8 +7,8 @@ void LobbyState::init()
 	for (int i = 0; i < 4; i++) {
 		joinedGamepads_[i] = false;
 	}
-	joinedKb[1] = joinedKb[2] = false;
-	joinedMouse = false;
+	joinedKb_[1] = joinedKb_[2] = false;
+	joinedMouse_ = false;
 }
 
 void LobbyState::handleInput()
@@ -50,55 +50,49 @@ void LobbyState::handleInput()
 		}
 	}
 	//comprueba si se quiere unir un pureKeyboardPeasant
-	if (!joinedKb[1] && !joinedMouse) {
+	if (!joinedKb_[1] && !joinedMouse_) {
 		if (ih_->isKeyDown(SDLK_w))
 		{
-			joinedKb[1] = true;
+			joinedKb_[1] = true;
 			int newId = joinedPlayers_.size();
 			joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(1)));
 			joinedPlayers_[newId].kbId = 1;
 		}
 	}
 	else if(ih_->isKeyDown(SDLK_ESCAPE)) {
-		joinedKb[1] = false;
+		joinedKb_[1] = false;
 		auto it = joinedPlayers_.begin();
-		while (it != joinedPlayers_.end() && it->kbId != 1)
-		{
-			it++;
-		}
-		//joinedPlayers_[j] es el jugador que se quiere salir
+		while (it != joinedPlayers_.end() && it->kbId != 1)	++it;
+		//it es el jugador que se quiere salir
 		it = joinedPlayers_.erase(it);
 		//it ahora apunta al siguiente elemento
 		//ajustamos el resto de ids en funcion
 		while (it != joinedPlayers_.end()) {
 			it->id--;
-			it++;
+			++it;
 		}
 	}
 
-	if (!joinedKb[2]) {
+	if (!joinedKb_[2]) {
 		if (ih_->isKeyDown(SDLK_i))
 		{
-			joinedKb[2] = true;
+			joinedKb_[2] = true;
 			int newId = joinedPlayers_.size();
 			joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(2)));
 			joinedPlayers_[newId].kbId = 2;
 		}
 	}
 	else if (ih_->isKeyDown(SDLK_7)) {
-		joinedKb[2] = false;
+		joinedKb_[2] = false;
 		auto it = joinedPlayers_.begin();
-		while (it != joinedPlayers_.end() && it->kbId != 2)
-		{
-			it++;
-		}
+		while (it != joinedPlayers_.end() && it->kbId != 2) ++it;
 		//joinedPlayers_[j] es el jugador que se quiere salir
 		it = joinedPlayers_.erase(it);
 		//it ahora apunta al siguiente elemento
 		//ajustamos el resto de ids en funcion
 		while (it != joinedPlayers_.end()) {
 			it->id--;
-			it++;
+			++it;
 		}
 	}
 	//comprueba si se quiere unir un jugador de teclado y raton
@@ -120,7 +114,20 @@ void LobbyState::update()
 			cout << "KBM " << player.kbmId << endl;
 		}
 		else {
-			cout << "unkown controller " << endl;
+			cout << "unknown controller " << endl;
 		}
 	}
+}
+
+void LobbyState::render() {
+	int i = 0;
+	for (auto& const player : joinedPlayers_) {
+		renderPlayerLobbyInfo(&player);
+		i++;
+	}
+	if(i < )
+}
+
+void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo) {
+
 }
