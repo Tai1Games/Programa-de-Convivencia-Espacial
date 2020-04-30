@@ -282,9 +282,6 @@
     <ClInclude Include="MidGameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RocketLogic.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -478,9 +475,6 @@
     </ClCompile>
     <ClCompile Include="MidGameState.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RocketLogic.cpp">
-      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

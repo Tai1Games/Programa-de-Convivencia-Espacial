@@ -14,6 +14,7 @@ private:
 	int currentFrame = 0;
 
 	std::vector<AnimatedViewer*> playerRockets_;
+	AnimatedViewer* spaceStationViewer_ = nullptr;
 
 	//Load of constants.
 	int distanceBetweenRockets_ = 200;
@@ -31,7 +32,5 @@ public:
 	virtual void render();
 	virtual void update();
 	virtual void handleInput();
-
-	virtual void rocketReachedDestination();
 };
 

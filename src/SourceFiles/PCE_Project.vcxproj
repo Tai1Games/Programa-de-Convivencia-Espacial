@@ -227,7 +227,6 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="PlayerData.h" />
     <ClInclude Include="PlayerFactory.h" />
-    <ClInclude Include="RocketLogic.h" />
     <ClInclude Include="RouterLogic.h" />
     <ClInclude Include="SlipperWeapon.h" />
     <ClInclude Include="StocksGameMode.h" />
@@ -297,7 +296,6 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="PlayerFactory.cpp" />
-    <ClCompile Include="RocketLogic.cpp" />
     <ClCompile Include="RouterLogic.cpp" />
     <ClCompile Include="SlipperWeapon.cpp" />
     <ClCompile Include="StocksGameMode.cpp" />
@@ -346,7 +344,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
   </Target>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties _1_1_4config_4constants_1json__JsonSchema="http://json.schemastore.org/clasp" />
+      <UserProperties />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

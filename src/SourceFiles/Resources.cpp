@@ -33,6 +33,9 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ ProgressBar, resourcesPath + "textures/ProgressBar.png"},
 	{ ProgressBar2, resourcesPath + "textures/ProgressBar2.png"},
 
+	{ Rocket, resourcesPath + "textures/Rocket.png"},
+	{ SpaceStation, resourcesPath + "textures/SpaceStation.png"},
+
 	// Weapons and map items
 	{ Ball, resourcesPath + "textures/PelotaSaltarina.png" },
 	{ Extinguisher, resourcesPath + "textures/Extintor.png" },
@@ -78,7 +81,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Debug, resourcesPath + "textures/debug.png" },
 	{ Negro ,resourcesPath + "textures/Negro.png"},
 	{ Transparent ,resourcesPath + "textures/transparent.png"},
-	{ Tinky, resourcesPath + "textures/Tinky.png" }
+	{ Tinky, resourcesPath + "textures/Tinky.png" },
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{

@@ -41,6 +41,10 @@ public:
 		ProgressBar,
 		ProgressBar2,
 
+		//midGameState
+		Rocket,
+		SpaceStation,
+
 		// Weapons and map items
 
 		// Players
@@ -104,6 +108,7 @@ public:
 		LivingRoomText,
 		BoilerRoomText,
 		GymRoomText,
+
 		//players
 		One,
 		Two,
