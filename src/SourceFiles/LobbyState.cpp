@@ -32,7 +32,7 @@ void LobbyState::handleInput()
 	GameState::handleInput();
 	//comprueba si alguno de los mandos conectados
 	//sin asignar se quiere unir o salir
-	for (int i = 0; ih_->getNumControllers() && i < 4; i++)
+	for (int i = 0; ih_->getNumControllers() && i < maxPlayers_; i++)
 	{
 		//Si se quiere unir
 		if (!joinedGamepads_[i]) {
@@ -48,46 +48,49 @@ void LobbyState::handleInput()
 		//Si quiere salir
 		else {
 			if (ih_->isButtonDown(i, SDL_CONTROLLER_BUTTON_B)) {
-				joinedGamepads_[i] = false;
-				playerOut(i);
+				ctrlPlayerOut(i);
 			}
 		}
 	}
-	//comprueba si se puede unir un pureKeyboardPeasant
-	if (!joinedKb_[0]) {
-		// comprueba si se quiere unir un pureKeyboardPeasant (tonto)
-		if (!joinedMouse_ && ih_->isKeyDown(SDLK_w))
-		{
-			joinedKb_[0] = true;
-			int newId = joinedPlayers_.size();
-			joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(1)));
-			joinedPlayers_[newId].kbId = 1;
-		}
-	}
-	else if (ih_->isKeyDown(SDLK_ESCAPE)) {
-		joinedKb_[0] = false;
-		playerOut(0);
-	}
 
-	if (!joinedKb_[1]) {
-		if (ih_->isKeyDown(SDLK_i))
-		{
-			joinedKb_[1] = true;
-			int newId = joinedPlayers_.size();
-			joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(2)));
-			joinedPlayers_[newId].kbId = 2;
+	//comprueba si se puede unir un pureKeyboardPeasant
+	if (!joinedMouse_)
+	{
+		if (!joinedKb_[0]) {
+			// comprueba si se quiere unir un pureKeyboardPeasant (tonto)
+			if (ih_->isKeyDown(SDLK_w))
+			{
+				joinedKb_[0] = true;
+				int newId = joinedPlayers_.size();
+				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(1)));
+				joinedPlayers_[newId].kbId = 1;
+			}
+		}
+		else if (ih_->isKeyDown(SDLK_ESCAPE)) {
+			kbPlayerOut(0);
+		}
+
+		if (!joinedKb_[1]) {
+			if (ih_->isKeyDown(SDLK_i))
+			{
+				joinedKb_[1] = true;
+				int newId = joinedPlayers_.size();
+				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(2)));
+				joinedPlayers_[newId].kbId = 2;
+			}
+		}
+		else if (ih_->isKeyDown(SDLK_7)) {
+			kbPlayerOut(1);
 		}
 	}
-	else if (ih_->isKeyDown(SDLK_7)) {
-		joinedKb_[1] = false;
-		playerOut(1);
+	else {
+		//comprueba si se quiere unir un jugador de teclado y raton
 	}
-	//comprueba si se quiere unir un jugador de teclado y raton
 }
 
 void LobbyState::update()
 {
-	clear();
+	clear2();
 	for (auto player : joinedPlayers_)
 	{
 		cout << "Player " << player.id << " using ";
@@ -108,13 +111,14 @@ void LobbyState::update()
 
 void LobbyState::render() {
 	int i = 0;
-	for (auto& const player : joinedPlayers_) {
+	for (PlayerLobbyInfo& const player : joinedPlayers_) {
 		renderPlayerLobbyInfo(&player, i);
 		i++;
 	}
 	for (; i < maxPlayers_; i++)
 		renderPlayerLobbyInfo(nullptr, i);
 }
+
 
 void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
 
@@ -129,17 +133,16 @@ void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
 	aux->render(destRect);
 	if (playerInfo != nullptr) {
 		destRect.y += playerTexture_->getHeight() + playerIdVerticalOffset_;
+		destRect.w /= 3; destRect.h /= 3;
 		string playerNum = to_string(playerInfo->id);
 		Texture playerNumTexture(SDL_Game::instance()->getRenderer(), playerNum,
-			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera_10), { COLOR(0xffffffff) });
+			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
 		playerNumTexture.render(destRect);
 	}
 }
 
-void LobbyState::playerOut(int index)
+void LobbyState::playerOut(std::vector<PlayerLobbyInfo>::iterator it)
 {
-	auto it = joinedPlayers_.begin();
-	while (it != joinedPlayers_.end() && it->kbId != index) ++it;
 	//it es el jugador que se quiere salir
 	it = joinedPlayers_.erase(it);
 	delete it->inputBinder;
@@ -149,4 +152,23 @@ void LobbyState::playerOut(int index)
 		it->id--;
 		++it;
 	}
+}
+
+void LobbyState::kbPlayerOut(int index) {
+	joinedKb_[index] = false;
+	auto it = joinedPlayers_.begin();
+	while (it != joinedPlayers_.end() && it->kbId != index) ++it;
+	playerOut(it);
+}
+
+void LobbyState::ctrlPlayerOut(int index) {
+	joinedGamepads_[index] = false;
+	auto it = joinedPlayers_.begin();
+	while (it != joinedPlayers_.end() && it->ctrlId != index) ++it;
+	playerOut(it);
+}
+
+void LobbyState::clear2()
+{
+	system("cls");
 }

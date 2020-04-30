@@ -28,6 +28,7 @@ private:
 		// CSI[2J clears screen, CSI[H moves the cursor to top-left corner
 		std::cout << "\x1B[2J\x1B[H";
 	}
+	void clear2();
 protected:
 	int maxPlayers_ = 4;
 	int verticalIniPoint_ = 0;
@@ -44,7 +45,9 @@ protected:
 	bool joinedMouse_; //indica si se ha unido el mouse
 
 	void renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index);
-	void playerOut(int index);
+	void playerOut(std::vector<PlayerLobbyInfo>::iterator it);
+	void kbPlayerOut(int index);
+	void ctrlPlayerOut(int index);
 public:
 	LobbyState() {};
 	~LobbyState();
