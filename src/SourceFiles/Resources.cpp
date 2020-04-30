@@ -4,6 +4,7 @@
 vector<Resources::FontInfo> Resources::fonts_{
 	//Fuentes {nombre_en_enum, ruta, tama�o}
 	{NES_Chimera , resourcesPath+"fonts/NES-Chimera.ttf", 38},
+	{NES_Chimera_10 , resourcesPath+"fonts/NES-Chimera.ttf", 10},
 	{Digits_Font , resourcesPath+"fonts/Digits_Font.ttf", 38}
 };
 

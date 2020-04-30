@@ -126,6 +126,7 @@ public:
 
 	enum FontId : std::size_t {
 		NES_Chimera,
+		NES_Chimera_10,
 		Digits_Font
 	};
 

@@ -1,14 +1,30 @@
 #include "LobbyState.h"
 #include "checkML.h"
+#include "Resources.h"
+
+LobbyState::~LobbyState()
+{
+	for (PlayerLobbyInfo p : joinedPlayers_) {
+		delete p.inputBinder;
+	}
+}
 
 void LobbyState::init()
 {
 	ih_ = SDL_Game::instance()->getInputHandler();
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < maxPlayers_; i++) {
 		joinedGamepads_[i] = false;
 	}
 	joinedKb_[1] = joinedKb_[2] = false;
 	joinedMouse_ = false;
+
+	playerTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::Body);
+	voidTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::SpaceSuit);
+
+	verticalIniPoint_ = CONST(int, "WINDOW_HEIGHT") / 2 - playerTexture_->getHeight() / 2;
+	horizontalIniPoint_ = CONST(int, "WINDOW_WIDTH") / 2 - (maxPlayers_ * (playerTexture_->getWidth() + CONST(int, "LOBBY_OFFSET_X")) / 2);
+	horizontalOffset_ = playerTexture_->getWidth() + CONST(int, "LOBBY_OFFSET_X");
+	playerIdVerticalOffset_ = playerTexture_->getWidth() + CONST(int, "LOBBY_PLAYERID_OFFSET_Y");
 }
 
 void LobbyState::handleInput()
@@ -16,11 +32,11 @@ void LobbyState::handleInput()
 	GameState::handleInput();
 	//comprueba si alguno de los mandos conectados
 	//sin asignar se quiere unir o salir
-	for (int i = 0; ih_->getNumControllers() && i<4; i++)
+	for (int i = 0; ih_->getNumControllers() && i < 4; i++)
 	{
 		//Si se quiere unir
-		if(!joinedGamepads_[i]){
-			if(ih_->isButtonDown(i,SDL_CONTROLLER_BUTTON_A)){
+		if (!joinedGamepads_[i]) {
+			if (ih_->isButtonDown(i, SDL_CONTROLLER_BUTTON_A)) {
 				joinedGamepads_[i] = true;
 				int newId = joinedPlayers_.size();
 				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new ControllerBinder(i)));
@@ -30,70 +46,41 @@ void LobbyState::handleInput()
 			}
 		}
 		//Si quiere salir
-		else{
-			if(ih_->isButtonDown(i,SDL_CONTROLLER_BUTTON_B)){
+		else {
+			if (ih_->isButtonDown(i, SDL_CONTROLLER_BUTTON_B)) {
 				joinedGamepads_[i] = false;
-				auto it = joinedPlayers_.begin();
-				while (it != joinedPlayers_.end() && it->ctrlId != i)
-				{
-					it++;
-				}
-				//joinedPlayers_[j] es el jugador que se quiere salir
-				it = joinedPlayers_.erase(it);
-				//it ahora apunta al siguiente elemento
-				//ajustamos el resto de ids en funcion
-				while (it != joinedPlayers_.end()) {
-					it->id--;
-					it++;
-				}
+				playerOut(i);
 			}
 		}
 	}
-	//comprueba si se quiere unir un pureKeyboardPeasant
-	if (!joinedKb_[1] && !joinedMouse_) {
-		if (ih_->isKeyDown(SDLK_w))
+	//comprueba si se puede unir un pureKeyboardPeasant
+	if (!joinedKb_[0]) {
+		// comprueba si se quiere unir un pureKeyboardPeasant (tonto)
+		if (!joinedMouse_ && ih_->isKeyDown(SDLK_w))
 		{
-			joinedKb_[1] = true;
+			joinedKb_[0] = true;
 			int newId = joinedPlayers_.size();
 			joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(1)));
 			joinedPlayers_[newId].kbId = 1;
 		}
 	}
-	else if(ih_->isKeyDown(SDLK_ESCAPE)) {
-		joinedKb_[1] = false;
-		auto it = joinedPlayers_.begin();
-		while (it != joinedPlayers_.end() && it->kbId != 1)	++it;
-		//it es el jugador que se quiere salir
-		it = joinedPlayers_.erase(it);
-		//it ahora apunta al siguiente elemento
-		//ajustamos el resto de ids en funcion
-		while (it != joinedPlayers_.end()) {
-			it->id--;
-			++it;
-		}
+	else if (ih_->isKeyDown(SDLK_ESCAPE)) {
+		joinedKb_[0] = false;
+		playerOut(0);
 	}
 
-	if (!joinedKb_[2]) {
+	if (!joinedKb_[1]) {
 		if (ih_->isKeyDown(SDLK_i))
 		{
-			joinedKb_[2] = true;
+			joinedKb_[1] = true;
 			int newId = joinedPlayers_.size();
 			joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(2)));
 			joinedPlayers_[newId].kbId = 2;
 		}
 	}
 	else if (ih_->isKeyDown(SDLK_7)) {
-		joinedKb_[2] = false;
-		auto it = joinedPlayers_.begin();
-		while (it != joinedPlayers_.end() && it->kbId != 2) ++it;
-		//joinedPlayers_[j] es el jugador que se quiere salir
-		it = joinedPlayers_.erase(it);
-		//it ahora apunta al siguiente elemento
-		//ajustamos el resto de ids en funcion
-		while (it != joinedPlayers_.end()) {
-			it->id--;
-			++it;
-		}
+		joinedKb_[1] = false;
+		playerOut(1);
 	}
 	//comprueba si se quiere unir un jugador de teclado y raton
 }
@@ -101,7 +88,7 @@ void LobbyState::handleInput()
 void LobbyState::update()
 {
 	clear();
-	for (auto player: joinedPlayers_)
+	for (auto player : joinedPlayers_)
 	{
 		cout << "Player " << player.id << " using ";
 		if (player.ctrlId != -1) {
@@ -122,14 +109,44 @@ void LobbyState::update()
 void LobbyState::render() {
 	int i = 0;
 	for (auto& const player : joinedPlayers_) {
-		renderPlayerLobbyInfo(&player);
+		renderPlayerLobbyInfo(&player, i);
 		i++;
 	}
-	if (i < 4) {
-	
+	for (; i < maxPlayers_; i++)
+		renderPlayerLobbyInfo(nullptr, i);
+}
+
+void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
+
+	SDL_Rect destRect = {
+		horizontalIniPoint_ + index * horizontalOffset_,
+		verticalIniPoint_,
+		playerTexture_->getWidth(),
+		playerTexture_->getHeight()
+	};
+
+	Texture* aux = ((playerInfo != nullptr) ? playerTexture_ : voidTexture_);
+	aux->render(destRect);
+	if (playerInfo != nullptr) {
+		destRect.y += playerTexture_->getHeight() + playerIdVerticalOffset_;
+		string playerNum = to_string(playerInfo->id);
+		Texture playerNumTexture(SDL_Game::instance()->getRenderer(), playerNum,
+			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera_10), { COLOR(0xffffffff) });
+		playerNumTexture.render(destRect);
 	}
 }
 
-void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo) {
-
+void LobbyState::playerOut(int index)
+{
+	auto it = joinedPlayers_.begin();
+	while (it != joinedPlayers_.end() && it->kbId != index) ++it;
+	//it es el jugador que se quiere salir
+	it = joinedPlayers_.erase(it);
+	delete it->inputBinder;
+	//it ahora apunta al siguiente elemento
+	//ajustamos el resto de ids en funcion
+	while (it != joinedPlayers_.end()) {
+		it->id--;
+		++it;
+	}
 }

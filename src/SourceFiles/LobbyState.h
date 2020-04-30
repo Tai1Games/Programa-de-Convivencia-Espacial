@@ -29,16 +29,25 @@ private:
 		std::cout << "\x1B[2J\x1B[H";
 	}
 protected:
+	int maxPlayers_ = 4;
+	int verticalIniPoint_ = 0;
+	int horizontalOffset_ = 0;
+	int horizontalIniPoint_ = 0;
+	int playerIdVerticalOffset_ = 0;
+	Texture* playerTexture_ = nullptr;
+	Texture* voidTexture_ = nullptr;
+
 	InputHandler* ih_ = nullptr;
 	std::vector<PlayerLobbyInfo> joinedPlayers_;
 	bool joinedGamepads_[4]; //indica los gamepads que se ha unido
 	bool joinedKb_[2]; //indica los teclados que se han unido
 	bool joinedMouse_; //indica si se ha unido el mouse
 
-	void renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo);
+	void renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index);
+	void playerOut(int index);
 public:
 	LobbyState() {};
-	~LobbyState() {};
+	~LobbyState();
 	void init() override;
 	void handleInput() override;
 	void update() override;
