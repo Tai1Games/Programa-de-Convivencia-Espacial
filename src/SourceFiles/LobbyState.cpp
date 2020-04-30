@@ -125,7 +125,9 @@ void LobbyState::render() {
 		renderPlayerLobbyInfo(&player);
 		i++;
 	}
-	if(i < )
+	if (i < 4) {
+	
+	}
 }
 
 void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo) {
