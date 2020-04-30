@@ -7,6 +7,8 @@ void LobbyState::init()
 	for (int i = 0; i < 4; i++) {
 		joinedGamepads_[i] = false;
 	}
+	joinedKb[1] = joinedKb[2] = false;
+	joinedMouse = false;
 }
 
 void LobbyState::handleInput()
@@ -31,7 +33,6 @@ void LobbyState::handleInput()
 		else{
 			if(ih_->isButtonDown(i,SDL_CONTROLLER_BUTTON_B)){
 				joinedGamepads_[i] = false;
-				int j = 0;
 				auto it = joinedPlayers_.begin();
 				while (it != joinedPlayers_.end() && it->ctrlId != i)
 				{
@@ -48,6 +49,59 @@ void LobbyState::handleInput()
 			}
 		}
 	}
+	//comprueba si se quiere unir un pureKeyboardPeasant
+	if (!joinedKb[1] && !joinedMouse) {
+		if (ih_->isKeyDown(SDLK_w))
+		{
+			joinedKb[1] = true;
+			int newId = joinedPlayers_.size();
+			joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(1)));
+			joinedPlayers_[newId].kbId = 1;
+		}
+	}
+	else if(ih_->isKeyDown(SDLK_ESCAPE)) {
+		joinedKb[1] = false;
+		auto it = joinedPlayers_.begin();
+		while (it != joinedPlayers_.end() && it->kbId != 1)
+		{
+			it++;
+		}
+		//joinedPlayers_[j] es el jugador que se quiere salir
+		it = joinedPlayers_.erase(it);
+		//it ahora apunta al siguiente elemento
+		//ajustamos el resto de ids en funcion
+		while (it != joinedPlayers_.end()) {
+			it->id--;
+			it++;
+		}
+	}
+
+	if (!joinedKb[2]) {
+		if (ih_->isKeyDown(SDLK_i))
+		{
+			joinedKb[2] = true;
+			int newId = joinedPlayers_.size();
+			joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(2)));
+			joinedPlayers_[newId].kbId = 2;
+		}
+	}
+	else if (ih_->isKeyDown(SDLK_7)) {
+		joinedKb[2] = false;
+		auto it = joinedPlayers_.begin();
+		while (it != joinedPlayers_.end() && it->kbId != 2)
+		{
+			it++;
+		}
+		//joinedPlayers_[j] es el jugador que se quiere salir
+		it = joinedPlayers_.erase(it);
+		//it ahora apunta al siguiente elemento
+		//ajustamos el resto de ids en funcion
+		while (it != joinedPlayers_.end()) {
+			it->id--;
+			it++;
+		}
+	}
+	//comprueba si se quiere unir un jugador de teclado y raton
 }
 
 void LobbyState::update()
