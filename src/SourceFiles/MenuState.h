@@ -37,9 +37,9 @@ private:
 
 public:
 	MenuState(int playerID) : GameState(), ownerPlayerID_(playerID) {};
-	~MenuState() {};
+	virtual ~MenuState() {};
 
-	virtual void init();
+	virtual void init() override;
 	virtual void handleInput();
 };
 

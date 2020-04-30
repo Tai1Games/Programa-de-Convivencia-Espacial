@@ -32,6 +32,7 @@ enum States
 	menu,
 	play,
 	pause,
+	transition,
 	//No toques
 	NUMBER_OF_STATES
 };
