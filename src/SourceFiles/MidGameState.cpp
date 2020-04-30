@@ -38,7 +38,7 @@ void MidGameState::init()
 	stationRect.h = 150;
 
 	Entity* spaceStation = entityManager_->addEntity();
-	spaceStationViewer_ = spaceStation->addComponent<AnimatedViewer>(Resources::SpaceStation, stationRect, 3, b2Vec2(CONST(int, "WINDOW_HEIGHT") / 2, CONST(int, "WINDOW_WIDTH") / 2), 1, 0);
+	spaceStationViewer_ = spaceStation->addComponent<AnimatedViewer>(Resources::SpaceStation, stationRect, 3, b2Vec2(CONST(int, "WINDOW_WIDTH") / 2 - spaceStationWidht_ / 2, CONST(int, "WINDOW_HEIGHT") / 2 - spaceStationHeight_ / 2), 1, 0);
 }
 
 void MidGameState::render()
@@ -54,11 +54,13 @@ void MidGameState::update()
 		rocketAnimationStarted_ = true;
 		rocketXPositionObjective_ = playerRockets_[roundWinner_]->getPosUIElement().x + distanceGainedByPoint_;
 	}
-	if (rocketAnimationStarted_ && !rocketAnimationEnded_) {
+	else if (rocketAnimationStarted_ && !rocketAnimationEnded_) {
 		playerRockets_[roundWinner_]->setPosUIElement(b2Vec2(playerRockets_[roundWinner_]->getPosUIElement().x + distanceGainedPerFrame_, playerRockets_[roundWinner_]->getPosUIElement().y));
 
 		if (playerRockets_[roundWinner_]->getPosUIElement().x > rocketXPositionObjective_) rocketAnimationEnded_ = true;
 	}
+
+	else if ()
 }
 
 void MidGameState::handleInput()
