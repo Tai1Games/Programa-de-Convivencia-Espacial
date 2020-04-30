@@ -53,7 +53,8 @@ void GameStateMachine::loadState(int state, int numberOfPlayers, int gameMode, s
 		//states_[state] = new... se necesita struct? o switch tal cual xd
 		switch (state) {
 		case States::menu:
-			for (int i = 1; i < states_.size(); i++) deleteState(i); //borrar el playState y menu para poder crear otros
+			deleteState(States::menu); //borrar el playState y menu para poder crear otros
+			deleteState(States::play);
 			states_[state] = new MenuState(numberOfPlayers); //numberOfPlayers usado como ownerID
 			break;
 		case States::play:
