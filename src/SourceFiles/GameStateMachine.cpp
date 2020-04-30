@@ -8,6 +8,7 @@
 #include "PlayState.h"
 #include "PauseState.h"
 #include "MenuState.h"
+#include "LobbyState.h"
 
 GameStateMachine::GameStateMachine() {
 	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
@@ -65,6 +66,10 @@ void GameStateMachine::changeToState(int state, int numberOfPlayers, int gameMod
 				//if (states_[state] != nullptr)	delete states_[state];
 				states_[state] = new PauseState();
 				break;
+			case States::lobby: {
+				states_[state] = new LobbyState();
+			}
+			break;
 			}
 			//inicializar la nueva escena
 			states_[state]->init();

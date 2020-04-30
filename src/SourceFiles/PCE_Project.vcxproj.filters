@@ -280,7 +280,7 @@
       <Filter>Header Files\Components\Viewers</Filter>
     </ClInclude>
     <ClInclude Include="LobbyState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -474,7 +474,7 @@
       <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
     <ClCompile Include="LobbyState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
