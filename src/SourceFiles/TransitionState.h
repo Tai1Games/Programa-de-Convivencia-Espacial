@@ -14,6 +14,9 @@ private:
 	int currentTransitionFrame_ = 0;
 	int transitionFrames_ = 0;
 	float frameToAlphaRatio_ = 0.0;
+
+	SDL_Rect blackScreen_;
+
 	vector<GameState*>* gameStatesVector_ = nullptr;
 public:
 	TransitionState(int fromState, int toState, vector<GameState*>* gameStatesVector);

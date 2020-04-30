@@ -12,6 +12,7 @@ TransitionState::TransitionState(int fromState, int toState, vector<GameState*>*
 	WIN_HEIGHT = CONST(int, "WINDOW_HEIGHT");
 
 	frameToAlphaRatio_ = 255 / transitionFrames_;
+	blackScreen_ = { 0, 0, WIN_WIDTH, WIN_HEIGHT };
 }
 
 void TransitionState::update() {
@@ -31,8 +32,8 @@ void TransitionState::render() {
 			SDL_SetRenderDrawColor(SDL_Game::instance()->getRenderer(), 0, 0, 0, 255 - (currentTransitionFrame_ - transitionFrames_) * frameToAlphaRatio_);
 		}
 
-		SDL_Rect blackScreen = { 0, 0, WIN_WIDTH, WIN_HEIGHT };
-		SDL_RenderFillRect(SDL_Game::instance()->getRenderer(), &blackScreen);
+		
+		SDL_RenderFillRect(SDL_Game::instance()->getRenderer(), &blackScreen_);
 	}
 	else
 	{
