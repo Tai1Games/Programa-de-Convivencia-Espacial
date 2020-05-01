@@ -22,6 +22,7 @@ public:
 		BoilerRoom,
 		GymRoom,
 		LivingRoom,
+		TutorialRoom,
 
 		// UI
 		ActiveHealth,
@@ -98,6 +99,7 @@ public:
 		Stocks,
 		WiFight,
 		Timed,
+		Tutorial,
 		//exit
 		Exit,
 		//maps

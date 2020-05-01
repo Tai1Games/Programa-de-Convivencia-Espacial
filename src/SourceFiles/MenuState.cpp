@@ -37,9 +37,12 @@ void MenuState::handleInput()
 
 	if (ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_A)) {
 		if (menuPointer_ < 2) {
-			if (modePointer_ != 5) {
+			if (modePointer_ < NUMBER_OF_GAMEMODES - 1) {
 				menuPointer_++;
 				updateText();
+			}
+			else if (modePointer_ < NUMBER_OF_GAMEMODES) {
+				SDL_Game::instance()->getStateMachine()->transitionToState(States::play, 1, modePointer_, "TutorialRoom");
 			}
 			else SDL_Game::instance()->exitGame();
 		}
@@ -56,25 +59,25 @@ void MenuState::updatePointer(int n) {
 		if (n == 1) modePointer_++;
 		else modePointer_ += GamemodeID::NUMBER_OF_GAMEMODES;
 		modePointer_ %= (GamemodeID::NUMBER_OF_GAMEMODES + 1);	
-		menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (modePointer_ + 2)));
+		menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (modePointer_ + 1)));
 		break;
 	case 1:
 		if (n == 1) mapPointer_++;
 		else mapPointer_ += maps_.size()-1;
 		mapPointer_ %= maps_.size();
-		menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (mapPointer_ + 2)));
+		menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (mapPointer_ + 1)));
 		break;
 	case 2:
 		if (n == 1) playerPointer_++;
 		else playerPointer_ += 3;
 		playerPointer_ %= 4;
-		menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (playerPointer_ + 2)));
+		menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (playerPointer_ + 1)));
 		break;
 	}
 }
 
 void MenuState::updateText() {
-	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, 2*yOffset_));
+	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_));
 	int end = Resources::LivingRoomText;
 
 	if (menuPointer_ == 1) end = Resources::One;
@@ -88,5 +91,5 @@ void MenuState::updateText() {
 		i++;
 	}
 
-	j = i-2;
+	j = i-1;
 }

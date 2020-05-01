@@ -282,6 +282,9 @@
     <ClInclude Include="TransitionState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
+    <ClInclude Include="TutorialGameMode.h">
+      <Filter>Header Files\GameModes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -475,6 +478,9 @@
     </ClCompile>
     <ClCompile Include="TransitionState.cpp">
       <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialGameMode.cpp">
+      <Filter>Source Files\GameModes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

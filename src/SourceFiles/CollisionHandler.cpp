@@ -61,12 +61,6 @@ void CollisionHandler::SolveInteractions() {
 		data.player->attachToObject(data.bodyToBeAttached, data.collPoint,data.collNormal);
 	}
 	vecWeld.clear();
-	for (auto move : vecMove) { //Recorre el vector resolviendo todos los move y lo limpia al final.
-		move.body->SetTransform(move.pos, 0);
-		move.body->SetLinearVelocity(b2Vec2_zero);
-		move.body->SetAngularVelocity(0);
-	}
-	vecMove.clear();
 	for (auto weapon : vecWeapon) { //Recorre el vector soltando los weapon y lo limpia al final.
 		weapon->UnPickObject();
 	}
@@ -75,6 +69,12 @@ void CollisionHandler::SolveInteractions() {
 		attach->deAttachFromObject();
 	}
 	vecAttach.clear();
+	for (auto move : vecMove) { //Recorre el vector resolviendo todos los move y lo limpia al final.
+		move.body->SetTransform(move.pos, 0);
+		move.body->SetLinearVelocity(b2Vec2_zero);
+		move.body->SetAngularVelocity(0);
+	}
+	vecMove.clear();
 	for (auto c : vecCoin) {
 		c->setActive(false);
 	}

@@ -4,6 +4,7 @@
 #include "ControllerGameMode.h"
 #include "CapitalismGameMode.h"
 #include "TimeGameMode.h"
+#include "TutorialGameMode.h"
 #include "Constants.h"
 
 #include "PlayState.h"
@@ -75,6 +76,9 @@ void GameStateMachine::loadState(int state, int numberOfPlayers, int gameMode, s
 					break;
 				case (GamemodeID::Timed):
 					states_[state] = new PlayState(new TimeGameMode(numberOfPlayers), tileMap);
+					break;
+				case (GamemodeID::Tutorial):
+					states_[state] = new PlayState(new TutorialGameMode(numberOfPlayers), tileMap);
 					break;
 				}
 			}

@@ -14,6 +14,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ BoilerRoom,resourcesPath + "textures/Background_BoilerRoom.png"},
 	{ GymRoom,resourcesPath + "textures/Background_GymRoom.png"},
 	{ LivingRoom,resourcesPath + "textures/Background_LivingRoom.png"},
+	{ TutorialRoom,resourcesPath + "textures/Background_TutorialRoom.png"},
 
 	// UI
 	{ ActiveHealth, resourcesPath + "textures/VidaActiva.png" },
@@ -96,6 +97,7 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{ Stocks, "Stocks", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ WiFight, "WiFight", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ Timed, "Timed", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Tutorial, "Tutorial", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	//exit
 	{ Exit, "Exit Game", { COLOR(0xff0000ff) }, FontId::NES_Chimera },
 	//maps

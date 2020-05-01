@@ -24,7 +24,7 @@ private:
 	Viewer* menuCursor_ = nullptr;
 	std::vector<Entity*> texts_;
 	int i = Resources::Capitalism; //i y j son para colocar el texto en pantalla
-	int j = Resources::SoundText;
+	int j = Resources::ExitText;
 
 	std::map<int, string> maps_ = { //añadir aquí los mapas que se vayan haciendo
 		{ 0, "LivingRoom"},
