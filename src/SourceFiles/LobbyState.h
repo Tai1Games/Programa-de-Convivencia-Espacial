@@ -1,10 +1,11 @@
-#pragma once
+ï»¿#pragma once
 #include "GameState.h"
 #include "InputBinder.h"
 #include "checkML.h"
 #include <vector>
 
-// todavía falta darle un owner a este State, para que sólo lo maneje el server
+// todavï¿½a falta darle un owner a este State, para que sï¿½lo lo maneje el server
+const int MAX_SKINS_PLACEHOLDER = 10;
 struct PlayerLobbyInfo {
 	int id;
 	InputBinder* inputBinder = nullptr;
@@ -13,12 +14,8 @@ struct PlayerLobbyInfo {
 	int kbmId = -1;
 	PlayerLobbyInfo(int i, InputBinder* ib) {
 		id = i; inputBinder = ib;
-
 	};
-	//se llama cuando no toca, hay que ver como recoger la basura
-	//~PlayerLobbyInfo() {
-	//	delete inputBinder;
-	//};
+	int playerSkin = 0; //no hace nada pero ira cambiando
 };
 
 class LobbyState : public GameState
@@ -57,7 +54,12 @@ protected:
 	void renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index);
 	void playerOut(std::vector<PlayerLobbyInfo>::iterator it);
 	void kbPlayerOut(int index);
+	void mousePlayerOut();
+	void changeMouseToKb();
+	void changeKbToMouse();
 	void ctrlPlayerOut(int index);
+	void handleJoinLeave();
+	void handleJoinedPlayers();
 public:
 	LobbyState() {};
 	~LobbyState();
