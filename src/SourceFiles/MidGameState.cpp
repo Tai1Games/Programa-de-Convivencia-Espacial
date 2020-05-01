@@ -15,19 +15,22 @@ void MidGameState::init()
 {
 	entityManager_ = new EntityManager();
 
+	//Fondo del modo	
+	fondo= SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::RocketRoom);
+
 	int initPos = (CONST(int, "WINDOW_HEIGHT") / 2) - (-distanceBetweenRockets_ / 2 + (distanceBetweenRockets_ / 2 * numPlayers_));
 
 	SDL_Rect rocketRect;
 	rocketRect.x = rocketRect.y = 0;
-	rocketRect.w = 34;
-	rocketRect.h = 34;
+	rocketRect.w = 160;
+	rocketRect.h = 76;
 
 	for (int k = 0; k < numPlayers_; k++) {
 		Entity* newRocket = entityManager_->addEntity();
 		//We could move the rockets using only the Viewer, but this will make
 		//the logic much much easier.
 
-		AnimatedViewer* viewer = newRocket->addComponent<AnimatedViewer>(Resources::RoombaSpriteSheet, rocketRect, 1, b2Vec2(startingXPosition_ + k * distanceGainedByPoint_, initPos + (distanceBetweenRockets_ * k) - 0.5), 1, 0);
+		AnimatedViewer* viewer = newRocket->addComponent<AnimatedViewer>(Resources::RocketSpriteSheet, rocketRect, 10, b2Vec2(startingXPosition_ + k * distanceGainedByPoint_, initPos + (distanceBetweenRockets_ * k) - 0.5), -1, 0);
 		playerRockets_.push_back(viewer);
 	}
 
@@ -43,6 +46,7 @@ void MidGameState::init()
 
 void MidGameState::render()
 {
+	fondo->render(0, 0);
 	GameState::render();
 }
 

@@ -22,6 +22,7 @@ public:
 		BoilerRoom,
 		GymRoom,
 		LivingRoom,
+		RocketRoom,
 
 		// UI
 		ActiveHealth,
@@ -83,6 +84,7 @@ public:
 		Router,
 		RoombaSpriteSheet,
 		Remote,
+		RocketSpriteSheet,
 
 		// miscel�nea
 		Debug,

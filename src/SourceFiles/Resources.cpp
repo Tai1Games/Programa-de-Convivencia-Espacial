@@ -14,6 +14,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ BoilerRoom,resourcesPath + "textures/Background_BoilerRoom.png"},
 	{ GymRoom,resourcesPath + "textures/Background_GymRoom.png"},
 	{ LivingRoom,resourcesPath + "textures/Background_LivingRoom.png"},
+	{ RocketRoom ,resourcesPath + "textures/Background_RocketRoom.png"},
 
 	// UI
 	{ ActiveHealth, resourcesPath + "textures/VidaActiva.png" },
@@ -76,6 +77,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Router,resourcesPath + "textures/Router2.png" },
 	{ RoombaSpriteSheet, resourcesPath + "textures/Roomba.png"},
 	{ Remote, resourcesPath + "textures/Mando.png"},
+	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png"},
 
 	// miscelánea
 	{ Debug, resourcesPath + "textures/debug.png" },

@@ -1,5 +1,6 @@
 #pragma once
 #include "GameState.h"
+#include "Texture.h"
 
 class AnimatedViewer;
 
@@ -14,12 +15,14 @@ private:
 	bool spaceStationAnimationStarted_ = false;
 	int currentFrame = 0;
 
+	Texture* fondo= nullptr;
+
 	std::vector<AnimatedViewer*> playerRockets_;
 	AnimatedViewer* spaceStationViewer_ = nullptr;
 
 	//Load of constants.
 	int distanceBetweenRockets_ = 200;
-	int startingXPosition_ = 300;
+	int startingXPosition_ = 450;
 	int distanceGainedByPoint_ = 150;
 	int framesUntilAnimationStart_ = 120;
 	int spaceStationAnimationDuration_ = 360;
