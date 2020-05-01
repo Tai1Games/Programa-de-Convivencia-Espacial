@@ -17,6 +17,10 @@ int Weapon::calculateCoinsDropped(int coinsPlayer)
 
 void Weapon::init()
 {
+	maxThrowSpeed_ = CONST(double, "WEAPON_MAX_THROW_SPEED");
+	minThrowSpeed_ = CONST(double, "WEAPON_MIN_THROW_SPEED");
+	spinOnThrowSpeed_ = CONST(double, "WEAPON_SPIN_SPEED");
+
 	mainCollider_ = GETCMP1_(Collider);
 	vw_ = GETCMP1_(Viewer);
 	mainCollider_->createCircularFixture(2, 0, 0, 0, Collider::CollisionLayer::Trigger , true);
@@ -69,11 +73,17 @@ void Weapon::UnPickObject()
 	//Si se tira un objeto, se guarda en el objeto lanzado la ID de quien lo lanza.
 	ThrownByPlayer* tObj = GETCMP_FROM_FIXTURE_(mainCollider_->getFixture(0), ThrownByPlayer);
 	if (tObj != nullptr) tObj->throwObject(currentHand_->getPlayerId());
-
 	mainCollider_->setLinearVelocity(b2Vec2(0, 0));
-	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x + currentHand_->getDir().x * CONST(double, "ARM_LENGTH_PHYSICS"), currentHand_->getPos().y - currentHand_->getDir().y * CONST(double, "ARM_LENGTH_PHYSICS")), currentHand_->getAngle());
-	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * CONST(double, "WEAPON_THROW_SPEED") + currentHand_->getVel().x, -currentHand_->getDir().y * CONST(double, "WEAPON_THROW_SPEED") + currentHand_->getVel().y), mainCollider_->getBody()->GetLocalCenter());
-	mainCollider_->getBody()->SetAngularVelocity(CONST(double, "WEAPON_SPIN_SPEED"));
+	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x + currentHand_->getDir().x * currentHand_->getArmLengthPhysics(), currentHand_->getPos().y - currentHand_->getDir().y * currentHand_->getArmLengthPhysics()), currentHand_->getAngle());
+	
+	double actualMagnitude = currentHand_->getVel().Length();
+	double resultThrowSpeed = minThrowSpeed_ + 
+		((actualMagnitude*(maxThrowSpeed_ - minThrowSpeed_))/23/*Media de magnitud maxima del jugador*/);
+	/*Hay que tener en cuenta el tamaño de la fixture principal del arma*/
+	float tam =  mainCollider_->getW(0) +  mainCollider_->getH(0);
+	resultThrowSpeed *= tam;
+	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * resultThrowSpeed, -currentHand_->getDir().y * resultThrowSpeed), mainCollider_->getBody()->GetLocalCenter());
+	mainCollider_->getBody()->SetAngularVelocity(spinOnThrowSpeed_);
 	currentHand_ = nullptr;
 }
 
