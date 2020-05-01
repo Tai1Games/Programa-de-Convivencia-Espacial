@@ -52,6 +52,7 @@ protected:
 
 	SDL_Keycode joinKbKeys_[2] = { SDLK_w, SDLK_i };
 	SDL_Keycode dcKbKeys_[2] = { SDLK_ESCAPE, SDLK_7 };
+	SDL_GameControllerButton ctrJoinButton = SDL_CONTROLLER_BUTTON_A, ctrOutButton = SDL_CONTROLLER_BUTTON_B;
 
 	void renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index);
 	void playerOut(std::vector<PlayerLobbyInfo>::iterator it);

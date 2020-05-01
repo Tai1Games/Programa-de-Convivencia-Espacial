@@ -41,7 +41,7 @@ void LobbyState::handleInput()
 	{
 		//Si se quiere unir
 		if (!joinedGamepads_[i]) {
-			if (ih_->isButtonDown(i, SDL_CONTROLLER_BUTTON_A)) {
+			if (ih_->isButtonDown(i, ctrJoinButton)) {
 				joinedGamepads_[i] = true;
 				int newId = joinedPlayers_.size();
 				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new ControllerBinder(i)));
@@ -52,7 +52,7 @@ void LobbyState::handleInput()
 		}
 		//Si quiere salir
 		else {
-			if (ih_->isButtonDown(i, SDL_CONTROLLER_BUTTON_B)) {
+			if (ih_->isButtonDown(i, ctrOutButton)) {
 				ctrlPlayerOut(i);
 			}
 		}
