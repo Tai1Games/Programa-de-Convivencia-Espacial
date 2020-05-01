@@ -42,7 +42,9 @@ struct KeyboardMapping {
 		throwWeapon = SDLK_e,
 		attack = SDLK_q, 
 		impulse = SDLK_c,
-		pause = SDLK_ESCAPE;
+		pause = SDLK_ESCAPE,
+		forward = SDLK_e,
+		back = SDLK_q;
 
 	KeyboardMapping(int player = 1) {
 		switch (player)
@@ -59,6 +61,8 @@ struct KeyboardMapping {
 			attack = SDLK_u,
 			impulse = SDLK_PERIOD,
 			pause = SDLK_7;
+			forward = SDLK_o;
+			back = SDLK_u;
 		}
 		break;
 		default:
@@ -89,6 +93,8 @@ public:
 	virtual bool pressAttack() = 0;
 	virtual void setPlayerCol(Collider* col) {};
 	virtual bool menuMove(Dir d) = 0;
+	virtual bool menuForward() = 0;
+	virtual bool menuBack() = 0;
 };
 
 //Abstracta pura para modos con teclado 
@@ -119,6 +125,14 @@ public:
 		case Dir::Right: { return ih->isKeyJustDown(map_.cursor.Right); }	break;
 		default: { return false; }											break;
 		}
+	}
+	virtual bool menuForward() {
+
+		return ih->isKeyJustDown(map_.forward);
+	}
+	virtual bool menuBack() {
+
+		return ih->isKeyJustDown(map_.back);
 	}
 	//como sigamos con la pelea juro que me como a alguien
 	virtual b2Vec2 getAimDir() = 0;
@@ -236,6 +250,12 @@ public:
 		case Dir::Right: { return ih->getStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK).x > 0.9; }	break;
 		default: { return false; }																			break;
 		}
+	}
+	virtual bool menuForward() {
+		return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_A);
+	}
+	virtual bool menuBack() {
+		return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_B);
 	}
 };
 

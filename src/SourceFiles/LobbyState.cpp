@@ -41,7 +41,33 @@ void LobbyState::handleInput()
 
 void LobbyState::update()
 {
-	clear2();
+	outDebug();
+}
+
+void LobbyState::render() {
+	int i = 0;
+	for (PlayerLobbyInfo& const player : joinedPlayers_) {
+		renderPlayerLobbyInfo(&player, i);
+		i++;
+	}
+	for (; i < maxPlayers_; i++)
+		renderPlayerLobbyInfo(nullptr, i);
+}
+
+bool LobbyState::ready()
+{
+	if (joinedPlayers_.size() > 0) {
+		auto it = joinedPlayers_.begin();
+		while (it != joinedPlayers_.end() && it->ready) ++it;
+		//si hemos salido del vector, todos estan ready
+		return it == joinedPlayers_.end();
+	}
+	return false;
+}
+
+void LobbyState::outDebug()
+{
+	clear();
 	for (auto& player : joinedPlayers_)
 	{
 		cout << "Player " << player.id << " using ";
@@ -57,18 +83,14 @@ void LobbyState::update()
 		else {
 			cout << "unknown controller ";
 		}
-		cout << "		PlayerSkin: " << player.playerSkin << endl;
-	}
-}
+		cout << " is ";
+		if (!player.ready) cout << "NOT ";
+		cout << "ready,		PlayerSkin: " << player.playerSkin;
 
-void LobbyState::render() {
-	int i = 0;
-	for (PlayerLobbyInfo& const player : joinedPlayers_) {
-		renderPlayerLobbyInfo(&player, i);
-		i++;
+		cout << endl;
 	}
-	for (; i < maxPlayers_; i++)
-		renderPlayerLobbyInfo(nullptr, i);
+	if (ready())
+		cout << "LETS A GOOOOOOO" << endl;
 }
 
 
@@ -176,16 +198,17 @@ void LobbyState::handleJoinLeave() {
 				int newId = joinedPlayers_.size();
 				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new ControllerBinder(i)));
 				joinedPlayers_[newId].ctrlId = i;
+				joinedPlayers_[newId].binderType = BinderType::ControllerB;
 				// crea un nuevo jugador con id newId
 				// lo mete en joinedPlayers
 			}
 		}
-		//Si quiere salir
-		else {
-			if (ih_->isButtonDown(i, ctrOutButton)) {
-				ctrlPlayerOut(i);
-			}
-		}
+		////Si quiere salir
+		//else {
+		//	if (ih_->isButtonDown(i, ctrOutButton)) {
+		//		ctrlPlayerOut(i);
+		//	}
+		//}
 	}
 
 	//comprueba si se puede unir un pureKeyboardPeasant
@@ -201,11 +224,12 @@ void LobbyState::handleJoinLeave() {
 					int newId = joinedPlayers_.size();
 					joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(kb + 1)));
 					joinedPlayers_[newId].kbId = kb;
+					joinedPlayers_[newId].binderType = KeyboardB;
 				}
 			}
-			else if (ih_->isKeyDown(dcKbKeys_[kb])) {
-				kbPlayerOut(kb);
-			}
+			//else if (ih_->isKeyDown(dcKbKeys_[kb])) {
+			//	kbPlayerOut(kb);
+			//}
 		}
 		//comprueba si se quiere unir un jugador de teclado y raton
 		if (ih_->isMouseButtonJustDown(InputHandler::LEFT))
@@ -223,6 +247,7 @@ void LobbyState::handleJoinLeave() {
 				joinedMouse_ = true;
 				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new MouseKeyboardBinder(nullptr, 1)));
 				joinedPlayers_[newId].kbmId = 0;
+				joinedPlayers_[newId].binderType =MouseB;
 			}
 		}
 	}
@@ -231,8 +256,8 @@ void LobbyState::handleJoinLeave() {
 		if (ih_->isMouseButtonJustDown(InputHandler::RIGHT))
 			changeMouseToKb();
 		// jugador de mouse se quiere salir
-		else if (ih_->isKeyDown(dcKbKeys_[0]))
-			mousePlayerOut();
+		else if (ih_->isKeyDown(dcKbKeys_[0])) {}
+			//mousePlayerOut();
 		else if (!joinedKb_[1]) {
 			// comprueba si se quiere unir un pureKeyboardPeasant (tonto)
 			if (ih_->isKeyDown(joinKbKeys_[1])) {
@@ -260,6 +285,24 @@ void LobbyState::handleJoinedPlayers(){
 		}
 		else if(player.inputBinder->menuMove(Dir::Right)){
 			player.playerSkin = (++player.playerSkin) % (MAX_SKINS_PLACEHOLDER);
+		}
+		else if (player.inputBinder->menuForward()) {
+			player.ready = true;
+		}
+		else if (player.inputBinder->menuBack()) {
+			if(player.ready)
+				player.ready = false;
+			//desconexion mediante boton back
+			else {
+				switch (player.binderType)
+				{
+				case BinderType::ControllerB: {ctrlPlayerOut(player.ctrlId); }break;
+				case BinderType::KeyboardB: {kbPlayerOut(player.kbId); } break;
+				case BinderType::MouseB: {mousePlayerOut(); }break;
+				default:
+					break;
+				}
+			}
 		}
 	}
 }
