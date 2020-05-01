@@ -15,16 +15,21 @@ void LobbyState::init()
 	for (int i = 0; i < maxPlayers_; i++) {
 		joinedGamepads_[i] = false;
 	}
-	joinedKb_[1] = joinedKb_[2] = false;
+	joinedKb_[0] = false;  joinedKb_[1] = false;
 	joinedMouse_ = false;
 
 	playerTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::Body);
 	voidTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::SpaceSuit);
+	ctrlTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::ControllerIcon);
+	kbTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::KeyboardIcon);
+	mouseTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::MouseIcon);
+
 
 	verticalIniPoint_ = CONST(int, "WINDOW_HEIGHT") / 2 - playerTexture_->getHeight() / 2;
 	horizontalIniPoint_ = CONST(int, "WINDOW_WIDTH") / 2 - (maxPlayers_ * (playerTexture_->getWidth() + CONST(int, "LOBBY_OFFSET_X")) / 2);
 	horizontalOffset_ = playerTexture_->getWidth() + CONST(int, "LOBBY_OFFSET_X");
 	playerIdVerticalOffset_ = playerTexture_->getWidth() + CONST(int, "LOBBY_PLAYERID_OFFSET_Y");
+	iconHorizontalOffset_ = CONST(int, "LOBBY_ICON_OFFSET");
 }
 
 void LobbyState::handleInput()
@@ -63,7 +68,7 @@ void LobbyState::handleInput()
 				joinedKb_[0] = true;
 				int newId = joinedPlayers_.size();
 				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(1)));
-				joinedPlayers_[newId].kbId = 1;
+				joinedPlayers_[newId].kbId = 0;
 			}
 		}
 		else if (ih_->isKeyDown(SDLK_ESCAPE)) {
@@ -76,7 +81,7 @@ void LobbyState::handleInput()
 				joinedKb_[1] = true;
 				int newId = joinedPlayers_.size();
 				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(2)));
-				joinedPlayers_[newId].kbId = 2;
+				joinedPlayers_[newId].kbId = 1;
 			}
 		}
 		else if (ih_->isKeyDown(SDLK_7)) {
@@ -138,20 +143,35 @@ void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
 		Texture playerNumTexture(SDL_Game::instance()->getRenderer(), playerNum,
 			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
 		playerNumTexture.render(destRect);
+		destRect.x += iconHorizontalOffset_;
+		if (playerInfo->ctrlId != -1) {
+			ctrlTexture_->render(destRect);
+		}
+		else if (playerInfo->kbId != -1) {
+			kbTexture_->render(destRect);			
+		}
+		else if (playerInfo->kbmId != -1) {
+			mouseTexture_->render(destRect);
+		}
 	}
 }
 
 void LobbyState::playerOut(std::vector<PlayerLobbyInfo>::iterator it)
 {
-	//it es el jugador que se quiere salir
-	it = joinedPlayers_.erase(it);
-	delete it->inputBinder;
-	//it ahora apunta al siguiente elemento
-	//ajustamos el resto de ids en funcion
-	while (it != joinedPlayers_.end()) {
-		it->id--;
-		++it;
+	if (it != joinedPlayers_.end())
+	{
+		//it es el jugador que se quiere salir
+		delete it->inputBinder;
+		it = joinedPlayers_.erase(it);
+		//it ahora apunta al siguiente elemento
+		//ajustamos el resto de ids en funcion
+		while (it != joinedPlayers_.end()) {
+			it->id--;
+			++it;
+		}
 	}
+	else
+		throw "Se intento desconectar un jugador inexistente";
 }
 
 void LobbyState::kbPlayerOut(int index) {
