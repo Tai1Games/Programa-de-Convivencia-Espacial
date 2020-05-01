@@ -24,6 +24,7 @@
 #include "TomatoWeapon.h"
 #include "AnimatedViewer.h"
 #include "BananaWeapon.h"
+#include "Bullet.h"
 
 
 Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
@@ -35,7 +36,7 @@ Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physic
 	e->addComponent <Viewer>(Resources::Slipper);
 	e->addComponent<SlipperWeapon>(WeaponID::Slipper, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"), CONST(int, "FLIPFLOP_COOLDOWN_FRAMES"));
 	e->addComponent<ColliderViewer>();
-	
+
 	return e;
 }
 
@@ -51,7 +52,7 @@ Entity* ObjectFactory::makeBall(EntityManager* entityManager, b2World* physicsWo
 	e->addComponent <Viewer>(Resources::Ball);
 	e->addComponent<Weapon>(WeaponID::Pelota, CONST(int, "BOUNCINGBALL_IMPACT_DAMAGE"));
 	e->addComponent<ColliderViewer>();
-  
+
 	return e;
 }
 
@@ -110,9 +111,9 @@ Entity* ObjectFactory::makeDumbbell(EntityManager* entityManager, b2World* physi
 		CONST(double, "DUMBBELL_FRICTION"), CONST(double, "DUMBBELL_RESTITUTION"),
 		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Mancuerna);
-	e->addComponent<MeleeWeapon>(WeaponID::Mancuerna, CONST(int, "DUMBBELL_DAMAGE"), CONST(int, "DUMBBELL_IMPACT_DAMAGE"), CONST(int,"DUMBBELL_COOLDOWN_FRAMES"));
+	e->addComponent<MeleeWeapon>(WeaponID::Mancuerna, CONST(int, "DUMBBELL_DAMAGE"), CONST(int, "DUMBBELL_IMPACT_DAMAGE"), CONST(int, "DUMBBELL_COOLDOWN_FRAMES"));
 	e->addComponent<ColliderViewer>();
-	
+
 	return e;
 }
 
@@ -204,13 +205,13 @@ Entity* ObjectFactory::makeRoomba(EntityManager* entityManager, b2World* physics
 	Entity* e = entityManager->addEntity();
 	Collider* collRoomba = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "ROOMBA_RADIUS"), CONST(double, "ROOMBA_DENSITY"), CONST(double, "ROOMBA_FRICTION"),
 		CONST(double, "ROOMBA_RESTITUTION"), CONST(double, "ROOMBA_LINEAR_DRAG"), CONST(double, "ROOMBA_ANGULAR_DRAG"), Collider::CollisionLayer::UnInteractableObject, false);
-	
-	e->addComponent<AnimatedViewer>(Resources::RoombaSpriteSheet, SDL_Rect{ 0,0,34,34 }, CONST(int, "ROOMBA_TIMEPERFRAME") );
-	
+
+	e->addComponent<AnimatedViewer>(Resources::RoombaSpriteSheet, SDL_Rect{ 0,0,34,34 }, CONST(int, "ROOMBA_TIMEPERFRAME"));
+
 	double velocityX = rand() % CONST(int, "ROOMBA_VELOCITY");
 	double velocityY = CONST(int, "ROOMBA_VELOCITY") - velocityX;
 
-	if (rand() % 2 == 1)velocityX *= -1; 
+	if (rand() % 2 == 1)velocityX *= -1;
 	if (rand() % 2 == 1) velocityY *= -1;
 
 	collRoomba->applyLinearImpulse(b2Vec2(velocityX, velocityY), b2Vec2(0, 0));
@@ -299,6 +300,20 @@ Entity* ObjectFactory::makeBanana(Entity* e, EntityManager* entityManager, b2Wor
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::BananaSkin, 100, 1, 5, 1000, 50, 100, 0, 360);
 	pE->setMaxParticles(1);
 	e->addComponent<BananaWeapon>();
+	e->addComponent<ColliderViewer>();
+
+	return e;
+}
+
+Entity* ObjectFactory::makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld)
+{
+	entityManager->addExistingEntity(e);
+
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 0, 0, 1, 1, CONST(double, "TOMATO_DENSITY"),
+		CONST(double, "TOMATO_FRICTION"), CONST(double, "TOMATO_RESTITUTION"),
+		CONST(double, "TOMATO_LINEAR_DRAG"), CONST(double, "TOMATO_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent<Viewer>(Resources::Negro);
+	e->addComponent<Bullet>();
 	e->addComponent<ColliderViewer>();
 
 	return e;

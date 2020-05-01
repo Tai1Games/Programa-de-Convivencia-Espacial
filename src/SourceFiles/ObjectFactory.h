@@ -53,4 +53,6 @@ public:
 	static Entity* makeCarnivorousePlant(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
 	static Entity* makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
+
+	static Entity* makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld);
 };

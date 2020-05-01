@@ -285,6 +285,12 @@
     <ClInclude Include="BananaPool.h">
       <Filter>Header Files\Pools</Filter>
     </ClInclude>
+    <ClInclude Include="BulletPool.h">
+      <Filter>Header Files\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files\Components\Weapons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -481,6 +487,12 @@
     </ClCompile>
     <ClCompile Include="BananaPool.cpp">
       <Filter>Source Files\Pools</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletPool.cpp">
+      <Filter>Source Files\Pools</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files\Components\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

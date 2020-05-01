@@ -9,6 +9,7 @@ void CapitalismGameMode::init(PlayState* game)
 	//NEED TO DELETE ---
 	tomatoPool_.init(game->getEntityManager(), game->getPhysicsWorld());
 	bananaPool_.init(game->getEntityManager(), game->getPhysicsWorld());
+	bulletPool_.init(game->getEntityManager(), game->getPhysicsWorld());
 	//------------------
 	//Load of constants
 	sPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
@@ -50,6 +51,8 @@ void CapitalismGameMode::init(PlayState* game)
 	//NEED TO DELETE
 	tomatoPool_.addTomato({ 40, 20 });
 	bananaPool_.addBanana({ 40,20 });
+
+	bulletPool_.addBullet({ 5,5 }, { 0,0 }, Resources::Negro, 0);
 	//--
 }
 
