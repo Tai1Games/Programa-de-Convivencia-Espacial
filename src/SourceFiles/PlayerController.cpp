@@ -24,7 +24,7 @@ void PlayerController::init()
 void PlayerController::handleInput()
 {
 	//Empieza la carga
-	if (ib->pressImpulse()) {
+	if (ib->pressImpulse() || (ib->holdImpulse() && !chargingImpulse_)) {
 		chargingImpulse_ = true;
 	}//Soltarse
 	else if (ib->releaseImpulse()) {
@@ -45,8 +45,13 @@ void PlayerController::handleInput()
 	}
 	else if (ib->releaseGrab()) {
 		Collider* attachedObj = attachesToObj_->getAttachedObject();
-		if (attachedObj != nullptr)
-			attachesToObj_->deAttachFromObject(); 
+		if (attachedObj != nullptr) {
+			chargedFrames_ = 0;
+			impulseForce_ = 0;
+			chargingImpulse_ = false;
+			attachesToObj_->deAttachFromObject();
+		}
+			
 	}
 }
 
