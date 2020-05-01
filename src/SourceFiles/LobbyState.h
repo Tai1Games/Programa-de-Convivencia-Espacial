@@ -31,6 +31,8 @@ private:
 	void clear2();
 protected:
 	int maxPlayers_ = 4;
+	const int maxKbPlayers_ = 2;
+
 	int verticalIniPoint_ = 0;
 	int horizontalOffset_ = 0;
 	int horizontalIniPoint_ = 0;
@@ -47,6 +49,9 @@ protected:
 	bool joinedGamepads_[4]; //indica los gamepads que se ha unido
 	bool joinedKb_[2]; //indica los teclados que se han unido
 	bool joinedMouse_; //indica si se ha unido el mouse
+
+	SDL_Keycode joinKbKeys_[2] = { SDLK_w, SDLK_i };
+	SDL_Keycode dcKbKeys_[2] = { SDLK_ESCAPE, SDLK_7 };
 
 	void renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index);
 	void playerOut(std::vector<PlayerLobbyInfo>::iterator it);

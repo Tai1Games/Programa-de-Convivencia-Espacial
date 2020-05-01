@@ -61,31 +61,21 @@ void LobbyState::handleInput()
 	//comprueba si se puede unir un pureKeyboardPeasant
 	if (!joinedMouse_)
 	{
-		if (!joinedKb_[0]) {
-			// comprueba si se quiere unir un pureKeyboardPeasant (tonto)
-			if (ih_->isKeyDown(SDLK_w))
-			{
-				joinedKb_[0] = true;
-				int newId = joinedPlayers_.size();
-				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(1)));
-				joinedPlayers_[newId].kbId = 0;
+		for (int kb = 0; kb < maxKbPlayers_; kb++)
+		{
+			if (!joinedKb_[kb]) {
+				// comprueba si se quiere unir un pureKeyboardPeasant (tonto)
+				if (ih_->isKeyDown(joinKbKeys_[kb]))
+				{
+					joinedKb_[kb] = true;
+					int newId = joinedPlayers_.size();
+					joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(kb+1)));
+					joinedPlayers_[newId].kbId = kb;
+				}
 			}
-		}
-		else if (ih_->isKeyDown(SDLK_ESCAPE)) {
-			kbPlayerOut(0);
-		}
-
-		if (!joinedKb_[1]) {
-			if (ih_->isKeyDown(SDLK_i))
-			{
-				joinedKb_[1] = true;
-				int newId = joinedPlayers_.size();
-				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(2)));
-				joinedPlayers_[newId].kbId = 1;
+			else if (ih_->isKeyDown(dcKbKeys_[kb])) {
+				kbPlayerOut(kb);
 			}
-		}
-		else if (ih_->isKeyDown(SDLK_7)) {
-			kbPlayerOut(1);
 		}
 	}
 	else {
@@ -95,7 +85,7 @@ void LobbyState::handleInput()
 
 void LobbyState::update()
 {
-	clear2();
+	clear();
 	for (auto player : joinedPlayers_)
 	{
 		cout << "Player " << player.id << " using ";
