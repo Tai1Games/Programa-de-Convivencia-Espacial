@@ -11,7 +11,18 @@ void BananaWeapon::action()
 {	
 	setActive(false);
 	entity_->setActive(false);
-	bulletPool_->addBullet({ 5,5 }, { 0,0 }, { 1,1 }, Resources::Negro, 0);
+	b2Vec2 dir = currentHand_->getDir();
+	dir *= CONST(double, "BANANA_BULLER_SPEED");
+	   
+	bulletPool_->addBullet(currentHand_->getPos(), { 0,0 }, {dir.x, -dir.y}, Resources::Negro, 0);
+
+	currentHand_->setWeapon(NoWeapon, nullptr);
+	picked_ = false;
+	pickedIndex_ = -1;
+	mainCollider_->getBody()->SetEnabled(true);
+	vw_->setDrawable(true);
+	currentHand_ = nullptr;
+	
 }
 
 void BananaWeapon::setActive(bool a, b2Vec2 pos)
@@ -20,7 +31,6 @@ void BananaWeapon::setActive(bool a, b2Vec2 pos)
 	viewer_->setDrawable(a);
 	colBanana_->getBody()->SetEnabled(a);
 	if (a) {
-		colBanana_->getBody()->SetTransform(pos, 0);
-		
+		colBanana_->getBody()->SetTransform(pos, 0);		
 	}
 }

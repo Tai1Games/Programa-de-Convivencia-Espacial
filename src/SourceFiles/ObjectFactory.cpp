@@ -294,13 +294,13 @@ Entity* ObjectFactory::makeBanana(Entity* e, EntityManager* entityManager, b2Wor
 {
 	entityManager->addExistingEntity(e);
 
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 5, 5, CONST(double, "TOMATO_RADIUS"), CONST(double, "TOMATO_DENSITY"),
-		CONST(double, "TOMATO_FRICTION"), CONST(double, "TOMATO_RESTITUTION"),
-		CONST(double, "TOMATO_LINEAR_DRAG"), CONST(double, "TOMATO_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 5, 5, CONST(double, "BANANA_X"), CONST(double, "BANANA_Y"), 
+		CONST(double, "BANANA_DENSITY"),CONST(double, "BANANA_FRICTION"), CONST(double, "BANANA_RESTITUTION"),
+		CONST(double, "BANANA_ANGULAR_DRAG"), CONST(double, "BANANA_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent<Viewer>(Resources::Banana);
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::BananaSkin, 100, 1, 5, 1000, 50, 100, 0, 360);
 	pE->setMaxParticles(1);
-	e->addComponent<BananaWeapon>(pb);
+	e->addComponent<BananaWeapon>(pb, CONST(double, "BANANA_DAMAGE"));
 	e->addComponent<ColliderViewer>();
 
 	return e;
@@ -311,9 +311,9 @@ Entity* ObjectFactory::makeBullet(Entity* e, EntityManager* entityManager, b2Wor
 {
 	entityManager->addExistingEntity(e);
 
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 0, 0, 1, 1, CONST(double, "TOMATO_DENSITY"),
-		CONST(double, "TOMATO_FRICTION"), CONST(double, "TOMATO_RESTITUTION"),
-		CONST(double, "TOMATO_LINEAR_DRAG"), CONST(double, "TOMATO_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 0, 0, CONST(double, "BANANA_BULLET_X"), CONST(double, "BANANA_BULLET_Y"),
+		CONST(double, "BANANA_BULLET_DENSITY"), CONST(double, "BANANA_BULLET_FRICTION"), CONST(double, "BANANA_BULLET_RESTITUTION"),
+		CONST(double, "BANANA_BULLET_LINEAR_DRAG"), CONST(double, "BANANA_BULLET_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, true);
 	e->addComponent<Viewer>(Resources::Negro);
 	e->addComponent<Bullet>();
 	e->addComponent<ColliderViewer>();

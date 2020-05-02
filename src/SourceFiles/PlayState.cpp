@@ -65,7 +65,7 @@ void PlayState::init() {
 	bulletPool_.init(entityManager_, physicsWorld_);
 	bananaPool_.init(entityManager_, physicsWorld_, &bulletPool_);
 
-	bananaPool_.addBanana({ 40,20 });
+	bananaPool_.addBanana({ 20,20 });
 }
 
 void PlayState::update() {
