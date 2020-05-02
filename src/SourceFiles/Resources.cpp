@@ -69,7 +69,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
 	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
 	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
-	{TreadmillPanel, resourcesPath + "textures/TreadmillPanel.png"},
+	{ TreadmillPanel, resourcesPath + "textures/TreadmillPanel.png"},
 
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/Moneda.png" },

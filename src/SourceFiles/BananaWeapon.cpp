@@ -12,10 +12,12 @@ void BananaWeapon::action()
 	setActive(false);
 	entity_->setActive(false);
 	b2Vec2 dir = currentHand_->getDir();
-	dir *= CONST(double, "BANANA_BULLER_SPEED");
+	int speed = CONST(double, "BANANA_BULLER_SPEED");
 	   
-	bulletPool_->addBullet(currentHand_->getPos(), { 0,0 }, {dir.x, -dir.y}, Resources::Negro, 
-		CONST(double, "BANANA_BULLET_DAMAGE"), currentHand_->getPlayerId());
+	bulletPool_->addBullet(currentHand_->getPos(), { 1,1 }, {dir.x * speed, -dir.y * speed}, Resources::BananaNonSkin, 
+		CONST(double, "BANANA_BULLET_DAMAGE"), currentHand_->getPlayerId()); 
+	bulletPool_->addBullet(currentHand_->getPos(), { 1,1 }, { -dir.x, dir.y }, Resources::BananaSkin,
+		0, currentHand_->getPlayerId());
 
 	currentHand_->setWeapon(NoWeapon, nullptr);
 	picked_ = false;

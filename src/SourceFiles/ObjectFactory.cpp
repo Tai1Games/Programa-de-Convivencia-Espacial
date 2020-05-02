@@ -311,9 +311,9 @@ Entity* ObjectFactory::makeBullet(Entity* e, EntityManager* entityManager, b2Wor
 {
 	entityManager->addExistingEntity(e);
 
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 0, 0, CONST(double, "BANANA_BULLET_X"), CONST(double, "BANANA_BULLET_Y"),
-		CONST(double, "BANANA_BULLET_DENSITY"), CONST(double, "BANANA_BULLET_FRICTION"), CONST(double, "BANANA_BULLET_RESTITUTION"),
-		CONST(double, "BANANA_BULLET_LINEAR_DRAG"), CONST(double, "BANANA_BULLET_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, true);
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 0, 0, CONST(double, "BULLET_X"), CONST(double, "BULLET_Y"),
+		CONST(double, "BULLET_DENSITY"), CONST(double, "BULLET_FRICTION"), CONST(double, "BULLET_RESTITUTION"),
+		CONST(double, "BULLET_LINEAR_DRAG"), CONST(double, "BULLET_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, true);
 	e->addComponent<Viewer>(Resources::Negro);
 	e->addComponent<Bullet>();
 	e->addComponent<ColliderViewer>();
