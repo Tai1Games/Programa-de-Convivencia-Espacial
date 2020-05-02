@@ -14,7 +14,8 @@ void BananaWeapon::action()
 	b2Vec2 dir = currentHand_->getDir();
 	dir *= CONST(double, "BANANA_BULLER_SPEED");
 	   
-	bulletPool_->addBullet(currentHand_->getPos(), { 0,0 }, {dir.x, -dir.y}, Resources::Negro, 0);
+	bulletPool_->addBullet(currentHand_->getPos(), { 0,0 }, {dir.x, -dir.y}, Resources::Negro, 
+		CONST(double, "BANANA_BULLET_DAMAGE"), currentHand_->getPlayerId());
 
 	currentHand_->setWeapon(NoWeapon, nullptr);
 	picked_ = false;

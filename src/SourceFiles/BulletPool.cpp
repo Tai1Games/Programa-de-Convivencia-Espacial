@@ -14,10 +14,10 @@ void BulletPool::init(EntityManager* eMan, b2World* physicsWorld)
 	}
 }
 
-void BulletPool::addBullet(b2Vec2 pos, b2Vec2 size, b2Vec2 vel,int texture, int damage)
+void BulletPool::addBullet(b2Vec2 pos, b2Vec2 size, b2Vec2 vel,int texture, int damage, int player)
 {
 	Entity* e = bulletsPool_.getObj();
 	if (e != nullptr) {
-		e->getComponent<Bullet>(ComponentType::Bullet)->setActive(true, pos, size, vel,texture, damage);
+		e->getComponent<Bullet>(ComponentType::Bullet)->setActive(true, pos, size, vel,texture, damage, player);
 	}
 }
