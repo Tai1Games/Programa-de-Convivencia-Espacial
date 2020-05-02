@@ -165,6 +165,7 @@ void LobbyState::changeMouseToKb()
 	it->kbmId = -1;
 	delete it->inputBinder;
 	it->inputBinder = new PureKeyboardBinder(1);
+	it->binderType = BinderType::KeyboardB;
 }
 
 void LobbyState::changeKbToMouse()
@@ -177,6 +178,8 @@ void LobbyState::changeKbToMouse()
 	it->kbmId = 0;
 	delete it->inputBinder;
 	it->inputBinder = new MouseKeyboardBinder(nullptr, 1);
+	it->binderType = BinderType::ControllerB;
+
 }
 
 void LobbyState::ctrlPlayerOut(int index) {
@@ -203,12 +206,6 @@ void LobbyState::handleJoinLeave() {
 				// lo mete en joinedPlayers
 			}
 		}
-		////Si quiere salir
-		//else {
-		//	if (ih_->isButtonDown(i, ctrOutButton)) {
-		//		ctrlPlayerOut(i);
-		//	}
-		//}
 	}
 
 	//comprueba si se puede unir un pureKeyboardPeasant
@@ -227,9 +224,6 @@ void LobbyState::handleJoinLeave() {
 					joinedPlayers_[newId].binderType = KeyboardB;
 				}
 			}
-			//else if (ih_->isKeyDown(dcKbKeys_[kb])) {
-			//	kbPlayerOut(kb);
-			//}
 		}
 		//comprueba si se quiere unir un jugador de teclado y raton
 		if (ih_->isMouseButtonJustDown(InputHandler::LEFT))
@@ -255,9 +249,6 @@ void LobbyState::handleJoinLeave() {
 		// jugador de mouse se quiere convertir al patetismo
 		if (ih_->isMouseButtonJustDown(InputHandler::RIGHT))
 			changeMouseToKb();
-		// jugador de mouse se quiere salir
-		else if (ih_->isKeyDown(dcKbKeys_[0])) {}
-			//mousePlayerOut();
 		else if (!joinedKb_[1]) {
 			// comprueba si se quiere unir un pureKeyboardPeasant (tonto)
 			if (ih_->isKeyDown(joinKbKeys_[1])) {
@@ -269,6 +260,7 @@ void LobbyState::handleJoinLeave() {
 				int newId = joinedPlayers_.size();
 				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(2)));
 				joinedPlayers_[newId].kbId = 1;
+				joinedPlayers_[newId].binderType = BinderType::KeyboardB;
 			}
 		}
 	}
