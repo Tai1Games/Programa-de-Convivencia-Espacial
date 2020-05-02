@@ -5,9 +5,11 @@
 #include "CapitalismGameMode.h"
 #include "TimeGameMode.h"
 #include "Constants.h"
+
 #include "PlayState.h"
 #include "PauseState.h"
 #include "MenuState.h"
+#include "TransitionState.h"
 #include "LobbyState.h"
 
 GameStateMachine::GameStateMachine() {
@@ -31,50 +33,64 @@ void GameStateMachine::setPauseOwner(int ownerID)
 
 void GameStateMachine::changeToState(int state, int numberOfPlayers, int gameMode, string tileMap) {
 	if (state != currentState_ && state < States::NUMBER_OF_STATES) {
-		if (states_[state] == nullptr) {
-			//create state
-			//states_[state] = new... se necesita struct? o switch tal cual xd
-			switch (state) {
-			case States::menu:
-				for (int i = 1; i < states_.size(); i++) deleteState(i); //borrar el playState y menu para poder crear otros
-				states_[state] = new MenuState(numberOfPlayers); //numberOfPlayers usado como ownerID
-				break;
-			case States::play:
-			{
-				if (gameMode < NUMBER_OF_GAMEMODES) {
-					switch (gameMode) {
-					case (GamemodeID::Capitalism):
-						states_[state] = new PlayState(new CapitalismGameMode(numberOfPlayers), tileMap);
-						break;
-					case (GamemodeID::Controller):
-						states_[state] = new PlayState(new ControllerGameMode(numberOfPlayers), tileMap);
-						break;
-					case (GamemodeID::Stocks):
-						states_[state] = new PlayState(new StocksGameMode(numberOfPlayers), tileMap);
-						break;
-					case (GamemodeID::WiFight):
-						states_[state] = new PlayState(new WiFightGameMode(numberOfPlayers), tileMap);
-						break;
-					case (GamemodeID::Timed):
-						states_[state] = new PlayState(new TimeGameMode(numberOfPlayers), tileMap);
-						break;
-					}
+		loadState(state, numberOfPlayers, gameMode, tileMap);
+		currentState_ = state;
+		if (states_[States::transition] != nullptr) {
+			deleteState(States::transition);
+		}
+	}
+}
+
+void GameStateMachine::transitionToState(int state, int numberOfPlayers, int gameMode, string tileMap) {
+	loadState(state, numberOfPlayers, gameMode, tileMap);
+	states_[States::transition] = new TransitionState(currentState_, state, &states_);
+	states_[States::transition]->init();
+	currentState_ = States::transition;
+}
+
+void GameStateMachine::loadState(int state, int numberOfPlayers, int gameMode, string tileMap) {
+	if (state == States::menu || states_[state] == nullptr) {
+		//create state
+		//states_[state] = new... se necesita struct? o switch tal cual xd
+		switch (state) {
+		case States::menu:
+			deleteState(States::menu); //borrar el playState y menu para poder crear otros
+			deleteState(States::play);
+			states_[state] = new MenuState(numberOfPlayers); //numberOfPlayers usado como ownerID
+			break;
+		case States::play:
+		{
+			if (gameMode < NUMBER_OF_GAMEMODES) {
+				switch (gameMode) {
+				case (GamemodeID::Capitalism):
+					states_[state] = new PlayState(new CapitalismGameMode(numberOfPlayers), tileMap);
+					break;
+				case (GamemodeID::Controller):
+					states_[state] = new PlayState(new ControllerGameMode(numberOfPlayers), tileMap);
+					break;
+				case (GamemodeID::Stocks):
+					states_[state] = new PlayState(new StocksGameMode(numberOfPlayers), tileMap);
+					break;
+				case (GamemodeID::WiFight):
+					states_[state] = new PlayState(new WiFightGameMode(numberOfPlayers), tileMap);
+					break;
+				case (GamemodeID::Timed):
+					states_[state] = new PlayState(new TimeGameMode(numberOfPlayers), tileMap);
+					break;
 				}
-				break;
 			}
-			case States::pause:
-				//if (states_[state] != nullptr)	delete states_[state];
-				states_[state] = new PauseState();
-				break;
 			case States::lobby: {
 				states_[state] = new LobbyState();
 			}
 			break;
-			}
-			//inicializar la nueva escena
-			states_[state]->init();
 		}
-		currentState_ = state;
+		case States::pause:
+			//if (states_[state] != nullptr)	delete states_[state];
+			states_[state] = new PauseState();
+			break;
+		}
+		//inicializar la nueva escena
+		states_[state]->init();
 	}
 }
 
@@ -97,4 +113,10 @@ void GameStateMachine::render() {
 
 void GameStateMachine::handleInput() {
 	states_[currentState_]->handleInput();
+}
+
+void GameStateMachine::gameCycle() {
+	handleInput();
+	update();
+	render();
 }
