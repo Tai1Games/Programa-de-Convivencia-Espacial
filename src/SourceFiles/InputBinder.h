@@ -76,6 +76,7 @@ protected:
 private:
 public:
 	InputBinder() { ih = SDL_Game::instance()->getInputHandler(); }
+	virtual ~InputBinder() {}
 	virtual bool holdGrab() = 0;
 	virtual bool pressThrow() = 0;
 	virtual bool pressPick() = 0;
@@ -183,6 +184,7 @@ protected:
 	int id_ = -1;
 public:
 	ControllerBinder(int id) : InputBinder(),id_(id) {}
+	virtual ~ControllerBinder() { ih->returnGamePad(id_); }
 	virtual bool holdGrab() {
 		return ih->getTrigger(id_, InputHandler::GAMEPADTRIGGER::LEFTTRIGGER);
 	}

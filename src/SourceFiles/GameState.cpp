@@ -13,6 +13,10 @@ GameState::~GameState() {
 	entityManager_ = nullptr;
 }
 
+void GameState::init() {
+	entityManager_ = new EntityManager();
+}
+
 void GameState::update() {
 	entityManager_->update();
 	//tambi�n deber�a actualizar la l�gica de modo de juego
