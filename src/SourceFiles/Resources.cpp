@@ -12,8 +12,9 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	// room backgrounds
 	{ BoilerRoom,resourcesPath + "textures/Background_BoilerRoom.png"},
-	{ GymRoom,resourcesPath + "textures/Background_GymRoom.png"},
+	{ GymRoom,resourcesPath + "textures/Background_gym.png"},
 	{ LivingRoom,resourcesPath + "textures/Background_LivingRoom.png"},
+	{ GardenRoom,resourcesPath + "textures/Background_garden.png"},
 
 	// UI
 	{ ActiveHealth, resourcesPath + "textures/VidaActiva.png" },
