@@ -13,6 +13,7 @@ void Hands::init()
 {
 	playerData_ = GETCMP1_(PlayerData);
 	collider_ = GETCMP1_(Collider);
+	armLengthPhysics_ = CONST(double, "ARM_LENGTH_PHYSICS");
 	handSize_ = (CONST(double, "HAND_SIZE"));
 	ib_ = playerData_->getBinder();
 	if (tex_ == nullptr) {

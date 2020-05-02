@@ -107,9 +107,7 @@ void SDL_Game::start() {
 	if (inputHandler_->getNumControllers() > 0) {
 		while (!exit_) {
 			Uint32 startTime = getTime();
-			gamestateMachine_->handleInput();
-			gamestateMachine_->update();
-			gamestateMachine_->render();
+			gamestateMachine_->gameCycle();
 			Uint32 frameTime = getTime() - startTime;
 			if (frameTime < MS_PER_FRAME_)
 				SDL_Delay(MS_PER_FRAME_ - frameTime);

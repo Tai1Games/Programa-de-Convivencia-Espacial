@@ -46,6 +46,11 @@ protected:
 
 	int calculateCoinsDropped(int coinsPlayer);
 
+private:
+	double maxThrowSpeed_ = 0;
+	double minThrowSpeed_ = 0;
+	double spinOnThrowSpeed_ = 0;
+
 public:
 	Weapon(WeaponID wId, int impctDmg) : Component(ComponentType::Weapon), weaponType_(wId), impactDamage_(impctDmg){}
 	Weapon(ComponentType::CmpId compType, WeaponID wId, int impactDmg) : Component(compType), weaponType_(wId), impactDamage_(impactDmg) {}

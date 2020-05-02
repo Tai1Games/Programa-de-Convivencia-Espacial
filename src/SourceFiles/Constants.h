@@ -33,6 +33,7 @@ enum States
 	play,
 	pause,
 	midGame,
+	transition,
 	//No toques
 	NUMBER_OF_STATES
 };
