@@ -52,7 +52,7 @@ void Bullet::onCollisionEnter(Collision* c)
 		else {
 			Wallet* wallet = GETCMP2(c->entity, Wallet);
 			if (wallet != nullptr) {
-				c->collisionHandler->addCoinDrop(std::make_tuple(wallet, pData, CONST(int, "BANANA_BULLET_COIN_DMG")));
+				c->collisionHandler->addCoinDrop(std::make_tuple(wallet, pData, CONST(int, "BULLET_COIN_DMG")));
 				needToDelete = true;
 			}
 		}

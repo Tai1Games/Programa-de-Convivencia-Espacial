@@ -55,6 +55,7 @@ enum WeaponID {
 	Slipper,
 	Mando,
 	Tomato,
+	Banana,
 
 	WEAPON_NUMBER
 };
