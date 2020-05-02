@@ -10,8 +10,10 @@ void Bullet::init()
 
 void Bullet::update()
 {
-	if (col_->getPos().x < 0 || col_->getPos().y > winWidth_ || //se elimina si se sale de la pantalla
+	if (SDL_Game::instance()->getTime() > limitTime_) needToDelete = true;
+	else if (col_->getPos().x < 0 || col_->getPos().y > winWidth_ || //se elimina si se sale de la pantalla
 		col_->getPos().y < 0 || col_->getPos().y > winHeight_) needToDelete = true;
+
 
 	if (needToDelete) {
 		setActive(false);
@@ -32,6 +34,7 @@ void Bullet::setActive(bool a, b2Vec2 pos, b2Vec2 size, b2Vec2 vel, int texture,
 		viewer_->setTexture(texture);
 		damage_ = damage;
 		player_ = player;
+		limitTime_ = SDL_Game::instance()->getTime() + CONST(double, "BULLET_DESTROY_TIME");
 	}
 }
 

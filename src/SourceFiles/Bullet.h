@@ -15,6 +15,7 @@ private:
 	Viewer* viewer_;
 	int player_, damage_ = 0, winWidth_, winHeight_;
 	bool needToDelete = false;
+	double limitTime_=0;
 
 public:
 	Bullet():Component(ComponentType::Bullet){}
