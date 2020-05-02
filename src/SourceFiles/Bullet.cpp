@@ -6,7 +6,7 @@ void Bullet::init()
 	viewer_ = GETCMP1_(Viewer);
 }
 
-void Bullet::setActive(bool a, b2Vec2 pos, b2Vec2 size, int texture, int damage)
+void Bullet::setActive(bool a, b2Vec2 pos, b2Vec2 size, b2Vec2 vel, int texture, int damage)
 {
 	entity_->setActive(a);
 	viewer_->setDrawable(a);
@@ -14,6 +14,7 @@ void Bullet::setActive(bool a, b2Vec2 pos, b2Vec2 size, int texture, int damage)
 
 	if (a) { //hacer movidas
 		col_->getBody()->SetTransform(pos,0);
+		col_->applyLinearImpulse(vel, { 0,0 });
 		//SIZE------------
 		viewer_->setTexture(texture);
 		damage_ = damage;

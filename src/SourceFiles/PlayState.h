@@ -6,6 +6,7 @@
 #include "checkML.h"
 #include "collisionHandler.h"
 #include "Resources.h"
+#include "BulletPool.h"
 
 using namespace std;
 
@@ -35,6 +36,7 @@ private:
 		{"GymRoom",Resources::GymRoom}
 	};
 	TileMap* tilemap_;
+	BulletPool bulletPool_;
 
 public:
 	PlayState(GameMode* gMode, string tmap);

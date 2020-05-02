@@ -6,7 +6,6 @@
 #include "FireBallPool.h"
 #include "TomatoPool.h" //DELETE THIS
 #include "BananaPool.h" //DELETE THIS	
-#include "BulletPool.h" //DELETE THIS
 
 class CapitalismGameMode : public GameMode
 {
@@ -18,7 +17,6 @@ private:
 	//NEED TO DELETE-------
 	TomatoPool tomatoPool_;
 	BananaPool bananaPool_;
-	BulletPool bulletPool_;
 	//---------------------
 	double timeSinceStart_ = 0;
 	double timeSinceSpawn_ = 0;

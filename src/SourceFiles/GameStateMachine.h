@@ -22,5 +22,6 @@ public:
 	void update();
 	void render();
 	void handleInput();
+	GameState* getState() { return states_[currentState_]; }
 };
 

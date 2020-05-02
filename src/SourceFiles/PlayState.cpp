@@ -63,6 +63,10 @@ void PlayState::init() {
 	tilemap_->createWeapons();
 
 	gameMode_->init(this);
+
+
+	bulletPool_.init(entityManager_, physicsWorld_);
+	bulletPool_.addBullet({ 5,5 }, { 0,0 }, { 1,1 }, Resources::Negro, 0);
 }
 
 void PlayState::update() {

@@ -15,6 +15,6 @@ public:
 	~Bullet(){}
 
 	virtual void init();
-	virtual void setActive(bool a, b2Vec2 pos = { 0,0 }, b2Vec2 size = { 0,0 }, int texture = 0, int damage = 0);
+	virtual void setActive(bool a, b2Vec2 pos = { 0,0 }, b2Vec2 size = { 0,0 }, b2Vec2 vel = {0,0}, int texture = 0, int damage = 0);
 };
 
