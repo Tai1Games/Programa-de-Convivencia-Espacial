@@ -17,8 +17,10 @@ TransitionState::TransitionState(int fromState, int toState, vector<GameState*>*
 
 void TransitionState::update() {
 	currentTransitionFrame_++;
-	if (currentTransitionFrame_ == transitionFrames_)
+	if (currentTransitionFrame_ == transitionFrames_) {
+		(*gameStatesVector_)[currentState_]->resetScene();
 		currentState_ = toState_;
+	}
 }
 
 void TransitionState::render() {

@@ -34,6 +34,10 @@ void GameState::handleInput() {
 		entityManager_->handleInput();
 }
 
+void GameState::resetScene()
+{
+}
+
 void GameState::DebugInput() {
 	InputHandler* ih = SDL_Game::instance()->getInputHandler();
 	for (int i = 0; i < ih->getNumControllers(); i++)
