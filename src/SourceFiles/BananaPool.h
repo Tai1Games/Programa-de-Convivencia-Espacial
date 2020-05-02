@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "BananaWeapon.h"
 #include "ObjectFactory.h"
+#include "BulletPool.h"
 
 class BananaPool
 {
@@ -12,6 +13,6 @@ private :
 public:
 	BananaPool();
 	~BananaPool(){}
-	void init(EntityManager* eMan, b2World* physicsWorld);
+	void init(EntityManager* eMan, b2World* physicsWorld, BulletPool* bp);
 	void addBanana(b2Vec2 pos);
 };

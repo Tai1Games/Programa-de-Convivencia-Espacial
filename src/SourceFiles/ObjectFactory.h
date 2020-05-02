@@ -5,6 +5,7 @@
 class EntityManager;
 class Weapon;
 class FireBallPool;
+class BulletPool;
 
 class ObjectFactory
 {
@@ -52,7 +53,7 @@ public:
 
 	static Entity* makeCarnivorousePlant(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
-	static Entity* makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
+	static Entity* makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, BulletPool* bp);
 
 	static Entity* makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld);
 };

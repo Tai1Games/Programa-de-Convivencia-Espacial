@@ -3,22 +3,15 @@
 void BananaWeapon::init()
 {
 	ActionableWeapon::init();
-	pEmitterBanana_ = GETCMP1_(ParticleEmitter);
 	colBanana_ = GETCMP1_(Collider);
 	viewer_ = GETCMP1_(Viewer);
-	playState_ = static_cast<PlayState*>(SDL_Game::instance()->getStateMachine()->getState());
 }
 
 void BananaWeapon::action()
 {	
-	pEmitterBanana_->setPositionCollider(currentHand_->getColHands_());
-	pEmitterBanana_->setDirection({ 0,.1 });
-	pEmitterBanana_->PlayStop();
-
-	//setActive(false);
-	//entity_->setActive(false);
-	//DISPARAR BALA Y DESACTIVAR ESTA ENTIDAD
-	
+	setActive(false);
+	entity_->setActive(false);
+	bulletPool_->addBullet({ 5,5 }, { 0,0 }, { 1,1 }, Resources::Negro, 0);
 }
 
 void BananaWeapon::setActive(bool a, b2Vec2 pos)

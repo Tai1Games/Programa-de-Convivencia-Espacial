@@ -25,6 +25,7 @@
 #include "AnimatedViewer.h"
 #include "BananaWeapon.h"
 #include "Bullet.h"
+#include "BulletPool.h"
 
 
 Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
@@ -289,7 +290,7 @@ Entity* ObjectFactory::makeCarnivorousePlant(EntityManager* entityManager, b2Wor
 	return planta;
 }
 
-Entity* ObjectFactory::makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
+Entity* ObjectFactory::makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, BulletPool* pb)
 {
 	entityManager->addExistingEntity(e);
 
@@ -299,11 +300,12 @@ Entity* ObjectFactory::makeBanana(Entity* e, EntityManager* entityManager, b2Wor
 	e->addComponent<Viewer>(Resources::Banana);
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::BananaSkin, 100, 1, 5, 1000, 50, 100, 0, 360);
 	pE->setMaxParticles(1);
-	e->addComponent<BananaWeapon>();
+	e->addComponent<BananaWeapon>(pb);
 	e->addComponent<ColliderViewer>();
 
 	return e;
 }
+
 
 Entity* ObjectFactory::makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld)
 {

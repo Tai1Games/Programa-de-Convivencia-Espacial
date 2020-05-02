@@ -16,7 +16,6 @@ private:
 	SDL_Rect canvasTimerRect_;
 	//NEED TO DELETE-------
 	TomatoPool tomatoPool_;
-	BananaPool bananaPool_;
 	//---------------------
 	double timeSinceStart_ = 0;
 	double timeSinceSpawn_ = 0;

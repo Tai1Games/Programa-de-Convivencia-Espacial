@@ -22,8 +22,6 @@ PlayState::PlayState(GameMode* gMode, string tmap):GameState(),
 
 
 PlayState::~PlayState() {
-	//for (Entity* i : deadBodies) { delete i; }
-	//for (Collider* i : collDeadBodies) { delete i; }
 	delete gameMode_;			gameMode_ = nullptr;
 	delete tilemap_;			tilemap_ = nullptr;
 	delete entityManager_;		entityManager_ = nullptr;
@@ -64,9 +62,10 @@ void PlayState::init() {
 
 	gameMode_->init(this);
 
-
 	bulletPool_.init(entityManager_, physicsWorld_);
-	bulletPool_.addBullet({ 5,5 }, { 0,0 }, { 1,1 }, Resources::Negro, 0);
+	bananaPool_.init(entityManager_, physicsWorld_, &bulletPool_);
+
+	bananaPool_.addBanana({ 40,20 });
 }
 
 void PlayState::update() {
@@ -110,3 +109,4 @@ void PlayState::createDeadBodies() {
 	}
 	collisionHandler_->clearBodyData();
 }
+
