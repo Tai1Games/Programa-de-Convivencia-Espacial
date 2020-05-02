@@ -14,9 +14,11 @@ private:
 	bool rocketAnimationEnded_ = false;
 	bool spaceStationAnimationStarted_ = false;
 	int currentFrame = 0;
+	int framesUntilNextShake_ = 0;
+	float spaceStationScaleFactor_ = 1;
 
 	Texture* fondo= nullptr;
-
+	b2Vec2 spaceStationOffset = b2Vec2(0, 0);
 	std::vector<AnimatedViewer*> playerRockets_;
 	AnimatedViewer* spaceStationViewer_ = nullptr;
 
@@ -29,7 +31,10 @@ private:
 	int framesUntilSpaceStationAnimationEnds_ = 0;
 	int rocketXPositionObjective_ = 0;
 	int distanceGainedPerFrame_ = 2;
-	double spaceStationGrowthPerFrame_ = 0.05;
+	int framesBetweenShakes_ = 5;
+	int shakeOffsetDistance_ = 3;
+	int maxScaleSpaceStation_ = 4;
+	float scaleGrowthPerFrame_ = 0.5;
 
 	int spaceStationWidht_ = 300;
 	int spaceStationHeight_ = 150;
