@@ -15,6 +15,8 @@ void PlayerController::init()
 	attachesToObj_ = GETCMP1_(AttachesToObjects);
 	playerNumber_ = playerData_->getPlayerNumber();
 	ib = playerData_->getBinder();
+	KeyboardBinder* bindAux = static_cast<KeyboardBinder*>(ib);
+	if (bindAux != nullptr) kBinder = bindAux;
 
 	maxImpulseGrabbed_ = CONST(float, "IMPULSE_GRABBED");
 	maxImpulseFloating_ = CONST(float, "IMPULSE_FLOATING");
@@ -42,6 +44,7 @@ void PlayerController::handleInput()
 		chargingImpulse_ = false;
 		chargedFrames_ = 0;
 		impulseForce_ = 0;
+		if (kBinder != nullptr) kBinder->grabbed = false;
 	}
 }
 

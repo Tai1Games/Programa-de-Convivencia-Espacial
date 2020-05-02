@@ -17,6 +17,10 @@ struct KeyCursor {
 		switch (player)
 		{
 		case 1: {
+			Up = SDLK_w;
+			Left = SDLK_a;
+			Down = SDLK_s;
+			Right = SDLK_d;
 		}
 		break;
 		case 2: {
@@ -41,14 +45,24 @@ struct KeyboardMapping {
 		pickWeapon = SDLK_e,
 		throwWeapon = SDLK_e,
 		attack = SDLK_q, 
+		attack_secondary = SDLK_r,
 		impulse = SDLK_c,
+		impulse_secondary = SDLK_c,
 		pause = SDLK_ESCAPE;
 
 	KeyboardMapping(int player = 1) {
 		switch (player)
 		{
 		case 1: {
-
+			cursor = KeyCursor(1);
+				grab = SDLK_z,
+				pickWeapon = SDLK_y,
+				throwWeapon = SDLK_u,
+				attack = SDLK_q,
+				attack_secondary = SDLK_r,
+				impulse = SDLK_LSHIFT,
+				impulse_secondary = SDLK_f,
+				pause = SDLK_ESCAPE;
 		}
 		break;
 		case 2: {
@@ -96,11 +110,20 @@ protected:
 public:
 	KeyboardBinder(KeyboardMapping m) : InputBinder(), map_(m) {}
 	KeyboardBinder(int defaultMap) : InputBinder(), map_(defaultMap) {}
+	bool grabbed = false;
 	virtual bool holdGrab() {
-		return ih->isKeyDown(map_.grab);
+		if (!grabbed && ih->isKeyDown(map_.grab)) {
+			return true;
+		}
+		return false;
+		//return (!grabbed && ih->isKeyDown(map_.grab) /*|| ih->isKeyDown(map_.grab_secondary)*/);
 	}
 	virtual bool releaseGrab() {
-		return ih->isKeyJustUp(map_.grab);
+		if (grabbed && ih->isKeyDown(map_.grab)) {
+			return true;
+		}
+		return false;
+		//return (ih->isKeyJustUp(map_.grab) /*|| ih->isKeyJustUp(map_.grab_secondary)*/);
 	}
 	virtual bool pressPick() {
 		return ih->isKeyJustDown(map_.pickWeapon);
@@ -134,13 +157,13 @@ public:
 		return lastDir;
 	}
 	virtual bool pressImpulse() {
-		return ih->isKeyJustDown(map_.impulse);
+		return (ih->isKeyJustDown(map_.impulse) || ih->isKeyJustDown(map_.impulse_secondary));
 	}
 	virtual bool holdImpulse() {
-		return ih->isKeyDown(map_.impulse);
+		return (ih->isKeyDown(map_.impulse) || ih->isKeyDown(map_.impulse_secondary));
 	}
 	virtual bool releaseImpulse() {
-		return ih->isKeyJustUp(map_.impulse);
+		return (ih->isKeyJustUp(map_.impulse) || ih->isKeyJustUp(map_.impulse_secondary));
 	}
 	virtual bool pressAttack() {
 		return ih->isKeyJustDown(map_.attack);

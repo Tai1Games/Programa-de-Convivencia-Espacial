@@ -26,6 +26,9 @@ private:
 	AttachesToObjects* attachesToObj_ = nullptr;
 	PlayerData* playerData_ = nullptr;
 	InputBinder* ib = nullptr;
+
+	bool usingKeyboard = false;
+	KeyboardBinder* kBinder = nullptr;
 public:
 	PlayerController();
 	virtual ~PlayerController() { Component::~Component(); };
