@@ -56,12 +56,24 @@ void MidGameState::update()
 	currentFrame++;
 
 	if (currentFrame >= framesUntilNextShake_) {
-	
-		int randDirX = 1, randDirY = 1;
-		if (rand() % 2 == 0) randDirX = -1;
-		if (rand() % 2 == 0) randDirY = -1;
+		if (!rocketsGoingOutAnimationStarted_) {
 
-		playerRockets_[roundWinner_]->setOffset(b2Vec2(rand() % shakeOffsetDistance_ * randDirX, rand() % shakeOffsetDistance_ * randDirY));
+			int randDirX = 1, randDirY = 1;
+			if (rand() % 2 == 0) randDirX = -1;
+			if (rand() % 2 == 0) randDirY = -1;
+
+			playerRockets_[roundWinner_]->setOffset(b2Vec2(rand() % shakeOffsetDistance_ * randDirX, rand() % shakeOffsetDistance_ * randDirY));
+		}
+
+		else {
+			for (int k = 0; k < playerRockets_.size(); k++) {
+				int randDirX = 1, randDirY = 1;
+				if (rand() % 2 == 0) randDirX = -1;
+				if (rand() % 2 == 0) randDirY = -1;
+
+				playerRockets_[k]->setOffset(b2Vec2(rand() % shakeOffsetDistance_ * randDirX, rand() % shakeOffsetDistance_ * randDirY));
+			}
+		}
 
 		framesUntilNextShake_ = currentFrame + framesBetweenShakes_;
 	}
@@ -85,9 +97,22 @@ void MidGameState::update()
 	else if (rocketAnimationStarted_ && !rocketAnimationEnded_) {
 		playerRockets_[roundWinner_]->setPosUIElement(b2Vec2(playerRockets_[roundWinner_]->getPosUIElement().x + distanceGainedPerFrame_, playerRockets_[roundWinner_]->getPosUIElement().y));
 
-		if (playerRockets_[roundWinner_]->getPosUIElement().x > rocketXPositionObjective_) rocketAnimationEnded_ = true;
+		if (playerRockets_[roundWinner_]->getPosUIElement().x > rocketXPositionObjective_) {
+			rocketAnimationEnded_ = true;
+			rocketsGoingOutAnimationStarted_ = true;
+			framesUntilRocketsGoingOutEnds_ = currentFrame + rocketsMovingOutFramesDuration_;
+		}
 	}
-	else if (rocketAnimationEnded_ && spaceStationScaleFactor_ <= maxScaleSpaceStation_) {
+	else if (rocketsGoingOutAnimationStarted_ && !rocketsGoingOutAnimationEnded_) {
+		for (int k = 0; k < playerRockets_.size(); k++) {
+			int dirY = 1;
+			if (k < playerRockets_.size() / 2) dirY = -1;
+			playerRockets_[k]->setPosUIElement(b2Vec2(playerRockets_[k]->getPosUIElement().x + rocketMovementX_, playerRockets_[k]->getPosUIElement().y + rocketMovementY_ * dirY));
+		}
+		if (currentFrame >= framesUntilRocketsGoingOutEnds_) rocketsGoingOutAnimationEnded_ = true;
+	}
+
+	else if (spaceStationAnimationStarted_ && spaceStationScaleFactor_ <= maxScaleSpaceStation_) {
 		spaceStationScaleFactor_ += scaleGrowthPerFrame_;
 
 		//// calculate new x and y
@@ -95,7 +120,7 @@ void MidGameState::update()
 		//double new_y = (spaceStationViewer_->getPosUIElement().y - (150 * spaceStationScaleFactor_ - (150 * spaceStationScaleFactor_ - 0.5)) / 2);
 
 		//spaceStationViewer_->setOffset(b2Vec2(300 / 2, 150 / 2));
-		//spaceStationViewer_->setScale(spaceStationScaleFactor_);
+		spaceStationViewer_->setScale(spaceStationScaleFactor_);
 		//spaceStationViewer_->setPosUIElement(b2Vec2(new_x, new_y));
 
 		//NO SABEMOS HACER MATES.

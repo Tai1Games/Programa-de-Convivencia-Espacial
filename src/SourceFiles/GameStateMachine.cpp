@@ -78,21 +78,15 @@ void GameStateMachine::loadState(int state, int numberOfPlayers, int gameMode, s
 					states_[state] = new PlayState(new TimeGameMode(numberOfPlayers), tileMap);
 					break;
 				}
-				break;
-			}
-			case States::pause:
-				//if (states_[state] != nullptr)	delete states_[state];
-				states_[state] = new PauseState();
-				break;
-			case States::midGame:
-				states_[state] = new MidGameState(numberOfPlayers, 1);
-				break;
 			}
 			break;
 		}
 		case States::pause:
 			//if (states_[state] != nullptr)	delete states_[state];
 			states_[state] = new PauseState();
+			break;
+		case States::midGame:
+			states_[state] = new MidGameState(numberOfPlayers, 1);
 			break;
 		}
 		//inicializar la nueva escena

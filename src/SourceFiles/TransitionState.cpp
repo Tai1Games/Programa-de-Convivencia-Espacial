@@ -24,7 +24,6 @@ void TransitionState::update() {
 void TransitionState::render() {
 	if (currentTransitionFrame_ < transitionFrames_ * 2) {
 		(*gameStatesVector_)[currentState_]->render();
-		cout << transitionFrames_ << " " << currentTransitionFrame_ << " " << 255 - (currentTransitionFrame_ - transitionFrames_) * frameToAlphaRatio_ << endl;
 		if (currentTransitionFrame_ <= transitionFrames_)
 			SDL_SetRenderDrawColor(SDL_Game::instance()->getRenderer(), 0, 0, 0, currentTransitionFrame_ * frameToAlphaRatio_);
 		else {
