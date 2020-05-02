@@ -41,14 +41,16 @@ struct KeyCursor {
 struct KeyboardMapping {
 	KeyCursor cursor; //Teclas de movimiento para PureKeyboardBinder
 	//Varias teclas
-	SDL_Keycode grab = SDLK_SPACE,
-		pickWeapon = SDLK_e,
-		throwWeapon = SDLK_e,
-		attack = SDLK_q, 
-		attack_secondary = SDLK_r,
-		impulse = SDLK_c,
-		impulse_secondary = SDLK_c,
-		pause = SDLK_ESCAPE;
+	SDL_Keycode grab,
+		pickWeapon,
+		pickWeapon_secondary,
+		throwWeapon,
+		throwWeapon_secondary,
+		attack, 
+		attack_secondary,
+		impulse,
+		impulse_secondary,
+		pause;
 
 	KeyboardMapping(int player = 1) {
 		switch (player)
@@ -56,10 +58,12 @@ struct KeyboardMapping {
 		case 1: {
 			cursor = KeyCursor(1);
 				grab = SDLK_z,
-				pickWeapon = SDLK_y,
-				throwWeapon = SDLK_u,
-				attack = SDLK_q,
-				attack_secondary = SDLK_r,
+				pickWeapon = SDLK_q,
+				pickWeapon_secondary = SDLK_r,
+				throwWeapon = SDLK_q,
+				throwWeapon_secondary = SDLK_r,
+				attack = SDLK_TAB,
+				attack_secondary = SDLK_e,
 				impulse = SDLK_LSHIFT,
 				impulse_secondary = SDLK_f,
 				pause = SDLK_ESCAPE;
@@ -112,24 +116,16 @@ public:
 	KeyboardBinder(int defaultMap) : InputBinder(), map_(defaultMap) {}
 	bool grabbed = false;
 	virtual bool holdGrab() {
-		if (!grabbed && ih->isKeyDown(map_.grab)) {
-			return true;
-		}
-		return false;
-		//return (!grabbed && ih->isKeyDown(map_.grab) /*|| ih->isKeyDown(map_.grab_secondary)*/);
+		return (!grabbed && ih->isKeyDown(map_.grab));
 	}
 	virtual bool releaseGrab() {
-		if (grabbed && ih->isKeyDown(map_.grab)) {
-			return true;
-		}
-		return false;
-		//return (ih->isKeyJustUp(map_.grab) /*|| ih->isKeyJustUp(map_.grab_secondary)*/);
+		return(!grabbed && ih->isKeyJustDown(map_.grab));
 	}
 	virtual bool pressPick() {
-		return ih->isKeyJustDown(map_.pickWeapon);
+		return (ih->isKeyJustDown(map_.pickWeapon) || ih->isKeyJustDown(map_.pickWeapon_secondary));
 	}
 	virtual bool pressThrow() {
-		return ih->isKeyJustDown(map_.throwWeapon);
+		return (ih->isKeyJustDown(map_.throwWeapon) || ih->isKeyJustDown(map_.throwWeapon_secondary));
 	}
 	//como sigamos con la pelea juro que me como a alguien
 	virtual b2Vec2 getAimDir() = 0;
@@ -166,7 +162,7 @@ public:
 		return (ih->isKeyJustUp(map_.impulse) || ih->isKeyJustUp(map_.impulse_secondary));
 	}
 	virtual bool pressAttack() {
-		return ih->isKeyJustDown(map_.attack);
+		return (ih->isKeyJustDown(map_.attack) || ih->isKeyJustDown(map_.attack_secondary));
 	}
 };
 

@@ -54,6 +54,7 @@ void PlayerController::handleInput()
 			impulseForce_ = 0;
 			chargingImpulse_ = false;
 			attachesToObj_->deAttachFromObject();
+			if (kBinder != nullptr)kBinder->grabbed = false;
 		}
 	}
 }
