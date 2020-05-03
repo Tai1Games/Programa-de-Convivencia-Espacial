@@ -94,7 +94,7 @@ void PlayState::handleInput()
 			SDL_Game::instance()->getStateMachine()->setPauseOwner(i);
 		}
 
-		else if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_DPAD_UP)) {
+		else if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_BACK)) {
 			SDL_Game::instance()->getAudioMngr()->pauseMusic();
 			SDL_Game::instance()->getStateMachine()->transitionToState(States::midGame, ih->getNumControllers());
 		}
