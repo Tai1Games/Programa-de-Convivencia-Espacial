@@ -34,7 +34,8 @@ private:
 	std::map<string, Resources::TextureId> resourceMap_ = { //añadir aquí los mapas que se vayan haciendo
 		{"LivingRoom",Resources::LivingRoom},
 		{"BoilerRoom",Resources::BoilerRoom},
-		{"GymRoom",Resources::GymRoom}
+		{"GymRoom",Resources::GymRoom},
+		{"GardenRoom",Resources::GardenRoom}
 	};
 	TileMap* tilemap_;
 	BulletPool bulletPool_;

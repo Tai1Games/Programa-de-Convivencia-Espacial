@@ -22,6 +22,7 @@ public:
 		BoilerRoom,
 		GymRoom,
 		LivingRoom,
+		GardenRoom,
 
 		// UI
 		ActiveHealth,
