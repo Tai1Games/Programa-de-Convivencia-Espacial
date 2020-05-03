@@ -19,6 +19,8 @@ void MidGameState::init()
 	//Fondo del modo	
 	fondo= SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::RocketRoom);
 
+	distanceGainedByPoint_ = (CONST(int, "WINDOW_WIDTH")- CONST(int, "START_POSITION")) / totalRounds;
+
 	int initPos = (CONST(int, "WINDOW_HEIGHT") / 2) - (-distanceBetweenRockets_ / 2 + (distanceBetweenRockets_ / 2 * numPlayers_));
 
 	SDL_Rect rocketRect;
@@ -33,14 +35,14 @@ void MidGameState::init()
 	stationRect.h = 150;
 
 	Entity* spaceStation = entityManager_->addEntity();
-	spaceStationViewer_ = spaceStation->addComponent<AnimatedViewer>(Resources::SpaceStation, stationRect, 3, b2Vec2(CONST(int, "WINDOW_WIDTH") / 2 - spaceStationWidht_ / 2, CONST(int, "WINDOW_HEIGHT") / 2 - spaceStationHeight_ / 2), 1, 0);
+	spaceStationViewer_ = spaceStation->addComponent<AnimatedViewer>(Resources::SpaceStation, stationRect, 3, b2Vec2(CONST(int, "WINDOW_WIDTH") / 2 - CONST(int, "SPACE_STATION_WIDTH") / 2, CONST(int, "WINDOW_HEIGHT") / 2 - CONST(int, "SPACE_STATION_HEIGHT") / 2), 1, 0);
 
 	for (int k = 0; k < numPlayers_; k++) {
 		Entity* newRocket = entityManager_->addEntity();
 		//We could move the rockets using only the Viewer, but this will make
 		//the logic much much easier.
 
-		AnimatedViewer* viewer = newRocket->addComponent<AnimatedViewer>(Resources::RocketSpriteSheet, rocketRect, 10, b2Vec2(startingXPosition_ /*+ k * distanceGainedByPoint_*/, initPos + (distanceBetweenRockets_ * k) + rocketRect.h / 2), -1, 0);
+		AnimatedViewer* viewer = newRocket->addComponent<AnimatedViewer>(Resources::RocketSpriteSheet, rocketRect, 10, b2Vec2(CONST(int, "START_POSITION") /*+ k * distanceGainedByPoint_*/, initPos + (distanceBetweenRockets_ * k) + rocketRect.h / 2), -1, 0);
 		playerRockets_.push_back(viewer);
 	}
 	//Texto para terminar la intermision
@@ -80,18 +82,19 @@ void MidGameState::update()
 			}
 		}
 
-		framesUntilNextShake_ = currentFrame + framesBetweenShakes_;
+		framesUntilNextShake_ = currentFrame + CONST(int, "FRAMES_PER_SHAKE");
 	}
 
 	if (currentState == waiting) {
-		if (currentFrame == watingStateDuration_) {
+		if (currentFrame == CONST(int, "WAITING_DURATION")) {
 			currentState = movingWinner;
 			rocketXPositionObjective_ = playerRockets_[roundWinner_]->getPosUIElement().x + distanceGainedByPoint_;
 		}
+	
 	}
 
 	else if (currentState == movingWinner) {
-		playerRockets_[roundWinner_]->setPosUIElement(b2Vec2(playerRockets_[roundWinner_]->getPosUIElement().x + distanceGainedPerFrame_, playerRockets_[roundWinner_]->getPosUIElement().y));
+		playerRockets_[roundWinner_]->setPosUIElement(b2Vec2(playerRockets_[roundWinner_]->getPosUIElement().x + CONST(int, "ROCKET_VEL"), playerRockets_[roundWinner_]->getPosUIElement().y));
 
 		if (playerRockets_[roundWinner_]->getPosUIElement().x > rocketXPositionObjective_) {
 			currentState = waitingButton;
@@ -101,7 +104,7 @@ void MidGameState::update()
 	}
 	else if (currentState == waitingButton && buttonPush) {
 		currentState = zoom;
-		frameZoomStateEnds_ = currentFrame + zoomStateDuration_;
+		frameZoomStateEnds_ = currentFrame + CONST(int,"ZOOM_DURATION");
 	}
 
 	else if (currentState == zoom) {
@@ -109,7 +112,7 @@ void MidGameState::update()
 		for (int k = 0; k < playerRockets_.size(); k++) {
 			int dirY = 1;
 			if (k < playerRockets_.size() / 2) dirY = -1;
-			playerRockets_[k]->setPosUIElement(b2Vec2(playerRockets_[k]->getPosUIElement().x + rocketMovementX_, playerRockets_[k]->getPosUIElement().y + rocketMovementY_ * dirY));
+			playerRockets_[k]->setPosUIElement(b2Vec2(playerRockets_[k]->getPosUIElement().x + CONST(int, "ROCKET_SHAKE_X"), playerRockets_[k]->getPosUIElement().y + CONST(int, "ROCKET_SHAKE_Y") * dirY));
 		}
 		if (currentFrame >= frameZoomStateEnds_) {
 			//Aqui pedirá a la super clase que ya se ponga el nuevo mapa y esas cosas
@@ -118,7 +121,7 @@ void MidGameState::update()
 		} 
 
 		//Altamente provisional hasta que sepamos hacer mates
-		spaceStationScaleFactor_ += scaleGrowthPerFrame_;
+		spaceStationScaleFactor_ += CONST(double, "SCALE_GROWTH");
 		spaceStationViewer_->setScale(spaceStationScaleFactor_);
 
 		//Numeros mágicos yeiiii
@@ -146,7 +149,7 @@ void MidGameState::handleInput()
 		//Eres un prisa y solo quieres matar
 		else if (currentState != waitingButton && ih->isButtonJustDown(i, SDL_CONTROLLER_BUTTON_A)) {
 			currentState = zoom;
-			frameZoomStateEnds_ = currentFrame + zoomStateDuration_;
+			frameZoomStateEnds_ = currentFrame + CONST(int, "ZOOM_DURATION");
 		}
 	}
 	
@@ -161,6 +164,8 @@ void MidGameState::resetScene() {
 	spaceStationViewer_->setScale(spaceStationScaleFactor_);
 	buttonPush = false;
 
+	roundWinner_ = 0;	//Nos lo dará la clase superior
+
 	int initPos = (CONST(int, "WINDOW_HEIGHT") / 2) - (-distanceBetweenRockets_ / 2 + (distanceBetweenRockets_ / 2 * numPlayers_));
 
 	SDL_Rect rocketRect;
@@ -168,11 +173,11 @@ void MidGameState::resetScene() {
 	rocketRect.w = 160;
 	rocketRect.h = 76;
 
-	spaceStationViewer_->setPosUIElement(b2Vec2(CONST(int, "WINDOW_WIDTH") / 2 - spaceStationWidht_ / 2, CONST(int, "WINDOW_HEIGHT") / 2 - spaceStationHeight_ / 2));
+	spaceStationViewer_->setPosUIElement(b2Vec2(CONST(int, "WINDOW_WIDTH") / 2 - CONST(int, "SPACE_STATION_WIDTH") / 2, CONST(int, "WINDOW_HEIGHT") / 2 - CONST(int, "SPACE_STATION_HEIGHT") / 2));
 
 	int playerPoints[] = {4,2,1,3};		//Para probar pero lo dará la super clase
 
 	for (int k = 0; k < playerRockets_.size(); k++) {
-		playerRockets_[k]->setPosUIElement(b2Vec2(startingXPosition_ + distanceGainedByPoint_ * playerPoints[k], initPos + (distanceBetweenRockets_ * k) + rocketRect.h / 2));
+		playerRockets_[k]->setPosUIElement(b2Vec2(CONST(int, "START_POSITION") + distanceGainedByPoint_ * playerPoints[k], initPos + (distanceBetweenRockets_ * k) + rocketRect.h / 2));
 	}
 }
