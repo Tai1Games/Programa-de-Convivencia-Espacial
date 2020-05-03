@@ -284,6 +284,8 @@
     </ClInclude>
     <ClInclude Include="TutorialGameMode.h">
       <Filter>Header Files\GameModes</Filter>
+    <ClInclude Include="LobbyState.h">
+      <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -481,6 +483,8 @@
     </ClCompile>
     <ClCompile Include="TutorialGameMode.cpp">
       <Filter>Source Files\GameModes</Filter>
+    <ClCompile Include="LobbyState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

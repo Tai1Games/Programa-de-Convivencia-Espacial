@@ -23,6 +23,7 @@ public:
 		GymRoom,
 		LivingRoom,
 		TutorialRoom,
+		GardenRoom,
 
 		// UI
 		ActiveHealth,
@@ -41,6 +42,10 @@ public:
 		EmptyProgressBar2,
 		ProgressBar,
 		ProgressBar2,
+
+		KeyboardIcon,
+		MouseIcon,
+		ControllerIcon,
 
 		// Weapons and map items
 

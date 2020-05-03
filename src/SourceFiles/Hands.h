@@ -14,6 +14,7 @@ private:
 	b2Vec2 pos_ = b2Vec2(0, 0);
 	b2Vec2 dir_ = b2Vec2(0, 0);
 
+	double armLengthPhysics_ = 0;
 	double handSize_ = 0;
 
 	Texture* tex_ = nullptr;
@@ -25,7 +26,7 @@ private:
 	float angle_ = 0;
 	SDL_RendererFlip Flipped_ = SDL_FLIP_NONE; //si las manos estan o no flipeadas
 	Weapon* currentWeapon_ = nullptr;
-protected:
+
 public:
 	Hands(int textureId, WeaponID wId = NoWeapon);
 	~Hands() {};
@@ -43,5 +44,6 @@ public:
 	Weapon* getWeapon() { return currentWeapon_; }
 	WeaponID getWeaponID() { return currentWeaponID_; }
 	b2Vec2 getPointerPos() { return handPos_; };
+	double getArmLengthPhysics() { return armLengthPhysics_; }
 };
 

@@ -5,6 +5,8 @@
 #include "Texture.h"
 #include "Viewer.h"
 #include "Constants.h"
+#include "checkML.h"
+
 
 void MenuState::init() {
 	entityManager_ = new EntityManager();
@@ -35,8 +37,8 @@ void MenuState::handleInput()
 	else if (holdingY_ && lStickYValue > -0.2 && lStickYValue < 0.2) {
 		holdingY_ = false;
 	}
-	//avanzar
-	if (ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_A)) {
+
+	if (ih->isButtonJustDown(ownerPlayerID_, SDL_CONTROLLER_BUTTON_A)) {
 		if (menuPointer_ < 2) {
 			if (pointers_[0] < NUMBER_OF_GAMEMODES - 1) {
 				menuPointer_++;
