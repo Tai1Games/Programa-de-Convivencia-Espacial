@@ -21,10 +21,8 @@ private:
 
 	Viewer* menuCursor_ = nullptr;
 	std::vector<Entity*> texts_ [3];
-	int i = 0;
-	int j = 0;
 
-	std::map<int, string> maps_ = { //añadir aquí los mapas que se vayan haciendo
+	std::map<int, string> maps_ = { //añadir aquí los mapas que se vayan haciendo, tutorial no
 		{ 0, "LivingRoom"},
 		{ 1, "BoilerRoom"},
 		{ 2, "GymRoom"}

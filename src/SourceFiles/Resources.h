@@ -107,11 +107,27 @@ public:
 		BoilerRoomText,
 		GymRoomText,
 		//players
+		OnePlayer,
+		TwoPlayers,
+		ThreePlayers,
+		FourPlayers,
+		FivePlayers, //es solo para iterar
+
+		//tutorial	
+		Completed,
+		Slash,
+		Zero,
 		One,
 		Two,
 		Three,
-		Four,
-		Five //es solo para iterar
+		Four,	
+		MoveTutorial,
+		HoldTutorial,
+		GrabTutorial,
+		ActionTutorial,
+		ThrowTutorial,
+		DeathTutorial,
+		TutorialEnd
 	};
 
 	enum AudioId : std::size_t {

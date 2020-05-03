@@ -105,10 +105,26 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{ BoilerRoomText, "Boiler Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ GymRoomText, "Gym Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	//players
-	{ One, "1 Player", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ Two, "2 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ Three, "3 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ Four, "4 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ OnePlayer, "1 Player", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ TwoPlayers, "2 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ ThreePlayers, "3 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ FourPlayers, "4 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+
+	//Tutorial
+	{ Completed, "Completed: ", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Slash, "/", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Zero, "0", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ One, "1", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Two, "2", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Three, "3", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Four, "4", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ MoveTutorial, "Welcome to PCE! To move, hold and release the A button while pointing anywhere with the left joystick. The longer you hold, the greater the impulse! Everyone boost once to continue!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ HoldTutorial, "It's hard to give yourself a good boost out of thin air, so press the left trigger to hold on a object, like a wall. This will stop you and let you build a greater impulse. To let loose, simply release the button. Everyone hold on to something to continue!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ GrabTutorial, "Weapons will allow you to harm your oponents and sometimes even improve your mobility. Pick up weapons with the Y button. Everyone pick a weapon to continue!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ ActionTutorial, "Some weapons can be activated with the X button, which will make them shoot, attack at melee range or something else entirely. Everyone use a weapon to continue!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ ThrowTutorial, "All weapons can be thrown with the Y button, which can be used to cover great distances quickly. Everyone throw a weapon to continue!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ DeathTutorial, "In many Game Modes enough damage will kill you, which will disarm you and make you respawn. You'll leave a body behind which can be held on to. Everyone die once to finish the tutorial!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ TutorialEnd, "Congratulations! You know all the basics of PCE. Play around if you want or press Start to go to the menu and choose Salir to exit.", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 };
 
 vector<Resources::MusicInfo> Resources::musics_{

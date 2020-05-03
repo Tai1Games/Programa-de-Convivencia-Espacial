@@ -113,10 +113,10 @@ void MenuState::createText() {
 			end = Resources::LivingRoomText;
 			break;
 		case 1:
-			end = Resources::One;
+			end = Resources::OnePlayer;
 			break;
 		case 2:
-			end = Resources::Five;
+			end = Resources::FivePlayers;
 			break;
 		}
 
