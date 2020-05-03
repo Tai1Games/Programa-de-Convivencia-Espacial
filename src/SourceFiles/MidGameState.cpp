@@ -49,12 +49,12 @@ void MidGameState::init()
 		//We could move the rockets using only the Viewer, but this will make
 		//the logic much much easier.
 
-		AnimatedViewer* viewer = newRocket->addComponent<AnimatedViewer>(Resources::RocketSpriteSheet, rocketRect, 10, b2Vec2(CONST(int, "START_POSITION") /*+ k * distanceGainedByPoint_*/, initPos + (distanceBetweenRockets_ * k) + rocketRect.h / 2), -1, 0);
+		AnimatedViewer* viewer = newRocket->addComponent<AnimatedViewer>(Resources::RocketSpriteSheet, rocketRect, 10, b2Vec2(CONST(int, "START_POSITION"), initPos + (distanceBetweenRockets_ * k) + rocketRect.h / 2), -1, 0);
 		playerRockets_.push_back(viewer);
 	}
 	//Texto para terminar la intermision
 	continueText = entityManager_->addEntity();
-	continueText->addComponent<Viewer>(Resources::ContinueText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 400, CONST(int, "WINDOW_HEIGHT") - 130), 1, 0);
+	continueText->addComponent<Viewer>(Resources::ContinueText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 500, CONST(int, "WINDOW_HEIGHT") - 130), 1, 0);
 	continueText->setActive(false);
 }
 
@@ -92,57 +92,60 @@ void MidGameState::update()
 		framesUntilNextShake_ = currentFrame + CONST(int, "FRAMES_PER_SHAKE");
 	}
 
-	if (currentState == waiting) {
-		if (currentFrame == CONST(int, "WAITING_DURATION")) {
-			currentState = movingWinner;
-			rocketXPositionObjective_ = playerRockets_[roundWinner_]->getPosUIElement().x + distanceGainedByPoint_;
-		}
-	
-	}
+	switch (currentState) {
+		case animationState::waiting:
+			if (currentFrame >= CONST(int, "WAITING_DURATION")) {
+				currentState = movingWinner;
+				rocketXPositionObjective_ = playerRockets_[roundWinner_]->getPosUIElement().x + distanceGainedByPoint_;
+			}
+		break;
 
-	else if (currentState == movingWinner) {
-		playerRockets_[roundWinner_]->setPosUIElement(b2Vec2(playerRockets_[roundWinner_]->getPosUIElement().x + CONST(int, "ROCKET_VEL"), playerRockets_[roundWinner_]->getPosUIElement().y));
+		case animationState::movingWinner:
+			playerRockets_[roundWinner_]->setPosUIElement(b2Vec2(playerRockets_[roundWinner_]->getPosUIElement().x + CONST(int, "ROCKET_VEL"), playerRockets_[roundWinner_]->getPosUIElement().y));
 
-		if (playerRockets_[roundWinner_]->getPosUIElement().x > rocketXPositionObjective_) {
-			currentState = waitingButton;
-			continueText->setActive(true);
-			//frameZoomStateEnds_ = currentFrame + zoomStateDuration_;
-		}
-	}
-	else if (currentState == waitingButton && buttonPush) {
-		currentState = zoom;
-		frameZoomStateEnds_ = currentFrame + CONST(int,"ZOOM_DURATION");
+			if (playerRockets_[roundWinner_]->getPosUIElement().x > rocketXPositionObjective_) {
+				currentState = waitingButton;
+				continueText->setActive(true);
+				//frameZoomStateEnds_ = currentFrame + zoomStateDuration_;
+			}
+		break;
 
-		for (int i = 0; i < markers.size(); i++) {
-			markers[i]->setActive(false);
-		}
-	}
+		case animationState::waitingButton:
+			if (buttonPush) {
+				currentState = zoom;
+				frameZoomStateEnds_ = currentFrame + CONST(int, "ZOOM_DURATION");
 
-	else if (currentState == zoom) {
+				for (int i = 0; i < markers.size(); i++) {
+					markers[i]->setActive(false);
+				}
+			}
+		break;
 
-		for (int k = 0; k < playerRockets_.size(); k++) {
-			int dirY = 1;
-			if (k < playerRockets_.size() / 2) dirY = -1;
-			playerRockets_[k]->setPosUIElement(b2Vec2(playerRockets_[k]->getPosUIElement().x + CONST(int, "ROCKET_SHAKE_X"), playerRockets_[k]->getPosUIElement().y + CONST(int, "ROCKET_SHAKE_Y") * dirY));
-		}
-		if (currentFrame >= frameZoomStateEnds_) {
-			//Aqui pedirá a la super clase que ya se ponga el nuevo mapa y esas cosas
-			SDL_Game::instance()->getAudioMngr()->resumeMusic();
-			SDL_Game::instance()->getStateMachine()->transitionToState(States::play);
+		case animationState::zoom:
+			for (int k = 0; k < playerRockets_.size(); k++) {
+				int dirY = 1;
+				if (k < playerRockets_.size() / 2) dirY = -1;
+				playerRockets_[k]->setPosUIElement(b2Vec2(playerRockets_[k]->getPosUIElement().x + CONST(int, "ROCKET_SHAKE_X"), playerRockets_[k]->getPosUIElement().y + CONST(int, "ROCKET_SHAKE_Y") * dirY));
+			}
+			if (currentFrame >= frameZoomStateEnds_) {
+				//Aqui pedirá a la super clase que ya se ponga el nuevo mapa y esas cosas
+				SDL_Game::instance()->getAudioMngr()->resumeMusic();
+				SDL_Game::instance()->getStateMachine()->transitionToState(States::play);
 
-		} 
+			}
 
-		//Altamente provisional hasta que sepamos hacer mates
-		spaceStationScaleFactor_ += CONST(double, "SCALE_GROWTH");
-		spaceStationViewer_->setScale(spaceStationScaleFactor_);
+			//Altamente provisional hasta que sepamos hacer mates
+			spaceStationScaleFactor_ += CONST(double, "SCALE_GROWTH");
+			spaceStationViewer_->setScale(spaceStationScaleFactor_);
 
-		//Numeros mágicos yeiiii
-		double new_x = (spaceStationViewer_->getPosUIElement().x - 3.0);
-		double new_y = (spaceStationViewer_->getPosUIElement().y - 1.25);
+			//Numeros mágicos yeiiii
+			double new_x = (spaceStationViewer_->getPosUIElement().x - 3.0);
+			double new_y = (spaceStationViewer_->getPosUIElement().y - 1.25);
 
-		spaceStationViewer_->setScale(spaceStationScaleFactor_);
-		spaceStationViewer_->setPosUIElement(b2Vec2(new_x, new_y));
-		//NO SABEMOS HACER MATES.
+			spaceStationViewer_->setScale(spaceStationScaleFactor_);
+			spaceStationViewer_->setPosUIElement(b2Vec2(new_x, new_y));
+			//NO SABEMOS HACER MATES.
+		break;
 	}
 	
 }

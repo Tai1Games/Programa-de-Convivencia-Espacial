@@ -6,7 +6,6 @@ class AnimatedViewer : public Viewer
 {
 private:
 	int frame_ = 0;
-	int nframes_ = 1;
 	int timeElapsed_ = 0;
 	int timePerFrame_ = 0;
 public:
