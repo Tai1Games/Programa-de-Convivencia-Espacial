@@ -6,7 +6,7 @@ class ThrownByPlayer : public Component
 {
 private:
 	int lastOwner_ = -1;
-	int timeWhenThrown_ = 0;
+	double timeWhenThrown_ = 0;
 	double actTime_ = 0;
 	double timeToDeleteOwner_ = 5;
 	double sPerFrame_ = 0;
