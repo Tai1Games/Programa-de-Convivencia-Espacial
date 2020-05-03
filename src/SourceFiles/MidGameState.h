@@ -30,6 +30,8 @@ private:
 	int currentFrame = 0;
 	int frameZoomStateEnds_ = 0;
 
+	//Markers
+	std::vector <Entity*> markers;
 
 	//rocketS
 	int distanceBetweenRockets_ = 200;	//Distancia normal

@@ -25,6 +25,7 @@ void MidGameState::init()
 	for (int i = 0; i < totalRounds; i++) {
 		Entity* marker = entityManager_->addEntity();
 		marker->addComponent<Viewer>(Resources::SliderControl, b2Vec2((CONST(int, "START_POSITION")+ distanceGainedByPoint_*i)- CONST(int, "MARKER_WIDTH"), CONST(int, "MARKER_Y_POSITION")), 2, 0);
+		markers.push_back(marker);
 	}
 	
 	int initPos = (CONST(int, "WINDOW_HEIGHT") / 2) - (-distanceBetweenRockets_ / 2 + (distanceBetweenRockets_ / 2 * numPlayers_));
@@ -53,7 +54,7 @@ void MidGameState::init()
 	}
 	//Texto para terminar la intermision
 	continueText = entityManager_->addEntity();
-	continueText->addComponent<Viewer>(Resources::ContinueText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 400, (CONST(int, "WINDOW_HEIGHT") / 2) + 180), 1, 0);
+	continueText->addComponent<Viewer>(Resources::ContinueText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 400, CONST(int, "WINDOW_HEIGHT") - 130), 1, 0);
 	continueText->setActive(false);
 }
 
@@ -111,6 +112,10 @@ void MidGameState::update()
 	else if (currentState == waitingButton && buttonPush) {
 		currentState = zoom;
 		frameZoomStateEnds_ = currentFrame + CONST(int,"ZOOM_DURATION");
+
+		for (int i = 0; i < markers.size(); i++) {
+			markers[i]->setActive(false);
+		}
 	}
 
 	else if (currentState == zoom) {
@@ -183,6 +188,10 @@ void MidGameState::resetScene() {
 	spaceStationViewer_->setPosUIElement(b2Vec2(CONST(int, "WINDOW_WIDTH") / 2 - CONST(int, "SPACE_STATION_WIDTH") / 2, CONST(int, "WINDOW_HEIGHT") / 2 - CONST(int, "SPACE_STATION_HEIGHT") / 2));
 
 	int playerPoints[] = {4,2,1,3};		//Para probar pero lo dará la super clase
+
+	for (int i = 0; i < markers.size(); i++) {
+		markers[i]->setActive(true);
+	}
 
 	for (int k = 0; k < playerRockets_.size(); k++) {
 		playerRockets_[k]->setPosUIElement(b2Vec2(CONST(int, "START_POSITION") + distanceGainedByPoint_ * playerPoints[k], initPos + (distanceBetweenRockets_ * k) + rocketRect.h / 2));
