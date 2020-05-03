@@ -68,7 +68,7 @@ void TutorialGameMode::init(PlayState* game) {
 }
 
 void TutorialGameMode::update() {
-	if (tutorialPointer_ < 6) {
+	if (tutorialPointer_ < Resources::TutorialEnd - Resources::MoveTutorial) {
 		InputHandler* ih = SDL_Game::instance()->getInputHandler();
 		//check if current tutorial is complete and if so, advance to next
 		int progress = 0;
