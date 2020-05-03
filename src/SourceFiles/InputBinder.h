@@ -68,7 +68,9 @@ struct KeyboardMapping {
 				attack_secondary = SDLK_r,
 				impulse = SDLK_TAB,
 				impulse_secondary = SDLK_f,
-				pause = SDLK_ESCAPE;
+				pause = SDLK_ESCAPE,
+				forward = SDLK_e,
+				back = SDLK_q;
 		}
 		break;
 		case 2: {
@@ -82,8 +84,8 @@ struct KeyboardMapping {
 			attack_secondary = SDLK_PERIOD,
 			impulse = SDLK_RETURN,
 			impulse_secondary = SDLK_RETURN,
-			pause = SDLK_BACKSPACE;
-			forward = SDLK_o;
+			pause = SDLK_BACKSPACE,
+			forward = SDLK_o,
 			back = SDLK_u;
 		}
 		break;
