@@ -137,6 +137,7 @@ vector<Resources::MusicInfo> Resources::musics_{
 	{ EntranceMusic , resourcesPath + "sound/entrance.mp3" },
 	{ LivingRoomMusic , resourcesPath + "sound/livingRoom.mp3" },
 	{ GymMusic , resourcesPath + "sound/gym.mp3" },
+	{ TutorialMusic , resourcesPath + "sound/tutorial.mp3" },
 	{ BoilerRoomMusic, resourcesPath + "sound/boilerRoom.mp3" }
 };
 
