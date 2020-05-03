@@ -27,3 +27,7 @@ void ThrownByPlayer::addPointsToOwner()
 	if (lastOwner_ != -1)
 		gameMode_->playerKillsPlayer(lastOwner_);
 }
+
+void ThrownByPlayer::SetOwner(int playerId) {
+	lastOwner_ = playerId;
+}

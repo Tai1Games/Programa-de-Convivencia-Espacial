@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-#include "TimeGameMode.h"
+#include "GameMode.h"
 
 class ThrownByPlayer : public Component
 {
@@ -10,10 +10,10 @@ private:
 	double actTime_ = 0;
 	double timeToDeleteOwner_ = 5;
 	double sPerFrame_ = 0;
-	TimeGameMode* gameMode_ = nullptr;
+	GameMode* gameMode_ = nullptr;
 
 public:
-	ThrownByPlayer(TimeGameMode* gameMode) :
+	ThrownByPlayer(GameMode* gameMode) :
 		Component(ComponentType::ThrownByPlayer),gameMode_(gameMode) {
 		lastOwner_ = -1;
 	}
@@ -23,4 +23,5 @@ public:
 	void throwObject(int playerId);
 	inline int getOwnerId() const { return lastOwner_; }
 	void addPointsToOwner();
+	void SetOwner(int playerId);
 };

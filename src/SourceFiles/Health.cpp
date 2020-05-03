@@ -123,20 +123,20 @@ void Health::onCollisionEnter(Collision* c)
 				playerWhoHitMe = GETCMP_FROM_FIXTURE_(fix, PlayerData);
 			}
 
-		if (!subtractLife(impact)) {
-			// player is killed by a weapon
-			if (objThrown != nullptr) {
-				if(objThrown->getOwnerId() != GETCMP1_(PlayerData)->getPlayerNumber())
-					objThrown->addPointsToOwner();
-			}
-
-			// player is killed by another player at high speed
-			else if (playerWhoHitMe != nullptr) {
-				if (playerWhoHitMe->getPlayerNumber() != GETCMP1_(PlayerData)->getPlayerNumber()) {
-					GameMode* s = c->collisionHandler->getGamemode();
-					s->playerKillsPlayer(playerWhoHitMe->getPlayerNumber());
+			if (!subtractLife(impact)) {
+				// player is killed by a weapon
+				if (objThrown != nullptr) {
+					if (objThrown->getOwnerId() != GETCMP1_(PlayerData)->getPlayerNumber())
+						objThrown->addPointsToOwner();
 				}
-			}
+
+				// player is killed by another player at high speed
+				else if (playerWhoHitMe != nullptr) {
+					if (playerWhoHitMe->getPlayerNumber() != GETCMP1_(PlayerData)->getPlayerNumber()) {
+						GameMode* s = c->collisionHandler->getGamemode();
+						s->playerKillsPlayer(playerWhoHitMe->getPlayerNumber());
+					}
+				}
 
 				playerDead(c->collisionHandler);
 			}

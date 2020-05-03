@@ -245,8 +245,6 @@ void TileMap::createWeapons()
 		case 8: //Confeti
 			break;
 		}
-		if(e != nullptr)
-			entityManager_->getWeaponVector()->push_back(e);
 	}
 }
 
