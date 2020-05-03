@@ -33,6 +33,7 @@ enum States
 	play,
 	pause,
 	transition,
+	lobby,
 	//No toques
 	NUMBER_OF_STATES
 };

@@ -42,6 +42,10 @@ public:
 		ProgressBar,
 		ProgressBar2,
 
+		KeyboardIcon,
+		MouseIcon,
+		ControllerIcon,
+
 		// Weapons and map items
 
 		// Players

@@ -282,6 +282,9 @@
     <ClInclude Include="TransitionState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
+    <ClInclude Include="LobbyState.h">
+      <Filter>Header Files\Gamestates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -474,6 +477,9 @@
       <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
     <ClCompile Include="TransitionState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="LobbyState.cpp">
       <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
   </ItemGroup>
