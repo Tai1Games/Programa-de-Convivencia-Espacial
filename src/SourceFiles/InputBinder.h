@@ -57,26 +57,30 @@ struct KeyboardMapping {
 		{
 		case 1: {
 			cursor = KeyCursor(1);
-				grab = SDLK_z,
+				grab = SDLK_LSHIFT,
 				pickWeapon = SDLK_q,
 				pickWeapon_secondary = SDLK_r,
 				throwWeapon = SDLK_q,
 				throwWeapon_secondary = SDLK_r,
-				attack = SDLK_TAB,
+				attack = SDLK_z,
 				attack_secondary = SDLK_e,
-				impulse = SDLK_LSHIFT,
+				impulse = SDLK_TAB,
 				impulse_secondary = SDLK_f,
 				pause = SDLK_ESCAPE;
 		}
 		break;
 		case 2: {
 			cursor = KeyCursor(2);
-			grab = SDLK_RALT,
+			grab = SDLK_RSHIFT,
 			pickWeapon = SDLK_o,
+			pickWeapon_secondary = SDLK_COMMA,
 			throwWeapon = SDLK_o,
-			attack = SDLK_u,
-			impulse = SDLK_PERIOD,
-			pause = SDLK_7;
+			throwWeapon_secondary = SDLK_COMMA,
+			attack = SDLK_p,
+			attack_secondary = SDLK_PERIOD,
+			impulse = SDLK_RETURN,
+			impulse_secondary = SDLK_RETURN,
+			pause = SDLK_BACKSPACE;
 		}
 		break;
 		default:
@@ -119,7 +123,7 @@ public:
 		return (!grabbed && ih->isKeyDown(map_.grab));
 	}
 	virtual bool releaseGrab() {
-		return(!grabbed && ih->isKeyJustDown(map_.grab));
+		return(grabbed && ih->isKeyJustDown(map_.grab));
 	}
 	virtual bool pressPick() {
 		return (ih->isKeyJustDown(map_.pickWeapon) || ih->isKeyJustDown(map_.pickWeapon_secondary));
