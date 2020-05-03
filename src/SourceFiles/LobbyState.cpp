@@ -178,7 +178,7 @@ void LobbyState::changeKbToMouse()
 	it->kbmId = 0;
 	delete it->inputBinder;
 	it->inputBinder = new MouseKeyboardBinder(nullptr, 1);
-	it->binderType = BinderType::ControllerB;
+	it->binderType = BinderType::MouseB;
 
 }
 
