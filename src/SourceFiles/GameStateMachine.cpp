@@ -79,11 +79,13 @@ void GameStateMachine::loadState(int state, int numberOfPlayers, int gameMode, s
 					break;
 				}
 			}
-			case States::lobby: {
-				states_[state] = new LobbyState();
-			}
-			break;
+			
 		}
+		break; // :P
+		case States::lobby: {
+			states_[state] = new LobbyState();
+		}
+		break;
 		case States::pause:
 			//if (states_[state] != nullptr)	delete states_[state];
 			states_[state] = new PauseState();

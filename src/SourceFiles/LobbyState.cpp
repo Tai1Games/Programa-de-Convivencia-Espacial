@@ -42,6 +42,9 @@ void LobbyState::handleInput()
 void LobbyState::update()
 {
 	outDebug();
+	if (ready()) {
+		SDL_Game::instance()->getStateMachine()->changeToState(States::menu, 0);
+	}
 }
 
 void LobbyState::render() {
