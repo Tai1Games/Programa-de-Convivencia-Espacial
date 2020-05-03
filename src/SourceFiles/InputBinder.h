@@ -59,11 +59,11 @@ struct KeyboardMapping {
 			cursor = KeyCursor(1);
 				grab = SDLK_LSHIFT,
 				pickWeapon = SDLK_q,
-				pickWeapon_secondary = SDLK_r,
+				pickWeapon_secondary = SDLK_e,
 				throwWeapon = SDLK_q,
-				throwWeapon_secondary = SDLK_r,
+				throwWeapon_secondary = SDLK_e,
 				attack = SDLK_z,
-				attack_secondary = SDLK_e,
+				attack_secondary = SDLK_r,
 				impulse = SDLK_TAB,
 				impulse_secondary = SDLK_f,
 				pause = SDLK_ESCAPE;
