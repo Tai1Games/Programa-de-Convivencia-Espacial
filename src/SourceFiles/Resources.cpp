@@ -12,9 +12,10 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	// room backgrounds
 	{ BoilerRoom,resourcesPath + "textures/Background_BoilerRoom.png"},
-	{ GymRoom,resourcesPath + "textures/Background_GymRoom.png"},
+	{ GymRoom,resourcesPath + "textures/Background_gym.png"},
 	{ LivingRoom,resourcesPath + "textures/Background_LivingRoom.png"},
 	{ RocketRoom ,resourcesPath + "textures/Background_RocketRoom.png"},
+	{ GardenRoom,resourcesPath + "textures/Background_garden.png"},
 
 	// UI
 	{ ActiveHealth, resourcesPath + "textures/VidaActiva.png" },
@@ -33,6 +34,9 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ EmptyProgressBar2, resourcesPath + "textures/EmptyProgressBar2.png"},
 	{ ProgressBar, resourcesPath + "textures/ProgressBar.png"},
 	{ ProgressBar2, resourcesPath + "textures/ProgressBar2.png"},
+	{ MouseIcon, resourcesPath + "textures/mouse_icon.png"},
+	{ KeyboardIcon, resourcesPath + "textures/keyboard_icon.png"},
+	{ ControllerIcon, resourcesPath + "textures/controller_icon.png"},
 
 	{ Rocket, resourcesPath + "textures/Rocket.png"},
 	{ SpaceStation, resourcesPath + "textures/SpaceStation.png"},

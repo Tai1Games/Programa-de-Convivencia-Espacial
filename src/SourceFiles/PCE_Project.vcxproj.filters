@@ -283,6 +283,7 @@
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
     <ClInclude Include="MidGameState.h">
+    <ClInclude Include="LobbyState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
   </ItemGroup>
@@ -480,6 +481,7 @@
       <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
     <ClCompile Include="MidGameState.cpp">
+    <ClCompile Include="LobbyState.cpp">
       <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
   </ItemGroup>

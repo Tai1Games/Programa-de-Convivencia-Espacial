@@ -23,6 +23,7 @@ public:
 		GymRoom,
 		LivingRoom,
 		RocketRoom,
+		GardenRoom,
 
 		// UI
 		ActiveHealth,
@@ -46,6 +47,9 @@ public:
 		Rocket,
 		SpaceStation,
 		Token,
+		KeyboardIcon,
+		MouseIcon,
+		ControllerIcon,
 
 		// Weapons and map items
 

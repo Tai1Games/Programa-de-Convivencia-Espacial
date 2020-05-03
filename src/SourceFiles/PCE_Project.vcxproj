@@ -216,6 +216,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="ImpulseViewer.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="InputBinder.h" />
+    <ClInclude Include="LobbyState.h" />
     <ClInclude Include="MeleeWeapon.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="MidGameState.h" />
@@ -287,6 +288,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="ImpulseViewer.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="InputBinder.cpp" />
+    <ClCompile Include="LobbyState.cpp" />
     <ClCompile Include="MeleeWeapon.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="MidGameState.cpp" />

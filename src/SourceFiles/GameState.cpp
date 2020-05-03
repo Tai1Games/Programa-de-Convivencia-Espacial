@@ -24,7 +24,10 @@ void GameState::update() {
 }
 
 void GameState::render() {
-	if (entityManager_ != nullptr) entityManager_->render();
+
+	if(entityManager_!=nullptr)
+		entityManager_->render();
+
 }
 
 void GameState::handleInput() {
