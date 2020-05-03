@@ -116,7 +116,11 @@ public:
 		Two,
 		Three,
 		Four,
-		Five //es solo para iterar
+		Five, //es solo para iterar
+
+
+		//MidGame 
+		ContinueText
 	};
 
 	enum AudioId : std::size_t {

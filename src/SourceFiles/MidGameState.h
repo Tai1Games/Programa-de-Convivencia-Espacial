@@ -12,12 +12,18 @@ private:
 	{
 		waiting,
 		movingWinner,
+		waitingButton,
 		zoom,
 	};
 
 	int numPlayers_;
 	int roundWinner_;
+	vector<int> points;
 	Texture* fondo = nullptr;
+
+	//Input
+	bool buttonPush = false;
+	Entity* continueText = nullptr;
 	//time
 
 	animationState currentState = waiting;
@@ -42,7 +48,7 @@ private:
 
 	//station
 	float spaceStationScaleFactor_ = 1;
-	float scaleGrowthPerFrame_ = 0.5;
+	float scaleGrowthPerFrame_ = 0.02;
 	b2Vec2 spaceStationOffset = b2Vec2(0, 0);
 	AnimatedViewer* spaceStationViewer_ = nullptr;
 

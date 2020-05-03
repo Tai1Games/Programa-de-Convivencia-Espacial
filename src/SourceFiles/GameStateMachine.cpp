@@ -85,8 +85,8 @@ void GameStateMachine::loadState(int state, int numberOfPlayers, int gameMode, s
 			//if (states_[state] != nullptr)	delete states_[state];
 			states_[state] = new PauseState();
 			break;
-		case States::midGame:
-			states_[state] = new MidGameState(numberOfPlayers, 1);
+		case States::midGame:			//Jugadores totales-----Jugador que gana la ronda
+			states_[state] = new MidGameState(numberOfPlayers+3, 1);
 			break;
 		}
 		//inicializar la nueva escena

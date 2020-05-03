@@ -112,6 +112,10 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{ Two, "2 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ Three, "3 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ Four, "4 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+
+
+	//MidGame
+	{ ContinueText, "Pulsa A para continuar", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 };
 
 vector<Resources::MusicInfo> Resources::musics_{

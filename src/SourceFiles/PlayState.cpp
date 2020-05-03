@@ -88,12 +88,17 @@ void PlayState::handleInput()
 	GameState::handleInput();
 	InputHandler* ih = SDL_Game::instance()->getInputHandler();
 	for (int i = 0; i < ih->getNumControllers(); i++) {
-		if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_START) ||
-			ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_GUIDE)) {
+		if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_START)/* ||
+			ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_GUIDE)*/) {
 			SDL_Game::instance()->getAudioMngr()->pauseMusic();
-			//SDL_Game::instance()->getStateMachine()->setPauseOwner(i);
-			SDL_Game::instance()->getStateMachine()->transitionToState(States::midGame, 4);
+			SDL_Game::instance()->getStateMachine()->setPauseOwner(i);
 		}
+
+		else if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_GUIDE)) {
+			SDL_Game::instance()->getAudioMngr()->pauseMusic();
+			SDL_Game::instance()->getStateMachine()->transitionToState(States::midGame, ih->getNumControllers());
+		}
+			
 	}
 }
 
