@@ -57,4 +57,11 @@ void Bullet::onCollisionEnter(Collision* c)
 			}
 		}
 	}
+	else { //dentro de un else para que si ha colisionado con un player ni se moleste en entrar aqui
+		Collider* col = c->entity->getComponent<Collider>(ComponentType::Collider);
+		if (col != nullptr) {
+			if (col->getFixture(0)->GetFilterData().categoryBits == Collider::CollisionLayer::Wall ||
+				col->getFixture(0)->GetFilterData().categoryBits == Collider::CollisionLayer::NonGrababbleWall) needToDelete = true;
+		}
+	}
 }
