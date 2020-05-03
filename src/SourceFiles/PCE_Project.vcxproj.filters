@@ -283,6 +283,8 @@
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
     <ClInclude Include="MidGameState.h">
+      <Filter>Header Files\Gamestates</Filter>
+    </ClInclude>
     <ClInclude Include="LobbyState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
@@ -481,6 +483,8 @@
       <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
     <ClCompile Include="MidGameState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
     <ClCompile Include="LobbyState.cpp">
       <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
