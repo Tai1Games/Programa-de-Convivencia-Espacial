@@ -57,7 +57,7 @@ void MenuState::handleInput()
 		}
 	}
 	//ir para atrás
-	else if (ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_B)) {
+	else if (ih->isButtonJustDown(ownerPlayerID_, SDL_CONTROLLER_BUTTON_B)) {
 		if (menuPointer_ > 0) {
 			if (pointers_[0] != NUMBER_OF_GAMEMODES - 1) {
 				menuPointer_--;

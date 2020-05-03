@@ -483,6 +483,7 @@
     </ClCompile>
     <ClCompile Include="TutorialGameMode.cpp">
       <Filter>Source Files\GameModes</Filter>
+    </ClCompile>
     <ClCompile Include="LobbyState.cpp">
       <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
