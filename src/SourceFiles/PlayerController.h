@@ -27,7 +27,6 @@ private:
 	PlayerData* playerData_ = nullptr;
 	InputBinder* ib = nullptr;
 
-	bool usingKeyboard = false;
 	KeyboardBinder* kBinder = nullptr;
 public:
 	PlayerController();
