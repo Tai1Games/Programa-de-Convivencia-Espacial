@@ -21,6 +21,12 @@ void MidGameState::init()
 
 	distanceGainedByPoint_ = (CONST(int, "WINDOW_WIDTH")- CONST(int, "START_POSITION")) / totalRounds;
 
+	//Marcadores de las rondas
+	for (int i = 0; i < totalRounds; i++) {
+		Entity* marker = entityManager_->addEntity();
+		marker->addComponent<Viewer>(Resources::SliderControl, b2Vec2((CONST(int, "START_POSITION")+ distanceGainedByPoint_*i)- CONST(int, "MARKER_WIDTH"), CONST(int, "MARKER_Y_POSITION")), 2, 0);
+	}
+	
 	int initPos = (CONST(int, "WINDOW_HEIGHT") / 2) - (-distanceBetweenRockets_ / 2 + (distanceBetweenRockets_ / 2 * numPlayers_));
 
 	SDL_Rect rocketRect;
@@ -116,7 +122,8 @@ void MidGameState::update()
 		}
 		if (currentFrame >= frameZoomStateEnds_) {
 			//Aqui pedirá a la super clase que ya se ponga el nuevo mapa y esas cosas
-			SDL_Game::instance()->getStateMachine()->transitionToState(States::play, 4, 1, "BoilerRoom");
+			SDL_Game::instance()->getAudioMngr()->resumeMusic();
+			SDL_Game::instance()->getStateMachine()->transitionToState(States::play);
 
 		} 
 
