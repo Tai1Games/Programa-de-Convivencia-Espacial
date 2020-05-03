@@ -10,6 +10,7 @@
 #include "PauseState.h"
 #include "MenuState.h"
 #include "TransitionState.h"
+#include "LobbyState.h"
 
 GameStateMachine::GameStateMachine() {
 	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
@@ -78,8 +79,13 @@ void GameStateMachine::loadState(int state, int numberOfPlayers, int gameMode, s
 					break;
 				}
 			}
-			break;
+			
 		}
+		break; // :P
+		case States::lobby: {
+			states_[state] = new LobbyState();
+		}
+		break;
 		case States::pause:
 			//if (states_[state] != nullptr)	delete states_[state];
 			states_[state] = new PauseState();

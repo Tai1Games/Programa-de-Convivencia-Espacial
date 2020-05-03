@@ -6,7 +6,7 @@
 class GameState
 {
 protected:
-	EntityManager* entityManager_;
+	EntityManager* entityManager_ = nullptr;
 	//HUD
 #pragma region Debug
 	void DebugInput();

@@ -5,6 +5,8 @@
 #include "Texture.h"
 #include "Viewer.h"
 #include "Constants.h"
+#include "checkML.h"
+
 
 void MenuState::init() {
 	entityManager_ = new EntityManager();
@@ -35,7 +37,7 @@ void MenuState::handleInput()
 		holdingY_ = false;
 	}
 
-	if (ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_A)) {
+	if (ih->isButtonJustDown(ownerPlayerID_, SDL_CONTROLLER_BUTTON_A)) {
 		if (menuPointer_ < 2) {
 			if (modePointer_ != 5) {
 				menuPointer_++;
