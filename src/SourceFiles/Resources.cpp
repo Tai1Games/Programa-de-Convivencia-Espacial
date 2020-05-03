@@ -36,6 +36,7 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	{ Rocket, resourcesPath + "textures/Rocket.png"},
 	{ SpaceStation, resourcesPath + "textures/SpaceStation.png"},
+	{ Token, resourcesPath + "textures/Marcador.png"},
 
 	// Weapons and map items
 	{ Ball, resourcesPath + "textures/PelotaSaltarina.png" },

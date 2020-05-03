@@ -45,6 +45,7 @@ public:
 		//midGameState
 		Rocket,
 		SpaceStation,
+		Token,
 
 		// Weapons and map items
 

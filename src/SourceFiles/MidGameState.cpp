@@ -24,7 +24,7 @@ void MidGameState::init()
 	//Marcadores de las rondas
 	for (int i = 0; i < totalRounds; i++) {
 		Entity* marker = entityManager_->addEntity();
-		marker->addComponent<Viewer>(Resources::SliderControl, b2Vec2((CONST(int, "START_POSITION")+ distanceGainedByPoint_*i)- CONST(int, "MARKER_WIDTH"), CONST(int, "MARKER_Y_POSITION")), 2, 0);
+		marker->addComponent<Viewer>(Resources::Token, b2Vec2((CONST(int, "START_POSITION")+ distanceGainedByPoint_*i)- CONST(int, "MARKER_WIDTH"), CONST(int, "MARKER_Y_POSITION")), 2, 0);
 		markers.push_back(marker);
 	}
 	
