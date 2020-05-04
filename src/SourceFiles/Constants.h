@@ -33,6 +33,7 @@ enum States
 	play,
 	pause,
 	transition,
+	lobby,
 	//No toques
 	NUMBER_OF_STATES
 };
@@ -43,6 +44,7 @@ enum GamemodeID {
 	Stocks,
 	WiFight,
 	Timed,
+	Tutorial,
 	NUMBER_OF_GAMEMODES
 };
 

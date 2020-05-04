@@ -26,6 +26,8 @@ private:
 	AttachesToObjects* attachesToObj_ = nullptr;
 	PlayerData* playerData_ = nullptr;
 	InputBinder* ib = nullptr;
+
+	KeyboardBinder* kBinder = nullptr;
 public:
 	PlayerController();
 	virtual ~PlayerController() { Component::~Component(); };
@@ -35,5 +37,6 @@ public:
 	void update() override;
 
 	float getImpulseForce() { return impulseForce_; };
+	void resetImpulseForce() { impulseForce_ = 0;  chargedFrames_ = 0; };
 };
 

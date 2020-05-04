@@ -2,6 +2,8 @@
 #include "Resources.h"
 #include "InputHandler.h"
 #include "PlayState.h"
+#include "checkML.h"
+
 
 unique_ptr<SDL_Game> SDL_Game::instance_;
 
@@ -101,7 +103,7 @@ void SDL_Game::closeResources() {
 
 void SDL_Game::start() {
 	exit_ = false;
-	gamestateMachine_->changeToState(States::menu, 0);
+	gamestateMachine_->changeToState(States::lobby, 0);
 	//gamestateMachine_->changeToState(States::play, 4, GamemodeID::Timed, "BoilerRoom"); //BoilerRoom, LivingRoom, GymRoom
 
 	if (inputHandler_->getNumControllers() > 0) {
