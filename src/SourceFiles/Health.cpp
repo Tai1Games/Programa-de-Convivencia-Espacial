@@ -100,12 +100,10 @@ void Health::onCollisionEnter(Collision* c)
 			b2Vec2 force = c->hitFixture->GetBody()->GetMass() * c->hitFixture->GetBody()->GetLinearVelocity();
 			int impact = force.Length();
 			Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
-			ThrownByPlayer* objThrown = nullptr;
 			PlayerData* playerWhoHitMe = nullptr;
 			//Si se impacta con un arma al umbral m�s alto de fuerza, se recibe su daño de impacto
 			if (w != nullptr) {
 				impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
-				objThrown = GETCMP_FROM_FIXTURE_(fix, ThrownByPlayer);
 			}
 			else {
 				//Depending on the force of impact we apply damage to the player
@@ -124,6 +122,7 @@ void Health::onCollisionEnter(Collision* c)
 			}
 
 			if (!subtractLife(impact)) {
+				ThrownByPlayer* objThrown = GETCMP_FROM_FIXTURE_(fix, ThrownByPlayer);
 				// player is killed by a weapon
 				if (objThrown != nullptr) {
 					if (objThrown->getOwnerId() != GETCMP1_(PlayerData)->getPlayerNumber())
