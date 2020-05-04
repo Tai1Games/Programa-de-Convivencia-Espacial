@@ -33,6 +33,7 @@ private:
 		{"LivingRoom",Resources::LivingRoom},
 		{"BoilerRoom",Resources::BoilerRoom},
 		{"GymRoom",Resources::GymRoom},
+		{"TutorialRoom", Resources::TutorialRoom},
 		{"GardenRoom",Resources::GardenRoom}
 	};
 	TileMap* tilemap_;

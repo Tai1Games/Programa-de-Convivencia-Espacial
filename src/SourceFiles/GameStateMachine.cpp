@@ -4,12 +4,14 @@
 #include "ControllerGameMode.h"
 #include "CapitalismGameMode.h"
 #include "TimeGameMode.h"
+#include "TutorialGameMode.h"
 #include "Constants.h"
 
 #include "PlayState.h"
 #include "PauseState.h"
 #include "MenuState.h"
 #include "TransitionState.h"
+#include "LobbyState.h"
 
 GameStateMachine::GameStateMachine() {
 	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
@@ -34,6 +36,7 @@ void GameStateMachine::changeToState(int state, int numberOfPlayers, int gameMod
 	if (state != currentState_ && state < States::NUMBER_OF_STATES) {
 		loadState(state, numberOfPlayers, gameMode, tileMap);
 		currentState_ = state;
+		states_[state]->onLoaded();
 		if (states_[States::transition] != nullptr) {
 			deleteState(States::transition);
 		}
@@ -48,13 +51,11 @@ void GameStateMachine::transitionToState(int state, int numberOfPlayers, int gam
 }
 
 void GameStateMachine::loadState(int state, int numberOfPlayers, int gameMode, string tileMap) {
-	if (state == States::menu || states_[state] == nullptr) {
+	if (states_[state] == nullptr) {
 		//create state
 		//states_[state] = new... se necesita struct? o switch tal cual xd
 		switch (state) {
-		case States::menu:
-			deleteState(States::menu); //borrar el playState y menu para poder crear otros
-			deleteState(States::play);
+		case States::menu:		
 			states_[state] = new MenuState(numberOfPlayers); //numberOfPlayers usado como ownerID
 			break;
 		case States::play:
@@ -76,10 +77,18 @@ void GameStateMachine::loadState(int state, int numberOfPlayers, int gameMode, s
 				case (GamemodeID::Timed):
 					states_[state] = new PlayState(new TimeGameMode(numberOfPlayers), tileMap);
 					break;
+				case (GamemodeID::Tutorial):
+					states_[state] = new PlayState(new TutorialGameMode(numberOfPlayers), tileMap);
+					break;
 				}
 			}
-			break;
+			
 		}
+		break; // :P
+		case States::lobby: {
+			states_[state] = new LobbyState();
+		}
+		break;
 		case States::pause:
 			//if (states_[state] != nullptr)	delete states_[state];
 			states_[state] = new PauseState();
@@ -87,6 +96,10 @@ void GameStateMachine::loadState(int state, int numberOfPlayers, int gameMode, s
 		}
 		//inicializar la nueva escena
 		states_[state]->init();
+	}
+	else if (state==States::menu){
+		//borrar playState para crear otro
+		deleteState(States::play);
 	}
 }
 

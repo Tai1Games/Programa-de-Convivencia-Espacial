@@ -6,6 +6,7 @@
 #include "AttachesToObjects.h"
 #include "CollisionHandler.h"
 #include "ThrownByPlayer.h"
+#include "PlayerController.h"
 
 Health::Health(int l) : Component(ComponentType::Health)
 {
@@ -67,6 +68,9 @@ void Health::playerDead(CollisionHandler* c)
 	Weapon* w = nullptr;
 	if (h != nullptr) w = h->getWeapon();
 	if (w != nullptr) c->dropWeapon(w);
+	//reset impulso
+	PlayerController* pc = GETCMP1_(PlayerController);
+	pc->resetImpulseForce();
 	//respawn
 	GameMode* s = c->getGamemode();
 	PlayerData* p = GETCMP1_(PlayerData);
