@@ -20,6 +20,7 @@ public:
 	virtual void render();
 	virtual void handleInput();
 	virtual void resetScene();
+	virtual void onLoaded() {};
 	EntityManager* getEntityManager() { return entityManager_; }
 };
 

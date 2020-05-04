@@ -285,6 +285,9 @@
     <ClInclude Include="MidGameState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
+    <ClInclude Include="TutorialGameMode.h">
+      <Filter>Header Files\GameModes</Filter>
+    </ClInclude>
     <ClInclude Include="LobbyState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
@@ -484,6 +487,9 @@
     </ClCompile>
     <ClCompile Include="MidGameState.cpp">
       <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialGameMode.cpp">
+      <Filter>Source Files\GameModes</Filter>
     </ClCompile>
     <ClCompile Include="LobbyState.cpp">
       <Filter>Source Files\Gamestates</Filter>
