@@ -22,6 +22,7 @@ public:
 		BoilerRoom,
 		GymRoom,
 		LivingRoom,
+		TutorialRoom,
 		GardenRoom,
 
 		// UI
@@ -103,6 +104,7 @@ public:
 		Stocks,
 		WiFight,
 		Timed,
+		Tutorial,
 		//exit
 		Exit,
 		//maps
@@ -110,11 +112,27 @@ public:
 		BoilerRoomText,
 		GymRoomText,
 		//players
+		OnePlayer,
+		TwoPlayers,
+		ThreePlayers,
+		FourPlayers,
+		FivePlayers, //es solo para iterar
+
+		//tutorial	
+		Completed,
+		Slash,
+		Zero,
 		One,
 		Two,
 		Three,
-		Four,
-		Five //es solo para iterar
+		Four,	
+		MoveTutorial,
+		HoldTutorial,
+		GrabTutorial,
+		ActionTutorial,
+		ThrowTutorial,
+		DeathTutorial,
+		TutorialEnd
 	};
 
 	enum AudioId : std::size_t {
@@ -123,7 +141,8 @@ public:
 		LivingRoomMusic = TextureId::LivingRoom,
 		GymMusic = TextureId::GymRoom,
 		BoilerRoomMusic = TextureId::BoilerRoom,
-		EntranceMusic,
+		TutorialMusic = TextureId::TutorialRoom,
+		EntranceMusic
 
 		// sound effects
 

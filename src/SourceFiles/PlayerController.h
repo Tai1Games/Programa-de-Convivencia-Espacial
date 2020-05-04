@@ -35,5 +35,6 @@ public:
 	void update() override;
 
 	float getImpulseForce() { return impulseForce_; };
+	void resetImpulseForce() { impulseForce_ = 0;  chargedFrames_ = 0; };
 };
 

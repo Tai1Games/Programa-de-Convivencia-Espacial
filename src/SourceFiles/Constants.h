@@ -44,6 +44,7 @@ enum GamemodeID {
 	Stocks,
 	WiFight,
 	Timed,
+	Tutorial,
 	NUMBER_OF_GAMEMODES
 };
 
