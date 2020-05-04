@@ -120,7 +120,7 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 
 
 	//MidGame
-	{ ContinueText, "Presiona impulso para continuar", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ ContinueText, "Press any key/button to continue", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 };
 
 vector<Resources::MusicInfo> Resources::musics_{

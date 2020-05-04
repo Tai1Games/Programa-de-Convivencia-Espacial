@@ -27,6 +27,8 @@ void MidGameState::init()
 		marker->addComponent<Viewer>(Resources::Token, b2Vec2((CONST(int, "START_POSITION")+ distanceGainedByPoint_*i)- CONST(int, "MARKER_WIDTH"), CONST(int, "MARKER_Y_POSITION")), 2, 0);
 		markers.push_back(marker);
 	}
+
+	
 	
 	int initPos = (CONST(int, "WINDOW_HEIGHT") / 2) - (-distanceBetweenRockets_ / 2 + (distanceBetweenRockets_ / 2 * numPlayers_));
 
@@ -54,7 +56,7 @@ void MidGameState::init()
 	}
 	//Texto para terminar la intermision
 	continueText = entityManager_->addEntity();
-	continueText->addComponent<Viewer>(Resources::ContinueText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 500, CONST(int, "WINDOW_HEIGHT") - 130), 1, 0);
+	continueText->addComponent<Viewer>(Resources::ContinueText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 600, CONST(int, "WINDOW_HEIGHT") - 130), 1, 0);
 	continueText->setActive(false);
 }
 
@@ -154,21 +156,20 @@ void MidGameState::handleInput()
 {
 	GameState::handleInput();
 	InputHandler* ih = SDL_Game::instance()->getInputHandler();
-	for (size_t i = 0; i < ih->getNumControllers(); i++)
-	{
-		//Has esperado para ver hasta donde se movia el cohete
-		if (currentState == waitingButton && ih->isButtonJustDown(i, SDL_CONTROLLER_BUTTON_A)) {
-			buttonPush = true;
-			continueText->setActive(false);
-		}
-		//Eres un prisa y solo quieres matar
-		else if (currentState != waitingButton && ih->isButtonJustDown(i, SDL_CONTROLLER_BUTTON_A)) {
-			currentState = zoom;
-			frameZoomStateEnds_ = currentFrame + CONST(int, "ZOOM_DURATION");
-		}
-	}
 	
+	//Has esperado para ver hasta donde se movia el cohete
+	if (currentState == waitingButton && (ih->keyDownEvent() || ih->isButonDownEvent())) {
+		buttonPush = true;
+		continueText->setActive(false);
+	}
+	//Eres un prisa y solo quieres matar
+	else if (currentState != waitingButton && (ih->keyDownEvent() || ih->isButonDownEvent())) {
+		currentState = zoom;
+		frameZoomStateEnds_ = currentFrame + CONST(int, "ZOOM_DURATION");
+	}
 }
+	
+
 
 void MidGameState::resetScene() {
 	//Reseteamos el estado a como estaba en origen
