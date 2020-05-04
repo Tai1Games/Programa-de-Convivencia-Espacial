@@ -16,6 +16,7 @@ private:
 	b2WeldJoint* joint_ = nullptr; //Joint entre el jugador y otro objeto
 	PlayerData* playerData_ = nullptr;
 	InputBinder* ib;
+	KeyboardBinder* kBinder = nullptr;
 public:
 	AttachesToObjects() : Component(ComponentType::AttachesToObjects) {};
 	~AttachesToObjects() {};
