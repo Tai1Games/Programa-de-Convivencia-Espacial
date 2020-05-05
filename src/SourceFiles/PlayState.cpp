@@ -24,8 +24,6 @@ PlayState::PlayState(GameMode* gMode, string tmap):GameState(),
 
 
 PlayState::~PlayState() {
-	//for (Entity* i : deadBodies) { delete i; }
-	//for (Collider* i : collDeadBodies) { delete i; }
 	delete gameMode_;			gameMode_ = nullptr;
 	delete tilemap_;			tilemap_ = nullptr;
 	delete entityManager_;		entityManager_ = nullptr;
@@ -59,16 +57,22 @@ void PlayState::init() {
 	
 	//MÚSICA
 	SDL_Game::instance()->getAudioMngr()->playMusic(resourceMap_[tilemapName_], -1);
-
+	
 	//Version estática de la factoria
 	tilemap_->executeMapFactory();
 	tilemap_->createWeapons();
 
 	gameMode_->init(this);
 
+	bulletPool_.init(entityManager_, physicsWorld_);
+	bananaPool_.init(entityManager_, physicsWorld_, &bulletPool_);
+
+	bananaPool_.addBanana({ 20,20 });
+	
 	for (Weapon* w : *(entityManager_->getWeaponVector())) {
 		w->getEntity()->addComponent<ThrownByPlayer>(gameMode_);
 	}
+	bulletPool_.addThrownByPlayer(gameMode_);
 }
 
 void PlayState::update() {
@@ -118,3 +122,4 @@ void PlayState::createDeadBodies() {
 	}
 	collisionHandler_->clearBodyData();
 }
+

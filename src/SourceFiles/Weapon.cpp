@@ -34,7 +34,6 @@ void Weapon::handleInput()
 {
 	if (currentHand_ == nullptr) {
 		for (int i = 0; i < playerInfo_.size(); i++) {
-
 			if (!IsPicked() && playerInfo_[i].isNear &&
 				playerInfo_[i].playerBinder->pressPick()) {
 				PickObjectBy(i);

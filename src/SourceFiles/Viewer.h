@@ -41,6 +41,7 @@ public:
 	void setClip(SDL_Rect clip) { clip_ = clip; }
 	void setNFrames(int nFrames);
 	void setOffset(b2Vec2 newOffset) { renderOffset_ = newOffset; }
+	void setTexture(int text) { textureId_ = text; tex_ = SDL_Game::instance()->getTexturesMngr()->getTexture(textureId_); } //tiene que resetear la textura como tal
 	void setScale(float scale) { scale_ = scale; }
 	/*Solo para UI elementos que no necesitan collider*/
 	void setPosUIElement(b2Vec2 pos) { pos_ = pos; }
