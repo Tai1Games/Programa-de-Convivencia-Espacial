@@ -51,7 +51,7 @@ public:
 		numPlayers_ = numPlayers; 
 		roundWinner_ = roundWinner;
 	};
-	~MidGameState();
+	virtual ~MidGameState();
 
 	virtual void init();
 	virtual void render();
@@ -59,4 +59,3 @@ public:
 	virtual void handleInput();
 	virtual void resetScene();
 };
-
