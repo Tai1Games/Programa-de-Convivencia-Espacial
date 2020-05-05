@@ -8,8 +8,6 @@ protected:
 	SDL_Rect clip_;
 	bool drawable_ = true;
 
-	//Atributos para UI elements
-	bool isUIElement_ = false;
 	b2Vec2 pos_;
 	b2Vec2 wH_;
 	float scale_;
@@ -24,6 +22,8 @@ public:
 	virtual void init() override;
 	virtual void draw() const override;
 
+	void setDrawable(bool b) { drawable_ = b; }
+	void setClip(SDL_Rect clip) { clip_ = clip; }
 	/*Solo para UI elementos que no necesitan collider*/
 	void setPosUIElement(b2Vec2 pos) { pos_ = pos; }
 	void setWHUIElement(b2Vec2 wH) { wH_ = wH; }

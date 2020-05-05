@@ -237,6 +237,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="TransitionState.h" />
     <ClInclude Include="Treadmill.h" />
     <ClInclude Include="TutorialGameMode.h" />
+    <ClInclude Include="UIViewer.h" />
     <ClInclude Include="Wallet.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="PlayState.h" />
@@ -308,6 +309,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="TransitionState.cpp" />
     <ClCompile Include="Treadmill.cpp" />
     <ClCompile Include="TutorialGameMode.cpp" />
+    <ClCompile Include="UIViewer.cpp" />
     <ClCompile Include="Wallet.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="PlayState.cpp" />
