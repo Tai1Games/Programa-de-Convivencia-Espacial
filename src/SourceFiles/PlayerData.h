@@ -25,8 +25,8 @@ public:
 		//se tiene que inicializar aquí para poder coger el collider
 		int gId = SDL_Game::instance()->getInputHandler()->getFreeGamePad();
 		cout << "Player " << playerNumber_ << " got controller " << gId << endl;
-		ib = new PureKeyboardBinder(1);
-		//ib = new ControllerBinder(gId);
+		//ib = new PureKeyboardBinder(1);
+		ib = new ControllerBinder(gId);
 	}
 };
 
