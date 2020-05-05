@@ -4,7 +4,7 @@
 #include "Entity.h"
 #include "Resources.h"
 
-class Viewer;
+class UIViewer;
 class MenuState:
 	public GameState
 {
@@ -19,7 +19,7 @@ private:
 	int xOffset_ = CONST(int, "WINDOW_WIDTH")/3;
 	int yOffset_ = CONST(int, "WINDOW_HEIGHT")/9;
 
-	Viewer* menuCursor_ = nullptr;
+	UIViewer* menuCursor_ = nullptr;
 	std::vector<Entity*> texts_ [3];
 
 	std::map<int, string> maps_ = { //añadir aquí los mapas que se vayan haciendo, tutorial no
