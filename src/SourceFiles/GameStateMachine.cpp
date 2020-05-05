@@ -59,7 +59,7 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 		//states_[state] = new... se necesita struct? o switch tal cual xd
 		switch (state) {
 		case States::menu:		
-			states_[state] = new MenuState(1); //numberOfPlayers usado como ownerID
+			states_[state] = new MenuState(0); //numberOfPlayers usado como ownerID
 			break;
 		case States::play:
 		{

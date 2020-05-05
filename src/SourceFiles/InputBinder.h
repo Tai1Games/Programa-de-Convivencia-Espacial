@@ -265,7 +265,7 @@ public:
 		return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_X);
 	}
 	virtual b2Vec2 getAimDir() {
-		return ih->getLastStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK);
+		return ih->getLastStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK));
 	}
 	virtual bool menuMove(Dir d){
 		switch (d) {

@@ -9,6 +9,7 @@ class MatchInfo
 {
 	struct PlayerInfo {
 		PlayerInfo(const PlayerLobbyInfo& info);
+		~PlayerInfo() { delete inputBinder; };
 
 		size_t playerId = 0;
 		InputBinder* inputBinder = nullptr;
@@ -17,16 +18,16 @@ class MatchInfo
 	};
 
 private:
-	vector<PlayerInfo> players_;
+	vector<PlayerInfo*> players_;
 	size_t numberOfPlayers_;
 
 public:
 	MatchInfo(size_t numberOfPlayers) { players_.reserve(numberOfPlayers); };
 	MatchInfo(const vector<PlayerLobbyInfo>& playerLobbyInfoVector);
 
-	vector<PlayerInfo>* getPlayersInfo() { return &players_; };
+	vector<PlayerInfo*>* getPlayersInfo() { return &players_; };
 
 	size_t getNumberOfPlayers() { return numberOfPlayers_; };
-	void AddVictory(size_t toPlayer, GamemodeID gameModeWon) { players_[toPlayer].matchesWon[gameModeWon]++; };
+	void AddVictory(size_t toPlayer, GamemodeID gameModeWon) { players_[toPlayer]->matchesWon[gameModeWon]++; };
 };
 
