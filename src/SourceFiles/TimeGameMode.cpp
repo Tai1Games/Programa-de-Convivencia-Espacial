@@ -29,11 +29,6 @@ void TimeGameMode::init(PlayState* game)
 		playerKills_.push_back(0); //Initializes kills vector with 0 for all players.
 	}
 
-	for (Entity* e : *(state_->getEntityManager()->getWeaponVector())) {
-		if(e != nullptr)
-			e->addComponent<ThrownByPlayer>(this);
-	}
-
 	for (int i = 0; i < players_.size(); i++) {
 
 		Entity* e = players_[i];
