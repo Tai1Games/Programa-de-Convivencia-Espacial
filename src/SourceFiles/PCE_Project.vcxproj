@@ -223,6 +223,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="LobbyState.h" />
     <ClInclude Include="MeleeWeapon.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="MidGameState.h" />
     <ClInclude Include="Pad.h" />
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="ParticleEmitter.h" />
@@ -299,6 +300,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="LobbyState.cpp" />
     <ClCompile Include="MeleeWeapon.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="MidGameState.cpp" />
     <ClCompile Include="Pad.cpp" />
     <ClCompile Include="ParticleEmitter.cpp" />
     <ClCompile Include="PauseState.cpp" />

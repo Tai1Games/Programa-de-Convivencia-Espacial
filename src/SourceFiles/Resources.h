@@ -22,6 +22,7 @@ public:
 		BoilerRoom,
 		GymRoom,
 		LivingRoom,
+		RocketRoom,
 		TutorialRoom,
 		GardenRoom,
 
@@ -43,6 +44,10 @@ public:
 		ProgressBar,
 		ProgressBar2,
 
+		//midGameState
+		Rocket,
+		SpaceStation,
+		Token,
 		KeyboardIcon,
 		MouseIcon,
 		ControllerIcon,
@@ -88,6 +93,7 @@ public:
 		Router,
 		RoombaSpriteSheet,
 		Remote,
+		RocketSpriteSheet,
 
 		// miscel�nea
 		Debug,
@@ -114,6 +120,7 @@ public:
 		LivingRoomText,
 		BoilerRoomText,
 		GymRoomText,
+
 		//players
 		OnePlayer,
 		TwoPlayers,
@@ -135,7 +142,10 @@ public:
 		ActionTutorial,
 		ThrowTutorial,
 		DeathTutorial,
-		TutorialEnd
+		TutorialEnd,
+
+		//MidGame 
+		ContinueText
 	};
 
 	enum AudioId : std::size_t {

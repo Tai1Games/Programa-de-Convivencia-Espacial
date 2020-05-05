@@ -32,6 +32,7 @@ enum States
 	menu,
 	play,
 	pause,
+	midGame,
 	transition,
 	lobby,
 	//No toques

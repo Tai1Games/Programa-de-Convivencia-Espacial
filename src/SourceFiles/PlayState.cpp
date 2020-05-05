@@ -94,9 +94,14 @@ void PlayState::handleInput()
 		if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_START) ||
 			ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_GUIDE)) {
 			SDL_Game::instance()->getAudioMngr()->pauseMusic();
-			//SDL_Game::instance()->getStateMachine()->setPauseOwner(i);
-			SDL_Game::instance()->getStateMachine()->transitionToState(States::pause);
+			SDL_Game::instance()->getStateMachine()->setPauseOwner(i);
 		}
+
+		else if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_BACK)) {
+			SDL_Game::instance()->getAudioMngr()->pauseMusic();
+			SDL_Game::instance()->getStateMachine()->transitionToState(States::midGame, ih->getNumControllers());
+		}
+			
 	}
 }
 

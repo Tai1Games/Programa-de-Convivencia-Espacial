@@ -14,6 +14,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ BoilerRoom,resourcesPath + "textures/Background_BoilerRoom.png"},
 	{ GymRoom,resourcesPath + "textures/Background_gym.png"},
 	{ LivingRoom,resourcesPath + "textures/Background_LivingRoom.png"},
+	{ RocketRoom ,resourcesPath + "textures/Background_RocketRoom.png"},
 	{ TutorialRoom,resourcesPath + "textures/Background_TutorialRoom.png"},
 	{ GardenRoom,resourcesPath + "textures/Background_garden.png"},
 
@@ -37,6 +38,10 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ MouseIcon, resourcesPath + "textures/mouse_icon.png"},
 	{ KeyboardIcon, resourcesPath + "textures/keyboard_icon.png"},
 	{ ControllerIcon, resourcesPath + "textures/controller_icon.png"},
+
+	{ Rocket, resourcesPath + "textures/Rocket.png"},
+	{ SpaceStation, resourcesPath + "textures/SpaceStation.png"},
+	{ Token, resourcesPath + "textures/Marcador.png"},
 
 	// Weapons and map items
 	{ Ball, resourcesPath + "textures/PelotaSaltarina.png" },
@@ -81,12 +86,13 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Router,resourcesPath + "textures/Router2.png" },
 	{ RoombaSpriteSheet, resourcesPath + "textures/Roomba.png"},
 	{ Remote, resourcesPath + "textures/Mando.png"},
+	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png"},
 
 	// miscelánea
 	{ Debug, resourcesPath + "textures/debug.png" },
 	{ Negro ,resourcesPath + "textures/Negro.png"},
 	{ Transparent ,resourcesPath + "textures/transparent.png"},
-	{ Tinky, resourcesPath + "textures/Tinky.png" }
+	{ Tinky, resourcesPath + "textures/Tinky.png" },
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{
@@ -132,6 +138,9 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{ ThrowTutorial, "All weapons can be thrown with the Y button, which can be used to cover great distances quickly. Everyone throw a weapon to continue!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ DeathTutorial, "In many Game Modes enough damage will kill you, which will disarm you and make you respawn. You'll leave a body behind which can be held on to. Everyone die once to finish the tutorial!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ TutorialEnd, "Congratulations! You know all the basics of PCE. Play around if you want or press Start to go to the menu and choose Salir to exit.", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+
+	//MidGame
+	{ ContinueText, "Press any key/button to continue", { COLOR(0xc7f2edff) }, FontId::NES_Chimera }
 };
 
 vector<Resources::MusicInfo> Resources::musics_{
