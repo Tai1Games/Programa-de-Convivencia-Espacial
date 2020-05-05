@@ -4,7 +4,8 @@
 #include "GameState.h"
 #include "checkML.h"
 #include "Texture.h"
-#include "MatchInfo.h"
+
+class MatchInfo;
 
 class GameStateMachine
 {
@@ -27,9 +28,9 @@ public:
 	void setMatchInfo(MatchInfo* matchInfo) { matchInfo_ = matchInfo; };
 	MatchInfo* getMatchInfo() { return matchInfo_; };
 
-	void changeToState(int state, int numberOfPlayers = 1, int gameMode = 0, std::string tileMap = "");
-	void transitionToState(int state, int numberOfPlayers = 1, int gameMode = 0, std::string tileMap = "");
-	void loadState(int state, int numberOfPlayers, int gameMode, string tileMap);
+	void changeToState(int state, int gameMode = 0, std::string tileMap = "");
+	void transitionToState(int state, int gameMode = 0, std::string tileMap = "");
+	void loadState(int state, int gameMode, string tileMap);
 	void deleteState(int state);
 
 	void gameCycle();

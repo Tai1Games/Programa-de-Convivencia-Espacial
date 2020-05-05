@@ -5,6 +5,7 @@
 #include "PlayerFactory.h"
 #include "checkML.h"
 #include "FireBallPool.h"
+#include "MatchInfo.h"
 
 class Entity;
 class PlayState;
@@ -17,6 +18,7 @@ protected:
 	Entity* winner_ = nullptr; //Player who wins the round.
 	bool roundFinished_ = false;
 	TileMap* tilemap_ = nullptr;
+	MatchInfo* matchInfo_ = nullptr;
 	int nPlayers_ = 0;
 	//Barras de progreso usadas por WiFightGameMode y ControllerGameMode(subidas a GameMode por herencia para no copiar y pegar dos veces)
 	vector<Texture*> emptyProgressBars_;
@@ -24,9 +26,10 @@ protected:
 	vector<b2Vec2> healthViewerPos_;
 	void initProgressBars();
 	void renderProgressBars(const std::vector<double>& progressValues, const double& goalScore);
+
 private:
 public:
-	GameMode(int nPlayers) : nPlayers_(nPlayers) {};
+	GameMode(MatchInfo* matchinfo) : matchInfo_(matchinfo),nPlayers_(matchInfo_->getNumberOfPlayers()) {};
 	virtual ~GameMode() {};
 	virtual void init(PlayState* state);
 	virtual void render() {};
@@ -35,4 +38,5 @@ public:
 	Entity* getRoundResults() { return winner_; }
 	virtual void setTileMap(TileMap* tm) { tilemap_ = tm; };
 	virtual void playerKillsPlayer(int killerId, int deadId = -1) {};
+	virtual void createPlayers(PlayState* state);
 };

@@ -6,6 +6,7 @@ MatchInfo::MatchInfo(const vector<PlayerLobbyInfo>& playerLobbyInfoVector) {
 	for (PlayerLobbyInfo player : playerLobbyInfoVector) {
 		players_.push_back(PlayerInfo(player));
 	}
+	numberOfPlayers_ = players_.size();
 }
 
 MatchInfo::PlayerInfo::PlayerInfo(const PlayerLobbyInfo& info) :

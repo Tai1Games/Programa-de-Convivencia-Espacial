@@ -43,12 +43,14 @@ private:
 	std::vector<Collider*> roombaColliders_;
 	std::vector<Wallet*> playerWallets_;
 public:
-	CapitalismGameMode(int nPlayers) : GameMode(nPlayers){};
+	CapitalismGameMode(MatchInfo* mInfo) : GameMode(mInfo){};
 	virtual ~CapitalismGameMode() {};
 	virtual void init(PlayState* game);
 	virtual void render();
 	virtual void update();
 	virtual bool onPlayerDead(int id) { return true; }; //Returns false when players runs out of stocks.
+	virtual void createPlayers(PlayState* game);
+
 
 	void createCoin(b2Vec2 spawnPos, int player = -1, int val = 1);
 };

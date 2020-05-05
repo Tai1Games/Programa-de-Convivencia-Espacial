@@ -2,6 +2,8 @@
 #include "checkML.h"
 #include "Resources.h"
 #include "MatchInfo.h"
+#include "InputBinder.h"
+#include "InputHandler.h"
 
 LobbyState::~LobbyState()
 {
@@ -71,7 +73,6 @@ bool LobbyState::ready()
 
 void LobbyState::outDebug()
 {
-	clear();
 	for (auto& player : joinedPlayers_)
 	{
 		cout << "Player " << player.id << " using ";
@@ -301,9 +302,4 @@ void LobbyState::handleJoinedPlayers(){
 			}
 		}
 	}
-}
-
-void LobbyState::clear2()
-{
-	system("cls");
 }

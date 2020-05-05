@@ -52,8 +52,8 @@ void MenuState::handleInput()
 			else SDL_Game::instance()->exitGame();
 		}
 		else {
-			if (pointers_[1] == -1) SDL_Game::instance()->getStateMachine()->transitionToState(States::play, pointers_[2] + 1, pointers_[0], "TutorialRoom");
-			else SDL_Game::instance()->getStateMachine()->transitionToState(States::play, pointers_[2] + 1, pointers_[0], maps_[pointers_[1]]);
+			if (pointers_[1] == -1) SDL_Game::instance()->getStateMachine()->transitionToState(States::play, pointers_[0], "TutorialRoom");
+			else SDL_Game::instance()->getStateMachine()->transitionToState(States::play, pointers_[0], maps_[pointers_[1]]);
 		}
 	}
 	//ir para atrás

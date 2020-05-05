@@ -3,7 +3,7 @@
 #include "PlayState.h"
 
 
-StocksGameMode::StocksGameMode(int nPlayers, int stocks) : GameMode(nPlayers)
+StocksGameMode::StocksGameMode(MatchInfo* mInfo, int stocks) : GameMode(mInfo)
 {
 	maxStocks_ = stocks;
 }
@@ -17,9 +17,8 @@ void StocksGameMode::init(PlayState* game){
 	//NEED TO DELETE ---
 	tomatoPool_.init(game->getEntityManager(), game->getPhysicsWorld());
 	//------------------
+	GameMode::createPlayers(game);
 	for (int i = 0; i < nPlayers_; i++) {
-		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), i,
-			Resources::Body, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, 3));
 		playerStocks_.push_back(maxStocks_); //Initializes maxStocks vector with 3 on all positions.
 	}
 	for(int i=0;i<players_.size();i++){

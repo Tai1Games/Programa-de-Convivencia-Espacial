@@ -41,7 +41,7 @@ private:
 	TomatoPool tomatoPool_;
 
 public:
-	TimeGameMode(int nPlayers);
+	TimeGameMode(MatchInfo* mInfo);
 	~TimeGameMode();
 	virtual void init(PlayState* game);
 	virtual void render();

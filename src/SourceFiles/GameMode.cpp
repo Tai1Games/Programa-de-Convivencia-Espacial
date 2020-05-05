@@ -53,3 +53,10 @@ void GameMode::renderProgressBars(const std::vector<double>& progressValues, con
 void GameMode::init(PlayState* game) {
 	state_ = game;
 }
+
+void GameMode::createPlayers(PlayState* game) {
+	for (int i = 0; i < nPlayers_; i++) {
+		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), i,
+			Resources::Body, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, 3));
+	}
+}

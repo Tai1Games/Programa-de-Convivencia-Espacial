@@ -6,6 +6,7 @@
 #include "TimeGameMode.h"
 #include "TutorialGameMode.h"
 #include "Constants.h"
+#include "MatchInfo.h"
 
 #include "PlayState.h"
 #include "PauseState.h"
@@ -34,9 +35,9 @@ void GameStateMachine::setPauseOwner(int ownerID)
 		pause->setOwner(ownerID);
 }
 
-void GameStateMachine::changeToState(int state, int numberOfPlayers, int gameMode, string tileMap) {
+void GameStateMachine::changeToState(int state, int gameMode, string tileMap) {
 	if (state != currentState_ && state < States::NUMBER_OF_STATES) {
-		loadState(state, numberOfPlayers, gameMode, tileMap);
+		loadState(state, gameMode, tileMap);
 		currentState_ = state;
 		states_[state]->onLoaded();
 		if (states_[States::transition] != nullptr) {
@@ -45,42 +46,42 @@ void GameStateMachine::changeToState(int state, int numberOfPlayers, int gameMod
 	}
 }
 
-void GameStateMachine::transitionToState(int state, int numberOfPlayers, int gameMode, string tileMap) {
-	loadState(state, numberOfPlayers, gameMode, tileMap);
+void GameStateMachine::transitionToState(int state, int gameMode, string tileMap) {
+	loadState(state, gameMode, tileMap);
 	states_[States::transition] = new TransitionState(currentState_, state, &states_);
 	states_[States::transition]->init();
 	currentState_ = States::transition;
 }
 
-void GameStateMachine::loadState(int state, int numberOfPlayers, int gameMode, string tileMap) {
+void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 	if (states_[state] == nullptr) {
 		//create state
 		//states_[state] = new... se necesita struct? o switch tal cual xd
 		switch (state) {
 		case States::menu:		
-			states_[state] = new MenuState(numberOfPlayers); //numberOfPlayers usado como ownerID
+			states_[state] = new MenuState(1); //numberOfPlayers usado como ownerID
 			break;
 		case States::play:
 		{
 			if (gameMode < NUMBER_OF_GAMEMODES) {
 				switch (gameMode) {
 				case (GamemodeID::Capitalism):
-					states_[state] = new PlayState(new CapitalismGameMode(numberOfPlayers), tileMap);
+					states_[state] = new PlayState(new CapitalismGameMode(matchInfo_), tileMap);
 					break;
 				case (GamemodeID::Controller):
-					states_[state] = new PlayState(new ControllerGameMode(numberOfPlayers), tileMap);
+					states_[state] = new PlayState(new ControllerGameMode(matchInfo_), tileMap);
 					break;
 				case (GamemodeID::Stocks):
-					states_[state] = new PlayState(new StocksGameMode(numberOfPlayers), tileMap);
+					states_[state] = new PlayState(new StocksGameMode(matchInfo_), tileMap);
 					break;
 				case (GamemodeID::WiFight):
-					states_[state] = new PlayState(new WiFightGameMode(numberOfPlayers), tileMap);
+					states_[state] = new PlayState(new WiFightGameMode(matchInfo_), tileMap);
 					break;
 				case (GamemodeID::Timed):
-					states_[state] = new PlayState(new TimeGameMode(numberOfPlayers), tileMap);
+					states_[state] = new PlayState(new TimeGameMode(matchInfo_), tileMap);
 					break;
 				case (GamemodeID::Tutorial):
-					states_[state] = new PlayState(new TutorialGameMode(numberOfPlayers), tileMap);
+					states_[state] = new PlayState(new TutorialGameMode(matchInfo_), tileMap);
 					break;
 				}
 			}
