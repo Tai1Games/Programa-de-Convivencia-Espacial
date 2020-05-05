@@ -16,6 +16,8 @@
 #include "ImpulseViewer.h"
 #include "PlayerData.h"
 #include "ParticleEmitter.h"
+#include "ThrownByPlayer.h"
+#include "Component.h"
 
 PlayState::PlayState(GameMode* gMode, string tmap):GameState(),
 	gameMode_(gMode), tilemapName_(tmap) {}
@@ -66,6 +68,10 @@ void PlayState::init() {
 	bananaPool_.init(entityManager_, physicsWorld_, &bulletPool_);
 
 	bananaPool_.addBanana({ 20,20 });
+	
+	for (Weapon* w : *(entityManager_->getWeaponVector())) {
+		w->getEntity()->addComponent<ThrownByPlayer>(gameMode_);
+	}
 }
 
 void PlayState::update() {

@@ -26,6 +26,8 @@ void Weapon::init()
 	mainCollider_->createCircularFixture(2, 0, 0, 0, Collider::CollisionLayer::Trigger , true);
 	//Tamaño del vector segun el numero de jugadores
 	playerInfo_.resize(4);
+	
+	entity_->getEntityManager()->getWeaponVector()->push_back(this);
 }
 
 void Weapon::handleInput()
@@ -34,7 +36,6 @@ void Weapon::handleInput()
 		for (int i = 0; i < playerInfo_.size(); i++) {
 			if (!IsPicked() && playerInfo_[i].isNear &&
 				playerInfo_[i].playerBinder->pressPick()) {
-				cout << "pickedUpWeapon";
 				PickObjectBy(i);
 			}
 		}
@@ -55,11 +56,17 @@ void Weapon::PickObjectBy(int index)
 		currentHand_->setWeapon(weaponType_, this);
 		mainCollider_->getBody()->SetEnabled(false);
 		vw_->setDrawable(false);
+
+		ThrownByPlayer* throwData = GETCMP1_(ThrownByPlayer);
+		throwData->SetOwner(index);
 	}
 }
 
 void Weapon::UnPickObject()
 {
+	//Si se tira un objeto, se guarda en el objeto lanzado la ID de quien lo lanza.
+	GETCMP1_(ThrownByPlayer)->throwObject(pickedIndex_);
+
 	currentHand_->setWeapon(NoWeapon, nullptr);
 	picked_ = false;
 	pickedIndex_ = -1;
@@ -69,9 +76,6 @@ void Weapon::UnPickObject()
 	cout << "dirHand: " << currentHand_->getDir().x << ", " << currentHand_->getDir().y << "\n";
 	cout << "dirplayer: " << currentHand_->getVel().x << ", " << currentHand_->getVel().y << "\n";
 
-	//Si se tira un objeto, se guarda en el objeto lanzado la ID de quien lo lanza.
-	ThrownByPlayer* tObj = GETCMP_FROM_FIXTURE_(mainCollider_->getFixture(0), ThrownByPlayer);
-	if (tObj != nullptr) tObj->throwObject(currentHand_->getPlayerId());
 	mainCollider_->setLinearVelocity(b2Vec2(0, 0));
 	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x + currentHand_->getDir().x * currentHand_->getArmLengthPhysics(), currentHand_->getPos().y - currentHand_->getDir().y * currentHand_->getArmLengthPhysics()), currentHand_->getAngle());
 	

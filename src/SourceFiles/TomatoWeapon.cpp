@@ -69,22 +69,21 @@ void TomatoWeapon::onCollisionEnter(Collision* c) {
 		Wallet* walletPlayer = GETCMP2(other, Wallet);
 		PlayerData* playerData = GETCMP2(other, PlayerData);
 		Collider* collPlayer = GETCMP2(other, Collider);
-		ThrownByPlayer* objThrown = GETCMP2(getEntity(), ThrownByPlayer);
+
+		ThrownByPlayer* objThrown = GETCMP1_(ThrownByPlayer);
 
 		if (healthPlayer && collPlayer) {
 			if (!healthPlayer->subtractLife(damageOnExplosionImpact_)) {
 
 				// add points to owner
-				if (objThrown != nullptr) {
-					if (objThrown->getOwnerId() != GETCMP1_(PlayerData)->getPlayerNumber())
-						objThrown->addPointsToOwner();
-				}
+				if (objThrown->getOwnerId() != playerData->getPlayerNumber())
+					objThrown->addPointsToOwner();
 
 				healthPlayer->playerDead(c->collisionHandler);
 			}
 		}
 		else if (walletPlayer && collPlayer) {
-			c->collisionHandler->addCoinDrop(std::make_tuple(walletPlayer, GETCMP2(c->entity, PlayerData), 3));
+			c->collisionHandler->addCoinDrop(std::make_tuple(walletPlayer, playerData, 3));
 		}
 
 		b2Vec2 dir = (collPlayer->getPos() - colTomato_->getPos()).NormalizedVector();
