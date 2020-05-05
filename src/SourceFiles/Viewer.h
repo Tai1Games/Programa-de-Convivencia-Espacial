@@ -17,8 +17,7 @@ protected:
 
 public:
 	Viewer();
-	Viewer(int textureId);
-	Viewer(int textureId, SDL_Rect clip);
+	Viewer(int textureId, SDL_Rect clip = {0,0,0,0});
 	virtual ~Viewer();
 
 	virtual void init() override;

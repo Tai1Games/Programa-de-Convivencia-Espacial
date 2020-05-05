@@ -6,14 +6,6 @@ Viewer::Viewer() :
 	Viewer(Resources::Debug) {	//
 }
 
-Viewer::Viewer(int textureId) :
-	Component(ComponentType::Viewer), //
-	tex_(nullptr),	//
-	collider_(nullptr),
-	clip_(SDL_Rect{ 0, 0, 0, 0 }),
-	textureId_(textureId) {	//
-}
-
 Viewer::Viewer(int textureId, SDL_Rect clip) :
 	Component(ComponentType::Viewer), //
 	tex_(nullptr),	//
@@ -21,7 +13,6 @@ Viewer::Viewer(int textureId, SDL_Rect clip) :
 	clip_(clip),
 	textureId_(textureId) {	//
 }
-
 
 Viewer::~Viewer() {
 
