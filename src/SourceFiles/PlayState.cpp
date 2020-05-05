@@ -72,6 +72,7 @@ void PlayState::init() {
 	for (Weapon* w : *(entityManager_->getWeaponVector())) {
 		w->getEntity()->addComponent<ThrownByPlayer>(gameMode_);
 	}
+	bulletPool_.addThrownByPlayer(gameMode_);
 }
 
 void PlayState::update() {

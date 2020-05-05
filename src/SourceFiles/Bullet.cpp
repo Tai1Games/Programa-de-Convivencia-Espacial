@@ -1,4 +1,5 @@
 #include "Bullet.h"
+#include "ThrownByPlayer.h"
 
 void Bullet::init()
 {
@@ -47,6 +48,10 @@ void Bullet::onCollisionEnter(Collision* c)
 			if (!pHealth_->subtractLife(damage_)) {
 				pHealth_->playerDead(c->collisionHandler);
 				needToDelete = true;
+				
+				ThrownByPlayer* objThrown = GETCMP1_(ThrownByPlayer);			
+				if (objThrown->getOwnerId() != GETCMP2(c->entity, PlayerData)->getPlayerNumber())
+					objThrown->addPointsToOwner();
 			}
 		}
 		else {
