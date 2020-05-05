@@ -1,6 +1,7 @@
 #include "LobbyState.h"
 #include "checkML.h"
 #include "Resources.h"
+#include "MatchInfo.h"
 
 LobbyState::~LobbyState()
 {
@@ -43,7 +44,7 @@ void LobbyState::update()
 {
 	outDebug();
 	if (ready()) {
-		SDL_Game::instance()->getStateMachine()->changeToState(States::menu, 0);
+		SDL_Game::instance()->getStateMachine()->setMatchInfo(new MatchInfo(joinedPlayers_));
 	}
 }
 

@@ -288,6 +288,9 @@
     <ClInclude Include="LobbyState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
+    <ClInclude Include="MatchInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -487,6 +490,9 @@
     </ClCompile>
     <ClCompile Include="LobbyState.cpp">
       <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchInfo.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

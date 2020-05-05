@@ -23,6 +23,8 @@ GameStateMachine::~GameStateMachine() {
 		delete state;
 	}
 	states_.clear();
+
+	delete matchInfo_;
 }
 
 void GameStateMachine::setPauseOwner(int ownerID)
