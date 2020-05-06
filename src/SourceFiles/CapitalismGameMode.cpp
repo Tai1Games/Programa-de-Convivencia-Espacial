@@ -36,6 +36,7 @@ void CapitalismGameMode::init(PlayState* game)
 		players_.push_back(PlayerFactory::createPlayerWithWallet(game->getEntityManager(), game->getPhysicsWorld(), k,
 			Resources::Body, tilemap_->getPlayerSpawnPoint(k).x, tilemap_->getPlayerSpawnPoint(k).y, this));
 		playerWallets_.push_back(players_[k]->getComponent<Wallet>(ComponentType::Wallet));
+		playerCoins_.push_back(playerWallets_[k]->getCoins());
 	}
 
 	//UI Elements.
@@ -52,6 +53,7 @@ void CapitalismGameMode::init(PlayState* game)
 }
 
 void CapitalismGameMode::update() {
+
 	timeSinceStart_ += sPerFrame_;
 	if (timeSinceStart_ >= timeToEnd_ && !roundFinished_) {
 		int maxPoints = 0;
@@ -86,6 +88,7 @@ void CapitalismGameMode::update() {
 }
 
 void CapitalismGameMode::render() {
+
 	int minutes = 0, seconds = 0;
 
 	if (timeToEnd_ < timeSinceStart_) {
@@ -113,7 +116,6 @@ void CapitalismGameMode::render() {
 			
 		}
 	}
-
 	else {
 		minutes = (timeToEnd_ - timeSinceStart_) / 60;
 		seconds = (int)(timeToEnd_ - timeSinceStart_) % 60;

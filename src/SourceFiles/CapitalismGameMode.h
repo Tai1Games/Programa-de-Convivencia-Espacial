@@ -42,6 +42,7 @@ private:
 	std::vector<b2Vec2> coinSpawnersPositions_;
 	std::vector<Collider*> roombaColliders_;
 	std::vector<Wallet*> playerWallets_;
+	std::vector<int> playerCoins_;
 public:
 	CapitalismGameMode(int nPlayers) : GameMode(nPlayers){};
 	virtual ~CapitalismGameMode() {};
