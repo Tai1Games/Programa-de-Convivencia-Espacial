@@ -1,37 +1,37 @@
 #pragma once
-#include "GameMode.h"
+#include "AbstractTimedGameMode.h"
 #include "PlayState.h"
 #include "CoinsPool.h"
 #include "Collider.h"
 #include "FireBallPool.h"
 #include "TomatoPool.h" //DELETE THIS
 
-class CapitalismGameMode : public GameMode
+class CapitalismGameMode : public AbstractTimedGameMode
 {
 private:
 	CoinsPool coinPool_;
 	Texture* coinTextureUI_ = nullptr;
-	Texture* canvasTimerTexture_ = nullptr;
-	SDL_Rect canvasTimerRect_;
+	//Texture* canvasTimerTexture_ = nullptr;
+	//SDL_Rect canvasTimerRect_;
 	//NEED TO DELETE-------
 	TomatoPool tomatoPool_;
 	//---------------------
-	double timeSinceStart_ = 0;
+	//double timeSinceStart_ = 0;
 	double timeSinceSpawn_ = 0;
 	double spawnTime_ = 0;
 	double currentSpawnTime_ = 0;
 	double minimumSpawnTime_ = 0;
 
-	double suddenDeathRenderTime = 0;
-	double suddenDeathRenderTimer = 0;
-	bool suddenDeathRendering = true;
+	//double suddenDeathRenderTime = 0;
+	//double suddenDeathRenderTimer = 0;
+	//bool suddenDeathRendering = true;
 	int coinsSpawned_ = 0;
 
 	//Constantes que inicializamos en init.
-	double sPerFrame_ = 0;
-	double timeToEnd_ = 0;
-	int winWidth_ = 0;
-	int winHeigth_ = 0;
+	//double sPerFrame_ = 0;
+	//double timeToEnd_ = 0;
+	//int winWidth_ = 0;
+	//int winHeigth_ = 0;
 	int coinUIRadius_ = 0;
 	int coinUIMarginX_ = 0;
 	int coinUIMarginY_ = 0;
@@ -44,7 +44,7 @@ private:
 	std::vector<Wallet*> playerWallets_;
 	std::vector<int> playerCoins_;
 public:
-	CapitalismGameMode(int nPlayers) : GameMode(nPlayers){};
+	CapitalismGameMode(int nPlayers) : AbstractTimedGameMode(nPlayers){};
 	virtual ~CapitalismGameMode() {};
 	virtual void init(PlayState* game);
 	virtual void render();

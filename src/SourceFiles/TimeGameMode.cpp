@@ -3,8 +3,7 @@
 #include "ThrownByPlayer.h"
 #include "TomatoPool.h"
 
-TimeGameMode::TimeGameMode(int nPlayers) :
-	AbstractTimedGameMode(nPlayers) {
+TimeGameMode::TimeGameMode(int nPlayers) : AbstractTimedGameMode(nPlayers) {
 }
 
 TimeGameMode::~TimeGameMode() {
