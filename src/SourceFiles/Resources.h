@@ -120,6 +120,7 @@ public:
 		LivingRoomText,
 		BoilerRoomText,
 		GymRoomText,
+		GardenRoomText,
 
 		//players
 		OnePlayer,
@@ -135,7 +136,7 @@ public:
 		One,
 		Two,
 		Three,
-		Four,	
+		Four,
 		MoveTutorial,
 		HoldTutorial,
 		GrabTutorial,
