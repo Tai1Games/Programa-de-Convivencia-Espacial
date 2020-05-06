@@ -25,15 +25,13 @@ private:
 	void renderKillMarker();
 	int calculateDigits(int points);
 
-	TomatoPool tomatoPool_;
-
 public:
-	TimeGameMode(int nPlayers);
-	~TimeGameMode();
+	TimeGameMode(int nPlayers) : AbstractTimedGameMode(nPlayers) {};
+	~TimeGameMode() {};
 
-	virtual void init(PlayState* game);
-	virtual void render();
-	virtual void update();
+	virtual void init(PlayState* game) override;
+	virtual void render() override;
+	virtual void update() override;
 	virtual void playerKillsPlayer(int killerId, int deadId = -1) override;
 
 	void addPoints(int playerID);

@@ -3,16 +3,9 @@
 #include "ThrownByPlayer.h"
 #include "TomatoPool.h"
 
-TimeGameMode::TimeGameMode(int nPlayers) : AbstractTimedGameMode(nPlayers) {
-}
-
-TimeGameMode::~TimeGameMode() {
-}
-
 void TimeGameMode::init(PlayState* game)
 {
 	AbstractTimedGameMode::init(game);
-	tomatoPool_.init(game->getEntityManager(), game->getPhysicsWorld());
 
 	timeToEnd_ = CONST(double, "TIMEMODE_TIME_TO_END");
 	suddenDeathTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SuddenDeathTimeModeText);
@@ -51,8 +44,6 @@ void TimeGameMode::init(PlayState* game)
 	skullUISize_ = CONST(int, "SKULL_UI_SIZE");
 	skullUIMarginX_ = CONST(int, "SKULL_UI_OFFSET_X");
 	skullTextureUI_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SkullUI);
-
-	tomatoPool_.addTomato({ 40, 20 });
 }
 
 void TimeGameMode::render()

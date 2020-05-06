@@ -4,10 +4,8 @@
 void CapitalismGameMode::init(PlayState* game)
 {
 	AbstractTimedGameMode::init(game);
+
 	coinPool_.init(game->getEntityManager(), game->getPhysicsWorld());
-	//NEED TO DELETE ---
-	tomatoPool_.init(game->getEntityManager(), game->getPhysicsWorld());
-	//------------------
 	//Load of constants
 	timeToEnd_ = CONST(double, "CAPITALISM_TIME_TO_END");
 	suddenDeathTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SuddenDeathCapitalismModeText);
@@ -20,7 +18,7 @@ void CapitalismGameMode::init(PlayState* game)
 	coinUIMarginY_ = CONST(int, "COIN_UI_MARGIN_Y");
 	coinUISpriteScale_ = CONST(double, "COIN_UI_SPRITE_SCALE");
 	fontCharacterWidth_ = CONST(double, "NES_WIDTH_PER_CHARACTER");
-
+	
 	currentSpawnTime_ = spawnTime_;
 	coinSpawnersPositions_ = tilemap_->getCoinsSpawnPoints();
 
@@ -38,10 +36,6 @@ void CapitalismGameMode::init(PlayState* game)
 
 	//UI Elements.
 	coinTextureUI_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::CoinUI);
-
-	//NEED TO DELETE
-	tomatoPool_.addTomato({ 40, 20 });
-	//--
 }
 
 void CapitalismGameMode::render() {
@@ -89,8 +83,8 @@ void CapitalismGameMode::renderCoinsMarker()
 		coinTextRect.w = coinNumbTexture.getWidth() * coinUISpriteScale_;
 		coinTextRect.h = coinNumbTexture.getHeight() * coinUISpriteScale_;
 
-		coinTextureUI_->render(coinImageRect);
 		coinNumbTexture.render(coinTextRect);
+		coinTextureUI_->render(coinImageRect);
 	}
 }
 
