@@ -105,8 +105,19 @@ void Health::onCollisionEnter(Collision* c)
 			int impact = force.Length();
 			Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
 			PlayerData* playerWhoHitMe = nullptr;
-			//Si se impacta con un arma al umbral m�s alto de fuerza, se recibe su daño de impacto
+			//Lo que ha golpeado es un arma?
 			if (w != nullptr) {
+
+				//Comprobamos si el golpe con el arma es suficientemente fuerte (indica que se ha lanzado o llevaba impulso)
+				if (impact >= CONST(double, "DISARM_IMPACT")) {
+					//Nos desarman con el golpe
+					Hands* h = GETCMP1_(Hands);
+					Weapon* we = nullptr;
+					if (h != nullptr) we = h->getWeapon();
+					if (we != nullptr) c->collisionHandler->dropWeapon(we);
+				}
+
+				//Si se impacta con un arma al umbral m�s alto de fuerza, se recibe su daño de impacto
 				impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
 			}
 			else {
