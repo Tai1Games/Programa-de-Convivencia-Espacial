@@ -21,7 +21,7 @@ public:
 	static Entity* makeBall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
 	//Crea una grapadora (Podemos pasarle los p�rametros que queramos segun las necesidades del objeto)
-	static Entity* makeStapler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
+	static Entity* makeStapler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, BulletPool* bp);
 
 	static Entity* makeExtinguisher(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 

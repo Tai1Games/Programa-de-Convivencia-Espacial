@@ -87,6 +87,7 @@ public:
 		Banana,
 		BananaSkin,
 		BananaNonSkin,
+		Staple,
 
 		// Gamemode specific elements
 		Coin,

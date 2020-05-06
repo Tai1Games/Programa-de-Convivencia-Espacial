@@ -37,6 +37,9 @@ void Bullet::setActive(bool a, b2Vec2 pos, b2Vec2 size, b2Vec2 vel, int texture,
 		player_ = player;
 		limitTime_ = SDL_Game::instance()->getTime() + CONST(double, "BULLET_DESTROY_TIME");
 	}
+	else {
+		col_->setLinearVelocity(b2Vec2(0,0));//resetea su velocidad
+	}
 }
 
 void Bullet::onCollisionEnter(Collision* c)
