@@ -57,5 +57,5 @@ public:
 	virtual void render();
 	virtual void update();
 	virtual void handleInput();
-	virtual void resetScene();
+	virtual void onLoaded();
 };

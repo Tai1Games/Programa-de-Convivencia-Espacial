@@ -171,7 +171,7 @@ void MidGameState::handleInput()
 	
 
 
-void MidGameState::resetScene() {
+void MidGameState::onLoaded() {
 	//Reseteamos el estado a como estaba en origen
 	currentState = waiting;
 	currentFrame = 0;

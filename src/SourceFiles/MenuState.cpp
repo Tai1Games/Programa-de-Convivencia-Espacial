@@ -42,6 +42,7 @@ void MenuState::handleInput()
 		if (menuPointer_ < 2) {
 			if (pointers_[0] < NUMBER_OF_GAMEMODES - 1) {
 				menuPointer_++;
+				if(pointers_[1] == -1) pointers_[1] = 0;
 				updateText(menuPointer_ -1);
 			}
 			else if (pointers_[0] < NUMBER_OF_GAMEMODES) {
@@ -65,7 +66,6 @@ void MenuState::handleInput()
 			}
 			else {
 				menuPointer_ -= 2;
-				pointers_[1] = 0;
 				updateText(menuPointer_ + 2);
 			}			
 		}
