@@ -25,7 +25,8 @@ private:
 	std::map<int, string> maps_ = { //añadir aquí los mapas que se vayan haciendo, tutorial no
 		{ 0, "LivingRoom"},
 		{ 1, "BoilerRoom"},
-		{ 2, "GymRoom"}
+		{ 2, "GymRoom"},
+		{ 3, "GardenRoom"}
 	};
 
 	void updatePointer(int n);

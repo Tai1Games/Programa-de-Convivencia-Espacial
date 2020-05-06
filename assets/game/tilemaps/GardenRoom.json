@@ -106,15 +106,15 @@
                  "y":472
                 }, 
                 {
-                 "height":410,
-                 "id":86,
-                 "name":"Pad",
+                 "height":200,
+                 "id":87,
+                 "name":"CarnivorousePlant",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":84,
-                 "x":86,
-                 "y":338
+                 "width":200,
+                 "x":80,
+                 "y":416
                 }],
          "opacity":1,
          "type":"objectgroup",
