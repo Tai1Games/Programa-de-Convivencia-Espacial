@@ -17,14 +17,15 @@ TransitionState::TransitionState(int fromState, int toState, vector<GameState*>*
 
 void TransitionState::update() {
 	currentTransitionFrame_++;
-	if (currentTransitionFrame_ == transitionFrames_)
+	if (currentTransitionFrame_ == transitionFrames_) {
+		(*gameStatesVector_)[currentState_]->resetScene();
 		currentState_ = toState_;
+	}
 }
 
 void TransitionState::render() {
 	if (currentTransitionFrame_ < transitionFrames_ * 2) {
 		(*gameStatesVector_)[currentState_]->render();
-		cout << transitionFrames_ << " " << currentTransitionFrame_ << " " << 255 - (currentTransitionFrame_ - transitionFrames_) * frameToAlphaRatio_ << endl;
 		if (currentTransitionFrame_ <= transitionFrames_)
 			SDL_SetRenderDrawColor(SDL_Game::instance()->getRenderer(), 0, 0, 0, currentTransitionFrame_ * frameToAlphaRatio_);
 		else {

@@ -24,6 +24,7 @@ public:
 	void changeToState(int state, int numberOfPlayers = 1, int gameMode = 0, std::string tileMap = "");
 	void transitionToState(int state, int numberOfPlayers = 1, int gameMode = 0, std::string tileMap = "");
 	void loadState(int state, int numberOfPlayers, int gameMode, string tileMap);
+	GameState* getCurrentState() const { return ((currentState_ != -1) ? states_[currentState_] : nullptr); };
 	void deleteState(int state);
 
 	void gameCycle();

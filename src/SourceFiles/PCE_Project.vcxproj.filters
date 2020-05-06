@@ -279,7 +279,22 @@
     <ClInclude Include="Viewer.h">
       <Filter>Header Files\Components\Viewers</Filter>
     </ClInclude>
+    <ClInclude Include="BananaWeapon.h">
+      <Filter>Header Files\Components\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="BananaPool.h">
+      <Filter>Header Files\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletPool.h">
+      <Filter>Header Files\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files\Components\Weapons</Filter>
+    </ClInclude>
     <ClInclude Include="TransitionState.h">
+      <Filter>Header Files\Gamestates</Filter>
+    </ClInclude>
+    <ClInclude Include="MidGameState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
     <ClInclude Include="TutorialGameMode.h">
@@ -479,7 +494,22 @@
     <ClCompile Include="ImpulseViewer.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
+    <ClCompile Include="BananaWeapon.cpp">
+      <Filter>Source Files\Components\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="BananaPool.cpp">
+      <Filter>Source Files\Pools</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletPool.cpp">
+      <Filter>Source Files\Pools</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files\Components\Weapons</Filter>
+    </ClCompile>
     <ClCompile Include="TransitionState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="MidGameState.cpp">
       <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
     <ClCompile Include="TutorialGameMode.cpp">

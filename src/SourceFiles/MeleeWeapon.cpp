@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "Collision.h"
 #include "CollisionHandler.h"
+#include "ThrownByPlayer.h"
 
 MeleeWeapon::MeleeWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : MeleeWeapon(ComponentType::MeleeWeapon, wId, dmg, impactDmg, cooldownFrames) {};
 
@@ -40,8 +41,12 @@ void MeleeWeapon::PickObjectBy(int index) {
 		currentHand_->setWeapon(weaponType_, this);
 		vw_->setDrawable(false);
 		//Desactivamos el trigger de pickUp
+
 		mainCollider_->disableFixtureCollisions(0);
 		mainCollider_->disableFixtureCollisions(1);
+    
+		ThrownByPlayer* throwData = GETCMP1_(ThrownByPlayer);
+		throwData->SetOwner(index);
 	}
 }
 

@@ -48,6 +48,7 @@ void CapitalismGameMode::init(PlayState* game)
 
 	//NEED TO DELETE
 	tomatoPool_.addTomato({ 40, 20 });
+	//--
 }
 
 void CapitalismGameMode::update() {
