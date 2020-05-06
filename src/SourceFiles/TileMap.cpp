@@ -11,8 +11,12 @@ TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW) :Comp
 width_(w),
 height_(h),
 entityManager_(eM),
-physicsWorld_(pW){
+physicsWorld_(pW) {
 	loadTileson(map);
+	playerSpawns_.reserve(4);
+	for (int i = 0; i < 4; i++) { //inicializa el vector
+		playerSpawns_.push_back(b2Vec2());
+	}
 }
 
 TileMap::~TileMap() {
@@ -34,9 +38,12 @@ void TileMap::init() {
 					factoryItems_.push_back(obj);
 				}
 				else if (tileLayer.getName() == "Spawns") { //spawns
-					playerSpawns_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER"))); //a�ade la posicion al vector de spawns
+					if (obj.getName() == "P1") playerSpawns_[0] = b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER"));
+					else if (obj.getName() == "P2")playerSpawns_[1] = b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER"));
+					else if (obj.getName() == "P3")playerSpawns_[2] = b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER"));
+					else if (obj.getName() == "P4")playerSpawns_[3] = b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER"));
 				}
-				else if (tileLayer.getName() == "SpecialObjects"){ //objetos espaciales (mando de tele, router...)
+				else if (tileLayer.getName() == "SpecialObjects") { //objetos espaciales (mando de tele, router...)
 					specialObjectsSpawnPoint_ = b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER"));
 				}
 				else if (tileLayer.getName() == "MapObjects") { //muebles
@@ -176,18 +183,18 @@ void TileMap::executeMapFactory()
 		}
 		else if (name == "DecButton") {
 			boilerButtons_.push_back(GETCMP2(ObjectFactory::makeBoilerButton(entityManager_, physicsWorld_, pos, false), BoilerButtonLogic));
-		}		
+		}
 		else if (name == "Pipe") {
 			float rotation = o.getRotation();
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), s.y / CONST(double, "PIXELS_PER_METER"));
 			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
 			size *= 0.5f;
 
-			ObjectFactory::makePipe(entityManager_, physicsWorld_, pos, size, rotation); 
+			ObjectFactory::makePipe(entityManager_, physicsWorld_, pos, size, rotation);
 		}
 		else if (name == "Treadmill") {
 			ObjectFactory::makeTreadmill(entityManager_, physicsWorld_, pos);
-		}	
+		}
 		else if (name == "CarnivorousePlant") {
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
 			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
@@ -222,7 +229,7 @@ void TileMap::createWeapons()
 		switch (weapon)
 		{
 		case 0: //slipper
-			e = ObjectFactory::makeSlipper(entityManager_,physicsWorld_, spawnPoint, b2Vec2(CONST(float, "SLIPPER_X"), CONST(float, "SLIPPER_Y")));
+			e = ObjectFactory::makeSlipper(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "SLIPPER_X"), CONST(float, "SLIPPER_Y")));
 			break;
 		case 1: //ball
 			e = ObjectFactory::makeBall(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "BALL_X"), CONST(float, "BALL_Y")));
