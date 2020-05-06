@@ -21,6 +21,13 @@ Viewer::Viewer(int textureId, SDL_Rect clip) :
 	clip_(clip),
 	textureId_(textureId) {	//
 }
+Viewer::Viewer(int textureId, SDL_Rect clip, ComponentType::CmpId ct) :
+	Component(ct), //
+	tex_(nullptr),	//
+	collider_(nullptr),
+	clip_(clip),
+	textureId_(textureId) {	//
+}
 
 Viewer::Viewer(int textureId, b2Vec2 pos, float scale, float angle, const SDL_RendererFlip& flip) :
 	Component(ComponentType::Viewer),

@@ -183,6 +183,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ActionableWeapon.h" />
+    <ClInclude Include="AnimatedPlayer.h" />
     <ClInclude Include="AnimatedViewer.h" />
     <ClInclude Include="AttachesToObjects.h" />
     <ClInclude Include="BoilerButtonLogic.h" />
@@ -258,6 +259,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActionableWeapon.cpp" />
+    <ClCompile Include="AnimatedPlayer.cpp" />
     <ClCompile Include="AnimatedViewer.cpp" />
     <ClCompile Include="AttachesToObjects.cpp" />
     <ClCompile Include="BoilerButtonLogic.cpp" />

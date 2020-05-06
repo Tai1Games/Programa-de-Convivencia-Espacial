@@ -285,6 +285,9 @@
     <ClInclude Include="LobbyState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
+    <ClInclude Include="AnimatedPlayer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -481,6 +484,9 @@
     </ClCompile>
     <ClCompile Include="LobbyState.cpp">
       <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedPlayer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
