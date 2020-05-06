@@ -80,22 +80,17 @@ void TimeGameMode::renderKillMarker() {
 		SDL_Rect killsTextTexture;
 		killsTextTexture.x = (int)playersPointsPos_[k].x;
 		killsTextTexture.y = (int)playersPointsPos_[k].y;
-		killsTextTexture.w = killsMarkerWidth_ * (calculateDigits(playerKills_[k] / 10) + 2);
+		killsTextTexture.w = killsMarkerWidth_ * killsNumb.size()-2;
 		killsTextTexture.h = killsMarkerHeight_;
 
 		killsNumbTexture.render(killsTextTexture);
 
-		SDL_Rect coinImageRect;
-		coinImageRect.x = killsTextTexture.x + killsTextTexture.w + skullUIMarginX_;
-		coinImageRect.y = killsTextTexture.y - killsTextTexture.h/2;
-		coinImageRect.w = skullUISize_;
-		coinImageRect.h = skullUISize_;
+		SDL_Rect skullImageRect;
+		skullImageRect.x = killsTextTexture.x + killsTextTexture.w + skullUIMarginX_;
+		skullImageRect.y = killsTextTexture.y - killsTextTexture.h/2;
+		skullImageRect.w = skullUISize_;
+		skullImageRect.h = skullUISize_;
 
-		skullTextureUI_->render(coinImageRect);
+		skullTextureUI_->render(skullImageRect);
 	}
-}
-
-int TimeGameMode::calculateDigits(int points) {
-	if (points > 0) return calculateDigits(points / 10) + 1;
-	else return 0;
 }

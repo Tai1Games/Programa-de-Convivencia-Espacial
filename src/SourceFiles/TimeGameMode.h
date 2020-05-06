@@ -23,7 +23,6 @@ private:
 	int killsMarkerHeight_ = 0;
 
 	void renderKillMarker();
-	int calculateDigits(int points);
 
 public:
 	TimeGameMode(int nPlayers) : AbstractTimedGameMode(nPlayers) {};

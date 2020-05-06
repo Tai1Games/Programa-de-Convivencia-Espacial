@@ -70,7 +70,7 @@ void CapitalismGameMode::renderCoinsMarker()
 		string coinNumb = to_string(playerCoins_[k]);
 		Texture coinNumbTexture(SDL_Game::instance()->getRenderer(), coinNumb,
 			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
-
+		
 		SDL_Rect coinImageRect;
 		coinImageRect.x = (k % 2 == 0) ? coinUIMarginX_ : winWidth_ - coinUIMarginX_ - coinUIRadius_;
 		coinImageRect.y = (k < 2) ? coinUIMarginY_ : winHeigth_ - coinUIMarginY_ - coinUIRadius_;
@@ -78,13 +78,15 @@ void CapitalismGameMode::renderCoinsMarker()
 		coinImageRect.h = coinUIRadius_;
 
 		SDL_Rect coinTextRect;
-		coinTextRect.x = coinImageRect.x + coinUIRadius_ * 0.3 - (fontCharacterWidth_ * (coinNumb.size() - 1));
+		coinTextRect.x = (k % 2 == 0) ? (coinImageRect.x + coinImageRect.w/3) + coinUIRadius_:
+			(coinImageRect.x + coinImageRect.w/3) - coinUIRadius_ - ((fontCharacterWidth_+17) * (coinNumb.size()-1));
 		coinTextRect.y = coinImageRect.y + coinUIRadius_ * 0.3;
 		coinTextRect.w = coinNumbTexture.getWidth() * coinUISpriteScale_;
 		coinTextRect.h = coinNumbTexture.getHeight() * coinUISpriteScale_;
 
 		coinNumbTexture.render(coinTextRect);
 		coinTextureUI_->render(coinImageRect);
+
 	}
 }
 
