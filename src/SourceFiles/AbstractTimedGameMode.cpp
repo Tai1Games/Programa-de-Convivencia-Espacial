@@ -1,10 +1,6 @@
 #include "AbstractTimedGameMode.h"
 #include "PlayState.h"
 
-AbstractTimedGameMode::AbstractTimedGameMode(int nPlayers) : GameMode(nPlayers)
-{
-}
-
 void AbstractTimedGameMode::init(PlayState* game)
 {
 	GameMode::init(game);
@@ -75,7 +71,7 @@ void AbstractTimedGameMode::renderTimer(int seconds, int minutes)
 
 void AbstractTimedGameMode::update()
 {
-
+	GameMode::update();
 }
 
 void AbstractTimedGameMode::updateTime(const vector<int>& playerPoints)

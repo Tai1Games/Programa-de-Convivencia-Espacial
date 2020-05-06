@@ -17,15 +17,19 @@ protected:
 	double timeToEnd_ = 0;
 	int winWidth_ = 0;
 	int winHeigth_ = 0;
+
+	virtual void updateTime(const vector<int>& playerPoints);
+
+private:
+	virtual void renderTimer(int secs, int mins);
+
 public:
-	AbstractTimedGameMode(int nPlayers);
+	AbstractTimedGameMode(int nPlayers) : GameMode(nPlayers) {};
 	~AbstractTimedGameMode() {};
 
 	virtual void init(PlayState* game);
 	virtual void render();
-	virtual void renderTimer(int secs, int mins);
 	virtual void update();
-	virtual void updateTime(const vector<int>& playerPoints);
 	virtual void playerKillsPlayer(int killerId, int deadId = -1) {};
 };
 
