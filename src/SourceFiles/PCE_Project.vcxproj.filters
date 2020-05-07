@@ -306,6 +306,9 @@
     <ClInclude Include="StaplerWeapon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AbstractTimedGameMode.h">
+      <Filter>Header Files\GameModes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -523,6 +526,9 @@
     </ClCompile>
     <ClCompile Include="StaplerWeapon.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractTimedGameMode.cpp">
+      <Filter>Source Files\GameModes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
