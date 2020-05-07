@@ -6,6 +6,8 @@
 #include "checkML.h"
 #include "collisionHandler.h"
 #include "Resources.h"
+#include "BananaPool.h"
+#include "BulletPool.h"
 
 using namespace std;
 
@@ -33,9 +35,12 @@ private:
 		{"LivingRoom",Resources::LivingRoom},
 		{"BoilerRoom",Resources::BoilerRoom},
 		{"GymRoom",Resources::GymRoom},
+		{"TutorialRoom", Resources::TutorialRoom},
 		{"GardenRoom",Resources::GardenRoom}
 	};
 	TileMap* tilemap_;
+	BulletPool bulletPool_;
+	BananaPool bananaPool_;
 
 public:
 	PlayState(GameMode* gMode, string tmap);

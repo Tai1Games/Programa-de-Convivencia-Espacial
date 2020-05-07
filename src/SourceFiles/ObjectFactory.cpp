@@ -23,6 +23,10 @@
 #include "CarnivorousPlant.h"
 #include "TomatoWeapon.h"
 #include "AnimatedViewer.h"
+#include "BananaWeapon.h"
+#include "Bullet.h"
+#include "BulletPool.h"
+#include "StaplerWeapon.h"
 
 
 Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
@@ -34,7 +38,7 @@ Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physic
 	e->addComponent <Viewer>(Resources::Slipper);
 	e->addComponent<SlipperWeapon>(WeaponID::Slipper, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"), CONST(int, "FLIPFLOP_COOLDOWN_FRAMES"));
 	e->addComponent<ColliderViewer>();
-	
+
 	return e;
 }
 
@@ -42,7 +46,7 @@ Entity* ObjectFactory::makeBall(EntityManager* entityManager, b2World* physicsWo
 
 	Entity* e = entityManager->addEntity();
 	// x,  y,   width, height, density,	friction, restitution, linearDrag, angularDrag,	Layer,							        sensor canBeAttached
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "BOUNCINGBALL_DENSITY"),
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, CONST(double, "BOUNCINGBALL_DENSITY"),
 		CONST(double, "BOUNCINGBALL_FRICTION"), CONST(double, "BOUNCINGBALL_RESTITUTION"), CONST(double, "BOUNCINGBALL_LINEAR_DRAG"),
 		CONST(double, "BOUNCINGBALL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	aux->getBody()->SetLinearDamping(0);
@@ -50,15 +54,17 @@ Entity* ObjectFactory::makeBall(EntityManager* entityManager, b2World* physicsWo
 	e->addComponent <Viewer>(Resources::Ball);
 	e->addComponent<Weapon>(WeaponID::Pelota, CONST(int, "BOUNCINGBALL_IMPACT_DAMAGE"));
 	e->addComponent<ColliderViewer>();
-  
+
 	return e;
 }
 
-Entity* ObjectFactory::makeStapler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
+Entity* ObjectFactory::makeStapler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, BulletPool* bp) {
 	Entity* e = entityManager->addEntity();
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "STAPLER_DENSITY"), CONST(double, "STAPLER_FRICTION"), CONST(double, "STAPLER_RESTITUTION"), CONST(double, "STAPLER_LINEAR_DRAG"), CONST(double, "STAPLER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "STAPLER_DENSITY"),
+		CONST(double, "STAPLER_FRICTION"), CONST(double, "STAPLER_RESTITUTION"), CONST(double, "STAPLER_LINEAR_DRAG"), 
+		CONST(double, "STAPLER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Stapler);
-	e->addComponent<Weapon>(WeaponID::Stapler, CONST(int, "STAPLER_IMPACT_DAMAGE"));
+	e->addComponent<StaplerWeapon>(CONST(int, "STAPLER_IMPACT_DAMAGE"), bp);
 	e->addComponent<ColliderViewer>();
 
 	return e;
@@ -67,10 +73,13 @@ Entity* ObjectFactory::makeStapler(EntityManager* entityManager, b2World* physic
 Entity* ObjectFactory::makeExtinguisher(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 
 	Entity* entity = entityManager->addEntity();
-	Collider* aux = entity->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "EXTINGUISHER_DENSITY"), CONST(double, "EXTINGUISHER_FRICTION"), CONST(double, "EXTINGUISHER_RESTITUTION"), CONST(double, "EXTINGUISHER_LINEAR_DRAG"), CONST(double, "EXTINGUISHER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	Collider* aux = entity->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, 
+		CONST(double, "EXTINGUISHER_DENSITY"), CONST(double, "EXTINGUISHER_FRICTION"), CONST(double, "EXTINGUISHER_RESTITUTION"),
+		CONST(double, "EXTINGUISHER_LINEAR_DRAG"), CONST(double, "EXTINGUISHER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	entity->addComponent<Viewer>(Resources::Extinguisher);
 	entity->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Coin, 10);
-	entity->addComponent<ExtinguisherWeapon>(WeaponID::Extinguisher, CONST(int, "EXTINGUISHER_IMPACT_DAMAGE"), CONST(int, "EXTINGUISHER_COOLDOWN_FRAMES"));
+	entity->addComponent<ExtinguisherWeapon>(WeaponID::Extinguisher, CONST(int, "EXTINGUISHER_IMPACT_DAMAGE"),
+		CONST(int, "EXTINGUISHER_COOLDOWN_FRAMES"));
 	entity->addComponent<ColliderViewer>();
 
 	return entity;
@@ -109,9 +118,9 @@ Entity* ObjectFactory::makeDumbbell(EntityManager* entityManager, b2World* physi
 		CONST(double, "DUMBBELL_FRICTION"), CONST(double, "DUMBBELL_RESTITUTION"),
 		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Mancuerna);
-	e->addComponent<MeleeWeapon>(WeaponID::Mancuerna, CONST(int, "DUMBBELL_DAMAGE"), CONST(int, "DUMBBELL_IMPACT_DAMAGE"), CONST(int,"DUMBBELL_COOLDOWN_FRAMES"));
+	e->addComponent<MeleeWeapon>(WeaponID::Mancuerna, CONST(int, "DUMBBELL_DAMAGE"), CONST(int, "DUMBBELL_IMPACT_DAMAGE"), CONST(int, "DUMBBELL_COOLDOWN_FRAMES"));
 	e->addComponent<ColliderViewer>();
-	
+
 	return e;
 }
 
@@ -164,7 +173,6 @@ Entity* ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* phys
 	return e;
 }
 
-
 Entity* ObjectFactory::makePad(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
 	Entity* e = entityManager->addEntity();
@@ -204,13 +212,13 @@ Entity* ObjectFactory::makeRoomba(EntityManager* entityManager, b2World* physics
 	Entity* e = entityManager->addEntity();
 	Collider* collRoomba = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "ROOMBA_RADIUS"), CONST(double, "ROOMBA_DENSITY"), CONST(double, "ROOMBA_FRICTION"),
 		CONST(double, "ROOMBA_RESTITUTION"), CONST(double, "ROOMBA_LINEAR_DRAG"), CONST(double, "ROOMBA_ANGULAR_DRAG"), Collider::CollisionLayer::UnInteractableObject, false);
-	
-	e->addComponent<AnimatedViewer>(Resources::RoombaSpriteSheet, SDL_Rect{ 0,0,34,34 }, CONST(int, "ROOMBA_TIMEPERFRAME") );
-	
+
+	e->addComponent<AnimatedViewer>(Resources::RoombaSpriteSheet, SDL_Rect{ 0,0,34,34 }, CONST(int, "ROOMBA_TIMEPERFRAME"));
+
 	double velocityX = rand() % CONST(int, "ROOMBA_VELOCITY");
 	double velocityY = CONST(int, "ROOMBA_VELOCITY") - velocityX;
 
-	if (rand() % 2 == 1)velocityX *= -1; 
+	if (rand() % 2 == 1)velocityX *= -1;
 	if (rand() % 2 == 1) velocityY *= -1;
 
 	collRoomba->applyLinearImpulse(b2Vec2(velocityX, velocityY), b2Vec2(0, 0));
@@ -286,4 +294,35 @@ Entity* ObjectFactory::makeCarnivorousePlant(EntityManager* entityManager, b2Wor
 	planta->addComponent<ColliderViewer>();
 
 	return planta;
+}
+
+Entity* ObjectFactory::makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, BulletPool* pb)
+{
+	entityManager->addExistingEntity(e);
+
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 5, 5, CONST(double, "BANANA_X"), CONST(double, "BANANA_Y"), 
+		CONST(double, "BANANA_DENSITY"),CONST(double, "BANANA_FRICTION"), CONST(double, "BANANA_RESTITUTION"),
+		CONST(double, "BANANA_ANGULAR_DRAG"), CONST(double, "BANANA_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent<Viewer>(Resources::Banana);
+	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::BananaSkin, 100, 1, 5, 1000, 50, 100, 0, 360);
+	pE->setMaxParticles(1);
+	e->addComponent<BananaWeapon>(pb, CONST(double, "BANANA_DAMAGE"));
+	e->addComponent<ColliderViewer>();
+
+	return e;
+}
+
+
+Entity* ObjectFactory::makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld)
+{
+	entityManager->addExistingEntity(e);
+
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 0, 0, 0.7, 0.7, //estos 0.7 son la escala, es provisional hasta que se pueda cambiar mas adelante en el setActive
+		CONST(double, "BULLET_DENSITY"), CONST(double, "BULLET_FRICTION"), CONST(double, "BULLET_RESTITUTION"),
+		CONST(double, "BULLET_LINEAR_DRAG"), CONST(double, "BULLET_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, true);
+	e->addComponent<Viewer>(Resources::Negro);
+	e->addComponent<Bullet>();
+	e->addComponent<ColliderViewer>();
+
+	return e;
 }

@@ -37,8 +37,6 @@ private:
 	vector<b2FixtureDef> fixtureDefs_;
 	vector<b2Fixture*> fixtures_;
 
-	b2Filter setCollisionLayer(CollisionLayer c);
-
 public:
 
 	//Friccion -> rozamiento al contacto con otros cuerpos   Drag-> rozamiento con el aire
@@ -104,4 +102,12 @@ public:
 		float friction, float restitution, CollisionLayer layer, bool sensor);
 	void createCircularFixture(float radius, float density, float friction, float restitution, CollisionLayer layer, bool sensor);
 	void destroyFixture(int i);
+	void changeLayerCollision(int i, int layer) { //suma o resta un layer de la colision con un fixture. poned el layer negativo para restar
+		b2Filter f = fixtures_[i]->GetFilterData();
+		f.maskBits += layer;
+		fixtures_[i]->SetFilterData(f);
+	}
+
+	b2Filter setCollisionLayer(CollisionLayer c);
+	void disableFixtureCollisions(int FixtureIndex);
 };

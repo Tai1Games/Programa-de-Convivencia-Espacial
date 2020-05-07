@@ -32,6 +32,7 @@ enum States
 	menu,
 	play,
 	pause,
+	midGame,
 	transition,
 	lobby,
 	//No toques
@@ -44,6 +45,7 @@ enum GamemodeID {
 	Stocks,
 	WiFight,
 	Timed,
+	Tutorial,
 	NUMBER_OF_GAMEMODES
 };
 
@@ -57,6 +59,7 @@ enum WeaponID {
 	Slipper,
 	Mando,
 	Tomato,
+	Banana,
 
 	WEAPON_NUMBER
 };

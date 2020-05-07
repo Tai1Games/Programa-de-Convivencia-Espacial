@@ -22,6 +22,8 @@ public:
 		BoilerRoom,
 		GymRoom,
 		LivingRoom,
+		RocketRoom,
+		TutorialRoom,
 		GardenRoom,
 
 		// UI
@@ -42,6 +44,10 @@ public:
 		ProgressBar,
 		ProgressBar2,
 
+		//midGameState
+		Rocket,
+		SpaceStation,
+		Token,
 		KeyboardIcon,
 		MouseIcon,
 		ControllerIcon,
@@ -80,12 +86,17 @@ public:
 		Tomato,
 		TomatoRing,
 		TreadmillPanel,
+		Banana,
+		BananaSkin,
+		BananaNonSkin,
+		Staple,
 
 		// Gamemode specific elements
 		Coin,
 		Router,
 		RoombaSpriteSheet,
 		Remote,
+		RocketSpriteSheet,
 
 		// miscel�nea
 		Debug,
@@ -105,18 +116,40 @@ public:
 		Stocks,
 		WiFight,
 		Timed,
+		Tutorial,
 		//exit
 		Exit,
 		//maps
 		LivingRoomText,
 		BoilerRoomText,
 		GymRoomText,
+		GardenRoomText,
+
 		//players
+		OnePlayer,
+		TwoPlayers,
+		ThreePlayers,
+		FourPlayers,
+		FivePlayers, //es solo para iterar
+
+		//tutorial	
+		Completed,
+		Slash,
+		Zero,
 		One,
 		Two,
 		Three,
 		Four,
-		Five //es solo para iterar
+		MoveTutorial,
+		HoldTutorial,
+		GrabTutorial,
+		ActionTutorial,
+		ThrowTutorial,
+		DeathTutorial,
+		TutorialEnd,
+
+		//MidGame 
+		ContinueText
 	};
 
 	enum AudioId : std::size_t {
@@ -125,7 +158,8 @@ public:
 		LivingRoomMusic = TextureId::LivingRoom,
 		GymMusic = TextureId::GymRoom,
 		BoilerRoomMusic = TextureId::BoilerRoom,
-		EntranceMusic,
+		TutorialMusic = TextureId::TutorialRoom,
+		EntranceMusic
 
 		// sound effects
 

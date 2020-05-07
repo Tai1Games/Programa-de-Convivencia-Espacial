@@ -1,11 +1,14 @@
 #include "EntityManager.h"
 #include "Entity.h"
+#include "Weapon.h"
+#include "Component.h"
 
 EntityManager::EntityManager() {}
 
 EntityManager::~EntityManager() {
 	entities_.clear();
 	externalEntities_.clear();
+	weapons_.clear();
 }
 
 void EntityManager::update() {
@@ -39,3 +42,5 @@ void EntityManager::addExistingEntity(Entity* e) {
 	e->setEntityManager(this);
 	externalEntities_.push_back(e);
 }
+
+std::vector<Weapon*>* EntityManager::getWeaponVector() { return &weapons_; }

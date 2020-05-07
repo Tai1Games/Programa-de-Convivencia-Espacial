@@ -6,6 +6,7 @@
 #include "AttachesToObjects.h"
 #include "CollisionHandler.h"
 #include "ThrownByPlayer.h"
+#include "PlayerController.h"
 
 Health::Health(int l) : Component(ComponentType::Health)
 {
@@ -67,6 +68,9 @@ void Health::playerDead(CollisionHandler* c)
 	Weapon* w = nullptr;
 	if (h != nullptr) w = h->getWeapon();
 	if (w != nullptr) c->dropWeapon(w);
+	//reset impulso
+	PlayerController* pc = GETCMP1_(PlayerController);
+	pc->resetImpulseForce();
 	//respawn
 	GameMode* s = c->getGamemode();
 	PlayerData* p = GETCMP1_(PlayerData);
@@ -100,12 +104,10 @@ void Health::onCollisionEnter(Collision* c)
 			b2Vec2 force = c->hitFixture->GetBody()->GetMass() * c->hitFixture->GetBody()->GetLinearVelocity();
 			int impact = force.Length();
 			Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
-			ThrownByPlayer* objThrown = nullptr;
 			PlayerData* playerWhoHitMe = nullptr;
 			//Si se impacta con un arma al umbral m�s alto de fuerza, se recibe su daño de impacto
 			if (w != nullptr) {
 				impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
-				objThrown = GETCMP_FROM_FIXTURE_(fix, ThrownByPlayer);
 			}
 			else {
 				//Depending on the force of impact we apply damage to the player
@@ -123,20 +125,21 @@ void Health::onCollisionEnter(Collision* c)
 				playerWhoHitMe = GETCMP_FROM_FIXTURE_(fix, PlayerData);
 			}
 
-		if (!subtractLife(impact)) {
-			// player is killed by a weapon
-			if (objThrown != nullptr) {
-				if(objThrown->getOwnerId() != GETCMP1_(PlayerData)->getPlayerNumber())
-					objThrown->addPointsToOwner();
-			}
-
-			// player is killed by another player at high speed
-			else if (playerWhoHitMe != nullptr) {
-				if (playerWhoHitMe->getPlayerNumber() != GETCMP1_(PlayerData)->getPlayerNumber()) {
-					GameMode* s = c->collisionHandler->getGamemode();
-					s->playerKillsPlayer(playerWhoHitMe->getPlayerNumber());
+			if (!subtractLife(impact)) {
+				ThrownByPlayer* objThrown = GETCMP_FROM_FIXTURE_(fix, ThrownByPlayer);
+				// player is killed by a weapon
+				if (objThrown != nullptr) {
+					if (objThrown->getOwnerId() != GETCMP1_(PlayerData)->getPlayerNumber())
+						objThrown->addPointsToOwner();
 				}
-			}
+
+				// player is killed by another player at high speed
+				else if (playerWhoHitMe != nullptr) {
+					if (playerWhoHitMe->getPlayerNumber() != GETCMP1_(PlayerData)->getPlayerNumber()) {
+						GameMode* s = c->collisionHandler->getGamemode();
+						s->playerKillsPlayer(playerWhoHitMe->getPlayerNumber());
+					}
+				}
 
 				playerDead(c->collisionHandler);
 			}

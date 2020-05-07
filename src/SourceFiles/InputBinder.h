@@ -17,6 +17,10 @@ struct KeyCursor {
 		switch (player)
 		{
 		case 1: {
+			Up = SDLK_w;
+			Left = SDLK_a;
+			Down = SDLK_s;
+			Right = SDLK_d;
 		}
 		break;
 		case 2: {
@@ -37,31 +41,51 @@ struct KeyCursor {
 struct KeyboardMapping {
 	KeyCursor cursor; //Teclas de movimiento para PureKeyboardBinder
 	//Varias teclas
-	SDL_Keycode grab = SDLK_SPACE,
-		pickWeapon = SDLK_e,
-		throwWeapon = SDLK_e,
-		attack = SDLK_q, 
-		impulse = SDLK_c,
-		pause = SDLK_ESCAPE,
-		forward = SDLK_e,
-		back = SDLK_q;
+	SDL_Keycode grab,
+		pickWeapon,
+		pickWeapon_secondary,
+		throwWeapon,
+		throwWeapon_secondary,
+		attack, 
+		attack_secondary,
+		impulse,
+		impulse_secondary,
+		pause,
+		forward,
+		back;
 
 	KeyboardMapping(int player = 1) {
 		switch (player)
 		{
 		case 1: {
-
+			cursor = KeyCursor(1);
+				grab = SDLK_LSHIFT,
+				pickWeapon = SDLK_q,
+				pickWeapon_secondary = SDLK_e,
+				throwWeapon = SDLK_q,
+				throwWeapon_secondary = SDLK_e,
+				attack = SDLK_z,
+				attack_secondary = SDLK_r,
+				impulse = SDLK_TAB,
+				impulse_secondary = SDLK_f,
+				pause = SDLK_ESCAPE,
+				forward = SDLK_e,
+				back = SDLK_q;
 		}
 		break;
 		case 2: {
 			cursor = KeyCursor(2);
-			grab = SDLK_RALT,
+			grab = SDLK_RSHIFT,
 			pickWeapon = SDLK_o,
+			pickWeapon_secondary = SDLK_COMMA,
 			throwWeapon = SDLK_o,
-			attack = SDLK_u,
-			impulse = SDLK_PERIOD,
-			pause = SDLK_7;
-			forward = SDLK_o;
+			throwWeapon_secondary = SDLK_COMMA,
+			attack = SDLK_p,
+			attack_secondary = SDLK_PERIOD,
+			impulse = SDLK_RETURN,
+			impulse_secondary = SDLK_RETURN,
+			pause = SDLK_BACKSPACE,
+			forward = SDLK_o,
 			back = SDLK_u;
 		}
 		break;
@@ -105,17 +129,18 @@ protected:
 public:
 	KeyboardBinder(KeyboardMapping m) : InputBinder(), map_(m) {}
 	KeyboardBinder(int defaultMap) : InputBinder(), map_(defaultMap) {}
+	bool grabbed = false;
 	virtual bool holdGrab() {
-		return ih->isKeyDown(map_.grab);
+		return (!grabbed && ih->isKeyDown(map_.grab));
 	}
 	virtual bool releaseGrab() {
-		return ih->isKeyJustUp(map_.grab);
+		return(grabbed && ih->isKeyJustDown(map_.grab));
 	}
 	virtual bool pressPick() {
-		return ih->isKeyJustDown(map_.pickWeapon);
+		return (ih->isKeyJustDown(map_.pickWeapon) || ih->isKeyJustDown(map_.pickWeapon_secondary));
 	}
 	virtual bool pressThrow() {
-		return ih->isKeyJustDown(map_.throwWeapon);
+		return (ih->isKeyJustDown(map_.throwWeapon) || ih->isKeyJustDown(map_.throwWeapon_secondary));
 	}
 	virtual bool menuMove(Dir d) {
 		switch (d) {
@@ -160,16 +185,16 @@ public:
 		return lastDir;
 	}
 	virtual bool pressImpulse() {
-		return ih->isKeyJustDown(map_.impulse);
+		return (ih->isKeyJustDown(map_.impulse) || ih->isKeyJustDown(map_.impulse_secondary));
 	}
 	virtual bool holdImpulse() {
-		return ih->isKeyDown(map_.impulse);
+		return (ih->isKeyDown(map_.impulse) || ih->isKeyDown(map_.impulse_secondary));
 	}
 	virtual bool releaseImpulse() {
-		return ih->isKeyJustUp(map_.impulse);
+		return (ih->isKeyJustUp(map_.impulse) || ih->isKeyJustUp(map_.impulse_secondary));
 	}
 	virtual bool pressAttack() {
-		return ih->isKeyJustDown(map_.attack);
+		return (ih->isKeyJustDown(map_.attack) || ih->isKeyJustDown(map_.attack_secondary));
 	}
 };
 

@@ -1,6 +1,5 @@
 #include "TomatoPool.h"
 #include "TomatoWeapon.h"
-#include "Entity.h"
 #include "ObjectFactory.h"
 
 TomatoPool::TomatoPool() : tomatoPool_([](Entity* e) { return e->isActive(); }) {};
