@@ -63,7 +63,7 @@ void CapitalismGameMode::update() {
 		for (int k = 0; k < players_.size(); k++) {
 			Wallet* playerWallet = players_[k]->getComponent<Wallet>(ComponentType::Wallet);
 			if (playerWallet->getCoins() > maxPoints) {
-				winner_ = players_[k];
+				winnerId_ = players_[k]->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber();
 				maxPoints = playerWallet->getCoins();
 				draw = false;
 			}
@@ -87,6 +87,7 @@ void CapitalismGameMode::update() {
 			coinsSpawned_++;
 		}
 	}
+	GameMode::update();
 }
 
 void CapitalismGameMode::render() {

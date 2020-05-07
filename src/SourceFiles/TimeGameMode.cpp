@@ -4,7 +4,7 @@
 #include "TomatoPool.h"
 
 TimeGameMode::TimeGameMode(MatchInfo* mInfo) :
-	GameMode(mInfo) {
+	GameMode(mInfo,GamemodeID::Timed) {
 }
 
 TimeGameMode::~TimeGameMode() {
@@ -114,7 +114,7 @@ void TimeGameMode::update()
 		for (int i = 0; i < playerKills_.size();i++) {
 			if (playerKills_[i] > maxPoints) {
 				maxPoints = playerKills_[i];
-				winner_ = players_[i];
+				winnerId_ = players_[i]->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber();
 				suddenDeath = false;
 			}
 			else if (playerKills_[i]==maxPoints) {
@@ -127,6 +127,8 @@ void TimeGameMode::update()
 		}
 
 	}
+
+	GameMode::update();
 }
 
 void TimeGameMode::addPoints(int playerID)

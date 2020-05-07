@@ -5,15 +5,17 @@
 #include "Resources.h"
 
 class Viewer;
+class InputBinder;
 class MenuState:
 	public GameState
 {
 private:
-	int menuPointer_ = 0;
-	int pointers_[3] = { 0,0,0 };
+	int menuPointer_ = 0; //En que screen del menú está (0 escogiendo modo, 1 escogiendo mapa)
+	int pointers_[2] = { 0,0 }; //Que seleccion dentro de la screen está
 	bool holdingY_ = false;
 	int ownerPlayerID_ = 0;
-	
+	InputBinder* ownerPlayerBinder_ = nullptr;
+
 	int tinkyOffset_ = CONST(int, "WINDOW_WIDTH") / 4;
 
 	int xOffset_ = CONST(int, "WINDOW_WIDTH")/3;

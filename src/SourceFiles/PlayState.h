@@ -6,13 +6,13 @@
 #include "checkML.h"
 #include "collisionHandler.h"
 #include "Resources.h"
+#include "MatchInfo.h"
 
 using namespace std;
 
 // esta clase es equivalente a un nivel del juego
 //se espera que herede de gamestate en un futuro
 //tambien deberia convertirse en un template de modo de juego y mapa
-
 class PlayState : public GameState
 {
 private:
@@ -37,6 +37,7 @@ private:
 		{"GardenRoom",Resources::GardenRoom}
 	};
 	TileMap* tilemap_;
+	vector<MatchInfo::PlayerInfo*>* playerInfo;
 
 public:
 	PlayState(GameMode* gMode, string tmap);

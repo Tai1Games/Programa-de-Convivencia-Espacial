@@ -12,6 +12,7 @@ enum Buttons {
 };
 
 class Viewer;
+class InputBinder;
 class PauseState : public GameState
 {
 private:
@@ -22,6 +23,7 @@ private:
 	/*Evita que se mueva varias veces hacia arriba/abajo al mantener el joystick*/
 	bool holdingY_ = false;
 	int ownerPlayerID_ = 0;
+	InputBinder* ownerBinder_;
 	vector<Viewer*> btns_;
 	/*Indice para el botón seleccionado en el vector de botones*/
 	int selectedBtn_ = 0;

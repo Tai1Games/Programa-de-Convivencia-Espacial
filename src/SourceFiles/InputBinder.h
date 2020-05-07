@@ -119,6 +119,7 @@ public:
 	virtual bool menuMove(Dir d) = 0;
 	virtual bool menuForward() = 0;
 	virtual bool menuBack() = 0;
+	virtual bool pressPause() = 0;
 };
 
 //Abstracta pura para modos con teclado
@@ -144,10 +145,10 @@ public:
 	}
 	virtual bool menuMove(Dir d) {
 		switch (d) {
-		case Dir::Up: { return ih->isKeyJustDown(map_.cursor.Up); }			break;
-		case Dir::Down: { return ih->isKeyJustDown(map_.cursor.Down); }		break;
-		case Dir::Left: { return ih->isKeyJustDown(map_.cursor.Left); }		break;
-		case Dir::Right: { return ih->isKeyJustDown(map_.cursor.Right); }	break;
+		case Dir::Up: { return ih->isKeyDown(map_.cursor.Up); }			break;
+		case Dir::Down: { return ih->isKeyDown(map_.cursor.Down); }		break;
+		case Dir::Left: { return ih->isKeyDown(map_.cursor.Left); }		break;
+		case Dir::Right: { return ih->isKeyDown(map_.cursor.Right); }	break;
 		default: { return false; }											break;
 		}
 	}
@@ -157,6 +158,7 @@ public:
 	virtual bool menuBack() {
 		return ih->isKeyJustDown(map_.back);
 	}
+	virtual bool pressPause() { return ih->isKeyJustDown(map_.pause); }
 	//como sigamos con la pelea juro que me como a alguien
 	virtual b2Vec2 getAimDir() = 0;
 };
@@ -267,8 +269,8 @@ public:
 	}
 	virtual bool menuMove(Dir d) {
 		switch (d) {
-		case Dir::Up: { return ih->getStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK).y > 0.9; }		break;
-		case Dir::Down: { return ih->getStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK).y < -0.9; }	break;
+		case Dir::Down: { return ih->getStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK).y > 0.9; }		break;
+		case Dir::Up: { return ih->getStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK).y < -0.9; }	break;
 		case Dir::Left: { return ih->getStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK).x < -0.9; }	break;
 		case Dir::Right: { return ih->getStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK).x > 0.9; }	break;
 		default: { return false; }																			break;
@@ -279,6 +281,10 @@ public:
 	}
 	virtual bool menuBack() {
 		return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_B);
+	}
+	virtual bool pressPause() {
+		return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_START)
+			|| ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_GUIDE);
 	}
 };
 

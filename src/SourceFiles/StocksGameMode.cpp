@@ -3,7 +3,7 @@
 #include "PlayState.h"
 
 
-StocksGameMode::StocksGameMode(MatchInfo* mInfo, int stocks) : GameMode(mInfo)
+StocksGameMode::StocksGameMode(MatchInfo* mInfo, int stocks) : GameMode(mInfo,GamemodeID::Stocks)
 {
 	maxStocks_ = stocks;
 }
@@ -40,7 +40,7 @@ void StocksGameMode::init(PlayState* game){
 }
 
 void StocksGameMode::update(){
-
+	GameMode::update();
 }
 
 void StocksGameMode::render(){
@@ -68,7 +68,7 @@ bool StocksGameMode::onPlayerDead(int id) { //Returns false when player runs out
 				int k = 0;
 				while (playerStocks_[k] == 0) { k++; }
 				roundResults_.push_back(players_[k]);
-				winner_ = players_[k];
+				winnerId_ = players_[k]->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber();
 				roundFinished_ = true; //Round finishes when only 1 player remains
 			}
 			return false;

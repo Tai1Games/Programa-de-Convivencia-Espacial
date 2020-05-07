@@ -4,7 +4,7 @@
 #include "ActionableWeapon.h"
 
 
-TutorialGameMode::TutorialGameMode(MatchInfo* mInfo, int stocks) : GameMode(mInfo)
+TutorialGameMode::TutorialGameMode(MatchInfo* mInfo, int stocks) : GameMode(mInfo,GamemodeID::Tutorial)
 {
 	maxStocks_ = stocks;
 }

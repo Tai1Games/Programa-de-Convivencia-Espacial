@@ -21,10 +21,11 @@ void ControllerGameMode::update() {
 			controllerTimes_[controller_->getPlayerId()] += (CONST(double, "MS_PER_FRAME"));
 			if (controllerTimes_[controller_->getPlayerId()] >= CONST(double, "TIME_TO_WIN")) {
 				roundFinished_ = true;
-				winner_ = players_[controller_->getPlayerId()];
+				winnerId_ = controller_->getPlayerId();
 			}
 		}
 	}
+	GameMode::update();
 }
 
 

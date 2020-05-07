@@ -43,7 +43,7 @@ private:
 	std::vector<Collider*> roombaColliders_;
 	std::vector<Wallet*> playerWallets_;
 public:
-	CapitalismGameMode(MatchInfo* mInfo) : GameMode(mInfo){};
+	CapitalismGameMode(MatchInfo* mInfo) : GameMode(mInfo, GamemodeID::Capitalism){};
 	virtual ~CapitalismGameMode() {};
 	virtual void init(PlayState* game);
 	virtual void render();

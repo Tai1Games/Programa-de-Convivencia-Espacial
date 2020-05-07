@@ -16,10 +16,13 @@ protected:
 	PlayState* state_ = nullptr;
 	std::vector<Entity*> players_; //Player vector. We use Entity because we will need multiple components from them.
 	Entity* winner_ = nullptr; //Player who wins the round.
+	int winnerId_ = -1;
 	bool roundFinished_ = false;
 	TileMap* tilemap_ = nullptr;
+
 	MatchInfo* matchInfo_ = nullptr;
 	int nPlayers_ = 0;
+	GamemodeID gamemodeId_ = GamemodeID::NUMBER_OF_GAMEMODES;
 	//Barras de progreso usadas por WiFightGameMode y ControllerGameMode(subidas a GameMode por herencia para no copiar y pegar dos veces)
 	vector<Texture*> emptyProgressBars_;
 	vector<Texture*> progressBars_;
@@ -29,11 +32,11 @@ protected:
 
 private:
 public:
-	GameMode(MatchInfo* matchinfo) : matchInfo_(matchinfo),nPlayers_(matchInfo_->getNumberOfPlayers()) {};
+	GameMode(MatchInfo* matchinfo, GamemodeID id) : matchInfo_(matchinfo),nPlayers_(matchInfo_->getNumberOfPlayers()),gamemodeId_(id) {};
 	virtual ~GameMode() {};
 	virtual void init(PlayState* state);
 	virtual void render() {};
-	virtual void update() {};
+	virtual void update();
 	virtual bool onPlayerDead(int id) { return true; };
 	Entity* getRoundResults() { return winner_; }
 	virtual void setTileMap(TileMap* tm) { tilemap_ = tm; };

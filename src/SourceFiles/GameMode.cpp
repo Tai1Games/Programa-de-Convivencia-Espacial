@@ -60,3 +60,9 @@ void GameMode::createPlayers(PlayState* game) {
 		Resources::Body, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, (*matchInfo_->getPlayersInfo())[i]->inputBinder, 3));
 	}
 }
+
+void GameMode::update(){
+	if(roundFinished_){
+		(*matchInfo_->getPlayersInfo())[winnerId_]->matchesWon[gamemodeId_]++;
+	}
+}
