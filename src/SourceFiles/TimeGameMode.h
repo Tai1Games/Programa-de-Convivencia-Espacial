@@ -25,8 +25,7 @@ private:
 	void renderKillMarker();
 
 public:
-	TimeGameMode(int nPlayers) : AbstractTimedGameMode(nPlayers) {};
-	//TimeGameMode(MatchInfo* mInfo);
+	TimeGameMode(MatchInfo* mInfo);
 	~TimeGameMode();
 	virtual void init(PlayState* game) override;
 	virtual void render() override;

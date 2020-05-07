@@ -98,7 +98,8 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 			states_[state] = new PauseState();
 			break;
 		case States::midGame:			//Jugadores totales-----Jugador que gana la ronda
-			states_[state] = new MidGameState(numberOfPlayers+3, 1);
+			//Se usa el parametro gamemode como indicador de quien gana la ronda
+			states_[state] = new MidGameState(matchInfo_->getNumberOfPlayers(), gameMode);
 			break;
 		}
 		//inicializar la nueva escena

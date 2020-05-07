@@ -4,7 +4,7 @@
 #include "TomatoPool.h"
 
 TimeGameMode::TimeGameMode(MatchInfo* mInfo) :
-	GameMode(mInfo,GamemodeID::Timed) {
+	AbstractTimedGameMode(mInfo,GamemodeID::Timed) {
 }
 
 TimeGameMode::~TimeGameMode() {

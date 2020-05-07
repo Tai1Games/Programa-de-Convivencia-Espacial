@@ -306,6 +306,8 @@
     <ClInclude Include="MatchInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AbstractTimedGameMode.h">
+      <Filter>Header Files\GameModes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -524,7 +526,7 @@
     </ClCompile>
     <ClCompile Include="MatchInfo.cpp">
       <Filter>Source Files</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="AbstractTimedGameMode.cpp">
       <Filter>Source Files\GameModes</Filter>
     </ClCompile>

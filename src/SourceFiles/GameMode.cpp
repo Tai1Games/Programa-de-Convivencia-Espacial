@@ -64,6 +64,6 @@ void GameMode::createPlayers(PlayState* game) {
 void GameMode::update(){
 	if(roundFinished_){
 		(*matchInfo_->getPlayersInfo())[winnerId_]->matchesWon[gamemodeId_]++;
-		//SDL_Game::instance()->getStateMachine()->transitionToState(States::transition);
+		SDL_Game::instance()->getStateMachine()->transitionToState(States::midGame,winnerId_);
 	}
 }

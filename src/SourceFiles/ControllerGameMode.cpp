@@ -33,7 +33,7 @@ void ControllerGameMode::render() {
 	GameMode::renderProgressBars(controllerTimes_, CONST(double, "TIME_TO_WIN"));
 	
 	if (roundFinished_) {
-		string winMsg = "Gana el jugador " + to_string(winner_->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber()+1);
+		string winMsg = "Gana el jugador " + to_string(winnerId_+1);
 		Texture ganador(SDL_Game::instance()->getRenderer(), winMsg,
 			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
 		ganador.render(CONST(int, "WINDOW_WIDTH") / 2 - ganador.getWidth() / 2, CONST(int, "WINDOW_HEIGHT") / 2);

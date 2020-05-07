@@ -33,8 +33,7 @@ private:
 
 	void renderCoinsMarker();
 public:
-	//CapitalismGameMode(MatchInfo* mInfo) : GameMode(mInfo, GamemodeID::Capitalism){};
-	CapitalismGameMode(int nPlayers) : AbstractTimedGameMode(nPlayers) {};
+	CapitalismGameMode(MatchInfo* mInfo) : AbstractTimedGameMode(mInfo, GamemodeID::Capitalism){};
 	virtual ~CapitalismGameMode() {};
 	virtual void init(PlayState* game) override;
 	virtual void render() override;
