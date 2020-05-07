@@ -7,6 +7,8 @@
 #include "collisionHandler.h"
 #include "Resources.h"
 #include "MatchInfo.h"
+#include "BananaPool.h"
+#include "BulletPool.h"
 
 using namespace std;
 
@@ -38,6 +40,8 @@ private:
 	};
 	TileMap* tilemap_;
 	vector<MatchInfo::PlayerInfo*>* playerInfo;
+	BulletPool bulletPool_;
+	BananaPool bananaPool_;
 
 public:
 	PlayState(GameMode* gMode, string tmap);

@@ -25,7 +25,7 @@
                  "width":1920,
                  "x":0,
                  "y":0
-                },
+                }, 
                 {
                  "height":30,
                  "id":3,
@@ -36,7 +36,7 @@
                  "width":1920,
                  "x":0,
                  "y":1050
-                },
+                }, 
                 {
                  "height":1080,
                  "id":4,
@@ -47,7 +47,7 @@
                  "width":30,
                  "x":0,
                  "y":0
-                },
+                }, 
                 {
                  "height":1080,
                  "id":5,
@@ -64,7 +64,7 @@
          "visible":true,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
          "id":5,
@@ -73,50 +73,50 @@
                 {
                  "height":0,
                  "id":6,
-                 "name":"Spawn",
+                 "name":"P1",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":960,
-                 "y":75
-                },
+                 "x":85.5984652598214,
+                 "y":87.8117440987572
+                }, 
                 {
                  "height":0,
                  "id":7,
-                 "name":"Spawn",
+                 "name":"P3",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":75,
-                 "y":540
-                },
+                 "x":91.0146801234465,
+                 "y":994.81691550588
+                }, 
                 {
                  "height":0,
                  "id":8,
-                 "name":"Spawn",
+                 "name":"P2",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1845,
-                 "y":540
-                },
+                 "x":1841.79706397531,
+                 "y":115.610976728668
+                }, 
                 {
                  "height":0,
                  "id":9,
-                 "name":"Spawn",
+                 "name":"P4",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":960,
-                 "y":1005
+                 "x":1816.78538660439,
+                 "y":1003.39853198766
                 }],
          "opacity":1,
          "type":"objectgroup",

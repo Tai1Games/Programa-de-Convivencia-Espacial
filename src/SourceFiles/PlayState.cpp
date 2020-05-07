@@ -17,14 +17,14 @@
 #include "PlayerData.h"
 #include "ParticleEmitter.h"
 #include "GameStateMachine.h"
+#include "ThrownByPlayer.h"
+#include "Component.h"
 
 PlayState::PlayState(GameMode* gMode, string tmap) :GameState(),
 gameMode_(gMode), tilemapName_(tmap) {}
 
 
 PlayState::~PlayState() {
-	//for (Entity* i : deadBodies) { delete i; }
-	//for (Collider* i : collDeadBodies) { delete i; }
 	delete gameMode_;			gameMode_ = nullptr;
 	delete tilemap_;			tilemap_ = nullptr;
 	delete entityManager_;		entityManager_ = nullptr;
@@ -58,7 +58,7 @@ void PlayState::init() {
 
 	//MÚSICA
 	SDL_Game::instance()->getAudioMngr()->playMusic(resourceMap_[tilemapName_], -1);
-
+	
 	//Version estática de la factoria
 	tilemap_->executeMapFactory();
 	tilemap_->createWeapons();
@@ -66,6 +66,15 @@ void PlayState::init() {
 	gameMode_->init(this);
 
 	playerInfo = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
+	bulletPool_.init(entityManager_, physicsWorld_);
+	bananaPool_.init(entityManager_, physicsWorld_, &bulletPool_);
+
+	bananaPool_.addBanana({ 20,20 });
+	
+	for (Weapon* w : *(entityManager_->getWeaponVector())) {
+		w->getEntity()->addComponent<ThrownByPlayer>(gameMode_);
+	}
+	bulletPool_.addThrownByPlayer(gameMode_);
 }
 
 void PlayState::update() {
@@ -96,6 +105,12 @@ void PlayState::handleInput()
 			SDL_Game::instance()->getStateMachine()->setPauseOwner(pInfo->playerId);
 			//SDL_Game::instance()->getStateMachine()->transitionToState(States::pause);
 		}
+
+		else if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_BACK)) {
+			SDL_Game::instance()->getAudioMngr()->pauseMusic();
+			SDL_Game::instance()->getStateMachine()->transitionToState(States::midGame, ih->getNumControllers());
+		}
+			
 	}
 }
 

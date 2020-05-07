@@ -182,10 +182,15 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractTimedGameMode.h" />
     <ClInclude Include="ActionableWeapon.h" />
     <ClInclude Include="AnimatedViewer.h" />
     <ClInclude Include="AttachesToObjects.h" />
+    <ClInclude Include="BananaPool.h" />
+    <ClInclude Include="BananaWeapon.h" />
     <ClInclude Include="BoilerButtonLogic.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletPool.h" />
     <ClInclude Include="CapitalismGameMode.h" />
     <ClInclude Include="CarnivorousPlant.h" />
     <ClInclude Include="checkML.h" />
@@ -220,6 +225,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="MatchInfo.h" />
     <ClInclude Include="MeleeWeapon.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="MidGameState.h" />
     <ClInclude Include="Pad.h" />
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="ParticleEmitter.h" />
@@ -259,10 +265,15 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="WiFightGameMode.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractTimedGameMode.cpp" />
     <ClCompile Include="ActionableWeapon.cpp" />
     <ClCompile Include="AnimatedViewer.cpp" />
     <ClCompile Include="AttachesToObjects.cpp" />
+    <ClCompile Include="BananaPool.cpp" />
+    <ClCompile Include="BananaWeapon.cpp" />
     <ClCompile Include="BoilerButtonLogic.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletPool.cpp" />
     <ClCompile Include="CapitalismGameMode.cpp" />
     <ClCompile Include="CarnivorousPlant.cpp" />
     <ClCompile Include="Coin.cpp" />
@@ -293,6 +304,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="MatchInfo.cpp" />
     <ClCompile Include="MeleeWeapon.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="MidGameState.cpp" />
     <ClCompile Include="Pad.cpp" />
     <ClCompile Include="ParticleEmitter.cpp" />
     <ClCompile Include="PauseState.cpp" />

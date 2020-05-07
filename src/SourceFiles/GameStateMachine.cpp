@@ -11,6 +11,7 @@
 #include "PlayState.h"
 #include "PauseState.h"
 #include "MenuState.h"
+#include "MidGameState.h"
 #include "TransitionState.h"
 #include "LobbyState.h"
 
@@ -95,6 +96,9 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 		case States::pause:
 			//if (states_[state] != nullptr)	delete states_[state];
 			states_[state] = new PauseState();
+			break;
+		case States::midGame:			//Jugadores totales-----Jugador que gana la ronda
+			states_[state] = new MidGameState(numberOfPlayers+3, 1);
 			break;
 		}
 		//inicializar la nueva escena

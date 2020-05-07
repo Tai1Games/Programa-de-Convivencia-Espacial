@@ -37,8 +37,6 @@ private:
 	vector<b2FixtureDef> fixtureDefs_;
 	vector<b2Fixture*> fixtures_;
 
-	b2Filter setCollisionLayer(CollisionLayer c);
-
 public:
 
 	//Friccion -> rozamiento al contacto con otros cuerpos   Drag-> rozamiento con el aire
@@ -109,4 +107,7 @@ public:
 		f.maskBits += layer;
 		fixtures_[i]->SetFilterData(f);
 	}
+
+	b2Filter setCollisionLayer(CollisionLayer c);
+	void disableFixtureCollisions(int FixtureIndex);
 };

@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "Collision.h"
 #include "CollisionHandler.h"
+#include "ThrownByPlayer.h"
 
 MeleeWeapon::MeleeWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : MeleeWeapon(ComponentType::MeleeWeapon, wId, dmg, impactDmg, cooldownFrames) {};
 
@@ -40,10 +41,12 @@ void MeleeWeapon::PickObjectBy(int index) {
 		currentHand_->setWeapon(weaponType_, this);
 		vw_->setDrawable(false);
 		//Desactivamos el trigger de pickUp
-		b2Filter pickUpCollider = mainCollider_->getFixture(0)->GetFilterData();
-		pickUpCollider.categoryBits = 0;
-		pickUpCollider.maskBits = 0;
-		mainCollider_->getFixture(0)->SetFilterData(pickUpCollider);
+
+		mainCollider_->disableFixtureCollisions(0);
+		mainCollider_->disableFixtureCollisions(1);
+    
+		ThrownByPlayer* throwData = GETCMP1_(ThrownByPlayer);
+		throwData->SetOwner(index);
 	}
 }
 
@@ -74,10 +77,8 @@ void MeleeWeapon::onCollisionEnter(Collision* c) {
 
 void MeleeWeapon::UnPickObject() {
 	//Reactivamos el trigger de pickUp
-	b2Filter pickUpCollider = mainCollider_->getFixture(0)->GetFilterData();
-	pickUpCollider.categoryBits = Collider::CollisionLayer::NormalObject;
-	pickUpCollider.maskBits = Collider::CollisionLayer::NormalObject | Collider::CollisionLayer::NormalAttachableObject | Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall | Collider::CollisionLayer::NonGrababbleWall;
-	mainCollider_->getFixture(0)->SetFilterData(pickUpCollider);
+	mainCollider_->getFixture(0)->SetFilterData(mainCollider_->setCollisionLayer(Collider::CollisionLayer::NormalObject));
+	mainCollider_->getFixture(1)->SetFilterData(mainCollider_->setCollisionLayer(Collider::CollisionLayer::Trigger));
 
 	ActionableWeapon::UnPickObject();
 }
