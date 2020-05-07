@@ -4,6 +4,7 @@
 #include "GameState.h"
 #include "checkML.h"
 #include "Texture.h"
+#include "Constants.h"
 
 class MatchInfo;
 
@@ -33,6 +34,7 @@ public:
 	void loadState(int state, int gameMode, string tileMap);
 
 	GameState* getCurrentState() const { return ((currentState_ != -1) ? states_[currentState_] : nullptr); };
+	GameState* getStateById(int id) const { return ((id < States::NUMBER_OF_STATES) ? states_[id] : nullptr); };
 	void deleteState(int state);
 
 	void gameCycle();

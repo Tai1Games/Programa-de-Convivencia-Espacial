@@ -64,29 +64,32 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 			break;
 		case States::play:
 		{
-			if (gameMode < NUMBER_OF_GAMEMODES) {
-				switch (gameMode) {
+			pair<GamemodeID, string> round = matchInfo_->getCurrentRound();
+
+			if (round.first < NUMBER_OF_GAMEMODES) {
+				switch (round.first) {
 				case (GamemodeID::Capitalism):
-					states_[state] = new PlayState(new CapitalismGameMode(matchInfo_), tileMap);
+					states_[state] = new PlayState(new CapitalismGameMode(matchInfo_), round.second);
 					break;
 				case (GamemodeID::Controller):
-					states_[state] = new PlayState(new ControllerGameMode(matchInfo_), tileMap);
+					states_[state] = new PlayState(new ControllerGameMode(matchInfo_), round.second);
 					break;
 				case (GamemodeID::Stocks):
-					states_[state] = new PlayState(new StocksGameMode(matchInfo_), tileMap);
+					states_[state] = new PlayState(new StocksGameMode(matchInfo_), round.second);
 					break;
 				case (GamemodeID::WiFight):
-					states_[state] = new PlayState(new WiFightGameMode(matchInfo_), tileMap);
+					states_[state] = new PlayState(new WiFightGameMode(matchInfo_), round.second);
 					break;
 				case (GamemodeID::Timed):
-					states_[state] = new PlayState(new TimeGameMode(matchInfo_), tileMap);
+					states_[state] = new PlayState(new TimeGameMode(matchInfo_), round.second);
 					break;
 				case (GamemodeID::Tutorial):
-					states_[state] = new PlayState(new TutorialGameMode(matchInfo_), tileMap);
+					states_[state] = new PlayState(new TutorialGameMode(matchInfo_), round.second);
+					break;
+				default: 
 					break;
 				}
 			}
-			
 		}
 		break; // :P
 		case States::lobby: {
@@ -112,7 +115,7 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 }
 
 void GameStateMachine::deleteState(int state) {
-	if (state != currentState_ && state < States::NUMBER_OF_STATES) {
+	if (state != currentState_ && state < States::NUMBER_OF_STATES && states_[state] != nullptr) {
 		delete states_[state];
 		states_[state] = nullptr;
 	}

@@ -17,3 +17,15 @@ MatchInfo::PlayerInfo::PlayerInfo(const PlayerLobbyInfo& info) :
 	for (int i = 0; i < GamemodeID::NUMBER_OF_GAMEMODES; i++)
 		matchesWon.push_back(0);
 }
+
+void MatchInfo::AddVictory(size_t toPlayer, GamemodeID gameModeWon) {
+	players_[toPlayer]->matchesWon[gameModeWon]++;
+	currentRoundNumber_++;
+}
+
+pair<GamemodeID, string> MatchInfo::getCurrentRound() {
+	if (currentRoundNumber_ < rounds_->size())
+		return (*rounds_)[currentRoundNumber_];
+	else
+		return { GamemodeID::NUMBER_OF_GAMEMODES,"" };
+}

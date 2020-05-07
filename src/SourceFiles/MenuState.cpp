@@ -54,6 +54,8 @@ void MenuState::handleInput()
 			else SDL_Game::instance()->exitGame();
 		}
 		else { //Elegimos el mapa
+			vector<pair<GamemodeID, string>>* roundsVectorino = new vector<pair<GamemodeID,string>>({ {GamemodeID::Controller,"LivingRoom"},{GamemodeID::Timed,"GymRoom"} });
+			SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVectorino);
 			SDL_Game::instance()->getStateMachine()->transitionToState(States::play, pointers_[0], maps_[pointers_[1]]);
 		}
 	}

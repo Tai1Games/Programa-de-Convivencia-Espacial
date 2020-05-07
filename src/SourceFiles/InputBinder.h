@@ -216,7 +216,10 @@ public:
 				lastDir = dir;
 			return lastDir;
 		}
-		else return b2Vec2();
+		else {
+			cout << "no hay collider" << endl;
+			return b2Vec2();
+		}
 	}
 	virtual bool pressImpulse() {
 		return ih->isMouseButtonJustDown(InputHandler::MOUSEBUTTON::RIGHT);

@@ -83,7 +83,7 @@ void AbstractTimedGameMode::updateTime(const vector<int>& playerPoints)
 		for (int i = 0; i < playerPoints.size(); i++) {
 			if (playerPoints[i] > maxPoints) {
 				maxPoints = playerPoints[i];
-				winner_ = players_[i];
+				winnerId_ = i;
 				suddenDeath = false;
 			}
 			else if (playerPoints[i] == maxPoints) {
@@ -92,7 +92,7 @@ void AbstractTimedGameMode::updateTime(const vector<int>& playerPoints)
 		}
 		if (!suddenDeath) {
 			roundFinished_ = true;
-			cout << "PLAYER: " << winner_->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber() << " WON." << endl;
+			cout << "PLAYER: " << winnerId_<< " WON." << endl;
 		}
 	}
 }

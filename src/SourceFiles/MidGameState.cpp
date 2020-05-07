@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "SDL_Game.h"
 #include "InputHandler.h"
+#include "MatchInfo.h"
 
 
 MidGameState::~MidGameState()
@@ -14,15 +15,18 @@ MidGameState::~MidGameState()
 
 void MidGameState::init()
 {
+	totalRounds_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfRounds();
+
 	entityManager_ = new EntityManager();
 
 	//Fondo del modo	
 	fondo= SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::RocketRoom);
 
-	distanceGainedByPoint_ = (CONST(int, "WINDOW_WIDTH")- CONST(int, "START_POSITION")) / totalRounds;
+	distanceGainedByPoint_ = (CONST(int, "WINDOW_WIDTH")- CONST(int, "START_POSITION")) / totalRounds_;
 
+	
 	//Marcadores de las rondas
-	for (int i = 0; i < totalRounds; i++) {
+	for (int i = 0; i < totalRounds_; i++) {
 		Entity* marker = entityManager_->addEntity();
 		marker->addComponent<Viewer>(Resources::Token, b2Vec2((CONST(int, "START_POSITION")+ distanceGainedByPoint_*i)- CONST(int, "MARKER_WIDTH"), CONST(int, "MARKER_Y_POSITION")), 2, 0);
 		markers.push_back(marker);
@@ -132,8 +136,11 @@ void MidGameState::update()
 			if (currentFrame >= frameZoomStateEnds_) {
 				//Aqui pedirá a la super clase que ya se ponga el nuevo mapa y esas cosas
 				SDL_Game::instance()->getAudioMngr()->resumeMusic();
-				SDL_Game::instance()->getStateMachine()->transitionToState(States::play);
-
+				GameStateMachine* gsMachine = SDL_Game::instance()->getStateMachine();
+				if (gsMachine->getMatchInfo()->getCurrentRoundNumber() < gsMachine->getMatchInfo()->getNumberOfRounds())
+					gsMachine->transitionToState(States::play);
+				else
+					gsMachine->transitionToState(States::menu);
 			}
 
 			//Altamente provisional hasta que sepamos hacer mates
@@ -169,7 +176,9 @@ void MidGameState::handleInput()
 	}
 }
 	
-
+void MidGameState::onLoaded() {
+	SDL_Game::instance()->getStateMachine()->deleteState(States::play);
+}
 
 void MidGameState::resetScene() {
 	//Reseteamos el estado a como estaba en origen

@@ -16,9 +16,9 @@ private:
 		zoom,
 	};
 
-	int numPlayers_;	//por constructora
-	int roundWinner_;	//Por constructora y por reset
-	int totalRounds=10; //Viene de la Super clase
+	int numPlayers_ = 0;	//por constructora
+	int roundWinner_ = 0;	//Por constructora y por reset
+	int totalRounds_ = 0; //Viene de MatchInfo
 	Texture* fondo = nullptr;
 
 	//Input
@@ -44,12 +44,10 @@ private:
 	//station
 	AnimatedViewer* spaceStationViewer_ = nullptr;
 	float spaceStationScaleFactor_ = 1;
-	
+
 
 public:
-	MidGameState(int numPlayers, int roundWinner) { 
-		numPlayers_ = numPlayers; 
-		roundWinner_ = roundWinner;
+	MidGameState(int numPlayers, int roundWinner) : numPlayers_(numPlayers), roundWinner_(roundWinner) {
 	};
 	virtual ~MidGameState();
 
@@ -58,4 +56,5 @@ public:
 	virtual void update();
 	virtual void handleInput();
 	virtual void resetScene();
+	virtual void onLoaded();
 };
