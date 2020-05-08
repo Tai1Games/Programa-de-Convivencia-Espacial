@@ -15,7 +15,7 @@ void MenuState::init() {
 	Entity* miniTinky = entityManager_->addEntity();
 	menuCursor_ = miniTinky->addComponent<Viewer>(Resources::Tinky, b2Vec2(0, 0), 0.5, 0);
 	createText();
-	updateText(-1);
+	updateText();
 
 	//MÚSICA
 	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::AudioId::MainMenuMusic, -1);
@@ -40,89 +40,83 @@ void MenuState::handleInput()
 		holdingY_ = false;
 	}
 
-	if (ownerPlayerBinder_->menuForward()) {		
+	if (ownerPlayerBinder_->menuForward()) {
 		if (menuPointer_ == 0) { //Seleccionando gamemode
-			if (pointers_[0] < GamemodeID::NUMBER_OF_GAMEMODES - 1) {
+			if (pointers_[0] < GamemodeID::Tutorial) {
 				menuPointer_++;
-				pointers_[1] = 0;
-				updateText(menuPointer_ -1);
+				updateText();
 			}
 			else if (pointers_[0] == GamemodeID::Tutorial) { //Si es tutorial te manda directo sin seleccionar mapa
-				pointers_[1] = -1;
-				SDL_Game::instance()->getStateMachine()->transitionToState(States::play, pointers_[0], "TutorialRoom");
+				addRound((GamemodeID)pointers_[0], "TutorialRoom");
+				SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVector_);
+				SDL_Game::instance()->getStateMachine()->transitionToState(States::play, roundsVector_->front().first, roundsVector_->front().second);
 			}
 			else SDL_Game::instance()->exitGame();
 		}
 		else { //Elegimos el mapa
-			vector<pair<GamemodeID, string>>* roundsVectorino = new vector<pair<GamemodeID,string>>({ {GamemodeID::Controller,"LivingRoom"},{GamemodeID::Timed,"GymRoom"} });
-			SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVectorino);
-			SDL_Game::instance()->getStateMachine()->transitionToState(States::play, pointers_[0], maps_[pointers_[1]]);
+			addRound((GamemodeID)pointers_[0], maps_[pointers_[1]]);
+			if (roundsVector_->size() == numberOfRounds_) {
+				SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVector_);
+				SDL_Game::instance()->getStateMachine()->transitionToState(States::play, roundsVector_->front().first, roundsVector_->front().second);
+			}
+			else { //como onLoaded pero sin resetear la música
+				menuPointer_ = 0;
+				pointers_[0] = 0;
+				pointers_[1] = 0;
+				updateText();
+			}
 		}
 	}
 	//ir para atrás
 	else if (ownerPlayerBinder_->menuBack() && (menuPointer_ > 0))
 	{
-			if (pointers_[0] != NUMBER_OF_GAMEMODES - 1) {
-				menuPointer_--;
-				updateText(menuPointer_ + 1);
-			}
-			else {
-				menuPointer_ -= 2;
-				pointers_[1] = 0;
-				updateText(menuPointer_ + 2);
-			}			
+		menuPointer_--;
+		updateText();
 	}
 }
 
-void MenuState::onLoaded() {
+void MenuState::addRound(GamemodeID gMode, string map) {
+	roundsVector_->push_back(std::make_pair(gMode, map));
+}
+
+void MenuState::onLoaded() { //poner el menú al principio
 	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::AudioId::MainMenuMusic, -1);
 	menuPointer_ = 0;
 	pointers_[0] = 0;
 	pointers_[1] = 0;
-	updateText(2);
+	updateText();
 }
 
 void MenuState::updatePointer(int n) {
 	int size = 0;
-	switch (menuPointer_) {
-	case 0:
-		size = GamemodeID::NUMBER_OF_GAMEMODES + 1;
-		break;
-	case 1:
-		size = maps_.size();
-		break;
-	default:
-		break;
-	}
-	if (n == 1) pointers_[menuPointer_]++;
-	else pointers_[menuPointer_] += size - 1;
 
+	if (menuPointer_ == 0) size = GamemodeID::NUMBER_OF_GAMEMODES + 1;
+	else size = maps_.size();
+
+	//moverse en el menú de manera modular
+	pointers_[menuPointer_] += size + n;
 	pointers_[menuPointer_] %= size;
+
 	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (pointers_[menuPointer_] + 1)));
 }
 
-void MenuState::updateText(int previous) {
+void MenuState::updateText() { //activar la pantalla actual y desactivar la otra, si solo hay dos no necesita más información
 	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (pointers_[menuPointer_] + 1)));
 
-	if (previous != -1) for (Entity* e : texts_[previous]) e->setActive(false);
-	for (Entity* e : texts_[menuPointer_]) e->setActive(true);
+	for (Entity* e : texts_[menuPointer_]) e->setActive(true); //activar actual
+	for (Entity* e : texts_[1 - menuPointer_]) e->setActive(false); //desactivar otra
 }
 
-void MenuState::createText() {
+void MenuState::createText() { //preparar los textos
 	int start, end, offset;
 
 	for (int i = 0; i < 2; i++) {
-		switch (i) {
-		case 0:
+
+		if (i == 0) {
 			start = Resources::Capitalism;
 			end = Resources::LivingRoomText;
-			break;
-		case 1:
-			end = Resources::OnePlayer;
-			break;
-		default:
-			break;
 		}
+		else end = Resources::OnePlayer;
 
 		offset = start - 1;
 
