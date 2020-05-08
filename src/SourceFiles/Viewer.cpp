@@ -7,20 +7,12 @@ Viewer::Viewer() :
 }
 
 Viewer::Viewer(int textureId) :
-	Component(ComponentType::Viewer), //
-	tex_(nullptr),	//
-	collider_(nullptr),
-	clip_(SDL_Rect{ 0, 0, 0, 0 }),
-	textureId_(textureId) {	//
-}
+	Viewer(textureId, { 0, 0, 0, 0 }) {}
 
 Viewer::Viewer(int textureId, SDL_Rect clip) :
-	Component(ComponentType::Viewer), //
-	tex_(nullptr),	//
-	collider_(nullptr),
-	clip_(clip),
-	textureId_(textureId) {	//
+	Viewer(textureId, clip, ComponentType::Viewer) {	//
 }
+
 Viewer::Viewer(int textureId, SDL_Rect clip, ComponentType::CmpId ct) :
 	Component(ct), //
 	tex_(nullptr),	//
