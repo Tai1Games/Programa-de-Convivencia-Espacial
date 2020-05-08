@@ -303,6 +303,9 @@
     <ClInclude Include="LobbyState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
+    <ClInclude Include="AnimatedPlayer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+     </ClInclude>
     <ClInclude Include="StaplerWeapon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -524,11 +527,15 @@
     <ClCompile Include="LobbyState.cpp">
       <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
+    <ClCompile Include="AnimatedPlayer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+        </ClCompile>
     <ClCompile Include="StaplerWeapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AbstractTimedGameMode.cpp">
       <Filter>Source Files\GameModes</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
