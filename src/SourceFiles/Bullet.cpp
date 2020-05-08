@@ -29,13 +29,19 @@ void Bullet::setActive(bool a, b2Vec2 pos, b2Vec2 size, b2Vec2 vel, int texture,
 	col_->getBody()->SetEnabled(a);
 
 	if (a) { //hacer movidas
-		col_->getBody()->SetTransform(pos, 0);
+		float attachAngle = std::atanf(vel.y / vel.x) - (PI/2);
+		if (vel.x < 0)attachAngle += PI; //se invierte
+		col_->getBody()->SetTransform(pos, attachAngle);
 		col_->applyLinearImpulse(vel, { 0,0 });
 		//SIZE------------
 		viewer_->setTexture(texture);
 		damage_ = damage;
 		player_ = player;
 		limitTime_ = SDL_Game::instance()->getTime() + CONST(double, "BULLET_DESTROY_TIME");
+	}
+	else {
+		col_->setLinearVelocity(b2Vec2(0,0));//resetea su velocidad
+		col_->getBody()->SetTransform(b2Vec2(0, 0), 0); //resetea su rotacion y posicion
 	}
 }
 

@@ -60,7 +60,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -94,31 +94,19 @@
                  "y":154
                 }, 
                 {
-                 "height":0,
-                 "id":83,
-                 "name":"Treadmill",
-                 "point":true,
+                 "height":200,
+                 "id":87,
+                 "name":"CarnivorousePlant",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":0,
-                 "x":802,
-                 "y":472
-                }, 
-                {
-                 "height":410,
-                 "id":86,
-                 "name":"Pad",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":84,
-                 "x":86,
-                 "y":338
+                 "width":200,
+                 "x":80,
+                 "y":416
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -141,7 +129,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -273,7 +261,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -332,7 +320,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],
