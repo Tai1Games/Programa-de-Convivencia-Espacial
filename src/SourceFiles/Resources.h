@@ -55,6 +55,8 @@ public:
 		// Weapons and map items
 
 		// Players
+		PlayerAnimSheet,
+
 
 		// Map elements
 		IncreasingFreqButton,
