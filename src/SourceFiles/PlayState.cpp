@@ -18,6 +18,7 @@
 #include "ParticleEmitter.h"
 #include "ThrownByPlayer.h"
 #include "Component.h"
+#include "Countdown.h"
 
 PlayState::PlayState(GameMode* gMode, string tmap):GameState(),
 	gameMode_(gMode), tilemapName_(tmap) {}
@@ -73,6 +74,9 @@ void PlayState::init() {
 		w->getEntity()->addComponent<ThrownByPlayer>(gameMode_);
 	}
 	bulletPool_.addThrownByPlayer(gameMode_);
+
+	Entity* countdown = entityManager_->addEntity();
+	countdown->addComponent<Countdown>(gameMode_);
 }
 
 void PlayState::update() {
@@ -107,8 +111,7 @@ void PlayState::handleInput()
 		else if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_BACK)) {
 			SDL_Game::instance()->getAudioMngr()->pauseMusic();
 			SDL_Game::instance()->getStateMachine()->transitionToState(States::midGame, ih->getNumControllers());
-		}
-			
+		}		
 	}
 }
 

@@ -1,6 +1,7 @@
 #include "GameMode.h"
 #include "PlayState.h"
 #include "HealthViewer.h"
+#include "ImpulseViewer.h"
 
 void GameMode::initProgressBars()
 {
@@ -37,14 +38,14 @@ void GameMode::renderProgressBars(const std::vector<double>& progressValues, con
 
 		//Barra de progreso vacía
 		SDL_Rect dest = { healthViewerPos_[i].x, healthViewerPos_[i].y ,
-		emptyProgressBars_[i % 2]->getWidth() * barsScale, emptyProgressBars_[i % 2]->getHeight() * barsScale};
-		emptyProgressBars_[i % 2]->render(dest,angle,flip);
+		emptyProgressBars_[i % 2]->getWidth() * barsScale, emptyProgressBars_[i % 2]->getHeight() * barsScale };
+		emptyProgressBars_[i % 2]->render(dest, angle, flip);
 
 		//Barra de progreso rellena
 		float progresV = progressValues[i] / goalScore;
 		float value = (i % 2 == 0) ? progresV : 1 - progresV;
-		dest = { int(healthViewerPos_[i].x), int(healthViewerPos_[i].y), 
-		int(progressBars_[i % 2]->getWidth() * barsScale * value), int(progressBars_[i % 2]->getHeight() * barsScale)};
+		dest = { int(healthViewerPos_[i].x), int(healthViewerPos_[i].y),
+		int(progressBars_[i % 2]->getWidth() * barsScale * value), int(progressBars_[i % 2]->getHeight() * barsScale) };
 		SDL_Rect clip = { 0, 0, int(progressBars_[i % 2]->getWidth() * value), int(progressBars_[i % 2]->getHeight()) };
 		progressBars_[i % 2]->render(dest, angle, clip, flip);
 	}
@@ -52,4 +53,13 @@ void GameMode::renderProgressBars(const std::vector<double>& progressValues, con
 
 void GameMode::init(PlayState* game) {
 	state_ = game;
+}
+
+void GameMode::activateControl() {
+	for (Entity* p : players_) {
+		p->addComponent<Hands>(Resources::Hands);
+		p->addComponent<AttachesToObjects>();
+		p->addComponent<PlayerController>();
+		p->addComponent<ImpulseViewer>(Resources::ImpulseArrow, Resources::ImpulseBackground);
+	}
 }
