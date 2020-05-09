@@ -21,8 +21,8 @@ void AbstractTimedGameMode::render()
 	int minutes = 0, seconds = 0;
 
 	if (timeToEnd_ < timeSinceStart_) {
-		if (roundFinished_ && winner_ != nullptr) {
-			string winMsg = "Gana el jugador " + to_string(winner_->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber() + 1);
+		if (roundFinished_ && winnerId_ != -1) {
+			string winMsg = "Gana el jugador " + (winnerId_ + 1);
 			Texture ganador(SDL_Game::instance()->getRenderer(), winMsg,
 				SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
 			ganador.render(winWidth_ / 2 - ganador.getWidth() / 2, winHeigth_ / 2);

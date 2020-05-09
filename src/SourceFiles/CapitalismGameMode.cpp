@@ -27,7 +27,7 @@ void CapitalismGameMode::init(PlayState* game)
 			game->getPhysicsWorld(), pos)->getComponent<Collider>(ComponentType::Collider));
 	}
 
-	GameMode::createPlayers(game);
+	createPlayers(game);
 	
 
 	//UI Elements.
@@ -46,6 +46,7 @@ void CapitalismGameMode::createPlayers(PlayState* game) {
 		players_.push_back(PlayerFactory::createPlayerWithWallet(game->getEntityManager(), game->getPhysicsWorld(), k,
 			Resources::Body, tilemap_->getPlayerSpawnPoint(k).x, tilemap_->getPlayerSpawnPoint(k).y, (*matchInfo_->getPlayersInfo())[k]->inputBinder, this));
 		playerWallets_.push_back(players_[k]->getComponent<Wallet>(ComponentType::Wallet));
+		playerCoins_.push_back(playerWallets_[k]->getCoins());
 	}
 }
 

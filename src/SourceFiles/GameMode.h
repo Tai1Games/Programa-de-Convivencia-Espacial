@@ -15,8 +15,7 @@ class GameMode {
 protected:
 	PlayState* state_ = nullptr;
 	std::vector<Entity*> players_; //Player vector. We use Entity because we will need multiple components from them.
-	Entity* winner_ = nullptr; //Player who wins the round.
-	int winnerId_ = -1;
+	int winnerId_ = -1; //id of the player who wins the round
 	bool roundFinished_ = false;
 	TileMap* tilemap_ = nullptr;
 
@@ -38,7 +37,6 @@ public:
 	virtual void render() {};
 	virtual void update();
 	virtual bool onPlayerDead(int id) { return true; };
-	Entity* getRoundResults() { return winner_; }
 	virtual void setTileMap(TileMap* tm) { tilemap_ = tm; };
 	virtual void playerKillsPlayer(int killerId, int deadId = -1) {};
 	virtual void createPlayers(PlayState* state);
