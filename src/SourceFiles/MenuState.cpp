@@ -3,7 +3,7 @@
 #include "SDL_Game.h"
 #include "GameStateMachine.h"
 #include "Texture.h"
-#include "Viewer.h"
+#include "UIViewer.h"
 #include "Constants.h"
 #include "checkML.h"
 #include "InputBinder.h"
@@ -13,7 +13,7 @@ void MenuState::init() {
 	entityManager_ = new EntityManager();
 	ownerPlayerBinder_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo()->at(ownerPlayerID_)->inputBinder;
 	Entity* miniTinky = entityManager_->addEntity();
-	menuCursor_ = miniTinky->addComponent<Viewer>(Resources::Tinky, b2Vec2(0, 0), 0.5, 0);
+	menuCursor_ = miniTinky->addComponent<UIViewer>(Resources::Tinky, b2Vec2(0, 0), 0.5, 0);
 	createText();
 	updateText();
 
@@ -122,7 +122,7 @@ void MenuState::createText() { //preparar los textos
 
 		while (start < end) {
 			texts_[i].push_back(entityManager_->addEntity());
-			texts_[i].back()->addComponent<Viewer>(start, b2Vec2(xOffset_, (start - offset) * yOffset_), 1.5, 0);
+			texts_[i].back()->addComponent<UIViewer>(start, b2Vec2(xOffset_, (start - offset) * yOffset_), 1.5, 0);
 			texts_[i].back()->setActive(false);
 			start++;
 		}

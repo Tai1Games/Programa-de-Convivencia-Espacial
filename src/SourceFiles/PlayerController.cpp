@@ -2,6 +2,9 @@
 #include "InputBinder.h"
 #include "Entity.h"
 
+#include"AnimatedPlayer.h"
+
+
 PlayerController::PlayerController() : Component(ComponentType::PlayerController),
 coll_(nullptr), attachesToObj_(nullptr), playerNumber_(-1), chargedFrames_(0), dirImpulse_(1, 0),
 chargeMultiplier_(0), maxImpulseFloating_(0), maxImpulseGrabbed_(0), impulseForce_(0)
@@ -41,6 +44,12 @@ void PlayerController::handleInput()
 		}
 		attachesToObj_->deAttachFromObject();
 		coll_->applyLinearImpulse(dirImpulse_, b2Vec2(0, 0)); //aplica la fuerza
+
+		//HAY QUE BORRAR-----------------------------------------------------------		
+		AnimatedPlayer* ap = GETCMP1_(AnimatedPlayer);
+		(ap)->setAnim(1);
+		//HAY QUE BORRAR-----------------------------------------------------------
+
 		chargingImpulse_ = false;
 		chargedFrames_ = 0;
 		impulseForce_ = 0;

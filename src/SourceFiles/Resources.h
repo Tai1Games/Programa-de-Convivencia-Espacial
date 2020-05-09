@@ -55,6 +55,8 @@ public:
 		// Weapons and map items
 
 		// Players
+		PlayerAnimSheet,
+
 
 		// Map elements
 		IncreasingFreqButton,
@@ -87,6 +89,7 @@ public:
 		Banana,
 		BananaSkin,
 		BananaNonSkin,
+		Staple,
 
 		// Gamemode specific elements
 		Coin,

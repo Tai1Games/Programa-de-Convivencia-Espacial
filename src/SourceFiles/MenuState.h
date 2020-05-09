@@ -4,14 +4,14 @@
 #include "Entity.h"
 #include "Resources.h"
 
-class Viewer;
 class InputBinder;
+class UIViewer;
 class MenuState:
 	public GameState
 {
 private:
-	int menuPointer_ = 0; //En que screen del menú está (0 escogiendo modo, 1 escogiendo mapa)
-	int pointers_[2] = { 0, 0 }; //Que seleccion dentro de la screen está
+	int menuPointer_ = 0; //En que screen del menï¿½ estï¿½ (0 escogiendo modo, 1 escogiendo mapa)
+	int pointers_[2] = { 0, 0 }; //Que seleccion dentro de la screen estï¿½
 	bool holdingY_ = false;
 	int ownerPlayerID_ = 0;
 	InputBinder* ownerPlayerBinder_ = nullptr;
@@ -23,11 +23,11 @@ private:
 
 	int numberOfRounds_ = 3;
 
-	Viewer* menuCursor_ = nullptr;
+	UIViewer* menuCursor_ = nullptr;
 	std::vector<Entity*> texts_ [3];
 	vector<pair<GamemodeID, string>>* roundsVector_ = new vector<pair<GamemodeID, string>>();  //vector de rondas
 
-	std::map<int, string> maps_ = { //añadir aquí los mapas que se vayan haciendo, tutorial no
+	std::map<int, string> maps_ = { //aï¿½adir aquï¿½ los mapas que se vayan haciendo, tutorial no
 		{ 0, "LivingRoom"},
 		{ 1, "BoilerRoom"},
 		{ 2, "GymRoom"},

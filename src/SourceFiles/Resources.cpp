@@ -3,8 +3,8 @@
 
 vector<Resources::FontInfo> Resources::fonts_{
 	//Fuentes {nombre_en_enum, ruta, tama�o}
-	{NES_Chimera , resourcesPath+"fonts/NES-Chimera.ttf", 38},
-	{Digits_Font , resourcesPath+"fonts/Digits_Font.ttf", 38}
+	{NES_Chimera , resourcesPath + "fonts/NES-Chimera.ttf", 38},
+	{Digits_Font , resourcesPath + "fonts/Digits_Font.ttf", 38}
 };
 
 vector<Resources::ImageInfo> Resources::images_{
@@ -56,9 +56,11 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Banana, resourcesPath + "textures/Banana.png"},
 	{ BananaSkin,resourcesPath + "textures/BananaSkin.png"},
 	{ BananaNonSkin,resourcesPath + "textures/Banana!Skin.png"},
+	{ Staple,resourcesPath + "textures/Staple.png"},
 
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },
+	{ PlayerAnimSheet, resourcesPath + "textures/playerAnim.png"},
 	{ Hands, resourcesPath + "textures/hands.png" },
 	{ ImpulseArrow, resourcesPath + "textures/FlechaImpulso.png"},
 	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png"},
