@@ -1,7 +1,7 @@
 #include "PauseState.h"
 #include "Texture.h"
 #include "Resources.h"
-#include "Viewer.h"
+#include "UIViewer.h"
 #include "SDL_Game.h"
 #include "InputHandler.h"
 
@@ -18,15 +18,15 @@ void PauseState::init()
 	Entity* miniTinky = entityManager_->addEntity();
 	Entity* sliderControl = entityManager_->addEntity();
 
-	pauseText->addComponent<Viewer>(Resources::PauseText, b2Vec2((CONST(int,"WINDOW_WIDTH") / 2) - 230, (CONST(int,"WINDOW_HEIGHT") / 2) - 310), 2.5, 0);
+	pauseText->addComponent<UIViewer>(Resources::PauseText, b2Vec2((CONST(int,"WINDOW_WIDTH") / 2) - 230, (CONST(int,"WINDOW_HEIGHT") / 2) - 310), 2.5, 0);
 	
-	btns_.push_back(resumeText->addComponent<Viewer>(Resources::ResumeText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) - 120), 1.5, 0));
-	btns_.push_back(soundText->addComponent<Viewer>(Resources::SoundText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2)), 1.5, 0));
-	btns_.push_back(exitText->addComponent<Viewer>(Resources::ExitText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) + 120), 1.5, 0));
+	btns_.push_back(resumeText->addComponent<UIViewer>(Resources::ResumeText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) - 120), 1.5, 0));
+	btns_.push_back(soundText->addComponent<UIViewer>(Resources::SoundText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2)), 1.5, 0));
+	btns_.push_back(exitText->addComponent<UIViewer>(Resources::ExitText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) + 120), 1.5, 0));
 
-	buttonSelectorImage_ = miniTinky->addComponent<Viewer>(Resources::Tinky, b2Vec2(btns_[selectedBtn_]->getPosUIElement().x - 80, btns_[selectedBtn_]->getPosUIElement().y - 15), 0.5, 0);
-	sliderControlImage_ = sliderControl->addComponent<Viewer>(Resources::SliderControl, b2Vec2(btns_[Buttons::Sound]->getPosUIElement().x + 645, btns_[Buttons::Sound]->getPosUIElement().y), 2, 0);
-	slider->addComponent<Viewer>(Resources::Slider, b2Vec2(btns_[Buttons::Sound]->getPosUIElement().x + 360, btns_[Buttons::Sound]->getPosUIElement().y), 2,0);
+	buttonSelectorImage_ = miniTinky->addComponent<UIViewer>(Resources::Tinky, b2Vec2(btns_[selectedBtn_]->getPosUIElement().x - 80, btns_[selectedBtn_]->getPosUIElement().y - 15), 0.5, 0);
+	sliderControlImage_ = sliderControl->addComponent<UIViewer>(Resources::SliderControl, b2Vec2(btns_[Buttons::Sound]->getPosUIElement().x + 645, btns_[Buttons::Sound]->getPosUIElement().y), 2, 0);
+	slider->addComponent<UIViewer>(Resources::Slider, b2Vec2(btns_[Buttons::Sound]->getPosUIElement().x + 360, btns_[Buttons::Sound]->getPosUIElement().y), 2,0);
 }
 
 void PauseState::handleInput()

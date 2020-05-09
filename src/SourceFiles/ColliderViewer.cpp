@@ -39,7 +39,7 @@ void ColliderViewer::setPoints(double originX, double originY, double width, dou
 }
 
 void ColliderViewer::draw() const {
-    if (drawable_ && !isUIElement_) {
+    if (drawable_) {
 
         // lista de fixtures del body
         b2Fixture* f = body_->GetFixtureList();

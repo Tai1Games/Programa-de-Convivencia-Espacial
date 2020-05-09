@@ -303,6 +303,9 @@
     <ClInclude Include="LobbyState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
+    <ClInclude Include="UIViewer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
     <ClInclude Include="AnimatedPlayer.h">
       <Filter>Header Files\Components\Viewers</Filter>
     </ClInclude>
@@ -317,6 +320,15 @@
     </ClInclude>
     <ClInclude Include="WiFiWavePool.h">
       <Filter>Header Files\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractAnimatedViewers.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedUIViewer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractViewers.h">
+      <Filter>Header Files\Components\Viewers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -533,6 +545,9 @@
     <ClCompile Include="LobbyState.cpp">
       <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
+    <ClCompile Include="UIViewer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
     <ClCompile Include="AnimatedPlayer.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
@@ -547,6 +562,15 @@
     </ClCompile>
     <ClCompile Include="WiFiWavePool.cpp">
       <Filter>Source Files\Pools</Filter>
+    </ClInclude>
+    <ClCompile Include="AbstractAnimatedViewers.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedUIViewer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractViewers.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

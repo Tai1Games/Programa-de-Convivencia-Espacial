@@ -182,11 +182,14 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractAnimatedViewers.h" />
     <ClInclude Include="AbstractTimedGameMode.h" />
+    <ClInclude Include="AbstractViewers.h" />
     <ClInclude Include="ActionableWeapon.h" />
     <ClInclude Include="WiFiWavePool.h" />
     <ClInclude Include="WiFiBullet.h" />
     <ClInclude Include="AnimatedPlayer.h" />
+    <ClInclude Include="AnimatedUIViewer.h" />
     <ClInclude Include="AnimatedViewer.h" />
     <ClInclude Include="AttachesToObjects.h" />
     <ClInclude Include="BananaPool.h" />
@@ -247,6 +250,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="TransitionState.h" />
     <ClInclude Include="Treadmill.h" />
     <ClInclude Include="TutorialGameMode.h" />
+    <ClInclude Include="UIViewer.h" />
     <ClInclude Include="Wallet.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="PlayState.h" />
@@ -268,11 +272,14 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="WiFightGameMode.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractAnimatedViewers.cpp" />
     <ClCompile Include="AbstractTimedGameMode.cpp" />
+    <ClCompile Include="AbstractViewers.cpp" />
     <ClCompile Include="ActionableWeapon.cpp" />
     <ClCompile Include="WiFiWavePool.cpp" />
     <ClCompile Include="WiFiBullet.cpp" />
     <ClCompile Include="AnimatedPlayer.cpp" />
+    <ClCompile Include="AnimatedUIViewer.cpp" />
     <ClCompile Include="AnimatedViewer.cpp" />
     <ClCompile Include="AttachesToObjects.cpp" />
     <ClCompile Include="BananaPool.cpp" />
@@ -328,6 +335,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="TransitionState.cpp" />
     <ClCompile Include="Treadmill.cpp" />
     <ClCompile Include="TutorialGameMode.cpp" />
+    <ClCompile Include="UIViewer.cpp" />
     <ClCompile Include="Wallet.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="PlayState.cpp" />
