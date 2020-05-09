@@ -1,7 +1,7 @@
 #include "UIViewer.h"
 
 UIViewer::UIViewer(int textureId, b2Vec2 pos, float scale, float angle, SDL_Rect clip, const SDL_RendererFlip& flip) :
-	Component(ComponentType::Viewer),
+	Component(ComponentType::UIViewer),
 	tex_(nullptr),	//
 	pos_(b2Vec2(pos)),
 	clip_(clip),

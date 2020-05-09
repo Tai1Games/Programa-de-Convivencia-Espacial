@@ -29,9 +29,7 @@ void MidGameState::init()
 		markers.push_back(marker);
 	}
 
-	
-	
-	int initPos = (CONST(int, "WINDOW_HEIGHT") / 2) - (-distanceBetweenRockets_ / 2 + (distanceBetweenRockets_ / 2 * numPlayers_));
+	int initPosY = (CONST(int, "WINDOW_HEIGHT") / 2) - (-distanceBetweenRockets_ / 2 + (distanceBetweenRockets_ / 2 * numPlayers_));
 
 	SDL_Rect rocketRect;
 	rocketRect.x = rocketRect.y = 0;
@@ -52,7 +50,7 @@ void MidGameState::init()
 		//We could move the rockets using only the Viewer, but this will make
 		//the logic much much easier.
 
-		AnimatedUIViewer* viewer = newRocket->addComponent<AnimatedUIViewer>(Resources::RocketSpriteSheet, rocketRect, 10, b2Vec2(CONST(int, "START_POSITION"), initPos + (distanceBetweenRockets_ * k) + rocketRect.h / 2), -1, 0);
+		AnimatedUIViewer* viewer = newRocket->addComponent<AnimatedUIViewer>(Resources::RocketSpriteSheet, rocketRect, 10, b2Vec2(CONST(int, "START_ROCKET_POSITION"), (initPosY-76) + (distanceBetweenRockets_ * k) + rocketRect.h / 2), 1, 0);
 		playerRockets_.push_back(viewer);
 	}
 	//Texto para terminar la intermision
@@ -199,6 +197,6 @@ void MidGameState::resetScene() {
 	}
 
 	for (int k = 0; k < playerRockets_.size(); k++) {
-		playerRockets_[k]->setPosUIElement(b2Vec2(CONST(int, "START_POSITION") + distanceGainedByPoint_ * playerPoints[k], initPos + (distanceBetweenRockets_ * k) + rocketRect.h / 2));
+		playerRockets_[k]->setPosUIElement(b2Vec2(CONST(int, "START_ROCKET_POSITION") + distanceGainedByPoint_ * playerPoints[k], (initPos-76) + (distanceBetweenRockets_ * k) + rocketRect.h / 2));
 	}
 }
