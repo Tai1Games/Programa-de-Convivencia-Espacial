@@ -117,7 +117,7 @@ Entity* ObjectFactory::makeDumbbell(EntityManager* entityManager, b2World* physi
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "DUMBBELL_DENSITY"),
 		CONST(double, "DUMBBELL_FRICTION"), CONST(double, "DUMBBELL_RESTITUTION"),
 		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent <Viewer>(Resources::Mancuerna);
+	e->addComponent <Viewer>(Resources::Dumbbell);
 	e->addComponent<MeleeWeapon>(WeaponID::Mancuerna, CONST(int, "DUMBBELL_DAMAGE"), CONST(int, "DUMBBELL_IMPACT_DAMAGE"), CONST(int, "DUMBBELL_COOLDOWN_FRAMES"));
 	e->addComponent<ColliderViewer>();
 

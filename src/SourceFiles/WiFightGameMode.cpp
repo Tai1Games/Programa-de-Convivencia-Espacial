@@ -1,5 +1,7 @@
 #include "WiFightGameMode.h"
 #include "Resources.h"
+#include "ParticleEmitter.h"
+#include "RouterLogic.h"
 
 void WiFightGameMode::init(PlayState* game)
 {
@@ -17,6 +19,8 @@ void WiFightGameMode::init(PlayState* game)
 	collRouter->createCircularFixture(5, 1, 0, 0, Collider::CollisionLayer::Trigger, true);
 	router->addComponent<Viewer>(Resources::Router);
 	router->addComponent<RouterLogic>(this);
+	//(Vector2D direction, int textureId, float speed, int numTextures = 1, int particleGenerationOdds = 5, Uint16 particleLifetime = 1000, Uint16 size = 20, Uint16 emittingTime = 1000, int speedVariation = 0, int emissionConeAngle = 10.0);
+	//router->addComponent<ParticleEmitter>(Vector2D(), Resources::TextureId::WiFiWave, Vector2D(), 1, );
 
 	collRouter->applyLinearImpulse(b2Vec2(100,100), b2Vec2(0, 0));
 
