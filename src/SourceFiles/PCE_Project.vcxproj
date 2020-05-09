@@ -184,6 +184,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
   <ItemGroup>
     <ClInclude Include="AbstractAnimatedViewers.h" />
     <ClInclude Include="AbstractTimedGameMode.h" />
+    <ClInclude Include="AbstractViewers.h" />
     <ClInclude Include="ActionableWeapon.h" />
     <ClInclude Include="AnimatedPlayer.h" />
     <ClInclude Include="AnimatedUIViewer.h" />
@@ -271,6 +272,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
   <ItemGroup>
     <ClCompile Include="AbstractAnimatedViewers.cpp" />
     <ClCompile Include="AbstractTimedGameMode.cpp" />
+    <ClCompile Include="AbstractViewers.cpp" />
     <ClCompile Include="ActionableWeapon.cpp" />
     <ClCompile Include="AnimatedPlayer.cpp" />
     <ClCompile Include="AnimatedUIViewer.cpp" />

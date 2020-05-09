@@ -1,42 +1,29 @@
 #pragma once
 #include "Component.h"
-class UIViewer : public Component
+#include "AbstractViewers.h"
+
+class UIViewer : public Component, public AbstractViewers
 {
 protected:
-	int textureId_;
-	int nFrames_ = 1;
-	Texture* tex_;
-	SDL_Rect clip_;
-	bool drawable_ = true;
-	b2Vec2 renderOffset_ = b2Vec2(0, 0);
-
 	b2Vec2 pos_;
-	b2Vec2 wH_;
 	float scale_;
 	/*En grados*/
 	float angle_;
 	SDL_RendererFlip flip_;
 public:
-	UIViewer(int textureId, b2Vec2 pos, float scale, float angle, SDL_Rect clip = {0,0,0,0}, const SDL_RendererFlip& flip = SDL_FLIP_NONE);
+	UIViewer(int textureId, b2Vec2 pos, float scale, float angle, SDL_Rect clip = {0,0,0,0}, const SDL_RendererFlip& flip = SDL_FLIP_NONE, ComponentType::CmpId id = ComponentType::UIViewer);
+	
 	virtual ~UIViewer();
 
 	virtual void init() override;
 	virtual void draw() const override;
 
-	void setDrawable(bool b) { drawable_ = b; }
-	void setClip(SDL_Rect clip) { clip_ = clip; }
-	void setOffset(b2Vec2 newOffset) { renderOffset_ = newOffset; }
 	void setPosUIElement(b2Vec2 pos) { pos_ = pos; }
 	void setWHUIElement(b2Vec2 wH) { wH_ = wH; }
 	void setScale(float scale) { scale_ = scale; }
-	void setNFrames(int nFrames);
 
 	b2Vec2 getPosUIElement() { return pos_; }
 	b2Vec2 getWHUIElement() { return wH_; }
 	SDL_Rect getClipUIElement() { return clip_; }
-	Texture* getTexture() { return tex_; }
-	int getTextureId() { return textureId_; }
-
-
 };
 

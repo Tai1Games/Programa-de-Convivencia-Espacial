@@ -4,7 +4,7 @@ void AnimatedUIViewer::init()
 {
 	UIViewer::init();
 	nFrames_ = tex_->getWidth() / clip_.w;
-	UIViewer::setNFrames(nFrames_);
+	AbstractViewers::setNFrames(nFrames_);
 }
 
 void AnimatedUIViewer::update()

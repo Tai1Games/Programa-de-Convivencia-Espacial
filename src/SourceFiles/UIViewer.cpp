@@ -1,15 +1,15 @@
 #include "UIViewer.h"
 
-UIViewer::UIViewer(int textureId, b2Vec2 pos, float scale, float angle, SDL_Rect clip, const SDL_RendererFlip& flip) :
-	Component(ComponentType::UIViewer),
-	tex_(nullptr),	//
+UIViewer::UIViewer(int textureId, b2Vec2 pos, float scale, float angle, SDL_Rect clip, const SDL_RendererFlip& flip, ComponentType::CmpId ct) :
+	Component(ct),
 	pos_(b2Vec2(pos)),
-	clip_(clip),
-	textureId_(textureId),
 	scale_(scale), //
 	angle_(angle),
 	flip_(flip)
 {
+	tex_ = nullptr;
+	clip_ = clip;
+	textureId_ = textureId;
 }
 
 UIViewer::~UIViewer()
@@ -18,12 +18,7 @@ UIViewer::~UIViewer()
 
 void UIViewer::init()
 {
-	if (tex_ == nullptr) {
-		tex_ = SDL_Game::instance()->getTexturesMngr()->getTexture(textureId_);
-		if (clip_.w == 0 && clip_.h == 0)
-			clip_ = SDL_Rect{ 0, 0, tex_->getWidth(), tex_->getHeight() };
-	}
-	wH_ = b2Vec2(tex_->getWidth(), tex_->getHeight());
+	AbstractViewers::init();
 }
 
 void UIViewer::draw() const
@@ -36,10 +31,4 @@ void UIViewer::draw() const
 		dest.h = wH_.y * scale_;
 		tex_->render(dest, angle_, clip_, flip_);
 	}
-}
-
-void UIViewer::setNFrames(int nFrames)
-{
-	nFrames_ = nFrames;
-	wH_.x = tex_->getWidth() / nFrames;
 }
