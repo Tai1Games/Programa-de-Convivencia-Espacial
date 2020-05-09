@@ -90,6 +90,7 @@ public:
 		BananaSkin,
 		BananaNonSkin,
 		Staple,
+		Confetti,
 
 		// Gamemode specific elements
 		Coin,

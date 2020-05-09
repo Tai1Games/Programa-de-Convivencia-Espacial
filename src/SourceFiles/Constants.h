@@ -60,6 +60,7 @@ enum WeaponID {
 	Mando,
 	Tomato,
 	Banana,
+	Confetti,
 
 	WEAPON_NUMBER
 };

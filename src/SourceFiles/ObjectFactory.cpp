@@ -49,12 +49,13 @@ Entity* ObjectFactory::makeConfetti(EntityManager* entityManager, b2World* physi
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "FLIPFLOP_DENSITY"),
 		CONST(double, "FLIPFLOP_FRICTION"), CONST(double, "FLIPFLOP_RESTITUTION"),
 		CONST(double, "FLIPFLOP_LINEAR_DRAG"), CONST(double, "FLIPFLOP_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent <Viewer>(Resources::Slipper);
-	//e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Coin, 10, 1, 3, 200, 20, 100, 0, 10);
-	e->addComponent<ConfettiWeapon>(WeaponID::Slipper, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"), CONST(int, "FLIPFLOP_COOLDOWN_FRAMES"));
+	e->addComponent <Viewer>(Resources::Confetti);
+	e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Coin, 10, 1, 3, 200, 20, 100, 0, 10);
+	e->addComponent<ConfettiWeapon>(WeaponID::Confetti, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"), CONST(int, "FLIPFLOP_COOLDOWN_FRAMES"));
 	e->addComponent<ColliderViewer>();
 
 	return e;
+	cout << "skdjfnsdjf";
 }
 
 Entity* ObjectFactory::makeBall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {

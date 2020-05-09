@@ -11,7 +11,7 @@ private:
 	ParticleEmitter* particleEmitter_ = nullptr;
 	bool used = false;
 public:
-	ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : MeleeWeapon(WeaponID::Slipper, dmg, impactDmg, cooldownFrames) {};
+	ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames);
 	~ConfettiWeapon() {};
 
 	virtual void init() override;
