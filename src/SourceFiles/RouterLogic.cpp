@@ -22,6 +22,8 @@ void RouterLogic::loseContactPlayer(Collider* playerDetected, int id) {
 void RouterLogic::init()
 {
 	posRouter_ = GETCMP1_(Collider);
+	frameWhenUpdate_ = CONST(int, "ROUTER_FRAMES_UNTIL_SHOOT");
+	wifiWaveSpd_ = CONST(double, "ROUTER_SHOOT_SPEED");
 }
 
 void RouterLogic::update()
@@ -37,8 +39,8 @@ void RouterLogic::update()
 			Collider* c = playersInsideRange_[k].posPlayer;
 			b2Vec2 dir = c->getPos() - posRouter_->getPos();
 
-			wifiPool_->addBullet(posRouter_->getPos(), { c->getW(0), c->getH(0) },
-				wifiWaveSpd_ * dir.NormalizedVector(),
+			wifiPool_->addBullet(posRouter_->getPos(), { c->getW(0) * (float)points, c->getH(0) * (float)points },
+				wifiWaveSpd_ * points * dir.NormalizedVector(),
 				Resources::WiFiWave, 0, playersInsideRange_[k].id);
 			actFrame_ = 0;
 		}
