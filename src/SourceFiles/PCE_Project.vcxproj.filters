@@ -562,7 +562,7 @@
     </ClCompile>
     <ClCompile Include="WiFiWavePool.cpp">
       <Filter>Source Files\Pools</Filter>
-    </ClInclude>
+    </ClCompile>
     <ClCompile Include="AbstractAnimatedViewers.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
