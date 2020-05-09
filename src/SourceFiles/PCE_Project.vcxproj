@@ -184,6 +184,8 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
   <ItemGroup>
     <ClInclude Include="AbstractTimedGameMode.h" />
     <ClInclude Include="ActionableWeapon.h" />
+    <ClInclude Include="WiFiWavePool.h" />
+    <ClInclude Include="WiFiBullet.h" />
     <ClInclude Include="AnimatedPlayer.h" />
     <ClInclude Include="AnimatedViewer.h" />
     <ClInclude Include="AttachesToObjects.h" />
@@ -268,6 +270,8 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
   <ItemGroup>
     <ClCompile Include="AbstractTimedGameMode.cpp" />
     <ClCompile Include="ActionableWeapon.cpp" />
+    <ClCompile Include="WiFiWavePool.cpp" />
+    <ClCompile Include="WiFiBullet.cpp" />
     <ClCompile Include="AnimatedPlayer.cpp" />
     <ClCompile Include="AnimatedViewer.cpp" />
     <ClCompile Include="AttachesToObjects.cpp" />

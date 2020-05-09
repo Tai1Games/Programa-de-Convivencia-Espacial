@@ -6,6 +6,7 @@ class EntityManager;
 class Weapon;
 class FireBallPool;
 class BulletPool;
+class Collider;
 
 class ObjectFactory
 {
@@ -56,4 +57,6 @@ public:
 	static Entity* makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, BulletPool* bp);
 
 	static Entity* makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld);
+
+	static Entity* makeWifiWave(Entity* e, EntityManager* entityManager, b2World* physicsWorld, Collider* colRouter);
 };

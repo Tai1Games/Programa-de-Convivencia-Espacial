@@ -305,12 +305,18 @@
     </ClInclude>
     <ClInclude Include="AnimatedPlayer.h">
       <Filter>Header Files\Components\Viewers</Filter>
-     </ClInclude>
+    </ClInclude>
     <ClInclude Include="StaplerWeapon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AbstractTimedGameMode.h">
       <Filter>Header Files\GameModes</Filter>
+    </ClInclude>
+    <ClInclude Include="WiFiBullet.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="WiFiWavePool.h">
+      <Filter>Header Files\Pools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -529,13 +535,18 @@
     </ClCompile>
     <ClCompile Include="AnimatedPlayer.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
-        </ClCompile>
+    </ClCompile>
     <ClCompile Include="StaplerWeapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AbstractTimedGameMode.cpp">
       <Filter>Source Files\GameModes</Filter>
-
+    </ClCompile>
+    <ClCompile Include="WiFiBullet.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="WiFiWavePool.cpp">
+      <Filter>Source Files\Pools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
