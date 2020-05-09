@@ -43,7 +43,7 @@ void WiFightGameMode::addPoints(int player, double sumPoints)
 		//cout << "Player " << player << " progress: " << playerProgress_[player] << endl;
 		if (playerProgress_[player] >= CONST(int, "POINTS_TO_WIN")) {
 			cout << "Player " << player << " won!" << endl;
-			winnerId_ = players_[player]->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber();
+			winnerId_ = player;
 			roundFinished_ = true;
 		}
 	}

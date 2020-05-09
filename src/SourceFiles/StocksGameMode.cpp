@@ -68,7 +68,7 @@ bool StocksGameMode::onPlayerDead(int id) { //Returns false when player runs out
 				int k = 0;
 				while (playerStocks_[k] == 0) { k++; }
 				roundResults_.push_back(players_[k]);
-				winnerId_ = players_[k]->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber();
+				winnerId_ = k;
 				roundFinished_ = true; //Round finishes when only 1 player remains
 			}
 			return false;
