@@ -9,6 +9,8 @@
 
 class BoilerButtonLogic;
 class FireBallGenerator;
+class TomatoPool;
+class BananaPool;
 
 class TileMap : public Component
 {
@@ -34,7 +36,9 @@ private:
 	vector<tson::Object> factoryItems_;
 	std::vector<b2Vec2> weaponSpawnPoints_;
 
-	BulletPool* bulletPool_;
+	BulletPool* bulletPool_ = nullptr;
+	TomatoPool* tomatoPool_ = nullptr;
+	BananaPool* bananaPool_ = nullptr;
 
 	void solvePostCreationProblems(); //Called when reading of tilemap ends. Use this to assign references and solve similar problems.
 public:

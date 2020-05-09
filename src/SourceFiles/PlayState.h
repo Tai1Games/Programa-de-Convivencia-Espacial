@@ -40,7 +40,7 @@ private:
 	};
 	TileMap* tilemap_;
 	BulletPool bulletPool_;
-	BananaPool bananaPool_;
+	//BananaPool bananaPool_;
 
 public:
 	PlayState(GameMode* gMode, string tmap);

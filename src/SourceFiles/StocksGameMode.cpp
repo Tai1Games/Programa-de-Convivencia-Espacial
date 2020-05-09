@@ -35,9 +35,6 @@ void StocksGameMode::init(PlayState* game){
 		}
 		playersStocksPos_.push_back(p);
 	}
-
-	//NEED TO DELETE
-	tomatoPool_.addTomato({ 40, 20 });
 }
 
 void StocksGameMode::update(){

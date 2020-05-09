@@ -341,10 +341,12 @@ Entity* ObjectFactory::makeTomatoTree(EntityManager* entityManager, b2World* phy
 	clip.x = 0; clip.y = 0;
 	e->addComponent<SpawnTree>(tomatoTex, CONST(double, "TOMATO_RADIUS"), 
 		CONST(double, "TOMATO_RADIUS"), pool, entityManager, physicsWorld);
+
+	return e;
 }
 
 Entity* ObjectFactory::makeBananaTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WeaponPool* pool) {
-	Texture* bananaTex = new Texture();
+	Texture* bananaTex = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Banana);
 	Entity* e = entityManager->addEntity();
 	Collider* col = e->addComponent<Collider>(physicsWorld, b2_kinematicBody, pos.x, pos.y, CONST(double, "SPAWN_TREE_WIDTH"),
 		CONST(double, "SPAWN_TREE_HEIGHT"), CONST(double, "SPAWN_TREE_DENSITY"), CONST(double, "SPAWN_TREE_FRICTION"),
@@ -354,6 +356,8 @@ Entity* ObjectFactory::makeBananaTree(EntityManager* entityManager, b2World* phy
 	SDL_Rect clip;
 	clip.h = bananaTex->getHeight(); clip.w = bananaTex->getWidth() / 17;
 	clip.x = 0; clip.y = 0;
-	e->addComponent<SpawnTree>(bananaTex, CONST(double, "TOMATO_RADIUS"), 
-		CONST(double, "TOMATO_RADIUS"), pool, entityManager, physicsWorld);
+	e->addComponent<SpawnTree>(bananaTex, CONST(double, "BANANA_X"), 
+		CONST(double, "BANANA_Y"), pool, entityManager, physicsWorld);
+
+	return e;
 }

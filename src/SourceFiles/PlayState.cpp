@@ -37,8 +37,8 @@ void PlayState::init() {
 	entityManager_ = new EntityManager();
 	physicsWorld_ = new b2World(b2Vec2(0, 0));
 
-	bulletPool_.init(entityManager_, physicsWorld_);
-	bananaPool_.init(entityManager_, physicsWorld_, &bulletPool_);
+	/*bulletPool_.init(entityManager_, physicsWorld_);
+	bananaPool_.init(entityManager_, physicsWorld_, &bulletPool_);*/
 
 	secondsPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 
@@ -68,12 +68,12 @@ void PlayState::init() {
 	gameMode_->init(this);
 
 
-	bananaPool_.addBanana({ 20,20 });
+	//bananaPool_.addBanana({ 20,20 });
 	
 	for (Weapon* w : *(entityManager_->getWeaponVector())) {
 		w->getEntity()->addComponent<ThrownByPlayer>(gameMode_);
 	}
-	bulletPool_.addThrownByPlayer(gameMode_);
+	//bulletPool_.addThrownByPlayer(gameMode_);
 }
 
 void PlayState::update() {

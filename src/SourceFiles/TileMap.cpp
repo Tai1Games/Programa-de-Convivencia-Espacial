@@ -5,6 +5,8 @@
 #include "BoilerButtonLogic.h"
 #include "FireBallGenerator.h"
 #include <string>
+#include "TomatoPool.h"
+#include "BananaPool.h"
 
 
 TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW, BulletPool* bp) :Component(ComponentType::Tilemap),  //w y h son de la ventana
@@ -201,6 +203,20 @@ void TileMap::executeMapFactory()
 			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
 			size *= 0.5f;
 			ObjectFactory::makeCarnivorousePlant(entityManager_, physicsWorld_, pos, size);
+		}
+		else if (name == "TomatoTree") {
+			if (tomatoPool_ == nullptr) { 
+				tomatoPool_ = new TomatoPool();
+				tomatoPool_->init(entityManager_, physicsWorld_);
+			}
+			ObjectFactory::makeTomatoTree(entityManager_, physicsWorld_, pos, tomatoPool_);
+		}
+		else if (name == "BananaTree") {
+			if (bananaPool_ == nullptr) {
+				bananaPool_ = new BananaPool(bulletPool_);
+				bananaPool_->init(entityManager_, physicsWorld_);
+			}
+			ObjectFactory::makeBananaTree(entityManager_, physicsWorld_, pos, bananaPool_);
 		}
 	}
 	solvePostCreationProblems();

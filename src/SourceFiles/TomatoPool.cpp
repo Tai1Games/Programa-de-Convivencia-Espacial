@@ -24,6 +24,7 @@ void TomatoPool::addWeapon(b2Vec2 pos) {
 		int randDirY = -1;
 		if (rand() % 2 == 1) randDirX = 1;
 		if (rand() % 2 == 1) randDirY = 1;
-		e->getComponent<Collider>(ComponentType::Collider)->applyForce(b2Vec2((rand() % tomatoMaxSpeed_ * randDirX) + tomatoMinSpeed_, (rand() % tomatoMaxSpeed_ * randDirY) + tomatoMinSpeed_), b2Vec2(0, 0));
+		e->getComponent<Collider>(ComponentType::Collider)->applyForce(b2Vec2((rand() % tomatoMaxSpeed_ * randDirX) + tomatoMinSpeed_,
+			(rand() % tomatoMaxSpeed_ * randDirY) + tomatoMinSpeed_), b2Vec2(0, 0));
 	}
 }
