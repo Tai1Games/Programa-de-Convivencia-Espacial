@@ -251,7 +251,8 @@ Entity* ObjectFactory::createTreadmill(EntityManager* entityManager, b2World* ph
 	return m;
 }
 
-Entity* ObjectFactory::createTomatoTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, Texture* tomatoTex, WeaponPool* pool) {
+Entity* ObjectFactory::createTomatoTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WeaponPool* pool) {
+	Texture* tomatoTex = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TreeTomato);
 	Entity* e = entityManager->addEntity();
 	Collider* col = e->addComponent<Collider>(physicsWorld, b2_kinematicBody, pos.x, pos.y, CONST(double, "SPAWN_TREE_WIDTH"),
 		CONST(double, "SPAWN_TREE_HEIGHT"), CONST(double, "SPAWN_TREE_DENSITY"), CONST(double, "SPAWN_TREE_FRICTION"),
@@ -259,9 +260,28 @@ Entity* ObjectFactory::createTomatoTree(EntityManager* entityManager, b2World* p
 		Collider::CollisionLayer::UnInteractableObject, false);
 	e->addComponent<Viewer>();
 	SDL_Rect clip;
-	clip.h = tomatoTex->getHeight(); clip.w = tomatoTex->getWidth() / 17;
+	clip.h = tomatoTex->getHeight(); 
+	clip.w = tomatoTex->getWidth() / 17;
 	clip.x = 0; clip.y = 0;
-	e->addComponent<SpawnTree>(tomatoTex, CONST(double, "TOMATO_RADIUS"), CONST(double, "TOMATO_RADIUS"), pool, entityManager, physicsWorld);
+	e->addComponent<SpawnTree>(tomatoTex, CONST(double, "TOMATO_RADIUS"), 
+		CONST(double, "TOMATO_RADIUS"), pool, entityManager, physicsWorld);
+
+	return e;
+}
+
+Entity* ObjectFactory::createBananaTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WeaponPool* pool) {
+	Texture* bananaTex = new Texture();
+	Entity* e = entityManager->addEntity();
+	Collider* col = e->addComponent<Collider>(physicsWorld, b2_kinematicBody, pos.x, pos.y, CONST(double, "SPAWN_TREE_WIDTH"),
+		CONST(double, "SPAWN_TREE_HEIGHT"), CONST(double, "SPAWN_TREE_DENSITY"), CONST(double, "SPAWN_TREE_FRICTION"),
+		CONST(double, "SPAWN_TREE_RESTITUTION"), CONST(double, "SPAWN_TREE_LINEAR_DRAG"), CONST(double, "SPAWN_TREE_ANGULAR_DRAG"),
+		Collider::CollisionLayer::UnInteractableObject, false);
+	e->addComponent<Viewer>();
+	SDL_Rect clip;
+	clip.h = bananaTex->getHeight(); clip.w = bananaTex->getWidth() / 17;
+	clip.x = 0; clip.y = 0;
+	e->addComponent<SpawnTree>(bananaTex, CONST(double, "TOMATO_RADIUS"), 
+		CONST(double, "TOMATO_RADIUS"), pool, entityManager, physicsWorld);
 
 	return e;
 }

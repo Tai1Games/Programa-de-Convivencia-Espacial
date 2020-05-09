@@ -51,5 +51,7 @@ public:
 
 	static Entity* createTreadmill(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 
-	static Entity* createTomatoTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, Texture* tomatoTex, WeaponPool* pool);
+	static Entity* createTomatoTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WeaponPool* pool);
+
+	static Entity* createBananaTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WeaponPool* pool);
 };
