@@ -31,7 +31,7 @@ void BoilerButtonLogic::onCollisionEnter(Collision* c) {
 	if (c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Player ||
 		c->hitFixture->GetBody()->GetLinearVelocity().Length() > minForceForAcivation_) {
 
-		fbGen_->modifyGenerationRate(inc_dec_);
+		fbGen_->onButtonAction(inc_dec_);
 		buttonViewer_->setClip(SDL_Rect{ frameSize, 0, frameSize, frameSize });
 		timeForReactivation_ = SDL_Game::instance()->getTime() + reactivationCd_;
 		activated = false;

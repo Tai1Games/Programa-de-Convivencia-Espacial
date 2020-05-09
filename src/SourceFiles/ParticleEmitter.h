@@ -23,13 +23,15 @@ protected:
 	//Velocidad con las que salen las particulas
 	float speed_;
 
-	//Aleatoridad de la velocidad de las particulas
+	//Aleatoridad en la generación de las partículas
 	int speedVariation_;
+	int generationOdds_;
+	int minGenerationOdds_;
+	int maxGenerationOdds_;
 
 	//Maximo angulo de aleatoridad segun el vector direccion
 	//Valores entre [0,180]
 	int emissionConeAngle_;
-	double PI;
 
 	//Tamaño de la particula en cuadrado
 	Uint16 size_;
@@ -46,17 +48,22 @@ protected:
 	Uint8 msPerFrame_ = 0;
 	Uint8 maxParticles_;
 
+	//Numero de texturas
+	int numParticlesInSpriteSheet_;
+	int textureSize_;
+
 	struct Particle {
 		Vector2D position;
 		Vector2D direction;
 		Uint16 lifeTime;
 		float speed;
+		int numTexture;
 	};
 
 	std::list<Particle> particles_;
 	std::queue<list<Particle>::iterator> particlesToDelete_;
 public:
-	ParticleEmitter(Vector2D direction, int textureId, float speed, Uint16 particleLifetime = 1000, Uint16 size = 20, Uint16 emittingTime = 1000, int speedVariation = 0, int emissionConeAngle = 10.0);
+	ParticleEmitter(Vector2D direction, int textureId, float speed, int numTextures = 1, int particleGenerationOdds = 5, Uint16 particleLifetime = 1000, Uint16 size = 20, Uint16 emittingTime = 1000, int speedVariation = 0, int emissionConeAngle = 10.0);
 	virtual ~ParticleEmitter() { Component::~Component(); };
 
 	virtual void init() override;
@@ -72,5 +79,7 @@ public:
 	void setSize(Uint16 size) { size_ = size; };
 	void setLifeTime(Uint16 time) { emittingTime_ = time; };
 	void setMaxParticles(Uint8 max) { maxParticles_ = max; };
+	void modifyGenerationOdds(int var);
+	void setGenerationOddsClamp(int min, int max) { minGenerationOdds_ = min; maxGenerationOdds_ = max; }
 };
 

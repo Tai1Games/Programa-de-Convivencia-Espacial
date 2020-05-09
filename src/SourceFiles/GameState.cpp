@@ -13,15 +13,20 @@ GameState::~GameState() {
 	entityManager_ = nullptr;
 }
 
+void GameState::init() {
+	entityManager_ = new EntityManager();
+}
+
 void GameState::update() {
-	entityManager_->update();
+	if (entityManager_ != nullptr) entityManager_->update();
 	//tambi�n deber�a actualizar la l�gica de modo de juego
 	//spawners de monedas, carga de objetivos...
 }
 
 void GameState::render() {
 
-	entityManager_->render();
+	if(entityManager_!=nullptr)
+		entityManager_->render();
 
 }
 
@@ -30,6 +35,10 @@ void GameState::handleInput() {
 	//DebugInput();
 	if(entityManager_!=nullptr)
 		entityManager_->handleInput();
+}
+
+void GameState::resetScene()
+{
 }
 
 void GameState::DebugInput() {

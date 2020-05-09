@@ -10,6 +10,9 @@ void AttachesToObjects::init() {
 	mainCollider_ = GETCMP1_(Collider); //Obtiene el collider del cuerpo principal.
 
 	playerNumber_ = playerData_->getPlayerNumber();
+	ib = GETCMP1_(PlayerData)->getBinder();
+	KeyboardBinder* bindAux = static_cast<KeyboardBinder*>(ib);
+	if (bindAux != nullptr) kBinder = bindAux;
 }
 
 void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint, b2Vec2 collNormal) {
@@ -18,7 +21,7 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 		b2Vec2 perp = perpendicularCounterClockwise(collNormal);
 		float attachAngle = std::atanf(perp.y/perp.x);
 		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle())>0) ? -1 : 1;
-		attachAngle += (CONST(double,"PI") / 2)*tilt;
+		attachAngle += (PI / 2)*tilt;
 		mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
 		b2WeldJointDef jointDef; //Definición del nuevo joint.
 		jointDef.bodyA = mainCollider_->getBody(); //Body del jugador.
@@ -43,8 +46,7 @@ void AttachesToObjects::deAttachFromObject() {
 }
 
 bool AttachesToObjects::canAttachToObject() { //Se agarra si está pretando una tecla válida y si no está agarrado a otra cosa.
-	InputHandler* ih = SDL_Game::instance()->getInputHandler();
-	if (ih->getTrigger(playerNumber_, InputHandler::GAMEPADTRIGGER::LEFTTRIGGER) || ih->isKeyDown(SDLK_SPACE)){
+	if (ib->holdGrab()){
 		if (attachedObject_ == nullptr) return true;
 	}
 	return false;
@@ -67,8 +69,9 @@ void AttachesToObjects::onCollisionEnter(Collision* c){
 			b2WorldManifold manifold;
 			attachedCollider_ = GETCMP2(c->entity, Collider);
 			c->contact->GetWorldManifold(&manifold);
-			c->collisionHandler->createWeld
-			(CollisionHandler::weldData(this, c->hitFixture->GetBody(), b2Vec2(manifold.points[0].x, manifold.points[0].y),manifold.normal));
+			c->collisionHandler->createWeld(CollisionHandler::weldData(this, c->hitFixture->GetBody(), 
+				b2Vec2(manifold.points[0].x, manifold.points[0].y),manifold.normal));
+			if (kBinder != nullptr) kBinder->grabbed = true;
 		}
 		else {
 			cout << "colision sin input con grabbable" << endl;

@@ -1,7 +1,6 @@
 #include "Collider.h"
 
 Collider::Collider(b2World* world, b2BodyType type, float x, float y, float width, float height,
-
 	float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor) :
 
 	world_(world),
@@ -78,28 +77,38 @@ b2Filter Collider::setCollisionLayer(CollisionLayer c) {
 	filter.categoryBits = c;
 	switch (c) {
 	case NormalObject:
-		filter.maskBits = NormalObject | NormalAttachableObject | Player | Wall; //what do I collide with?
+		filter.maskBits = NormalObject | NormalAttachableObject | Player | Wall | NonGrababbleWall; //what do I collide with?
 		break;
 	case NormalAttachableObject:
-		filter.maskBits = NormalObject | NormalAttachableObject | Player | Wall; //what do I collide with?
+		filter.maskBits = NormalObject | NormalAttachableObject | Player | Wall | NonGrababbleWall; //what do I collide with?
 		break;
 	case Player:
-		filter.maskBits = NormalObject | NormalAttachableObject | Player | PickableObject | Wall;
+		filter.maskBits = NormalObject | NormalAttachableObject | Player | PickableObject | Wall | Trigger | NonGrababbleWall;
 		break;
 	case Trigger:
 		filter.maskBits = Player;
 		break;
 	case PickableObject:
-		filter.maskBits = Player | Wall;
+		filter.maskBits = Player | Wall | NonGrababbleWall;
 		break;
 	case UnInteractableObject:
 		filter.maskBits = Wall | NonGrababbleWall;
 		break;
 	case Wall:
-		filter.maskBits = UnInteractableObject | Player | NormalAttachableObject | NormalObject;
+		filter.maskBits = UnInteractableObject | Player | NormalAttachableObject | NormalObject | PickableObject;
+		break;
+	case NonGrababbleWall:
+		filter.maskBits = UnInteractableObject | Player | NormalAttachableObject | NormalObject | PickableObject;
 		break;
 	}
 	return filter;
+}
+
+void Collider::disableFixtureCollisions(int fixtureIndex) {
+	b2Filter filter;
+	filter.maskBits = 0;
+	filter.categoryBits = 0;
+	getFixture(fixtureIndex)->SetFilterData(filter);
 }
 
 void Collider::destroyFixture(int i) {

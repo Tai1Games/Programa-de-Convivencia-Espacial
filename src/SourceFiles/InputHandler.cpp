@@ -7,8 +7,11 @@
 using namespace std;
 InputHandler::InputHandler() {
 	clearState();
-	kbState_ = SDL_GetKeyboardState(0);
+	//kbState_ = SDL_GetKeyboardState(0);
 	numControllers_ = 0;
+	for (int i = 0; i < kbSize; i++) {
+		kbState_.push_back(ButtonState::Up);
+	}
 }
 
 InputHandler::~InputHandler() {
@@ -60,11 +63,6 @@ void InputHandler::update() {
 			break;
 		}
 	}
-
-	//if (SDL_GameControllerGetButton(controllers_[0], SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_A) == 1) {
-	//	cout << "Voy a prenderme fuego ahora mismo" << endl;
-	//}
-
 }
 
 void InputHandler::initialiseGamepads() {
@@ -76,21 +74,12 @@ void InputHandler::initialiseGamepads() {
 	numControllers_ = SDL_NumJoysticks();
 	if (SDL_NumJoysticks() > 0) {
 
-		//json mapData;
-		//ifstream inData = ifstream("../config/inputMapping.json");
-		//if (inData.is_open()) {
-		//	inData >> mapData;
-		//	//cout << "loaded Mapping files" << endl;
-		//}
 		for (int i = 0; i < SDL_NumJoysticks(); i++) {
 			SDL_GameController* gameCtrl = SDL_GameControllerOpen(i);
 			if (gameCtrl)
 			{
 				cout << "--------------" << endl;
 				cout << SDL_GameControllerName(gameCtrl) << endl;
-				//if (mapJoystick(gameCtrl, mapData)) {
-				//	cout << "Controller " << i <<" mapped accordingly" << endl;
-				//}
 				cout << SDL_GameControllerMapping(gameCtrl)<<endl;
 				m_gameControllers.push_back(gameCtrl);
 				m_joystickValues.push_back(std::make_pair(new
@@ -106,6 +95,7 @@ void InputHandler::initialiseGamepads() {
 					tempButtons.push_back(Up);
 				}
 				m_buttonStates.push_back(tempButtons);
+				m_freeGameControllers.push(i);
 			}
 			else
 			{
@@ -143,8 +133,27 @@ void InputHandler::clearState() {
 	isButtonDownEvent_ = false;
 	isButtonUpEvent_ = false;
 
+	//Ajustamos los botones y teclas recien pulsados o soltados
 	for (int i = 0; i < 3; i++) {
-		mbState_[i] = false;
+		switch (mbState_[i])
+		{
+		case JustUp:
+			mbState_[i] = Up;
+			break;
+		case JustDown:
+			mbState_[i] = Down;
+			break;
+		default:
+			break;
+		}
+	}
+	while (!justDownKeys.empty()) {
+		kbState_[justDownKeys.front()] = ButtonState::Down;
+		justDownKeys.pop();
+	}
+	while (!justUpKeys.empty()) {
+		kbState_[justUpKeys.front()] = ButtonState::Up;
+		justUpKeys.pop();
 	}
 
 	for (int controller = 0; controller < m_gameControllers.size();controller++) {
@@ -166,6 +175,8 @@ void InputHandler::clearState() {
 
 double InputHandler::getStickX(int joy, GAMEPADSTICK stick)
 {
+	if (joy >= m_gameControllers.size())
+		return 0.0;
 	if (m_joystickValues.size() > 0)
 	{
 		if (stick == LEFTSTICK)
@@ -183,6 +194,8 @@ double InputHandler::getStickX(int joy, GAMEPADSTICK stick)
 
 double InputHandler::getStickY(int joy, GAMEPADSTICK stick)
 {
+	if (joy >= m_gameControllers.size())
+		return 0.0;
 	if (m_joystickValues.size() > joy)
 	{
 		if (stick == LEFTSTICK)
@@ -215,7 +228,6 @@ double InputHandler::getTrigger(int joy, GAMEPADTRIGGER trigger) {
 void InputHandler::onJoyAxisChange(SDL_Event& event) {
 	isAxisMovementEvent_ = true;
 	int whichOne = event.jaxis.which;
-	//cout << event.jaxis.value<<endl;
 	const double normalize= 1.0/32768.0;
 	double val = event.jaxis.value;
 	// left stick move left or right
@@ -343,19 +355,6 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		lastLStickValue_[whichOne].x = lastLx;
 		lastLStickValue_[whichOne].y = lastLy;
 	}
-
-	//cout << "Controller 0:" << endl;
-	//cout << "Triggers " << getTrigger(0, LEFTTRIGGER) << " " << getTrigger(0, RIGHTTRIGGER) << endl;
-
-
-	//if (m_joystickValues[whichOne].first->magnitude() != 0 || m_joystickValues[whichOne].second->magnitude()!=0)
-	//{
-	//	cout << whichOne << endl;
-	//	cout << "Left: " <<
-	//		m_joystickValues[whichOne].first->getX() << " " << m_joystickValues[whichOne].first->getY() << endl;
-	//	cout << "Right: " <<
-	//		m_joystickValues[whichOne].second->getX() << " " << m_joystickValues[whichOne].second->getY() << endl;
-	//}
 }
 
 void InputHandler::onJoyButtonChange(SDL_Event& event,ButtonState just) {
@@ -380,30 +379,6 @@ void InputHandler::onJoyButtonChange(SDL_Event& event,ButtonState just) {
 		i++;
 	}
 	m_buttonStates[whichOne][bindedButton] = just;
-
-
-	//hay que iterar por todo el mapeo de input porque event devuelve el botón hardware
-	//y eso no nos gusta
-	//for (int i = 0; i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX;i++) {
-	//	switch (m_buttonStates[whichOne][i]) {
-	//	//si un botón está suelto, comprobamos si se ha pulsado
-	//	case(Up):
-	//		if (1 == SDL_GameControllerGetButton(m_gameControllers[whichOne], (SDL_GameControllerButton)i))
-	//			m_buttonStates[whichOne][i] = JustDown;
-	//		break;
-	//	//para los botones pulsados, comprobamos si se sueltan
-	//	case(Down):
-	//		if (0 == SDL_GameControllerGetButton(m_gameControllers[whichOne], (SDL_GameControllerButton)i))
-	//			m_buttonStates[whichOne][i] = JustUp;
-	//		break;
-	//	}
-	//}
-
-
-
-	/*if (just = JustDown)
-		cout << SDL_GameControllerGetBindForButton
-		(m_gameControllers[whichOne], (SDL_GameControllerButton)event.cbutton.button).value.button << endl;*/
 }
 
 bool InputHandler::mapJoystick(SDL_GameController* ctrl,json mapData) {
@@ -432,6 +407,8 @@ bool InputHandler::mapJoystick(SDL_GameController* ctrl,json mapData) {
 }
 
 b2Vec2 InputHandler::getStickDir(int ctrl, GAMEPADSTICK stick) {
+	if (ctrl >= m_gameControllers.size())
+		return b2Vec2(0,0);
 	Vector2D aux;
 	if (stick == LEFTSTICK)
 		aux = *m_joystickValues[ctrl].first;
@@ -444,10 +421,25 @@ b2Vec2 InputHandler::getStickDir(int ctrl, GAMEPADSTICK stick) {
 }
 
 b2Vec2 InputHandler::getLastStickDir(int ctrl, GAMEPADSTICK stick) {
+	if (ctrl >= m_gameControllers.size())
+		return b2Vec2(0, 0);
 	if (stick == LEFTSTICK)
 		return lastLStickValue_[ctrl];
 	else
 		return b2Vec2(0, 0);
 
 	//return b2Vec2(aux.getX(), aux.getY());
+}
+
+int InputHandler::getFreeGamePad() {
+	int r = -1;
+	if (!m_freeGameControllers.empty()) {
+		r = m_freeGameControllers.front();
+			m_freeGameControllers.pop();
+	}
+	return r;
+}
+
+void InputHandler::returnGamePad(int g) {
+	m_freeGameControllers.push(g);
 }

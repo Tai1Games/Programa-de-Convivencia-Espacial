@@ -3,8 +3,7 @@
     {
      "export":
         {
-         "format":"json",
-         "target":"GymRoom.json"
+         "target":"."
         }
     },
  "height":135,
@@ -25,7 +24,7 @@
                  "width":1920,
                  "x":0,
                  "y":0
-                },
+                }, 
                 {
                  "height":30,
                  "id":3,
@@ -36,7 +35,7 @@
                  "width":1920,
                  "x":0,
                  "y":1050
-                },
+                }, 
                 {
                  "height":1080,
                  "id":4,
@@ -47,7 +46,7 @@
                  "width":30,
                  "x":0,
                  "y":0
-                },
+                }, 
                 {
                  "height":1080,
                  "id":5,
@@ -61,10 +60,10 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
          "id":3,
@@ -79,9 +78,9 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1500,
-                 "y":840
-                },
+                 "x":1060,
+                 "y":114
+                }, 
                 {
                  "height":0,
                  "id":27,
@@ -91,9 +90,9 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":492,
-                 "y":834
-                },
+                 "x":882,
+                 "y":154
+                }, 
                 {
                  "height":0,
                  "id":83,
@@ -105,13 +104,24 @@
                  "width":0,
                  "x":802,
                  "y":472
+                }, 
+                {
+                 "height":410,
+                 "id":86,
+                 "name":"Pad",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":84,
+                 "x":86,
+                 "y":338
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
          "id":4,
@@ -126,15 +136,15 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":960,
-                 "y":540
+                 "x":962,
+                 "y":522
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
          "id":5,
@@ -143,7 +153,7 @@
                 {
                  "height":0,
                  "id":6,
-                 "name":"Spawn",
+                 "name":"P2",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -151,11 +161,11 @@
                  "width":0,
                  "x":1644,
                  "y":291
-                },
+                }, 
                 {
                  "height":0,
                  "id":7,
-                 "name":"Spawn",
+                 "name":"P1",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -163,11 +173,11 @@
                  "width":0,
                  "x":359,
                  "y":248
-                },
+                }, 
                 {
                  "height":0,
                  "id":8,
-                 "name":"Spawn",
+                 "name":"P4",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -175,18 +185,18 @@
                  "width":0,
                  "x":1589,
                  "y":806
-                },
+                }, 
                 {
                  "height":0,
                  "id":9,
-                 "name":"Spawn",
+                 "name":"P3",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":308,
-                 "y":819
+                 "x":506,
+                 "y":829
                 }],
          "offsetx":2,
          "offsety":-2,
@@ -195,7 +205,7 @@
          "visible":true,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
          "id":7,
@@ -212,7 +222,7 @@
                  "width":0,
                  "x":502,
                  "y":262
-                },
+                }, 
                 {
                  "height":0,
                  "id":21,
@@ -224,7 +234,7 @@
                  "width":0,
                  "x":1078,
                  "y":242
-                },
+                }, 
                 {
                  "height":0,
                  "id":22,
@@ -236,7 +246,7 @@
                  "width":0,
                  "x":1480,
                  "y":236
-                },
+                }, 
                 {
                  "height":0,
                  "id":23,
@@ -248,7 +258,7 @@
                  "width":0,
                  "x":1480,
                  "y":968
-                },
+                }, 
                 {
                  "height":0,
                  "id":24,
@@ -263,10 +273,10 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
          "id":6,
@@ -283,7 +293,7 @@
                  "width":0,
                  "x":960,
                  "y":300
-                },
+                }, 
                 {
                  "height":0,
                  "id":11,
@@ -295,7 +305,7 @@
                  "width":0,
                  "x":540,
                  "y":540
-                },
+                }, 
                 {
                  "height":0,
                  "id":12,
@@ -307,7 +317,7 @@
                  "width":0,
                  "x":960,
                  "y":780
-                },
+                }, 
                 {
                  "height":0,
                  "id":13,
@@ -322,12 +332,12 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":84,
+ "nextobjectid":88,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.3.3",

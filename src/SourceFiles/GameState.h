@@ -6,7 +6,7 @@
 class GameState
 {
 protected:
-	EntityManager* entityManager_;
+	EntityManager* entityManager_ = nullptr;
 	//HUD
 #pragma region Debug
 	void DebugInput();
@@ -15,10 +15,12 @@ protected:
 public:
 	GameState();
 	virtual ~GameState();
-	virtual void init() {};
+	virtual void init();
 	virtual void update();
 	virtual void render();
 	virtual void handleInput();
+	virtual void resetScene();
+	virtual void onLoaded() {};
 	EntityManager* getEntityManager() { return entityManager_; }
 };
 

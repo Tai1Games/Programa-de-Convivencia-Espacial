@@ -1,4 +1,12 @@
-{ "height":135,
+{ "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "target":"."
+        }
+    },
+ "height":135,
  "infinite":false,
  "layers":[
         {
@@ -52,7 +60,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -70,8 +78,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":960,
-                 "y":428
+                 "x":952,
+                 "y":510
                 }, 
                 {
                  "height":0,
@@ -235,7 +243,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -253,73 +261,12 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":960,
-                 "y":540
+                 "x":956,
+                 "y":650
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "id":5,
-         "name":"Spawns",
-         "objects":[
-                {
-                 "height":0,
-                 "id":6,
-                 "name":"Spawn",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1644,
-                 "y":291
-                }, 
-                {
-                 "height":0,
-                 "id":7,
-                 "name":"Spawn",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":359,
-                 "y":248
-                }, 
-                {
-                 "height":0,
-                 "id":8,
-                 "name":"Spawn",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1589,
-                 "y":806
-                }, 
-                {
-                 "height":0,
-                 "id":9,
-                 "name":"Spawn",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":308,
-                 "y":819
-                }],
-         "offsetx":2,
-         "offsety":-2,
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -390,6 +337,67 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
+         "visible":false,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":5,
+         "name":"Spawns",
+         "objects":[
+                {
+                 "height":0,
+                 "id":6,
+                 "name":"P2",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1644,
+                 "y":291
+                }, 
+                {
+                 "height":0,
+                 "id":7,
+                 "name":"P1",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":359,
+                 "y":248
+                }, 
+                {
+                 "height":0,
+                 "id":8,
+                 "name":"P4",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1589,
+                 "y":806
+                }, 
+                {
+                 "height":0,
+                 "id":9,
+                 "name":"P3",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":308,
+                 "y":819
+                }],
+         "offsetx":2,
+         "offsety":-2,
+         "opacity":1,
+         "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
@@ -449,7 +457,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
@@ -457,7 +465,7 @@
  "nextobjectid":83,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.5",
+ "tiledversion":"1.3.3",
  "tileheight":8,
  "tilesets":[],
  "tilewidth":8,

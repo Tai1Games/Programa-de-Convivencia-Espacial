@@ -17,6 +17,10 @@ public:
 	T getConstant(const std::string& key) const; //devuelve la constante pedida o su valor por defecto
 };
 
+//Mathz
+const double PI = 3.14159265358979323846264338327950288;
+const int FRAMES_PER_SECOND = 60;
+
 //Pools
 const int COIN_POOL_SIZE = 140;
 const int FIREBALL_POOL_SIZE = 5;
@@ -28,6 +32,9 @@ enum States
 	menu,
 	play,
 	pause,
+	midGame,
+	transition,
+	lobby,
 	//No toques
 	NUMBER_OF_STATES
 };
@@ -38,6 +45,7 @@ enum GamemodeID {
 	Stocks,
 	WiFight,
 	Timed,
+	Tutorial,
 	NUMBER_OF_GAMEMODES
 };
 
@@ -51,11 +59,12 @@ enum WeaponID {
 	Slipper,
 	Mando,
 	Tomato,
+	Banana,
 
 	WEAPON_NUMBER
 };
 
-// no sé por qué peta al hacer un array de strings
+// no sï¿½ por quï¿½ peta al hacer un array de strings
 /*std::string mapNames[] = {
 	"LivingRoom",
 	"Gym",

@@ -8,7 +8,7 @@ void ThrownByPlayer::init() {
 
 void ThrownByPlayer::update()
 {
-	if (lastOwner_ != -1) {
+	if (lastOwner_ != -1 && timeWhenThrown_ != -1) {
 		timeWhenThrown_ += sPerFrame_;
 		if (timeWhenThrown_ > timeToDeleteOwner_) {
 			lastOwner_ = -1;
@@ -25,5 +25,10 @@ void ThrownByPlayer::throwObject(int playerId)
 void ThrownByPlayer::addPointsToOwner()
 {
 	if (lastOwner_ != -1)
-		gameMode_->addPoints(lastOwner_);
+		gameMode_->playerKillsPlayer(lastOwner_);
+}
+
+void ThrownByPlayer::SetOwner(int playerId) {
+	lastOwner_ = playerId;
+	timeWhenThrown_ = -1;
 }

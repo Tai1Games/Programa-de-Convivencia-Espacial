@@ -6,6 +6,7 @@
 class PlayerController;
 class Collider;
 class PlayerData;
+class InputBinder;
 
 class ImpulseViewer : public Component
 {
@@ -13,6 +14,11 @@ protected:
 	PlayerData* playerData_;
 	Collider* playerCollider_;
 	PlayerController* playerController_;
+	InputBinder* ib_;
+
+	//constants
+	float maxImpulseGrabbed_;
+	int impulseSize_;
 
 	int playerNumber_;
 	int emptyTextureId_;

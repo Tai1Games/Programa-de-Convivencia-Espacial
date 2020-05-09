@@ -182,14 +182,26 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractAnimatedViewers.h" />
+    <ClInclude Include="AbstractTimedGameMode.h" />
+    <ClInclude Include="AbstractViewers.h" />
     <ClInclude Include="ActionableWeapon.h" />
+    <ClInclude Include="AnimatedPlayer.h" />
+    <ClInclude Include="AnimatedUIViewer.h" />
+    <ClInclude Include="AnimatedViewer.h" />
     <ClInclude Include="AttachesToObjects.h" />
+    <ClInclude Include="BananaPool.h" />
+    <ClInclude Include="BananaWeapon.h" />
     <ClInclude Include="BoilerButtonLogic.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletPool.h" />
     <ClInclude Include="CapitalismGameMode.h" />
+    <ClInclude Include="CarnivorousPlant.h" />
     <ClInclude Include="checkML.h" />
     <ClInclude Include="Coin.h" />
     <ClInclude Include="CoinsPool.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="ColliderViewer.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionHandler.h" />
     <ClInclude Include="Component.h" />
@@ -212,8 +224,11 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="HealthViewer.h" />
     <ClInclude Include="ImpulseViewer.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="InputBinder.h" />
+    <ClInclude Include="LobbyState.h" />
     <ClInclude Include="MeleeWeapon.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="MidGameState.h" />
     <ClInclude Include="Pad.h" />
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="ParticleEmitter.h" />
@@ -225,13 +240,16 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="RouterLogic.h" />
     <ClInclude Include="SlipperWeapon.h" />
     <ClInclude Include="SpawnTree.h" />
+    <ClInclude Include="StaplerWeapon.h" />
     <ClInclude Include="StocksGameMode.h" />
     <ClInclude Include="ThrownByPlayer.h" />
     <ClInclude Include="TimeGameMode.h" />
-    <ClInclude Include="TomatoTree.h" />
     <ClInclude Include="TomatoWeapon.h" />
     <ClInclude Include="TomatoPool.h" />
+    <ClInclude Include="TransitionState.h" />
     <ClInclude Include="Treadmill.h" />
+    <ClInclude Include="TutorialGameMode.h" />
+    <ClInclude Include="UIViewer.h" />
     <ClInclude Include="Wallet.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="PlayState.h" />
@@ -254,14 +272,25 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="WiFightGameMode.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractAnimatedViewers.cpp" />
+    <ClCompile Include="AbstractTimedGameMode.cpp" />
+    <ClCompile Include="AbstractViewers.cpp" />
     <ClCompile Include="ActionableWeapon.cpp" />
+    <ClCompile Include="AnimatedPlayer.cpp" />
+    <ClCompile Include="AnimatedUIViewer.cpp" />
+    <ClCompile Include="AnimatedViewer.cpp" />
     <ClCompile Include="AttachesToObjects.cpp" />
+    <ClCompile Include="BananaPool.cpp" />
+    <ClCompile Include="BananaWeapon.cpp" />
     <ClCompile Include="BoilerButtonLogic.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletPool.cpp" />
     <ClCompile Include="CapitalismGameMode.cpp" />
+    <ClCompile Include="CarnivorousPlant.cpp" />
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="CoinsPool.cpp" />
     <ClCompile Include="Collider.cpp" />
-    <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="ColliderViewer.cpp" />
     <ClCompile Include="CollisionHandler.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ControllerGameMode.cpp" />
@@ -281,8 +310,11 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="HealthViewer.cpp" />
     <ClCompile Include="ImpulseViewer.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="InputBinder.cpp" />
+    <ClCompile Include="LobbyState.cpp" />
     <ClCompile Include="MeleeWeapon.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="MidGameState.cpp" />
     <ClCompile Include="Pad.cpp" />
     <ClCompile Include="ParticleEmitter.cpp" />
     <ClCompile Include="PauseState.cpp" />
@@ -293,13 +325,16 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="RouterLogic.cpp" />
     <ClCompile Include="SlipperWeapon.cpp" />
     <ClCompile Include="SpawnTree.cpp" />
+    <ClCompile Include="StaplerWeapon.cpp" />
     <ClCompile Include="StocksGameMode.cpp" />
     <ClCompile Include="ThrownByPlayer.cpp" />
     <ClCompile Include="TimeGameMode.cpp" />
-    <ClCompile Include="TomatoTree.cpp" />
     <ClCompile Include="TomatoWeapon.cpp" />
     <ClCompile Include="TomatoPool.cpp" />
+    <ClCompile Include="TransitionState.cpp" />
     <ClCompile Include="Treadmill.cpp" />
+    <ClCompile Include="TutorialGameMode.cpp" />
+    <ClCompile Include="UIViewer.cpp" />
     <ClCompile Include="Wallet.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="PlayState.cpp" />

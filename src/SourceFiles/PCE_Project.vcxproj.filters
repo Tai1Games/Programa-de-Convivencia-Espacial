@@ -55,6 +55,12 @@
     <Filter Include="Header Files\Components\Weapons">
       <UniqueIdentifier>{be79505f-f448-4b8b-839b-fe624286eeb3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\Viewers">
+      <UniqueIdentifier>{22a7cef9-3a7d-4430-b47a-13ca68166c7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Viewers">
+      <UniqueIdentifier>{4adbda0a-113e-4aff-b06e-48bc387f3c6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -117,9 +123,6 @@
     <ClInclude Include="Health.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="HealthViewer.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerController.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -127,9 +130,6 @@
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="TileMap.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Viewer.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="GameStateMachine.h">
@@ -164,9 +164,6 @@
     </ClInclude>
     <ClInclude Include="InputHandler.h">
       <Filter>Header Files\Managers &amp; Handlers</Filter>
-    </ClInclude>
-    <ClInclude Include="ImpulseViewer.h">
-      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="PauseState.h">
       <Filter>Header Files\Gamestates</Filter>
@@ -258,7 +255,10 @@
     <ClInclude Include="SpawnTree.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="TomatoTree.h">
+    <ClInclude Include="InputBinder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CarnivorousPlant.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="TomatoPool.h">
@@ -270,15 +270,72 @@
     <ClInclude Include="TomatoWeapon.h">
       <Filter>Header Files\Components\Weapons</Filter>
     </ClInclude>
+    <ClInclude Include="AnimatedViewer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderViewer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthViewer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="ImpulseViewer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="BananaWeapon.h">
+      <Filter>Header Files\Components\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="BananaPool.h">
+      <Filter>Header Files\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletPool.h">
+      <Filter>Header Files\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files\Components\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="TransitionState.h">
+      <Filter>Header Files\Gamestates</Filter>
+    </ClInclude>
+    <ClInclude Include="MidGameState.h">
+      <Filter>Header Files\Gamestates</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialGameMode.h">
+      <Filter>Header Files\GameModes</Filter>
+    </ClInclude>
+    <ClInclude Include="LobbyState.h">
+      <Filter>Header Files\Gamestates</Filter>
+    </ClInclude>
+    <ClInclude Include="UIViewer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedPlayer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="StaplerWeapon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractTimedGameMode.h">
+      <Filter>Header Files\GameModes</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractAnimatedViewers.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedUIViewer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractViewers.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SDL_Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Vector2D.cpp">
@@ -305,16 +362,10 @@
     <ClCompile Include="TileMap.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Viewer.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="AttachesToObjects.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthViewer.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Hands.cpp">
@@ -349,9 +400,6 @@
     </ClCompile>
     <ClCompile Include="CollisionHandler.cpp">
       <Filter>Source Files\Managers &amp; Handlers</Filter>
-    </ClCompile>
-    <ClCompile Include="ImpulseViewer.cpp">
-      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="PlayerData.cpp">
       <Filter>Source Files\Components</Filter>
@@ -397,9 +445,6 @@
     </ClCompile>
     <ClCompile Include="Pad.cpp">
       <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Health.cpp">
       <Filter>Source Files\Components</Filter>
@@ -449,7 +494,10 @@
     <ClCompile Include="SpawnTree.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="TomatoTree.cpp">
+    <ClCompile Include="InputBinder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CarnivorousPlant.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="TomatoPool.cpp">
@@ -457,6 +505,69 @@
     </ClCompile>
     <ClCompile Include="TomatoWeapon.cpp">
       <Filter>Source Files\Components\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedViewer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderViewer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthViewer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="ImpulseViewer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="BananaWeapon.cpp">
+      <Filter>Source Files\Components\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="BananaPool.cpp">
+      <Filter>Source Files\Pools</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletPool.cpp">
+      <Filter>Source Files\Pools</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files\Components\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="TransitionState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="MidGameState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialGameMode.cpp">
+      <Filter>Source Files\GameModes</Filter>
+    </ClCompile>
+    <ClCompile Include="LobbyState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="UIViewer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedPlayer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="StaplerWeapon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractTimedGameMode.cpp">
+      <Filter>Source Files\GameModes</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractAnimatedViewers.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedUIViewer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractViewers.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,8 @@
 #include "../json/single_include/nlohmann/json.hpp"
 #include <box2d.h>
 #include "checkML.h"
+#include <iterator>
+#include <queue>
 
 using json = nlohmann::json;
 using namespace std;
@@ -32,7 +34,7 @@ private:
 	//variables
 	//
 	//keyboard
-	const Uint8* kbState_;
+	//ButtonState kbState_[1000];
 	bool isKeyUpEvent_;
 	bool isKeyDownEvent_;
 
@@ -41,14 +43,22 @@ private:
 	bool isMouseMotionEvent_;
 	bool isMouseButtonEvent_;
 	b2Vec2 mousePos_;
-	std::array<bool, 3> mbState_;
+	std::array<ButtonState, 3> mbState_;
 	//---------------------------------------------
 	//controllers
 	int numControllers_;
 	std::vector<SDL_GameController*> m_gameControllers;
+	std::queue<int> m_freeGameControllers;
 	std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
 	std::vector<std::pair<double*, double*>> m_triggerValues;
 	std::vector<std::vector<ButtonState>> m_buttonStates;
+	ButtonState m_mouseButtonStates[3];
+	std::vector<SDL_Scancode> m_keysJustDown; //vector de teclas recien pulsadas
+	std::vector<SDL_Scancode> m_keysJustUp; //vector de teclas recien soltadas
+	const int kbSize = 300;
+	std::vector<ButtonState> kbState_;
+	std::queue<int> justUpKeys, justDownKeys;
+
 
 	bool m_bJoysticksInitialised;
 	bool isButtonDownEvent_;
@@ -69,12 +79,18 @@ private:
 	//---------------------------------------------
 	//keyboard
 	inline void onKeyDown(SDL_Event& event) {
-		isKeyDownEvent_ = true;
-		// kbState_ = SDL_GetKeyboardState(0);
+		isKeyDownEvent_  = true;
+		if (kbState_[event.key.keysym.scancode] == ButtonState::Up) {
+			kbState_[event.key.keysym.scancode] = ButtonState::JustDown;
+			justDownKeys.push(event.key.keysym.scancode);
+		}
 	}
 	inline void onKeyUp(SDL_Event& event) {
 		isKeyUpEvent_ = true;
-		// kbState_ = SDL_GetKeyboardState(0);
+		if (kbState_[event.key.keysym.scancode] == ButtonState::Down) {
+			kbState_[event.key.keysym.scancode] = ButtonState::JustUp;
+			justUpKeys.push(event.key.keysym.scancode);
+		}
 	}
 	//---------------------------------------------
 	//mouse
@@ -85,13 +101,13 @@ private:
 	inline void onMouseButtonChange(SDL_Event& event, bool isDown) {
 		isMouseButtonEvent_ = true;
 		if (event.button.button == SDL_BUTTON_LEFT) {
-			mbState_[LEFT] = isDown;
+			mbState_[LEFT] = (isDown) ? JustDown : JustUp;
 		}
 		else if (event.button.button == SDL_BUTTON_MIDDLE) {
-			mbState_[MIDDLE] = isDown;
+			mbState_[MIDDLE] = (isDown) ? JustDown : JustUp;
 		}
 		else if (event.button.button == SDL_BUTTON_RIGHT) {
-			mbState_[RIGHT] = isDown;
+			mbState_[RIGHT] = (isDown) ? JustDown : JustUp;
 		}
 	}
 	//---------------------------------------------
@@ -119,19 +135,24 @@ public:
 	}
 	inline bool isKeyDown(SDL_Scancode key) {
 		// return kbState_[key] == 1;
-		return keyDownEvent() && kbState_[key] == 1;
+		return kbState_[key] == ButtonState::Down;
 	}
 	inline bool isKeyDown(SDL_Keycode key) {
 		return isKeyDown(SDL_GetScancodeFromKey(key));
 	}
 	inline bool isKeyUp(SDL_Scancode key) {
 		// kbState_[key] == 0;
-		return keyUpEvent() && kbState_[key] == 0;
+		 return kbState_[key] == ButtonState::Up;
 	}
 	inline bool isKeyUp(SDL_Keycode key) {
 		return isKeyUp(SDL_GetScancodeFromKey(key));
 	}
-
+	inline bool isKeyJustDown(SDL_Keycode key) {
+		return kbState_[SDL_GetScancodeFromKey(key)] == ButtonState::JustDown;
+	}
+	inline bool isKeyJustUp(SDL_Keycode key) {
+		return kbState_[SDL_GetScancodeFromKey(key)] == ButtonState::JustUp;
+	}
 	// mouse
 	inline bool mouseMotionEvent() {
 		return isMouseMotionEvent_;
@@ -145,9 +166,19 @@ public:
 		return mousePos_;
 	}
 
-	inline int getMouseButtonState(MOUSEBUTTON b) {
-		return mbState_[b];
+	inline bool isMouseButtonUp(MOUSEBUTTON mb) {
+		return mbState_[mb] == Up || mbState_[mb] == JustUp;
 	}
+	inline bool isMouseButtonDown(MOUSEBUTTON mb) {
+		return mbState_[mb] == Down || mbState_[mb] == JustDown;
+	}
+	inline bool isMouseButtonJustDown(MOUSEBUTTON mb) {
+		return mbState_[mb] == JustDown;
+	}
+	inline bool isMouseButtonJustUp(MOUSEBUTTON mb) {
+		return mbState_[mb] == JustUp;
+	}
+
 
 	// Joystick
 	//init
@@ -172,16 +203,24 @@ public:
 	}
 	//justup/down for the exact press or release
 	inline bool isButtonJustUp(int ctrl, SDL_GameControllerButton b) {
+		if (ctrl >= m_gameControllers.size())
+			return false;
 		return(isButtonUpEvent_ && m_buttonStates[ctrl][b] == JustUp);
 	}
 	inline bool isButtonJustDown(int ctrl, SDL_GameControllerButton b) {
+		if (ctrl >= m_gameControllers.size())
+			return false;
 		return(isButtonDownEvent_ && m_buttonStates[ctrl][b] == JustDown);
 	}
 	//isup/down for holding a button
 	inline bool isButtonDown(int ctrl, SDL_GameControllerButton b) {
+		if (ctrl >= m_gameControllers.size())
+			return false;
 		return(m_buttonStates[ctrl][b] == Down);
 	}
 	inline bool isButtonUp(int ctrl, SDL_GameControllerButton b) {
+		if (ctrl >= m_gameControllers.size())
+			return false;
 		return(m_buttonStates[ctrl][b] == Up);
 	}
 
@@ -192,6 +231,9 @@ public:
 	double getStickX(int ctrl, GAMEPADSTICK stick);
 	double getStickY(int ctrl, GAMEPADSTICK stick);
 	double getTrigger(int ctrl, GAMEPADTRIGGER trigger);
+
+	int getFreeGamePad();
+	void returnGamePad(int g);
 
 };
 

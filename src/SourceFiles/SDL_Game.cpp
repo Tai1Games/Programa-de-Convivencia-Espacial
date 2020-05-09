@@ -2,6 +2,8 @@
 #include "Resources.h"
 #include "InputHandler.h"
 #include "PlayState.h"
+#include "checkML.h"
+
 
 unique_ptr<SDL_Game> SDL_Game::instance_;
 
@@ -101,20 +103,18 @@ void SDL_Game::closeResources() {
 
 void SDL_Game::start() {
 	exit_ = false;
-	gamestateMachine_->changeToState(States::menu, 0);
+	gamestateMachine_->changeToState(States::lobby, 0);
 	//gamestateMachine_->changeToState(States::play, 4, GamemodeID::Timed, "BoilerRoom"); //BoilerRoom, LivingRoom, GymRoom
 
 	if (inputHandler_->getNumControllers() > 0) {
 		while (!exit_) {
 			Uint32 startTime = getTime();
-			gamestateMachine_->handleInput();
-			gamestateMachine_->update();
-			gamestateMachine_->render();
+			gamestateMachine_->gameCycle();
 			Uint32 frameTime = getTime() - startTime;
 			if (frameTime < MS_PER_FRAME_)
 				SDL_Delay(MS_PER_FRAME_ - frameTime);
 			else
-				cout << "LAGGING BEHIND!" << endl << endl;
+				cout << "LAGGING BEHIND! " << frameTime << endl << endl;
 		}
 	}
 	else std::cout << "No hay mando conectado.\nAt SDL_Game.cpp line 113\n\n";

@@ -10,6 +10,7 @@
 #include "ParticleEmitter.h"
 #include "Hands.h"
 #include "CollisionHandler.h"
+#include "ThrownByPlayer.h"
 
 void TomatoWeapon::init() {
 	ActionableWeapon::init();
@@ -17,8 +18,8 @@ void TomatoWeapon::init() {
 	tomatoViewer_ = GETCMP1_(Viewer);
 	particleEmitterTomato_ = GETCMP1_(ParticleEmitter);
 
-	framesForExplosion_ = CONST(int, "TOMATO_TIME_CHARGE");
-	framesForExplosionExpire_ = CONST(int, "TOMATO_TIME_EXPLOSION");
+	timeForExplosion_ = CONST(int, "TOMATO_TIME_CHARGE");
+	timeForExplosionExpire_ = CONST(int, "TOMATO_TIME_EXPLOSION");
 	nFramesCharge_ = CONST(int, "TOMATO_N_FRAMES_ACTIVATED");
 	nFramesExplosion_ = CONST(int, "TOMATO_N_FRAMES_EXPLOSION");
 	damageOnExplosionImpact_ = CONST(int, "TOMATO_DAMAGE");
@@ -26,8 +27,8 @@ void TomatoWeapon::init() {
 	explosionForce_ = CONST(int, "TOMATO_EXPLOSION_FORCE");
 	frameSize_ = tomatoViewer_->getTexture()->getHeight();
 
-	frameSpeedCharge_ = framesForExplosion_ / nFramesCharge_;
-	frameSpeedExplosion_ = framesForExplosionExpire_ / nFramesExplosion_;
+	frameSpeedCharge_ = timeForExplosion_ / nFramesCharge_;
+	frameSpeedExplosion_ = timeForExplosionExpire_ / nFramesExplosion_;
 }
 
 void TomatoWeapon::update() {
@@ -35,9 +36,9 @@ void TomatoWeapon::update() {
 
 	if (activated_) {
 
-		if (SDL_Game::instance()->getTime() > framesForExplosion_) {
+		if (SDL_Game::instance()->getTime() > timeForExplosion_) {
 			colTomato_->createCircularFixture(explosionSize_, 0, 0, 0, Collider::CollisionLayer::NormalObject, true);
-			framesForExplosionExpire_ = SDL_Game::instance()->getTime() + framesForExplosionExpire_;
+			timeForExplosionExpire_ = SDL_Game::instance()->getTime() + timeForExplosionExpire_;
 			timeExploded_ = SDL_Game::instance()->getTime();
 			exploded_ = true;
 			activated_ = false;
@@ -48,7 +49,7 @@ void TomatoWeapon::update() {
 		tomatoViewer_->setClip(SDL_Rect{ frame * frameSize_, 0, frameSize_, frameSize_ });
 	}
 	else if (exploded_) {
-		if (SDL_Game::instance()->getTime() > framesForExplosionExpire_) {
+		if (SDL_Game::instance()->getTime() > timeForExplosionExpire_) {
 			colTomato_->destroyFixture(1);
 			setActive(false);
 		}
@@ -69,13 +70,20 @@ void TomatoWeapon::onCollisionEnter(Collision* c) {
 		PlayerData* playerData = GETCMP2(other, PlayerData);
 		Collider* collPlayer = GETCMP2(other, Collider);
 
+		ThrownByPlayer* objThrown = GETCMP1_(ThrownByPlayer);
+
 		if (healthPlayer && collPlayer) {
 			if (!healthPlayer->subtractLife(damageOnExplosionImpact_)) {
-				healthPlayer->playerDead(c);
+
+				// add points to owner
+				if (objThrown->getOwnerId() != playerData->getPlayerNumber())
+					objThrown->addPointsToOwner();
+
+				healthPlayer->playerDead(c->collisionHandler);
 			}
 		}
 		else if (walletPlayer && collPlayer) {
-			c->collisionHandler->addCoinDrop(std::make_tuple(walletPlayer, GETCMP2(c->entity, PlayerData), 3));
+			c->collisionHandler->addCoinDrop(std::make_tuple(walletPlayer, playerData, 3));
 		}
 
 		b2Vec2 dir = (collPlayer->getPos() - colTomato_->getPos()).NormalizedVector();
@@ -86,7 +94,7 @@ void TomatoWeapon::onCollisionEnter(Collision* c) {
 void TomatoWeapon::action() {
 	if (!activated_) {
 		activated_ = true;
-		framesForExplosion_ = SDL_Game::instance()->getTime() + framesForExplosion_;
+		timeForExplosion_ = SDL_Game::instance()->getTime() + timeForExplosion_;
 		timeActivated_ = SDL_Game::instance()->getTime();
 		particleEmitterTomato_->setPositionCollider(colTomato_);
 		particleEmitterTomato_->setDirection({ 0, -1 });
@@ -111,7 +119,7 @@ void TomatoWeapon::PickObjectBy(Hands* playerHands)
 void TomatoWeapon::UnPickObject() {
 	b2Filter pickUpCollider = mainCollider_->getFixture(0)->GetFilterData();
 	pickUpCollider.categoryBits = Collider::CollisionLayer::NormalObject;
-	pickUpCollider.maskBits = Collider::CollisionLayer::NormalObject | Collider::CollisionLayer::NormalAttachableObject | Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall;
+	pickUpCollider.maskBits = Collider::CollisionLayer::NormalObject | Collider::CollisionLayer::NormalAttachableObject | Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall | Collider::CollisionLayer::NonGrababbleWall;
 	mainCollider_->getFixture(0)->SetFilterData(pickUpCollider);
 
 	ActionableWeapon::UnPickObject();

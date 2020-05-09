@@ -6,6 +6,7 @@
 #include "AttachesToObjects.h"
 #include "CollisionHandler.h"
 #include "ThrownByPlayer.h"
+#include "PlayerController.h"
 
 Health::Health(int l) : Component(ComponentType::Health)
 {
@@ -54,25 +55,28 @@ void Health::addLife(int sum)
 	else lives_ += sum;
 }
 
-void Health::playerDead(Collision* c)
+void Health::playerDead(CollisionHandler* c)
 {
 	//reset player
 
 	//soltar objetos agarrados
 	AttachesToObjects* a = GETCMP1_(AttachesToObjects);
 	if (a != nullptr && a->isAttached())
-		c->collisionHandler->breakAttachment(a);
+		c->breakAttachment(a);
 	//soltar arma
 	Hands* h = GETCMP1_(Hands);
 	Weapon* w = nullptr;
 	if (h != nullptr) w = h->getWeapon();
-	if (w != nullptr) c->collisionHandler->dropWeapon(w);
+	if (w != nullptr) c->dropWeapon(w);
+	//reset impulso
+	PlayerController* pc = GETCMP1_(PlayerController);
+	pc->resetImpulseForce();
 	//respawn
-	GameMode* s = c->collisionHandler->getGamemode();
+	GameMode* s = c->getGamemode();
 	PlayerData* p = GETCMP1_(PlayerData);
 	CollisionHandler::moveData mov;
 	mov.body = GETCMP1_(Collider)->getFixture(0)->GetBody();
-	mov.pos = c->collisionHandler->getPlayerRespawnPoint(p->getPlayerNumber());
+	mov.pos = c->getPlayerRespawnPoint(p->getPlayerNumber());
 	if (s->onPlayerDead(p->getPlayerNumber())) {	//avisa al jugador si puede respawnear
 		resetHealth();
 		invFrames_ = INV_FRAMES_RESPAWN_;
@@ -80,14 +84,14 @@ void Health::playerDead(Collision* c)
 	else {	//si no le quedan vidas le mandamos lejos provisionalmente
 		mov.pos = b2Vec2((1 + p->getPlayerNumber()) * 50, 0);
 	}
-	c->collisionHandler->addMove(mov);
+	c->addMove(mov);
 
 	//cuerpo muerto
 	CollisionHandler::bodyData body;
 	b2Fixture* fix = GETCMP1_(Collider)->getFixture(0);
 	body.pos = fix->GetBody()->GetPosition();
 	body.angle = fix->GetBody()->GetAngle();
-	c->collisionHandler->addCorpse(body);
+	c->addCorpse(body);
 }
 
 void Health::onCollisionEnter(Collision* c)
@@ -100,12 +104,10 @@ void Health::onCollisionEnter(Collision* c)
 			b2Vec2 force = c->hitFixture->GetBody()->GetMass() * c->hitFixture->GetBody()->GetLinearVelocity();
 			int impact = force.Length();
 			Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
-			ThrownByPlayer* objThrown = nullptr;
 			PlayerData* playerWhoHitMe = nullptr;
 			//Si se impacta con un arma al umbral m�s alto de fuerza, se recibe su daño de impacto
 			if (w != nullptr) {
 				impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
-				objThrown = GETCMP_FROM_FIXTURE_(fix, ThrownByPlayer);
 			}
 			else {
 				//Depending on the force of impact we apply damage to the player
@@ -123,22 +125,23 @@ void Health::onCollisionEnter(Collision* c)
 				playerWhoHitMe = GETCMP_FROM_FIXTURE_(fix, PlayerData);
 			}
 
-		if (!subtractLife(impact)) {
-			// player is killed by a weapon
-			if (objThrown != nullptr) {
-				if(objThrown->getOwnerId() != GETCMP1_(PlayerData)->getPlayerNumber())
-					objThrown->addPointsToOwner();
-			}
-
-			// player is killed by another player at high speed
-			else if (playerWhoHitMe != nullptr) {
-				if (playerWhoHitMe->getPlayerNumber() != GETCMP1_(PlayerData)->getPlayerNumber()) {
-					GameMode* s = c->collisionHandler->getGamemode();
-					s->playerKillsPlayer(playerWhoHitMe->getPlayerNumber());
+			if (!subtractLife(impact)) {
+				ThrownByPlayer* objThrown = GETCMP_FROM_FIXTURE_(fix, ThrownByPlayer);
+				// player is killed by a weapon
+				if (objThrown != nullptr) {
+					if (objThrown->getOwnerId() != GETCMP1_(PlayerData)->getPlayerNumber())
+						objThrown->addPointsToOwner();
 				}
-			}
 
-				playerDead(c);
+				// player is killed by another player at high speed
+				else if (playerWhoHitMe != nullptr) {
+					if (playerWhoHitMe->getPlayerNumber() != GETCMP1_(PlayerData)->getPlayerNumber()) {
+						GameMode* s = c->collisionHandler->getGamemode();
+						s->playerKillsPlayer(playerWhoHitMe->getPlayerNumber());
+					}
+				}
+
+				playerDead(c->collisionHandler);
 			}
 		}
 	}
