@@ -58,6 +58,7 @@ void MeleeWeapon::onCollisionEnter(Collision* c) {
 		Health* auxHe = GETCMP2(c->entity, Health);
 		Wallet* auxWa = GETCMP2(c->entity, Wallet);
 		Collider* auxCo = GETCMP2(c->entity, Collider);
+		PlayerData* pData = GETCMP2(c->entity, PlayerData);
 
 		b2Vec2 knockback = auxCo->getPos() - mainCollider_->getPos();
 		knockback.Normalize();
@@ -65,8 +66,15 @@ void MeleeWeapon::onCollisionEnter(Collision* c) {
 
 		auxCo->applyLinearImpulse(knockback, b2Vec2(0, 1));
 		if (auxHe != nullptr) {
-			if (!auxHe->subtractLife(damage_))
+			if (!auxHe->subtractLife(damage_)) {
+				ThrownByPlayer* objThrown = GETCMP1_(ThrownByPlayer);
+				// player is killed by a weapon
+				if (objThrown != nullptr && pData != nullptr) {
+					if (objThrown->getOwnerId() != pData->getPlayerNumber())
+						objThrown->addPointsToOwner();
+				}
 				auxHe->playerDead(c->collisionHandler);
+			}
 		}
 		else
 			c->collisionHandler->addCoinDrop(std::make_tuple(auxWa, GETCMP2(c->entity,PlayerData), damage_));
