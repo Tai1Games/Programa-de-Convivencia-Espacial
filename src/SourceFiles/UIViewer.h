@@ -4,9 +4,11 @@ class UIViewer : public Component
 {
 protected:
 	int textureId_;
+	int nFrames_ = 1;
 	Texture* tex_;
 	SDL_Rect clip_;
 	bool drawable_ = true;
+	b2Vec2 renderOffset_ = b2Vec2(0, 0);
 
 	b2Vec2 pos_;
 	b2Vec2 wH_;
@@ -23,8 +25,11 @@ public:
 
 	void setDrawable(bool b) { drawable_ = b; }
 	void setClip(SDL_Rect clip) { clip_ = clip; }
+	void setOffset(b2Vec2 newOffset) { renderOffset_ = newOffset; }
 	void setPosUIElement(b2Vec2 pos) { pos_ = pos; }
 	void setWHUIElement(b2Vec2 wH) { wH_ = wH; }
+	void setScale(float scale) { scale_ = scale; }
+	void setNFrames(int nFrames);
 
 	b2Vec2 getPosUIElement() { return pos_; }
 	b2Vec2 getWHUIElement() { return wH_; }

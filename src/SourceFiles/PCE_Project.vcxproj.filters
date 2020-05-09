@@ -308,12 +308,18 @@
     </ClInclude>
     <ClInclude Include="AnimatedPlayer.h">
       <Filter>Header Files\Components\Viewers</Filter>
-     </ClInclude>
+    </ClInclude>
     <ClInclude Include="StaplerWeapon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AbstractTimedGameMode.h">
       <Filter>Header Files\GameModes</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractAnimatedViewers.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedUIViewer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -535,12 +541,18 @@
     </ClCompile>
     <ClCompile Include="AnimatedPlayer.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
-        </ClCompile>
+    </ClCompile>
     <ClCompile Include="StaplerWeapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AbstractTimedGameMode.cpp">
       <Filter>Source Files\GameModes</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractAnimatedViewers.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedUIViewer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

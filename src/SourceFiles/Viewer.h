@@ -16,6 +16,7 @@ protected:
 	bool drawable_ = true;
 	b2Vec2 renderOffset_ = b2Vec2(0,0); //Use this if you want to draw the object a set distance from the collider.
 
+	b2Vec2 wH_;
 public:
 	Viewer();
 	Viewer(int textureId, SDL_Rect clip = {0,0,0,0});
@@ -31,7 +32,7 @@ public:
 	void setNFrames(int nFrames);
 	void setOffset(b2Vec2 newOffset) { renderOffset_ = newOffset; }
 	void setTexture(int text) { textureId_ = text; tex_ = SDL_Game::instance()->getTexturesMngr()->getTexture(textureId_); } //tiene que resetear la textura como tal
-	void setScale(float scale) { scale_ = scale; }
+	//void setScale(float scale) { scale_ = scale; }
 	Texture* getTexture() { return tex_; }
 	int getTextureId() { return textureId_; }
 };

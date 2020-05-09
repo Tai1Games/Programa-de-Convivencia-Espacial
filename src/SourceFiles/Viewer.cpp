@@ -6,9 +6,6 @@ Viewer::Viewer() :
 	Viewer(Resources::Debug) {	//
 }
 
-Viewer::Viewer(int textureId) :
-	Viewer(textureId, { 0, 0, 0, 0 }) {}
-
 Viewer::Viewer(int textureId, SDL_Rect clip) :
 	Viewer(textureId, clip, ComponentType::Viewer) {	//
 }

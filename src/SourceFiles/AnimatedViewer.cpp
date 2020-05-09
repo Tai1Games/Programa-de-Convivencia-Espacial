@@ -8,12 +8,18 @@ void AnimatedViewer::init() {
 
 void AnimatedViewer::update()
 {
-	timeElapsed_++;		//Aumentamos en uno el número de ciclos
-	
-	if (timeElapsed_ == timePerFrame_) {
-		timeElapsed_ = 0;	//Reseteamos el contador de frames
+	//timeElapsed_++;		//Aumentamos en uno el número de ciclos
+	//
+	//if (timeElapsed_ == timePerFrame_) {
+	//	timeElapsed_ = 0;	//Reseteamos el contador de frames
 
-		frame_ = frame_ % nFrames_;
+	//	frame_ = frame_ % nFrames_;
+	//	setClip(SDL_Rect{ (clip_.w * frame_), 0, clip_.w, clip_.h });	//Cogemos el frame del spritesheet
+
+	//	frame_++;	//Cambiamos al siguiente frame de la animación
+	//}
+
+	if (updateTime(nFrames_)) {
 		setClip(SDL_Rect{ (clip_.w * frame_), 0, clip_.w, clip_.h });	//Cogemos el frame del spritesheet
 
 		frame_++;	//Cambiamos al siguiente frame de la animación

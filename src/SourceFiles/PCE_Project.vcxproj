@@ -182,9 +182,11 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractAnimatedViewers.h" />
     <ClInclude Include="AbstractTimedGameMode.h" />
     <ClInclude Include="ActionableWeapon.h" />
     <ClInclude Include="AnimatedPlayer.h" />
+    <ClInclude Include="AnimatedUIViewer.h" />
     <ClInclude Include="AnimatedViewer.h" />
     <ClInclude Include="AttachesToObjects.h" />
     <ClInclude Include="BananaPool.h" />
@@ -267,9 +269,11 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="WiFightGameMode.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractAnimatedViewers.cpp" />
     <ClCompile Include="AbstractTimedGameMode.cpp" />
     <ClCompile Include="ActionableWeapon.cpp" />
     <ClCompile Include="AnimatedPlayer.cpp" />
+    <ClCompile Include="AnimatedUIViewer.cpp" />
     <ClCompile Include="AnimatedViewer.cpp" />
     <ClCompile Include="AttachesToObjects.cpp" />
     <ClCompile Include="BananaPool.cpp" />
