@@ -120,6 +120,7 @@ public:
 	virtual bool menuForward() = 0;
 	virtual bool menuBack() = 0;
 	virtual bool pressPause() = 0;
+	virtual bool secretWinButton() { return false; }
 };
 
 //Abstracta pura para modos con teclado
@@ -289,6 +290,7 @@ public:
 		return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_START)
 			|| ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_GUIDE);
 	}
+	virtual bool secretWinButton() {return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_LEFTSHOULDER); }
 };
 
 //pero seguid con los meme xfa

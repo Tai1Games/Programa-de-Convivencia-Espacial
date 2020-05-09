@@ -21,6 +21,7 @@ MatchInfo::PlayerInfo::PlayerInfo(const PlayerLobbyInfo& info) :
 void MatchInfo::AddVictory(size_t toPlayer, GamemodeID gameModeWon) {
 	players_[toPlayer]->matchesWon[gameModeWon]++;
 	currentRoundNumber_++;
+	players_[toPlayer]->totalPoints++;
 }
 
 pair<GamemodeID, string> MatchInfo::getCurrentRound() {

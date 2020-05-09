@@ -16,6 +16,7 @@ public:
 		InputBinder* inputBinder = nullptr;
 		size_t playerSkin = 0;
 		vector<size_t> matchesWon;
+		size_t totalPoints = 0;
 	};
 private:
 	vector<PlayerInfo*> players_;	
@@ -26,7 +27,7 @@ private:
 	size_t currentRoundNumber_=0;
 public:
 
-	MatchInfo(size_t numberOfPlayers) { players_.reserve(numberOfPlayers); };
+	//MatchInfo(size_t numberOfPlayers) { players_.reserve(numberOfPlayers); };
 	MatchInfo(const vector<PlayerLobbyInfo>& playerLobbyInfoVector);
 
 	void setRounds(vector<pair<GamemodeID, string>>* roundsVector) { rounds_ = roundsVector; numberOfRounds_ = (*rounds_).size(); };

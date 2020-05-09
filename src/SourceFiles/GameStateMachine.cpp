@@ -38,12 +38,15 @@ void GameStateMachine::setPauseOwner(int ownerID)
 
 void GameStateMachine::changeToState(int state, int gameMode, string tileMap) {
 	if (state != currentState_ && state < States::NUMBER_OF_STATES) {
-		loadState(state, gameMode, tileMap);
-		currentState_ = state;
-		states_[state]->onLoaded();
-		if (states_[States::transition] != nullptr) {
+		if (currentState_ != States::transition) {
+			loadState(state, gameMode, tileMap); //Evita cargar el mapa dos veces si viene de transition
+			states_[state]->onLoaded();
+		}			
+		else if (states_[States::transition] != nullptr) //Viene de transition, borrar la escena
+		{
 			deleteState(States::transition);
 		}
+		currentState_ = state;
 	}
 }
 
@@ -108,10 +111,13 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 		//inicializar la nueva escena
 		states_[state]->init();
 	}
-	else if (state==States::menu){
-		//borrar playState para crear otro
-		deleteState(States::play);
-	}
+		else if (state == States::menu) {
+			//borrar playState para crear otro
+			deleteState(States::play);
+		}
+		else if (state == States::midGame) {
+			static_cast<MidGameState*>(states_[States::midGame])->setWinner(gameMode);
+		}
 }
 
 void GameStateMachine::deleteState(int state) {
