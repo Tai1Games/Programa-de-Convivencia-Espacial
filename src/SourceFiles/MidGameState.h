@@ -3,6 +3,7 @@
 #include "Texture.h"
 
 class AnimatedViewer;
+class AnimatedUIViewer;
 
 class MidGameState : public GameState
 {
@@ -37,12 +38,12 @@ private:
 	int distanceBetweenRockets_ = 200;	//Distancia normal
 	int rocketXPositionObjective_ = 0;
 	int distanceGainedByPoint_ = 150;	//Por defecto
-	std::vector<AnimatedViewer*> playerRockets_;
+	std::vector<AnimatedUIViewer*> playerRockets_;
 	int framesUntilNextShake_ = 0;
 	int shakeOffsetDistance_ = 3;
 
 	//station
-	AnimatedViewer* spaceStationViewer_ = nullptr;
+	AnimatedUIViewer* spaceStationViewer_ = nullptr;
 	float spaceStationScaleFactor_ = 1;
 	
 
