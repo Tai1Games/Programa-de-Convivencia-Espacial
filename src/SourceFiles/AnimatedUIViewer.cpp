@@ -10,7 +10,7 @@ void AnimatedUIViewer::init()
 void AnimatedUIViewer::update()
 {
 	if (AbstractAnimatedViewers::updateTime(nFrames_)) {
-		setClip(SDL_Rect{ (clip_.w * frame_), 0, clip_.w, clip_.h });	//Cogemos el frame del spritesheet
+		AbstractViewers::setClip(SDL_Rect{ (clip_.w * frame_), 0, clip_.w, clip_.h });	//Cogemos el frame del spritesheet
 
 		frame_++;	//Cambiamos al siguiente frame de la animación
 	}

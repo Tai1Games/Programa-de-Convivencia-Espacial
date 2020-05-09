@@ -8,8 +8,8 @@ void AnimatedViewer::init() {
 
 void AnimatedViewer::update()
 {
-	if (updateTime(nFrames_)) {
-		setClip(SDL_Rect{ (clip_.w * frame_), 0, clip_.w, clip_.h });	//Cogemos el frame del spritesheet
+	if (AbstractAnimatedViewers::updateTime(nFrames_)) {
+		AbstractViewers::setClip(SDL_Rect{ (clip_.w * frame_), 0, clip_.w, clip_.h });	//Cogemos el frame del spritesheet
 
 		frame_++;	//Cambiamos al siguiente frame de la animación
 	}
