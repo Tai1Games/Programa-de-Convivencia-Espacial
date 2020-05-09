@@ -84,6 +84,7 @@ void MenuState::onLoaded() { //poner el menú al principio
 	menuPointer_ = 0;
 	pointers_[0] = 0;
 	pointers_[1] = 0;
+	roundsVector_->clear();
 	updateText();
 }
 
@@ -111,7 +112,6 @@ void MenuState::createText() { //preparar los textos
 	int start, end, offset;
 
 	for (int i = 0; i < 2; i++) {
-
 		if (i == 0) {
 			start = Resources::Capitalism;
 			end = Resources::LivingRoomText;
