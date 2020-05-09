@@ -3,8 +3,8 @@
 
 vector<Resources::FontInfo> Resources::fonts_{
 	//Fuentes {nombre_en_enum, ruta, tama�o}
-	{NES_Chimera , resourcesPath+"fonts/NES-Chimera.ttf", 38},
-	{Digits_Font , resourcesPath+"fonts/Digits_Font.ttf", 38}
+	{NES_Chimera , resourcesPath + "fonts/NES-Chimera.ttf", 38},
+	{Digits_Font , resourcesPath + "fonts/Digits_Font.ttf", 38}
 };
 
 vector<Resources::ImageInfo> Resources::images_{
@@ -14,6 +14,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ BoilerRoom,resourcesPath + "textures/Background_BoilerRoom.png"},
 	{ GymRoom,resourcesPath + "textures/Background_gym.png"},
 	{ LivingRoom,resourcesPath + "textures/Background_LivingRoom.png"},
+	{ RocketRoom ,resourcesPath + "textures/Background_RocketRoom.png"},
 	{ TutorialRoom,resourcesPath + "textures/Background_TutorialRoom.png"},
 	{ GardenRoom,resourcesPath + "textures/Background_garden.png"},
 
@@ -38,6 +39,10 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ KeyboardIcon, resourcesPath + "textures/keyboard_icon.png"},
 	{ ControllerIcon, resourcesPath + "textures/controller_icon.png"},
 
+	{ Rocket, resourcesPath + "textures/Rocket.png"},
+	{ SpaceStation, resourcesPath + "textures/SpaceStation.png"},
+	{ Token, resourcesPath + "textures/Marcador.png"},
+
 	// Weapons and map items
 	{ Ball, resourcesPath + "textures/PelotaSaltarina.png" },
 	{ Extinguisher, resourcesPath + "textures/Extintor.png" },
@@ -48,9 +53,14 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Stone, resourcesPath + "textures/Piedra.png" },
 	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png"},
 	{ TomatoRing, resourcesPath + "textures/TomatoRing.png"},
+	{ Banana, resourcesPath + "textures/Banana.png"},
+	{ BananaSkin,resourcesPath + "textures/BananaSkin.png"},
+	{ BananaNonSkin,resourcesPath + "textures/Banana!Skin.png"},
+	{ Staple,resourcesPath + "textures/Staple.png"},
 
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },
+	{ PlayerAnimSheet, resourcesPath + "textures/playerAnim.png"},
 	{ Hands, resourcesPath + "textures/hands.png" },
 	{ ImpulseArrow, resourcesPath + "textures/FlechaImpulso.png"},
 	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png"},
@@ -71,19 +81,20 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
 	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
 	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
-	{TreadmillPanel, resourcesPath + "textures/TreadmillPanel.png"},
+	{ TreadmillPanel, resourcesPath + "textures/TreadmillPanel.png"},
 
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/Moneda.png" },
 	{ Router,resourcesPath + "textures/Router2.png" },
 	{ RoombaSpriteSheet, resourcesPath + "textures/Roomba.png"},
 	{ Remote, resourcesPath + "textures/Mando.png"},
+	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png"},
 
 	// miscelánea
 	{ Debug, resourcesPath + "textures/debug.png" },
 	{ Negro ,resourcesPath + "textures/Negro.png"},
 	{ Transparent ,resourcesPath + "textures/transparent.png"},
-	{ Tinky, resourcesPath + "textures/Tinky.png" }
+	{ Tinky, resourcesPath + "textures/Tinky.png" },
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{
@@ -108,6 +119,7 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{ LivingRoomText, "Living Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ BoilerRoomText, "Boiler Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ GymRoomText, "Gym Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ GardenRoomText, "Garden Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	//players
 	{ OnePlayer, "1 Player", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ TwoPlayers, "2 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
@@ -129,6 +141,9 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{ ThrowTutorial, "All weapons can be thrown with the Y button, which can be used to cover great distances quickly. Everyone throw a weapon to continue!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ DeathTutorial, "In many Game Modes enough damage will kill you, which will disarm you and make you respawn. You'll leave a body behind which can be held on to. Everyone die once to finish the tutorial!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ TutorialEnd, "Congratulations! You know all the basics of PCE. Play around if you want or press Start to go to the menu and choose Salir to exit.", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+
+	//MidGame
+	{ ContinueText, "Press any key/button to continue", { COLOR(0xc7f2edff) }, FontId::NES_Chimera }
 };
 
 vector<Resources::MusicInfo> Resources::musics_{

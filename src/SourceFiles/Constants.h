@@ -32,6 +32,7 @@ enum States
 	menu,
 	play,
 	pause,
+	midGame,
 	transition,
 	lobby,
 	//No toques
@@ -58,6 +59,7 @@ enum WeaponID {
 	Slipper,
 	Mando,
 	Tomato,
+	Banana,
 
 	WEAPON_NUMBER
 };

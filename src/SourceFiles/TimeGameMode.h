@@ -1,11 +1,11 @@
 #pragma once
-#include "GameMode.h"
+#include "AbstractTimedGameMode.h"
 #include "checkML.h"
 #include "Health.h"
 #include "HealthViewer.h"
 #include "TomatoPool.h"
 
-class TimeGameMode : public GameMode
+class TimeGameMode : public AbstractTimedGameMode
 {
 private:
 	vector<int> playerKills_; //Kills of each player
@@ -17,36 +17,23 @@ private:
 	int skullUISize_ = 0;
 	int skullUIMarginX_ = 0;
 	Texture* skullTextureUI_ = nullptr;
-	Texture* canvasTimerTexture_ = nullptr;
-	SDL_Rect canvasTimerRect_ = {};
-	double timeSinceStart_ = 0;
-
-	double suddenDeathRenderTime = 0;
-	double suddenDeathRenderTimer = 0;
-	bool suddenDeathRendering = true;
 
 	//Constantes que inicializamos en init.
-	double sPerFrame_ = 0;
-	double timeToEnd_ = 0;
-	int winWidth_ = 0;
-	int winHeigth_ = 0;
-
 	int killsMarkerWidth_ = 0;
 	int killsMarkerHeight_ = 0;
 
-	void renderTimer(int seconds, int minutes);
 	void renderKillMarker();
-	int calculateDigits(int points);
-
-	TomatoPool tomatoPool_;
 
 public:
-	TimeGameMode(int nPlayers);
-	~TimeGameMode();
-	virtual void init(PlayState* game);
-	virtual void render();
-	virtual void update();
-	virtual void addPoints(int playerID);
-	virtual void playerKillsPlayer(int killerId, int deadId = -1);
+	TimeGameMode(int nPlayers) : AbstractTimedGameMode(nPlayers) {};
+	~TimeGameMode() {};
+
+	virtual void init(PlayState* game) override;
+	virtual void render() override;
+	virtual void update() override;
+	virtual void playerKillsPlayer(int killerId, int deadId = -1) override;
+
+	void addPoints(int playerID);
+
 };
 

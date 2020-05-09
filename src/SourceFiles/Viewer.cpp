@@ -6,8 +6,15 @@ Viewer::Viewer() :
 	Viewer(Resources::Debug) {	//
 }
 
+Viewer::Viewer(int textureId) :
+	Viewer(textureId, { 0, 0, 0, 0 }) {}
+
 Viewer::Viewer(int textureId, SDL_Rect clip) :
-	Component(ComponentType::Viewer), //
+	Viewer(textureId, clip, ComponentType::Viewer) {	//
+}
+
+Viewer::Viewer(int textureId, SDL_Rect clip, ComponentType::CmpId ct) :
+	Component(ct), //
 	tex_(nullptr),	//
 	collider_(nullptr),
 	clip_(clip),
@@ -34,4 +41,10 @@ void Viewer::draw() const {
 		drawRect.y += renderOffset_.y;
 		tex_->render(drawRect, collider_->getAngleInDegrees(), clip_); // getAngle devuelve radianes, hay que pasarlos a �ngulos
     }
+}
+
+void Viewer::setNFrames(int nFrames) //Es esto feo de cojones y nada intuitivo? Absolutamente. Lo vamos a tirar todo en un futuro para hacer cosas de la UI aparte? También.
+{
+	nFrames_ = nFrames;
+	wH_.x = tex_->getWidth() / nFrames;
 }

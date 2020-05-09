@@ -22,6 +22,7 @@ public:
 		BoilerRoom,
 		GymRoom,
 		LivingRoom,
+		RocketRoom,
 		TutorialRoom,
 		GardenRoom,
 
@@ -43,6 +44,10 @@ public:
 		ProgressBar,
 		ProgressBar2,
 
+		//midGameState
+		Rocket,
+		SpaceStation,
+		Token,
 		KeyboardIcon,
 		MouseIcon,
 		ControllerIcon,
@@ -50,6 +55,8 @@ public:
 		// Weapons and map items
 
 		// Players
+		PlayerAnimSheet,
+
 
 		// Map elements
 		IncreasingFreqButton,
@@ -79,12 +86,17 @@ public:
 		Tomato,
 		TomatoRing,
 		TreadmillPanel,
+		Banana,
+		BananaSkin,
+		BananaNonSkin,
+		Staple,
 
 		// Gamemode specific elements
 		Coin,
 		Router,
 		RoombaSpriteSheet,
 		Remote,
+		RocketSpriteSheet,
 
 		// miscel�nea
 		Debug,
@@ -111,6 +123,8 @@ public:
 		LivingRoomText,
 		BoilerRoomText,
 		GymRoomText,
+		GardenRoomText,
+
 		//players
 		OnePlayer,
 		TwoPlayers,
@@ -125,14 +139,17 @@ public:
 		One,
 		Two,
 		Three,
-		Four,	
+		Four,
 		MoveTutorial,
 		HoldTutorial,
 		GrabTutorial,
 		ActionTutorial,
 		ThrowTutorial,
 		DeathTutorial,
-		TutorialEnd
+		TutorialEnd,
+
+		//MidGame 
+		ContinueText
 	};
 
 	enum AudioId : std::size_t {

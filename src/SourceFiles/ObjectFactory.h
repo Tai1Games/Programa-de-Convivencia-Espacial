@@ -5,6 +5,7 @@
 class EntityManager;
 class Weapon;
 class FireBallPool;
+class BulletPool;
 
 class ObjectFactory
 {
@@ -20,7 +21,7 @@ public:
 	static Entity* makeBall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
 	//Crea una grapadora (Podemos pasarle los p�rametros que queramos segun las necesidades del objeto)
-	static Entity* makeStapler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
+	static Entity* makeStapler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, BulletPool* bp);
 
 	static Entity* makeExtinguisher(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
@@ -51,4 +52,8 @@ public:
 	static Entity* makeTreadmill(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 
 	static Entity* makeCarnivorousePlant(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
+
+	static Entity* makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, BulletPool* bp);
+
+	static Entity* makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld);
 };
