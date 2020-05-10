@@ -17,14 +17,7 @@ void AttachesToObjects::init() {
 
 void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint, b2Vec2 collNormal) {
 	if (joint_ == nullptr) {
-		//Evitar angulos negativos
-		if (mainCollider_->getBody()->GetAngle() > 360) {
-			mainCollider_->getBody()->SetTransform(mainCollider_->getPos(), mainCollider_->getBody()->GetAngle() - 360);
-		}
-		else if (mainCollider_->getBody()->GetAngle() < 0) {
-			mainCollider_->getBody()->SetTransform(mainCollider_->getPos(),360 - mainCollider_->getBody()->GetAngle());
-		}
-
+		
 		attachedObject_ = attachedObject;
 		b2Vec2 perp = perpendicularCounterClockwise(collNormal);
 		float attachAngle = std::atanf(perp.y/perp.x);
