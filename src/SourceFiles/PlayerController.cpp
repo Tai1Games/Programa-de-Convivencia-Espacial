@@ -25,6 +25,8 @@ void PlayerController::init()
 	maxImpulseFloating_ = CONST(float, "IMPULSE_FLOATING");
 	chargeMultiplier_ = CONST(float, "IMPULSE_MULTIPLIER");
 
+	maxSpeedAfterImpulse_ = CONST(float, "MAX_SPEED_AFTER_IMPULSE") + maxImpulseFloating_;
+
 	impulseCooldown_ = CONST(int, "IMPULSE_COOLDOWN");
 }
 
@@ -40,8 +42,13 @@ void PlayerController::handleInput()
 		dirImpulse_ = ib->getAimDir();
 		dirImpulse_ *= impulseForce_;
 		dirImpulse_.y *= -1; //hay que invertirlo para convertirlo en vector compatible con box2D
+
+		// si se pasa del l�mite de velocidad le bajamos los humos (s�lo aplica cuando no est�s agarrao)
+		Vector2D velAfterImpulse = {(coll_->getLinearVelocity() + dirImpulse_).x, (coll_->getLinearVelocity() + dirImpulse_).y };
+		if (!attachesToObj_->isAttached() && velAfterImpulse.magnitude() > maxSpeedAfterImpulse_) dirImpulse_ = { 0, 0 };
+
 		Collider* attachedObj = attachesToObj_->getAttachedObject();
-		if (attachedObj) {
+		if (attachedObj != nullptr) {
 			dirImpulse_ *= -1;
 			attachedObj->applyLinearImpulse(dirImpulse_, b2Vec2(0, 0));
 			dirImpulse_ *= -1;
@@ -49,7 +56,7 @@ void PlayerController::handleInput()
 		attachesToObj_->deAttachFromObject();
 		coll_->applyLinearImpulse(dirImpulse_, b2Vec2(0, 0)); //aplica la fuerza
 
-		//HAY QUE BORRAR-----------------------------------------------------------		
+		//HAY QUE BORRAR-----------------------------------------------------------
 		AnimatedPlayer* ap = GETCMP1_(AnimatedPlayer);
 		(ap)->setAnim(1);
 		//HAY QUE BORRAR-----------------------------------------------------------

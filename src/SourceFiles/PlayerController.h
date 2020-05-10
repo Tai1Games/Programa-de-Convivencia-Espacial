@@ -17,7 +17,7 @@ private:
 	float chargeMultiplier_;
 	float maxImpulseGrabbed_;
 	float maxImpulseFloating_;
-
+	float maxSpeedAfterImpulse_;
 
 	int playerNumber_;
 	b2Vec2 dirImpulse_;
