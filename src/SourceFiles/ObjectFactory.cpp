@@ -50,7 +50,8 @@ Entity* ObjectFactory::makeConfetti(EntityManager* entityManager, b2World* physi
 		CONST(double, "CONFETTI_FRICTION"), CONST(double, "CONFETTI_RESTITUTION"),
 		CONST(double, "CONFETTI_LINEAR_DRAG"), CONST(double, "CONFETTI_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Confetti);
-	e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::ConfettiParticles, 10, 4, 4, 200, 50, 500, 3, 30);
+	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::ConfettiParticles, 10, 4, 4, 200, 50, 500, 3, 30);
+	pE->setOffset({ CONST(double, "CONFETTI_PARTICLE_OFFSET_X"), CONST(double, "CONFETTI_PARTICLE_OFFSET_Y") });
 	e->addComponent<ConfettiWeapon>(WeaponID::Confetti, CONST(int, "CONFETTI_DAMAGE"), CONST(int, "CONFETTI_IMPACT_DAMAGE"), CONST(int, "CONFETTI_COOLDOWN_FRAMES"));
 	e->addComponent<ColliderViewer>();
 

@@ -9,7 +9,6 @@ void ConfettiWeapon::init() {
 	MeleeWeapon::init();
 	colWeapon_ = GETCMP1_(Collider);
 	particleEmitter_ = GETCMP1_(ParticleEmitter);
-	particleEmitter_->setOffset({ 10, 15 });
 }
 
 void ConfettiWeapon::action() {
