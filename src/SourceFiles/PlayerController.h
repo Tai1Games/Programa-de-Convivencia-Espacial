@@ -31,7 +31,10 @@ private:
 	PlayerData* playerData_ = nullptr;
 	InputBinder* ib = nullptr;
 
-	KeyboardBinder* kBinder = nullptr;
+	KeyboardBinder* kBinder_ = nullptr;
+
+	int impulseCooldown_ = 0;
+	int impulseCooldownTimer_ = 0;
 public:
 	PlayerController();
 	virtual ~PlayerController() { Component::~Component(); };
@@ -42,5 +45,6 @@ public:
 
 	float getImpulseForce() { return impulseForce_; };
 	void resetImpulseForce() { impulseForce_ = 0;  chargedFrames_ = 0; };
+	bool isChargingImpulse() { return chargingImpulse_; };
 };
 

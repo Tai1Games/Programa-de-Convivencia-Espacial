@@ -19,27 +19,29 @@ void PlayerController::init()
 	playerNumber_ = playerData_->getPlayerNumber();
 	ib = playerData_->getBinder();
 	KeyboardBinder* bindAux = static_cast<KeyboardBinder*>(ib);
-	if (bindAux != nullptr) kBinder = bindAux;
+	if (bindAux != nullptr) kBinder_ = bindAux;
 
 	maxImpulseGrabbed_ = CONST(float, "IMPULSE_GRABBED");
 	maxImpulseFloating_ = CONST(float, "IMPULSE_FLOATING");
 	chargeMultiplier_ = CONST(float, "IMPULSE_MULTIPLIER");
 	maxSpeedAfterImpulse_ = CONST(float, "MAX_SPEED_AFTER_IMPULSE") + maxImpulseFloating_;
-	impulseCooldown_ = CONST(int, "PLAYER_IMPULSE_COOLDOWN");
+	impulseCooldown_ = CONST(int, "IMPULSE_COOLDOWN");
 }
 
 void PlayerController::handleInput()
 {
 	//Empieza la carga
-	if (ib->pressImpulse() || (ib->holdImpulse() && !chargingImpulse_)) {
+	if (impulseCooldownTimer_ >= impulseCooldown_ &&
+		(ib->pressImpulse() || (ib->holdImpulse() && !chargingImpulse_))) {
 		chargingImpulse_ = true;
+		impulseCooldownTimer_ = 0;
 	}//Soltarse
 	else if (ib->releaseImpulse()) {
 		dirImpulse_ = ib->getAimDir();
 		dirImpulse_ *= impulseForce_;
 		dirImpulse_.y *= -1; //hay que invertirlo para convertirlo en vector compatible con box2D
 
-		// si se pasa del límite de velocidad le bajamos los humos (sólo aplica cuando no estás agarrao)
+		// si se pasa del lï¿½mite de velocidad le bajamos los humos (sï¿½lo aplica cuando no estï¿½s agarrao)
 		Vector2D velAfterImpulse = {(coll_->getLinearVelocity() + dirImpulse_).x, (coll_->getLinearVelocity() + dirImpulse_).y };
 		if (!attachesToObj_->isAttached() && velAfterImpulse.magnitude() > maxSpeedAfterImpulse_) dirImpulse_ = { 0, 0 };
 
@@ -58,7 +60,7 @@ void PlayerController::handleInput()
 		attachesToObj_->deAttachFromObject();
 		coll_->applyLinearImpulse(dirImpulse_, b2Vec2(0, 0)); //aplica la fuerza
 
-		//HAY QUE BORRAR-----------------------------------------------------------		
+		//HAY QUE BORRAR-----------------------------------------------------------
 		AnimatedPlayer* ap = GETCMP1_(AnimatedPlayer);
 		(ap)->setAnim(1);
 		//HAY QUE BORRAR-----------------------------------------------------------
@@ -66,7 +68,8 @@ void PlayerController::handleInput()
 		chargingImpulse_ = false;
 		chargedFrames_ = 0;
 		impulseForce_ = 0;
-		if (kBinder != nullptr) kBinder->grabbed = false;
+		if (kBinder_ != nullptr) kBinder_->grabbed = false;
+		impulseCooldownTimer_ = 0;
 	}
 
 	if (ib->releaseGrab()) {
@@ -76,7 +79,7 @@ void PlayerController::handleInput()
 			impulseForce_ = 0;
 			chargingImpulse_ = false;
 			attachesToObj_->deAttachFromObject();
-			if (kBinder != nullptr)kBinder->grabbed = false;
+			if (kBinder_ != nullptr)kBinder_->grabbed = false;
 		}
 	}
 }
@@ -89,4 +92,5 @@ void PlayerController::update() {
 			impulseForce_ = chargedFrames_ * chargeMultiplier_;
 		}
 	}
+	impulseCooldownTimer_++;
 }

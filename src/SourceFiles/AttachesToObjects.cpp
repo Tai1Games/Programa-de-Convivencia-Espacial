@@ -12,7 +12,7 @@ void AttachesToObjects::init() {
 	playerNumber_ = playerData_->getPlayerNumber();
 	ib = GETCMP1_(PlayerData)->getBinder();
 	KeyboardBinder* bindAux = static_cast<KeyboardBinder*>(ib);
-	if (bindAux != nullptr) kBinder = bindAux;
+	if (bindAux != nullptr) kBinder_ = bindAux;
 }
 
 void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint, b2Vec2 collNormal) {
@@ -71,7 +71,7 @@ void AttachesToObjects::onCollisionEnter(Collision* c){
 			c->contact->GetWorldManifold(&manifold);
 			c->collisionHandler->createWeld(CollisionHandler::weldData(this, c->hitFixture->GetBody(), 
 				b2Vec2(manifold.points[0].x, manifold.points[0].y),manifold.normal));
-			if (kBinder != nullptr) kBinder->grabbed = true;
+			if (kBinder_ != nullptr) kBinder_->grabbed = true;
 		}
 		else {
 			cout << "colision sin input con grabbable" << endl;
