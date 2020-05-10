@@ -28,7 +28,7 @@ void ImpulseViewer::init() {
 
 void ImpulseViewer::draw() const {
 	b2Vec2 stickDir = ib_->getAimDir();
-	if (ib_->holdImpulse()) {
+	if (playerController_->isChargingImpulse()) {
 		double angle = std::atan2((double)stickDir.x, -(double)stickDir.y) * (180.0 / PI);
 		SDL_Rect playerRect = playerCollider_->getRectRender();
 		SDL_Rect destRect{ playerRect.x,playerRect.y,impulseSize_,impulseSize_ };
