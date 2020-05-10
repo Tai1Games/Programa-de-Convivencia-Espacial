@@ -58,6 +58,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ BananaNonSkin,resourcesPath + "textures/Banana!Skin.png"},
 	{ Staple,resourcesPath + "textures/Staple.png"},
 	{ Confetti,resourcesPath + "textures/ConfettiWeapon.png"},
+	{ ConfettiParticles,resourcesPath + "textures/ConfettiParticles.png"},
 
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },

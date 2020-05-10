@@ -50,7 +50,7 @@ Entity* ObjectFactory::makeConfetti(EntityManager* entityManager, b2World* physi
 		CONST(double, "FLIPFLOP_FRICTION"), CONST(double, "FLIPFLOP_RESTITUTION"),
 		CONST(double, "FLIPFLOP_LINEAR_DRAG"), CONST(double, "FLIPFLOP_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Confetti);
-	e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Coin, 10, 1, 3, 200, 20, 100, 0, 10);
+	e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::ConfettiParticles, 10, 4, 4, 200, 50, 500, 3, 30);
 	e->addComponent<ConfettiWeapon>(WeaponID::Confetti, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"), CONST(int, "FLIPFLOP_COOLDOWN_FRAMES"));
 	e->addComponent<ColliderViewer>();
 
