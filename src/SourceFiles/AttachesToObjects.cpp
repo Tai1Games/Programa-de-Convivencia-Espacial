@@ -22,13 +22,24 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 		b2Vec2 perp = perpendicularCounterClockwise(collNormal);
 		float attachAngle = std::atanf(perp.y/perp.x);
 
+		float auxAngle = attachAngle;
+
 		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle())>0) ? -1 : 1;
 		attachAngle += (PI / 2)*tilt;
 
 		b2Vec2 aux = collPoint - mainCollider_->getPos();
 		aux.Normalize();
-		aux.x *= mainCollider_->getH(0) / 2;
-		aux.y *= mainCollider_->getH(0) / 2;
+
+		if (collNormal == b2Vec2(-1, 0) || collNormal == b2Vec2(1, 0)) {
+			aux.y = 0;
+			aux.x *= mainCollider_->getH(0) / 3;
+		}
+		else if(collNormal == b2Vec2(0, 1) || collNormal == b2Vec2(0, -1)) {
+			aux.y *= mainCollider_->getH(0) / 3;
+			aux.x = 0;
+		}
+		
+		
 		mainCollider_->setTransform(mainCollider_->getPos() + aux, attachAngle);
 
 
@@ -49,10 +60,10 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 void AttachesToObjects::deAttachFromObject() {
 	if (joint_ != nullptr) {
 		//Direccion contraria a la pared
-		b2Vec2 aux = joint_->GetBodyB()->GetPosition() - mainCollider_->getPos();
+		b2Vec2 aux =joint_->GetBodyB()->GetPosition()- mainCollider_->getPos() ;
 		aux.Normalize();
-		aux.x *= mainCollider_->getH(0) / 2;
-		aux.y *= mainCollider_->getH(0) / 2;
+		aux.x *= mainCollider_->getH(0)/2;
+		aux.y *= mainCollider_->getH(0)/2;
 		
 		
 		mainCollider_->getWorld()->DestroyJoint(joint_); //Destruye el joint
