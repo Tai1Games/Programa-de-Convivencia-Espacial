@@ -25,8 +25,7 @@ private:
 	GameMode* gMode_;
 public:
 	Countdown(GameMode* g) : Component(ComponentType::Countdown), gMode_(g) {}
-	~Countdown() {}
+	virtual ~Countdown() {}
 	virtual void update();
 	virtual void draw() const;
 };
-
