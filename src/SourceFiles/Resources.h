@@ -55,6 +55,8 @@ public:
 		// Weapons and map items
 
 		// Players
+		PlayerAnimSheet,
+
 
 		// Map elements
 		IncreasingFreqButton,
@@ -87,6 +89,7 @@ public:
 		Banana,
 		BananaSkin,
 		BananaNonSkin,
+		Staple,
 
 		// Gamemode specific elements
 		Coin,
@@ -120,6 +123,7 @@ public:
 		LivingRoomText,
 		BoilerRoomText,
 		GymRoomText,
+		GardenRoomText,
 
 		//players
 		OnePlayer,
@@ -135,7 +139,7 @@ public:
 		One,
 		Two,
 		Three,
-		Four,	
+		Four,
 		MoveTutorial,
 		HoldTutorial,
 		GrabTutorial,

@@ -41,11 +41,10 @@ void MeleeWeapon::PickObjectBy(int index) {
 		currentHand_->setWeapon(weaponType_, this);
 		vw_->setDrawable(false);
 		//Desactivamos el trigger de pickUp
-		b2Filter pickUpCollider = mainCollider_->getFixture(0)->GetFilterData();
-		pickUpCollider.categoryBits = 0;
-		pickUpCollider.maskBits = 0;
-		mainCollider_->getFixture(0)->SetFilterData(pickUpCollider);
 
+		mainCollider_->disableFixtureCollisions(0);
+		mainCollider_->disableFixtureCollisions(1);
+    
 		ThrownByPlayer* throwData = GETCMP1_(ThrownByPlayer);
 		throwData->SetOwner(index);
 	}
@@ -59,6 +58,7 @@ void MeleeWeapon::onCollisionEnter(Collision* c) {
 		Health* auxHe = GETCMP2(c->entity, Health);
 		Wallet* auxWa = GETCMP2(c->entity, Wallet);
 		Collider* auxCo = GETCMP2(c->entity, Collider);
+		PlayerData* pData = GETCMP2(c->entity, PlayerData);
 
 		b2Vec2 knockback = auxCo->getPos() - mainCollider_->getPos();
 		knockback.Normalize();
@@ -66,8 +66,15 @@ void MeleeWeapon::onCollisionEnter(Collision* c) {
 
 		auxCo->applyLinearImpulse(knockback, b2Vec2(0, 1));
 		if (auxHe != nullptr) {
-			if (!auxHe->subtractLife(damage_))
+			if (!auxHe->subtractLife(damage_)) {
+				ThrownByPlayer* objThrown = GETCMP1_(ThrownByPlayer);
+				// player is killed by a weapon
+				if (objThrown != nullptr && pData != nullptr) {
+					if (objThrown->getOwnerId() != pData->getPlayerNumber())
+						objThrown->addPointsToOwner();
+				}
 				auxHe->playerDead(c->collisionHandler);
+			}
 		}
 		else
 			c->collisionHandler->addCoinDrop(std::make_tuple(auxWa, GETCMP2(c->entity,PlayerData), damage_));
@@ -78,10 +85,8 @@ void MeleeWeapon::onCollisionEnter(Collision* c) {
 
 void MeleeWeapon::UnPickObject() {
 	//Reactivamos el trigger de pickUp
-	b2Filter pickUpCollider = mainCollider_->getFixture(0)->GetFilterData();
-	pickUpCollider.categoryBits = Collider::CollisionLayer::NormalObject;
-	pickUpCollider.maskBits = Collider::CollisionLayer::NormalObject | Collider::CollisionLayer::NormalAttachableObject | Collider::CollisionLayer::Player | Collider::CollisionLayer::Wall | Collider::CollisionLayer::NonGrababbleWall;
-	mainCollider_->getFixture(0)->SetFilterData(pickUpCollider);
+	mainCollider_->getFixture(0)->SetFilterData(mainCollider_->setCollisionLayer(Collider::CollisionLayer::NormalObject));
+	mainCollider_->getFixture(1)->SetFilterData(mainCollider_->setCollisionLayer(Collider::CollisionLayer::Trigger));
 
 	ActionableWeapon::UnPickObject();
 }

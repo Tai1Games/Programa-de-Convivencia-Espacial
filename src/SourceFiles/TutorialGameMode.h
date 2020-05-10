@@ -38,7 +38,7 @@ private:
 	int previousProgress_ = 0;
 
 public:
-	TutorialGameMode(int nPlayers, int stocks = 5);
+	TutorialGameMode(MatchInfo* mInfo, int stocks = 5);
 	~TutorialGameMode();
 	virtual void init(PlayState* game);
 	virtual void render();

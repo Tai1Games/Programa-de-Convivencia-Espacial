@@ -6,13 +6,14 @@
 #include "checkML.h"
 #include <vector>
 
+class MatchInfo;
 class WiFightGameMode : public GameMode
 {
 private:
 	std::vector<double> playerProgress_;
 	Entity* router = nullptr;
 public:
-	WiFightGameMode(int nPlayers): GameMode(nPlayers) {};
+	WiFightGameMode(MatchInfo* mInfo) : GameMode(mInfo, GamemodeID::WiFight) {};
 	virtual ~WiFightGameMode() {};
 	virtual void init(PlayState* game);
 	virtual void render();

@@ -2,6 +2,7 @@
 #include "PlayState.h"
 #include "HealthViewer.h"
 #include "ImpulseViewer.h"
+#include "PlayerData.h"
 
 void GameMode::initProgressBars()
 {
@@ -36,7 +37,7 @@ void GameMode::renderProgressBars(const std::vector<double>& progressValues, con
 		float angle = (i % 2 == 0) ? 0 : 180;
 		SDL_RendererFlip flip = (i % 2 == 0) ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL;
 
-		//Barra de progreso vacía
+		//Barra de progreso vacï¿½a
 		SDL_Rect dest = { healthViewerPos_[i].x, healthViewerPos_[i].y ,
 		emptyProgressBars_[i % 2]->getWidth() * barsScale, emptyProgressBars_[i % 2]->getHeight() * barsScale };
 		emptyProgressBars_[i % 2]->render(dest, angle, flip);
@@ -61,5 +62,26 @@ void GameMode::activateControl() {
 		p->addComponent<AttachesToObjects>();
 		p->addComponent<PlayerController>();
 		p->addComponent<ImpulseViewer>(Resources::ImpulseArrow, Resources::ImpulseBackground);
+	}
+}
+
+void GameMode::createPlayers(PlayState* game) {
+	for (int i = 0; i < nPlayers_; i++) {
+		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), i,
+			Resources::Body, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, (*matchInfo_->getPlayersInfo())[i]->inputBinder, 3));
+	}
+}
+
+void GameMode::update() {
+	if (roundFinished_) {
+		matchInfo_->AddVictory(winnerId_, gamemodeId_);
+		cout << "Player " << winnerId_ << " won" << endl;
+		SDL_Game::instance()->getStateMachine()->transitionToState(States::midGame, winnerId_);
+	}
+	for (int i = 0; i < players_.size(); i++) {
+		if (players_[i]->getComponent<PlayerData>(ComponentType::PlayerData)->getBinder()->secretWinButton()) {
+			matchInfo_->AddVictory(players_[i]->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber(), gamemodeId_);
+			SDL_Game::instance()->getStateMachine()->transitionToState(States::midGame, players_[i]->getComponent<PlayerData>(ComponentType::PlayerData)->getPlayerNumber());
+		}
 	}
 }

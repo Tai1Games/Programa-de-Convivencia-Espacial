@@ -3,6 +3,7 @@
 #include "Texture.h"
 
 class AnimatedViewer;
+class AnimatedUIViewer;
 
 class MidGameState : public GameState
 {
@@ -16,9 +17,9 @@ private:
 		zoom,
 	};
 
-	int numPlayers_;	//por constructora
-	int roundWinner_;	//Por constructora y por reset
-	int totalRounds=10; //Viene de la Super clase
+	int numPlayers_ = 0;	//por constructora
+	int roundWinner_ = 0;	//Por constructora y por reset
+	int totalRounds_ = 0; //Viene de MatchInfo
 	Texture* fondo = nullptr;
 
 	//Input
@@ -37,19 +38,17 @@ private:
 	int distanceBetweenRockets_ = 200;	//Distancia normal
 	int rocketXPositionObjective_ = 0;
 	int distanceGainedByPoint_ = 150;	//Por defecto
-	std::vector<AnimatedViewer*> playerRockets_;
+	std::vector<AnimatedUIViewer*> playerRockets_;
 	int framesUntilNextShake_ = 0;
 	int shakeOffsetDistance_ = 3;
 
 	//station
-	AnimatedViewer* spaceStationViewer_ = nullptr;
+	AnimatedUIViewer* spaceStationViewer_ = nullptr;
 	float spaceStationScaleFactor_ = 1;
-	
+
 
 public:
-	MidGameState(int numPlayers, int roundWinner) { 
-		numPlayers_ = numPlayers; 
-		roundWinner_ = roundWinner;
+	MidGameState(int numPlayers, int roundWinner) : numPlayers_(numPlayers), roundWinner_(roundWinner) {
 	};
 	virtual ~MidGameState();
 
@@ -58,4 +57,6 @@ public:
 	virtual void update();
 	virtual void handleInput();
 	virtual void onLoaded();
+
+	void setWinner(int id) { roundWinner_ = id; };
 };

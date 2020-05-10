@@ -34,9 +34,11 @@ private:
 	vector<tson::Object> factoryItems_;
 	std::vector<b2Vec2> weaponSpawnPoints_;
 
+	BulletPool* bulletPool_;
+
 	void solvePostCreationProblems(); //Called when reading of tilemap ends. Use this to assign references and solve similar problems.
 public:
-	TileMap(int w,int h,string map, EntityManager* entityManager_, b2World* physicsWorld_);
+	TileMap(int w,int h,string map, EntityManager* entityManager_, b2World* physicsWorld_, BulletPool* bp);
 	~TileMap();
 	virtual void update() override;
 	virtual void init() override;

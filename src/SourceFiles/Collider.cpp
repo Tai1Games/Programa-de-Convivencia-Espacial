@@ -104,6 +104,13 @@ b2Filter Collider::setCollisionLayer(CollisionLayer c) {
 	return filter;
 }
 
+void Collider::disableFixtureCollisions(int fixtureIndex) {
+	b2Filter filter;
+	filter.maskBits = 0;
+	filter.categoryBits = 0;
+	getFixture(fixtureIndex)->SetFilterData(filter);
+}
+
 void Collider::destroyFixture(int i) {
 	body_->DestroyFixture(fixtures_[i]);
 	fixtures_.erase(fixtures_.begin() + i);

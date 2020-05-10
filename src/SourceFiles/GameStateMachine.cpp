@@ -6,6 +6,7 @@
 #include "TimeGameMode.h"
 #include "TutorialGameMode.h"
 #include "Constants.h"
+#include "MatchInfo.h"
 
 #include "PlayState.h"
 #include "PauseState.h"
@@ -24,6 +25,8 @@ GameStateMachine::~GameStateMachine() {
 		delete state;
 	}
 	states_.clear();
+
+	delete matchInfo_;
 }
 
 void GameStateMachine::setPauseOwner(int ownerID)
@@ -33,57 +36,63 @@ void GameStateMachine::setPauseOwner(int ownerID)
 		pause->setOwner(ownerID);
 }
 
-void GameStateMachine::changeToState(int state, int numberOfPlayers, int gameMode, string tileMap) {
+void GameStateMachine::changeToState(int state, int gameMode, string tileMap) {
 	if (state != currentState_ && state < States::NUMBER_OF_STATES) {
-		loadState(state, numberOfPlayers, gameMode, tileMap);
-		currentState_ = state;
-		states_[state]->onLoaded();
-		if (states_[States::transition] != nullptr) {
+		if (currentState_ != States::transition) {
+			loadState(state, gameMode, tileMap); //Evita cargar el mapa dos veces si viene de transition
+			states_[state]->onLoaded();
+		}			
+		else if (states_[States::transition] != nullptr) //Viene de transition, borrar la escena
+		{
 			deleteState(States::transition);
 		}
+		currentState_ = state;
 	}
 }
 
-void GameStateMachine::transitionToState(int state, int numberOfPlayers, int gameMode, string tileMap) {
-	loadState(state, numberOfPlayers, gameMode, tileMap);
+void GameStateMachine::transitionToState(int state, int gameMode, string tileMap) {
+	loadState(state, gameMode, tileMap);
 	states_[States::transition] = new TransitionState(currentState_, state, &states_);
 	states_[States::transition]->init();
 	currentState_ = States::transition;
 }
 
-void GameStateMachine::loadState(int state, int numberOfPlayers, int gameMode, string tileMap) {
+void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 	if (states_[state] == nullptr) {
 		//create state
 		//states_[state] = new... se necesita struct? o switch tal cual xd
 		switch (state) {
 		case States::menu:		
-			states_[state] = new MenuState(numberOfPlayers); //numberOfPlayers usado como ownerID
+			states_[state] = new MenuState(0); //numberOfPlayers usado como ownerID
 			break;
 		case States::play:
 		{
-			if (gameMode < NUMBER_OF_GAMEMODES) {
-				switch (gameMode) {
+			pair<GamemodeID, string> round = matchInfo_->getCurrentRound();
+
+			if (round.first < NUMBER_OF_GAMEMODES) {
+				switch (round.first) {
 				case (GamemodeID::Capitalism):
-					states_[state] = new PlayState(new CapitalismGameMode(numberOfPlayers), tileMap);
+					states_[state] = new PlayState(new CapitalismGameMode(matchInfo_), round.second);
 					break;
 				case (GamemodeID::Controller):
-					states_[state] = new PlayState(new ControllerGameMode(numberOfPlayers), tileMap);
+					states_[state] = new PlayState(new ControllerGameMode(matchInfo_), round.second);
 					break;
 				case (GamemodeID::Stocks):
-					states_[state] = new PlayState(new StocksGameMode(numberOfPlayers), tileMap);
+					states_[state] = new PlayState(new StocksGameMode(matchInfo_), round.second);
 					break;
 				case (GamemodeID::WiFight):
-					states_[state] = new PlayState(new WiFightGameMode(numberOfPlayers), tileMap);
+					states_[state] = new PlayState(new WiFightGameMode(matchInfo_), round.second);
 					break;
 				case (GamemodeID::Timed):
-					states_[state] = new PlayState(new TimeGameMode(numberOfPlayers), tileMap);
+					states_[state] = new PlayState(new TimeGameMode(matchInfo_), round.second);
 					break;
 				case (GamemodeID::Tutorial):
-					states_[state] = new PlayState(new TutorialGameMode(numberOfPlayers), tileMap);
+					states_[state] = new PlayState(new TutorialGameMode(matchInfo_), round.second);
+					break;
+				default: 
 					break;
 				}
 			}
-			
 		}
 		break; // :P
 		case States::lobby: {
@@ -95,20 +104,24 @@ void GameStateMachine::loadState(int state, int numberOfPlayers, int gameMode, s
 			states_[state] = new PauseState();
 			break;
 		case States::midGame:			//Jugadores totales-----Jugador que gana la ronda
-			states_[state] = new MidGameState(numberOfPlayers+3, 1);
+			//Se usa el parametro gamemode como indicador de quien gana la ronda
+			states_[state] = new MidGameState(matchInfo_->getNumberOfPlayers(), gameMode);
 			break;
 		}
 		//inicializar la nueva escena
 		states_[state]->init();
 	}
-	else if (state==States::menu){
-		//borrar playState para crear otro
-		deleteState(States::play);
-	}
+		else if (state == States::menu) {
+			//borrar playState para crear otro
+			deleteState(States::play);
+		}
+		else if (state == States::midGame) {
+			static_cast<MidGameState*>(states_[States::midGame])->setWinner(gameMode);
+		}
 }
 
 void GameStateMachine::deleteState(int state) {
-	if (state != currentState_ && state < States::NUMBER_OF_STATES) {
+	if (state != currentState_ && state < States::NUMBER_OF_STATES && states_[state] != nullptr) {
 		delete states_[state];
 		states_[state] = nullptr;
 	}

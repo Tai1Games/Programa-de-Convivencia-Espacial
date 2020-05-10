@@ -5,7 +5,7 @@
 #include "Viewer.h"
 #include "Health.h"
 #include "HealthViewer.h"
-#include "InputHandler.h"
+#include "InputBinder.h"
 #include "CollisionHandler.h"
 #include "TileMap.h"
 #include "Tileson.h"
@@ -16,12 +16,13 @@
 #include "ImpulseViewer.h"
 #include "PlayerData.h"
 #include "ParticleEmitter.h"
+#include "GameStateMachine.h"
 #include "ThrownByPlayer.h"
 #include "Component.h"
 #include "Countdown.h"
 
-PlayState::PlayState(GameMode* gMode, string tmap):GameState(),
-	gameMode_(gMode), tilemapName_(tmap) {}
+PlayState::PlayState(GameMode* gMode, string tmap) :GameState(),
+gameMode_(gMode), tilemapName_(tmap) {}
 
 
 PlayState::~PlayState() {
@@ -38,11 +39,14 @@ void PlayState::init() {
 	entityManager_ = new EntityManager();
 	physicsWorld_ = new b2World(b2Vec2(0, 0));
 
+	bulletPool_.init(entityManager_, physicsWorld_);
+	bananaPool_.init(entityManager_, physicsWorld_, &bulletPool_);
+
 	secondsPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 
 	tilemap_ = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
 		"assets/game/tilemaps/"+tilemapName_+".json",
-		entityManager_, physicsWorld_);
+		entityManager_, physicsWorld_, &bulletPool_);
 	tilemap_->init();
 	gameMode_->setTileMap(tilemap_);
 
@@ -55,21 +59,20 @@ void PlayState::init() {
 
 	//FONDO
 	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(resourceMap_[tilemapName_]);
-	
+
 	//MÚSICA
 	SDL_Game::instance()->getAudioMngr()->playMusic(resourceMap_[tilemapName_], -1);
-	
+
 	//Version estática de la factoria
 	tilemap_->executeMapFactory();
 	tilemap_->createWeapons();
 
 	gameMode_->init(this);
 
-	bulletPool_.init(entityManager_, physicsWorld_);
-	bananaPool_.init(entityManager_, physicsWorld_, &bulletPool_);
+	playerInfo = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
 
 	bananaPool_.addBanana({ 20,20 });
-	
+
 	for (Weapon* w : *(entityManager_->getWeaponVector())) {
 		w->getEntity()->addComponent<ThrownByPlayer>(gameMode_);
 	}
@@ -92,7 +95,7 @@ void PlayState::update() {
 }
 
 void PlayState::render() {
-	fondo_->render(0,0);
+	fondo_->render(0, 0);
 	GameState::render();
 	gameMode_->render();
 }
@@ -100,18 +103,13 @@ void PlayState::render() {
 void PlayState::handleInput()
 {
 	GameState::handleInput();
-	InputHandler* ih = SDL_Game::instance()->getInputHandler();
-	for (int i = 0; i < ih->getNumControllers(); i++) {
-		if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_START) ||
-			ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_GUIDE)) {
+	for (MatchInfo::PlayerInfo* pInfo : *playerInfo)
+	{
+		if (pInfo->inputBinder->pressPause()) {
 			SDL_Game::instance()->getAudioMngr()->pauseMusic();
-			SDL_Game::instance()->getStateMachine()->setPauseOwner(i);
+			SDL_Game::instance()->getStateMachine()->setPauseOwner(pInfo->playerId);
+			//SDL_Game::instance()->getStateMachine()->transitionToState(States::pause);
 		}
-
-		else if (ih->isButtonJustUp(i, SDL_CONTROLLER_BUTTON_BACK)) {
-			SDL_Game::instance()->getAudioMngr()->pauseMusic();
-			SDL_Game::instance()->getStateMachine()->transitionToState(States::midGame, ih->getNumControllers());
-		}		
 	}
 }
 
@@ -125,4 +123,3 @@ void PlayState::createDeadBodies() {
 	}
 	collisionHandler_->clearBodyData();
 }
-

@@ -2,9 +2,10 @@
 #include "Constants.h"
 #include "PlayState.h"
 #include "ActionableWeapon.h"
+#include "UIViewer.h"
 
 
-TutorialGameMode::TutorialGameMode(int nPlayers, int stocks) : GameMode(nPlayers)
+TutorialGameMode::TutorialGameMode(MatchInfo* mInfo, int stocks) : GameMode(mInfo,GamemodeID::Tutorial)
 {
 	maxStocks_ = stocks;
 }
@@ -22,9 +23,8 @@ void TutorialGameMode::init(PlayState* game) {
 	piranhaPlant_->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, -Collider::CollisionLayer::Player);
 	piranhaPlant_->setActive(false);
 	//------------------
+	GameMode::createPlayers(game);
 	for (int i = 0; i < nPlayers_; i++) {
-		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), i,
-			Resources::Body, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, 3));
 		playerStocks_.push_back(maxStocks_); //Initializes maxStocks vector with 3 on all positions.
 		//tutorial weapons
 		weapons_.push_back(ObjectFactory::makeExtinguisher(game->getEntityManager(), game->getPhysicsWorld(),
@@ -50,26 +50,26 @@ void TutorialGameMode::init(PlayState* game) {
 	//tutorial texts
 	for (int i = Resources::MoveTutorial; i < Resources::TutorialEnd + 1; i++) {
 		tutorialTexts_.push_back(game->getEntityManager()->addEntity());
-		tutorialTexts_.back()->addComponent<Viewer>(i, b2Vec2(xOffset_, yOffset_), scale_, 0);
+		tutorialTexts_.back()->addComponent<UIViewer>(i, b2Vec2(xOffset_, yOffset_), scale_, 0);
 		tutorialTexts_.back()->setActive(false);
 	}
 	tutorialTexts_[0]->setActive(true);
 	//progress texts
 	//completed + /
 	completed_ = game->getEntityManager()->addEntity();
-	completed_->addComponent<Viewer>(Resources::Completed, b2Vec2(xOffsetProgressText_, yOffsetProgress_), scale_, 0);
+	completed_->addComponent<UIViewer>(Resources::Completed, b2Vec2(xOffsetProgressText_, yOffsetProgress_), scale_, 0);
 	slash_ = game->getEntityManager()->addEntity();
-	slash_->addComponent<Viewer>(Resources::Slash, b2Vec2(xOffsetProgressSlash_, yOffsetProgress_), scale_, 0);
+	slash_->addComponent<UIViewer>(Resources::Slash, b2Vec2(xOffsetProgressSlash_, yOffsetProgress_), scale_, 0);
 	//zero to number of players
 	for (int i = Resources::Zero; i < Resources::One + players_.size(); i++) {
 		numberTexts_.push_back(game->getEntityManager()->addEntity());
-		numberTexts_.back()->addComponent<Viewer>(i, b2Vec2(xOffsetProgressCount_, yOffsetProgress_), scale_, 0);
+		numberTexts_.back()->addComponent<UIViewer>(i, b2Vec2(xOffsetProgressCount_, yOffsetProgress_), scale_, 0);
 		numberTexts_.back()->setActive(false);
 	}
 	numberTexts_[0]->setActive(true);
 	//number of players
 	numPlayers_ = game->getEntityManager()->addEntity();
-	numPlayers_->addComponent<Viewer>(Resources::Zero + players_.size(), b2Vec2(xOffsetProgressMax_, yOffsetProgress_), scale_, 0);
+	numPlayers_->addComponent<UIViewer>(Resources::Zero + players_.size(), b2Vec2(xOffsetProgressMax_, yOffsetProgress_), scale_, 0);
 }
 
 void TutorialGameMode::update() {

@@ -19,6 +19,7 @@ void TransitionState::update() {
 	currentTransitionFrame_++;
 	if (currentTransitionFrame_ == transitionFrames_) {
 		currentState_ = toState_;
+		(*gameStatesVector_)[toState_]->onLoaded();
 	}
 }
 
