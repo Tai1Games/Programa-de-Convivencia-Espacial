@@ -10,7 +10,7 @@
 
 class Bullet: public Component
 {
-private:
+protected:
 	Collider* col_;
 	Viewer* viewer_;
 	int player_, damage_ = 0, winWidth_, winHeight_;
