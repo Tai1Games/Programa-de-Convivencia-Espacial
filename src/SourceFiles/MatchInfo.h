@@ -10,7 +10,7 @@ class MatchInfo
 public:
 	struct PlayerInfo {
 		PlayerInfo(const PlayerLobbyInfo& info);
-		~PlayerInfo() { delete inputBinder; };
+		~PlayerInfo() { };
 
 		size_t playerId = 0;
 		InputBinder* inputBinder = nullptr;
@@ -29,6 +29,7 @@ public:
 
 	//MatchInfo(size_t numberOfPlayers) { players_.reserve(numberOfPlayers); };
 	MatchInfo(const vector<PlayerLobbyInfo>& playerLobbyInfoVector);
+	~MatchInfo();
 
 	void setRounds(vector<pair<GamemodeID, string>>* roundsVector) { rounds_ = roundsVector; currentRoundNumber_ = 0; numberOfRounds_ = (*rounds_).size(); };
 

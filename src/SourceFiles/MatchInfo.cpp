@@ -9,6 +9,14 @@ MatchInfo::MatchInfo(const vector<PlayerLobbyInfo>& playerLobbyInfoVector) {
 	numberOfPlayers_ = players_.size();
 }
 
+MatchInfo::~MatchInfo()
+{
+	for (PlayerInfo* player : players_) {
+		delete player;	player = nullptr;
+	}
+	players_.clear();
+}
+
 MatchInfo::PlayerInfo::PlayerInfo(const PlayerLobbyInfo& info) :
 	playerId(info.id),
 	inputBinder(info.inputBinder),

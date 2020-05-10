@@ -41,7 +41,9 @@ private:
 
 public:
 	MenuState(int playerID) : GameState(), ownerPlayerID_(playerID) {};
-	virtual ~MenuState() {};
+	virtual ~MenuState() {
+		delete roundsVector_;
+	};
 
 	virtual void init() override;
 	virtual void onLoaded() override;
