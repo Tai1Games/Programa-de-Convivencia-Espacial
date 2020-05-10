@@ -24,7 +24,9 @@ void PlayerController::init()
 	maxImpulseGrabbed_ = CONST(float, "IMPULSE_GRABBED");
 	maxImpulseFloating_ = CONST(float, "IMPULSE_FLOATING");
 	chargeMultiplier_ = CONST(float, "IMPULSE_MULTIPLIER");
+
 	maxSpeedAfterImpulse_ = CONST(float, "MAX_SPEED_AFTER_IMPULSE") + maxImpulseFloating_;
+
 	impulseCooldown_ = CONST(int, "IMPULSE_COOLDOWN");
 }
 
