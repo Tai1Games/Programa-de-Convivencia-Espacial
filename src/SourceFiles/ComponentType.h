@@ -37,6 +37,8 @@ namespace ComponentType {
 		MeleeWeapon,
 		SlipperWeapon,
 		AnimatedViewer,
+		AnimatedUIViewer,
+		UIViewer,
 		AnimatedPlayer,
 		Banana,
 		Bullet,

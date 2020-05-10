@@ -1,12 +1,13 @@
-#include "AnimatedViewer.h"
+#include "AnimatedUIViewer.h"
 
-void AnimatedViewer::init() {
-	Viewer::init();
-	nFrames_ = tex_->getWidth() / clip_.w;	//Obtenemos el número de frames de la spritesheet
+void AnimatedUIViewer::init()
+{
+	UIViewer::init();
+	nFrames_ = tex_->getWidth() / clip_.w;
 	AbstractViewers::setNFrames(nFrames_);
 }
 
-void AnimatedViewer::update()
+void AnimatedUIViewer::update()
 {
 	if (AbstractAnimatedViewers::updateTime(nFrames_)) {
 		AbstractViewers::setClip(SDL_Rect{ (clip_.w * frame_), 0, clip_.w, clip_.h });	//Cogemos el frame del spritesheet

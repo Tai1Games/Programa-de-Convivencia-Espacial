@@ -1,5 +1,6 @@
 #include "Pad.h"
 #include "Collision.h"
+#include "Entity.h"
 
 Pad::Pad() : Component(ComponentType::Pad)
 {
