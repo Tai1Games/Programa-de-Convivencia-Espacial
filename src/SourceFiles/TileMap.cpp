@@ -251,6 +251,7 @@ void TileMap::createWeapons()
 		case 7: //TomatoGranade
 			break;
 		case 8: //Confeti
+			e = ObjectFactory::makeConfetti(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "CONFETTI_X"), CONST(float, "CONFETTI_Y")));
 			break;
 		}
 	}
