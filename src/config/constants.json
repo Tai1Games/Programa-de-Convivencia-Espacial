@@ -50,11 +50,6 @@
   "INVULNERABILITY_FRAMES_RESPAWN": 400,
   "MAX_SPEED_AFTER_IMPULSE": 5,
 
-  "_these cooldowns expressed in frames": null,
-  "PLAYER_IMPULSE_COOLDOWN": 20,
-  "PLAYER_THROW_COOLDOWN": 20,
-  "PLAYER_PICK_COOLDOWN": 20,
-
   "PLAYER_ANIMS": null,
   "NUM_SKINS": 4,
   "NUM_ANIMS": 4,

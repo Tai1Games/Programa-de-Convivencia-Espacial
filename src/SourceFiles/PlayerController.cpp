@@ -47,12 +47,6 @@ void PlayerController::handleInput()
 		Vector2D velAfterImpulse = {(coll_->getLinearVelocity() + dirImpulse_).x, (coll_->getLinearVelocity() + dirImpulse_).y };
 		if (!attachesToObj_->isAttached() && velAfterImpulse.magnitude() > maxSpeedAfterImpulse_) dirImpulse_ = { 0, 0 };
 
-		/*if (Vector2D(dirImpulse_.x, dirImpulse_.y).magnitude() == 0)
-			cout << "CHANGED DIRIMPULSE!!!!!!!!!!!!!!!!!" << endl;
-
-		cout << "velAfterImpulse x: " << velAfterImpulse << endl;
-		cout << "Dirimpulse x: " << dirImpulse_.x << " Dirimpulse y: " << dirImpulse_.y << endl;*/
-
 		Collider* attachedObj = attachesToObj_->getAttachedObject();
 		if (attachedObj != nullptr) {
 			dirImpulse_ *= -1;
