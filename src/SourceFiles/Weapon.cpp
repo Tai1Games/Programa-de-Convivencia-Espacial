@@ -28,6 +28,8 @@ void Weapon::init()
 	playerInfo_.resize(4);
 	
 	entity_->getEntityManager()->getWeaponVector()->push_back(this);
+
+	throwCooldown_ = CONST(int, "THROW_COOLDOWN");
 }
 
 void Weapon::handleInput()
@@ -40,8 +42,9 @@ void Weapon::handleInput()
 			}
 		}
 	}
-	else if (IsPicked() && playerInfo_[pickedIndex_].playerBinder->pressThrow())
+	else if (throwCooldownTimer_ >= throwCooldown_ && IsPicked() && playerInfo_[pickedIndex_].playerBinder->pressThrow())
 	{
+		throwCooldownTimer_ = 0;
 		UnPickObject();
 	}
 }
@@ -124,8 +127,14 @@ void Weapon::SavePlayerInfo(int index, Hands* playerH, Health* healthAux, Wallet
 	if (healthAux) playerInfo_[index].playerHealth = healthAux;
 	else playerInfo_[index].playerWallet = walletAux;
 }
+
 void Weapon::DeletePlayerInfo(int index)
 {
 	playerInfo_[index].isNear = false;
 	playerInfo_[index].playerHands = nullptr;
+}
+
+void Weapon::update() {
+	if(picked_)
+		throwCooldownTimer_++;
 }

@@ -6,6 +6,7 @@ ActionableWeapon::ActionableWeapon(ComponentType::CmpId compType, WeaponID wId, 
 cooldownFrames_(cooldownFrames) {}
 
 void ActionableWeapon::update() {
+	Weapon::update();
 	if (beenActivated_) {
 		framesSinceActivation_++;
 		if (framesSinceActivation_ >= cooldownFrames_) {

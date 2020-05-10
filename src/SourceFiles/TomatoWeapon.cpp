@@ -32,6 +32,7 @@ void TomatoWeapon::init() {
 }
 
 void TomatoWeapon::update() {
+	Weapon::update();
 	if (currentHand_) mainCollider_->setTransform(currentHand_->getPointerPos(), 0.0);
 
 	if (activated_) {

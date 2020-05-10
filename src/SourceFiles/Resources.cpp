@@ -47,7 +47,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Ball, resourcesPath + "textures/PelotaSaltarina.png" },
 	{ Extinguisher, resourcesPath + "textures/Extintor.png" },
 	{ Fireball,resourcesPath + "textures/fireball_placeholder.png"},
-	{ Mancuerna, resourcesPath + "textures/Mancuerna.png" },
+	{ Dumbbell, resourcesPath + "textures/Mancuerna.png" },
 	{ Slipper, resourcesPath + "textures/Chancla.png" },
 	{ Stapler, resourcesPath + "textures/Grapadora.png" },
 	{ Stone, resourcesPath + "textures/Piedra.png" },
@@ -68,7 +68,6 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SpaceSuit, resourcesPath + "textures/PinkTinky.png"},	// dead body
 
 	// Map elements
-	{ Smoke, resourcesPath + "textures/SmokeParticles-Sheet.png" },
 	{ Boiler,resourcesPath + "textures/CalderaPro.png"},
 	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
 	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
@@ -96,6 +95,10 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Negro ,resourcesPath + "textures/Negro.png"},
 	{ Transparent ,resourcesPath + "textures/transparent.png"},
 	{ Tinky, resourcesPath + "textures/Tinky.png" },
+
+	// particles
+	{ Smoke, resourcesPath + "textures/SmokeParticles-Sheet.png" },
+	{ WiFiWave, resourcesPath + "textures/WiFiWave.png" },
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{
