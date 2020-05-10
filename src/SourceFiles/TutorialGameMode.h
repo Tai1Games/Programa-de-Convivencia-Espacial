@@ -36,12 +36,13 @@ private:
 	int yOffsetProgress_ = CONST(double, "WINDOW_HEIGHT") / 1.5;
 	double scale_ = 0.75;
 	int previousProgress_ = 0;
-
+	bool startedTutorial_ = false;
 public:
 	TutorialGameMode(MatchInfo* mInfo, int stocks = 5);
 	~TutorialGameMode();
 	virtual void init(PlayState* game);
 	virtual void render();
 	virtual void update();
+	virtual void activateControl();
 	virtual bool onPlayerDead(int id); //Returns false when players runs out of stocks.
 };

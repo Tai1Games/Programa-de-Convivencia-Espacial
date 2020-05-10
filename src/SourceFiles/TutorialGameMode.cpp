@@ -73,7 +73,7 @@ void TutorialGameMode::init(PlayState* game) {
 }
 
 void TutorialGameMode::update() {
-	if (tutorialPointer_ < Resources::TutorialEnd - Resources::MoveTutorial) {
+	if (tutorialPointer_ < Resources::TutorialEnd - Resources::MoveTutorial && startedTutorial_) {
 		InputHandler* ih = SDL_Game::instance()->getInputHandler();
 		//check if current tutorial is complete and if so, advance to next
 		int progress = 0;
@@ -126,7 +126,7 @@ void TutorialGameMode::update() {
 			break;
 		}
 	}
-	else {
+	else if(startedTutorial_){
 		completed_->setActive(false);
 		slash_->setActive(false);
 		numPlayers_->setActive(false);
@@ -167,4 +167,9 @@ bool TutorialGameMode::onPlayerDead(int id) { //Returns false when player runs o
 		else return true;
 	}
 	else return true;
+}
+
+void TutorialGameMode::activateControl() {
+	GameMode::activateControl();
+	startedTutorial_ = true;
 }
