@@ -3,6 +3,13 @@
 #include "ThrownByPlayer.h"
 #include "TomatoPool.h"
 
+TimeGameMode::TimeGameMode(MatchInfo* mInfo) :
+	AbstractTimedGameMode(mInfo,GamemodeID::Timed) {
+}
+
+TimeGameMode::~TimeGameMode() {
+}
+
 void TimeGameMode::init(PlayState* game)
 {
 	AbstractTimedGameMode::init(game);
@@ -13,9 +20,8 @@ void TimeGameMode::init(PlayState* game)
 	killsMarkerWidth_ = CONST(int, "KILLS_WIDTH");
 	killsMarkerHeight_ = CONST(int, "KILLS_HEIGHT");
 
+	GameMode::createPlayers(game);
 	for (int i = 0; i < nPlayers_; i++) {
-		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), i,
-			Resources::Body, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, 3));
 		playerKills_.push_back(0); //Initializes kills vector with 0 for all players.
 	}
 
@@ -56,6 +62,7 @@ void TimeGameMode::render()
 void TimeGameMode::update()
 {
 	updateTime(playerKills_);
+	GameMode::update();
 }
 
 void TimeGameMode::addPoints(int playerID)

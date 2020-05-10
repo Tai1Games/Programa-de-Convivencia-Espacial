@@ -24,7 +24,7 @@ private:
 	virtual void renderTimer(int secs, int mins);
 
 public:
-	AbstractTimedGameMode(int nPlayers) : GameMode(nPlayers) {};
+	AbstractTimedGameMode(MatchInfo* mInfo, GamemodeID id) : GameMode(mInfo, id) {};
 	~AbstractTimedGameMode() {};
 
 	virtual void init(PlayState* game);
