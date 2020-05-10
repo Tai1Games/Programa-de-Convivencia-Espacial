@@ -143,7 +143,10 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{ TutorialEnd, "Congratulations! You know all the basics of PCE. Play around if you want or press Start to go to the menu and choose Salir to exit.", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 
 	//MidGame
-	{ ContinueText, "Press any key/button to continue", { COLOR(0xc7f2edff) }, FontId::NES_Chimera }
+	{ ContinueText, "Press any key/button to continue", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+
+	//Countdown
+	{ Go, "GO!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 };
 
 vector<Resources::MusicInfo> Resources::musics_{

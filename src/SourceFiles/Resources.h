@@ -149,7 +149,10 @@ public:
 		TutorialEnd,
 
 		//MidGame 
-		ContinueText
+		ContinueText,
+
+		//Countdown
+		Go
 	};
 
 	enum AudioId : std::size_t {
