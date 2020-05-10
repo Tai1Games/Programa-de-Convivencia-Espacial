@@ -3,7 +3,7 @@
 #include "PlayState.h"
 
 
-StocksGameMode::StocksGameMode(int nPlayers, int stocks) : GameMode(nPlayers)
+StocksGameMode::StocksGameMode(MatchInfo* mInfo, int stocks) : GameMode(mInfo,GamemodeID::Stocks)
 {
 	maxStocks_ = stocks;
 }
@@ -14,12 +14,9 @@ StocksGameMode::~StocksGameMode()
 
 void StocksGameMode::init(PlayState* game){
 	GameMode::init(game);
-	//NEED TO DELETE ---
-	tomatoPool_.init(game->getEntityManager(), game->getPhysicsWorld());
-	//------------------
+
+	GameMode::createPlayers(game);
 	for (int i = 0; i < nPlayers_; i++) {
-		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), i,
-			Resources::Body, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, 3));
 		playerStocks_.push_back(maxStocks_); //Initializes maxStocks vector with 3 on all positions.
 	}
 	for(int i=0;i<players_.size();i++){
@@ -35,13 +32,10 @@ void StocksGameMode::init(PlayState* game){
 		}
 		playersStocksPos_.push_back(p);
 	}
-
-	//NEED TO DELETE
-	tomatoPool_.addTomato({ 40, 20 });
 }
 
 void StocksGameMode::update(){
-
+	GameMode::update();
 }
 
 void StocksGameMode::render(){
@@ -69,7 +63,7 @@ bool StocksGameMode::onPlayerDead(int id) { //Returns false when player runs out
 				int k = 0;
 				while (playerStocks_[k] == 0) { k++; }
 				roundResults_.push_back(players_[k]);
-				winner_ = players_[k];
+				winnerId_ = k;
 				roundFinished_ = true; //Round finishes when only 1 player remains
 			}
 			return false;
