@@ -19,6 +19,7 @@
 #include "GameStateMachine.h"
 #include "ThrownByPlayer.h"
 #include "Component.h"
+#include "Countdown.h"
 
 PlayState::PlayState(GameMode* gMode, string tmap) :GameState(),
 gameMode_(gMode), tilemapName_(tmap) {}
@@ -73,6 +74,9 @@ void PlayState::init() {
 	for (Weapon* w : *(entityManager_->getWeaponVector())) {
 		w->getEntity()->addComponent<ThrownByPlayer>(gameMode_);
 	}
+
+	Entity* countdown = entityManager_->addEntity();
+	countdown->addComponent<Countdown>(gameMode_);
 }
 
 void PlayState::update() {

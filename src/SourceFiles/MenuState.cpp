@@ -17,7 +17,7 @@ void MenuState::init() {
 	createText();
 	updateText();
 
-	//MÚSICA
+	//Mï¿½SICA
 	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::AudioId::MainMenuMusic, -1);
 }
 
@@ -59,7 +59,7 @@ void MenuState::handleInput()
 				SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVector_);
 				SDL_Game::instance()->getStateMachine()->transitionToState(States::play, roundsVector_->front().first, roundsVector_->front().second);
 			}
-			else { //como onLoaded pero sin resetear la música
+			else { //como onLoaded pero sin resetear la mï¿½sica
 				menuPointer_ = 0;
 				pointers_[0] = 0;
 				pointers_[1] = 0;
@@ -67,7 +67,7 @@ void MenuState::handleInput()
 			}
 		}
 	}
-	//ir para atrás
+	//ir para atrï¿½s
 	else if (ownerPlayerBinder_->menuBack() && (menuPointer_ > 0))
 	{
 		menuPointer_--;
@@ -79,7 +79,7 @@ void MenuState::addRound(GamemodeID gMode, string map) {
 	roundsVector_->push_back(std::make_pair(gMode, map));
 }
 
-void MenuState::onLoaded() { //poner el menú al principio
+void MenuState::onLoaded() { //poner el menï¿½ al principio
 	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::AudioId::MainMenuMusic, -1);
 	menuPointer_ = 0;
 	pointers_[0] = 0;
@@ -94,14 +94,14 @@ void MenuState::updatePointer(int n) {
 	if (menuPointer_ == 0) size = GamemodeID::NUMBER_OF_GAMEMODES + 1;
 	else size = maps_.size();
 
-	//moverse en el menú de manera modular
+	//moverse en el menï¿½ de manera modular
 	pointers_[menuPointer_] += size + n;
 	pointers_[menuPointer_] %= size;
 
 	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (pointers_[menuPointer_] + 1)));
 }
 
-void MenuState::updateText() { //activar la pantalla actual y desactivar la otra, si solo hay dos no necesita más información
+void MenuState::updateText() { //activar la pantalla actual y desactivar la otra, si solo hay dos no necesita mï¿½s informaciï¿½n
 	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (pointers_[menuPointer_] + 1)));
 
 	for (Entity* e : texts_[menuPointer_]) e->setActive(true); //activar actual

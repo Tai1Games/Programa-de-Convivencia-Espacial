@@ -309,6 +309,9 @@
     <ClInclude Include="LobbyState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
+    <ClInclude Include="Countdown.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
     <ClInclude Include="MatchInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -556,6 +559,9 @@
     </ClCompile>
     <ClCompile Include="LobbyState.cpp">
       <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="Countdown.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="MatchInfo.cpp">
       <Filter>Source Files</Filter>

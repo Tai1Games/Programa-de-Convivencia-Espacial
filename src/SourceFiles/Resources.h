@@ -151,6 +151,9 @@ public:
 		//MidGame 
 		ContinueText,
 
+		//Countdown
+		Go
+      
 		// particles
 		Smoke,
 		WiFiWave

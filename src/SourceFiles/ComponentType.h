@@ -43,6 +43,7 @@ namespace ComponentType {
 		Banana,
 		Bullet,
 		RocketLogic,
+		Countdown,
 		StaplerWeapon,
 		SpawnTree,
 
