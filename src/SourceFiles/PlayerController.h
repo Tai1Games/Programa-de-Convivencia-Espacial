@@ -18,6 +18,9 @@ private:
 	float maxImpulseGrabbed_;
 	float maxImpulseFloating_;
 
+	// cooldowns (aun no se usan para nada)
+	int actImpulseFrame_ = 0;
+	int impulseCooldown_ = 0;
 
 	int playerNumber_;
 	b2Vec2 dirImpulse_;
