@@ -24,6 +24,7 @@ void PlayerController::init()
 	maxImpulseGrabbed_ = CONST(float, "IMPULSE_GRABBED");
 	maxImpulseFloating_ = CONST(float, "IMPULSE_FLOATING");
 	chargeMultiplier_ = CONST(float, "IMPULSE_MULTIPLIER");
+	maxSpeedAfterImpulse_ = CONST(float, "MAX_SPEED_AFTER_IMPULSE") + maxImpulseFloating_;
 	impulseCooldown_ = CONST(int, "PLAYER_IMPULSE_COOLDOWN");
 }
 
@@ -37,8 +38,19 @@ void PlayerController::handleInput()
 		dirImpulse_ = ib->getAimDir();
 		dirImpulse_ *= impulseForce_;
 		dirImpulse_.y *= -1; //hay que invertirlo para convertirlo en vector compatible con box2D
+
+		// si se pasa del límite de velocidad le bajamos los humos (sólo aplica cuando no estás agarrao)
+		Vector2D velAfterImpulse = {(coll_->getLinearVelocity() + dirImpulse_).x, (coll_->getLinearVelocity() + dirImpulse_).y };
+		if (!attachesToObj_->isAttached() && velAfterImpulse.magnitude() > maxSpeedAfterImpulse_) dirImpulse_ = { 0, 0 };
+
+		/*if (Vector2D(dirImpulse_.x, dirImpulse_.y).magnitude() == 0)
+			cout << "CHANGED DIRIMPULSE!!!!!!!!!!!!!!!!!" << endl;
+
+		cout << "velAfterImpulse x: " << velAfterImpulse << endl;
+		cout << "Dirimpulse x: " << dirImpulse_.x << " Dirimpulse y: " << dirImpulse_.y << endl;*/
+
 		Collider* attachedObj = attachesToObj_->getAttachedObject();
-		if (attachedObj) {
+		if (attachedObj != nullptr) {
 			dirImpulse_ *= -1;
 			attachedObj->applyLinearImpulse(dirImpulse_, b2Vec2(0, 0));
 			dirImpulse_ *= -1;

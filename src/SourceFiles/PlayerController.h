@@ -17,6 +17,7 @@ private:
 	float chargeMultiplier_;
 	float maxImpulseGrabbed_;
 	float maxImpulseFloating_;
+	float maxSpeedAfterImpulse_;
 
 	// cooldowns (aun no se usan para nada)
 	int actImpulseFrame_ = 0;
