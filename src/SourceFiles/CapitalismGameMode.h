@@ -11,7 +11,6 @@ class CapitalismGameMode : public AbstractTimedGameMode
 private:
 	CoinsPool coinPool_;
 	Texture* coinTextureUI_ = nullptr;
-
 	double timeSinceSpawn_ = 0;
 	double spawnTime_ = 0;
 	double currentSpawnTime_ = 0;
@@ -33,13 +32,13 @@ private:
 
 	void renderCoinsMarker();
 public:
-	CapitalismGameMode(int nPlayers) : AbstractTimedGameMode(nPlayers) {};
+	CapitalismGameMode(MatchInfo* mInfo) : AbstractTimedGameMode(mInfo, GamemodeID::Capitalism){};
 	virtual ~CapitalismGameMode() {};
-
 	virtual void init(PlayState* game) override;
 	virtual void render() override;
 	virtual void update() override;
+	virtual void createPlayers(PlayState* game);
+
 
 	void createCoin(b2Vec2 spawnPos, int player = -1, int val = 1);
 };
-

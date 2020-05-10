@@ -1,12 +1,15 @@
 ﻿#pragma once
 #include "GameState.h"
-#include "InputBinder.h"
 #include "checkML.h"
+#include "Texture.h"
 #include <vector>
+
+class InputBinder;
+class InputHandler;
 
 // todav�a falta darle un owner a este State, para que s�lo lo maneje el server
 const int MAX_SKINS_PLACEHOLDER = 10;
-enum BinderType {ControllerB=0,KeyboardB,MouseB,UNKNOWN};
+enum BinderType { ControllerB = 0, KeyboardB, MouseB, UNKNOWN };
 struct PlayerLobbyInfo {
 	int id;
 	InputBinder* inputBinder = nullptr;
@@ -24,11 +27,6 @@ struct PlayerLobbyInfo {
 class LobbyState : public GameState
 {
 private:
-	void clear() {
-		// CSI[2J clears screen, CSI[H moves the cursor to top-left corner
-		std::cout << "\x1B[2J\x1B[H";
-	}
-	void clear2();
 protected:
 	int maxPlayers_ = 4;
 	const int maxKbPlayers_ = 2;
@@ -73,4 +71,3 @@ public:
 	void render() override;
 	bool ready(); //devuelve true si todos los jugadores estan listos
 };
-

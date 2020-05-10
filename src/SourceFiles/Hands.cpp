@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "Resources.h"
 #include "InputHandler.h"
+#include "InputBinder.h"
 
 Hands::Hands(int textureId, WeaponID wId) :
 	Component(ComponentType::Hands),

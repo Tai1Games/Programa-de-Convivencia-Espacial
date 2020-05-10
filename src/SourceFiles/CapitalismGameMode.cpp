@@ -1,5 +1,6 @@
 #include "CapitalismGameMode.h"
 #include "FireBallGenerator.h"
+#include "ObjectFactory.h"
 
 void CapitalismGameMode::init(PlayState* game)
 {
@@ -27,12 +28,8 @@ void CapitalismGameMode::init(PlayState* game)
 			game->getPhysicsWorld(), pos)->getComponent<Collider>(ComponentType::Collider));
 	}
 
-	for (int k = 0; k < nPlayers_; k++) {
-		players_.push_back(PlayerFactory::createPlayerWithWallet(game->getEntityManager(), game->getPhysicsWorld(), k,
-			Resources::Body, tilemap_->getPlayerSpawnPoint(k).x, tilemap_->getPlayerSpawnPoint(k).y, this));
-		playerWallets_.push_back(players_[k]->getComponent<Wallet>(ComponentType::Wallet));
-		playerCoins_.push_back(playerWallets_[k]->getCoins());
-	}
+	createPlayers(game);
+	
 
 	//UI Elements.
 	coinTextureUI_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::CoinUI);
@@ -43,6 +40,15 @@ void CapitalismGameMode::render() {
 	AbstractTimedGameMode::render();
 
 	renderCoinsMarker();
+}
+
+void CapitalismGameMode::createPlayers(PlayState* game) {
+	for (int k = 0; k < nPlayers_; k++) {
+		players_.push_back(PlayerFactory::createPlayerWithWallet(game->getEntityManager(), game->getPhysicsWorld(), k,
+			Resources::Body, tilemap_->getPlayerSpawnPoint(k).x, tilemap_->getPlayerSpawnPoint(k).y, (*matchInfo_->getPlayersInfo())[k]->inputBinder, this));
+		playerWallets_.push_back(players_[k]->getComponent<Wallet>(ComponentType::Wallet));
+		playerCoins_.push_back(playerWallets_[k]->getCoins());
+	}
 }
 
 void CapitalismGameMode::update() {
@@ -61,6 +67,7 @@ void CapitalismGameMode::update() {
 			coinsSpawned_++;
 		}
 	}
+	GameMode::update();
 }
 
 void CapitalismGameMode::renderCoinsMarker()

@@ -11,10 +11,7 @@ protected:
 public:
 	BulletPool();
 	~BulletPool() {}
-	
-	virtual void init(EntityManager* eMan, b2World* physicsWorld);
-	virtual void addBullet(b2Vec2 pos, b2Vec2 size, b2Vec2 vel, int texture, int damage, int player);
 
-	void addThrownByPlayer(GameMode* gm);
+	void init(EntityManager* eMan, b2World* physicsWorld, GameMode* gM);
+	void addBullet(b2Vec2 pos, b2Vec2 size, b2Vec2 vel, int texture, int damage, int player);
 };
-

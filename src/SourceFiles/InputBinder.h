@@ -6,7 +6,7 @@
 
 #pragma once
 class b2Vec2;
-enum ActionKey {Grab=0,Throw,Pick,Attack,Impulse};
+enum ActionKey { Grab = 0, Throw, Pick, Attack, Impulse };
 struct KeyCursor {
 	SDL_Keycode Up = SDLK_w;
 	SDL_Keycode Left = SDLK_a;
@@ -22,14 +22,14 @@ struct KeyCursor {
 			Down = SDLK_s;
 			Right = SDLK_d;
 		}
-		break;
+			  break;
 		case 2: {
 			Up = SDLK_i;
 			Left = SDLK_j;
 			Down = SDLK_k;
 			Right = SDLK_l;
 		}
-		break;
+			  break;
 		default:
 			break;
 		}
@@ -46,7 +46,7 @@ struct KeyboardMapping {
 		pickWeapon_secondary,
 		throwWeapon,
 		throwWeapon_secondary,
-		attack, 
+		attack,
 		attack_secondary,
 		impulse,
 		impulse_secondary,
@@ -59,7 +59,7 @@ struct KeyboardMapping {
 		{
 		case 1: {
 			cursor = KeyCursor(1);
-				grab = SDLK_LSHIFT,
+			grab = SDLK_LSHIFT,
 				pickWeapon = SDLK_q,
 				pickWeapon_secondary = SDLK_e,
 				throwWeapon = SDLK_q,
@@ -72,23 +72,23 @@ struct KeyboardMapping {
 				forward = SDLK_e,
 				back = SDLK_q;
 		}
-		break;
+			  break;
 		case 2: {
 			cursor = KeyCursor(2);
 			grab = SDLK_RSHIFT,
-			pickWeapon = SDLK_o,
-			pickWeapon_secondary = SDLK_COMMA,
-			throwWeapon = SDLK_o,
-			throwWeapon_secondary = SDLK_COMMA,
-			attack = SDLK_p,
-			attack_secondary = SDLK_PERIOD,
-			impulse = SDLK_RETURN,
-			impulse_secondary = SDLK_RETURN,
-			pause = SDLK_BACKSPACE,
-			forward = SDLK_o,
-			back = SDLK_u;
+				pickWeapon = SDLK_o,
+				pickWeapon_secondary = SDLK_COMMA,
+				throwWeapon = SDLK_o,
+				throwWeapon_secondary = SDLK_COMMA,
+				attack = SDLK_p,
+				attack_secondary = SDLK_PERIOD,
+				impulse = SDLK_RETURN,
+				impulse_secondary = SDLK_RETURN,
+				pause = SDLK_BACKSPACE,
+				forward = SDLK_o,
+				back = SDLK_u;
 		}
-		break;
+			  break;
 		default:
 			break;
 		}
@@ -119,9 +119,11 @@ public:
 	virtual bool menuMove(Dir d) = 0;
 	virtual bool menuForward() = 0;
 	virtual bool menuBack() = 0;
+	virtual bool pressPause() = 0;
+	virtual bool secretWinButton() { return false; }
 };
 
-//Abstracta pura para modos con teclado 
+//Abstracta pura para modos con teclado
 //para que dejeis
 class KeyboardBinder : public InputBinder {
 protected:
@@ -144,21 +146,20 @@ public:
 	}
 	virtual bool menuMove(Dir d) {
 		switch (d) {
-		case Dir::Up: { return ih->isKeyJustDown(map_.cursor.Up); }			break;
-		case Dir::Down: { return ih->isKeyJustDown(map_.cursor.Down); }		break;
-		case Dir::Left: { return ih->isKeyJustDown(map_.cursor.Left); }		break;
-		case Dir::Right: { return ih->isKeyJustDown(map_.cursor.Right); }	break;
+		case Dir::Up: { return ih->isKeyDown(map_.cursor.Up); }			break;
+		case Dir::Down: { return ih->isKeyDown(map_.cursor.Down); }		break;
+		case Dir::Left: { return ih->isKeyDown(map_.cursor.Left); }		break;
+		case Dir::Right: { return ih->isKeyDown(map_.cursor.Right); }	break;
 		default: { return false; }											break;
 		}
 	}
 	virtual bool menuForward() {
-
 		return ih->isKeyJustDown(map_.forward);
 	}
 	virtual bool menuBack() {
-
 		return ih->isKeyJustDown(map_.back);
 	}
+	virtual bool pressPause() { return ih->isKeyJustDown(map_.pause); }
 	//como sigamos con la pelea juro que me como a alguien
 	virtual b2Vec2 getAimDir() = 0;
 };
@@ -216,7 +217,10 @@ public:
 				lastDir = dir;
 			return lastDir;
 		}
-		else return b2Vec2();
+		else {
+			cout << "no hay collider" << endl;
+			return b2Vec2();
+		}
 	}
 	virtual bool pressImpulse() {
 		return ih->isMouseButtonJustDown(InputHandler::MOUSEBUTTON::RIGHT);
@@ -238,7 +242,7 @@ class ControllerBinder : public InputBinder {
 protected:
 	int id_ = -1;
 public:
-	ControllerBinder(int id) : InputBinder(),id_(id) {}
+	ControllerBinder(int id) : InputBinder(), id_(id) {}
 	virtual ~ControllerBinder() { ih->returnGamePad(id_); }
 	virtual bool holdGrab() {
 		return ih->getTrigger(id_, InputHandler::GAMEPADTRIGGER::LEFTTRIGGER);
@@ -247,7 +251,7 @@ public:
 		return !ih->getTrigger(id_, InputHandler::GAMEPADTRIGGER::LEFTTRIGGER);
 	}
 	virtual bool pressPick() {
-		return ih->isButtonJustDown(id_,SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_Y);
+		return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_Y);
 	}
 	virtual bool pressThrow() {
 		return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_Y);
@@ -267,10 +271,10 @@ public:
 	virtual b2Vec2 getAimDir() {
 		return ih->getLastStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK);
 	}
-	virtual bool menuMove(Dir d){
+	virtual bool menuMove(Dir d) {
 		switch (d) {
-		case Dir::Up: { return ih->getStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK).y > 0.9; }		break;
-		case Dir::Down: { return ih->getStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK).y < -0.9; }	break;
+		case Dir::Down: { return ih->getStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK).y > 0.9; }		break;
+		case Dir::Up: { return ih->getStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK).y < -0.9; }	break;
 		case Dir::Left: { return ih->getStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK).x < -0.9; }	break;
 		case Dir::Right: { return ih->getStickDir(id_, InputHandler::GAMEPADSTICK::LEFTSTICK).x > 0.9; }	break;
 		default: { return false; }																			break;
@@ -282,26 +286,11 @@ public:
 	virtual bool menuBack() {
 		return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_B);
 	}
+	virtual bool pressPause() {
+		return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_START)
+			|| ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_GUIDE);
+	}
+	virtual bool secretWinButton() {return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_LEFTSHOULDER); }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //pero seguid con los meme xfa

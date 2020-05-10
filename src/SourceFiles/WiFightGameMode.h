@@ -6,6 +6,7 @@
 #include <vector>
 #include "WiFiWavePool.h"
 
+class MatchInfo;
 class WiFightGameMode : public GameMode
 {
 private:
@@ -14,7 +15,7 @@ private:
 	WiFiWavePool wifiWavesPool_;
 
 public:
-	WiFightGameMode(int nPlayers): GameMode(nPlayers) {};
+	WiFightGameMode(MatchInfo* mInfo) : GameMode(mInfo, GamemodeID::WiFight) {};
 	virtual ~WiFightGameMode() {};
 	virtual void init(PlayState* game);
 	virtual void render();
