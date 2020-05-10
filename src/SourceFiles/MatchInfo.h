@@ -31,7 +31,14 @@ public:
 	MatchInfo(const vector<PlayerLobbyInfo>& playerLobbyInfoVector);
 	~MatchInfo();
 
-	void setRounds(vector<pair<GamemodeID, string>>* roundsVector) { rounds_ = roundsVector; currentRoundNumber_ = 0; numberOfRounds_ = (*rounds_).size(); };
+	void setRounds(vector<pair<GamemodeID, string>>* roundsVector) {
+		rounds_ = roundsVector; currentRoundNumber_ = 0;
+		numberOfRounds_ = (*rounds_).size();
+		for (PlayerInfo* p : players_) {
+			p->totalPoints = 0;
+			for_each(p->matchesWon.begin(), p->matchesWon.end(), [](size_t& n) {n = 0; });
+		}
+	};
 
 	vector<PlayerInfo*>* getPlayersInfo() { return &players_; };
 
