@@ -9,6 +9,10 @@ void ConfettiWeapon::init() {
 	MeleeWeapon::init();
 	colWeapon_ = GETCMP1_(Collider);
 	particleEmitter_ = GETCMP1_(ParticleEmitter);
+	viewer_ = GETCMP1_(Viewer);
+	frameSize_ = viewer_->getTexture()->getHeight();
+
+	viewer_->setClip(SDL_Rect{ 0, 0, frameSize_, frameSize_ });
 }
 
 void ConfettiWeapon::action() {
@@ -22,6 +26,7 @@ void ConfettiWeapon::action() {
 		particleEmitter_->setDirection({ handDirection.x, handDirection.y });
 		particleEmitter_->PlayStop();
 		used = true;
+		viewer_->setClip(SDL_Rect{ frameSize_, 0, frameSize_, frameSize_ });
 		MeleeWeapon::action();
 	}
 }
