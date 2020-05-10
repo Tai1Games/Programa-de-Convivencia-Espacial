@@ -41,7 +41,7 @@ private:
 	TileMap* tilemap_;
 	vector<MatchInfo::PlayerInfo*>* playerInfo;
 	BulletPool bulletPool_;
-	BananaPool bananaPool_;
+	//BananaPool bananaPool_;
 
 public:
 	PlayState(GameMode* gMode, string tmap);

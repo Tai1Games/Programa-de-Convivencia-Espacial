@@ -1,11 +1,13 @@
 #pragma once
 #include "Entity.h"
 #include "checkML.h"
+#include "WeaponPool.h"
 
 class EntityManager;
 class Weapon;
 class FireBallPool;
 class BulletPool;
+class GameMode;
 
 class ObjectFactory
 {
@@ -55,5 +57,9 @@ public:
 
 	static Entity* makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, BulletPool* bp);
 
-	static Entity* makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld);
+	static Entity* makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld, GameMode* gameMode);
+
+	static Entity* makeTomatoTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WeaponPool* pool);
+
+	static Entity* makeBananaTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WeaponPool* pool);
 };

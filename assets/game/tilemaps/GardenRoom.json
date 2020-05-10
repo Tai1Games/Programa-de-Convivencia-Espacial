@@ -3,7 +3,8 @@
     {
      "export":
         {
-         "target":"."
+         "format":"json",
+         "target":"GardenRoom.json"
         }
     },
  "height":135,
@@ -103,6 +104,30 @@
                  "width":200,
                  "x":80,
                  "y":416
+                }, 
+                {
+                 "height":0,
+                 "id":88,
+                 "name":"TomatoTree",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":203.0722739864,
+                 "y":797.783933518006
+                }, 
+                {
+                 "height":0,
+                 "id":90,
+                 "name":"BananaTree",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1665.67615210274,
+                 "y":563.283807605137
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -325,10 +350,10 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":88,
+ "nextobjectid":92,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.3.3",
+ "tiledversion":"1.3.1",
  "tileheight":8,
  "tilesets":[],
  "tilewidth":8,
