@@ -28,6 +28,8 @@
 #include "BulletPool.h"
 #include "StaplerWeapon.h"
 #include "SpawnTree.h"
+#include "ThrownByPlayer.h"
+#include "GameMode.h"
 
 
 Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
@@ -313,7 +315,7 @@ Entity* ObjectFactory::makeBanana(Entity* e, EntityManager* entityManager, b2Wor
 	return e;
 }
 
-Entity* ObjectFactory::makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld)
+Entity* ObjectFactory::makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld, GameMode* gameMode)
 {
 	entityManager->addExistingEntity(e);
 
@@ -323,6 +325,7 @@ Entity* ObjectFactory::makeBullet(Entity* e, EntityManager* entityManager, b2Wor
 	e->addComponent<Viewer>(Resources::Negro);
 	e->addComponent<Bullet>();
 	e->addComponent<ColliderViewer>();
+	e->addComponent<ThrownByPlayer>(gameMode);
 
 	return e;
 }

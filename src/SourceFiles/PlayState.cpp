@@ -44,7 +44,7 @@ void PlayState::init() {
 
 	tilemap_ = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
 		"assets/game/tilemaps/"+tilemapName_+".json",
-		entityManager_, physicsWorld_, &bulletPool_);
+		entityManager_, physicsWorld_, &bulletPool_, gameMode_);
 	tilemap_->init();
 	gameMode_->setTileMap(tilemap_);
 
@@ -66,14 +66,10 @@ void PlayState::init() {
 	tilemap_->createWeapons();
 
 	gameMode_->init(this);
-
-
-	//bananaPool_.addBanana({ 20,20 });
 	
 	for (Weapon* w : *(entityManager_->getWeaponVector())) {
 		w->getEntity()->addComponent<ThrownByPlayer>(gameMode_);
 	}
-	//bulletPool_.addThrownByPlayer(gameMode_);
 }
 
 void PlayState::update() {

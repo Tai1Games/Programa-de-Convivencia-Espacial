@@ -24,8 +24,6 @@ private:
 
 	void renderKillMarker();
 
-	TomatoPool tomatoPool_;
-
 public:
 	TimeGameMode(int nPlayers) : AbstractTimedGameMode(nPlayers) {};
 	~TimeGameMode() {};

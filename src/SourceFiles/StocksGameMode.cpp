@@ -14,9 +14,6 @@ StocksGameMode::~StocksGameMode()
 
 void StocksGameMode::init(PlayState* game){
 	GameMode::init(game);
-	//NEED TO DELETE ---
-	tomatoPool_.init(game->getEntityManager(), game->getPhysicsWorld());
-	//------------------
 	for (int i = 0; i < nPlayers_; i++) {
 		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), i,
 			Resources::Body, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, 3));

@@ -7,14 +7,16 @@
 #include <string>
 #include "TomatoPool.h"
 #include "BananaPool.h"
+#include "GameMode.h"
 
 
-TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW, BulletPool* bp) :Component(ComponentType::Tilemap),  //w y h son de la ventana
+TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW, BulletPool* bp, GameMode* gameMode) :Component(ComponentType::Tilemap),  //w y h son de la ventana
 width_(w),
 height_(h),
 entityManager_(eM),
 physicsWorld_(pW),
-bulletPool_(bp){
+bulletPool_(bp),
+gameMode_(gameMode){
 	loadTileson(map);
 	playerSpawns_.reserve(4);
 	for (int i = 0; i < 4; i++) { //inicializa el vector
@@ -61,6 +63,7 @@ void TileMap::init() {
 			}
 		}
 	}
+	bulletPool_->init(entityManager_, physicsWorld_, gameMode_);
 }
 
 void TileMap::update() {
@@ -206,17 +209,17 @@ void TileMap::executeMapFactory()
 		}
 		else if (name == "TomatoTree") {
 			if (tomatoPool_ == nullptr) { 
-				tomatoPool_ = new TomatoPool();
+				tomatoPool_ = make_unique<TomatoPool>();
 				tomatoPool_->init(entityManager_, physicsWorld_);
 			}
-			ObjectFactory::makeTomatoTree(entityManager_, physicsWorld_, pos, tomatoPool_);
+			ObjectFactory::makeTomatoTree(entityManager_, physicsWorld_, pos, tomatoPool_.get());
 		}
 		else if (name == "BananaTree") {
 			if (bananaPool_ == nullptr) {
-				bananaPool_ = new BananaPool(bulletPool_);
+				bananaPool_ = make_unique<BananaPool>(bulletPool_);
 				bananaPool_->init(entityManager_, physicsWorld_);
 			}
-			ObjectFactory::makeBananaTree(entityManager_, physicsWorld_, pos, bananaPool_);
+			ObjectFactory::makeBananaTree(entityManager_, physicsWorld_, pos, bananaPool_.get());
 		}
 	}
 	solvePostCreationProblems();
