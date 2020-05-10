@@ -1,18 +1,24 @@
 #pragma once
+
+#include "WeaponPool.h"
 #include "ObjectPool.h"
-#include "Entity.h"
-#include "BananaWeapon.h"
-#include "ObjectFactory.h"
+#include "Constants.h"
 #include "BulletPool.h"
 
-class BananaPool
-{
-private :
-	ObjectPool<Entity, 10> bananaPool_; //de 10 bananas de momento
 
+class EntityManager;
+class b2World;
+class b2Vec2;
+
+class BananaPool : public WeaponPool {
+private:
+	ObjectPool<Entity, BANANA_POOL_SIZE> bananaPool_;
+	int bananaMaxSpeed_ = 0;
+	int bananaMinSpeed_ = 0;
+	BulletPool* bulletPool_ = nullptr;
 public:
-	BananaPool();
-	~BananaPool(){}
-	void init(EntityManager* eMan, b2World* physicsWorld, BulletPool* bp);
-	void addBanana(b2Vec2 pos);
+	BananaPool(BulletPool* bp);
+	~BananaPool() {};
+	virtual void init(EntityManager* eMan, b2World* physicsWorld) override;
+	virtual void addWeapon(b2Vec2 pos) override;
 };

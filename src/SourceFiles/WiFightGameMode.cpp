@@ -1,5 +1,8 @@
 #include "WiFightGameMode.h"
 #include "Resources.h"
+#include "ParticleEmitter.h"
+#include "RouterLogic.h"
+#include "ColliderViewer.h"
 
 void WiFightGameMode::init(PlayState* game)
 {
@@ -16,9 +19,12 @@ void WiFightGameMode::init(PlayState* game)
 	Collider* collRouter = router->addComponent<Collider>(state_->getPhysicsWorld(), b2_dynamicBody, tilemap_->getObjSpecialSpawnPos().x, tilemap_->getObjSpecialSpawnPos().y, 1, 0.7, 1, 0, 1, 0, 0, Collider::CollisionLayer::UnInteractableObject, false);
 	collRouter->createCircularFixture(5, 1, 0, 0, Collider::CollisionLayer::Trigger, true);
 	router->addComponent<Viewer>(Resources::Router);
-	router->addComponent<RouterLogic>(this);
+	router->addComponent<RouterLogic>(this, &wifiWavesPool_);
+	router->addComponent<ColliderViewer>();
 
 	collRouter->applyLinearImpulse(b2Vec2(100, 100), b2Vec2(0, 0));
+
+	wifiWavesPool_.init(state_->getEntityManager(), state_->getPhysicsWorld(), collRouter);
 
 	GameMode::initProgressBars();
 
