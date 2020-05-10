@@ -152,7 +152,7 @@ public:
 		ContinueText,
 
 		//Countdown
-		Go
+		Go,
       
 		// particles
 		Smoke,
