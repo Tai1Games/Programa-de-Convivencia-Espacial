@@ -25,15 +25,12 @@ private:
 	void renderKillMarker();
 
 public:
-	TimeGameMode(int nPlayers) : AbstractTimedGameMode(nPlayers) {};
-	~TimeGameMode() {};
-
+	TimeGameMode(MatchInfo* mInfo);
+	~TimeGameMode();
 	virtual void init(PlayState* game) override;
 	virtual void render() override;
 	virtual void update() override;
+	virtual void addPoints(int playerID);
 	virtual void playerKillsPlayer(int killerId, int deadId = -1) override;
-
-	void addPoints(int playerID);
-
 };
 

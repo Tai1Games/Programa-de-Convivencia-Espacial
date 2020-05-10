@@ -11,6 +11,7 @@ enum Buttons {
 	Exit
 };
 
+class InputBinder;
 class UIViewer;
 class PauseState : public GameState
 {
@@ -22,14 +23,15 @@ private:
 	/*Evita que se mueva varias veces hacia arriba/abajo al mantener el joystick*/
 	bool holdingY_ = false;
 	int ownerPlayerID_ = 0;
+	InputBinder* ownerBinder_;
 	vector<UIViewer*> btns_;
-	/*Indice para el botón seleccionado en el vector de botones*/
+	/*Indice para el botï¿½n seleccionado en el vector de botones*/
 	int selectedBtn_ = 0;
 	int currentMusicVolume_ = CONST(double, "MAX_MUSIC_VOLUME");
 
-	/*Actualiza la posición de la selección y el botón seleccionado*/
+	/*Actualiza la posiciï¿½n de la selecciï¿½n y el botï¿½n seleccionado*/
 	void updateSelectedButton();
-	/*Actualiza la posición del slider y el volumen de la música*/
+	/*Actualiza la posiciï¿½n del slider y el volumen de la mï¿½sica*/
 	void updateMusicVolume();
 
 	void resumeGame();

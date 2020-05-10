@@ -5,7 +5,7 @@
 #include "UIViewer.h"
 
 
-TutorialGameMode::TutorialGameMode(int nPlayers, int stocks) : GameMode(nPlayers)
+TutorialGameMode::TutorialGameMode(MatchInfo* mInfo, int stocks) : GameMode(mInfo,GamemodeID::Tutorial)
 {
 	maxStocks_ = stocks;
 }
@@ -18,9 +18,8 @@ void TutorialGameMode::init(PlayState* game) {
 	GameMode::init(game);
 
 	//------------------
+	GameMode::createPlayers(game);
 	for (int i = 0; i < nPlayers_; i++) {
-		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), i,
-			Resources::Body, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, 3));
 		playerStocks_.push_back(maxStocks_); //Initializes maxStocks vector with 3 on all positions.
 		//tutorial weapons
 		weapons_.push_back(ObjectFactory::makeExtinguisher(game->getEntityManager(), game->getPhysicsWorld(),

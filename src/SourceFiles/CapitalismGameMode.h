@@ -32,13 +32,13 @@ private:
 
 	void renderCoinsMarker();
 public:
-	CapitalismGameMode(int nPlayers) : AbstractTimedGameMode(nPlayers) {};
+	CapitalismGameMode(MatchInfo* mInfo) : AbstractTimedGameMode(mInfo, GamemodeID::Capitalism){};
 	virtual ~CapitalismGameMode() {};
-
 	virtual void init(PlayState* game) override;
 	virtual void render() override;
 	virtual void update() override;
+	virtual void createPlayers(PlayState* game);
+
 
 	void createCoin(b2Vec2 spawnPos, int player = -1, int val = 1);
 };
-

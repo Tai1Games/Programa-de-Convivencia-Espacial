@@ -1,6 +1,16 @@
 #include "LobbyState.h"
 #include "checkML.h"
 #include "Resources.h"
+#include "MatchInfo.h"
+#include "InputBinder.h"
+#include "InputHandler.h"
+
+void LobbyState::handleInput()
+{
+	GameState::handleInput();
+	handleJoinLeave();
+	handleJoinedPlayers();
+}
 
 LobbyState::~LobbyState()
 {
@@ -32,18 +42,12 @@ void LobbyState::init()
 	iconHorizontalOffset_ = CONST(int, "LOBBY_ICON_OFFSET");
 }
 
-void LobbyState::handleInput()
-{
-	GameState::handleInput();
-	handleJoinLeave();
-	handleJoinedPlayers();
-}
-
 void LobbyState::update()
 {
 	outDebug();
 	if (ready()) {
-		SDL_Game::instance()->getStateMachine()->changeToState(States::menu, 0);
+		SDL_Game::instance()->getStateMachine()->setMatchInfo(new MatchInfo(joinedPlayers_));
+		SDL_Game::instance()->getStateMachine()->changeToState(States::menu);
 	}
 }
 
@@ -56,7 +60,6 @@ void LobbyState::render() {
 	for (; i < maxPlayers_; i++)
 		renderPlayerLobbyInfo(nullptr, i);
 }
-
 bool LobbyState::ready()
 {
 	if (joinedPlayers_.size() > 0) {
@@ -70,7 +73,6 @@ bool LobbyState::ready()
 
 void LobbyState::outDebug()
 {
-	clear();
 	for (auto& player : joinedPlayers_)
 	{
 		cout << "Player " << player.id << " using ";
@@ -98,7 +100,6 @@ void LobbyState::outDebug()
 
 
 void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
-
 	SDL_Rect destRect = {
 		horizontalIniPoint_ + index * horizontalOffset_,
 		verticalIniPoint_,
@@ -120,7 +121,7 @@ void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
 			ctrlTexture_->render(destRect);
 		}
 		else if (playerInfo->kbId != -1) {
-			kbTexture_->render(destRect);			
+			kbTexture_->render(destRect);
 		}
 		else if (playerInfo->kbmId != -1) {
 			mouseTexture_->render(destRect);
@@ -182,7 +183,6 @@ void LobbyState::changeKbToMouse()
 	delete it->inputBinder;
 	it->inputBinder = new MouseKeyboardBinder(nullptr, 1);
 	it->binderType = BinderType::MouseB;
-
 }
 
 void LobbyState::ctrlPlayerOut(int index) {
@@ -244,7 +244,7 @@ void LobbyState::handleJoinLeave() {
 				joinedMouse_ = true;
 				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new MouseKeyboardBinder(nullptr, 1)));
 				joinedPlayers_[newId].kbmId = 0;
-				joinedPlayers_[newId].binderType =MouseB;
+				joinedPlayers_[newId].binderType = MouseB;
 			}
 		}
 	}
@@ -269,23 +269,23 @@ void LobbyState::handleJoinLeave() {
 	}
 }
 
-void LobbyState::handleJoinedPlayers(){
-	for(auto& player: joinedPlayers_){
+void LobbyState::handleJoinedPlayers() {
+	for (auto& player : joinedPlayers_) {
 		//cambiamos de skin
-		if(player.inputBinder->menuMove(Dir::Left)){
+		if (player.inputBinder->menuMove(Dir::Left)) {
 			player.playerSkin -= 1;
-			if(player.playerSkin < 0){
-				player.playerSkin = MAX_SKINS_PLACEHOLDER-1;
+			if (player.playerSkin < 0) {
+				player.playerSkin = MAX_SKINS_PLACEHOLDER - 1;
 			}
 		}
-		else if(player.inputBinder->menuMove(Dir::Right)){
+		else if (player.inputBinder->menuMove(Dir::Right)) {
 			player.playerSkin = (++player.playerSkin) % (MAX_SKINS_PLACEHOLDER);
 		}
 		else if (player.inputBinder->menuForward()) {
 			player.ready = true;
 		}
 		else if (player.inputBinder->menuBack()) {
-			if(player.ready)
+			if (player.ready)
 				player.ready = false;
 			//desconexion mediante boton back
 			else {
@@ -300,9 +300,4 @@ void LobbyState::handleJoinedPlayers(){
 			}
 		}
 	}
-}
-
-void LobbyState::clear2()
-{
-	system("cls");
 }

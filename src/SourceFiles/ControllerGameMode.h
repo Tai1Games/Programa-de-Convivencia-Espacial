@@ -18,7 +18,7 @@ private:
 	vector<double> controllerTimes_;
 	Weapon* controller_ = nullptr;
 public:
-	ControllerGameMode(int nPlayers): GameMode(nPlayers) {};
+	ControllerGameMode(MatchInfo* mInfo): GameMode(mInfo,GamemodeID::Controller) {};
 	virtual ~ControllerGameMode();
 	virtual void init(PlayState* game);
 	virtual void render();

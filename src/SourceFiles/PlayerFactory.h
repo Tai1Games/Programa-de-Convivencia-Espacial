@@ -12,14 +12,15 @@
 #include "b2_world.h"
 
 class CapitalismGameMode;
+class InputBinder;
 
 class PlayerFactory {
 private:
-	static Entity* createBasePlayer(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY);
+	static Entity* createBasePlayer(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY, InputBinder* ib);
 public:
 	PlayerFactory() {}
 	~PlayerFactory() {}
 
-	static Entity* createPlayerWithHealth(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY, int healthPoints);
-	static Entity* createPlayerWithWallet(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY, CapitalismGameMode* gM);
+	static Entity* createPlayerWithHealth(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY, InputBinder* ib, int healthPoints);
+	static Entity* createPlayerWithWallet(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY, InputBinder* ib, CapitalismGameMode* gM);
 };
