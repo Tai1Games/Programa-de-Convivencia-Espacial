@@ -38,10 +38,8 @@ public:
 	virtual void init(PlayState* game) override;
 	virtual void render() override;
 	virtual void update() override;
-	virtual bool onPlayerDead(int id) { return true; }; //Returns false when players runs out of stocks.
 	virtual void createPlayers(PlayState* game);
 
 
 	void createCoin(b2Vec2 spawnPos, int player = -1, int val = 1);
 };
-
