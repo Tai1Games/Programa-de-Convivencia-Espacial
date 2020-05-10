@@ -17,7 +17,7 @@ void AttachesToObjects::init() {
 
 void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint, b2Vec2 collNormal) {
 	if (joint_ == nullptr) {
-
+		//Evitar angulos negativos
 		if (mainCollider_->getBody()->GetAngle() > 360) {
 			mainCollider_->getBody()->SetTransform(mainCollider_->getPos(), mainCollider_->getBody()->GetAngle() - 360);
 		}
@@ -31,7 +31,13 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle())>0) ? -1 : 1;
 		attachAngle += (PI / 2)*tilt;
 
-		mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
+		b2Vec2 aux = collPoint - mainCollider_->getPos();
+		aux.Normalize();
+		aux.x *= mainCollider_->getH(0) / 2;
+		aux.y *= mainCollider_->getH(0) / 2;
+		mainCollider_->setTransform(mainCollider_->getPos() + aux, attachAngle);
+		
+		
 		b2WeldJointDef jointDef; //Definición del nuevo joint.
 		jointDef.bodyA = mainCollider_->getBody(); //Body del jugador.
 		jointDef.bodyB = attachedObject; //Body del objeto al que se tiene que atar.
