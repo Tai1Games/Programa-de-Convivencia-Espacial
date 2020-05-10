@@ -51,11 +51,15 @@ private:
 	double minThrowSpeed_ = 0;
 	double spinOnThrowSpeed_ = 0;
 
+	int throwCooldown_ = 0;
+	int throwCooldownTimer_ = 0;
+
 public:
 	Weapon(WeaponID wId, int impctDmg) : Component(ComponentType::Weapon), weaponType_(wId), impactDamage_(impctDmg){}
 	Weapon(ComponentType::CmpId compType, WeaponID wId, int impactDmg) : Component(compType), weaponType_(wId), impactDamage_(impactDmg) {}
 	virtual ~Weapon(){};
 	virtual void init() override;
+	virtual void update() override;
 
 	virtual void handleInput() override;
 

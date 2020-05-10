@@ -19,18 +19,22 @@ void PlayerController::init()
 	playerNumber_ = playerData_->getPlayerNumber();
 	ib = playerData_->getBinder();
 	KeyboardBinder* bindAux = static_cast<KeyboardBinder*>(ib);
-	if (bindAux != nullptr) kBinder = bindAux;
+	if (bindAux != nullptr) kBinder_ = bindAux;
 
 	maxImpulseGrabbed_ = CONST(float, "IMPULSE_GRABBED");
 	maxImpulseFloating_ = CONST(float, "IMPULSE_FLOATING");
 	chargeMultiplier_ = CONST(float, "IMPULSE_MULTIPLIER");
+
+	impulseCooldown_ = CONST(int, "IMPULSE_COOLDOWN");
 }
 
 void PlayerController::handleInput()
 {
 	//Empieza la carga
-	if (ib->pressImpulse() || (ib->holdImpulse() && !chargingImpulse_)) {
+	if (impulseCooldownTimer_ >= impulseCooldown_ &&
+		(ib->pressImpulse() || (ib->holdImpulse() && !chargingImpulse_))) {
 		chargingImpulse_ = true;
+		impulseCooldownTimer_ = 0;
 	}//Soltarse
 	else if (ib->releaseImpulse()) {
 		dirImpulse_ = ib->getAimDir();
@@ -53,7 +57,8 @@ void PlayerController::handleInput()
 		chargingImpulse_ = false;
 		chargedFrames_ = 0;
 		impulseForce_ = 0;
-		if (kBinder != nullptr) kBinder->grabbed = false;
+		if (kBinder_ != nullptr) kBinder_->grabbed = false;
+		impulseCooldownTimer_ = 0;
 	}
 
 	if (ib->releaseGrab()) {
@@ -63,7 +68,7 @@ void PlayerController::handleInput()
 			impulseForce_ = 0;
 			chargingImpulse_ = false;
 			attachesToObj_->deAttachFromObject();
-			if (kBinder != nullptr)kBinder->grabbed = false;
+			if (kBinder_ != nullptr)kBinder_->grabbed = false;
 		}
 	}
 }
@@ -76,4 +81,5 @@ void PlayerController::update() {
 			impulseForce_ = chargedFrames_ * chargeMultiplier_;
 		}
 	}
+	impulseCooldownTimer_++;
 }
