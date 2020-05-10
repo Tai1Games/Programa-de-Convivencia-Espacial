@@ -62,7 +62,6 @@ void MeleeWeapon::onCollisionEnter(Collision* c) {
 		b2Vec2 knockback = auxCo->getPos() - mainCollider_->getPos();
 		knockback.Normalize();
 		knockback *= CONST(double, "WEAPON_MELEE_KNOCKBACK");
-		cout << "a";
 
 		auxCo->applyLinearImpulse(knockback, b2Vec2(0, 1));
 		if (auxHe != nullptr) {
