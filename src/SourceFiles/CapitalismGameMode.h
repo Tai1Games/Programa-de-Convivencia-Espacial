@@ -11,7 +11,6 @@ class CapitalismGameMode : public AbstractTimedGameMode
 private:
 	CoinsPool coinPool_;
 	Texture* coinTextureUI_ = nullptr;
-
 	double timeSinceSpawn_ = 0;
 	double spawnTime_ = 0;
 	double currentSpawnTime_ = 0;

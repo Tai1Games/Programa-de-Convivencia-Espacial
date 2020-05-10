@@ -10,7 +10,6 @@ void BananaWeapon::init()
 void BananaWeapon::action()
 {	
 	setActive(false);
-	entity_->setActive(false);
 	b2Vec2 dir = currentHand_->getDir();
 	int speed = CONST(double, "BANANA_BULLER_SPEED");
 	   
