@@ -1,5 +1,6 @@
 #include "CapitalismGameMode.h"
 #include "FireBallGenerator.h"
+#include "ObjectFactory.h"
 
 void CapitalismGameMode::init(PlayState* game)
 {

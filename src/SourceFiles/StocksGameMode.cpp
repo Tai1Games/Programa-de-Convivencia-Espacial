@@ -14,9 +14,7 @@ StocksGameMode::~StocksGameMode()
 
 void StocksGameMode::init(PlayState* game){
 	GameMode::init(game);
-	//NEED TO DELETE ---
-	tomatoPool_.init(game->getEntityManager(), game->getPhysicsWorld());
-	//------------------
+
 	GameMode::createPlayers(game);
 	for (int i = 0; i < nPlayers_; i++) {
 		playerStocks_.push_back(maxStocks_); //Initializes maxStocks vector with 3 on all positions.
@@ -34,9 +32,6 @@ void StocksGameMode::init(PlayState* game){
 		}
 		playersStocksPos_.push_back(p);
 	}
-
-	//NEED TO DELETE
-	tomatoPool_.addTomato({ 40, 20 });
 }
 
 void StocksGameMode::update(){

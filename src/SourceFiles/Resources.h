@@ -81,6 +81,7 @@ public:
 		TreadmillSpriteSheet,
 		PipeHor,
 		PipeVer,
+		TreeTomato,
 		CarnivorousPlant,
 		Smoke,
 		Tomato,

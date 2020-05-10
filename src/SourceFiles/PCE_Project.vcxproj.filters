@@ -252,6 +252,9 @@
     <ClInclude Include="MenuState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
+    <ClInclude Include="SpawnTree.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
     <ClInclude Include="InputBinder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -259,6 +262,9 @@
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="TomatoPool.h">
+      <Filter>Header Files\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponPool.h">
       <Filter>Header Files\Pools</Filter>
     </ClInclude>
     <ClInclude Include="TomatoWeapon.h">
@@ -490,6 +496,9 @@
     </ClCompile>
     <ClCompile Include="MenuState.cpp">
       <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnTree.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="InputBinder.cpp">
       <Filter>Source Files</Filter>

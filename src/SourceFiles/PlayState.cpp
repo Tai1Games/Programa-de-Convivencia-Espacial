@@ -39,14 +39,14 @@ void PlayState::init() {
 	entityManager_ = new EntityManager();
 	physicsWorld_ = new b2World(b2Vec2(0, 0));
 
-	bulletPool_.init(entityManager_, physicsWorld_);
-	bananaPool_.init(entityManager_, physicsWorld_, &bulletPool_);
+	/*bulletPool_.init(entityManager_, physicsWorld_);
+	bananaPool_.init(entityManager_, physicsWorld_, &bulletPool_);*/
 
 	secondsPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 
 	tilemap_ = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
 		"assets/game/tilemaps/"+tilemapName_+".json",
-		entityManager_, physicsWorld_, &bulletPool_);
+		entityManager_, physicsWorld_, &bulletPool_, gameMode_);
 	tilemap_->init();
 	gameMode_->setTileMap(tilemap_);
 
@@ -71,12 +71,9 @@ void PlayState::init() {
 
 	playerInfo = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
 
-	bananaPool_.addBanana({ 20,20 });
-
 	for (Weapon* w : *(entityManager_->getWeaponVector())) {
 		w->getEntity()->addComponent<ThrownByPlayer>(gameMode_);
 	}
-	bulletPool_.addThrownByPlayer(gameMode_);
 
 	Entity* countdown = entityManager_->addEntity();
 	countdown->addComponent<Countdown>(gameMode_);
