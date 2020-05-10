@@ -37,6 +37,7 @@ public:
 	virtual void render() {};
 	virtual void update();
 	virtual bool onPlayerDead(int id) { return true; };
+	virtual void activateControl();
 	virtual void setTileMap(TileMap* tm) { tilemap_ = tm; };
 	virtual void playerKillsPlayer(int killerId, int deadId = -1) {};
 	virtual void createPlayers(PlayState* state);

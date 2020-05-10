@@ -65,7 +65,7 @@ public:
 		TSet_Dungeon,
 		Slipper,
 		Extinguisher,
-		Mancuerna,
+		Dumbbell,
 		Ball,
 		Stapler,
 		Stone,
@@ -83,7 +83,6 @@ public:
 		PipeVer,
 		TreeTomato,
 		CarnivorousPlant,
-		Smoke,
 		Tomato,
 		TomatoRing,
 		TreadmillPanel,
@@ -150,7 +149,14 @@ public:
 		TutorialEnd,
 
 		//MidGame 
-		ContinueText
+		ContinueText,
+
+		//Countdown
+		Go
+      
+		// particles
+		Smoke,
+		WiFiWave
 	};
 
 	enum AudioId : std::size_t {

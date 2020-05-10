@@ -52,6 +52,7 @@ void GameStateMachine::changeToState(int state, int gameMode, string tileMap) {
 
 void GameStateMachine::transitionToState(int state, int gameMode, string tileMap) {
 	loadState(state, gameMode, tileMap);
+	delete states_[States::transition];
 	states_[States::transition] = new TransitionState(currentState_, state, &states_);
 	states_[States::transition]->init();
 	currentState_ = States::transition;

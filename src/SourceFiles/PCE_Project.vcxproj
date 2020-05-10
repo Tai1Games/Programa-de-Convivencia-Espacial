@@ -186,6 +186,8 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="AbstractTimedGameMode.h" />
     <ClInclude Include="AbstractViewers.h" />
     <ClInclude Include="ActionableWeapon.h" />
+    <ClInclude Include="WiFiWavePool.h" />
+    <ClInclude Include="WiFiBullet.h" />
     <ClInclude Include="AnimatedPlayer.h" />
     <ClInclude Include="AnimatedUIViewer.h" />
     <ClInclude Include="AnimatedViewer.h" />
@@ -208,6 +210,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="ComponentType.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ControllerGameMode.h" />
+    <ClInclude Include="Countdown.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Fireball.h" />
@@ -277,6 +280,8 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="AbstractTimedGameMode.cpp" />
     <ClCompile Include="AbstractViewers.cpp" />
     <ClCompile Include="ActionableWeapon.cpp" />
+    <ClCompile Include="WiFiWavePool.cpp" />
+    <ClCompile Include="WiFiBullet.cpp" />
     <ClCompile Include="AnimatedPlayer.cpp" />
     <ClCompile Include="AnimatedUIViewer.cpp" />
     <ClCompile Include="AnimatedViewer.cpp" />
@@ -296,6 +301,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ControllerGameMode.cpp" />
     <ClCompile Include="Constants.cpp" />
+    <ClCompile Include="Countdown.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Fireball.cpp" />

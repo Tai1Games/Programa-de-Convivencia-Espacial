@@ -309,6 +309,9 @@
     <ClInclude Include="LobbyState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
+    <ClInclude Include="Countdown.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
     <ClInclude Include="MatchInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -318,11 +321,14 @@
     <ClInclude Include="AnimatedPlayer.h">
       <Filter>Header Files\Components\Viewers</Filter>
     </ClInclude>
-    <ClInclude Include="StaplerWeapon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AbstractTimedGameMode.h">
       <Filter>Header Files\GameModes</Filter>
+    </ClInclude>
+    <ClInclude Include="WiFiBullet.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="WiFiWavePool.h">
+      <Filter>Header Files\Pools</Filter>
     </ClInclude>
     <ClInclude Include="AbstractAnimatedViewers.h">
       <Filter>Header Files\Components\Viewers</Filter>
@@ -332,6 +338,9 @@
     </ClInclude>
     <ClInclude Include="AbstractViewers.h">
       <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="StaplerWeapon.h">
+      <Filter>Header Files\Components\Weapons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -551,6 +560,9 @@
     <ClCompile Include="LobbyState.cpp">
       <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
+    <ClCompile Include="Countdown.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
     <ClCompile Include="MatchInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -565,6 +577,12 @@
     </ClCompile>
     <ClCompile Include="AbstractTimedGameMode.cpp">
       <Filter>Source Files\GameModes</Filter>
+    </ClCompile>
+    <ClCompile Include="WiFiBullet.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="WiFiWavePool.cpp">
+      <Filter>Source Files\Pools</Filter>
     </ClCompile>
     <ClCompile Include="AbstractAnimatedViewers.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
