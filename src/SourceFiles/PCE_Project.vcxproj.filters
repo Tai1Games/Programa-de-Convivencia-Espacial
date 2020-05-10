@@ -318,9 +318,6 @@
     <ClInclude Include="AnimatedPlayer.h">
       <Filter>Header Files\Components\Viewers</Filter>
     </ClInclude>
-    <ClInclude Include="StaplerWeapon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AbstractTimedGameMode.h">
       <Filter>Header Files\GameModes</Filter>
     </ClInclude>
@@ -338,6 +335,9 @@
     </ClInclude>
     <ClInclude Include="AbstractViewers.h">
       <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="StaplerWeapon.h">
+      <Filter>Header Files\Components\Weapons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
