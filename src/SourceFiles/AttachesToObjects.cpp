@@ -17,10 +17,11 @@ void AttachesToObjects::init() {
 
 void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint, b2Vec2 collNormal) {
 	if (joint_ == nullptr) {
-		
+
 		attachedObject_ = attachedObject;
 		b2Vec2 perp = perpendicularCounterClockwise(collNormal);
 		float attachAngle = std::atanf(perp.y/perp.x);
+
 		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle())>0) ? -1 : 1;
 		attachAngle += (PI / 2)*tilt;
 
@@ -29,8 +30,9 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 		aux.x *= mainCollider_->getH(0) / 2;
 		aux.y *= mainCollider_->getH(0) / 2;
 		mainCollider_->setTransform(mainCollider_->getPos() + aux, attachAngle);
-		
-		
+
+
+		//mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
 		b2WeldJointDef jointDef; //Definición del nuevo joint.
 		jointDef.bodyA = mainCollider_->getBody(); //Body del jugador.
 		jointDef.bodyB = attachedObject; //Body del objeto al que se tiene que atar.
@@ -46,10 +48,19 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 
 void AttachesToObjects::deAttachFromObject() {
 	if (joint_ != nullptr) {
+		//Direccion contraria a la pared
+		b2Vec2 aux = joint_->GetBodyB()->GetPosition() - mainCollider_->getPos();
+		aux.Normalize();
+		aux.x *= mainCollider_->getH(0) / 2;
+		aux.y *= mainCollider_->getH(0) / 2;
+		
+		
 		mainCollider_->getWorld()->DestroyJoint(joint_); //Destruye el joint
 		joint_ = nullptr; //Al hacer la acción de arriba, el puntero a joint_ sigue apuntando a una dirección de memoria que NO es válida. Por eso se iguala a nullptr
 		attachedObject_ = nullptr;
 		attachedCollider_ = nullptr;
+		//Te separa de la pared para que no te agarres de inmediato
+		mainCollider_->setTransform(mainCollider_->getPos() - aux, mainCollider_->getAngle());
 	}
 }
 
