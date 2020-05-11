@@ -3,6 +3,8 @@
 #include "Entity.h"
 #include "Constants.h"
 
+class GameMode;
+
 class ConfettiPool
 {
 private:
@@ -10,7 +12,7 @@ private:
 public:
 	ConfettiPool();
 	~ConfettiPool() {};
-	void init(EntityManager* eMan, b2World* physicsWorld);
+	void init(EntityManager* eMan, b2World* physicsWorld, GameMode* gM);
 
 	void addConfetti(b2Vec2 pos);
 };

@@ -47,7 +47,7 @@ Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physic
 	return e;
 }
 
-Entity* ObjectFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
+Entity* ObjectFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, GameMode* gM)
 {
 	entityManager->addExistingEntity(e);
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "CONFETTI_DENSITY"),
@@ -58,6 +58,7 @@ Entity* ObjectFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2W
 	pE->setOffset({ CONST(double, "CONFETTI_PARTICLE_OFFSET_X"), CONST(double, "CONFETTI_PARTICLE_OFFSET_Y") });
 	e->addComponent<ConfettiWeapon>(WeaponID::Confetti, CONST(int, "CONFETTI_DAMAGE"), CONST(int, "CONFETTI_IMPACT_DAMAGE"), CONST(int, "CONFETTI_COOLDOWN_FRAMES"));
 	e->addComponent<ColliderViewer>();
+	e->addComponent<ThrownByPlayer>(gM);
 
 	return e;
 }
