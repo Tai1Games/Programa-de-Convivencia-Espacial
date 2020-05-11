@@ -206,6 +206,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="CollisionHandler.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentType.h" />
+    <ClInclude Include="ConfettiPool.h" />
     <ClInclude Include="ConfettiWeapon.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ControllerGameMode.h" />
@@ -292,6 +293,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="ColliderViewer.cpp" />
     <ClCompile Include="CollisionHandler.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="ConfettiPool.cpp" />
     <ClCompile Include="ConfettiWeapon.cpp" />
     <ClCompile Include="ControllerGameMode.cpp" />
     <ClCompile Include="Constants.cpp" />

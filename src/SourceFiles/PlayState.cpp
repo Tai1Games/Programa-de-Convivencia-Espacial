@@ -39,12 +39,13 @@ void PlayState::init() {
 
 	bulletPool_.init(entityManager_, physicsWorld_);
 	bananaPool_.init(entityManager_, physicsWorld_, &bulletPool_);
+	confettiPool_.init(entityManager_, physicsWorld_);
 
 	secondsPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 
 	tilemap_ = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
 		"assets/game/tilemaps/"+tilemapName_+".json",
-		entityManager_, physicsWorld_, &bulletPool_);
+		entityManager_, physicsWorld_, &bulletPool_, &confettiPool_);
 	tilemap_->init();
 	gameMode_->setTileMap(tilemap_);
 

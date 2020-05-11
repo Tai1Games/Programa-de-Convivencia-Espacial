@@ -43,9 +43,9 @@ Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physic
 	return e;
 }
 
-Entity* ObjectFactory::makeConfetti(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
+Entity* ObjectFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
-	Entity* e = entityManager->addEntity();
+	entityManager->addExistingEntity(e);
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "CONFETTI_DENSITY"),
 		CONST(double, "CONFETTI_FRICTION"), CONST(double, "CONFETTI_RESTITUTION"),
 		CONST(double, "CONFETTI_LINEAR_DRAG"), CONST(double, "CONFETTI_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);

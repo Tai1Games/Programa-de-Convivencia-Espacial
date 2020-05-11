@@ -30,3 +30,15 @@ void ConfettiWeapon::action() {
 		MeleeWeapon::action();
 	}
 }
+
+void ConfettiWeapon::setActive(bool a, b2Vec2 pos)
+{
+	entity_->setActive(a);
+	viewer_->setDrawable(a);
+	colWeapon_->getBody()->SetEnabled(a);
+	colWeapon_->getBody()->SetTransform(pos, 0);
+	if (used) {
+		viewer_->setClip(SDL_Rect{ 0, 0, frameSize_, frameSize_ });
+		used = false;
+	}
+}

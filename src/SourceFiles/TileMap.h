@@ -7,8 +7,10 @@
 #include "ObjectFactory.h"
 #include "checkML.h"
 
+
 class BoilerButtonLogic;
 class FireBallGenerator;
+class ConfettiPool;
 
 class TileMap : public Component
 {
@@ -35,10 +37,11 @@ private:
 	std::vector<b2Vec2> weaponSpawnPoints_;
 
 	BulletPool* bulletPool_;
+	ConfettiPool* confettiPool_;
 
 	void solvePostCreationProblems(); //Called when reading of tilemap ends. Use this to assign references and solve similar problems.
 public:
-	TileMap(int w,int h,string map, EntityManager* entityManager_, b2World* physicsWorld_, BulletPool* bp);
+	TileMap(int w,int h,string map, EntityManager* entityManager_, b2World* physicsWorld_, BulletPool* bp, ConfettiPool* cP);
 	~TileMap();
 	virtual void update() override;
 	virtual void init() override;

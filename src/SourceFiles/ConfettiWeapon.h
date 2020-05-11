@@ -18,4 +18,5 @@ public:
 
 	virtual void init() override;
 	virtual void action() override;
+	virtual void setActive(bool a, b2Vec2 pos = { 0,0 });
 };

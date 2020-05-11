@@ -8,6 +8,7 @@
 #include "Resources.h"
 #include "BananaPool.h"
 #include "BulletPool.h"
+#include "ConfettiPool.h"
 
 using namespace std;
 
@@ -41,6 +42,7 @@ private:
 	TileMap* tilemap_;
 	BulletPool bulletPool_;
 	BananaPool bananaPool_;
+	ConfettiPool confettiPool_;
 
 public:
 	PlayState(GameMode* gMode, string tmap);

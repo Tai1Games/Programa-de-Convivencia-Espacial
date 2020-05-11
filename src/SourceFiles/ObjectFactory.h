@@ -17,7 +17,7 @@ public:
 	//Crea una chancla (Podemos pasarle los p�rametros que queramos segun las necesidades del objeto)
 	static Entity* makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
-	static Entity* makeConfetti(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
+	static Entity* makeConfetti(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
 	//Crea una pelota saltarina (Podemos pasarle los p�rametros que queramos segun las necesidades del objeto)
 	static Entity* makeBall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
