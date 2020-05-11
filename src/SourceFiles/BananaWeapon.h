@@ -8,7 +8,7 @@ class BananaWeapon :public ActionableWeapon
 {
 private:
 	Collider* colBanana_ = nullptr;
-	Viewer* viewer_;
+	Viewer* viewer_ = nullptr;
 	BulletPool* bulletPool_;
 public:
 	BananaWeapon(BulletPool* p, int damage) :ActionableWeapon(ComponentType::Banana, WeaponID::Banana, 0, 0) {

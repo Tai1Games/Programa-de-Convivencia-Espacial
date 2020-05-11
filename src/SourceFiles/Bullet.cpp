@@ -11,10 +11,11 @@ void Bullet::init()
 
 void Bullet::update()
 {
-	if (SDL_Game::instance()->getTime() > limitTime_) needToDelete = true;
-	else if (col_->getPos().x < 0 || col_->getPos().y > winWidth_ || //se elimina si se sale de la pantalla
-		col_->getPos().y < 0 || col_->getPos().y > winHeight_) needToDelete = true;
-
+	if (SDL_Game::instance()->getTime() > limitTime_ ||					//se elimina si se acaba su tiempo de vida
+			(col_->getPos().x < 0 || col_->getPos().y > winWidth_ ||	//se elimina si se sale de la pantalla
+			col_->getPos().y < 0 || col_->getPos().y > winHeight_)) {
+		needToDelete = true;
+	}
 
 	if (needToDelete) {
 		setActive(false);
@@ -47,21 +48,22 @@ void Bullet::setActive(bool a, b2Vec2 pos, b2Vec2 size, b2Vec2 vel, int texture,
 
 void Bullet::onCollisionEnter(Collision* c)
 {
-	PlayerData* pData = c->entity->getComponent<PlayerData>(ComponentType::PlayerData);
+	Entity* cEntity = c->entity;
+	PlayerData* pData = GETCMP2(cEntity, PlayerData);
+
 	if (pData != nullptr && pData->getPlayerNumber() != player_) { //solo colisiona con jugadores que no sea el que lo ha lanzado
-		Health* pHealth_ = c->entity->getComponent<Health>(ComponentType::Health);
+		Health* pHealth_ = GETCMP2(cEntity, Health);
 		if (pHealth_ != nullptr) {
 			if (!pHealth_->subtractLife(damage_)) {
 				pHealth_->playerDead(c->collisionHandler);
 				needToDelete = true;
-				
 				ThrownByPlayer* objThrown = GETCMP1_(ThrownByPlayer);			
-				if (objThrown->getOwnerId() != GETCMP2(c->entity, PlayerData)->getPlayerNumber())
+				if (objThrown->getOwnerId() != pData->getPlayerNumber())
 					objThrown->addPointsToOwner();
 			}
 		}
 		else {
-			Wallet* wallet = GETCMP2(c->entity, Wallet);
+			Wallet* wallet = GETCMP2(cEntity, Wallet);
 			if (wallet != nullptr) {
 				c->collisionHandler->addCoinDrop(std::make_tuple(wallet, pData, CONST(int, "BULLET_COIN_DMG")));
 				needToDelete = true;
@@ -69,7 +71,7 @@ void Bullet::onCollisionEnter(Collision* c)
 		}
 	}
 	else { //dentro de un else para que si ha colisionado con un player ni se moleste en entrar aqui
-		Collider* col = c->entity->getComponent<Collider>(ComponentType::Collider);
+		Collider* col = GETCMP2(cEntity, Collider);
 		if (col != nullptr) {
 			if (col->getFixture(0)->GetFilterData().categoryBits == Collider::CollisionLayer::Wall ||
 				col->getFixture(0)->GetFilterData().categoryBits == Collider::CollisionLayer::NonGrababbleWall) needToDelete = true;

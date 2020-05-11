@@ -19,6 +19,7 @@ private:
 
 	//tutorial
 	vector<Entity*> weapons_;
+	Entity* piranhaPlant_;
 	int tutorialPointer_ = 0;
 	vector<bool> tutorials_ [Resources::TutorialEnd - Resources::MoveTutorial]; //move, hold, grab, action, throw, death
 	vector<Entity*> numberTexts_;
@@ -35,12 +36,13 @@ private:
 	int yOffsetProgress_ = CONST(double, "WINDOW_HEIGHT") / 1.5;
 	double scale_ = 0.75;
 	int previousProgress_ = 0;
-
+	bool startedTutorial_ = false;
 public:
-	TutorialGameMode(int nPlayers, int stocks = 5);
+	TutorialGameMode(MatchInfo* mInfo, int stocks = 5);
 	~TutorialGameMode();
 	virtual void init(PlayState* game);
 	virtual void render();
 	virtual void update();
+	virtual void activateControl();
 	virtual bool onPlayerDead(int id); //Returns false when players runs out of stocks.
 };

@@ -1,11 +1,14 @@
 #pragma once
 #include "Entity.h"
 #include "checkML.h"
+#include "WeaponPool.h"
 
 class EntityManager;
 class Weapon;
 class FireBallPool;
 class BulletPool;
+class Collider;
+class GameMode;
 
 class ObjectFactory
 {
@@ -36,17 +39,17 @@ public:
 	static Entity* makeSpaceJunk(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
 	static Entity* makeFireball(Entity* e,EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
-	
+
 	static Entity* makeBoiler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
-	//Crea un mando de la tele (espec�fico para el modo Pelea Por El Mando)
+	//Crea un mando de la tele (especifico para el modo Pelea Por El Mando)
 	static Weapon* makeController(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
-	
+
 	static Entity* makeDumbbell(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
 	static Entity* makePad(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
-	
+
 	static Entity* makeCoin(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, int val);
-	
+
 	static Entity* makeRoomba(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 
 	static Entity* makeBoilerButton(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, bool inc_dec);
@@ -57,5 +60,11 @@ public:
 
 	static Entity* makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, BulletPool* bp);
 
-	static Entity* makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld);
+	static Entity* makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld, GameMode* gameMode);
+
+	static Entity* makeTomatoTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WeaponPool* pool);
+
+	static Entity* makeBananaTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WeaponPool* pool);
+
+	static Entity* makeWifiWave(Entity* e, EntityManager* entityManager, b2World* physicsWorld, Collider* colRouter);
 };

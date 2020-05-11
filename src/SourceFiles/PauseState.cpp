@@ -3,7 +3,9 @@
 #include "Resources.h"
 #include "UIViewer.h"
 #include "SDL_Game.h"
-#include "InputHandler.h"
+#include "InputBinder.h"
+#include "GameStateMachine.h"
+#include "MatchInfo.h"
 
 void PauseState::init()
 {
@@ -27,68 +29,68 @@ void PauseState::init()
 	buttonSelectorImage_ = miniTinky->addComponent<UIViewer>(Resources::Tinky, b2Vec2(btns_[selectedBtn_]->getPosUIElement().x - 80, btns_[selectedBtn_]->getPosUIElement().y - 15), 0.5, 0);
 	sliderControlImage_ = sliderControl->addComponent<UIViewer>(Resources::SliderControl, b2Vec2(btns_[Buttons::Sound]->getPosUIElement().x + 645, btns_[Buttons::Sound]->getPosUIElement().y), 2, 0);
 	slider->addComponent<UIViewer>(Resources::Slider, b2Vec2(btns_[Buttons::Sound]->getPosUIElement().x + 360, btns_[Buttons::Sound]->getPosUIElement().y), 2,0);
+
+	ownerBinder_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo()->at(ownerPlayerID_)->inputBinder;
 }
 
 void PauseState::handleInput()
 {
 	GameState::handleInput();
-	InputHandler* ih = SDL_Game::instance()->getInputHandler();
-	double lStickXValue;
-	double lStickYValue;
 
-	//Input específico para el botón seleccionado
+	//Input especï¿½fico para el botï¿½n seleccionado
 	switch (selectedBtn_)
 	{
 	case Buttons::Resume:
-		if (ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_A))
+		if (ownerBinder_->menuForward())
 			resumeGame();
 		break;
 	case Buttons::Sound:
-		lStickXValue = ih->getStickX(ownerPlayerID_, InputHandler::GAMEPADSTICK::LEFTSTICK);
-		if (currentMusicVolume_> 0 && !holdingX_ && lStickXValue < -0.999) {
-			currentMusicVolume_ -= 10;
-			updateMusicVolume();
-			holdingX_ = true;
+		if (!holdingX_)
+		{
+			if (currentMusicVolume_ > 0 && ownerBinder_->menuMove(Dir::Left)) {
+				currentMusicVolume_ -= 10;
+				updateMusicVolume();
+				holdingX_ = true;
+			}
+			else if (currentMusicVolume_ < CONST(int, "MAX_MUSIC_VOLUME") && ownerBinder_->menuMove(Dir::Right)) {
+				currentMusicVolume_ += 10;
+				updateMusicVolume();
+				holdingX_ = true;
+			}
 		}
-		else if (currentMusicVolume_ < CONST(int,"MAX_MUSIC_VOLUME") && !holdingX_ && lStickXValue > 0.999) {
-			currentMusicVolume_ += 10;
-			updateMusicVolume();
-			holdingX_ = true;
-		}
-		else if (holdingX_ && lStickXValue == 0) {
+		else if (holdingX_ && !ownerBinder_->menuMove(Dir::Right) && !ownerBinder_->menuMove(Dir::Left)) {
 			holdingX_ = false;
 		}
 		break;
 	case Buttons::Exit:
-		if (ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_A))
+		if (ownerBinder_->menuForward())
 			SDL_Game::instance()->getStateMachine()->changeToState(States::menu, ownerPlayerID_);
 		break;
 	}
 
-	//Input general para el menú
-	if (ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_START) ||
-		ih->isButtonJustUp(ownerPlayerID_, SDL_CONTROLLER_BUTTON_GUIDE)) {
+	//Input general para el menï¿½
+	if (ownerBinder_->pressPause()) {
 		selectedBtn_ = 0;
 		updateSelectedButton();
 		resumeGame();
 	}
 
-	lStickYValue = ih->getStickY(ownerPlayerID_, InputHandler::GAMEPADSTICK::LEFTSTICK);
-
-	if (!holdingY_ && lStickYValue > 0.9) {
-		selectedBtn_++;
-		updateSelectedButton();
-		holdingY_ = true;
+	if (!holdingY_)
+	{
+		if (ownerBinder_->menuMove(Dir::Down)) {
+			selectedBtn_++;
+			updateSelectedButton();
+			holdingY_ = true;
+		}
+		else if (ownerBinder_->menuMove(Dir::Up)) {
+			selectedBtn_--;
+			updateSelectedButton();
+			holdingY_ = true;
+		}
 	}
-	else if (!holdingY_ && lStickYValue < -0.9) {
-		selectedBtn_--;
-		updateSelectedButton();
-		holdingY_ = true;
-	}
-	else if (holdingY_ && lStickYValue > -0.2 && lStickYValue < 0.2) {
+	else if (holdingY_ && !ownerBinder_->menuMove(Dir::Up) && !ownerBinder_->menuMove(Dir::Down)) {
 		holdingY_ = false;
 	}
-	
 }
 
 void PauseState::updateSelectedButton()
@@ -102,14 +104,13 @@ void PauseState::updateSelectedButton()
 	float newXPos = btns_[selectedBtn_]->getPosUIElement().x - 80;
 	float newYPos = btns_[selectedBtn_]->getPosUIElement().y - 15;
 	buttonSelectorImage_->setPosUIElement(b2Vec2(newXPos, newYPos));
-
 }
 
 void PauseState::updateMusicVolume()
 {
 	SDL_Game::instance()->getAudioMngr()->setMusicVolume(currentMusicVolume_);
 
-	float newXPos = (btns_[Buttons::Sound]->getPosUIElement().x + 395) + ((currentMusicVolume_ / 10) * (250 / (CONST(double, "MAX_MUSIC_VOLUME")/ 10)));
+	float newXPos = (btns_[Buttons::Sound]->getPosUIElement().x + 395) + ((currentMusicVolume_ / 10) * (250 / (CONST(double, "MAX_MUSIC_VOLUME") / 10)));
 	sliderControlImage_->setPosUIElement(b2Vec2(newXPos,
 		btns_[Buttons::Sound]->getPosUIElement().y));
 }

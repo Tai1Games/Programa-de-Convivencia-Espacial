@@ -5,7 +5,7 @@
 #include "UIViewer.h"
 
 
-TutorialGameMode::TutorialGameMode(int nPlayers, int stocks) : GameMode(nPlayers)
+TutorialGameMode::TutorialGameMode(MatchInfo* mInfo, int stocks) : GameMode(mInfo,GamemodeID::Tutorial)
 {
 	maxStocks_ = stocks;
 }
@@ -17,17 +17,21 @@ TutorialGameMode::~TutorialGameMode()
 void TutorialGameMode::init(PlayState* game) {
 	GameMode::init(game);
 
+	//tutorial plant
+	piranhaPlant_ = ObjectFactory::makeCarnivorousePlant(game->getEntityManager(), game->getPhysicsWorld(),
+		b2Vec2(10, 7), b2Vec2(5, 5));
+	piranhaPlant_->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, -Collider::CollisionLayer::Player);
+	piranhaPlant_->setActive(false);
 	//------------------
+	GameMode::createPlayers(game);
 	for (int i = 0; i < nPlayers_; i++) {
-		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), i,
-			Resources::Body, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, 3));
 		playerStocks_.push_back(maxStocks_); //Initializes maxStocks vector with 3 on all positions.
 		//tutorial weapons
 		weapons_.push_back(ObjectFactory::makeExtinguisher(game->getEntityManager(), game->getPhysicsWorld(),
-			b2Vec2(10 + i, 10 + i), b2Vec2(1.25, 1.25)));
+			b2Vec2(10 + i, 10 + i), b2Vec2(1, 1)));
 		weapons_.back()->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, -Collider::CollisionLayer::Player);
 		weapons_.back()->setActive(false);
-	}
+	}	
 	for (int i = 0; i < players_.size(); i++) {
 		Entity* e = players_[i];
 		playersHealth_.push_back(e->getComponent<Health>(ComponentType::Health)); //Initializes playersHealth vector catching a reference to Health on entity e.
@@ -69,7 +73,7 @@ void TutorialGameMode::init(PlayState* game) {
 }
 
 void TutorialGameMode::update() {
-	if (tutorialPointer_ < Resources::TutorialEnd - Resources::MoveTutorial) {
+	if (tutorialPointer_ < Resources::TutorialEnd - Resources::MoveTutorial && startedTutorial_) {
 		InputHandler* ih = SDL_Game::instance()->getInputHandler();
 		//check if current tutorial is complete and if so, advance to next
 		int progress = 0;
@@ -84,9 +88,13 @@ void TutorialGameMode::update() {
 			tutorialTexts_[tutorialPointer_]->setActive(true); // show new text
 			numberTexts_[previousProgress_]->setActive(false);
 			numberTexts_[0]->setActive(true);					//reset progress
-			if (tutorialPointer_ == 2) for (Entity* e : weapons_) {
-				e->setActive(true); //activate weapons
+			if (tutorialPointer_ == 2) for (Entity* e : weapons_) { //activate weapons
+				e->setActive(true); 
 				e->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, Collider::CollisionLayer::Player);
+			}
+			else if (tutorialPointer_ == 5) { //activate plant
+				piranhaPlant_->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, Collider::CollisionLayer::Player);
+				piranhaPlant_->setActive(true);
 			}
 		}
 		else if (progress != previousProgress_) {	//update progress if changed
@@ -106,7 +114,7 @@ void TutorialGameMode::update() {
 			for (int i = 0; i < players_.size(); i++) tutorials_[tutorialPointer_][i] = (players_[i]->getComponent<Hands>(ComponentType::Hands)->getWeaponID() != NoWeapon);
 			break;
 		case 3: //action tutorial
-			for (int i = 0; i < players_.size(); i++) if (inputBinders_[i]->pressAttack()) tutorials_[tutorialPointer_][i] = true;
+			for (int i = 0; i < players_.size(); i++) if (players_[i]->getComponent<Hands>(ComponentType::Hands)->getWeaponID() != NoWeapon && inputBinders_[i]->pressAttack()) tutorials_[tutorialPointer_][i] = true;
 			break;
 		case 4: //throw tutorial
 			for (int i = 0; i < players_.size(); i++) if (inputBinders_[i]->pressThrow()) tutorials_[tutorialPointer_][i] = true;
@@ -118,7 +126,7 @@ void TutorialGameMode::update() {
 			break;
 		}
 	}
-	else {
+	else if(startedTutorial_){
 		completed_->setActive(false);
 		slash_->setActive(false);
 		numPlayers_->setActive(false);
@@ -159,4 +167,9 @@ bool TutorialGameMode::onPlayerDead(int id) { //Returns false when player runs o
 		else return true;
 	}
 	else return true;
+}
+
+void TutorialGameMode::activateControl() {
+	GameMode::activateControl();
+	startedTutorial_ = true;
 }
