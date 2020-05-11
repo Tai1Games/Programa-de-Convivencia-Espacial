@@ -11,9 +11,8 @@ private:
 	ObjectPool<Entity, CONFETTI_POOL_SIZE> confettiPool_;
 public:
 	ConfettiPool();
-	~ConfettiPool() {};
+	virtual ~ConfettiPool() {};
 	void init(EntityManager* eMan, b2World* physicsWorld, GameMode* gM);
 
 	void addConfetti(b2Vec2 pos);
 };
-
