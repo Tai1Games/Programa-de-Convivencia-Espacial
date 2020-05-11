@@ -14,7 +14,7 @@ private:
 	int frameSize_ = 0;
 public:
 	ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames);
-	~ConfettiWeapon() {};
+	virtual ~ConfettiWeapon() {};
 
 	virtual void init() override;
 	virtual void action() override;
