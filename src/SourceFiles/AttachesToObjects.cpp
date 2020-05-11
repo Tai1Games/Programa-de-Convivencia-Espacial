@@ -21,29 +21,30 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 		attachedObject_ = attachedObject;
 		b2Vec2 perp = perpendicularCounterClockwise(collNormal);
 		float attachAngle = std::atanf(perp.y/perp.x);
-
-		float auxAngle = attachAngle;
-
 		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle())>0) ? -1 : 1;
 		attachAngle += (PI / 2)*tilt;
 
 		b2Vec2 aux = collPoint - mainCollider_->getPos();
 		aux.Normalize();
 
-		if (collNormal == b2Vec2(-1, 0) || collNormal == b2Vec2(1, 0)) {
+		float auxaux= sin(mainCollider_->getBody()->GetAngle());
+
+		if ((collNormal == b2Vec2(-1, 0) || collNormal == b2Vec2(1, 0)) && (auxaux<= -0.8 || auxaux >= 0.2)) {
 			aux.y = 0;
-			aux.x *= mainCollider_->getH(0) / 3;
+			aux.x *= mainCollider_->getH(0) / 2;
+
+			mainCollider_->setTransform(mainCollider_->getPos() + aux, attachAngle);
 		}
-		else if(collNormal == b2Vec2(0, 1) || collNormal == b2Vec2(0, -1)) {
-			aux.y *= mainCollider_->getH(0) / 3;
+		else if((collNormal == b2Vec2(0, 1) || collNormal == b2Vec2(0, -1)) && !(auxaux <= -0.2 || auxaux >= 0.8)) {
+			aux.y *= mainCollider_->getH(0) / 2;
 			aux.x = 0;
+
+			mainCollider_->setTransform(mainCollider_->getPos() + aux, attachAngle);
+		}
+		else {
+			mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);	//Colision con un angulo paralelo o promedio
 		}
 		
-		
-		mainCollider_->setTransform(mainCollider_->getPos() + aux, attachAngle);
-
-
-		//mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
 		b2WeldJointDef jointDef; //Definición del nuevo joint.
 		jointDef.bodyA = mainCollider_->getBody(); //Body del jugador.
 		jointDef.bodyB = attachedObject; //Body del objeto al que se tiene que atar.
@@ -62,8 +63,8 @@ void AttachesToObjects::deAttachFromObject() {
 		//Direccion contraria a la pared
 		b2Vec2 aux =joint_->GetBodyB()->GetPosition()- mainCollider_->getPos() ;
 		aux.Normalize();
-		aux.x *= mainCollider_->getH(0)/2;
-		aux.y *= mainCollider_->getH(0)/2;
+		aux.x *= mainCollider_->getH(0)/4;
+		aux.y *= mainCollider_->getH(0)/4;
 		
 		
 		mainCollider_->getWorld()->DestroyJoint(joint_); //Destruye el joint
