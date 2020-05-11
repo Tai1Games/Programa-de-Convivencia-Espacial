@@ -29,13 +29,13 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 
 		float auxaux= sin(mainCollider_->getBody()->GetAngle());
 
-		if ((collNormal == b2Vec2(-1, 0) || collNormal == b2Vec2(1, 0)) && (auxaux<= -0.8 || auxaux >= 0.2)) {
+		if ((auxaux <= -0.5 || auxaux >= 0.5)) {
 			aux.y = 0;
 			aux.x *= mainCollider_->getH(0) / 2;
 
 			mainCollider_->setTransform(mainCollider_->getPos() + aux, attachAngle);
 		}
-		else if((collNormal == b2Vec2(0, 1) || collNormal == b2Vec2(0, -1)) && !(auxaux <= -0.2 || auxaux >= 0.8)) {
+		else if(!(auxaux <= -0.5 || auxaux >= 0.5)) {
 			aux.y *= mainCollider_->getH(0) / 2;
 			aux.x = 0;
 
