@@ -27,6 +27,7 @@
 #include "Bullet.h"
 #include "BulletPool.h"
 #include "StaplerWeapon.h"
+#include "ConfettiWeapon.h"
 #include "WiFiBullet.h"
 #include "SpawnTree.h"
 #include "ThrownByPlayer.h"
@@ -42,6 +43,22 @@ Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physic
 	e->addComponent <Viewer>(Resources::Slipper);
 	e->addComponent<SlipperWeapon>(WeaponID::Slipper, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"), CONST(int, "FLIPFLOP_COOLDOWN_FRAMES"));
 	e->addComponent<ColliderViewer>();
+
+	return e;
+}
+
+Entity* ObjectFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, GameMode* gM)
+{
+	entityManager->addExistingEntity(e);
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "CONFETTI_DENSITY"),
+		CONST(double, "CONFETTI_FRICTION"), CONST(double, "CONFETTI_RESTITUTION"),
+		CONST(double, "CONFETTI_LINEAR_DRAG"), CONST(double, "CONFETTI_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent <Viewer>(Resources::Confetti, SDL_Rect{ 0,0,32,32 });
+	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::ConfettiParticles, 10, 4, 4, 200, 50, 500, 3, 30);
+	pE->setOffset({ CONST(double, "CONFETTI_PARTICLE_OFFSET_X"), CONST(double, "CONFETTI_PARTICLE_OFFSET_Y") });
+	e->addComponent<ConfettiWeapon>(WeaponID::Confetti, CONST(int, "CONFETTI_DAMAGE"), CONST(int, "CONFETTI_IMPACT_DAMAGE"), CONST(int, "CONFETTI_COOLDOWN_FRAMES"));
+	e->addComponent<ColliderViewer>();
+	e->addComponent<ThrownByPlayer>(gM);
 
 	return e;
 }

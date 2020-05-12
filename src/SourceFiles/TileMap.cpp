@@ -4,18 +4,20 @@
 #include "json.hpp"
 #include "BoilerButtonLogic.h"
 #include "FireBallGenerator.h"
+#include "ConfettiPool.h"
 #include <string>
 #include "TomatoPool.h"
 #include "BananaPool.h"
 #include "GameMode.h"
 
 
-TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW, BulletPool* bp, GameMode* gameMode) :Component(ComponentType::Tilemap),  //w y h son de la ventana
+TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW, BulletPool* bp, ConfettiPool* cP, GameMode* gameMode) :Component(ComponentType::Tilemap),  //w y h son de la ventana
 width_(w),
 height_(h),
 entityManager_(eM),
 physicsWorld_(pW),
 bulletPool_(bp),
+confettiPool_(cP),
 gameMode_(gameMode){
 	loadTileson(map);
 	playerSpawns_.reserve(4);
@@ -270,6 +272,8 @@ void TileMap::createWeapons()
 		case 7: //TomatoGranade
 			break;
 		case 8: //Confeti
+			//e = ObjectFactory::makeConfetti(e, entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "CONFETTI_X"), CONST(float, "CONFETTI_Y")));
+			confettiPool_->addConfetti(spawnPoint);
 			break;
 		}
 	}

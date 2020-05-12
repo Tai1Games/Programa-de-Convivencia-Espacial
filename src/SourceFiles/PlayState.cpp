@@ -39,6 +39,7 @@ void PlayState::init() {
 	entityManager_ = new EntityManager();
 	physicsWorld_ = new b2World(b2Vec2(0, 0));
 
+	confettiPool_.init(entityManager_, physicsWorld_, gameMode_);
 	/*bulletPool_.init(entityManager_, physicsWorld_);
 	bananaPool_.init(entityManager_, physicsWorld_, &bulletPool_);*/
 
@@ -46,7 +47,7 @@ void PlayState::init() {
 
 	tilemap_ = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
 		"assets/game/tilemaps/"+tilemapName_+".json",
-		entityManager_, physicsWorld_, &bulletPool_, gameMode_);
+		entityManager_, physicsWorld_, &bulletPool_, &confettiPool_, gameMode_);
 	tilemap_->init();
 	gameMode_->setTileMap(tilemap_);
 

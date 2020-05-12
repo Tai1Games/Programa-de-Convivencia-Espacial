@@ -9,6 +9,7 @@
 #include "MatchInfo.h"
 #include "BananaPool.h"
 #include "BulletPool.h"
+#include "ConfettiPool.h"
 
 using namespace std;
 
@@ -41,6 +42,7 @@ private:
 	TileMap* tilemap_;
 	vector<MatchInfo::PlayerInfo*>* playerInfo;
 	BulletPool bulletPool_;
+	ConfettiPool confettiPool_;
 	//BananaPool bananaPool_;
 
 public:
