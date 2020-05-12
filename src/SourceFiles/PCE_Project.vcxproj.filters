@@ -342,6 +342,9 @@
     <ClInclude Include="StaplerWeapon.h">
       <Filter>Header Files\Components\Weapons</Filter>
     </ClInclude>
+    <ClInclude Include="ClientState.h">
+      <Filter>Header Files\Gamestates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -592,6 +595,9 @@
     </ClCompile>
     <ClCompile Include="AbstractViewers.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
