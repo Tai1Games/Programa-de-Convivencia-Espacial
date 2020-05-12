@@ -24,25 +24,22 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle())>0) ? -1 : 1;
 		attachAngle += (PI / 2)*tilt;
 
-		b2Vec2 aux = collPoint - mainCollider_->getPos();
+		b2Vec2 aux = -collNormal;
 		aux.Normalize();
 
 		float auxaux= sin(mainCollider_->getBody()->GetAngle());
 
-		if ((auxaux <= -0.5 || auxaux >= 0.5)) {
-			aux.y = 0;
-			aux.x *= mainCollider_->getH(0) / 2;
-
-			mainCollider_->setTransform(mainCollider_->getPos() + aux, attachAngle);
+		if ((auxaux <= -0.85 || auxaux >= 0.85) && (collNormal == b2Vec2(0,1) || collNormal == b2Vec2(0, -1))) {
+			mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
 		}
-		else if(!(auxaux <= -0.5 || auxaux >= 0.5)) {
-			aux.y *= mainCollider_->getH(0) / 2;
-			aux.x = 0;
-
-			mainCollider_->setTransform(mainCollider_->getPos() + aux, attachAngle);
+		else if((auxaux >= -0.15 && auxaux <= 0.15) && (collNormal == b2Vec2(1, 0) || collNormal == b2Vec2(-1, 0))) {
+			mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
 		}
 		else {
-			mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);	//Colision con un angulo paralelo o promedio
+			aux.x *= mainCollider_->getH(0) / 2.7;
+			aux.y *= mainCollider_->getH(0) / 2.7;
+
+			mainCollider_->setTransform(mainCollider_->getPos() + aux, attachAngle);
 		}
 		
 		b2WeldJointDef jointDef; //Definición del nuevo joint.
@@ -60,19 +57,10 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 
 void AttachesToObjects::deAttachFromObject() {
 	if (joint_ != nullptr) {
-		//Direccion contraria a la pared
-		b2Vec2 aux =joint_->GetBodyB()->GetPosition()- mainCollider_->getPos() ;
-		aux.Normalize();
-		aux.x *= mainCollider_->getH(0)/4;
-		aux.y *= mainCollider_->getH(0)/4;
-		
-		
 		mainCollider_->getWorld()->DestroyJoint(joint_); //Destruye el joint
 		joint_ = nullptr; //Al hacer la acción de arriba, el puntero a joint_ sigue apuntando a una dirección de memoria que NO es válida. Por eso se iguala a nullptr
 		attachedObject_ = nullptr;
 		attachedCollider_ = nullptr;
-		//Te separa de la pared para que no te agarres de inmediato
-		mainCollider_->setTransform(mainCollider_->getPos() - aux, mainCollider_->getAngle());
 	}
 }
 
