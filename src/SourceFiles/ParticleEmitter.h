@@ -14,6 +14,7 @@ protected:
 
 	Vector2D position_;
 	Vector2D direction_;
+	Vector2D offset_ = Vector2D(0,0);
 
 	bool emitting_ = false;
 
@@ -69,6 +70,7 @@ public:
 	virtual void init() override;
 	virtual void update() override;
 	virtual void draw() const override;
+	void setOffset(Vector2D offset) { offset_ = offset; }
 
 	//Devuelve si se ha detenido o empezado
 	bool PlayStop() { timeEmitted_ = 0; return emitting_ = !emitting_; };
