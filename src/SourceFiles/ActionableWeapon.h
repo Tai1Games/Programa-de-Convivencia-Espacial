@@ -9,6 +9,7 @@ protected:
 	int cooldownFrames_ = 0;
 	bool beenActivated_ = false;
 public:
+	ActionableWeapon(WeaponID wId, int impactDmg, int cooldownFrames);
 	ActionableWeapon(ComponentType::CmpId compType, WeaponID wId, int impactDmg, int cooldownFrames);
 	virtual ~ActionableWeapon() {};
 
