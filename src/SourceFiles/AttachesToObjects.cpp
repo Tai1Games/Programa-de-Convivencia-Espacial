@@ -24,20 +24,20 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle())>0) ? -1 : 1;
 		attachAngle += (PI / 2)*tilt;
 
-		aux = -collNormal;
-		aux.Normalize();
+		attachDir = -collNormal;
+		attachDir.Normalize();
 
-		float auxaux= sin(mainCollider_->getBody()->GetAngle());
+		float angleSin= sin(mainCollider_->getBody()->GetAngle());
 
-		if (auxaux >= sin(attachAngle)- CONST(double, "GRAB_ANGLE_TOLERANCE") && auxaux <= sin(attachAngle) + CONST(double, "GRAB_ANGLE_TOLERANCE")) {
+		if (angleSin >= sin(attachAngle)- CONST(double, "GRAB_ANGLE_TOLERANCE") && angleSin <= sin(attachAngle) + CONST(double, "GRAB_ANGLE_TOLERANCE")) {
 			mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
 		}
 
 		else {
-			aux.x *= mainCollider_->getH(0) / 2.3;
-			aux.y *= mainCollider_->getH(0) / 2.3;
+			attachDir.x *= mainCollider_->getH(0) / 2.3;
+			attachDir.y *= mainCollider_->getH(0) / 2.3;
 
-			mainCollider_->setTransform(mainCollider_->getPos() + aux, attachAngle);
+			mainCollider_->setTransform(mainCollider_->getPos() + attachDir, attachAngle);
 		}
 		
 		b2WeldJointDef jointDef; //Definición del nuevo joint.
