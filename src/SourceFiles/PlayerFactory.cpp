@@ -9,7 +9,9 @@
 
 Entity* PlayerFactory::createBasePlayer(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY, InputBinder* ib) {
 	Entity* p = eMan->addEntity();
-	Collider* collP = p->addComponent<Collider>(physicsWorld, b2_dynamicBody, posX, posY, CONST(double, "PLAYER_HEIGTH"), CONST(double, "PLAYER_WIDTH"), CONST(double, "PLAYER_DENSITY"), CONST(double, "PLAYER_FRICTION"), CONST(double, "PLAYER_RESTITUTION"), CONST(double, "PLAYER_LINEAR_DRAG"), CONST(double, "PLAYER_ANGULAR_DRAG"), Collider::CollisionLayer::Player, false);
+
+	Collider::CollisionLayer layer = (Collider::CollisionLayer)(Collider::CollisionLayer::Player1 * pow(2, playerID));
+	Collider* collP = p->addComponent<Collider>(physicsWorld, b2_dynamicBody, posX, posY, CONST(double, "PLAYER_HEIGTH"), CONST(double, "PLAYER_WIDTH"), CONST(double, "PLAYER_DENSITY"), CONST(double, "PLAYER_FRICTION"), CONST(double, "PLAYER_RESTITUTION"), CONST(double, "PLAYER_LINEAR_DRAG"), CONST(double, "PLAYER_ANGULAR_DRAG"), layer, false);
 	p->addComponent<PlayerData>(playerID,ib);
 	p->addComponent<AnimatedPlayer>(Resources::PlayerAnimSheet, 0);
 

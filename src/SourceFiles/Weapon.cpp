@@ -30,6 +30,8 @@ void Weapon::init()
 	entity_->getEntityManager()->getWeaponVector()->push_back(this);
 
 	throwCooldown_ = CONST(int, "THROW_COOLDOWN");
+
+	framesUntilRecoveringCollision_ = CONST(int, "RECOVERING_COLLISION_AFTER_THROWN_COOLDOWN");
 }
 
 void Weapon::handleInput()
@@ -60,6 +62,10 @@ void Weapon::PickObjectBy(int index)
 		mainCollider_->getBody()->SetEnabled(false);
 		vw_->setDrawable(false);
 
+		hasBeenThrownRecently_ = false;
+		framesUntilRecoveringCollisionTimer_ = 0;
+		mainCollider_->changeLayerCollision(0, Collider::CollisionLayer::Player);
+
 		ThrownByPlayer* throwData = GETCMP1_(ThrownByPlayer);
 		throwData->SetOwner(index);
 	}
@@ -70,6 +76,14 @@ void Weapon::UnPickObject()
 	//Si se tira un objeto, se guarda en el objeto lanzado la ID de quien lo lanza.
 	GETCMP1_(ThrownByPlayer)->throwObject(pickedIndex_);
 
+	system("cls");
+	// desactiva colisión con el jugador
+	cout << "Weapon prev layer: " << (int)(mainCollider_->getFixture(0)->GetFilterData().categoryBits) << endl;
+	mainCollider_->changeLayerCollision(0, -(Collider::CollisionLayer)(Collider::CollisionLayer::Player1 * pow(2, getPlayerId())));
+	hasBeenThrownRecently_ = true;
+	cout << "Player 0 layer: " << Collider::CollisionLayer::Player1 << endl;
+	cout << "Weapon post layer: " << Collider::CollisionLayer::Player1 * pow(2, getPlayerId()) << endl;
+	
 	currentHand_->setWeapon(NoWeapon, nullptr);
 	picked_ = false;
 	pickedIndex_ = -1;
@@ -105,7 +119,7 @@ void Weapon::onCollisionEnter(Collision* c)
 	b2Fixture* auxF = coll->getFixture(1);
 
 	if (otherHand != nullptr &&
-		auxF->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
+		auxF->GetFilterData().categoryBits & Collider::CollisionLayer::Trigger) {
 		SavePlayerInfo(otherHand->getPlayerId(), otherHand, GETCMP2(other, Health), GETCMP2(other, Wallet), GETCMP2(other, PlayerData)->getBinder());
 	}
 }
@@ -137,4 +151,14 @@ void Weapon::DeletePlayerInfo(int index)
 void Weapon::update() {
 	if(picked_)
 		throwCooldownTimer_++;
+
+	// recupera colisiones con todos los jugadores tras cierto tiempo
+	if (hasBeenThrownRecently_) {
+		framesUntilRecoveringCollisionTimer_++;
+		if (framesUntilRecoveringCollisionTimer_ >= framesUntilRecoveringCollision_) {
+			hasBeenThrownRecently_ = false;
+			framesUntilRecoveringCollisionTimer_ = 0;
+			mainCollider_->changeLayerCollision(0, Collider::CollisionLayer::Player);
+		}
+	}
 }

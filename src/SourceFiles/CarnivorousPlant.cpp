@@ -64,7 +64,7 @@ void CarnivorousPlant::update()
 
 void CarnivorousPlant::onCollisionEnter(Collision* c)
 {
-	if (c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
+	if (c->hitFixture->GetFilterData().categoryBits & Collider::CollisionLayer::Player) {
 		player_ = c->entity;
 		playerCollHandler_ = c->collisionHandler;
 		walletPlayer_ = GETCMP2(c->entity, Wallet);
@@ -77,7 +77,7 @@ void CarnivorousPlant::onCollisionEnter(Collision* c)
 
 void CarnivorousPlant::onCollisionExit(Collision* c)
 {
-	if (c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Player) {
+	if (c->hitFixture->GetFilterData().categoryBits & Collider::CollisionLayer::Player) {
 		playersInside_--;
 
 		if (playersInside_ == 0) {

@@ -18,7 +18,7 @@ void TutorialGameMode::init(PlayState* game) {
 	GameMode::init(game);
 
 	//tutorial plant
-	piranhaPlant_ = ObjectFactory::makeCarnivorousePlant(game->getEntityManager(), game->getPhysicsWorld(),
+	piranhaPlant_ = ObjectFactory::makeCarnivorousPlant(game->getEntityManager(), game->getPhysicsWorld(),
 		b2Vec2(10, 7), b2Vec2(5, 5));
 	piranhaPlant_->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, -Collider::CollisionLayer::Player);
 	piranhaPlant_->setActive(false);
