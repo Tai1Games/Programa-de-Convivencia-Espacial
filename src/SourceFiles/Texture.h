@@ -11,7 +11,7 @@ using namespace std;
 class Texture {
 public:
 	Texture();
-	Texture(SDL_Renderer *renderer, const string& fileName);
+	Texture(SDL_Renderer *renderer, const string& fileName, unsigned short nHorFrames, unsigned short nVerFrames);
 	Texture(SDL_Renderer *renderer, const string& text, const Font *font,
 			const SDL_Color& color);
 	virtual ~Texture();
@@ -55,4 +55,6 @@ private:
 	SDL_Renderer *renderer_;
 	int width_;
 	int height_;
+	unsigned short nHorizontalFrames_;
+	unsigned short nVerticalFrames_;
 };

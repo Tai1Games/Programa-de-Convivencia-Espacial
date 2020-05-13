@@ -42,16 +42,17 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Rocket, resourcesPath + "textures/Rocket.png"},
 	{ SpaceStation, resourcesPath + "textures/SpaceStation.png"},
 	{ Token, resourcesPath + "textures/Marcador.png"},
+	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png"},
 
 	// Weapons and map items
 	{ Ball, resourcesPath + "textures/PelotaSaltarina.png" },
 	{ Extinguisher, resourcesPath + "textures/Extintor.png" },
-	{ Fireball,resourcesPath + "textures/fireball_placeholder.png"},
+	{ Fireball,resourcesPath + "textures/fireball_placeholder.png", 4},
 	{ Dumbbell, resourcesPath + "textures/Mancuerna.png" },
 	{ Slipper, resourcesPath + "textures/Chancla.png" },
 	{ Stapler, resourcesPath + "textures/Grapadora.png" },
 	{ Stone, resourcesPath + "textures/Piedra.png" },
-	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png"},
+	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png", 17},
 	{ TomatoRing, resourcesPath + "textures/TomatoRing.png"},
 	{ TreeTomato, resourcesPath + "textures/TreeTomato.png"},
 	{ Banana, resourcesPath + "textures/Banana.png"},
@@ -61,10 +62,10 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },
-	{ PlayerAnimSheet, resourcesPath + "textures/playerAnim.png"},
-	{ Hands, resourcesPath + "textures/hands.png" },
+	{ PlayerAnimSheet, resourcesPath + "textures/playerAnim.png",23,4},
+	{ Hands, resourcesPath + "textures/hands.png", 10},
 	{ ImpulseArrow, resourcesPath + "textures/FlechaImpulso.png"},
-	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png"},
+	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png", 12},
 	{ SpaceSuit, resourcesPath + "textures/PinkTinky.png"},	// dead body
 
 	// Map elements
@@ -75,8 +76,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
 	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
 	{ Treadmill , resourcesPath + "textures/Treadmill.png"},
-	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png"},
-	{ CarnivorousPlant , resourcesPath + "textures/PlantaCarnivora.png"},
+	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png", 8},
+	{ CarnivorousPlant , resourcesPath + "textures/PlantaCarnivora.png", 1, 7},
 	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
 	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
 	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
@@ -86,9 +87,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/Moneda.png" },
 	{ Router,resourcesPath + "textures/Router2.png" },
-	{ RoombaSpriteSheet, resourcesPath + "textures/Roomba.png"},
+	{ RoombaSpriteSheet, resourcesPath + "textures/Roomba.png", 5},
 	{ Remote, resourcesPath + "textures/Mando.png"},
-	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png"},
 
 	// miscelánea
 	{ Debug, resourcesPath + "textures/debug.png" },
@@ -97,7 +97,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Tinky, resourcesPath + "textures/Tinky.png" },
 
 	// particles
-	{ Smoke, resourcesPath + "textures/SmokeParticles-Sheet.png" },
+	{ Smoke, resourcesPath + "textures/SmokeParticles-Sheet.png", 4},
 	{ WiFiWave, resourcesPath + "textures/WiFiWave.png" },
 };
 

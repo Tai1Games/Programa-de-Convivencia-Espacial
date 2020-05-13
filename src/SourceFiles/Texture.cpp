@@ -9,8 +9,8 @@ Texture::Texture() :
 		texture_(nullptr), renderer_(nullptr), width_(0), height_(0) {
 }
 
-Texture::Texture(SDL_Renderer *renderer, const string& fileName) :
-		texture_(nullptr), width_(0), height_(0) {
+Texture::Texture(SDL_Renderer *renderer, const string& fileName, unsigned short nHorFrames, unsigned short nVerFrames) :
+		texture_(nullptr), width_(0), height_(0), nHorizontalFrames_(nHorFrames), nVerticalFrames_(nVerFrames) {
 	loadFromImg(renderer, fileName);
 }
 
