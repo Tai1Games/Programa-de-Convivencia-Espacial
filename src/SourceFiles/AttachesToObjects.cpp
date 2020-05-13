@@ -24,20 +24,18 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle())>0) ? -1 : 1;
 		attachAngle += (PI / 2)*tilt;
 
-		b2Vec2 aux = -collNormal;
+		aux = -collNormal;
 		aux.Normalize();
 
 		float auxaux= sin(mainCollider_->getBody()->GetAngle());
 
-		if ((auxaux <= -0.85 || auxaux >= 0.85) && (collNormal == b2Vec2(0,1) || collNormal == b2Vec2(0, -1))) {
+		if (auxaux >= sin(attachAngle)- CONST(double, "GRAB_ANGLE_TOLERANCE") && auxaux <= sin(attachAngle) + CONST(double, "GRAB_ANGLE_TOLERANCE")) {
 			mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
 		}
-		else if((auxaux >= -0.15 && auxaux <= 0.15) && (collNormal == b2Vec2(1, 0) || collNormal == b2Vec2(-1, 0))) {
-			mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
-		}
+
 		else {
-			aux.x *= mainCollider_->getH(0) / 2.7;
-			aux.y *= mainCollider_->getH(0) / 2.7;
+			aux.x *= mainCollider_->getH(0) / 2.3;
+			aux.y *= mainCollider_->getH(0) / 2.3;
 
 			mainCollider_->setTransform(mainCollider_->getPos() + aux, attachAngle);
 		}
