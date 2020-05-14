@@ -76,13 +76,12 @@ void Weapon::UnPickObject()
 	//Si se tira un objeto, se guarda en el objeto lanzado la ID de quien lo lanza.
 	GETCMP1_(ThrownByPlayer)->throwObject(pickedIndex_);
 
-	system("cls");
 	// desactiva colisión con el jugador
-	cout << "Weapon prev layer: " << (int)(mainCollider_->getFixture(0)->GetFilterData().categoryBits) << endl;
-	mainCollider_->changeLayerCollision(0, -(Collider::CollisionLayer)(Collider::CollisionLayer::Player1 * pow(2, getPlayerId())));
+	b2Filter f;
+	f.categoryBits = Collider::CollisionLayer::NormalObject - (Collider::CollisionLayer::Player1 * pow(2, getPlayerId()));
+	mainCollider_->getFixture(0)->SetFilterData(f);
 	hasBeenThrownRecently_ = true;
-	cout << "Player 0 layer: " << Collider::CollisionLayer::Player1 << endl;
-	cout << "Weapon post layer: " << Collider::CollisionLayer::Player1 * pow(2, getPlayerId()) << endl;
+	//
 	
 	currentHand_->setWeapon(NoWeapon, nullptr);
 	picked_ = false;
@@ -158,7 +157,8 @@ void Weapon::update() {
 		if (framesUntilRecoveringCollisionTimer_ >= framesUntilRecoveringCollision_) {
 			hasBeenThrownRecently_ = false;
 			framesUntilRecoveringCollisionTimer_ = 0;
-			mainCollider_->changeLayerCollision(0, Collider::CollisionLayer::Player);
+			b2Filter f = mainCollider_->getLayerFilter(Collider::CollisionLayer::NormalObject);
+			mainCollider_->getFixture(0)->SetFilterData(f);
 		}
 	}
 }

@@ -33,7 +33,7 @@ SDL_Game::SDL_Game() {
 
 	MS_PER_FRAME_ = constants_.getConstant<double>("MS_PER_FRAME");
 
-	audio_->setMusicVolume(constants_.getConstant<int>("MAX_MUSIC_VOLUME") / 2);
+	audio_->setMusicVolume(constants_.getConstant<int>("MAX_MUSIC_VOLUME"));
 	inputHandler_ = new InputHandler();
 	inputHandler_->initialiseGamepads();
 

@@ -46,7 +46,7 @@ void Collider::createRectangularFixture(float width, float height, float density
 	b2FixtureDef aux;
 	aux.shape = &shape;
 	aux.density = density;
-	aux.filter = setCollisionLayer(c);
+	aux.filter = getLayerFilter(c);
 	aux.friction = friction;
 	aux.restitution = restitution;
 	aux.isSensor = sensor;
@@ -64,7 +64,7 @@ void Collider::createCircularFixture(float radius, float density, float friction
 	b2FixtureDef aux;
 	aux.shape = &shape;
 	aux.density = density;
-	aux.filter = setCollisionLayer(c);
+	aux.filter = getLayerFilter(c);
 	aux.friction = friction;
 	aux.restitution = restitution;
 	aux.isSensor = sensor;
@@ -72,33 +72,64 @@ void Collider::createCircularFixture(float radius, float density, float friction
 	fixtures_.push_back(body_->CreateFixture(&fixtureDefs_.back()));
 }
 
-b2Filter Collider::setCollisionLayer(CollisionLayer c) {
+b2Filter Collider::getLayerFilter(CollisionLayer c) {
 	b2Filter filter;
 	filter.categoryBits = c;
-	switch (c) {
+	return getLayerFilter(filter);
+}
+
+b2Filter Collider::getLayerFilter(b2Filter filter) {
+	switch (filter.categoryBits) {
 	case NormalObject:
+		// = 0000 0111 1100 1011
 		filter.maskBits = NormalObject | NormalAttachableObject | Player | Wall | NonGrababbleWall; //what do I collide with?
 		break;
 	case NormalAttachableObject:
+		// = 0000 0111 1100 1011
 		filter.maskBits = NormalObject | NormalAttachableObject | Player | Wall | NonGrababbleWall; //what do I collide with?
 		break;
+	case Player1:
+		// = 0000 0111 1111 1011
+		filter.maskBits = InteractsWithPlayer;
+		break;
+	case Player2:
+		// = 0000 0111 1111 1011
+		filter.maskBits = InteractsWithPlayer;
+		break;
+	case Player3:
+		// = 0000 0111 1111 1011
+		filter.maskBits = InteractsWithPlayer;
+		break;
+	case Player4:
+		// = 0000 0111 1111 1011
+		filter.maskBits = InteractsWithPlayer;
+		break;
 	case Player:
+		// = 0000 0111 1111 1011
 		filter.maskBits = InteractsWithPlayer;
 		break;
 	case Trigger:
+		// = 0000 0111 1001 0000
 		filter.maskBits = Player | Trigger;
 		break;
 	case PickableObject:
+		// = 0000 0111 1100 0000
 		filter.maskBits = Player | Wall | NonGrababbleWall;
 		break;
 	case UnInteractableObject:
+		// = 0000 0000 0100 1000
 		filter.maskBits = Wall | NonGrababbleWall;
 		break;
 	case Wall:
+		// = 0000 0111 1010 0111
 		filter.maskBits = UnInteractableObject | Player | NormalAttachableObject | NormalObject | PickableObject;
 		break;
 	case NonGrababbleWall:
+		// = 0000 0111 1010 0111
 		filter.maskBits = UnInteractableObject | Player | NormalAttachableObject | NormalObject | PickableObject;
+		break;
+	default:
+		filter.maskBits = filter.categoryBits;
 		break;
 	}
 	return filter;

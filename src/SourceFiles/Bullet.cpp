@@ -73,7 +73,8 @@ void Bullet::onCollisionEnter(Collision* c)
 	else { //dentro de un else para que si ha colisionado con un player ni se moleste en entrar aqui
 		Collider* col = GETCMP2(cEntity, Collider);
 		if (col != nullptr) {
-			if (col->getFixture(0)->GetFilterData().categoryBits & (Collider::CollisionLayer::Wall | Collider::CollisionLayer::NonGrababbleWall))
+			if (col->getFixture(0)->GetFilterData().categoryBits == Collider::CollisionLayer::Wall ||
+				col->getFixture(0)->GetFilterData().categoryBits == Collider::CollisionLayer::NonGrababbleWall)
 				needToDelete = true;
 		}
 	}
