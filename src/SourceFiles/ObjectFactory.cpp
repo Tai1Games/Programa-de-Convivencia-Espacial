@@ -202,7 +202,6 @@ Entity* ObjectFactory::makeTable(EntityManager* entityManager, b2World* physicsW
 		CONST(double, "TABLE_LINEAR_DRAG"), CONST(double, "TABLE_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false);
 	e->addComponent<Viewer>(Resources::Table);
 
-	aux->applyLinearImpulse(b2Vec2(rand() % 4, rand() % 4), b2Vec2(0, 0));
 	e->addComponent<ColliderViewer>();
 
 	return e;
@@ -216,7 +215,6 @@ Entity* ObjectFactory::makeLamp(EntityManager* entityManager, b2World* physicsWo
 		CONST(double, "LAMP_LINEAR_DRAG"), CONST(double, "LAMP_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false);
 	e->addComponent<Viewer>(Resources::Lamp);
 
-	aux->applyLinearImpulse(b2Vec2(rand() % 4, rand() % 4), b2Vec2(0, 0));
 	e->addComponent<ColliderViewer>();
 
 	return e;
@@ -230,7 +228,6 @@ Entity* ObjectFactory::makeSofa(EntityManager* entityManager, b2World* physicsWo
 		CONST(double, "SOFA_LINEAR_DRAG"), CONST(double, "SOFA_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false);
 	e->addComponent<Viewer>(Resources::Sofa);
 
-	aux->applyLinearImpulse(b2Vec2(rand() % 4, rand() % 4), b2Vec2(0, 0));
 	e->addComponent<ColliderViewer>();
 
 	return e;
