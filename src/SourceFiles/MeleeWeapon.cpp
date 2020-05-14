@@ -53,7 +53,7 @@ void MeleeWeapon::PickObjectBy(int index) {
 void MeleeWeapon::onCollisionEnter(Collision* c) {
 	ActionableWeapon::onCollisionEnter(c);
 
-	if (picked_ && c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Player && c->entity != currentHand_->getEntity()) {
+	if (picked_ && c->hitFixture->GetFilterData().maskBits & Collider::CollisionLayer::Player && c->entity != currentHand_->getEntity()) {
 		//Restar vida
 		Health* auxHe = GETCMP2(c->entity, Health);
 		Wallet* auxWa = GETCMP2(c->entity, Wallet);
