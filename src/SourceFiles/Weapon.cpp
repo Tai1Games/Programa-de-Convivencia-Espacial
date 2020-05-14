@@ -158,8 +158,7 @@ void Weapon::update() {
 		if (framesUntilRecoveringCollisionTimer_ >= framesUntilRecoveringCollision_) {
 			hasBeenThrownRecently_ = false;
 			framesUntilRecoveringCollisionTimer_ = 0;
-			b2Filter f = mainCollider_->getLayerFilter(Collider::CollisionLayer::NormalObject);
-			mainCollider_->getFixture(0)->SetFilterData(f);
+			mainCollider_->getFixture(0)->SetFilterData(mainCollider_->getLayerFilter(Collider::CollisionLayer::NormalObject));
 		}
 	}
 }
