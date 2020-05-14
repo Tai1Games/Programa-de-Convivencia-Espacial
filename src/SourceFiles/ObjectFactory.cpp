@@ -188,7 +188,49 @@ Entity* ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* phys
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false);
 	e->addComponent<Viewer>(Resources::Stone);
 
-	aux->applyLinearImpulse(b2Vec2(0, 50), b2Vec2(0.1, 0));
+	aux->applyLinearImpulse(b2Vec2(rand() % 4, rand() % 4), b2Vec2(0, 0));
+	e->addComponent<ColliderViewer>();
+
+	return e;
+}
+
+Entity* ObjectFactory::makeTable(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
+{
+	Entity* e = entityManager->addEntity();
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "TABLE_DENSITY"),
+		CONST(double, "TABLE_FRICTION"), CONST(double, "TABLE_RESTITUTION"),
+		CONST(double, "TABLE_LINEAR_DRAG"), CONST(double, "TABLE_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false);
+	e->addComponent<Viewer>(Resources::Table);
+
+	aux->applyLinearImpulse(b2Vec2(rand() % 4, rand() % 4), b2Vec2(0, 0));
+	e->addComponent<ColliderViewer>();
+
+	return e;
+}
+
+Entity* ObjectFactory::makeLamp(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
+{
+	Entity* e = entityManager->addEntity();
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "LAMP_DENSITY"),
+		CONST(double, "LAMP_FRICTION"), CONST(double, "LAMP_RESTITUTION"),
+		CONST(double, "LAMP_LINEAR_DRAG"), CONST(double, "LAMP_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false);
+	e->addComponent<Viewer>(Resources::Lamp);
+
+	aux->applyLinearImpulse(b2Vec2(rand() % 4, rand() % 4), b2Vec2(0, 0));
+	e->addComponent<ColliderViewer>();
+
+	return e;
+}
+
+Entity* ObjectFactory::makeSofa(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
+{
+	Entity* e = entityManager->addEntity();
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "SOFA_DENSITY"),
+		CONST(double, "SOFA_FRICTION"), CONST(double, "SOFA_RESTITUTION"),
+		CONST(double, "SOFA_LINEAR_DRAG"), CONST(double, "SOFA_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false);
+	e->addComponent<Viewer>(Resources::Sofa);
+
+	aux->applyLinearImpulse(b2Vec2(rand() % 4, rand() % 4), b2Vec2(0, 0));
 	e->addComponent<ColliderViewer>();
 
 	return e;
