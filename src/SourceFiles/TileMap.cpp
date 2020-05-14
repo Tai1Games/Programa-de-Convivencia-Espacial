@@ -177,6 +177,15 @@ void TileMap::executeMapFactory()
 		else if (name == "SpaceJunk") {
 			ObjectFactory::makeSpaceJunk(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
 		}
+		else if (name == "Table") {
+			ObjectFactory::makeTable(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "TABLE_X"), CONST(float, "TABLE_Y")));
+		}
+		else if (name == "Lamp") {
+			ObjectFactory::makeLamp(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "LAMP_X"), CONST(float, "LAMP_Y")));
+		}
+		else if (name == "Sofa") {
+			ObjectFactory::makeSofa(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "SOFA_X"), CONST(float, "SOFA_Y")));
+		}
 		else if (name == "Pad") {
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
 			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
