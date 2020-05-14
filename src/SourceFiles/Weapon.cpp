@@ -119,7 +119,7 @@ void Weapon::onCollisionEnter(Collision* c)
 	b2Fixture* auxF = coll->getFixture(1);
 
 	if (otherHand != nullptr &&
-		auxF->GetFilterData().categoryBits & Collider::CollisionLayer::Trigger) {
+		auxF->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
 		SavePlayerInfo(otherHand->getPlayerId(), otherHand, GETCMP2(other, Health), GETCMP2(other, Wallet), GETCMP2(other, PlayerData)->getBinder());
 	}
 }
