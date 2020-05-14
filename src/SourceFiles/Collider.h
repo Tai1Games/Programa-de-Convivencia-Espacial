@@ -115,7 +115,7 @@ public:
 		fixtures_[i]->SetFilterData(f);
 	}
 
-	b2Filter getLayerFilter(CollisionLayer c);
-	b2Filter getLayerFilter(b2Filter filter);
+	b2Filter getFilterFromLayer(CollisionLayer c);
+	b2Filter setFilterLayerBits(b2Filter filter);
 	void disableFixtureCollisions(int FixtureIndex);
 };

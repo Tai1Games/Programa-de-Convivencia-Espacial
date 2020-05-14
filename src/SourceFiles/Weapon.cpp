@@ -77,7 +77,7 @@ void Weapon::UnPickObject()
 	GETCMP1_(ThrownByPlayer)->throwObject(pickedIndex_);
 
 	// desactiva colisión con el jugador
-	b2Filter f = mainCollider_->getLayerFilter(Collider::CollisionLayer::NormalObject);
+	b2Filter f = mainCollider_->getFilterFromLayer(Collider::CollisionLayer::NormalObject);
 	uint16 playerLayer = Collider::CollisionLayer::Player1 * pow(2, getPlayerId());
 	f.maskBits -= playerLayer;
 	mainCollider_->getFixture(0)->SetFilterData(f);
@@ -158,7 +158,7 @@ void Weapon::update() {
 		if (framesUntilRecoveringCollisionTimer_ >= framesUntilRecoveringCollision_) {
 			hasBeenThrownRecently_ = false;
 			framesUntilRecoveringCollisionTimer_ = 0;
-			mainCollider_->getFixture(0)->SetFilterData(mainCollider_->getLayerFilter(Collider::CollisionLayer::NormalObject));
+			mainCollider_->getFixture(0)->SetFilterData(mainCollider_->getFilterFromLayer(Collider::CollisionLayer::NormalObject));
 		}
 	}
 }

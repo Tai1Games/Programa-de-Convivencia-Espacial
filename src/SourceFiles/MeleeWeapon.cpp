@@ -85,8 +85,8 @@ void MeleeWeapon::onCollisionEnter(Collision* c) {
 
 void MeleeWeapon::UnPickObject() {
 	//Reactivamos el trigger de pickUp
-	mainCollider_->getFixture(0)->SetFilterData(mainCollider_->getLayerFilter(Collider::CollisionLayer::NormalObject));
-	mainCollider_->getFixture(1)->SetFilterData(mainCollider_->getLayerFilter(Collider::CollisionLayer::Trigger));
+	mainCollider_->getFixture(0)->SetFilterData(mainCollider_->getFilterFromLayer(Collider::CollisionLayer::NormalObject));
+	mainCollider_->getFixture(1)->SetFilterData(mainCollider_->getFilterFromLayer(Collider::CollisionLayer::Trigger));
 
 	ActionableWeapon::UnPickObject();
 }
