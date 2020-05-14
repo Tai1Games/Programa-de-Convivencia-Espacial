@@ -13,7 +13,7 @@ class GameStateMachine
 private:
 	std::vector<GameState*> states_;
 
-	MatchInfo* matchInfo_;
+	MatchInfo* matchInfo_ = nullptr;
 
 	int currentState_ = -1;
 
@@ -39,4 +39,3 @@ public:
 
 	void gameCycle();
 };
-
