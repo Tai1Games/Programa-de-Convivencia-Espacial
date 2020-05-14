@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <list>
-#include "GameState.h"
+#include "PlayState.h"
 #include "GameMode.h"
 #include "Entity.h"
 #include "checkML.h"
@@ -16,7 +16,7 @@ using namespace std;
 // esta clase es equivalente a un nivel del juego
 //se espera que herede de gamestate en un futuro
 //tambien deberia convertirse en un template de modo de juego y mapa
-class PlayableMenuState : public GameState
+class PlayableMenuState : public PlayState
 {
 private:
 	b2World* physicsWorld_;
@@ -37,7 +37,8 @@ private:
 		{"BoilerRoom",Resources::BoilerRoom},
 		{"GymRoom",Resources::GymRoom},
 		{"TutorialRoom", Resources::TutorialRoom},
-		{"GardenRoom",Resources::GardenRoom}
+		{"GardenRoom",Resources::GardenRoom},
+		{"MenuRoom",Resources::LivingRoom}
 	};
 	TileMap* tilemap_;
 	vector<MatchInfo::PlayerInfo*>* playerInfo;
@@ -46,13 +47,10 @@ private:
 	//BananaPool bananaPool_;
 
 public:
-	PlayableMenuState(GameMode* gMode, string tmap);
-	~PlayableMenuState();
-	virtual void init();
-	virtual void update();
-	void createDeadBodies();
-	virtual void render();
-	virtual void handleInput();
+	PlayableMenuState(GameMode* gameMode_, string tmap);
+	virtual ~PlayableMenuState();
+	
+	
 	EntityManager* getEntityManager() const { return entityManager_; }
 	b2World* getPhysicsWorld() const { return physicsWorld_; }
 };
