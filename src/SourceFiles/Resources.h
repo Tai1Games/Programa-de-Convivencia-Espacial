@@ -92,6 +92,9 @@ public:
 		Staple,
 		Confetti,
 		ConfettiParticles,
+		Lamp,
+		Table,
+		Sofa,
 
 		// Gamemode specific elements
 		Coin,
