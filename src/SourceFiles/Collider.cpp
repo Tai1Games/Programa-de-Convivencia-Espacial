@@ -91,6 +91,7 @@ b2Filter Collider::setFilterLayerBits(b2Filter filter) {
 	case Player1:
 	case Player2:
 	case Player3:
+	case Player4:
 	case Player:
 		// = 0000 0111 1111 1011
 		filter.maskBits = InteractsWithPlayer;
