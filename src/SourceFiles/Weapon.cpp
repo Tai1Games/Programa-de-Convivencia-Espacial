@@ -84,7 +84,7 @@ void Weapon::UnPickObject()
 	
 	double actualMagnitude = currentHand_->getVel().Length();
 	double resultThrowSpeed = minThrowSpeed_ + 
-		((actualMagnitude*(maxThrowSpeed_ - minThrowSpeed_))/23/*Media de magnitud maxima del jugador*/);
+		((actualMagnitude*(maxThrowSpeed_ - minThrowSpeed_))/10/*Media de magnitud maxima del jugador*/);
 	/*Hay que tener en cuenta el tamaño de la fixture principal del arma*/
 	float tam =  mainCollider_->getW(0) +  mainCollider_->getH(0);
 	resultThrowSpeed *= tam;
