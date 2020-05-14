@@ -24,7 +24,7 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle())>0) ? -1 : 1;
 		attachAngle += (PI / 2)*tilt;
 
-		attachDir = -collNormal;
+		/*attachDir = -collNormal;		//Pendiente de ver con lo de impedir el impulso
 		attachDir.Normalize();
 
 		float angleSin= sin(mainCollider_->getBody()->GetAngle());
@@ -38,8 +38,9 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 			attachDir.y *= mainCollider_->getH(0) / 2.3;
 
 			mainCollider_->setTransform(mainCollider_->getPos() + attachDir, attachAngle);
-		}
+		}*/
 		
+		mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
 		b2WeldJointDef jointDef; //Definición del nuevo joint.
 		jointDef.bodyA = mainCollider_->getBody(); //Body del jugador.
 		jointDef.bodyB = attachedObject; //Body del objeto al que se tiene que atar.
