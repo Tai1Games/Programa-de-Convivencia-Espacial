@@ -52,6 +52,18 @@ void Wallet::onCollisionEnter(Collision* c)
 			Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
 			//Si se impacta con un arma al umbral más alto de fuerza, se recibe su daño de impacto
 			if (w != nullptr) {
+				//Cogemos nuestras manos
+				Hands* h = GETCMP1_(Hands);
+
+				if (impact >= CONST(double, "DISARM_IMPACT")) {
+					//Nos desarman con el golpe
+					Weapon* we = nullptr;
+					if (h != nullptr) we = h->getWeapon();
+
+					//Si tenemos un arma cogida la soltamos al haber sido golpeados
+					if (we != nullptr) c->collisionHandler->letFallWeapon(we);
+				}
+
 				impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
 			}
 			else {

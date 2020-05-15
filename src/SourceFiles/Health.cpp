@@ -121,7 +121,7 @@ void Health::onCollisionEnter(Collision* c)
 					if (h != nullptr) we = h->getWeapon();
 
 					//Si tenemos un arma cogida la soltamos al haber sido golpeados
-					if (we != nullptr) c->collisionHandler->dropWeapon(we);
+					if (we != nullptr) c->collisionHandler->letFallWeapon(we);
 				}
 
 				//Si se impacta con un arma al umbral m�s alto de fuerza, se recibe su daño de impacto
