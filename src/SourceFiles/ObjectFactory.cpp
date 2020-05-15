@@ -1,121 +1,66 @@
 #include "ObjectFactory.h"
 
-#include "EntityManager.h"
-#include "Transform.h"
-#include "Texture.h"
-#include "Viewer.h"
+#include "AnimatedViewer.h"
+#include "BoilerButtonLogic.h"
+#include "Bullet.h"
+#include "BulletPool.h"
+#include "CarnivorousPlant.h"
+#include "Coin.h"
 #include "ColliderViewer.h"
+#include "EntityManager.h"
+#include "FireBallGenerator.h"
+#include "Fireball.h"
+#include "GameMode.h"
+#include "Hands.h"
 #include "Health.h"
 #include "HealthViewer.h"
 #include "InputHandler.h"
-#include "Weapon.h"
-#include "Hands.h"
-#include "Coin.h"
-#include "FireBallGenerator.h"
-#include "Fireball.h"
-#include "ExtinguisherWeapon.h"
-#include "SlipperWeapon.h"
-#include "MeleeWeapon.h"
-#include "ParticleEmitter.h"
-#include "BoilerButtonLogic.h"
 #include "Pad.h"
-#include "Treadmill.h"
-#include "CarnivorousPlant.h"
-#include "TomatoWeapon.h"
-#include "AnimatedViewer.h"
-#include "BananaWeapon.h"
-#include "Bullet.h"
-#include "BulletPool.h"
-#include "StaplerWeapon.h"
-#include "ConfettiWeapon.h"
-#include "WiFiBullet.h"
+#include "ParticleEmitter.h"
 #include "SpawnTree.h"
+#include "Texture.h"
 #include "ThrownByPlayer.h"
-#include "GameMode.h"
+#include "Transform.h"
+#include "Treadmill.h"
+#include "Viewer.h"
+#include "Weapon.h"
+#include "WeaponPool.h"
+#include "WiFiBullet.h"
 
-
-Entity* ObjectFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
-
-	Entity* e = entityManager->addEntity();
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "FLIPFLOP_DENSITY"),
-		CONST(double, "FLIPFLOP_FRICTION"), CONST(double, "FLIPFLOP_RESTITUTION"),
-		CONST(double, "FLIPFLOP_LINEAR_DRAG"), CONST(double, "FLIPFLOP_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent <Viewer>(Resources::Slipper);
-	e->addComponent<SlipperWeapon>(WeaponID::Slipper, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"), CONST(int, "FLIPFLOP_COOLDOWN_FRAMES"));
-	e->addComponent<ColliderViewer>();
-
-	return e;
-}
-
-Entity* ObjectFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, GameMode* gM)
+Entity* ObjectFactory::makeTable(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
-	entityManager->addExistingEntity(e);
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "CONFETTI_DENSITY"),
-		CONST(double, "CONFETTI_FRICTION"), CONST(double, "CONFETTI_RESTITUTION"),
-		CONST(double, "CONFETTI_LINEAR_DRAG"), CONST(double, "CONFETTI_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent <Viewer>(Resources::Confetti, SDL_Rect{ 0,0,32,32 });
-	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::ConfettiParticles, 10, 4, 4, 200, 50, 500, 3, 30);
-	pE->setOffset({ CONST(double, "CONFETTI_PARTICLE_OFFSET_X"), CONST(double, "CONFETTI_PARTICLE_OFFSET_Y") });
-	e->addComponent<ConfettiWeapon>(WeaponID::Confetti, CONST(int, "CONFETTI_DAMAGE"), CONST(int, "CONFETTI_IMPACT_DAMAGE"), CONST(int, "CONFETTI_COOLDOWN_FRAMES"));
-	e->addComponent<ColliderViewer>();
-	e->addComponent<ThrownByPlayer>(gM);
-
-	return e;
-}
-
-Entity* ObjectFactory::makeBall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
-
 	Entity* e = entityManager->addEntity();
-	// x,  y,   width, height, density,	friction, restitution, linearDrag, angularDrag,	Layer,							        sensor canBeAttached
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, CONST(double, "BOUNCINGBALL_DENSITY"),
-		CONST(double, "BOUNCINGBALL_FRICTION"), CONST(double, "BOUNCINGBALL_RESTITUTION"), CONST(double, "BOUNCINGBALL_LINEAR_DRAG"),
-		CONST(double, "BOUNCINGBALL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	aux->getBody()->SetLinearDamping(0);
-	aux->getBody()->SetAngularDamping(0);
-	e->addComponent <Viewer>(Resources::Ball);
-	e->addComponent<Weapon>(WeaponID::Pelota, CONST(int, "BOUNCINGBALL_IMPACT_DAMAGE"));
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "TABLE_DENSITY"),
+		CONST(double, "TABLE_FRICTION"), CONST(double, "TABLE_RESTITUTION"),
+		CONST(double, "TABLE_LINEAR_DRAG"), CONST(double, "TABLE_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false);
+	e->addComponent<Viewer>(Resources::Table);
+
 	e->addComponent<ColliderViewer>();
 
 	return e;
 }
 
-Entity* ObjectFactory::makeStapler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, BulletPool* bp) {
-	Entity* e = entityManager->addEntity();
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "STAPLER_DENSITY"),
-		CONST(double, "STAPLER_FRICTION"), CONST(double, "STAPLER_RESTITUTION"), CONST(double, "STAPLER_LINEAR_DRAG"),
-		CONST(double, "STAPLER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent <Viewer>(Resources::Stapler);
-	e->addComponent<StaplerWeapon>(CONST(int, "STAPLER_IMPACT_DAMAGE"), bp);
-	e->addComponent<ColliderViewer>();
-
-	return e;
-}
-
-Entity* ObjectFactory::makeExtinguisher(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
-
-	Entity* entity = entityManager->addEntity();
-	Collider* aux = entity->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y,
-		CONST(double, "EXTINGUISHER_DENSITY"), CONST(double, "EXTINGUISHER_FRICTION"), CONST(double, "EXTINGUISHER_RESTITUTION"),
-		CONST(double, "EXTINGUISHER_LINEAR_DRAG"), CONST(double, "EXTINGUISHER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	entity->addComponent<Viewer>(Resources::Extinguisher);
-	entity->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Coin, 10);
-	entity->addComponent<ExtinguisherWeapon>(WeaponID::Extinguisher, CONST(int, "EXTINGUISHER_IMPACT_DAMAGE"),
-		CONST(int, "EXTINGUISHER_COOLDOWN_FRAMES"));
-	entity->addComponent<ColliderViewer>();
-
-	return entity;
-}
-
-Entity* ObjectFactory::makeTomato(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
+Entity* ObjectFactory::makeLamp(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
-	entityManager->addExistingEntity(e);
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "TOMATO_RADIUS"), CONST(double, "TOMATO_DENSITY"),
-		CONST(double, "TOMATO_FRICTION"), CONST(double, "TOMATO_RESTITUTION"),
-		CONST(double, "TOMATO_LINEAR_DRAG"), CONST(double, "TOMATO_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent <Viewer>(Resources::Tomato, SDL_Rect{ 0, 0, 160, 160 });
-	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::TomatoRing, 5, 1, 5, 1000, 20, 100, 0, 360);
-	pE->setMaxParticles(1);
-	e->addComponent<TomatoWeapon>();
+	Entity* e = entityManager->addEntity();
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "LAMP_DENSITY"),
+		CONST(double, "LAMP_FRICTION"), CONST(double, "LAMP_RESTITUTION"),
+		CONST(double, "LAMP_LINEAR_DRAG"), CONST(double, "LAMP_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false);
+	e->addComponent<Viewer>(Resources::Lamp);
+
+	e->addComponent<ColliderViewer>();
+
+	return e;
+}
+
+Entity* ObjectFactory::makeSofa(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
+{
+	Entity* e = entityManager->addEntity();
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "SOFA_DENSITY"),
+		CONST(double, "SOFA_FRICTION"), CONST(double, "SOFA_RESTITUTION"),
+		CONST(double, "SOFA_LINEAR_DRAG"), CONST(double, "SOFA_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false);
+	e->addComponent<Viewer>(Resources::Sofa);
+
 	e->addComponent<ColliderViewer>();
 
 	return e;
@@ -130,19 +75,6 @@ Weapon* ObjectFactory::makeController(EntityManager* entityManager, b2World* phy
 	e->addComponent<ColliderViewer>();
 
 	return controller;
-}
-
-Entity* ObjectFactory::makeDumbbell(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
-{
-	Entity* e = entityManager->addEntity();
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "DUMBBELL_DENSITY"),
-		CONST(double, "DUMBBELL_FRICTION"), CONST(double, "DUMBBELL_RESTITUTION"),
-		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent <Viewer>(Resources::Dumbbell);
-	e->addComponent<MeleeWeapon>(WeaponID::Mancuerna, CONST(int, "DUMBBELL_DAMAGE"), CONST(int, "DUMBBELL_IMPACT_DAMAGE"), CONST(int, "DUMBBELL_COOLDOWN_FRAMES"));
-	e->addComponent<ColliderViewer>();
-
-	return e;
 }
 
 Entity* ObjectFactory::makeWall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
@@ -189,45 +121,6 @@ Entity* ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* phys
 	e->addComponent<Viewer>(Resources::Stone);
 
 	aux->applyLinearImpulse(b2Vec2(rand() % 4, rand() % 4), b2Vec2(0, 0));
-	e->addComponent<ColliderViewer>();
-
-	return e;
-}
-
-Entity* ObjectFactory::makeTable(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
-{
-	Entity* e = entityManager->addEntity();
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "TABLE_DENSITY"),
-		CONST(double, "TABLE_FRICTION"), CONST(double, "TABLE_RESTITUTION"),
-		CONST(double, "TABLE_LINEAR_DRAG"), CONST(double, "TABLE_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false);
-	e->addComponent<Viewer>(Resources::Table);
-
-	e->addComponent<ColliderViewer>();
-
-	return e;
-}
-
-Entity* ObjectFactory::makeLamp(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
-{
-	Entity* e = entityManager->addEntity();
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "LAMP_DENSITY"),
-		CONST(double, "LAMP_FRICTION"), CONST(double, "LAMP_RESTITUTION"),
-		CONST(double, "LAMP_LINEAR_DRAG"), CONST(double, "LAMP_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false);
-	e->addComponent<Viewer>(Resources::Lamp);
-
-	e->addComponent<ColliderViewer>();
-
-	return e;
-}
-
-Entity* ObjectFactory::makeSofa(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
-{
-	Entity* e = entityManager->addEntity();
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "SOFA_DENSITY"),
-		CONST(double, "SOFA_FRICTION"), CONST(double, "SOFA_RESTITUTION"),
-		CONST(double, "SOFA_LINEAR_DRAG"), CONST(double, "SOFA_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false);
-	e->addComponent<Viewer>(Resources::Sofa);
-
 	e->addComponent<ColliderViewer>();
 
 	return e;
@@ -354,22 +247,6 @@ Entity* ObjectFactory::makeCarnivorousePlant(EntityManager* entityManager, b2Wor
 	planta->addComponent<ColliderViewer>();
 
 	return planta;
-}
-
-Entity* ObjectFactory::makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, BulletPool* pb)
-{
-	entityManager->addExistingEntity(e);
-
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 5, 5, CONST(double, "BANANA_X"), CONST(double, "BANANA_Y"),
-		CONST(double, "BANANA_DENSITY"),CONST(double, "BANANA_FRICTION"), CONST(double, "BANANA_RESTITUTION"),
-		CONST(double, "BANANA_ANGULAR_DRAG"), CONST(double, "BANANA_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent<Viewer>(Resources::Banana);
-	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::BananaSkin, 100, 1, 5, 1000, 50, 100, 0, 360);
-	pE->setMaxParticles(1);
-	e->addComponent<BananaWeapon>(pb, CONST(double, "BANANA_DAMAGE"));
-	e->addComponent<ColliderViewer>();
-
-	return e;
 }
 
 Entity* ObjectFactory::makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld, GameMode* gameMode)

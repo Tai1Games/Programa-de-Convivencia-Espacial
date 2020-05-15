@@ -9,6 +9,7 @@
 #include "TomatoPool.h"
 #include "BananaPool.h"
 #include "GameMode.h"
+#include "WeaponFactory.h"
 
 
 TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW, BulletPool* bp, ConfettiPool* cP, GameMode* gameMode) :Component(ComponentType::Tilemap),  //w y h son de la ventana
@@ -260,21 +261,21 @@ void TileMap::createWeapons()
 		switch (weapon)
 		{
 		case 0: //slipper
-			e = ObjectFactory::makeSlipper(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "SLIPPER_X"), CONST(float, "SLIPPER_Y")));
+			e = WeaponFactory::makeSlipper(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "SLIPPER_X"), CONST(float, "SLIPPER_Y")));
 			break;
 		case 1: //ball
-			e = ObjectFactory::makeBall(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "BALL_X"), CONST(float, "BALL_Y")));
+			e = WeaponFactory::makeBall(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "BALL_X"), CONST(float, "BALL_Y")));
 			break;
 		case 2: //stapler
-			e = ObjectFactory::makeStapler(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "STAPLER_X"), CONST(float, "STAPLER_Y")), bulletPool_);
+			e = WeaponFactory::makeStapler(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "STAPLER_X"), CONST(float, "STAPLER_Y")), bulletPool_);
 			break;
 		case 3: //extinguisher
-			e = ObjectFactory::makeExtinguisher(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "EXTINGUISHER_X"), CONST(float, "EXTINGUISHER_Y")));
+			e = WeaponFactory::makeExtinguisher(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "EXTINGUISHER_X"), CONST(float, "EXTINGUISHER_Y")));
 			break;
 		case 4: //rock
 			break;
 		case 5: //dumbbell
-			e = ObjectFactory::makeDumbbell(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "DUMBBELL_X"), CONST(float, "DUMBBELL_Y")));
+			e = WeaponFactory::makeDumbbell(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "DUMBBELL_X"), CONST(float, "DUMBBELL_Y")));
 			break;
 		case 6: //bananGun
 			break;
