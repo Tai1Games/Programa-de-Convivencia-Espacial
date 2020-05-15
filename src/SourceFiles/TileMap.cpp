@@ -217,7 +217,7 @@ void TileMap::executeMapFactory()
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
 			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
 			size *= 0.5f;
-			ObjectFactory::makeCarnivorousePlant(entityManager_, physicsWorld_, pos, size);
+			ObjectFactory::makeCarnivorousPlant(entityManager_, physicsWorld_, pos, size);
 		}
 		else if (name == "TomatoTree") {
 			if (tomatoPool_ == nullptr) { 

@@ -43,6 +43,14 @@ private:
 	vector<MatchInfo::PlayerInfo*>* playerInfo;
 	BulletPool bulletPool_;
 	ConfettiPool confettiPool_;
+	int maxCorpses_ = CONST(int, "MAX_CORPSES");
+	double playerHeight_ = CONST(double, "PLAYER_HEIGHT");
+	double playerWidth_ = CONST(double, "PLAYER_WIDTH");
+	double playerDensity_ = CONST(double, "PLAYER_DENSITY");
+	double playerFriction_ = CONST(double, "PLAYER_FRICTION");
+	double playerRestitution_ = CONST(double, "PLAYER_RESTITUTION");
+	double playerLinearDrag_ = CONST(double, "PLAYER_LINEAR_DRAG");
+	double playerAngularDrag_ = CONST(double, "PLAYER_ANGULAR_DRAG");
 	//BananaPool bananaPool_;
 
 public:
