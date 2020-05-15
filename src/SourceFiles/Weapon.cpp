@@ -30,6 +30,8 @@ void Weapon::init()
 	entity_->getEntityManager()->getWeaponVector()->push_back(this);
 
 	throwCooldown_ = CONST(int, "THROW_COOLDOWN");
+
+	framesUntilRecoveringCollision_ = CONST(int, "RECOVERING_COLLISION_AFTER_THROWN_COOLDOWN");
 }
 
 void Weapon::handleInput()
@@ -60,6 +62,10 @@ void Weapon::PickObjectBy(int index)
 		mainCollider_->getBody()->SetEnabled(false);
 		vw_->setDrawable(false);
 
+		hasBeenThrownRecently_ = false;
+		framesUntilRecoveringCollisionTimer_ = 0;
+		mainCollider_->changeLayerCollision(0, Collider::CollisionLayer::Player);
+
 		ThrownByPlayer* throwData = GETCMP1_(ThrownByPlayer);
 		throwData->SetOwner(index);
 	}
@@ -70,6 +76,14 @@ void Weapon::UnPickObject()
 	//Si se tira un objeto, se guarda en el objeto lanzado la ID de quien lo lanza.
 	GETCMP1_(ThrownByPlayer)->throwObject(pickedIndex_);
 
+	// desactiva colisión con el jugador
+	b2Filter f = mainCollider_->getFilterFromLayer(Collider::CollisionLayer::NormalObject);
+	uint16 playerLayer = Collider::CollisionLayer::Player1 * pow(2, getPlayerId());
+	f.maskBits -= playerLayer;
+	mainCollider_->getFixture(0)->SetFilterData(f);
+	hasBeenThrownRecently_ = true;
+	//
+	
 	currentHand_->setWeapon(NoWeapon, nullptr);
 	picked_ = false;
 	pickedIndex_ = -1;
@@ -156,4 +170,14 @@ void Weapon::DeletePlayerInfo(int index)
 void Weapon::update() {
 	if(picked_)
 		throwCooldownTimer_++;
+
+	// recupera colisiones con todos los jugadores tras cierto tiempo
+	if (hasBeenThrownRecently_) {
+		framesUntilRecoveringCollisionTimer_++;
+		if (framesUntilRecoveringCollisionTimer_ >= framesUntilRecoveringCollision_) {
+			hasBeenThrownRecently_ = false;
+			framesUntilRecoveringCollisionTimer_ = 0;
+			mainCollider_->getFixture(0)->SetFilterData(mainCollider_->getFilterFromLayer(Collider::CollisionLayer::NormalObject));
+		}
+	}
 }

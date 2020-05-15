@@ -17,6 +17,9 @@ private:
 	vector<b2Vec2> playersStocksPos_; //Position in which the Stocks will be drawn FOR EACH DIFFERENT PLAYER.
 	int healtWidth_;
 	int maxStocks_;
+	int stockWidth_ = CONST(int, "STOCK_WIDTH");
+	int stockHeight_ = CONST(int, "STOCK_HEIGHT");
+	int stockOffset_ = CONST(int, "STOCK_OFFSET");
 public:
 	StocksGameMode(MatchInfo* mInfo, int stocks = 3);
 	~StocksGameMode();

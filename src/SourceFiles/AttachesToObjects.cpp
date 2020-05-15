@@ -82,7 +82,7 @@ void AttachesToObjects::handleInput() { //Si el jugador suelta la tecla de agarr
 
 void AttachesToObjects::onCollisionEnter(Collision* c){
 	//si chocamos con un objeto que pueda agarrarse
-	if (c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Wall || c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::NormalAttachableObject) {
+	if (c->hitFixture->GetFilterData().categoryBits & (Collider::CollisionLayer::Wall | Collider::CollisionLayer::NormalAttachableObject)) {
 		if (canAttachToObject()) {
 			b2WorldManifold manifold;
 			attachedCollider_ = GETCMP2(c->entity, Collider);

@@ -93,6 +93,8 @@ void Health::playerDead(CollisionHandler* c)
 	b2Fixture* fix = GETCMP1_(Collider)->getFixture(0);
 	body.pos = fix->GetBody()->GetPosition();
 	body.angle = fix->GetBody()->GetAngle();
+	body.linearVelocity = fix->GetBody()->GetLinearVelocity();
+	body.angularVelocity = fix->GetBody()->GetAngularVelocity();
 	c->addCorpse(body);
 }
 
