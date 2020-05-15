@@ -3,13 +3,13 @@
 
 class FireBallGenerator;
 class Collider;
-class Viewer;
+class AnimatedViewer;
 
 class BoilerButtonLogic : public Component
 {
 private:
 	FireBallGenerator* fbGen_ = nullptr;
-	Viewer* buttonViewer_ = nullptr;
+	AnimatedViewer* buttonViewer_ = nullptr;
 
 	bool inc_dec_ = false;
 	bool activated = true;

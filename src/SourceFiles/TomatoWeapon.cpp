@@ -14,8 +14,8 @@
 
 void TomatoWeapon::init() {
 	ActionableWeapon::init();
-	colTomato_ = GETCMP1_(Collider);
-	tomatoViewer_ = GETCMP1_(AnimatedViewer);
+	colTomato_ = GETCMP1_(Collider); 
+	tomatoViewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
 	particleEmitterTomato_ = GETCMP1_(ParticleEmitter);
 
 	timeForExplosion_ = CONST(int, "TOMATO_TIME_CHARGE");
@@ -126,7 +126,7 @@ void TomatoWeapon::UnPickObject() {
 
 void TomatoWeapon::setActive(bool a, b2Vec2 pos) {
 	entity_->setActive(a);
-	GETCMP1_(Viewer)->setDrawable(a);
+	entity_->getComponent<AnimatedViewer>(ComponentType::Viewer)->setDrawable(a);
 	colTomato_->getBody()->SetEnabled(a);
 	if (a) colTomato_->getBody()->SetTransform(pos, 0);
 	else {

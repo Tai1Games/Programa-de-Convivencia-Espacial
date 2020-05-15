@@ -250,7 +250,7 @@ Entity* ObjectFactory::makeBoilerButton(EntityManager* entityManager, b2World* p
 	Entity* e = entityManager->addEntity();
 	Collider* collBoilerButton = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "BOILER_BUTTON_RADIUS"), 0, 0,
 		0, 0, 0, Collider::CollisionLayer::NormalObject, true);
-	e->addComponent<AnimatedViewer>((inc_dec) ? Resources::IncreasingFreqButton : Resources::DecreasingFreqButton, 0);
+	e->addComponent<AnimatedViewer>((inc_dec) ? Resources::IncreasingFreqButton : Resources::DecreasingFreqButton, 0)->stopAnimation();
 	e->addComponent<BoilerButtonLogic>(inc_dec);
 	e->addComponent<ColliderViewer>();
 
