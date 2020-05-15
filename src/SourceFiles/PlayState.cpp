@@ -77,7 +77,8 @@ void PlayState::init() {
 	}
 
 	Entity* countdown = entityManager_->addEntity();
-	countdown->addComponent<Countdown>(gameMode_);
+	Countdown* count = countdown->addComponent<Countdown>(gameMode_);
+	count->assignBoiler(tilemap_->getFireballGen());
 }
 
 void PlayState::update() {
@@ -113,11 +114,16 @@ void PlayState::handleInput()
 
 void PlayState::createDeadBodies() {
 	auto bodies = collisionHandler_->getBodyData();
-	for (int i = 0; i < bodies.size(); i++) {
-		deadBodies.push_back(entityManager_->addEntity());
-		collDeadBodies.push_back(deadBodies.back()->addComponent<Collider>(physicsWorld_, b2_dynamicBody, bodies[i].pos.x, bodies[i].pos.y, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalAttachableObject, false));
-		deadBodies.back()->addComponent<Viewer>(Resources::SpaceSuit);
-		collDeadBodies.back()->setTransform(b2Vec2(bodies[i].pos.x, bodies[i].pos.y), bodies[i].angle);
+	if (deadBodies.size() < maxCorpses_) {
+		for (int i = 0; i < bodies.size(); i++) {
+			deadBodies.push_back(entityManager_->addEntity());
+			collDeadBodies.push_back(deadBodies.back()->addComponent<Collider>(physicsWorld_, b2_dynamicBody, bodies[i].pos.x, bodies[i].pos.y, playerWidth_, playerHeight_,
+				playerDensity_, playerFriction_, playerRestitution_, playerLinearDrag_, playerAngularDrag_, Collider::CollisionLayer::NormalAttachableObject, false));
+			deadBodies.back()->addComponent<Viewer>(Resources::SpaceSuit);
+			collDeadBodies.back()->setTransform(b2Vec2(bodies[i].pos.x, bodies[i].pos.y), bodies[i].angle);
+			collDeadBodies.back()->setLinearVelocity(bodies[i].linearVelocity);
+			collDeadBodies.back()->setAngularVelocity(bodies[i].angularVelocity);
+		}
 	}
 	collisionHandler_->clearBodyData();
 }
