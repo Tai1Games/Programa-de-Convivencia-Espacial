@@ -10,9 +10,9 @@ class Treadmill :
 protected:
 	Collider* myCol_ = nullptr;
 	vector<b2Body*> objectsInside_;
-	float spinSpeed_;
-	float launchSpeed_;
-	float speedUp_;
+	float spinSpeed_ = 0;
+	float launchSpeed_ = 0;
+	float speedUp_ = 0;
 
 public:
 	Treadmill(Collider* c) :Component(ComponentType::Treadmill), myCol_(c){}

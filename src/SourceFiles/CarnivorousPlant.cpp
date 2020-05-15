@@ -23,19 +23,19 @@ void CarnivorousPlant::init()
 
 void CarnivorousPlant::update()
 {
-	//sistema de animaicon
+	//sistema de animacion
 	if (idle_) {
 		int pos = frameSize_ * (frame_ / (int)actualSpeed_);
 		if (pos < frameSize_ * idleFrames_) {
-			viewer_->setClip(SDL_Rect{ 0,pos,frameSize_,frameSize_ });
+			viewer_->setFrame(pos);
 			frame_++;
 		}
 		else frame_ = 0;
 	}
 	else {
-		int pos = frameSize_ * (frame_ / (int)actualSpeed_) + frameSize_ * idleFrames_;
-		if (pos < frameSize_ * (eatingFrames_ + idleFrames_)) {
-			viewer_->setClip(SDL_Rect{ 0,pos,frameSize_,frameSize_ });
+		int pos = frame_ / (int)actualSpeed_ + idleFrames_;
+		if (pos < eatingFrames_ + idleFrames_) {
+			viewer_->setFrame(pos);
 			frame_++;
 		}
 		else {

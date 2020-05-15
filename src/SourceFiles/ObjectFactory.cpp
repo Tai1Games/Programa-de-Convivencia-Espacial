@@ -95,7 +95,7 @@ Entity* ObjectFactory::makeTomato(Entity* e, EntityManager* entityManager, b2Wor
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "TOMATO_RADIUS"), CONST(double, "TOMATO_DENSITY"),
 		CONST(double, "TOMATO_FRICTION"), CONST(double, "TOMATO_RESTITUTION"),
 		CONST(double, "TOMATO_LINEAR_DRAG"), CONST(double, "TOMATO_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent <Viewer>(Resources::Tomato, SDL_Rect{ 0, 0, 160, 160 });
+	e->addComponent <Viewer>(Resources::Tomato);
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::TomatoRing, 5, 1, 5, 1000, 20, 100, 0, 360);
 	pE->setMaxParticles(1);
 	e->addComponent<TomatoWeapon>();
@@ -181,7 +181,7 @@ Entity* ObjectFactory::makePad(EntityManager* entityManager, b2World* physicsWor
 {
 	Entity* e = entityManager->addEntity();
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 1, 0, 0, Collider::CollisionLayer::NonGrababbleWall, false);
-	e->addComponent<Viewer>(Resources::PadSpriteSheet, SDL_Rect{ 0,0,32,32 });
+	e->addComponent<AnimatedViewer>(Resources::PadSpriteSheet, CONST(int, "PAD_ANIMATION_SPEED"))->stopAnimation();
 	e->addComponent<Pad>();
 	e->addComponent<ColliderViewer>();
 
@@ -217,7 +217,7 @@ Entity* ObjectFactory::makeRoomba(EntityManager* entityManager, b2World* physics
 	Collider* collRoomba = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "ROOMBA_RADIUS"), CONST(double, "ROOMBA_DENSITY"), CONST(double, "ROOMBA_FRICTION"),
 		CONST(double, "ROOMBA_RESTITUTION"), CONST(double, "ROOMBA_LINEAR_DRAG"), CONST(double, "ROOMBA_ANGULAR_DRAG"), Collider::CollisionLayer::UnInteractableObject, false);
 
-	e->addComponent<AnimatedViewer>(Resources::RoombaSpriteSheet, SDL_Rect{ 0,0,34,34 }, CONST(int, "ROOMBA_TIMEPERFRAME"));
+	e->addComponent<AnimatedViewer>(Resources::RoombaSpriteSheet, CONST(int, "ROOMBA_TIMEPERFRAME"));
 
 	double velocityX = rand() % CONST(int, "ROOMBA_VELOCITY");
 	double velocityY = CONST(int, "ROOMBA_VELOCITY") - velocityX;
@@ -249,8 +249,7 @@ Entity* ObjectFactory::makeBoilerButton(EntityManager* entityManager, b2World* p
 	Entity* e = entityManager->addEntity();
 	Collider* collBoilerButton = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "BOILER_BUTTON_RADIUS"), 0, 0,
 		0, 0, 0, Collider::CollisionLayer::NormalObject, true);
-	if (inc_dec) e->addComponent<Viewer>(Resources::IncreasingFreqButton, SDL_Rect{ 0,0,100,100 });
-	else e->addComponent<Viewer>(Resources::DecreasingFreqButton, SDL_Rect{ 0,0,100,100 });
+	e->addComponent<Viewer>((inc_dec) ? Resources::IncreasingFreqButton : Resources::DecreasingFreqButton);
 	e->addComponent<BoilerButtonLogic>(inc_dec);
 	e->addComponent<ColliderViewer>();
 
@@ -339,10 +338,10 @@ Entity* ObjectFactory::makeTomatoTree(EntityManager* entityManager, b2World* phy
 		CONST(double, "SPAWN_TREE_RESTITUTION"), CONST(double, "SPAWN_TREE_LINEAR_DRAG"), CONST(double, "SPAWN_TREE_ANGULAR_DRAG"),
 		Collider::CollisionLayer::UnInteractableObject, false);
 	e->addComponent<Viewer>();
-	SDL_Rect clip;
-	clip.h = tomatoTex->getHeight();
-	clip.w = tomatoTex->getWidth() / 17;
-	clip.x = 0; clip.y = 0;
+	//SDL_Rect clip;
+	//clip.h = tomatoTex->getHeight();
+	//clip.w = tomatoTex->getWidth() / 17;
+	//clip.x = 0; clip.y = 0;
 	e->addComponent<SpawnTree>(tomatoTex, CONST(double, "TOMATO_RADIUS"),
 		CONST(double, "TOMATO_RADIUS"), pool, entityManager, physicsWorld);
 
@@ -376,9 +375,8 @@ Entity* ObjectFactory::makeWifiWave(Entity* e, EntityManager* entityManager, b2W
 
 
 	Texture* t = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::WiFiWave);
-	SDL_Rect r = { 0, 0, t->getWidth(), t->getHeight() };
 
-	e->addComponent<AnimatedViewer>(Resources::WiFiWave, r, 100);
+	e->addComponent<AnimatedViewer>(Resources::WiFiWave, 100);
 	e->addComponent<WiFiBullet>(colRouter);
 	e->addComponent<ColliderViewer>();
 

@@ -24,5 +24,10 @@ public:
 
 	int getTextureId() { return textureId_; }
 	Texture* getTexture() { return tex_; }
+
+	void setFrame(unsigned short frameX, unsigned short frameY = 0) {
+		frameX_ = frameX;
+		frameY_ = frameY;
+	};
 };
 

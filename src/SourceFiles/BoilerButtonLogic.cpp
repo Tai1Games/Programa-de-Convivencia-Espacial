@@ -13,7 +13,6 @@ BoilerButtonLogic::BoilerButtonLogic(bool inc_dec) : Component(ComponentType::Bo
 void BoilerButtonLogic::init() {
 	buttonViewer_ = GETCMP1_(Viewer);
 	reactivationCd_ = CONST(int, "BOILER_BUTTON_COOLDOWN");
-	frameSize = buttonViewer_->getTexture()->getHeight();
 	minForceForAcivation_ = CONST(int, "BOILER_MIN_FORCE_FOR_ACTIVATION");
 }
 
@@ -21,7 +20,7 @@ void BoilerButtonLogic::update() {
 	if (!activated) {
 		if (SDL_Game::instance()->getTime() > timeForReactivation_) {
 			activated = true;
-			buttonViewer_->setClip(SDL_Rect{ 0, 0, frameSize, frameSize });
+			buttonViewer_->setFrame(1);
 		}
 	}
 }
@@ -32,7 +31,7 @@ void BoilerButtonLogic::onCollisionEnter(Collision* c) {
 		c->hitFixture->GetBody()->GetLinearVelocity().Length() > minForceForAcivation_) {
 
 		fbGen_->onButtonAction(inc_dec_);
-		buttonViewer_->setClip(SDL_Rect{ frameSize, 0, frameSize, frameSize });
+		buttonViewer_->setFrame(0);
 		timeForReactivation_ = SDL_Game::instance()->getTime() + reactivationCd_;
 		activated = false;
 	}

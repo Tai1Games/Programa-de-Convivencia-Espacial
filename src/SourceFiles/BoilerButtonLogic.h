@@ -16,8 +16,7 @@ private:
 	int timeForReactivation_ = 0;
 
 	//Initialized at init()
-	int reactivationCd_ = 0; 
-	int frameSize = 0;
+	int reactivationCd_ = 0;
 	int minForceForAcivation_ = 0;
 
 public:

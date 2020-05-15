@@ -5,7 +5,7 @@
 class AnimatedUIViewer : public UIViewer, public AbstractAnimatedViewers
 {
 public:
-	AnimatedUIViewer(int textureId, SDL_Rect clip, int timeperframe, b2Vec2 pos, float scale, float angle) : UIViewer(textureId, pos, scale, angle, clip){
+	AnimatedUIViewer(int textureId, int timeperframe, b2Vec2 pos, float scale, float angle) : UIViewer(textureId, pos, scale, angle){
 		timePerFrame_ = timeperframe;
 	}
 	virtual ~AnimatedUIViewer() {};

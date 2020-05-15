@@ -64,8 +64,8 @@ private:
 	SDL_Renderer *renderer_;
 	int width_;
 	int height_;
-	unsigned short nHorizontalFrames_;
-	unsigned short nVerticalFrames_;
+	unsigned short nHorizontalFrames_ = 1;
+	unsigned short nVerticalFrames_ = 1;
 	int frameWidth_;
 	int frameHeight_;
 };

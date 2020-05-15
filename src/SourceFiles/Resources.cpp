@@ -70,9 +70,9 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	// Map elements
 	{ Boiler,resourcesPath + "textures/CalderaPro.png"},
-	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
-	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
-	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png" },
+	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png", 2},
+	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png", 2},
+	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png", 4},
 	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
 	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
 	{ Treadmill , resourcesPath + "textures/Treadmill.png"},

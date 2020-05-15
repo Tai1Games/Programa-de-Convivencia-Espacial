@@ -103,8 +103,9 @@ struct SpritePacket {
 	unsigned short posY;
 	unsigned short width;
 	unsigned short height;
-	short rotationDegrees;
-	unsigned short frameNumber;
+	short rotationDegrees = 0;
+	unsigned char frameNumberX = 0;
+	unsigned char frameNumberY = 0;
 };
 
 struct AudioPacket {

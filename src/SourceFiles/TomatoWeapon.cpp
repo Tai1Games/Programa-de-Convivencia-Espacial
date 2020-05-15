@@ -47,7 +47,7 @@ void TomatoWeapon::update() {
 			colTomato_->setLinearVelocity({ 0,0 });
 		}
 		frame = 1 + (SDL_Game::instance()->getTime() - timeActivated_) / frameSpeedCharge_;
-		tomatoViewer_->setClip(SDL_Rect{ frame * frameSize_, 0, frameSize_, frameSize_ });
+		tomatoViewer_->setFrame(frame);
 	}
 	else if (exploded_) {
 		if (SDL_Game::instance()->getTime() > timeForExplosionExpire_) {
@@ -55,9 +55,8 @@ void TomatoWeapon::update() {
 			setActive(false);
 		}
 		frame = 1 + nFramesCharge_ + (SDL_Game::instance()->getTime() - timeExploded_) / frameSpeedExplosion_;
-		tomatoViewer_->setClip(SDL_Rect{ frame * frameSize_, 0, frameSize_, frameSize_ });
+		tomatoViewer_->setFrame(frame);
 	}
-	
 }
 
 void TomatoWeapon::onCollisionEnter(Collision* c) {
