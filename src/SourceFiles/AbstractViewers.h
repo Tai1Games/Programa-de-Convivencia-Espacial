@@ -13,6 +13,7 @@ protected:
 	bool drawable_ = true;
 	b2Vec2 renderOffset_ = b2Vec2(0, 0);
 	b2Vec2 wH_;
+	unsigned short int frameX_ = 0, frameY_ = 0;
 public:
 	void init();
 

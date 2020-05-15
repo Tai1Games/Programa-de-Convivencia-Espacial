@@ -45,6 +45,7 @@ public:
 	// if no clip provided it renders all texture (scaled to dest).
 	void render(const SDL_Rect& dest, double angle, const SDL_Rect& clip, SDL_RendererFlip flip) const;
 	void render(const SDL_Rect &dest, double angle,	const SDL_Rect &clip) const;
+	void render(const SDL_Rect& dest, double angle, unsigned short frameX, unsigned short frameY = 0, SDL_RendererFlip flip = SDL_FLIP_NONE) const;
 	void render(const SDL_Rect& dest, double angle, const SDL_RendererFlip& flip) const;
 	void render(const SDL_Rect &dest, double angle) const;
 
@@ -57,4 +58,6 @@ private:
 	int height_;
 	unsigned short nHorizontalFrames_;
 	unsigned short nVerticalFrames_;
+	int frameWidth_;
+	int frameHeight_;
 };

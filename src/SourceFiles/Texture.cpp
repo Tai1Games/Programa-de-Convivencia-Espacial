@@ -6,7 +6,7 @@
 using namespace std;
 
 Texture::Texture() :
-		texture_(nullptr), renderer_(nullptr), width_(0), height_(0) {
+		texture_(nullptr), renderer_(nullptr), width_(0), height_(0), frameWidth_(0), frameHeight_(0) {
 }
 
 Texture::Texture(SDL_Renderer *renderer, const string& fileName, unsigned short nHorFrames, unsigned short nVerFrames) :
@@ -41,6 +41,8 @@ bool Texture::loadFromImg(SDL_Renderer *renderer, const string& fileName) {
 		if (texture_ != nullptr) {
 			width_ = surface->w;
 			height_ = surface->h;
+			frameWidth_ = width_ / nHorizontalFrames_;
+			frameHeight_ = height_ / nVerticalFrames_;
 		}
 		SDL_FreeSurface(surface);
 	} else {
@@ -110,6 +112,13 @@ void Texture::render(const SDL_Rect &dest, double angle,
 		const SDL_Rect &clip) const {
 
 		render(dest, angle, clip, SDL_FLIP_NONE);
+
+}
+
+// this overloaded function gets the clip for you. frameY and flip are optional parameters
+void Texture::render(const SDL_Rect& dest, double angle, unsigned short frameX, unsigned short frameY, SDL_RendererFlip flip) const {
+	SDL_Rect clip = { frameWidth_ * frameX, frameHeight_ * frameY, frameWidth_, frameHeight_ };
+	render(dest, angle, clip, flip);
 
 }
 
