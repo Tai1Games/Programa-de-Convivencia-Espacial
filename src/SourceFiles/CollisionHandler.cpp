@@ -62,13 +62,9 @@ void CollisionHandler::SolveInteractions() {
 	}
 	vecWeld.clear();
 	for (auto weapon : vecWeapon) { //Recorre el vector soltando los weapon y lo limpia al final.
-		weapon->UnPickObject();
-	}
-	vecWeapon.clear();
-	for (auto weapon : vecLetWeapon) { //Recorre el vector soltando los weapon y lo limpia al final.
 		weapon->letFallObject();
 	}
-	vecLetWeapon.clear();
+	vecWeapon.clear();
 	for (auto attach : vecAttach) { //Recorre el vector soltando los agarres y lo limpia al final.
 		attach->deAttachFromObject();
 	}

@@ -61,7 +61,7 @@ void Wallet::onCollisionEnter(Collision* c)
 					if (h != nullptr) we = h->getWeapon();
 
 					//Si tenemos un arma cogida la soltamos al haber sido golpeados
-					if (we != nullptr) c->collisionHandler->letFallWeapon(we);
+					if (we != nullptr) c->collisionHandler->dropWeapon(we);
 				}
 
 				impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
