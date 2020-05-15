@@ -28,7 +28,7 @@ private:
 
 	vector<moveData> vecMove; //Vector donde almacenamos los moves que realizaremos al final del step.
 	vector<bodyData> vecBody; //Vector donde almacenamos los cuerpos muertos que crearemos al final del step.
-	vector<Weapon*> vecWeapon; //Vector donde almacenamos las weapons que soltaremos al final del step
+	vector<Weapon*> vecWeapon; //Vector donde almacenamos las weapons que soltaremos al final del step.
 	vector<AttachesToObjects*> vecAttach; //Vector donde almacenamos los agarres que soltaremos al final del step.
 	vector<tuple<Wallet*, PlayerData*, int>> vecCoinsToDrop; //Vector donde almacenamos los impactos entre objetos y wallets.
 	vector<Fireball*> fireballsToClear; //Bolas de fuego que se eliminaran al final del step

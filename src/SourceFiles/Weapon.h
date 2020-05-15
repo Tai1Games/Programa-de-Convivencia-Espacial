@@ -74,6 +74,8 @@ public:
 	/*Reactiva el arma y la lanza en direccion de la mano*/
 	virtual void UnPickObject();
 
+	virtual void letFallObject();
+
 	int getImpactDamage() { return impactDamage_; }
 	int getWeaponType() { return weaponType_; }
 	Hands* getCurrentHand() { return currentHand_; }

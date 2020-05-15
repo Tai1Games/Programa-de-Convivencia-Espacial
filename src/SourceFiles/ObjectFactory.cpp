@@ -128,7 +128,7 @@ Weapon* ObjectFactory::makeController(EntityManager* entityManager, b2World* phy
 	e->addComponent<Viewer>(Resources::Remote);
 	Weapon* controller = e->addComponent<Weapon>(WeaponID::Mando, CONST(int, "CONTROLLER_IMPACT_DAMAGE"));
 	e->addComponent<ColliderViewer>();
-
+	
 	return controller;
 }
 
@@ -224,7 +224,7 @@ Entity* ObjectFactory::makeFireball(Entity* e, EntityManager* entityManager, b2W
 	e->addComponent<Fireball>();
 	e->addComponent<Weapon>(WeaponID::Piedra, 999);//Si, el fuego es una piedra muy caliente. Mucho m�s que el magma, esta caldera echa bolas de PLASMA, el cuarto estado de la materia
 	e->addComponent<ColliderViewer>();
-
+	
 	return e;
 }
 
@@ -329,7 +329,7 @@ Entity* ObjectFactory::makeBanana(Entity* e, EntityManager* entityManager, b2Wor
 	pE->setMaxParticles(1);
 	e->addComponent<BananaWeapon>(pb, CONST(double, "BANANA_DAMAGE"));
 	e->addComponent<ColliderViewer>();
-
+	
 	return e;
 }
 
