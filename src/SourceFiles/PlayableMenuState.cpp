@@ -62,7 +62,10 @@ void PlayableMenuState::init()
 
 	//Version estática de la factoria
 	tmap->executeMapFactory();
-	//tilemap_->createWeapons();
+	tmap->createWeapons();
+
+
+	ObjectFactory::makeCarnivorousePlant(entityManager_, physicsWorld_, b2Vec2(15, 3), b2Vec2(6, 6));
 
 	//gameMode_->init(this);
 
@@ -76,8 +79,7 @@ void PlayableMenuState::init()
 	player->addComponent<AttachesToObjects>();
 	player->addComponent<PlayerController>();
 	player->addComponent<ImpulseViewer>(Resources::ImpulseArrow, Resources::ImpulseBackground);
-	//ObjectFactory::makeCarnivorousePlant(entityManager_, physicsWorld_, b2Vec2(5, 3), b2Vec2(6, 6));
-
+	
 }
 
 void PlayableMenuState::update()
