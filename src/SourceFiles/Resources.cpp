@@ -76,13 +76,9 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
 	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
 	{ Treadmill , resourcesPath + "textures/Treadmill.png"},
+	{ TreadmillPanel, resourcesPath + "textures/TreadmillPanel.png"},
 	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png", 8},
 	{ CarnivorousPlant , resourcesPath + "textures/PlantaCarnivora.png", 7, 1},
-	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
-	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
-	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
-	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
-	{ TreadmillPanel, resourcesPath + "textures/TreadmillPanel.png"},
 
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/Moneda.png" },
