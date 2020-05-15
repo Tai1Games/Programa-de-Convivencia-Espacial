@@ -104,7 +104,7 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 		break;
 
 		case States::playableMenu: {
-			states_[state] = new PlayableMenuState(new TimeGameMode(matchInfo_), "LivingRoom");
+			states_[state] = new PlayableMenuState("LivingRoom");
 		}
 			break;
 

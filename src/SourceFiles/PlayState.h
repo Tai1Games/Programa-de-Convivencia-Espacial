@@ -18,7 +18,7 @@ using namespace std;
 //tambien deberia convertirse en un template de modo de juego y mapa
 class PlayState : public GameState
 {
-private:
+protected:
 	b2World* physicsWorld_;
 	vector<b2Body*> physicalEntities_; //almacena los punteros a los colliders de b2
 	//puede que no sea necesario si cogemos la referencia en cuanto los creamos con addPhysicalEntity
@@ -37,7 +37,8 @@ private:
 		{"BoilerRoom",Resources::BoilerRoom},
 		{"GymRoom",Resources::GymRoom},
 		{"TutorialRoom", Resources::TutorialRoom},
-		{"GardenRoom",Resources::GardenRoom}
+		{"GardenRoom",Resources::GardenRoom},
+		{"MenuRoom",Resources::LivingRoom}
 	};
 	TileMap* tilemap_;
 	vector<MatchInfo::PlayerInfo*>* playerInfo;

@@ -49,6 +49,7 @@ enum GamemodeID {
 	WiFight,
 	Timed,
 	Tutorial,
+	PlayMenu,
 	NUMBER_OF_GAMEMODES
 };
 
