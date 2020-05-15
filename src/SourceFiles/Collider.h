@@ -103,6 +103,7 @@ public:
 	void setUserData(void* data) { body_->SetUserData(data); }
 	void setTransform(b2Vec2 pos, float angle) { body_->SetTransform(pos, angle); }
 	void setLinearVelocity(b2Vec2 vel) { body_->SetLinearVelocity(vel); }
+	void setAngularVelocity(float vel) { body_->SetAngularVelocity(vel); }
 	void applyLinearImpulse(b2Vec2 force, b2Vec2 point) { body_->ApplyLinearImpulse(force, body_->GetPosition() + point, true); }
 	void applyForce(b2Vec2 force, b2Vec2 point) { body_->ApplyForce(force, body_->GetPosition() + point, true); }
 	void createRectangularFixture(float width, float height, float density,

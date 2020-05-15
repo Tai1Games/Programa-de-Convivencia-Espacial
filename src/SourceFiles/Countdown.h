@@ -2,6 +2,7 @@
 #include "GameMode.h"
 #include "Resources.h"
 #include "Texture.h"
+#include "FireBallGenerator.h"
 
 class Countdown : public Component
 {
@@ -23,9 +24,12 @@ private:
 	SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::One),
 	SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Go) };
 	GameMode* gMode_;
+	FireBallGenerator* fGen_;
+
 public:
 	Countdown(GameMode* g) : Component(ComponentType::Countdown), gMode_(g) {}
 	virtual ~Countdown() {}
 	virtual void update();
 	virtual void draw() const;
+	void assignBoiler(FireBallGenerator* fGen) { fGen_ = fGen; }
 };

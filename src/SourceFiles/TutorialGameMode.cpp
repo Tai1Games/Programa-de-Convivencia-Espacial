@@ -42,7 +42,7 @@ void TutorialGameMode::init(PlayState* game) {
 			p.x += hV->getWidth() + CONST(int, "STOCK_INITIAL_OFFSET");
 		}
 		else {
-			p.x -= ((hV->getWidth() - CONST(int, "LIFE_WIDTH")) + CONST(int, "STOCK_INITIAL_OFFSET") + CONST(int, "STOCK_WIDTH"));
+			p.x -= ((hV->getWidth() - CONST(int, "LIFE_WIDTH")) + CONST(int, "STOCK_INITIAL_OFFSET") + stockWidth_);
 		}
 		playersStocksPos_.push_back(p);
 		for (int j = 0; j < Resources::TutorialEnd - Resources::MoveTutorial; j++) tutorials_[j].push_back(false);
@@ -136,15 +136,15 @@ void TutorialGameMode::update() {
 
 void TutorialGameMode::render() {
 	SDL_Rect drawPos; //Position where the stocks will be drawn
-	drawPos.w = CONST(int, "STOCK_WIDTH");
-	drawPos.h = CONST(int, "STOCK_HEIGTH");
+	drawPos.w = stockWidth_;
+	drawPos.h = stockHeight_;
 	for (int i = 0; i < playerStocks_.size(); ++i) { //i = player number, j = individual stock to be drawn
 		drawPos.y = playersStocksPos_[i].y; //Stocks and Health are drawn on the same Y coordinate.
 		for (int j = 0; j < playerStocks_[i]; j++) {
 			if (i % 2 == 0) //X coordinate depends on whether the stocks are drawn on the left or the right. 
-				drawPos.x = playersStocksPos_[i].x + j * (CONST(int, "STOCK_WIDTH") + CONST(int, "STOCK_OFFSET"));
+				drawPos.x = playersStocksPos_[i].x + j * (stockWidth_ + stockOffset_);
 			else
-				drawPos.x = playersStocksPos_[i].x - j * (CONST(int, "STOCK_WIDTH") + CONST(int, "STOCK_OFFSET"));
+				drawPos.x = playersStocksPos_[i].x - j * (stockWidth_ + stockOffset_);
 			SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Tinky)->render(drawPos);
 		}
 	}
@@ -155,13 +155,8 @@ bool TutorialGameMode::onPlayerDead(int id) { //Returns false when player runs o
 		playerStocks_[id]--;
 		if (playerStocks_[id] <= 0) {
 			roundResults_.push_back(players_[id]);
-			if (roundResults_.size() == playerStocks_.size() - 1) {
-				//int k = 0;
-				//while (playerStocks_[k] == 0) { k++; }
-				//roundResults_.push_back(players_[k]);
-				//winner_ = players_[k];
-				//roundFinished_ = true; //Round finishes when only 1 player remains
-			}
+			/*if (roundResults_.size() == playerStocks_.size() - 1) {
+			}*/
 			return false;
 		}
 		else return true;

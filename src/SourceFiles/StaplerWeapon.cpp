@@ -1,6 +1,6 @@
 #include "StaplerWeapon.h"
 
-StaplerWeapon::StaplerWeapon(int damage, BulletPool* pb) :ActionableWeapon(ComponentType::StaplerWeapon, WeaponID::Stapler, damage, 0),
+StaplerWeapon::StaplerWeapon(int damage, BulletPool* pb) : ActionableWeapon(WeaponID::Stapler, damage, 0),
 bulletPool_(pb)
 {
 }
