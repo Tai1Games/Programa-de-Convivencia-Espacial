@@ -19,7 +19,7 @@ public:
 	void init();
 
 	void setNFrames(int nFrames);
-	void setDrawable(bool b) { drawable_ = b; }
+	virtual void setDrawable(bool b) { drawable_ = b; }
 	void setOffset(b2Vec2 newOffset) { renderOffset_ = newOffset; }
 
 	int getTextureId() { return textureId_; }

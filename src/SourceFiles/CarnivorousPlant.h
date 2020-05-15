@@ -1,7 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "checkML.h"
-#include "Viewer.h"
+#include "AnimatedViewer.h"
 #include "Collision.h"
 #include "PlayerData.h"
 #include "Health.h"
@@ -11,7 +11,7 @@
 class CarnivorousPlant : public Component
 {
 private:
-	Viewer* viewer_;
+	AnimatedViewer* viewer_;
 	int frame_, minAnimationSpeed_, maxAnimationSpeed_, playersInside_,
 		idleFrames_, eatingFrames_, frameSize_, coinDMG, damage, maxFrames_, frameCount_;
 	float increase_, actualSpeed_;
@@ -21,7 +21,7 @@ private:
 	Wallet* walletPlayer_;
 
 public:
-	CarnivorousPlant() :Component(ComponentType::CarnivorousPlant) {}
+	CarnivorousPlant() : Component(ComponentType::CarnivorousPlant) {}
 
 	virtual void init() override;
 	virtual void update() override;

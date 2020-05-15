@@ -95,7 +95,8 @@ Entity* ObjectFactory::makeTomato(Entity* e, EntityManager* entityManager, b2Wor
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "TOMATO_RADIUS"), CONST(double, "TOMATO_DENSITY"),
 		CONST(double, "TOMATO_FRICTION"), CONST(double, "TOMATO_RESTITUTION"),
 		CONST(double, "TOMATO_LINEAR_DRAG"), CONST(double, "TOMATO_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent <Viewer>(Resources::Tomato);
+	
+	e->addComponent<AnimatedViewer>(Resources::Tomato, (int)(CONST(int, "TOMATO_TIME_CHARGE") / CONST(int, "TOMATO_N_FRAMES_ACTIVATED")));
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::TomatoRing, 5, 1, 5, 1000, 20, 100, 0, 360);
 	pE->setMaxParticles(1);
 	e->addComponent<TomatoWeapon>();
@@ -249,7 +250,7 @@ Entity* ObjectFactory::makeBoilerButton(EntityManager* entityManager, b2World* p
 	Entity* e = entityManager->addEntity();
 	Collider* collBoilerButton = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "BOILER_BUTTON_RADIUS"), 0, 0,
 		0, 0, 0, Collider::CollisionLayer::NormalObject, true);
-	e->addComponent<Viewer>((inc_dec) ? Resources::IncreasingFreqButton : Resources::DecreasingFreqButton);
+	e->addComponent<AnimatedViewer>((inc_dec) ? Resources::IncreasingFreqButton : Resources::DecreasingFreqButton, 0);
 	e->addComponent<BoilerButtonLogic>(inc_dec);
 	e->addComponent<ColliderViewer>();
 
@@ -292,7 +293,7 @@ Entity* ObjectFactory::makeCarnivorousePlant(EntityManager* entityManager, b2Wor
 {
 	Entity* planta = entityManager->addEntity();
 	planta->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
-	planta->addComponent<Viewer>(Resources::CarnivorousPlant);
+	planta->addComponent<AnimatedViewer>(Resources::CarnivorousPlant, CONST(int, "CARNIVOROUSPLANT_MIN_SPEED"));
 	planta->addComponent<CarnivorousPlant>();
 	planta->addComponent<ColliderViewer>();
 

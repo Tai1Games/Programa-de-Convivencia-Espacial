@@ -42,7 +42,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Rocket, resourcesPath + "textures/Rocket.png"},
 	{ SpaceStation, resourcesPath + "textures/SpaceStation.png"},
 	{ Token, resourcesPath + "textures/Marcador.png"},
-	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png"},
+	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png", 8},
 
 	// Weapons and map items
 	{ Ball, resourcesPath + "textures/PelotaSaltarina.png" },
@@ -77,7 +77,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
 	{ Treadmill , resourcesPath + "textures/Treadmill.png"},
 	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png", 8},
-	{ CarnivorousPlant , resourcesPath + "textures/PlantaCarnivora.png", 1, 7},
+	{ CarnivorousPlant , resourcesPath + "textures/PlantaCarnivora.png", 7, 1},
 	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
 	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
 	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},

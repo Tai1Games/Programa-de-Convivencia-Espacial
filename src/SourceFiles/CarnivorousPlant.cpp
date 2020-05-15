@@ -3,7 +3,7 @@
 void CarnivorousPlant::init()
 {
 	frame_ = 0;
-	viewer_ = entity_->getComponent<Viewer>(ComponentType::Viewer);
+	viewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
 	idle_ = true;
 	maxAnimationSpeed_ = CONST(int, "CARNIVOROUSPLANT_MAX_SPEED");
 	minAnimationSpeed_ = CONST(int, "CARNIVOROUSPLANT_MIN_SPEED");
@@ -41,6 +41,7 @@ void CarnivorousPlant::update()
 		else {
 			frame_ = 0;
 			actualSpeed_ = minAnimationSpeed_;
+			viewer_->setAnimSpeed(actualSpeed_);
 			idle_ = true;
 		}
 	}

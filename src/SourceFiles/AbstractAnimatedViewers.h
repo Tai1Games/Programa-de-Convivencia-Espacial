@@ -7,8 +7,9 @@ protected:
 	int timePerFrame_ = 0;
 	int loops_ = -1;
 	int currentLoop_ = 0;
-	bool updateTime(int nFrames);
 	bool activeAnimation_ = true;
+
+	bool updateTime(int nFrames);
 
 public:
 	struct AnimationInfo {
@@ -25,4 +26,9 @@ public:
 		activeAnimation_ = false;
 		frame_ = 0;
 	}
+
+	void setAnimSpeed(int timePerFrame) {
+		timePerFrame_ = timePerFrame;
+	}
+
 };
