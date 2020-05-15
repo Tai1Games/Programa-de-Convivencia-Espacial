@@ -1,5 +1,9 @@
 #include "ClientState.h"
+#include "SDL_Game.h"
 #include <iostream>
+
+#define us unsigned short
+#define uc unsigned char
 
 ClientState::ClientState(char* host) {
 	if (SDLNet_Init() < 0) {
@@ -30,11 +34,6 @@ void ClientState::init() {
 
 void ClientState::update()
 {
-
-}
-
-void ClientState::render()
-{
 	while (!doneReceiving_) {
 		if (SDLNet_CheckSockets(socketSet_, 0) > 0) {
 			if (SDLNet_SocketReady(hostConnection_)) {
@@ -43,13 +42,15 @@ void ClientState::render()
 					throw;
 				}
 				switch (buffer[0]) {
-				case 0:
+				case 'A':
+					//Audio
+				case 'F':
+					//Finished
 					doneReceiving_ = true;
 					break;
-				case 2:
-					//renderizar sprite
-					SDLNet_TCP_Recv(hostConnection_, buffer, 16);
-					renderBufferTexture();
+				case 'S':
+					//Sprite
+					receiveSprite();
 					break;
 				}
 			}
@@ -57,12 +58,29 @@ void ClientState::render()
 	}
 }
 
-void ClientState::renderBufferTexture() {
-	//|idTex|x|x|y|y|w|w|h|h|rot|rot|frame| = 12 
-	//|idTex|x|x|y|y|w|w|h|h|xc|xc|yc|yc|wc|wc|hc|hc|rot|rot|frame| = 20
+void ClientState::render()
+{
+	SpritePacket sprite;
+	while (!spritesToRender_.empty()) {
+		sprite = spritesToRender_.front();
+		//SDL_Game::instance()->getTexturesMngr()->getTexture(sprite.textureId)->render({sprite.posX,sprite.posY,sprite.width,sprite.height},sprite.rotationDegrees,sprite.frameNumberX,sprite.frameNumberY,sprite.flip);
+		spritesToRender_.pop();
+	}
+}
+
+void ClientState::receiveSprite() {
+	//Ya que se ha recibido el identificador de tipo es SpritePacketSize - 1
+	receivedBytes_ = 0;
+	int n = 0;
+	while (receivedBytes_ < sizeof(SpritePacket) - 1) {
+		n = SDLNet_TCP_Recv(hostConnection_, buffer + receivedBytes_, sizeof(SpritePacket) - 1 - receivedBytes_);
+		receivedBytes_ += n;
+	}
+
+	//id      pos x			pos y		  width	         height		   rot				frameX		     frameY			flip
+	spritesToRender_.push({ 'S', buffer[0],(us)buffer[1],(us)buffer[3],(us)buffer[5],(us)buffer[7],(us)buffer[9],(uc)buffer[11],(uc)buffer[12],(uc)buffer[13] });
 }
 
 void ClientState::handleInput()
 {
-
 }

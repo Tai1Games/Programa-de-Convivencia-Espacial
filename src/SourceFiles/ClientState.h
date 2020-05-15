@@ -1,6 +1,8 @@
 #pragma once
 #include "GameState.h"
 #include "SDL_net.h"
+#include "Constants.h"
+#include <queue>
 
 /*
 * Tipos de mensajes del servidor
@@ -22,8 +24,10 @@ private:
 	//1024 bytes a 16 bytes por sprite = 64 sprites
 	//a 12 = 85 sprites
 	//a 20 = 51 sprites
-	char buffer[16];
+	char buffer[2048];
 	int receivedBytes_ = 0;
+
+	std::queue<SpritePacket> spritesToRender_;
 public:
 	ClientState(char* host);
 	virtual ~ClientState() { SDLNet_Quit(); };
@@ -31,7 +35,8 @@ public:
 	virtual void init() override;
 	virtual void update() override;
 	virtual void render() override;
-	void renderBufferTexture();
 	virtual void handleInput() override;
+
+	void receiveSprite();
 };
 

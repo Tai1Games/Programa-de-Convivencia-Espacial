@@ -49,6 +49,11 @@ Los clientes solo se tienen que preocupar de registrar el input de su jugador y 
 
 * **Input:** El cliente recibe el input de su mando, lo codifica y lo envía al host.
 
-  * Codificación: [pendiente]
+  * Codificación:
+      * Sprites: Cada sprite va codificado en un paquete de 14 bytes 
+        {identificador de mensaje, id de textura, posicion X, posicion Y, Ancho, Alto, rotación, numero de frame horizontal, numero de frame vertical}
+
+      * Audio: Cada audio va codificado en un paquete de 2 bytes
+        {identificador de mensaje, id de audio}
 
 * **Renderizado:** Recibe la información de cada uno de los sprites que tiene el host en pantalla, y los renderiza según le vayan llegando.
