@@ -119,7 +119,6 @@ void Texture::render(const SDL_Rect &dest, double angle,
 void Texture::render(const SDL_Rect& dest, double angle, unsigned short frameX, unsigned short frameY, SDL_RendererFlip flip) const {
 	SDL_Rect clip = { frameWidth_ * frameX, frameHeight_ * frameY, frameWidth_, frameHeight_ };
 	render(dest, angle, clip, flip);
-
 }
 
 void Texture::render(const SDL_Rect &dest, double angle) const {

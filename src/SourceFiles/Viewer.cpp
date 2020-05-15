@@ -6,11 +6,10 @@ Viewer::Viewer() :
 	Viewer(Resources::Debug) {	//
 }
 
-Viewer::Viewer(int textureId, SDL_Rect clip, ComponentType::CmpId ct) :
+Viewer::Viewer(int textureId, ComponentType::CmpId ct) :
 	Component(ct), //
 	collider_(nullptr){	//
 	tex_ = nullptr;
-	clip_ = clip;
 	textureId_ = textureId;
 }
 
@@ -26,7 +25,7 @@ void Viewer::draw() const {
 		SDL_Rect drawRect = collider_->getRectRender();
 		drawRect.x += renderOffset_.x;
 		drawRect.y += renderOffset_.y;
-		tex_->render(drawRect, collider_->getAngleInDegrees(), clip_); // getAngle devuelve radianes, hay que pasarlos a �ngulos
+		tex_->render(drawRect, collider_->getAngleInDegrees(), frameX_, frameY_, flip_); // getAngle devuelve radianes, hay que pasarlos a �ngulos
     }
 }
 

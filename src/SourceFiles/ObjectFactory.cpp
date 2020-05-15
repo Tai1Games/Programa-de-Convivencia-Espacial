@@ -269,7 +269,7 @@ Entity* ObjectFactory::makeTreadmill(EntityManager* entityManager, b2World* phys
 	Collider* collMill = m->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x + offset, pos.y, CONST(double, "TREADMILL_MILL_WIDTH"), CONST(double, "TREADMILL_MILL_HEIGHT"), CONST(double, "TREADMILL_DENSITY"), CONST(double, "TREADMILL_FRICTION"),
 		CONST(double, "TREADMILL_RESTITUTION"), CONST(double, "TREADMILL_LINEAR_DRAG"), CONST(double, "TREADMILL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, true);
 
-	m->addComponent<Viewer>(Resources::TreadmillSpriteSheet, SDL_Rect{ 0,0,82,46 });
+	m->addComponent<AnimatedViewer>(Resources::TreadmillSpriteSheet, CONST(int, "TREADMILL_ANIMATION_SPEED"));
 	h->addComponent<Viewer>(Resources::TreadmillPanel);
 	m->addComponent<Treadmill>(collHandle);
 
@@ -293,7 +293,7 @@ Entity* ObjectFactory::makeCarnivorousePlant(EntityManager* entityManager, b2Wor
 {
 	Entity* planta = entityManager->addEntity();
 	planta->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
-	planta->addComponent<Viewer>(Resources::CarnivorousPlant, SDL_Rect{ 0,0,32,32 });
+	planta->addComponent<Viewer>(Resources::CarnivorousPlant);
 	planta->addComponent<CarnivorousPlant>();
 	planta->addComponent<ColliderViewer>();
 
