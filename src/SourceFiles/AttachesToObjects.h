@@ -17,6 +17,8 @@ private:
 	PlayerData* playerData_ = nullptr;
 	InputBinder* ib;
 	KeyboardBinder* kBinder_ = nullptr;
+
+	b2Vec2 attachDir = b2Vec2(0,0);
 public:
 	AttachesToObjects() : Component(ComponentType::AttachesToObjects) {};
 	~AttachesToObjects() {};

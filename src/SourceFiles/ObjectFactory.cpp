@@ -98,7 +98,7 @@ Entity* ObjectFactory::makeExtinguisher(EntityManager* entityManager, b2World* p
 		CONST(double, "EXTINGUISHER_DENSITY"), CONST(double, "EXTINGUISHER_FRICTION"), CONST(double, "EXTINGUISHER_RESTITUTION"),
 		CONST(double, "EXTINGUISHER_LINEAR_DRAG"), CONST(double, "EXTINGUISHER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	entity->addComponent<Viewer>(Resources::Extinguisher);
-	entity->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Coin, 10);
+	entity->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Smoke, 10);
 	entity->addComponent<ExtinguisherWeapon>(WeaponID::Extinguisher, CONST(int, "EXTINGUISHER_IMPACT_DAMAGE"),
 		CONST(int, "EXTINGUISHER_COOLDOWN_FRAMES"));
 	entity->addComponent<ColliderViewer>();
@@ -128,7 +128,7 @@ Weapon* ObjectFactory::makeController(EntityManager* entityManager, b2World* phy
 	e->addComponent<Viewer>(Resources::Remote);
 	Weapon* controller = e->addComponent<Weapon>(WeaponID::Mando, CONST(int, "CONTROLLER_IMPACT_DAMAGE"));
 	e->addComponent<ColliderViewer>();
-
+	
 	return controller;
 }
 
@@ -224,7 +224,7 @@ Entity* ObjectFactory::makeFireball(Entity* e, EntityManager* entityManager, b2W
 	e->addComponent<Fireball>();
 	e->addComponent<Weapon>(WeaponID::Piedra, 999);//Si, el fuego es una piedra muy caliente. Mucho m�s que el magma, esta caldera echa bolas de PLASMA, el cuarto estado de la materia
 	e->addComponent<ColliderViewer>();
-
+	
 	return e;
 }
 
@@ -252,7 +252,7 @@ Entity* ObjectFactory::makeBoiler(EntityManager* entityManager, b2World* physics
 {
 	Entity* e = entityManager->addEntity();
 	Collider* collRoomba = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "BOILER_WIDTH"), CONST(double, "BOILER_HEIGHT"), CONST(double, "BOILER_DENSITY"), CONST(double, "BOILER_FRICTION"),
-		CONST(double, "BOILER_RESTITUTION"), CONST(double, "BOILER_LINEAR_DRAG"), CONST(double, "BOILER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false);
+		CONST(double, "BOILER_RESTITUTION"), CONST(double, "BOILER_LINEAR_DRAG"), CONST(double, "BOILER_ANGULAR_DRAG"), Collider::CollisionLayer::NonGrababbleWall, false);
 	int nFrames = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Smoke)->getWidth() / SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Smoke)->getHeight();
 	e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Smoke, CONST(int, "FBGEN_PARTICLE_SPEED"), nFrames, CONST(int, "FBGEN_PARTICLE_GEN_ODDS"), CONST(int, "FBGEN_PARTICLE_LIFETIME"), CONST(int, "FBGEN_PARTICLE_SIZE"), 0, CONST(int, "FBGEN_PARTICLE_SPEED_VARIATION"), 180);
 	e->addComponent<Viewer>(Resources::Boiler);
@@ -306,7 +306,7 @@ Entity* ObjectFactory::makeTreadmill(EntityManager* entityManager, b2World* phys
 	return m;
 }
 
-Entity* ObjectFactory::makeCarnivorousePlant(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
+Entity* ObjectFactory::makeCarnivorousPlant(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
 	Entity* planta = entityManager->addEntity();
 	planta->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
@@ -329,7 +329,7 @@ Entity* ObjectFactory::makeBanana(Entity* e, EntityManager* entityManager, b2Wor
 	pE->setMaxParticles(1);
 	e->addComponent<BananaWeapon>(pb, CONST(double, "BANANA_DAMAGE"));
 	e->addComponent<ColliderViewer>();
-
+	
 	return e;
 }
 

@@ -10,16 +10,23 @@ class Collider : public Component
 {
 public:
 	//Add the different collision layers as we see fit
-	enum CollisionLayer {
+	enum CollisionLayer : uint16_t {
 		//a collision layer can't be zero or else it won't collide
 		NormalObject = 0x0001,				//	= 0000 0000 0000 0001
-		UnInteractableObject = 0x0002,		//	= 0000 0000 0000 0010
-		NormalAttachableObject = 0x0004,	//	= 0000 0000 0000 0100
+		NormalAttachableObject = 0x0002,	//	= 0000 0000 0000 0010
+		UnInteractableObject = 0x0004,		//	= 0000 0000 0000 0100
 		Wall = 0x0008,						//	= 0000 0000 0000 1000
-		Player = 0x0010,					//	= 0000 0000 0001 0000
-		Trigger = 0x0020,					//	= 0000 0000 0010 0000
-		PickableObject = 0x0040,			//	= 0000 0000 0100 0000
-		NonGrababbleWall = 0x0080			//	= 0000 0000 1000 0000
+		Trigger = 0x0010,					//	= 0000 0000 0001 0000
+		PickableObject = 0x0020,			//	= 0000 0000 0010 0000
+		NonGrababbleWall = 0x0040,			//	= 0000 0000 0100 0000
+		Player1 = 0x0080,					//	= 0000 0000 1000 0000
+		Player2 = 0x0100,					//	= 0000 0001 0000 0000
+		Player3 = 0x0200,					//	= 0000 0010 0000 0000
+		Player4 = 0x0400,					//	= 0000 0100 0000 0000
+
+		// layers que resumen juntando varias capas en una
+		Player = 0x0780,					//	= 0000 0111 1000 0000
+		InteractsWithPlayer = 0x07FB		//  = 0000 0111 1111 1011
 	};
 
 private:
@@ -96,6 +103,7 @@ public:
 	void setUserData(void* data) { body_->SetUserData(data); }
 	void setTransform(b2Vec2 pos, float angle) { body_->SetTransform(pos, angle); }
 	void setLinearVelocity(b2Vec2 vel) { body_->SetLinearVelocity(vel); }
+	void setAngularVelocity(float vel) { body_->SetAngularVelocity(vel); }
 	void applyLinearImpulse(b2Vec2 force, b2Vec2 point) { body_->ApplyLinearImpulse(force, body_->GetPosition() + point, true); }
 	void applyForce(b2Vec2 force, b2Vec2 point) { body_->ApplyForce(force, body_->GetPosition() + point, true); }
 	void createRectangularFixture(float width, float height, float density,
@@ -108,6 +116,7 @@ public:
 		fixtures_[i]->SetFilterData(f);
 	}
 
-	b2Filter setCollisionLayer(CollisionLayer c);
+	b2Filter getFilterFromLayer(CollisionLayer c);
+	b2Filter setFilterLayerBits(b2Filter filter);
 	void disableFixtureCollisions(int FixtureIndex);
 };
