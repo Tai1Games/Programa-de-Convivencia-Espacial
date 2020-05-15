@@ -1,8 +1,9 @@
 #include "AnimatedPlayer.h"
 
-AnimatedPlayer::AnimatedPlayer(int textureId, int skin) : Viewer(textureId, ComponentType::AnimatedPlayer) {
-	animationsInfo_ = vector<AnimationInfo>( CONST(int, "NUM_ANIMS"));
-	skin_ = skin;	
+AnimatedPlayer::AnimatedPlayer(int textureId, int timePerFrame, int skin) : Viewer(textureId, ComponentType::AnimatedPlayer) {
+	animationsInfo_ = vector<AnimationInfo>(CONST(int, "NUM_ANIMS"));
+	timePerFrame_ = timePerFrame;
+	skin_ = skin;
 }
 
 AnimatedPlayer::~AnimatedPlayer()
@@ -34,28 +35,15 @@ void AnimatedPlayer::init()
 
 void AnimatedPlayer::update()
 {
-	if (anim_ != -1 && isPlaying_ && updateTime(animationsInfo_[anim_].numFrames_)) {
-		frameX_ = animationsInfo_[anim_].animOrigin_ + frame_;
-		if (!isLooping_ && currentLoop_ > maxLoops_) {
-			anim_ = -1;
-			currentLoop_ = 0;
-		}
+	if (isPlaying_ && anim_ != -1 && updateTime(animationsInfo_[anim_].numFrames_)) {
+			frameX_ = animationsInfo_[anim_].animOrigin_ + frame_;
+			if (loops_ != -1 && currentLoop_ >= loops_) {
+				resetAnimation();
+			}
 	}
 }
 
-void AnimatedPlayer::play()
+void AnimatedPlayer::resetAnimation()
 {
-	isPlaying_ = true;
-}
-
-void AnimatedPlayer::pause()
-{
-	isPlaying_ = false;
-}
-
-void AnimatedPlayer::stop()
-{
-	isPlaying_ = false;
-	anim_ = -1;
-	frame_ = -1;
+	startAnimation(-1, 0);
 }

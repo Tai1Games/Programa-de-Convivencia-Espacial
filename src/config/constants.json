@@ -51,6 +51,7 @@
   "MAX_SPEED_AFTER_IMPULSE": 5,
 
   "PLAYER_ANIMS": null,
+  "PLAYER_TIME_PER_FRAME" :  10,
   "NUM_SKINS": 4,
   "NUM_ANIMS": 4,
 

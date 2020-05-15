@@ -8,6 +8,7 @@ protected:
 	int loops_ = -1;
 	int currentLoop_ = 0;
 	bool activeAnimation_ = true;
+	bool isPlaying_ = true;
 
 	bool updateTime(int nFrames);
 
@@ -17,12 +18,18 @@ public:
 		short unsigned int numFrames_;
 	};
 
-	void startAnimation(int loops = -1) {
+	// animation aquí sólo sirve para el override
+	virtual void startAnimation(int loops = -1, int animation = 0) {
 		activeAnimation_ = true;
 		loops_ = loops;
 	}
 
-	void stopAnimation() {
+	void pauseAnimation()
+	{
+		isPlaying_ = false;
+	}
+
+	virtual void stopAnimation() {
 		activeAnimation_ = false;
 		frame_ = 0;
 	}
