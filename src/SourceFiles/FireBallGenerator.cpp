@@ -45,21 +45,23 @@ void FireBallGenerator::init() {
 
 void FireBallGenerator::update() {
 	//entity_->getEntityManager()->addEntity();
-	uint actTime = SDL_Game::instance()->getTime();
-	currentFrame++;
-	if (actTime > nextShot_) {
-		int n = rand() % maxFireballs_ + minFireballs_;
-		addFireball(n);
-		nextShot_ = actTime + (rand() % maxCd_ + minCd_);
-	}
-	if (currentFrame > framesForNextShake) {
-		framesForNextShake = currentFrame + framesBetweenShakes_;
+	if (activated_) {
+		uint actTime = SDL_Game::instance()->getTime();
+		currentFrame++;
+		if (actTime > nextShot_) {
+			int n = rand() % maxFireballs_ + minFireballs_;
+			addFireball(n);
+			nextShot_ = actTime + (rand() % maxCd_ + minCd_);
+		}
+		if (currentFrame > framesForNextShake) {
+			framesForNextShake = currentFrame + framesBetweenShakes_;
 
-		int randDirX = 1, randDirY = 1;
-		if (rand() % 2 == 0) randDirX = -1;
-		if (rand() % 2 == 0) randDirY = -1;
+			int randDirX = 1, randDirY = 1;
+			if (rand() % 2 == 0) randDirX = -1;
+			if (rand() % 2 == 0) randDirY = -1;
 
-		boilerViewer_->setOffset(b2Vec2(rand() % shakeOffsetX_ * randDirX, rand() % shakeOffsetY_ * randDirY));
+			boilerViewer_->setOffset(b2Vec2(rand() % shakeOffsetX_ * randDirX, rand() % shakeOffsetY_ * randDirY));
+		}
 	}
 }
 

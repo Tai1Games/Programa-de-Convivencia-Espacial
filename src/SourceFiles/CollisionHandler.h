@@ -54,6 +54,8 @@ public:
 	struct bodyData {  //Struct donde guardamos los datos necesarios para hacer un cuerpo muerto.
 		b2Vec2 pos;
 		float angle;
+		b2Vec2 linearVelocity;
+		float angularVelocity;
 	};
     CollisionHandler(GameMode* g, TileMap* tm): gMode_(g), tilemap_(tm) {};
 	~CollisionHandler() {};

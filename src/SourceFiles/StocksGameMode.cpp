@@ -28,7 +28,7 @@ void StocksGameMode::init(PlayState* game){
 			p.x += hV->getWidth() + CONST(int,"STOCK_INITIAL_OFFSET");
 		}
 		else {
-			p.x -= ((hV->getWidth()-CONST(int,"LIFE_WIDTH")) + CONST(int,"STOCK_INITIAL_OFFSET") + CONST(int,"STOCK_WIDTH"));
+			p.x -= ((hV->getWidth()-CONST(int,"LIFE_WIDTH")) + CONST(int,"STOCK_INITIAL_OFFSET") + stockWidth_);
 		}
 		playersStocksPos_.push_back(p);
 	}
@@ -40,15 +40,15 @@ void StocksGameMode::update(){
 
 void StocksGameMode::render(){
 	SDL_Rect drawPos; //Position where the stocks will be drawn
-	drawPos.w = CONST(int,"STOCK_WIDTH");
-	drawPos.h = CONST(int,"STOCK_HEIGTH");
+	drawPos.w = stockWidth_;
+	drawPos.h = stockHeight_;
 	for(int i = 0;i<playerStocks_.size();++i){ //i = player number, j = individual stock to be drawn
 		drawPos.y = playersStocksPos_[i].y; //Stocks and Health are drawn on the same Y coordinate.
 		for(int j = 0;j < playerStocks_[i];j++){ 
 			if(i%2==0) //X coordinate depends on whether the stocks are drawn on the left or the right. 
-				drawPos.x = playersStocksPos_[i].x + j*(CONST(int,"STOCK_WIDTH") + CONST(int,"STOCK_OFFSET"));
+				drawPos.x = playersStocksPos_[i].x + j* (stockWidth_ + stockOffset_);
 			else
-				drawPos.x = playersStocksPos_[i].x - j * (CONST(int,"STOCK_WIDTH") + CONST(int, "STOCK_OFFSET"));
+				drawPos.x = playersStocksPos_[i].x - j * (stockWidth_ + stockOffset_);
 			SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Tinky)->render(drawPos);
 		}
 	}
