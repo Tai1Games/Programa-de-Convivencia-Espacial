@@ -14,7 +14,7 @@ protected:
 	b2Vec2 renderOffset_ = b2Vec2(0, 0);
 	b2Vec2 wH_;
 	unsigned short int frameX_ = 0, frameY_ = 0;
-	SDL_RendererFlip flip_;
+	SDL_RendererFlip flip_ = SDL_FLIP_NONE;
 public:
 	void init();
 
