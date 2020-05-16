@@ -42,12 +42,12 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Rocket, resourcesPath + "textures/Rocket.png"},
 	{ SpaceStation, resourcesPath + "textures/SpaceStation.png"},
 	{ Token, resourcesPath + "textures/Marcador.png"},
-	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png"},
+	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png", 8, 1},
 
 	// Weapons and map items
 	{ Ball, resourcesPath + "textures/PelotaSaltarina.png" },
 	{ Extinguisher, resourcesPath + "textures/Extintor.png" },
-	{ Fireball,resourcesPath + "textures/fireball_placeholder.png", 4},
+	{ Fireball,resourcesPath + "textures/fireball.png", 4},
 	{ Dumbbell, resourcesPath + "textures/Mancuerna.png" },
 	{ Slipper, resourcesPath + "textures/Chancla.png" },
 	{ Stapler, resourcesPath + "textures/Grapadora.png" },
@@ -70,19 +70,15 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	// Map elements
 	{ Boiler,resourcesPath + "textures/CalderaPro.png"},
-	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
-	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
-	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png" },
+	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png", 2, 1},
+	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png", 2, 1},
+	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png", 4},
 	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
 	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
 	{ Treadmill , resourcesPath + "textures/Treadmill.png"},
-	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png", 8},
-	{ CarnivorousPlant , resourcesPath + "textures/PlantaCarnivora.png", 1, 7},
-	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png"},
-	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png"},
-	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
-	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
 	{ TreadmillPanel, resourcesPath + "textures/TreadmillPanel.png"},
+	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png", 8},
+	{ CarnivorousPlant , resourcesPath + "textures/PlantaCarnivora.png", 7, 1},
 
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/Moneda.png" },

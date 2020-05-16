@@ -16,16 +16,24 @@ public:
 			const SDL_Color& color);
 	virtual ~Texture();
 
-	inline int getWidth() {
+	inline int getWidth() const {
 		return width_;
 	}
 
-	inline int getHeight() {
+	inline int getHeight() const {
 		return height_;
 	}
 
-	inline bool isReady() {
+	inline bool isReady() const {
 		return texture_ != nullptr;
+	}
+
+	inline unsigned short int getNumFramesX() const {
+		return nHorizontalFrames_;
+	}
+
+	inline unsigned short int getNumFramesY() const {
+		return nVerticalFrames_;
 	}
 
 	// load from image or text, in both cases we should provide a rendered
@@ -56,8 +64,8 @@ private:
 	SDL_Renderer *renderer_;
 	int width_;
 	int height_;
-	unsigned short nHorizontalFrames_;
-	unsigned short nVerticalFrames_;
+	unsigned short nHorizontalFrames_ = 1;
+	unsigned short nVerticalFrames_ = 1;
 	int frameWidth_;
 	int frameHeight_;
 };
