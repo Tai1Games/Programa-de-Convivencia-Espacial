@@ -65,10 +65,7 @@ void AttachesToObjects::deAttachFromObject() {
 }
 
 bool AttachesToObjects::canAttachToObject() { //Se agarra si está pretando una tecla válida y si no está agarrado a otra cosa.
-	if (ib->holdGrab()) {
-		if (attachedObject_ == nullptr) return true;
-	}
-	return false;
+	return (attachedObject_ == nullptr && ib->holdGrab());
 }
 
 bool AttachesToObjects::isAttached()

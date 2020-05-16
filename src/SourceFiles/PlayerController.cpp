@@ -10,7 +10,6 @@ bool PlayerController::isImpulseValid(const b2Vec2& dir)
 	b2Vec2 normal = attachesToObj_->getAttachmentNormal();
 	float angle = atan2(normal.x * dir.x + normal.y * dir.y,
 		normal.x * dir.y - normal.y * dir.x);
-
 	//comop mucho permite impulsos perpendiculares al agarre
 	//sumar radianes a PI/2 para restringir aun mas la direccion de impulso
 	return abs(angle) > PI / 2;
