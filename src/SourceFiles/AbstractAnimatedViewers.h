@@ -32,6 +32,7 @@ public:
 	// times (-1 = loop until stopped). Ignore the
 	// "animation" field, it is used for inheritance.
 	virtual void startAnimation(int loops = -1, int animation = 0) {	// animation aquí sólo sirve para el override
+		stopAnimation();
 		activeAnimation_ = true;
 		loops_ = loops;
 	}
