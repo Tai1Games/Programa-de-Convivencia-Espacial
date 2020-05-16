@@ -29,7 +29,7 @@ private:
 
 	vector<MatchInfo::PlayerInfo*>* playerInfo;
 public:
-	PlayableMenuState(string tmap);
+	PlayableMenuState() {};
 	virtual ~PlayableMenuState();
 	
 	virtual void init() override;

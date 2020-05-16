@@ -23,7 +23,6 @@
 
 #include "PlayerFactory.h"
 
-PlayableMenuState::PlayableMenuState(string tmap) : tilemap(tmap) {}
 
 PlayableMenuState::~PlayableMenuState()
 {
@@ -44,18 +43,15 @@ void PlayableMenuState::init()
 	ConfettiPool confettiPool_;
 
 	tmap = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
-		"assets/game/tilemaps/TutorialRoom.json",
+		"assets/game/tilemaps/MenuRoom.json",
 		entityManager_, physicsWorld_, &bulletPool_, &confettiPool_, nullptr);
 	tmap->init();
 	
-
-
 	collisionHandler_ = new CollisionHandler(nullptr, tmap);
 	physicsWorld_->SetContactListener(collisionHandler_);
 
-
 	//FONDO
-	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::LivingRoom);
+	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::MenuRoom);
 
 	//MÚSICA
 	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::MainMenuMusic, -1);
@@ -63,11 +59,6 @@ void PlayableMenuState::init()
 	//Version estática de la factoria
 	tmap->executeMapFactory();
 	tmap->createWeapons();
-
-
-	ObjectFactory::makeCarnivorousePlant(entityManager_, physicsWorld_, b2Vec2(15, 3), b2Vec2(6, 6));
-
-	//gameMode_->init(this);
 
 	playerInfo = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
 	MatchInfo* aux = SDL_Game::instance()->getStateMachine()->getMatchInfo();

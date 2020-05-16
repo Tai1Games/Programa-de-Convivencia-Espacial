@@ -351,9 +351,6 @@
     <ClInclude Include="CarnivorousPlantViewer.h">
       <Filter>Header Files\Components\Viewers</Filter>
     </ClInclude>
-    <ClInclude Include="ConfettiPool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PlayableMenuState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
@@ -362,6 +359,9 @@
     </ClInclude>
     <ClInclude Include="WeaponFactory.h">
       <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfettiPool.h">
+      <Filter>Header Files\Pools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -623,17 +623,17 @@
     <ClCompile Include="StaplerWeapon.cpp">
       <Filter>Source Files\Components\Weapons</Filter>
     </ClCompile>
-    <ClCompile Include="ConfettiPool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PlayableMenuState.cpp">
       <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
     <ClCompile Include="TriggerButton.cpp">
       <Filter>Source Files\Components</Filter>
-    </ClInclude>
+    </ClCompile>
     <ClCompile Include="WeaponFactory.cpp">
       <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfettiPool.cpp">
+      <Filter>Source Files\Pools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -25,6 +25,7 @@ public:
 		RocketRoom,
 		TutorialRoom,
 		GardenRoom,
+		MenuRoom,
 
 		// UI
 		ActiveHealth,

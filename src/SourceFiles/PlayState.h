@@ -38,7 +38,7 @@ protected:
 		{"GymRoom",Resources::GymRoom},
 		{"TutorialRoom", Resources::TutorialRoom},
 		{"GardenRoom",Resources::GardenRoom},
-		{"MenuRoom",Resources::LivingRoom}
+		{"MenuRoom",Resources::MenuRoom}
 	};
 	TileMap* tilemap_;
 	vector<MatchInfo::PlayerInfo*>* playerInfo;
