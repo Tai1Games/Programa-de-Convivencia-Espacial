@@ -11,14 +11,14 @@ void BananaPool::init(EntityManager* eMan, b2World* physicsWorld) {
 	bananaMinSpeed_ = CONST(int, "BANANA_MIN_SPEED");
 	for (Entity* e : bananaPool) {
 		ObjectFactory::makeBanana(e, eMan, physicsWorld, b2Vec2(0, 0), bulletPool_);
-		e->getComponent<BananaWeapon>(ComponentType::Banana)->setActive(false);
+		e->getComponent<BananaWeapon>(ComponentType::Weapon)->setActive(false);
 	}
 }
 
 void BananaPool::addWeapon(b2Vec2 pos) {
 	Entity* e = bananaPool_.getObj();
 	if (e != nullptr) {
-		BananaWeapon* banana = e->getComponent<BananaWeapon>(ComponentType::Banana);
+		BananaWeapon* banana = e->getComponent<BananaWeapon>(ComponentType::Weapon);
 		banana->setActive(true, pos);
 		int randDirX = -1;
 		int randDirY = -1;

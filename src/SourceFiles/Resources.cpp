@@ -58,6 +58,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ BananaSkin,resourcesPath + "textures/BananaSkin.png"},
 	{ BananaNonSkin,resourcesPath + "textures/Banana!Skin.png"},
 	{ Staple,resourcesPath + "textures/Staple.png"},
+	{ Confetti,resourcesPath + "textures/ConfettiWeapon.png"},
+	{ ConfettiParticles,resourcesPath + "textures/ConfettiParticles.png"},
 
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },
@@ -85,7 +87,7 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/Moneda.png" },
-	{ Router,resourcesPath + "textures/Router2.png" },
+	{ Router,resourcesPath + "textures/Router.png" },
 	{ RoombaSpriteSheet, resourcesPath + "textures/Roomba.png"},
 	{ Remote, resourcesPath + "textures/Mando.png"},
 	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png"},
