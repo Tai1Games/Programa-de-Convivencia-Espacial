@@ -120,19 +120,20 @@ struct AudioPacket {
 
 struct InputPacket {
 	char packetId = 'I'; //Input
-	bool holdGrab;
-	bool releaseGrab;
-	bool pressThrow;
-	float aimDirX;
-	float aimDirY;
-	bool pressImpulse;
-	bool releaseImpulse;
-	bool pressAttack;
-	bool menuForward;
-	bool menuBack;
-	bool pressPause;
-	char menuMove;
+	bool holdGrab = false;
+	bool releaseGrab = false;
+	bool pressThrow = false;
+	bool pressPick = false;
+	bool holdImpulse = false;
+	float aimDirX = 0;
+	float aimDirY = 0;
+	bool pressImpulse = false;
+	bool releaseImpulse = false;
+	bool pressAttack = false;
+	bool menuForward = false;
+	bool menuBack = false;
+	bool pressPause = false;
+	char menuMove = false;
 };
 
 #pragma pack(pop)
-
