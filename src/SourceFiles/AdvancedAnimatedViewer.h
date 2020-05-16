@@ -27,10 +27,5 @@ public:
 		limitFrame_ = limitFrame;
 	}
 
-	virtual void stopAnimation() override {
-		AbstractAnimatedViewers::stopAnimation();
-		resetAnimation();
-	}
-
 	virtual void resetAnimation();
 };
