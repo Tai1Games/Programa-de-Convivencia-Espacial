@@ -54,6 +54,7 @@ Entity* ObjectFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2W
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "CONFETTI_DENSITY"),
 		CONST(double, "CONFETTI_FRICTION"), CONST(double, "CONFETTI_RESTITUTION"),
 		CONST(double, "CONFETTI_LINEAR_DRAG"), CONST(double, "CONFETTI_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "CONFETTI_W_SPRITE") ,CONST(int, "CONFETTI_H_SPRITE") }, aux);
 	e->addComponent <Viewer>(Resources::Confetti, SDL_Rect{ 0,0,32,32 });
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::ConfettiParticles, 10, 4, 4, 200, 50, 500, 3, 30);
 	pE->setOffset({ CONST(double, "CONFETTI_PARTICLE_OFFSET_X"), CONST(double, "CONFETTI_PARTICLE_OFFSET_Y") });
@@ -346,11 +347,11 @@ Entity* ObjectFactory::makeBanana(Entity* e, EntityManager* entityManager, b2Wor
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 5, 5, CONST(double, "BANANA_W_PHYSICS"), CONST(double, "BANANA_H_PHYSICS"),
 		CONST(double, "BANANA_DENSITY"), CONST(double, "BANANA_FRICTION"), CONST(double, "BANANA_RESTITUTION"),
 		CONST(double, "BANANA_ANGULAR_DRAG"), CONST(double, "BANANA_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent<Transform>(SDL_Rect{0,0, CONST(int, "BANANA_W_SPRITE") ,CONST(int, "BANANA_W_SPRITE") }, aux);
+	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "BANANA_W_SPRITE") ,CONST(int, "BANANA_W_SPRITE") }, aux);
 	e->addComponent<Viewer>(Resources::Banana);
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::BananaSkin, 100, 1, 5, 1000, 50, 100, 0, 360);
 	pE->setMaxParticles(1);
-	e->addComponent<BananaWeapon>(pb, CONST(double, "BANANA_DAMAGE"));
+	e->addComponent<BananaWeapon>(pb, CONST(double, "ANANA_DAMAGE"));
 	e->addComponent<ColliderViewer>();
 
 	return e;
@@ -363,7 +364,7 @@ Entity* ObjectFactory::makeBullet(Entity* e, EntityManager* entityManager, b2Wor
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 0, 0, 0.7, 0.7, //estos 0.7 son la escala, es provisional hasta que se pueda cambiar mas adelante en el setActive
 		CONST(double, "BULLET_DENSITY"), CONST(double, "BULLET_FRICTION"), CONST(double, "BULLET_RESTITUTION"),
 		CONST(double, "BULLET_LINEAR_DRAG"), CONST(double, "BULLET_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, true);
-	e->addComponent<Transform>(SDL_Rect{0,0, CONST(int, "BULLET_W_SPRITE"),CONST(int, "BULLET_H_SPRITE") }, aux);
+	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "BULLET_W_SPRITE"),CONST(int, "BULLET_H_SPRITE") }, aux);
 	e->addComponent<Viewer>(Resources::Negro);
 
 	e->addComponent<Bullet>();
@@ -422,7 +423,7 @@ Entity* ObjectFactory::makeWifiWave(Entity* e, EntityManager* entityManager, b2W
 	Texture* t = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::WiFiWave);
 	SDL_Rect r = { 0, 0, t->getWidth(), t->getHeight() };
 
-	e->addComponent<Transform>(SDL_Rect{0,0,CONST(int, "WIFI_W_SPRITE"), CONST(int, "WIFI_H_SPRITE")}, aux);
+	e->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "WIFI_W_SPRITE"), CONST(int, "WIFI_H_SPRITE") }, aux);
 	e->addComponent<AnimatedViewer>(Resources::WiFiWave, r, 100);
 	e->addComponent<WiFiBullet>(colRouter);
 	e->addComponent<ColliderViewer>();

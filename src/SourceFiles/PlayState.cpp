@@ -46,7 +46,7 @@ void PlayState::init() {
 	secondsPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 
 	tilemap_ = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
-		"assets/game/tilemaps/"+tilemapName_+".json",
+		"assets/game/tilemaps/" + tilemapName_ + ".json",
 		entityManager_, physicsWorld_, &bulletPool_, &confettiPool_, gameMode_);
 	tilemap_->init();
 	gameMode_->setTileMap(tilemap_);
@@ -65,8 +65,8 @@ void PlayState::init() {
 	SDL_Game::instance()->getAudioMngr()->playMusic(resourceMap_[tilemapName_], -1);
 
 	//Version estática de la factoria
-	 tilemap_->executeMapFactory();
-	 tilemap_->createWeapons();
+	tilemap_->executeMapFactory();
+	tilemap_->createWeapons();
 
 	gameMode_->init(this);
 
@@ -119,6 +119,7 @@ void PlayState::createDeadBodies() {
 			deadBodies.push_back(entityManager_->addEntity());
 			collDeadBodies.push_back(deadBodies.back()->addComponent<Collider>(physicsWorld_, b2_dynamicBody, bodies[i].pos.x, bodies[i].pos.y, playerWidth_, playerHeight_,
 				playerDensity_, playerFriction_, playerRestitution_, playerLinearDrag_, playerAngularDrag_, Collider::CollisionLayer::NormalAttachableObject, false));
+			deadBodies.back()->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "CORPSE_W_SPRITE"),CONST(int, "CORPSE_H_SPRITE") }, collDeadBodies.back());
 			deadBodies.back()->addComponent<Viewer>(Resources::SpaceSuit);
 			collDeadBodies.back()->setTransform(b2Vec2(bodies[i].pos.x, bodies[i].pos.y), bodies[i].angle);
 			collDeadBodies.back()->setLinearVelocity(bodies[i].linearVelocity);
