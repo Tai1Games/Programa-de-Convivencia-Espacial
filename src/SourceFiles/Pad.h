@@ -8,7 +8,7 @@ class Pad:public Component
 private:
 	AnimatedViewer* viewer_;
 public:
-	Pad() {};
+	Pad() : Component(ComponentType::Pad) {};
 	virtual ~Pad() {};
 
 	virtual void init() override;

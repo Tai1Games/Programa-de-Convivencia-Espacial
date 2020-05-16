@@ -155,7 +155,7 @@ Entity* ObjectFactory::makePipe(EntityManager* entityManager, b2World* physicsWo
 	else {
 		e->addComponent<Viewer>(Resources::PipeVer);
 		if (pos.x > CONST(int, "WINDOW_WIDTH") / CONST(double, "PIXELS_PER_METER") / 2) {
-			aux->getBody()->SetTransform(pos, PI);
+			aux->getBody()->SetTransform(pos, -PI);
 		}
 	}
 	//Si la tuberia tiene una rotacion especial se la aplicamos
@@ -293,7 +293,7 @@ Entity* ObjectFactory::makeCarnivorousePlant(EntityManager* entityManager, b2Wor
 {
 	Entity* planta = entityManager->addEntity();
 	planta->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
-	planta->addComponent<AnimatedViewer>(Resources::CarnivorousPlant, CONST(int, "CARNIVOROUSPLANT_MIN_SPEED"));
+	planta->addComponent<CarnivorousPlantViewer>(Resources::CarnivorousPlant, CONST(int, "CARNIVOROUSPLANT_MIN_SPEED"));
 	planta->addComponent<CarnivorousPlant>();
 	planta->addComponent<ColliderViewer>();
 

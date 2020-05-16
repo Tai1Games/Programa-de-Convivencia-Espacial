@@ -126,10 +126,11 @@ void TomatoWeapon::UnPickObject() {
 
 void TomatoWeapon::setActive(bool a, b2Vec2 pos) {
 	entity_->setActive(a);
-	entity_->getComponent<AnimatedViewer>(ComponentType::Viewer)->setDrawable(a);
+	tomatoViewer_->setDrawable(a);
 	colTomato_->getBody()->SetEnabled(a);
 	if (a) colTomato_->getBody()->SetTransform(pos, 0);
 	else {
+		tomatoViewer_->stopAnimation();
 		exploded_ = false;
 		activated_ = false;
 	}
