@@ -64,8 +64,8 @@ void PlayState::init() {
 	SDL_Game::instance()->getAudioMngr()->playMusic(resourceMap_[tilemapName_], -1);
 
 	//Version estática de la factoria
-	tilemap_->executeMapFactory();
-	tilemap_->createWeapons();
+	 tilemap_->executeMapFactory();
+	 tilemap_->createWeapons();
 
 	gameMode_->init(this);
 
@@ -116,6 +116,7 @@ void PlayState::createDeadBodies() {
 		deadBodies.push_back(entityManager_->addEntity());
 		collDeadBodies.push_back(deadBodies.back()->addComponent<Collider>(physicsWorld_, b2_dynamicBody, bodies[i].pos.x, bodies[i].pos.y, 1, 1, 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalAttachableObject, false));
 		deadBodies.back()->addComponent<Viewer>(Resources::SpaceSuit);
+		
 		collDeadBodies.back()->setTransform(b2Vec2(bodies[i].pos.x, bodies[i].pos.y), bodies[i].angle);
 	}
 	collisionHandler_->clearBodyData();

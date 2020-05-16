@@ -1,6 +1,7 @@
 #pragma once
 #include "Viewer.h"
 #include "checkML.h"
+#include "Collider.h"
 
 struct DebugColor {
 	DebugColor(Uint8 r, Uint8 g, Uint8 b) :
@@ -16,6 +17,7 @@ private:
 	SDL_Renderer* renderer_ = nullptr;
 	SDL_Point* points_ = nullptr;
 	b2Body* body_ = nullptr;
+	Collider* collider_ = nullptr;
 
 	// SE PUEDEN CAMBIAR ESTOS COLORES COMO QUER�IS
 	DebugColor colors[9] = {

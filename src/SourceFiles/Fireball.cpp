@@ -20,7 +20,7 @@ void Fireball::setActive(bool to,b2Vec2 pos)
 	entity_->setActive(to);
 	col_->getFixture(0)->GetBody()->SetTransform(pos, 0);
 	if (to) {
-		col_->createCircularFixture(CONST(double, "FIREBALL_RADIUS"), CONST(double, "FIREBALL_DENSITY"), CONST(double, "FIREBALL_FRICTION"), CONST(double, "FIREBALL_RESTITUTION"), Collider::CollisionLayer::NormalObject, true);
+		col_->createCircularFixture(CONST(double, "FIREBALL_RADIUS_PHYSICS"), CONST(double, "FIREBALL_DENSITY"), CONST(double, "FIREBALL_FRICTION"), CONST(double, "FIREBALL_RESTITUTION"), Collider::CollisionLayer::NormalObject, true);
 	}
 	else if (col_->getNumFixtures() > 1) col_->destroyFixture(1);
 

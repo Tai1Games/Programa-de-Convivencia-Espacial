@@ -280,6 +280,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="AbstractTimedGameMode.cpp" />
     <ClCompile Include="AbstractViewers.cpp" />
     <ClCompile Include="ActionableWeapon.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="WiFiWavePool.cpp" />
     <ClCompile Include="WiFiBullet.cpp" />
     <ClCompile Include="AnimatedPlayer.cpp" />
