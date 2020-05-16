@@ -43,6 +43,7 @@ protected:
 	int pickedIndex_ = -1; //player que tiene el arma, -1 si no la tiene nadie
 
 	int impactDamage_ = 0;	
+	int impactForce_ = 0;
 
 	int calculateCoinsDropped(int coinsPlayer);
 
@@ -55,8 +56,8 @@ private:
 	int throwCooldownTimer_ = 0;
 
 public:
-	Weapon(WeaponID wId, int impctDmg) : Component(ComponentType::Weapon), weaponType_(wId), impactDamage_(impctDmg){}
-	Weapon(ComponentType::CmpId compType, WeaponID wId, int impactDmg) : Component(compType), weaponType_(wId), impactDamage_(impactDmg) {}
+	Weapon(WeaponID wId, int impctDmg, int impctForce=0) : Component(ComponentType::Weapon), weaponType_(wId), impactDamage_(impctDmg), impactForce_(impctForce){}
+	Weapon(ComponentType::CmpId compType, WeaponID wId, int impactDmg, int impctForce=0) : Component(compType), weaponType_(wId), impactDamage_(impactDmg), impactForce_(impctForce) {}
 	virtual ~Weapon(){};
 	virtual void init() override;
 	virtual void update() override;
@@ -73,6 +74,7 @@ public:
 	int getImpactDamage() { return impactDamage_; }
 	int getWeaponType() { return weaponType_; }
 	Hands* getCurrentHand() { return currentHand_; }
+	int getImpactForce() { return impactForce_; }
 
 	int getPlayerId(); //Cuerpo en el cpp por temas de inclusi�n circular
 

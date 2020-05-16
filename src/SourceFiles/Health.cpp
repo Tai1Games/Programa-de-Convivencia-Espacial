@@ -103,16 +103,21 @@ void Health::onCollisionEnter(Collision* c)
 		b2Fixture* fix = c->hitFixture;
 		if (!fix->IsSensor())
 		{
-			b2Vec2 force =/* c->hitFixture->GetBody()->GetMass() * */c->hitFixture->GetBody()->GetLinearVelocity();
-			int impact = force.Length();
+			
+			b2Vec2 force =c->hitFixture->GetBody()->GetLinearVelocity();
+			int impact;
+
 			Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
 			PlayerData* playerWhoHitMe = nullptr;
 			//Si se impacta con un arma al umbral m�s alto de fuerza, se recibe su daño de impacto
 			if (w != nullptr) {
-			std::cout << "\n\n\nSE HA HECHO DAno: " << impact << "\n\n\n";
+				force *= w->getImpactForce();
+				impact = force.Length();
 				impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
 			}
 			else {
+				force *= c->hitFixture->GetBody()->GetMass();
+				impact = force.Length();
 				//Depending on the force of impact we apply damage to the player
 				if (impact < CONST(int, "LOW_DAMAGE")) impact = 0;
 

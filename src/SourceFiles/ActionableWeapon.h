@@ -9,8 +9,8 @@ protected:
 	int cooldownFrames_ = 0;
 	bool beenActivated_ = false;
 public:
-	ActionableWeapon(WeaponID wId, int impactDmg, int cooldownFrames);
-	ActionableWeapon(ComponentType::CmpId compType, WeaponID wId, int impactDmg, int cooldownFrames);
+	ActionableWeapon(WeaponID wId, int impactDmg, int cooldownFrames, int impctForce);
+	ActionableWeapon(ComponentType::CmpId compType, WeaponID wId, int impactDmg, int cooldownFrames, int impctForce);
 	virtual ~ActionableWeapon() {};
 
 	virtual void update() override;
