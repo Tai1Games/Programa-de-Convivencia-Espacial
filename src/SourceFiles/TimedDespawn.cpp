@@ -1,5 +1,6 @@
 #include "TimedDespawn.h"
 #include "Weapon.h"
+#include "WeaponSpawner.h"
 
 void TimedDespawn::startTimer(Weapon* weapon)
 {
@@ -17,6 +18,10 @@ void TimedDespawn::update()
 			//Security measures.
 			activated = false;
 			currentFrame_ = 0;
+
+			if (weaponSpawner_) {
+				weaponSpawner_->onWeaponDespawned();
+			}
 		}
 	}
 }

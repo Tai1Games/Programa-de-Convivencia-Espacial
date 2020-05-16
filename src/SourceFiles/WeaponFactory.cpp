@@ -26,7 +26,7 @@ Entity* WeaponFactory::makeSlipper(EntityManager* entityManager, b2World* physic
 	return e;
 }
 
-Entity* WeaponFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, GameMode* gM)
+Entity* WeaponFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
 	entityManager->addExistingEntity(e);
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "CONFETTI_DENSITY"),
@@ -35,12 +35,11 @@ Entity* WeaponFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2W
 	e->addComponent <Viewer>(Resources::Confetti, SDL_Rect{ 0,0,32,32 });
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::ConfettiParticles, 10, 4, 4, 200, 50, 500, 3, 30);
 	pE->setOffset({ CONST(double, "CONFETTI_PARTICLE_OFFSET_X"), CONST(double, "CONFETTI_PARTICLE_OFFSET_Y") });
-	int framesToDespawn = (CONST(double, "CONFETTI_TIME_FOR_DESPAWN") * CONST(double, "SECONDS_PER_FRAME"));
+	int framesToDespawn = (CONST(double, "CONFETTI_TIME_FOR_DESPAWN") * FRAMES_PER_SECOND);
 
 	e->addComponent<TimedDespawn>(CONST(double, "CONFETTI_TIME_FOR_DESPAWN") * FRAMES_PER_SECOND);
 	e->addComponent<ConfettiWeapon>(WeaponID::Confetti, CONST(int, "CONFETTI_DAMAGE"), CONST(int, "CONFETTI_IMPACT_DAMAGE"), CONST(int, "CONFETTI_COOLDOWN_FRAMES"));
 	e->addComponent<ColliderViewer>();
-	e->addComponent<ThrownByPlayer>(gM);
 
 	return e;
 }
@@ -131,15 +130,17 @@ Entity* WeaponFactory::makeBanana(Entity* e, EntityManager* entityManager, b2Wor
 	return e;
 }
 
-void WeaponFactory::makeLowTierWeapon(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, GameMode* gM, ConfettiPool* confettiPool)
+Entity* WeaponFactory::makeLowTierWeapon(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, ConfettiPool* confettiPool)
 {
+	Entity* e = nullptr;
 	int weapon = rand() % 1;
 	switch (weapon)
 	{
 	case 0: //slipper
-		confettiPool->addConfetti(pos);
+		e = confettiPool->addConfetti(pos);
 		break;
 	}
+	return e;
 }
 
 Entity* WeaponFactory::makeMidTierWeapon(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)

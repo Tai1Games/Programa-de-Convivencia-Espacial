@@ -260,7 +260,8 @@ void TileMap::createWeapons()
 	}
 
 	for (b2Vec2 spawnPoint : lowTierWeaponSpawnPoints_) {
-		WeaponFactory::makeLowTierWeapon(entityManager_, physicsWorld_, spawnPoint, gameMode_, confettiPool_);
+
+		ObjectFactory::makeWeaponSpawner(entityManager_, physicsWorld_, spawnPoint, confettiPool_);
 	}
 }
 

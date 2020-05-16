@@ -2,21 +2,29 @@
 #include "Entity.h"
 #include "Vector2D.h"
 
+class ConfettiPool;
+class Weapon;
+
 class WeaponSpawner : public Component
 {
 private:
-	Vector2D pos_;
-	int tier_; //0 = low, 1 = mid, 2 = high
-
+	EntityManager* eMan_ = nullptr;
+	b2World* b2world_ = nullptr;
+	b2Vec2 pos_;
+	ConfettiPool* confettiPool_ = nullptr;
+	Weapon* weaponOnGame_ = nullptr;
 	int currentFrame_ = 0;
-	int framesUntilSpawn_ = 0; //Frames until next rnd weapon spawn
-	bool activated_ = false;
+	int frameToSpawn_ = 0; //Frame in which a weapon will spawn
+	bool activated_ = true;
+
+	int framesBetweenSpawns_ = 0; //initiated at init();
 public:
-	WeaponSpawner(Vector2D pos) : Component(ComponentType::WeaponSpawner) { pos_ = pos; }
+	WeaponSpawner(b2Vec2 pos, EntityManager* eMan, b2World* b2World, ConfettiPool* confettiPool) : Component(ComponentType::WeaponSpawner) { pos_ = pos; eMan_ = eMan; b2world_ = b2World; confettiPool_ = confettiPool; }
 	~WeaponSpawner() {};
 
 	void spawnWeapon();
 	void onWeaponDespawned(); //This is called when a weapon loses ammo and despawns from the scene.
 	virtual void update();
+	virtual void init();
 };
 
