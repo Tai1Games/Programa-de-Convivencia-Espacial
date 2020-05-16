@@ -1,14 +1,14 @@
 #pragma once
 #include "Component.h"
 
-class Viewer;
+class AnimatedViewer;
 class Collider;
 class Fireball :
 	public Component
 {
 private:
 	const static int damage_ = 1000; //daño que hace al impactar con el jugador
-	Viewer* vw_ = nullptr;
+	AnimatedViewer* vw_ = nullptr;
 	Collider* col_ = nullptr;
 	int coinDMG;
 public:

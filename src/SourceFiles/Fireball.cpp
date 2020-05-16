@@ -9,7 +9,7 @@
 
 void Fireball::init()
 {
-	vw_ = GETCMP1_(Viewer);
+	vw_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
 	col_ = GETCMP1_(Collider);
 }
 
@@ -21,6 +21,7 @@ void Fireball::setActive(bool to,b2Vec2 pos)
 	col_->getFixture(0)->GetBody()->SetTransform(pos, 0);
 	if (to) {
 		col_->createCircularFixture(CONST(double, "FIREBALL_RADIUS"), CONST(double, "FIREBALL_DENSITY"), CONST(double, "FIREBALL_FRICTION"), CONST(double, "FIREBALL_RESTITUTION"), Collider::CollisionLayer::NormalObject, true);
+		vw_->startAnimation();
 	}
 	else if (col_->getNumFixtures() > 1) col_->destroyFixture(1);
 
