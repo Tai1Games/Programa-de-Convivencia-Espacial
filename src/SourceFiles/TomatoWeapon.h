@@ -30,7 +30,7 @@ private:
 	int damageOnExplosionImpact_ = 0;
 	int explosionForce_ = 0;
 public:
-	TomatoWeapon() : ActionableWeapon(ComponentType::TomatoLogic, WeaponID::Tomato, 0, 0){};
+	TomatoWeapon() : ActionableWeapon(WeaponID::Tomato, 0, 0){};
 	~TomatoWeapon() {};
 
 	virtual void init();

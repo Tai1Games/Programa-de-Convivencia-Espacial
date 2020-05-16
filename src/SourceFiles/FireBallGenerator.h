@@ -47,6 +47,8 @@ private:
 	int shakeOffsetX_ = 0;
 	int shakeOffsetY_ = 0;
 
+	bool activated_ = false;
+
 	void addFireball(int num = 1);
 
 public:
@@ -57,5 +59,6 @@ public:
 	void init() override;
 	void update() override;
 	void onButtonAction(bool inc_dec);
+	void activate(bool active) { activated_ = active; }
 };
 

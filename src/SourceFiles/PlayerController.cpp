@@ -46,7 +46,10 @@ void PlayerController::handleInput()
 
 		// si se pasa del l�mite de velocidad le bajamos los humos (s�lo aplica cuando no est�s agarrao)
 		Vector2D velAfterImpulse = {(coll_->getLinearVelocity() + dirImpulse_).x, (coll_->getLinearVelocity() + dirImpulse_).y };
-		if (!attachesToObj_->isAttached() && velAfterImpulse.magnitude() > maxSpeedAfterImpulse_) dirImpulse_ = { 0, 0 };
+		if (!attachesToObj_->isAttached()) {
+			if(abs(velAfterImpulse.getX()) > maxSpeedAfterImpulse_) dirImpulse_.x = 0;
+			if(abs(velAfterImpulse.getY()) > maxSpeedAfterImpulse_) dirImpulse_.y = 0;
+		}
 
 		Collider* attachedObj = attachesToObj_->getAttachedObject();
 		if (attachedObj != nullptr) {

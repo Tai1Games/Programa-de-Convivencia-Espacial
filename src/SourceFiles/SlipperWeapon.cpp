@@ -1,7 +1,7 @@
 #include "SlipperWeapon.h"
 #include "Hands.h"
 
-SlipperWeapon::SlipperWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : MeleeWeapon(ComponentType::SlipperWeapon, wId, dmg, impactDmg, cooldownFrames) {};
+SlipperWeapon::SlipperWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : MeleeWeapon(wId, dmg, impactDmg, cooldownFrames) {};
 
 void SlipperWeapon::action() {
 	if (playerInfo_[currentHand_->getPlayerId()].playerHealth != nullptr) {

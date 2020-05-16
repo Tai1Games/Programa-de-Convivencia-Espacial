@@ -59,11 +59,16 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ BananaSkin,resourcesPath + "textures/BananaSkin.png"},
 	{ BananaNonSkin,resourcesPath + "textures/Banana!Skin.png"},
 	{ Staple,resourcesPath + "textures/Staple.png"},
+	{ Confetti,resourcesPath + "textures/ConfettiWeapon.png", 2},
+	{ ConfettiParticles,resourcesPath + "textures/ConfettiParticles.png"},
+	{ Lamp,resourcesPath + "textures/Lampara.png"},
+	{ Table,resourcesPath + "textures/Mesa.png"},
+	{ Sofa,resourcesPath + "textures/Sofa.png"},
 
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },
 	{ PlayerAnimSheet, resourcesPath + "textures/playerAnim.png",23,4},
-	{ Hands, resourcesPath + "textures/hands.png", 10},
+	{ Hands, resourcesPath + "textures/hands.png", 11},
 	{ ImpulseArrow, resourcesPath + "textures/FlechaImpulso.png"},
 	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png", 12},
 	{ SpaceSuit, resourcesPath + "textures/PinkTinky.png"},	// dead body

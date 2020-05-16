@@ -28,7 +28,7 @@ private:
 
 	vector<moveData> vecMove; //Vector donde almacenamos los moves que realizaremos al final del step.
 	vector<bodyData> vecBody; //Vector donde almacenamos los cuerpos muertos que crearemos al final del step.
-	vector<Weapon*> vecWeapon; //Vector donde almacenamos las weapons que soltaremos al final del step
+	vector<Weapon*> vecWeapon; //Vector donde almacenamos las weapons que soltaremos al final del step.
 	vector<AttachesToObjects*> vecAttach; //Vector donde almacenamos los agarres que soltaremos al final del step.
 	vector<tuple<Wallet*, PlayerData*, int>> vecCoinsToDrop; //Vector donde almacenamos los impactos entre objetos y wallets.
 	vector<Fireball*> fireballsToClear; //Bolas de fuego que se eliminaran al final del step
@@ -54,6 +54,8 @@ public:
 	struct bodyData {  //Struct donde guardamos los datos necesarios para hacer un cuerpo muerto.
 		b2Vec2 pos;
 		float angle;
+		b2Vec2 linearVelocity;
+		float angularVelocity;
 	};
     CollisionHandler(GameMode* g, TileMap* tm): gMode_(g), tilemap_(tm) {};
 	~CollisionHandler() {};

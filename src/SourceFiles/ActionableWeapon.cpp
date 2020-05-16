@@ -2,6 +2,8 @@
 #include "Hands.h"
 #include "InputBinder.h"
 
+ActionableWeapon::ActionableWeapon(WeaponID wId, int impactDmg, int cooldownFrames) : ActionableWeapon(ComponentType::Weapon, wId, impactDmg, cooldownFrames) {};
+
 ActionableWeapon::ActionableWeapon(ComponentType::CmpId compType, WeaponID wId, int impactDmg, int cooldownFrames) : Weapon(compType, wId, impactDmg),
 cooldownFrames_(cooldownFrames) {}
 

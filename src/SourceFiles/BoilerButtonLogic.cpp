@@ -27,7 +27,7 @@ void BoilerButtonLogic::update() {
 
 void BoilerButtonLogic::onCollisionEnter(Collision* c) {
 	Entity* other = c->entity;
-	if (c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Player ||
+	if (c->hitFixture->GetFilterData().categoryBits & Collider::CollisionLayer::Player ||
 		c->hitFixture->GetBody()->GetLinearVelocity().Length() > minForceForAcivation_) {
 
 		fbGen_->onButtonAction(inc_dec_);
