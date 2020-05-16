@@ -1,31 +1,32 @@
 #pragma once
 #include "Component.h"
 #include "checkML.h"
-#include "Viewer.h"
 #include "Collision.h"
 #include "PlayerData.h"
 #include "Health.h"
 #include "Wallet.h"
 #include "CollisionHandler.h"
+#include "CarnivorousPlantViewer.h"
 
 class CarnivorousPlant : public Component
 {
 private:
-	Viewer* viewer_;
-	int frame_, minAnimationSpeed_, maxAnimationSpeed_, playersInside_,
-		idleFrames_, eatingFrames_, frameSize_, coinDMG, damage, maxFrames_, frameCount_;
+	CarnivorousPlantViewer* viewer_;
+	int minAnimationSpeed_, maxAnimationSpeed_, playersInside_ = 0, marginUntilBite_ = 5,
+		idleFrames_, eatingFrames_, coinDamage_, damage_, maxFrames_, frameCount_ = 0;
 	float increase_, actualSpeed_;
-	bool idle_, playerDetected_;
-	Entity* player_;
-	CollisionHandler* playerCollHandler_;
-	Wallet* walletPlayer_;
+	bool playerDetected_ = false;
+	Entity* player_ = nullptr;
+	CollisionHandler* playerCollHandler_ = nullptr;
+	Wallet* walletPlayer_ = nullptr;
 
 public:
-	CarnivorousPlant() :Component(ComponentType::CarnivorousPlant) {}
+	CarnivorousPlant() : Component(ComponentType::CarnivorousPlant) {}
 
 	virtual void init() override;
 	virtual void update() override;
 	virtual void onCollisionEnter(Collision* c);
 	virtual void onCollisionExit(Collision* c);
+	void bite();
 };
 

@@ -3,14 +3,14 @@
 #include "ActionableWeapon.h"
 
 class Collider;
-class Viewer;
+class AnimatedViewer;
 class ParticleEmitter;
 
 class TomatoWeapon : public ActionableWeapon
 {
 private:
 	Collider* colTomato_ = nullptr;
-	Viewer* tomatoViewer_ = nullptr;
+	AnimatedViewer* tomatoViewer_ = nullptr;
 	ParticleEmitter* particleEmitterTomato_ = nullptr;
 
 	bool activated_ = false;
@@ -25,9 +25,8 @@ private:
 	int nFramesCharge_ = 0;
 	int explosionSize_ = 0;
 	int nFramesExplosion_ = 0;
-	int frameSpeedCharge_ = 0;
-	int frameSpeedExplosion_ = 0;
-	int frameSize_ = 0;
+	int timePerFrame_ = 0;
+	int timePerFrameUntilExplosion_ = 0;
 	int damageOnExplosionImpact_ = 0;
 	int explosionForce_ = 0;
 public:

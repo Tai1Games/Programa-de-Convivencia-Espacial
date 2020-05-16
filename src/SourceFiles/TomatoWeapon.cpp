@@ -5,7 +5,7 @@
 #include "Health.h"
 #include "Wallet.h"
 #include "PlayerData.h"
-#include "Viewer.h"
+#include "AnimatedViewer.h"
 #include "InputHandler.h"
 #include "ParticleEmitter.h"
 #include "Hands.h"
@@ -14,8 +14,8 @@
 
 void TomatoWeapon::init() {
 	ActionableWeapon::init();
-	colTomato_ = GETCMP1_(Collider);
-	tomatoViewer_ = GETCMP1_(Viewer);
+	colTomato_ = GETCMP1_(Collider); 
+	tomatoViewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
 	particleEmitterTomato_ = GETCMP1_(ParticleEmitter);
 
 	timeForExplosion_ = CONST(int, "TOMATO_TIME_CHARGE");
@@ -25,10 +25,9 @@ void TomatoWeapon::init() {
 	damageOnExplosionImpact_ = CONST(int, "TOMATO_DAMAGE");
 	explosionSize_ = CONST(int, "TOMATO_EXPLOSION_SIZE");
 	explosionForce_ = CONST(int, "TOMATO_EXPLOSION_FORCE");
-	frameSize_ = tomatoViewer_->getTexture()->getHeight();
 
-	frameSpeedCharge_ = timeForExplosion_ / nFramesCharge_;
-	frameSpeedExplosion_ = timeForExplosionExpire_ / nFramesExplosion_;
+	timePerFrame_ = timeForExplosion_ / nFramesCharge_;
+	timePerFrameUntilExplosion_ = timeForExplosionExpire_ / nFramesExplosion_;
 }
 
 void TomatoWeapon::update() {
@@ -46,18 +45,17 @@ void TomatoWeapon::update() {
 			if (picked_) UnPickObject();
 			colTomato_->setLinearVelocity({ 0,0 });
 		}
-		frame = 1 + (SDL_Game::instance()->getTime() - timeActivated_) / frameSpeedCharge_;
-		tomatoViewer_->setClip(SDL_Rect{ frame * frameSize_, 0, frameSize_, frameSize_ });
+		frame = (SDL_Game::instance()->getTime() - timeActivated_) / timePerFrame_;
+		tomatoViewer_->setFrame(frame);
 	}
 	else if (exploded_) {
 		if (SDL_Game::instance()->getTime() > timeForExplosionExpire_) {
 			colTomato_->destroyFixture(1);
 			setActive(false);
 		}
-		frame = 1 + nFramesCharge_ + (SDL_Game::instance()->getTime() - timeExploded_) / frameSpeedExplosion_;
-		tomatoViewer_->setClip(SDL_Rect{ frame * frameSize_, 0, frameSize_, frameSize_ });
+		frame = nFramesCharge_ + (SDL_Game::instance()->getTime() - timeExploded_) / timePerFrameUntilExplosion_;
+		tomatoViewer_->setFrame(frame);
 	}
-	
 }
 
 void TomatoWeapon::onCollisionEnter(Collision* c) {
@@ -132,6 +130,7 @@ void TomatoWeapon::setActive(bool a, b2Vec2 pos) {
 	colTomato_->getBody()->SetEnabled(a);
 	if (a) colTomato_->getBody()->SetTransform(pos, 0);
 	else {
+		tomatoViewer_->stopAnimation();
 		exploded_ = false;
 		activated_ = false;
 	}

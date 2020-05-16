@@ -345,6 +345,12 @@
     <ClInclude Include="StaplerWeapon.h">
       <Filter>Header Files\Components\Weapons</Filter>
     </ClInclude>
+    <ClInclude Include="AdvancedAnimatedViewer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="CarnivorousPlantViewer.h">
+      <Filter>Header Files\Components\Viewers</Filter>
+    </ClInclude>
     <ClInclude Include="ConfettiPool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -600,6 +606,12 @@
       <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
     <ClCompile Include="AbstractViewers.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="AdvancedAnimatedViewer.cpp">
+      <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="CarnivorousPlantViewer.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
     <ClCompile Include="StaplerWeapon.cpp">
