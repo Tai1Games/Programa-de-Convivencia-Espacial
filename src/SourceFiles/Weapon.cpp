@@ -27,9 +27,6 @@ void Weapon::init()
 	//Tamaño del vector segun el numero de jugadores
 	playerInfo_.resize(4);
 	
-	if (weaponType_ == WeaponID::Tomato)
-		int i = 0;
-	
 	entity_->getEntityManager()->getWeaponVector()->push_back(this);
 
 	throwCooldown_ = CONST(int, "THROW_COOLDOWN");
