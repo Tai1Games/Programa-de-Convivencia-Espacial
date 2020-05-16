@@ -4,6 +4,7 @@
 
 class BulletPool;
 class GameMode;
+class ConfettiPool;
 class WeaponFactory
 {
 public:
@@ -29,6 +30,12 @@ public:
 	static Entity* makeDumbbell(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
 	static Entity* makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, BulletPool* bp);
+
+	static void makeLowTierWeapon(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, GameMode* gM, ConfettiPool* confettiPool);
+
+	static Entity* makeMidTierWeapon(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
+
+	static Entity* makeHighTierWeapon(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 
 };
 

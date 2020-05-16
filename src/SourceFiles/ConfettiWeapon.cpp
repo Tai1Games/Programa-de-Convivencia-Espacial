@@ -2,14 +2,16 @@
 #include "Collider.h"
 #include "ParticleEmitter.h"
 #include "Hands.h"
+#include "TimedDespawn.h"
 
-ConfettiWeapon:: ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : MeleeWeapon( wId, dmg, impactDmg, cooldownFrames) {}
+ConfettiWeapon::ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : MeleeWeapon(ComponentType::ConfettiWeapon, wId, dmg, impactDmg, cooldownFrames) {}
 
 void ConfettiWeapon::init() {
 	MeleeWeapon::init();
 	colWeapon_ = GETCMP1_(Collider);
 	particleEmitter_ = GETCMP1_(ParticleEmitter);
 	viewer_ = GETCMP1_(Viewer);
+	timedDespawn_ = GETCMP1_(TimedDespawn);
 	frameSize_ = viewer_->getTexture()->getHeight();
 
 	viewer_->setClip(SDL_Rect{ 0, 0, frameSize_, frameSize_ });
@@ -27,18 +29,21 @@ void ConfettiWeapon::action() {
 		particleEmitter_->PlayStop();
 		used = true;
 		viewer_->setClip(SDL_Rect{ frameSize_, 0, frameSize_, frameSize_ });
+		timedDespawn_->startTimer(this);
 		MeleeWeapon::action();
 	}
 }
 
 void ConfettiWeapon::setActive(bool a, b2Vec2 pos)
 {
+	if (used) {
+		if (currentHand_ != nullptr) ActionableWeapon::UnPickObject();
+		viewer_->setClip(SDL_Rect{ 0, 0, frameSize_, frameSize_ });
+		used = false;
+		cout << "test";
+	}
 	entity_->setActive(a);
 	viewer_->setDrawable(a);
 	colWeapon_->getBody()->SetEnabled(a);
 	colWeapon_->getBody()->SetTransform(pos, 0);
-	if (used) {
-		viewer_->setClip(SDL_Rect{ 0, 0, frameSize_, frameSize_ });
-		used = false;
-	}
 }

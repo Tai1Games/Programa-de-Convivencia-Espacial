@@ -64,7 +64,7 @@ public:
 	virtual ~Weapon(){};
 	virtual void init() override;
 	virtual void update() override;
-
+	virtual void setActive(bool a, b2Vec2 pos = { 0,0 }) {};
 	virtual void handleInput() override;
 
 	/*Desactiva el arma y se anade a la mano este arma*/
