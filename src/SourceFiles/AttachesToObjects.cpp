@@ -17,12 +17,13 @@ void AttachesToObjects::init() {
 
 void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint, b2Vec2 collNormal) {
 	if (joint_ == nullptr) {
-
 		attachedObject_ = attachedObject;
-		b2Vec2 perp = perpendicularCounterClockwise(collNormal);
-		float attachAngle = std::atanf(perp.y/perp.x);
-		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle())>0) ? -1 : 1;
-		attachAngle += (PI / 2)*tilt;
+		normalOnAttach_ = perpendicularCounterClockwise(collNormal);
+		cout << "perpendicular: " << normalOnAttach_.x << " " << normalOnAttach_.y << endl;
+		float attachAngle = std::atanf(normalOnAttach_.y / normalOnAttach_.x);
+		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle()) > 0) ? -1 : 1;
+		attachAngle += (PI / 2) * tilt;
+		angleOnAttach_ = attachedObject->GetAngle();
 
 		/*attachDir = -collNormal;		//Pendiente de ver con lo de impedir el impulso
 		attachDir.Normalize();
@@ -39,7 +40,7 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 
 			mainCollider_->setTransform(mainCollider_->getPos() + attachDir, attachAngle);
 		}*/
-		
+
 		mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
 		b2WeldJointDef jointDef; //Definición del nuevo joint.
 		jointDef.bodyA = mainCollider_->getBody(); //Body del jugador.
@@ -48,7 +49,7 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 		jointDef.localAnchorA = jointDef.bodyA->GetLocalPoint(collPoint); //Punto donde se ata el cuerpo A al cuerpo B
 		jointDef.localAnchorB = jointDef.bodyB->GetLocalPoint(collPoint); //Punto donde se ata el cuerpo B al cuerpo A
 		jointDef.referenceAngle = jointDef.bodyB->GetAngle() - jointDef.bodyA->GetAngle(); //Ángulo conjunto del cuerpo
-		cout << "se agarra en " << jointDef.localAnchorA.x << " "<<jointDef.localAnchorA.y<< " con un angulo local de " << jointDef.bodyA->GetAngle() <<  "y global " << jointDef.referenceAngle <<endl;
+		cout << "se agarra en " << jointDef.localAnchorA.x << " " << jointDef.localAnchorA.y << " con un angulo local de " << jointDef.bodyA->GetAngle() << "y global " << jointDef.referenceAngle << endl;
 		b2World* world = mainCollider_->getWorld(); //Obtenemos el mundo físico para crear el joint
 		joint_ = (b2WeldJoint*)world->CreateJoint(&jointDef); //Crea el joint con la definición que hemos definido previamente
 	}
@@ -64,7 +65,7 @@ void AttachesToObjects::deAttachFromObject() {
 }
 
 bool AttachesToObjects::canAttachToObject() { //Se agarra si está pretando una tecla válida y si no está agarrado a otra cosa.
-	if (ib->holdGrab()){
+	if (ib->holdGrab()) {
 		if (attachedObject_ == nullptr) return true;
 	}
 	return false;
@@ -77,22 +78,38 @@ bool AttachesToObjects::isAttached()
 }
 
 void AttachesToObjects::handleInput() { //Si el jugador suelta la tecla de agarre, se suelta.
-
 }
 
-void AttachesToObjects::onCollisionEnter(Collision* c){
+void AttachesToObjects::onCollisionEnter(Collision* c) {
 	//si chocamos con un objeto que pueda agarrarse
 	if (c->hitFixture->GetFilterData().categoryBits & (Collider::CollisionLayer::Wall | Collider::CollisionLayer::NormalAttachableObject)) {
 		if (canAttachToObject()) {
 			b2WorldManifold manifold;
 			attachedCollider_ = GETCMP2(c->entity, Collider);
 			c->contact->GetWorldManifold(&manifold);
-			c->collisionHandler->createWeld(CollisionHandler::weldData(this, c->hitFixture->GetBody(), 
-				b2Vec2(manifold.points[0].x, manifold.points[0].y),manifold.normal));
+			c->collisionHandler->createWeld(CollisionHandler::weldData(this, c->hitFixture->GetBody(),
+				b2Vec2(manifold.points[0].x, manifold.points[0].y), manifold.normal));
 			if (kBinder_ != nullptr) kBinder_->grabbed = true;
 		}
 		else {
 			cout << "colision sin input con grabbable" << endl;
 		}
 	}
+}
+
+b2Vec2 AttachesToObjects::getAttachmentNormal()
+{
+	b2Vec2 n;
+	float diff = getRotationDifference();
+	float cs = std::cos(diff);
+	float sn = std::sin(diff);
+	//rotamos el vector en funcion de la rotacion del cuerpo desde que nos agarramos
+	n.x = normalOnAttach_.x * cs - normalOnAttach_.y * sn;
+	n.y = normalOnAttach_.x * sn + normalOnAttach_.y * cs;
+	return n;
+}
+
+float AttachesToObjects::getRotationDifference()
+{
+	return attachedObject_->GetAngle() - angleOnAttach_;
 }

@@ -18,12 +18,13 @@ private:
 	InputBinder* ib;
 	KeyboardBinder* kBinder_ = nullptr;
 
-	b2Vec2 attachDir = b2Vec2(0,0);
+	b2Vec2 normalOnAttach_ = b2Vec2(0, 0);
+	float angleOnAttach_ = 0; //angle of attached body on start of attachmemt
 public:
 	AttachesToObjects() : Component(ComponentType::AttachesToObjects) {};
 	~AttachesToObjects() {};
 
-	void attachToObject(b2Body* attachableObject, b2Vec2 collPoint,b2Vec2 collNormal); //Ata al jugador a otro collider
+	void attachToObject(b2Body* attachableObject, b2Vec2 collPoint, b2Vec2 collNormal); //Ata al jugador a otro collider
 	void deAttachFromObject(); //Rompe el joint entre el jugador y el otro objeto
 	bool canAttachToObject(); //Comprueba si el jugador está pulsando la tecla válida y si no está sujeto a otro objeto
 	bool isAttached(); //Te dice si actualmente está agarrado a algo o no
@@ -32,4 +33,6 @@ public:
 	virtual void init() override;
 	virtual void handleInput();
 	virtual void onCollisionEnter(Collision* c);
+	b2Vec2 getAttachmentNormal();
+	float getRotationDifference(); //returns the rotation of the attached body since start
 };
