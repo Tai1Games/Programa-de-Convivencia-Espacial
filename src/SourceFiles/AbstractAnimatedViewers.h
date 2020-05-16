@@ -28,6 +28,12 @@ public:
 	{
 		isPlaying_ = false;
 	}
+	
+
+	void resumeAnimation()
+	{
+		isPlaying_ = true;
+	}
 
 	virtual void stopAnimation() {
 		activeAnimation_ = false;
