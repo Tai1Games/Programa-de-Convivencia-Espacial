@@ -11,21 +11,29 @@ using namespace std;
 class Texture {
 public:
 	Texture();
-	Texture(SDL_Renderer *renderer, const string& fileName);
+	Texture(SDL_Renderer *renderer, const string& fileName, unsigned short nHorFrames, unsigned short nVerFrames);
 	Texture(SDL_Renderer *renderer, const string& text, const Font *font,
 			const SDL_Color& color);
 	virtual ~Texture();
 
-	inline int getWidth() {
+	inline int getWidth() const {
 		return width_;
 	}
 
-	inline int getHeight() {
+	inline int getHeight() const {
 		return height_;
 	}
 
-	inline bool isReady() {
+	inline bool isReady() const {
 		return texture_ != nullptr;
+	}
+
+	inline unsigned short int getNumFramesX() const {
+		return nHorizontalFrames_;
+	}
+
+	inline unsigned short int getNumFramesY() const {
+		return nVerticalFrames_;
 	}
 
 	// load from image or text, in both cases we should provide a rendered
@@ -45,6 +53,7 @@ public:
 	// if no clip provided it renders all texture (scaled to dest).
 	void render(const SDL_Rect& dest, double angle, const SDL_Rect& clip, SDL_RendererFlip flip) const;
 	void render(const SDL_Rect &dest, double angle,	const SDL_Rect &clip) const;
+	void render(const SDL_Rect& dest, double angle, unsigned short frameX, unsigned short frameY = 0, SDL_RendererFlip flip = SDL_FLIP_NONE) const;
 	void render(const SDL_Rect& dest, double angle, const SDL_RendererFlip& flip) const;
 	void render(const SDL_Rect &dest, double angle) const;
 
@@ -55,4 +64,8 @@ private:
 	SDL_Renderer *renderer_;
 	int width_;
 	int height_;
+	unsigned short nHorizontalFrames_ = 1;
+	unsigned short nVerticalFrames_ = 1;
+	int frameWidth_;
+	int frameHeight_;
 };

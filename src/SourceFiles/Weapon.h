@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "Collider.h"
 #include "Viewer.h"
+#include "AnimatedViewer.h"
 #include "Health.h"
 #include "Wallet.h"
 #include "Constants.h"

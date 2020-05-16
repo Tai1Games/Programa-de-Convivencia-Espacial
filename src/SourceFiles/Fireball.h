@@ -1,18 +1,18 @@
 #pragma once
 #include "Component.h"
 
-class Viewer;
+class AnimatedViewer;
 class Collider;
 class Fireball :
 	public Component
 {
 private:
-	const static int damage_ = 1000; //daño que hace al impactar con el jugador
-	Viewer* vw_ = nullptr;
+	int damage_ = 0; //daño que hace al impactar con el jugador
+	int coinDamage_ = 0;
+	AnimatedViewer* viewer_ = nullptr;
 	Collider* col_ = nullptr;
-	int coinDMG;
 public:
-	Fireball() :Component(ComponentType::Fireball),coinDMG(CONST(int,"FIREBALL_COIN_DMG")) {}
+	Fireball() : Component(ComponentType::Fireball) {}
 	~Fireball() {};
 	virtual void init() override;
 	void setActive(bool to, b2Vec2 pos);
