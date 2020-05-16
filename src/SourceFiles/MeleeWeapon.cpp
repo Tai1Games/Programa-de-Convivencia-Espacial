@@ -13,12 +13,12 @@ MeleeWeapon::MeleeWeapon(ComponentType::CmpId compType, WeaponID wId, int dmg, i
 
 void MeleeWeapon::action() {
 	if (!beenActivated_) {
-		cout << "ACCION ARMA MELEE ACTIVADA" << endl;
+		std::cout << "ACCION ARMA MELEE ACTIVADA" << endl;
 		mainCollider_->createRectangularFixture(mainCollider_->getW(0) * 4, mainCollider_->getH(0) * 4, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
 		beenActivated_ = true;
 	}
 	else
-		cout << "COOLDING DOWN" << endl;
+		std::cout << "COOLDING DOWN" << endl;
 }
 
 void MeleeWeapon::update() {
@@ -55,7 +55,7 @@ void MeleeWeapon::PickObjectBy(int index) {
 void MeleeWeapon::onCollisionEnter(Collision* c) {
 	ActionableWeapon::onCollisionEnter(c);
 
-	if (picked_ && c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Player && c->entity != currentHand_->getEntity()) {
+	if (picked_ && c->hitFixture->GetFilterData().categoryBits & Collider::CollisionLayer::Player && c->entity != currentHand_->getEntity()) {
 		//Restar vida
 		Health* auxHe = GETCMP2(c->entity, Health);
 		Wallet* auxWa = GETCMP2(c->entity, Wallet);
@@ -80,15 +80,15 @@ void MeleeWeapon::onCollisionEnter(Collision* c) {
 		}
 		else
 			c->collisionHandler->addCoinDrop(std::make_tuple(auxWa, GETCMP2(c->entity,PlayerData), damage_));
-		cout << "Golpeado jugador" << endl;
+		std::cout << "Golpeado jugador" << endl;
 	}
 	
 }
 
 void MeleeWeapon::UnPickObject() {
 	//Reactivamos el trigger de pickUp
-	mainCollider_->getFixture(0)->SetFilterData(mainCollider_->setCollisionLayer(Collider::CollisionLayer::NormalObject));
-	mainCollider_->getFixture(1)->SetFilterData(mainCollider_->setCollisionLayer(Collider::CollisionLayer::Trigger));
+	mainCollider_->getFixture(0)->SetFilterData(mainCollider_->getFilterFromLayer(Collider::CollisionLayer::NormalObject));
+	mainCollider_->getFixture(1)->SetFilterData(mainCollider_->getFilterFromLayer(Collider::CollisionLayer::Trigger));
 
 	ActionableWeapon::UnPickObject();
 }

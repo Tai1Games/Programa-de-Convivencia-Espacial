@@ -55,6 +55,10 @@ private:
 	int throwCooldown_ = 0;
 	int throwCooldownTimer_ = 0;
 
+	bool hasBeenThrownRecently_ = false;
+	int framesUntilRecoveringCollision_ = 0;
+	int framesUntilRecoveringCollisionTimer_ = 0;
+
 public:
 	Weapon(WeaponID wId, int impctDmg, int impctForce=0) : Component(ComponentType::Weapon), weaponType_(wId), impactDamage_(impctDmg), impactForce_(impctForce){}
 	Weapon(ComponentType::CmpId compType, WeaponID wId, int impactDmg, int impctForce=0) : Component(compType), weaponType_(wId), impactDamage_(impactDmg), impactForce_(impctForce) {}
@@ -70,6 +74,8 @@ public:
 	bool IsPicked() { return picked_; }
 	/*Reactiva el arma y la lanza en direccion de la mano*/
 	virtual void UnPickObject();
+
+	virtual void letFallObject();
 
 	int getImpactDamage() { return impactDamage_; }
 	int getWeaponType() { return weaponType_; }
