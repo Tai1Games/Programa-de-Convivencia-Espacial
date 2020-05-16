@@ -20,7 +20,7 @@ void MidGameState::init()
 
 	entityManager_ = new EntityManager();
 
-	//Fondo del modo	
+	//Fondo del modo
 	fondo = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::RocketRoom);
 
 	distanceGainedByPoint_ = (CONST(int, "WINDOW_WIDTH") - CONST(int, "START_POSITION")) / totalRounds_;
@@ -29,7 +29,7 @@ void MidGameState::init()
 	//Marcadores de las rondas
 	for (int i = 0; i < totalRounds_; i++) {
 		Entity* marker = entityManager_->addEntity();
-		marker->addComponent<UIViewer>(Resources::Token, b2Vec2((CONST(int, "START_POSITION")+ distanceGainedByPoint_*i)- CONST(int, "MARKER_WIDTH"), CONST(int, "MARKER_Y_POSITION")), 2, 0);
+		marker->addComponent<UIViewer>(Resources::Token, b2Vec2((CONST(int, "START_POSITION") + distanceGainedByPoint_ * i) - CONST(int, "MARKER_WIDTH"), CONST(int, "MARKER_Y_POSITION")), 2, 0);
 		markers.push_back(marker);
 	}
 
@@ -54,7 +54,7 @@ void MidGameState::init()
 		//We could move the rockets using only the Viewer, but this will make
 		//the logic much much easier.
 
-		AnimatedUIViewer* viewer = newRocket->addComponent<AnimatedUIViewer>(Resources::RocketSpriteSheet, rocketRect, 10, b2Vec2(CONST(int, "START_ROCKET_POSITION"), (initPosY-76) + (distanceBetweenRockets_ * k) + rocketRect.h / 2), 1, 0);
+		AnimatedUIViewer* viewer = newRocket->addComponent<AnimatedUIViewer>(Resources::RocketSpriteSheet, rocketRect, 10, b2Vec2(CONST(int, "START_ROCKET_POSITION"), (initPosY - 76) + (distanceBetweenRockets_ * k) + rocketRect.h / 2), 1, 0);
 		playerRockets_.push_back(viewer);
 	}
 	//Texto para terminar la intermision
@@ -76,7 +76,6 @@ void MidGameState::update()
 
 	if (currentFrame >= framesUntilNextShake_) {
 		if (currentState != zoom) {
-
 			int randDirX = 1, randDirY = 1;
 			if (rand() % 2 == 0) randDirX = -1;
 			if (rand() % 2 == 0) randDirY = -1;
@@ -155,7 +154,6 @@ void MidGameState::update()
 		//NO SABEMOS HACER MATES.
 		break;
 	}
-
 }
 
 void MidGameState::handleInput()
@@ -163,15 +161,18 @@ void MidGameState::handleInput()
 	GameState::handleInput();
 	InputHandler* ih = SDL_Game::instance()->getInputHandler();
 
-	//Has esperado para ver hasta donde se movia el cohete
-	if (currentState == waitingButton && (ih->keyDownEvent() || ih->isButonDownEvent())) {
-		buttonPush = true;
-		continueText->setActive(false);
-	}
-	//Eres un prisa y solo quieres matar
-	else if (currentState != waitingButton && (ih->keyDownEvent() || ih->isButonDownEvent())) {
-		currentState = zoom;
-		frameZoomStateEnds_ = currentFrame + CONST(int, "ZOOM_DURATION");
+	if (currentState != zoom)
+	{
+		//Has esperado para ver hasta donde se movia el cohete
+		if (currentState == waitingButton && (ih->keyDownEvent() || ih->isButonDownEvent())) {
+			buttonPush = true;
+			continueText->setActive(false);
+		}
+		//Eres un prisa y solo quieres matar
+		else if (currentState != waitingButton && (ih->keyDownEvent() || ih->isButonDownEvent())) {
+			currentState = zoom;
+			frameZoomStateEnds_ = currentFrame + CONST(int, "ZOOM_DURATION");
+		}
 	}
 }
 
@@ -210,6 +211,6 @@ void MidGameState::onLoaded() {
 	}
 
 	for (int k = 0; k < playerRockets_.size(); k++) {
-		playerRockets_[k]->setPosUIElement(b2Vec2(CONST(int, "START_ROCKET_POSITION") + distanceGainedByPoint_ * playerPoints[k], (initPos-76) + (distanceBetweenRockets_ * k) + rocketRect.h / 2));
+		playerRockets_[k]->setPosUIElement(b2Vec2(CONST(int, "START_ROCKET_POSITION") + distanceGainedByPoint_ * playerPoints[k], (initPos - 76) + (distanceBetweenRockets_ * k) + rocketRect.h / 2));
 	}
 }
