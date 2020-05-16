@@ -8,8 +8,8 @@ class Pad:public Component
 private:
 	AnimatedViewer* viewer_;
 public:
-	Pad();
-	virtual ~Pad();
+	Pad() {};
+	virtual ~Pad() {};
 
 	virtual void init() override;
 	virtual void onCollisionExit(Collision* c);
