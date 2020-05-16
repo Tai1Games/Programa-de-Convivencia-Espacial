@@ -28,6 +28,6 @@ void UIViewer::draw() const
 		dest.y = pos_.y + renderOffset_.y;
 		dest.w = wH_.x * scale_;
 		dest.h = wH_.y * scale_;
-		tex_->render(dest, angle_, flip_);
+		tex_->render(dest, angle_, frameX_, frameY_, flip_);
 	}
 }

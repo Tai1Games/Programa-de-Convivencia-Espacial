@@ -102,17 +102,12 @@ void Texture::render(const SDL_Rect& dest, double angle, const SDL_Rect& clip, S
 void Texture::render(const SDL_Rect& dest, double angle, const SDL_RendererFlip& flip) const
 {
 	SDL_Rect clip = { 0, 0, width_, height_ };
-	if (texture_) {
-		SDL_RenderCopyEx(renderer_, texture_, &clip, &dest, angle, nullptr,
-			flip);
-	}
+	render(dest, angle, clip, flip);
 }
 
-void Texture::render(const SDL_Rect &dest, double angle,
-		const SDL_Rect &clip) const {
-
-		render(dest, angle, clip, SDL_FLIP_NONE);
-
+void Texture::render(const SDL_Rect& dest, double angle,
+	const SDL_Rect& clip) const {
+	render(dest, angle, clip, SDL_FLIP_NONE);
 }
 
 // this overloaded function gets the clip for you. frameY and flip are optional parameters

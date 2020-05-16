@@ -56,7 +56,8 @@ void MidGameState::init()
 
 		AnimatedUIViewer* viewer = newRocket->addComponent<AnimatedUIViewer>(Resources::RocketSpriteSheet, 10, b2Vec2(CONST(int, "START_ROCKET_POSITION"), (initPosY-76) + (distanceBetweenRockets_ * k) + rocketRect.h / 2), 1, 0);
 		playerRockets_.push_back(viewer);
-		viewer->setFrame(0, k);
+		//viewer->setFrame(0, k);	// cuando haya skins, descomentar esta línea y quitar startAnimation
+		viewer->startAnimation();
 	}
 	//Texto para terminar la intermision
 	continueText = entityManager_->addEntity();
