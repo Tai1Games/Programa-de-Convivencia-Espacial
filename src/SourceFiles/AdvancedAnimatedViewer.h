@@ -18,6 +18,8 @@ public:
 	virtual void init() override = 0;
 	virtual void update() override;
 
+	int getCurrentAnim() const { return anim_; }
+
 	virtual void startAnimation(int loops = -1, int initialFrame = 0, int limitFrame = -1, int animation = 0) override {
 		stopAnimation();
 		anim_ = animation;

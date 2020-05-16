@@ -10,6 +10,7 @@ void CarnivorousPlant::init()
 	coinDamage_ = CONST(int, "CARNIVOROUSPLANT_COIN_DMG");
 	damage_ = CONST(int, "CARNIVOROUSPLANT_DMG");
 	maxFrames_ = CONST(int, "CARNIVOROUSPLANT_TIME");
+	marginUntilBite_ = CONST(int, "CARNIVOROUSPLANT_MARGIN_UNTIL_BITE");
 
 	increase_ = (float)(minAnimationSpeed_ - maxAnimationSpeed_) / maxFrames_;
 	actualSpeed_ = minAnimationSpeed_;
@@ -21,6 +22,9 @@ void CarnivorousPlant::update()
 {
 	if (playerDetected_) {
 		frameCount_++;
+		if (viewer_->getCurrentAnim() != 1 && frameCount_ >= maxFrames_ - marginUntilBite_) {
+			viewer_->startAnimation(0, 0, -1, 1);
+		}
 		if (frameCount_ >= maxFrames_) { //tiene que morder xd
 			bite();
 		}
@@ -33,7 +37,6 @@ void CarnivorousPlant::update()
 
 void CarnivorousPlant::bite()
 {
-	viewer_->startAnimation(0, 0, -1, 1);
 	Health* healthPlayer = player_->getComponent<Health>(ComponentType::Health);
 	if (healthPlayer != nullptr && !healthPlayer->subtractLife(damage_)) healthPlayer->playerDead(playerCollHandler_);
 	else if (walletPlayer_ != nullptr) playerCollHandler_->addCoinDrop(std::make_tuple(walletPlayer_, GETCMP2(player_, PlayerData), coinDamage_));
