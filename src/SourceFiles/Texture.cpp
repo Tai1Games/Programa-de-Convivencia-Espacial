@@ -61,6 +61,8 @@ bool Texture::loadFromText(SDL_Renderer *renderer, const string& text, const Fon
 		if (texture_ != nullptr) {
 			width_ = textSurface->w;
 			height_ = textSurface->h;
+			frameWidth_ = width_ / nHorizontalFrames_;
+			frameHeight_ = height_ / nVerticalFrames_;
 		}
 		SDL_FreeSurface(textSurface);
 	} else {
