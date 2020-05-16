@@ -60,6 +60,9 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Staple,resourcesPath + "textures/Staple.png"},
 	{ Confetti,resourcesPath + "textures/ConfettiWeapon.png"},
 	{ ConfettiParticles,resourcesPath + "textures/ConfettiParticles.png"},
+	{ Lamp,resourcesPath + "textures/Lampara.png"},
+	{ Table,resourcesPath + "textures/Mesa.png"},
+	{ Sofa,resourcesPath + "textures/Sofa.png"},
 
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },

@@ -348,6 +348,9 @@
     <ClInclude Include="ConfettiPool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WeaponFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -604,6 +607,9 @@
     </ClCompile>
     <ClCompile Include="ConfettiPool.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

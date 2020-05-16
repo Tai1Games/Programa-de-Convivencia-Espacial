@@ -52,7 +52,7 @@
   "MAX_SPEED_AFTER_IMPULSE": 5,
   "GRAB_ANGLE_TOLERANCE": 0.2,
 
-  "PLAYER_ANIMS": null,
+  "_PLAYER_ANIMS": null,
   "NUM_SKINS": 4,
   "NUM_ANIMS": 4,
 
@@ -197,6 +197,32 @@
 
   "CONFETI_X": 0.5,
   "CONFETI_Y": 0.5,
+  
+  "_OBJECTS": null,
+  
+  "TABLE_DENSITY": 1,
+  "TABLE_FRICTION": 0.1,
+  "TABLE_RESTITUTION": 0.2,
+  "TABLE_LINEAR_DRAG": 12,
+  "TABLE_ANGULAR_DRAG": 7,
+  "TABLE_X": 1.5,
+  "TABLE_Y": 0.8,
+  
+  "LAMP_DENSITY": 1,
+  "LAMP_FRICTION": 0.1,
+  "LAMP_RESTITUTION": 0.2,
+  "LAMP_LINEAR_DRAG": 10,
+  "LAMP_ANGULAR_DRAG": 5,
+  "LAMP_X": 0.7,
+  "LAMP_Y": 1,
+  
+  "SOFA_DENSITY": 1,
+  "SOFA_FRICTION": 0.1,
+  "SOFA_RESTITUTION": 0.2,
+  "SOFA_LINEAR_DRAG": 15,
+  "SOFA_ANGULAR_DRAG": 8,
+  "SOFA_X": 2,
+  "SOFA_Y": 1,
 
   "_UI": null,
 
