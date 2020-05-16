@@ -34,7 +34,7 @@ Health::~Health()
 
 bool Health::subtractLife(int damage)
 {
-	if (invFrames_ <= 0 && damage> 0) {
+	if (invFrames_ <= 0 && damage > 0) {
 		if (lives_ > 0) {
 			lives_ -= damage;
 			invFrames_ = INV_FRAMES_HIT_;
@@ -103,17 +103,17 @@ void Health::onCollisionEnter(Collision* c)
 		b2Fixture* fix = c->hitFixture;
 		if (!fix->IsSensor())
 		{
-			b2Vec2 force = c->hitFixture->GetBody()->GetMass() * c->hitFixture->GetBody()->GetLinearVelocity();
+			b2Vec2 force =/* c->hitFixture->GetBody()->GetMass() * */c->hitFixture->GetBody()->GetLinearVelocity();
 			int impact = force.Length();
 			Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
 			PlayerData* playerWhoHitMe = nullptr;
 			//Si se impacta con un arma al umbral m�s alto de fuerza, se recibe su daño de impacto
 			if (w != nullptr) {
+			std::cout << "\n\n\nSE HA HECHO DAno: " << impact << "\n\n\n";
 				impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
 			}
 			else {
 				//Depending on the force of impact we apply damage to the player
-
 				if (impact < CONST(int, "LOW_DAMAGE")) impact = 0;
 
 				else if (impact >= CONST(int, "LOW_DAMAGE") && impact < CONST(double, "MEDIUM_DAMAGE")) impact = 1;
