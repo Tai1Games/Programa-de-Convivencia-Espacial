@@ -320,10 +320,10 @@ Entity* ObjectFactory::makeWifiWave(Entity* e, EntityManager* entityManager, b2W
 	return e;
 }
 
-Entity* ObjectFactory::makeWeaponSpawner(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 position, ConfettiPool* confettiPool)
+Entity* ObjectFactory::makeWeaponSpawner(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 position, ConfettiPool* confettiPool, StaplerPool* staplerPool, BulletPool* bulletPool)
 {
 	Entity* e = entityManager->addEntity();
-	e->addComponent<WeaponSpawner>(position, entityManager, physicsWorld, confettiPool);
+	e->addComponent<WeaponSpawner>(position, entityManager, physicsWorld, confettiPool, staplerPool, bulletPool);
 
 	return e;
 }

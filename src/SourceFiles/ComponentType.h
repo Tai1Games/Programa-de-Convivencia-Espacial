@@ -37,6 +37,7 @@ namespace ComponentType {
 		UIViewer,
 		AnimatedPlayer,
 		Bullet,
+		StaplerWeapon,
 		RocketLogic,
 		Countdown,
 		ConfettiWeapon,

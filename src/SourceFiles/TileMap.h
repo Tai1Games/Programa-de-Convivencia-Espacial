@@ -14,6 +14,7 @@ class FireBallGenerator;
 class ConfettiPool;
 class TomatoPool;
 class BananaPool;
+class StaplerPool;
 class GameMode;
 
 class TileMap : public Component
@@ -44,6 +45,7 @@ private:
 	std::vector<b2Vec2> highTierWeaponSpawnPoints_;
 
 	ConfettiPool* confettiPool_;
+	StaplerPool* staplerPool_;
 	BulletPool* bulletPool_ = nullptr;
 	unique_ptr<TomatoPool> tomatoPool_;
 	unique_ptr<BananaPool> bananaPool_;
@@ -52,7 +54,7 @@ private:
 
 	void solvePostCreationProblems(); //Called when reading of tilemap ends. Use this to assign references and solve similar problems.
 public:
-	TileMap(int w, int h, string map, EntityManager* entityManager_, b2World* physicsWorld_, BulletPool* bp, ConfettiPool* cP, GameMode* gameMode);
+	TileMap(int w, int h, string map, EntityManager* entityManager_, b2World* physicsWorld_, BulletPool* bp, ConfettiPool* cP, StaplerPool* staplerPool, GameMode* gameMode);
 	~TileMap();
 	virtual void update() override;
 	virtual void init() override;

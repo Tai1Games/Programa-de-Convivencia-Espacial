@@ -12,6 +12,7 @@
 #include "Viewer.h"
 #include "TimedDespawn.h"
 #include "ConfettiPool.h"
+#include "StaplerPool.h"
 
 Entity* WeaponFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 
@@ -59,12 +60,13 @@ Entity* WeaponFactory::makeBall(EntityManager* entityManager, b2World* physicsWo
 	return e;
 }
 
-Entity* WeaponFactory::makeStapler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, BulletPool* bp) {
-	Entity* e = entityManager->addEntity();
+Entity* WeaponFactory::makeStapler(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, BulletPool* bp) {
+	entityManager->addExistingEntity(e);
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "STAPLER_DENSITY"),
 		CONST(double, "STAPLER_FRICTION"), CONST(double, "STAPLER_RESTITUTION"), CONST(double, "STAPLER_LINEAR_DRAG"),
 		CONST(double, "STAPLER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent <Viewer>(Resources::Stapler);
+	e->addComponent<TimedDespawn>(CONST(double, "CONFETTI_TIME_FOR_DESPAWN") * FRAMES_PER_SECOND);
 	e->addComponent<StaplerWeapon>(CONST(int, "STAPLER_IMPACT_DAMAGE"), bp);
 	e->addComponent<ColliderViewer>();
 
@@ -130,14 +132,17 @@ Entity* WeaponFactory::makeBanana(Entity* e, EntityManager* entityManager, b2Wor
 	return e;
 }
 
-Entity* WeaponFactory::makeLowTierWeapon(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, ConfettiPool* confettiPool)
+Entity* WeaponFactory::makeLowTierWeapon(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, ConfettiPool* confettiPool, StaplerPool* staplerPool, BulletPool* bulletPool)
 {
 	Entity* e = nullptr;
-	int weapon = rand() % 1;
+	int weapon = rand() % 2;
 	switch (weapon)
 	{
 	case 0: //slipper
 		e = confettiPool->addConfetti(pos);
+		break;
+	case 1:
+		e = staplerPool->addStapler(pos);
 		break;
 	}
 	return e;

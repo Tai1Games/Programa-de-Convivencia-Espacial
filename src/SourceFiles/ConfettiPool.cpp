@@ -21,6 +21,5 @@ Entity* ConfettiPool::addConfetti(b2Vec2 pos)
 		ConfettiWeapon* confetti = e->getComponent<ConfettiWeapon>(ComponentType::ConfettiWeapon);
 		confetti->setActive(true, pos);
 	}
-
 	return e;
 }

@@ -11,13 +11,14 @@
 #include "GameMode.h"
 
 
-TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW, BulletPool* bp, ConfettiPool* cP, GameMode* gameMode) :Component(ComponentType::Tilemap),  //w y h son de la ventana
+TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW, BulletPool* bp, ConfettiPool* cP, StaplerPool* staplerPool, GameMode* gameMode) :Component(ComponentType::Tilemap),  //w y h son de la ventana
 width_(w),
 height_(h),
 entityManager_(eM),
 physicsWorld_(pW),
 bulletPool_(bp),
 confettiPool_(cP),
+staplerPool_(staplerPool),
 gameMode_(gameMode) {
 	loadTileson(map);
 	playerSpawns_.reserve(4);
@@ -261,7 +262,7 @@ void TileMap::createWeapons()
 
 	for (b2Vec2 spawnPoint : lowTierWeaponSpawnPoints_) {
 
-		ObjectFactory::makeWeaponSpawner(entityManager_, physicsWorld_, spawnPoint, confettiPool_);
+		ObjectFactory::makeWeaponSpawner(entityManager_, physicsWorld_, spawnPoint, confettiPool_, staplerPool_, bulletPool_);
 	}
 }
 

@@ -4,7 +4,7 @@
 #include "Constants.h"
 
 void WeaponSpawner::spawnWeapon(){
-	Entity* e = WeaponFactory::makeLowTierWeapon(eMan_, b2world_, pos_, confettiPool_);
+	Entity* e = WeaponFactory::makeLowTierWeapon(eMan_, b2world_, pos_, confettiPool_, staplerPool_, bulletPool_);
 
 	e->getComponent<TimedDespawn>(ComponentType::TimedDespawn)->setSpawner(this);
 }

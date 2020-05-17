@@ -186,6 +186,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClInclude Include="AbstractTimedGameMode.h" />
     <ClInclude Include="AbstractViewers.h" />
     <ClInclude Include="ActionableWeapon.h" />
+    <ClInclude Include="StaplerPool.h" />
     <ClInclude Include="TimedDespawn.h" />
     <ClInclude Include="WeaponFactory.h" />
     <ClInclude Include="WeaponSpawner.h" />
@@ -285,6 +286,7 @@ copy "$(SolutionDir)SDL2_image-2.0.5\lib\$(Platform)\*.dll" "$(TargetDir)"</Comm
     <ClCompile Include="AbstractTimedGameMode.cpp" />
     <ClCompile Include="AbstractViewers.cpp" />
     <ClCompile Include="ActionableWeapon.cpp" />
+    <ClCompile Include="StaplerPool.cpp" />
     <ClCompile Include="TimedDespawn.cpp" />
     <ClCompile Include="WeaponFactory.cpp" />
     <ClCompile Include="WeaponSpawner.cpp" />
