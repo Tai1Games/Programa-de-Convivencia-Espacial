@@ -4,6 +4,7 @@
 class Collider;
 class ParticleEmitter;
 class TimedDespawn;
+class AnimatedViewer;
 
 class ConfettiWeapon : public MeleeWeapon
 {

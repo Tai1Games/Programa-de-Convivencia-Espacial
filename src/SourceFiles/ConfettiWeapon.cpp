@@ -3,6 +3,7 @@
 #include "ParticleEmitter.h"
 #include "Hands.h"
 #include "TimedDespawn.h"
+#include "AnimatedViewer.h"
 
 ConfettiWeapon::ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : MeleeWeapon(ComponentType::ConfettiWeapon, wId, dmg, impactDmg, cooldownFrames) {}
 
@@ -10,9 +11,8 @@ void ConfettiWeapon::init() {
 	MeleeWeapon::init();
 	colWeapon_ = GETCMP1_(Collider);
 	particleEmitter_ = GETCMP1_(ParticleEmitter);
-	viewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::AnimatedViewer);
+	viewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
 	timedDespawn_ = GETCMP1_(TimedDespawn);
-	frameSize_ = viewer_->getTexture()->getHeight();
 
 	viewer_->stopAnimation();
 	viewer_->setFrame(0);
@@ -42,6 +42,8 @@ void ConfettiWeapon::setActive(bool a, b2Vec2 pos)
 		viewer_->setFrame(0);
 		used = false;
 		cout << "tesst";
+		colWeapon_->setLinearVelocity(b2Vec2(0, 0));
+		colWeapon_->setAngularVelocity(0);
 	}
 	entity_->setActive(a);
 	viewer_->setDrawable(a);

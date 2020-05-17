@@ -33,11 +33,10 @@ Entity* WeaponFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2W
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "CONFETTI_DENSITY"),
 		CONST(double, "CONFETTI_FRICTION"), CONST(double, "CONFETTI_RESTITUTION"),
 		CONST(double, "CONFETTI_LINEAR_DRAG"), CONST(double, "CONFETTI_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent <AnimatedViewer>(Resources::Confetti, 100);
+	e->addComponent<AnimatedViewer>(Resources::Confetti, 0);
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::ConfettiParticles, 10, 4, 4, 200, 50, 500, 3, 30);
 	pE->setOffset({ CONST(double, "CONFETTI_PARTICLE_OFFSET_X"), CONST(double, "CONFETTI_PARTICLE_OFFSET_Y") });
 	int framesToDespawn = (CONST(double, "CONFETTI_TIME_FOR_DESPAWN") * FRAMES_PER_SECOND);
-
 	e->addComponent<TimedDespawn>(CONST(double, "CONFETTI_TIME_FOR_DESPAWN") * FRAMES_PER_SECOND);
 	e->addComponent<ConfettiWeapon>(WeaponID::Confetti, CONST(int, "CONFETTI_DAMAGE"), CONST(int, "CONFETTI_IMPACT_DAMAGE"), CONST(int, "CONFETTI_COOLDOWN_FRAMES"));
 	e->addComponent<ColliderViewer>();

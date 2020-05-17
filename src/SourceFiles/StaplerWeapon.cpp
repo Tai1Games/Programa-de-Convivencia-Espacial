@@ -40,4 +40,6 @@ void StaplerWeapon::setActive(bool a, b2Vec2 pos)
 	viewer_->setDrawable(a);
 	collider_->getBody()->SetEnabled(a);
 	collider_->getBody()->SetTransform(pos, 0);
+	collider_->setLinearVelocity(b2Vec2(0, 0));
+	collider_->setAngularVelocity(0);
 }
