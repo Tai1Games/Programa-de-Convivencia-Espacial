@@ -36,7 +36,7 @@ Health::~Health()
 
 bool Health::subtractLife(int damage)
 {
-	if (invFrames_ <= 0 && damage> 0) {
+	if (invFrames_ <= 0 && damage > 0) {
 		if (lives_ > 0) {
 			lives_ -= damage;
 			invFrames_ = INV_FRAMES_HIT_;
@@ -73,6 +73,17 @@ void Health::playerDead(CollisionHandler* c)
 	//reset impulso
 	PlayerController* pc = GETCMP1_(PlayerController);
 	pc->resetImpulseForce();
+
+	//cuerpo muerto
+	CollisionHandler::bodyData body;
+	b2Fixture* fix = GETCMP1_(Collider)->getFixture(0);
+	body.pos = fix->GetBody()->GetPosition();
+	body.angle = GETCMP1_(Collider)->getAngle();
+	body.linearVelocity = fix->GetBody()->GetLinearVelocity();
+	body.angularVelocity = fix->GetBody()->GetAngularVelocity();
+	cout << " player dead with angle: " << body.angle << endl;
+	c->addCorpse(body);
+
 	//respawn
 	GameMode* s = c->getGamemode();
 	PlayerData* p = GETCMP1_(PlayerData);
@@ -87,21 +98,11 @@ void Health::playerDead(CollisionHandler* c)
 		mov.pos = b2Vec2((1 + p->getPlayerNumber()) * 50, 0);
 	}
 	c->addMove(mov);
-
-	//cuerpo muerto
-	CollisionHandler::bodyData body;
-	b2Fixture* fix = GETCMP1_(Collider)->getFixture(0);
-	body.pos = fix->GetBody()->GetPosition();
-	body.angle = fix->GetBody()->GetAngle();
-	body.linearVelocity = fix->GetBody()->GetLinearVelocity();
-	body.angularVelocity = fix->GetBody()->GetAngularVelocity();
-	c->addCorpse(body);
 }
 
 void Health::onCollisionEnter(Collision* c)
 {
 	if (invFrames_ <= 0) {
-
 		b2Fixture* fix = c->hitFixture;
 		if (!fix->IsSensor())
 		{
@@ -163,8 +164,6 @@ void Health::onCollisionEnter(Collision* c)
 
 				playerDead(c->collisionHandler);
 			}
-
-			
 		}
 	}
 }
