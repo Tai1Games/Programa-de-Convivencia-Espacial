@@ -13,7 +13,7 @@ private:
 	bool used = false;
 	int frameSize_ = 0;
 public:
-	ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames);
+	ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames, int impctForce);
 	virtual ~ConfettiWeapon() {};
 
 	virtual void init() override;

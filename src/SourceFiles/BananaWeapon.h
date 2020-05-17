@@ -11,7 +11,7 @@ private:
 	Viewer* viewer_ = nullptr;
 	BulletPool* bulletPool_;
 public:
-	BananaWeapon(BulletPool* p, int damage) :ActionableWeapon( WeaponID::Banana, 0, 0) {
+	BananaWeapon(BulletPool* p, int damage, int impctForce) :ActionableWeapon( WeaponID::Banana, 0, 0, impctForce) {
 		bulletPool_ = p;
 		impactDamage_ = damage;		
 	} //provisional

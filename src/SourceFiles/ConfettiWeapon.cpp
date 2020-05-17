@@ -3,7 +3,8 @@
 #include "ParticleEmitter.h"
 #include "Hands.h"
 
-ConfettiWeapon:: ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : MeleeWeapon( wId, dmg, impactDmg, cooldownFrames) {}
+ConfettiWeapon:: ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames, int impctForce) :
+	MeleeWeapon( wId, dmg, impactDmg, cooldownFrames, impctForce) {}
 
 void ConfettiWeapon::init() {
 	MeleeWeapon::init();
