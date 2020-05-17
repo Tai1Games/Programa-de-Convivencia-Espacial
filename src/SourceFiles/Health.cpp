@@ -113,23 +113,24 @@ void Health::onCollisionEnter(Collision* c)
 			Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
 			PlayerData* playerWhoHitMe = nullptr;
 
+			//¿Es un objeto lanzable? (Por lo tanto puede desarmar)
+			ThrownByPlayer* thrown = GETCMP_FROM_FIXTURE_(fix, ThrownByPlayer);
 
 			//Cogemos nuestras manos
 			Hands* h = GETCMP1_(Hands);
 
+			//Comprobamos si el golpe con el arma es suficientemente fuerte (indica que se ha lanzado o llevaba impulso)
+			if ( impact >= CONST(double, "DISARM_IMPACT") && thrown != nullptr && thrown->getOwnerId() != h->getPlayerId()) {
+				//Nos desarman con el golpe
+				Weapon* we = nullptr;
+				if (h != nullptr) we = h->getWeapon();
+
+				//Si tenemos un arma cogida la soltamos al haber sido golpeados
+				if (we != nullptr) c->collisionHandler->dropWeapon(we);
+			}
+
 			//Lo que ha golpeado es un arma?
 			if (w != nullptr) {
-				force *= w->getImpactForce();
-				impact = force.Length();
-				//Comprobamos si el golpe con el arma es suficientemente fuerte (indica que se ha lanzado o llevaba impulso)
-				if (impact >= CONST(double, "DISARM_IMPACT")) {
-					//Nos desarman con el golpe
-					Weapon* we = nullptr;
-					if (h != nullptr) we = h->getWeapon();
-
-					//Si tenemos un arma cogida la soltamos al haber sido golpeados
-					if (we != nullptr) c->collisionHandler->dropWeapon(we);
-				}
 
 				//Si se impacta con un arma al umbral m�s alto de fuerza, se recibe su daño de impacto
 				impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
@@ -169,6 +170,8 @@ void Health::onCollisionEnter(Collision* c)
 
 				playerDead(c->collisionHandler);
 			}
+
+			
 		}
 	}
 }

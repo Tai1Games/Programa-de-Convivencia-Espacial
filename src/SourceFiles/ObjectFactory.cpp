@@ -73,7 +73,7 @@ Weapon* ObjectFactory::makeController(EntityManager* entityManager, b2World* phy
 	e->addComponent<Viewer>(Resources::Remote);
 	Weapon* controller = e->addComponent<Weapon>(WeaponID::Mando, CONST(int, "CONTROLLER_IMPACT_DAMAGE"));
 	e->addComponent<ColliderViewer>();
-
+	
 	return controller;
 }
 
@@ -156,7 +156,7 @@ Entity* ObjectFactory::makeFireball(Entity* e, EntityManager* entityManager, b2W
 	e->addComponent<Fireball>();
 	e->addComponent<Weapon>(WeaponID::Piedra, 999);//Si, el fuego es una piedra muy caliente. Mucho m�s que el magma, esta caldera echa bolas de PLASMA, el cuarto estado de la materia
 	e->addComponent<ColliderViewer>();
-
+	
 	return e;
 }
 
@@ -246,6 +246,22 @@ Entity* ObjectFactory::makeCarnivorousPlant(EntityManager* entityManager, b2Worl
 	planta->addComponent<ColliderViewer>();
 
 	return planta;
+}
+
+Entity* ObjectFactory::makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, BulletPool* pb)
+{
+	entityManager->addExistingEntity(e);
+
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 5, 5, CONST(double, "BANANA_X"), CONST(double, "BANANA_Y"),
+		CONST(double, "BANANA_DENSITY"),CONST(double, "BANANA_FRICTION"), CONST(double, "BANANA_RESTITUTION"),
+		CONST(double, "BANANA_ANGULAR_DRAG"), CONST(double, "BANANA_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent<Viewer>(Resources::Banana);
+	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::BananaSkin, 100, 1, 5, 1000, 50, 100, 0, 360);
+	pE->setMaxParticles(1);
+	e->addComponent<BananaWeapon>(pb, CONST(double, "BANANA_DAMAGE"));
+	e->addComponent<ColliderViewer>();
+	
+	return e;
 }
 
 Entity* ObjectFactory::makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld, GameMode* gameMode)
