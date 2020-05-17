@@ -10,7 +10,7 @@ void ConfettiWeapon::init() {
 	MeleeWeapon::init();
 	colWeapon_ = GETCMP1_(Collider);
 	particleEmitter_ = GETCMP1_(ParticleEmitter);
-	viewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
+	viewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::AnimatedViewer);
 	timedDespawn_ = GETCMP1_(TimedDespawn);
 	frameSize_ = viewer_->getTexture()->getHeight();
 

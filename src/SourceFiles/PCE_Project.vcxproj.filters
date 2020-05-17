@@ -366,7 +366,6 @@
     <ClInclude Include="CarnivorousPlantViewer.h">
       <Filter>Header Files\Components\Viewers</Filter>
     </ClInclude>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
