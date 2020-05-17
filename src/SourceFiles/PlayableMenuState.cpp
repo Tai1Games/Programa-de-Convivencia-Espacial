@@ -60,9 +60,11 @@ void PlayableMenuState::init()
 	playerInfo = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
 	MatchInfo* aux = SDL_Game::instance()->getStateMachine()->getMatchInfo();
 	Entity* player = PlayerFactory::createBasePlayer(entityManager_, physicsWorld_, 0,
-		Resources::Body, 15, 16, aux->getPlayersInfo()->at(0)->inputBinder);
+		Resources::Body, tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y, aux->getPlayersInfo()->at(0)->inputBinder);
 	
 	
+	//ObjectFactory::makeWall(entityManager_, physicsWorld_, b2Vec2(10, 13), b2Vec2(6, 6));
+
 	player->addComponent<Hands>(Resources::Hands);
 	player->addComponent<AttachesToObjects>();
 	player->addComponent<PlayerController>();
