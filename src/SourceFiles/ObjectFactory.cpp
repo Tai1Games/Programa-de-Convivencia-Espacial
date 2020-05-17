@@ -185,7 +185,7 @@ Entity* ObjectFactory::makeBoiler(EntityManager* entityManager, b2World* physics
 {
 	Entity* e = entityManager->addEntity();
 	Collider* collRoomba = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "BOILER_WIDTH"), CONST(double, "BOILER_HEIGHT"), CONST(double, "BOILER_DENSITY"), CONST(double, "BOILER_FRICTION"),
-		CONST(double, "BOILER_RESTITUTION"), CONST(double, "BOILER_LINEAR_DRAG"), CONST(double, "BOILER_ANGULAR_DRAG"), Collider::CollisionLayer::NonGrababbleWall, false);
+		CONST(double, "BOILER_RESTITUTION"), CONST(double, "BOILER_LINEAR_DRAG"), CONST(double, "BOILER_ANGULAR_DRAG"), Collider::CollisionLayer::Wall, false);
 	int nFrames = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Smoke)->getWidth() / SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Smoke)->getHeight();
 	e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Smoke, CONST(int, "FBGEN_PARTICLE_SPEED"), nFrames, CONST(int, "FBGEN_PARTICLE_GEN_ODDS"), CONST(int, "FBGEN_PARTICLE_LIFETIME"), CONST(int, "FBGEN_PARTICLE_SIZE"), 0, CONST(int, "FBGEN_PARTICLE_SPEED_VARIATION"), 180);
 	e->addComponent<Viewer>(Resources::Boiler);

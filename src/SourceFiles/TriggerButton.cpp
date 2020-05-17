@@ -24,7 +24,7 @@ void TriggerButton::update()
 
 void TriggerButton::PassState()
 {
-	SDL_Game::instance()->getStateMachine()->changeToState(States::lobby, 0);
+	SDL_Game::instance()->getStateMachine()->changeToState(stateToChange, 0);
 }
 
 void TriggerButton::onCollisionEnter(Collision* c)
