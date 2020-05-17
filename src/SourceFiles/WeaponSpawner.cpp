@@ -14,6 +14,8 @@ void WeaponSpawner::onWeaponDespawned()
 	activated_ = true;
 	
 	frameToSpawn_ = currentFrame_ + framesBetweenSpawns_;
+
+	cout << "weapon despawned";
 }
 
 void WeaponSpawner::init() {
