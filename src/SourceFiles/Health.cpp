@@ -106,8 +106,7 @@ void Health::onCollisionEnter(Collision* c)
 		b2Fixture* fix = c->hitFixture;
 		if (!fix->IsSensor())
 		{
-			
-			b2Vec2 force =c->hitFixture->GetBody()->GetLinearVelocity();
+			b2Vec2 force = c->hitFixture->GetBody()->GetLinearVelocity();
 			int impact;
 
 			Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
@@ -118,9 +117,9 @@ void Health::onCollisionEnter(Collision* c)
 
 			//Cogemos nuestras manos
 			Hands* h = GETCMP1_(Hands);
-
+			impact = force.Length();
 			//Comprobamos si el golpe con el arma es suficientemente fuerte (indica que se ha lanzado o llevaba impulso)
-			if ( impact >= CONST(double, "DISARM_IMPACT") && thrown != nullptr && thrown->getOwnerId() != h->getPlayerId()) {
+			if (impact >= CONST(double, "DISARM_IMPACT") && thrown != nullptr && thrown->getOwnerId() != h->getPlayerId()) {
 				//Nos desarman con el golpe
 				Weapon* we = nullptr;
 				if (h != nullptr) we = h->getWeapon();
@@ -131,7 +130,7 @@ void Health::onCollisionEnter(Collision* c)
 
 			//Lo que ha golpeado es un arma?
 			if (w != nullptr) {
-
+				force *= w->getImpactForce();
 				//Si se impacta con un arma al umbral m�s alto de fuerza, se recibe su daño de impacto
 				impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
 			}
@@ -170,8 +169,6 @@ void Health::onCollisionEnter(Collision* c)
 
 				playerDead(c->collisionHandler);
 			}
-
-			
 		}
 	}
 }

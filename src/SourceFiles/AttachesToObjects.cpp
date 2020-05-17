@@ -17,29 +17,28 @@ void AttachesToObjects::init() {
 
 void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint, b2Vec2 collNormal) {
 	if (joint_ == nullptr) {
-
 		attachedObject_ = attachedObject;
 		b2Vec2 perp = perpendicularCounterClockwise(collNormal);
-		float attachAngle = std::atanf(perp.y/perp.x);
-		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle())>0) ? -1 : 1;
-		attachAngle += (PI / 2)*tilt;
+		float attachAngle = std::atanf(perp.y / perp.x);
+		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle()) > 0) ? -1 : 1;
+		attachAngle += (PI / 2) * tilt;
 
-		attachDir = -collNormal;
-		attachDir.Normalize();
+		normalOnAttach_ = -collNormal;
+		normalOnAttach_.Normalize();
 
-		float angleSin= sin(mainCollider_->getBody()->GetAngle());
+		float angleSin = sin(mainCollider_->getBody()->GetAngle());
 
-		if (angleSin >= sin(attachAngle)- CONST(double, "GRAB_ANGLE_TOLERANCE") && angleSin <= sin(attachAngle) + CONST(double, "GRAB_ANGLE_TOLERANCE")) {
+		if (angleSin >= sin(attachAngle) - CONST(double, "GRAB_ANGLE_TOLERANCE") && angleSin <= sin(attachAngle) + CONST(double, "GRAB_ANGLE_TOLERANCE")) {
 			mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
 		}
 
 		else {
-			attachDir.x *= mainCollider_->getH(0) / 2.3;
-			attachDir.y *= mainCollider_->getH(0) / 2.3;
+			normalOnAttach_.x *= mainCollider_->getH(0) / 2.3;
+			normalOnAttach_.y *= mainCollider_->getH(0) / 2.3;
 
-			mainCollider_->setTransform(mainCollider_->getPos() + attachDir, attachAngle);
+			mainCollider_->setTransform(mainCollider_->getPos() + normalOnAttach_, attachAngle);
 		}
-		
+
 		b2WeldJointDef jointDef; //Definici�n del nuevo joint.
 		jointDef.bodyA = mainCollider_->getBody(); //Body del jugador.
 		jointDef.bodyB = attachedObject; //Body del objeto al que se tiene que atar.

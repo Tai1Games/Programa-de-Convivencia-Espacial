@@ -29,7 +29,7 @@ public:
 
 	static Entity* makeSpaceJunk(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
-	static Entity* makeFireball(Entity* e,EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
+	static Entity* makeFireball(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 
 	static Entity* makeBoiler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 	//Crea un mando de la tele (especifico para el modo Pelea Por El Mando)
@@ -52,6 +52,8 @@ public:
 	static Entity* makeTomatoTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WeaponPool* pool);
 
 	static Entity* makeBananaTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WeaponPool* pool);
+
+	static Entity* makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, BulletPool* pb);
 
 	static Entity* makeWifiWave(Entity* e, EntityManager* entityManager, b2World* physicsWorld, Collider* colRouter);
 };
