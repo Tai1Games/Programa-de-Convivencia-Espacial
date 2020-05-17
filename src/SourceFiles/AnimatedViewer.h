@@ -4,9 +4,9 @@
 
 class AnimatedViewer : public Viewer, public AbstractAnimatedViewers
 {
-
 public:
-	AnimatedViewer(int textureId, SDL_Rect clip, int timeperframe) : Viewer(textureId, clip) {
+	AnimatedViewer(int textureId, int timeperframe, ComponentType::CmpId componentId = ComponentType::Viewer) :
+		Viewer(textureId, componentId) {
 		timePerFrame_ = timeperframe;
 	}
 

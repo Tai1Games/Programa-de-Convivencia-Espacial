@@ -10,7 +10,7 @@ protected:
 	Collider* collider_;
 public:
 	Viewer();
-	Viewer(int textureId, SDL_Rect clip = {0,0,0,0}, ComponentType::CmpId id = ComponentType::Viewer);
+	Viewer(int textureId, ComponentType::CmpId id = ComponentType::Viewer);
 
 	virtual ~Viewer();
 

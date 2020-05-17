@@ -37,11 +37,10 @@ private:
 	void resumeGame();
 public:
 	PauseState() : GameState() {};
-	~PauseState(){};
+	~PauseState() {};
 
 	virtual void init();
 	virtual void handleInput();
 
-	void setOwner(int ownerID) { ownerPlayerID_ = ownerID; }
+	void setOwner(int ownerID);
 };
-

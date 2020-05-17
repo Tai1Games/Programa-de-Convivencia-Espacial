@@ -86,3 +86,33 @@ enum MapID {
 	// No toques
 	NUMBER_OF_MAPS
 };*/
+
+#pragma pack(push,2)
+
+//Lo mejor es asegurarse de que los elementos que son multiplos de dos vayan en su propia palabra
+//Con la instruccion que tenemos queda así, que es la manera mas eficiente y evita errores
+/*
+	|char|char|
+	|  short  |
+	|  short  |
+*/
+
+
+struct SpritePacket {
+	char packetId = 'S'; //Sprite
+	char textureId;
+	unsigned short posX;
+	unsigned short posY;
+	unsigned short width;
+	unsigned short height;
+	short rotationDegrees = 0;
+	unsigned char frameNumberX = 0;
+	unsigned char frameNumberY = 0;
+};
+
+struct AudioPacket {
+	char packetId = 'A';
+	char soundId;
+};
+
+#pragma pack(pop)

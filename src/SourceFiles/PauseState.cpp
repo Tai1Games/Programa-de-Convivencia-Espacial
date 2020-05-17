@@ -20,16 +20,17 @@ void PauseState::init()
 	Entity* miniTinky = entityManager_->addEntity();
 	Entity* sliderControl = entityManager_->addEntity();
 
-	pauseText->addComponent<UIViewer>(Resources::PauseText, b2Vec2((CONST(int,"WINDOW_WIDTH") / 2) - 230, (CONST(int,"WINDOW_HEIGHT") / 2) - 310), 2.5, 0);
-	
+	pauseText->addComponent<UIViewer>(Resources::PauseText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 230, (CONST(int, "WINDOW_HEIGHT") / 2) - 310), 2.5, 0);
+
 	btns_.push_back(resumeText->addComponent<UIViewer>(Resources::ResumeText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) - 120), 1.5, 0));
 	btns_.push_back(soundText->addComponent<UIViewer>(Resources::SoundText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2)), 1.5, 0));
 	btns_.push_back(exitText->addComponent<UIViewer>(Resources::ExitText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) + 120), 1.5, 0));
 
 	buttonSelectorImage_ = miniTinky->addComponent<UIViewer>(Resources::Tinky, b2Vec2(btns_[selectedBtn_]->getPosUIElement().x - 80, btns_[selectedBtn_]->getPosUIElement().y - 15), 0.5, 0);
 	sliderControlImage_ = sliderControl->addComponent<UIViewer>(Resources::SliderControl, b2Vec2(btns_[Buttons::Sound]->getPosUIElement().x + 645, btns_[Buttons::Sound]->getPosUIElement().y), 2, 0);
-	slider->addComponent<UIViewer>(Resources::Slider, b2Vec2(btns_[Buttons::Sound]->getPosUIElement().x + 360, btns_[Buttons::Sound]->getPosUIElement().y), 2,0);
+	slider->addComponent<UIViewer>(Resources::Slider, b2Vec2(btns_[Buttons::Sound]->getPosUIElement().x + 360, btns_[Buttons::Sound]->getPosUIElement().y), 2, 0);
 
+	cout << "Pause initialized to " << ownerPlayerID_ << endl;
 	ownerBinder_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo()->at(ownerPlayerID_)->inputBinder;
 }
 
@@ -63,8 +64,10 @@ void PauseState::handleInput()
 		}
 		break;
 	case Buttons::Exit:
-		if (ownerBinder_->menuForward())
+		if (ownerBinder_->menuForward()) {
+			cout << "Pause ended for " << ownerPlayerID_ << endl;
 			SDL_Game::instance()->getStateMachine()->changeToState(States::menu, ownerPlayerID_);
+		}
 		break;
 	}
 
@@ -91,6 +94,11 @@ void PauseState::handleInput()
 	else if (holdingY_ && !ownerBinder_->menuMove(Dir::Up) && !ownerBinder_->menuMove(Dir::Down)) {
 		holdingY_ = false;
 	}
+}
+
+void PauseState::setOwner(int ownerID) {
+	ownerPlayerID_ = ownerID;
+	ownerBinder_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo()->at(ownerID)->inputBinder;
 }
 
 void PauseState::updateSelectedButton()
