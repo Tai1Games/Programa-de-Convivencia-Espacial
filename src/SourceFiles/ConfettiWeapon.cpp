@@ -37,10 +37,10 @@ void ConfettiWeapon::action() {
 void ConfettiWeapon::setActive(bool a, b2Vec2 pos)
 {
 	if (used) {
-		if (currentHand_ != nullptr) ActionableWeapon::UnPickObject();
+		if (currentHand_ != nullptr) UnPickObject();
 		viewer_->setClip(SDL_Rect{ 0, 0, frameSize_, frameSize_ });
 		used = false;
-		cout << "test";
+		cout << "tesst";
 	}
 	entity_->setActive(a);
 	viewer_->setDrawable(a);
