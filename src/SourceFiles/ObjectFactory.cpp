@@ -26,6 +26,7 @@
 #include "Weapon.h"
 #include "WeaponPool.h"
 #include "WiFiBullet.h"
+#include "TriggerButton.h"
 
 Entity* ObjectFactory::makeTable(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
@@ -314,4 +315,14 @@ Entity* ObjectFactory::makeWifiWave(Entity* e, EntityManager* entityManager, b2W
 	e->addComponent<ColliderViewer>();
 
 	return e;
+}
+
+Entity* ObjectFactory::makeTriggerButton(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, int state) {
+	Entity* trButton = entityManager->addEntity();
+	trButton->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
+	//trButton->addComponent<CarnivorousPlantViewer>(Resources::CarnivorousPlant, CONST(int, "CARNIVOROUSPLANT_MIN_SPEED"));
+	trButton->addComponent<TriggerButton>(state);
+	trButton->addComponent<ColliderViewer>();
+
+	return trButton;
 }

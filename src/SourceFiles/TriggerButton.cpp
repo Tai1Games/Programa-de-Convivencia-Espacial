@@ -3,7 +3,7 @@
 void TriggerButton::init()
 {
 	//viewer_ = entity_->getComponent<CarnivorousPlantViewer>(ComponentType::AdvancedAnimatedViewer);
-
+	timeToActivate = CONST(int, "TRIGGER_BUTTON_TIME");
 	
 	
 
@@ -13,36 +13,33 @@ void TriggerButton::init()
 void TriggerButton::update()
 {
 	if (playerDetected_) {
-		
+		framesInside++;
+
+		if (framesInside >= timeToActivate) {
+			//Pasas al modo correspondiente
+			PassState();
+		}
 	}
 }
 
 void TriggerButton::PassState()
 {
-	
+	SDL_Game::instance()->getStateMachine()->changeToState(States::lobby, 0);
 }
 
 void TriggerButton::onCollisionEnter(Collision* c)
 {
 	if (c->hitFixture->GetFilterData().categoryBits & Collider::CollisionLayer::Player) {
-		player_ = c->entity;
-		playerCollHandler_ = c->collisionHandler;
-		if (playersInside_ == 0) {
-			playerDetected_ = true;
-		}
-		playersInside_++;
+		playerDetected_ = true;
 	}
 }
 
 void TriggerButton::onCollisionExit(Collision* c)
 {
 	if (c->hitFixture->GetFilterData().categoryBits & Collider::CollisionLayer::Player) {
-		playersInside_--;
-
-		if (playersInside_ == 0) {
-			playerDetected_ = false;
-			player_ = nullptr;
-			playerCollHandler_ = nullptr;
-		}
+		
+		playerDetected_ = false;
+		
+		framesInside = 0;
 	}
 }

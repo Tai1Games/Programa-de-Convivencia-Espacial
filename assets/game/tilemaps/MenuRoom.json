@@ -3,6 +3,61 @@
  "layers":[
         {
          "draworder":"topdown",
+         "id":8,
+         "name":"MapObjects",
+         "objects":[
+                {
+                 "height":415.03,
+                 "id":42,
+                 "name":"TriggerButton",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":444,
+                 "x":74,
+                 "y":54.485
+                }, 
+                {
+                 "height":415.03,
+                 "id":43,
+                 "name":"TriggerButton",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":444,
+                 "x":1438,
+                 "y":68.485
+                }, 
+                {
+                 "height":415.03,
+                 "id":44,
+                 "name":"TriggerButton",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":444,
+                 "x":1414,
+                 "y":608.485
+                }, 
+                {
+                 "height":415.03,
+                 "id":45,
+                 "name":"TriggerButton",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":444,
+                 "x":82,
+                 "y":604.485
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":2,
          "name":"Walls",
          "objects":[
@@ -181,8 +236,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":8,
- "nextobjectid":39,
+ "nextlayerid":9,
+ "nextobjectid":46,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.5",

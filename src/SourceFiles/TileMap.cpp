@@ -233,6 +233,12 @@ void TileMap::executeMapFactory()
 			}
 			ObjectFactory::makeBananaTree(entityManager_, physicsWorld_, pos, bananaPool_.get());
 		}
+		else if (name == "TriggerButton") {
+			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
+			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
+			size *= 0.5f;
+			ObjectFactory::makeTriggerButton(entityManager_, physicsWorld_, pos, size, States::lobby);
+		}
 	}
 	solvePostCreationProblems();
 }

@@ -8,17 +8,14 @@
 class TriggerButton : public Component
 {
 private:
-	TriggerButton* viewer_;
+	int stateToChange = 0;
 
-	int playersInside_ = 0;
-	float increase_, actualSpeed_;
+	int framesInside = 0;
+	int timeToActivate = 0;
 	bool playerDetected_ = false;
-	Entity* player_ = nullptr;
-	CollisionHandler* playerCollHandler_ = nullptr;
-	Wallet* walletPlayer_ = nullptr;
 
 public:
-	TriggerButton() : Component(ComponentType::TriggerButton) {}
+	TriggerButton(int state) : Component(ComponentType::TriggerButton) { stateToChange = state; }
 
 	virtual void init() override;
 	virtual void update() override;
