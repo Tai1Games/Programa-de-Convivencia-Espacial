@@ -10,11 +10,12 @@ void ConfettiWeapon::init() {
 	MeleeWeapon::init();
 	colWeapon_ = GETCMP1_(Collider);
 	particleEmitter_ = GETCMP1_(ParticleEmitter);
-	viewer_ = GETCMP1_(Viewer);
+	viewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
 	timedDespawn_ = GETCMP1_(TimedDespawn);
 	frameSize_ = viewer_->getTexture()->getHeight();
 
-	viewer_->setClip(SDL_Rect{ 0, 0, frameSize_, frameSize_ });
+	viewer_->stopAnimation();
+	viewer_->setFrame(0);
 }
 
 void ConfettiWeapon::action() {
@@ -28,7 +29,7 @@ void ConfettiWeapon::action() {
 		particleEmitter_->setDirection({ handDirection.x, handDirection.y });
 		particleEmitter_->PlayStop();
 		used = true;
-		viewer_->setClip(SDL_Rect{ frameSize_, 0, frameSize_, frameSize_ });
+		viewer_->setFrame(1);
 		timedDespawn_->startTimer(this);
 		MeleeWeapon::action();
 	}
@@ -38,7 +39,7 @@ void ConfettiWeapon::setActive(bool a, b2Vec2 pos)
 {
 	if (used) {
 		if (currentHand_ != nullptr) UnPickObject();
-		viewer_->setClip(SDL_Rect{ 0, 0, frameSize_, frameSize_ });
+		viewer_->setFrame(0);
 		used = false;
 		cout << "tesst";
 	}

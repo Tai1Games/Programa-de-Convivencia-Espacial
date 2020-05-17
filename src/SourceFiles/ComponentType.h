@@ -35,7 +35,7 @@ namespace ComponentType {
 		AnimatedViewer,
 		AnimatedUIViewer,
 		UIViewer,
-		AnimatedPlayer,
+		AdvancedAnimatedViewer,
 		Bullet,
 		StaplerWeapon,
 		RocketLogic,
