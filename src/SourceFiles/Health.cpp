@@ -36,7 +36,7 @@ Health::~Health()
 
 bool Health::subtractLife(int damage)
 {
-	if (invFrames_ <= 0 && damage> 0) {
+	if (invFrames_ <= 0 && damage > 0) {
 		if (lives_ > 0) {
 			lives_ -= damage;
 			invFrames_ = INV_FRAMES_HIT_;
@@ -105,8 +105,10 @@ void Health::onCollisionEnter(Collision* c)
 		b2Fixture* fix = c->hitFixture;
 		if (!fix->IsSensor())
 		{
-			b2Vec2 force = c->hitFixture->GetBody()->GetMass() * c->hitFixture->GetBody()->GetLinearVelocity();
-			int impact = force.Length();
+			
+			b2Vec2 force =c->hitFixture->GetBody()->GetLinearVelocity();
+			int impact;
+
 			Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
 			PlayerData* playerWhoHitMe = nullptr;
 
@@ -116,6 +118,8 @@ void Health::onCollisionEnter(Collision* c)
 
 			//Lo que ha golpeado es un arma?
 			if (w != nullptr) {
+				force *= w->getImpactForce();
+				impact = force.Length();
 				//Comprobamos si el golpe con el arma es suficientemente fuerte (indica que se ha lanzado o llevaba impulso)
 				if (impact >= CONST(double, "DISARM_IMPACT")) {
 					//Nos desarman con el golpe
@@ -130,8 +134,9 @@ void Health::onCollisionEnter(Collision* c)
 				impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
 			}
 			else {
+				force *= c->hitFixture->GetBody()->GetMass();
+				impact = force.Length();
 				//Depending on the force of impact we apply damage to the player
-
 				if (impact < CONST(int, "LOW_DAMAGE")) impact = 0;
 
 				else if (impact >= CONST(int, "LOW_DAMAGE") && impact < CONST(double, "MEDIUM_DAMAGE")) impact = 1;

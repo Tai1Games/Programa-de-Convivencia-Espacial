@@ -5,9 +5,11 @@
 #include "CollisionHandler.h"
 #include "ThrownByPlayer.h"
 
-MeleeWeapon::MeleeWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : MeleeWeapon(ComponentType::Weapon, wId, dmg, impactDmg, cooldownFrames) {};
+MeleeWeapon::MeleeWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames, int impctForce) :
+	MeleeWeapon(ComponentType::Weapon, wId, dmg, impactDmg, cooldownFrames, impctForce) {};
 
-MeleeWeapon::MeleeWeapon(ComponentType::CmpId compType, WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : ActionableWeapon(compType, wId, impactDmg, cooldownFrames), damage_(dmg) {}
+MeleeWeapon::MeleeWeapon(ComponentType::CmpId compType, WeaponID wId, int dmg, int impactDmg, int cooldownFrames, int impctForce) :
+	ActionableWeapon(compType, wId, impactDmg, cooldownFrames, impctForce), damage_(dmg) {}
 
 void MeleeWeapon::action() {
 	if (!beenActivated_) {
