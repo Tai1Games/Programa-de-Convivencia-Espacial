@@ -9,11 +9,15 @@ void AbstractTimedGameMode::init(PlayState* game)
 	
 	winWidth_ = CONST(int, "WINDOW_WIDTH");
 	winHeigth_ = CONST(int, "WINDOW_HEIGHT");
+
+	halfWinWidth_ = winWidth_ * 0.5;
+	halfWinHeight_ = winHeigth_ * 0.5;
 	canvasTimerTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::CanvasTimerBackground);
-	canvasTimerRect_.x = winWidth_ / 2 - CONST(int, "COUNTDOWN_UI_OFFSET_X");
+	canvasTimerRect_.x = halfWinWidth_ - CONST(int, "COUNTDOWN_UI_OFFSET_X");
 	canvasTimerRect_.y = 0;
 	canvasTimerRect_.w = CONST(int, "COUNTDOWN_UI_WIDTH");
 	canvasTimerRect_.h = CONST(int, "COUNTDOWN_UI_HEIGTH");
+
 }
 
 void AbstractTimedGameMode::render()
@@ -25,7 +29,7 @@ void AbstractTimedGameMode::render()
 			string winMsg = "Gana el jugador " + (winnerId_ + 1);
 			Texture ganador(SDL_Game::instance()->getRenderer(), winMsg,
 				SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
-			ganador.render(winWidth_ / 2 - ganador.getWidth() / 2, winHeigth_ / 2);
+			ganador.render(halfWinWidth_ - ganador.getWidth() * 0.5, halfWinHeight_);
 		}
 		else {
 			suddenDeathRenderTimer_ += sPerFrame_;
@@ -35,8 +39,8 @@ void AbstractTimedGameMode::render()
 			}
 			if (suddenDeathRendering_) {
 				SDL_Rect suddenDeathRect;
-				suddenDeathRect.x = winWidth_ / 2 - suddenDeathTexture_->getWidth() / 2;
-				suddenDeathRect.y = winHeigth_ / 2 - suddenDeathTexture_->getHeight() / 2;
+				suddenDeathRect.x = halfWinWidth_ - suddenDeathTexture_->getWidth() * 0.5;
+				suddenDeathRect.y = halfWinHeight_ - suddenDeathTexture_->getHeight() * 0.5;
 				suddenDeathRect.w = suddenDeathTexture_->getWidth();
 				suddenDeathRect.h = suddenDeathTexture_->getHeight();
 				suddenDeathTexture_->render(suddenDeathRect);
@@ -44,7 +48,7 @@ void AbstractTimedGameMode::render()
 		}
 	}
 	else {
-		minutes = (timeToEnd_ - timeSinceStart_) / 60;
+		minutes = (timeToEnd_ - timeSinceStart_) * minutesFreq_;
 		seconds = (int)(timeToEnd_ - timeSinceStart_) % 60;
 	}
 	renderTimer(seconds, minutes);
@@ -61,7 +65,7 @@ void AbstractTimedGameMode::renderTimer(int seconds, int minutes)
 		SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
 
 	SDL_Rect timeTextRect;
-	timeTextRect.x = winWidth_ / 2 - timeTextTexture.getWidth() * 0.7 / 2;
+	timeTextRect.x = halfWinWidth_ - timeTextTexture.getWidth() * 0.7 * 0.5;
 	timeTextRect.y = 7;
 	timeTextRect.w = timeTextTexture.getWidth() * 0.7;
 	timeTextRect.h = timeTextTexture.getHeight() * 0.7;

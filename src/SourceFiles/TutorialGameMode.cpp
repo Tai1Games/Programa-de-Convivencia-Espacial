@@ -3,6 +3,7 @@
 #include "PlayState.h"
 #include "ActionableWeapon.h"
 #include "UIViewer.h"
+#include "WeaponFactory.h"
 
 
 TutorialGameMode::TutorialGameMode(MatchInfo* mInfo, int stocks) : GameMode(mInfo,GamemodeID::Tutorial)
@@ -27,7 +28,7 @@ void TutorialGameMode::init(PlayState* game) {
 	for (int i = 0; i < nPlayers_; i++) {
 		playerStocks_.push_back(maxStocks_); //Initializes maxStocks vector with 3 on all positions.
 		//tutorial weapons
-		weapons_.push_back(ObjectFactory::makeExtinguisher(game->getEntityManager(), game->getPhysicsWorld(),
+		weapons_.push_back(WeaponFactory::makeExtinguisher(game->getEntityManager(), game->getPhysicsWorld(),
 			b2Vec2(10 + i, 10 + i), b2Vec2(1, 1)));
 		weapons_.back()->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, -Collider::CollisionLayer::Player);
 		weapons_.back()->setActive(false);
