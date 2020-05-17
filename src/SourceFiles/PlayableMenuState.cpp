@@ -3,8 +3,6 @@
 #include "AttachesToObjects.h"
 #include "Texture.h"
 #include "Viewer.h"
-#include "Health.h"
-#include "HealthViewer.h"
 #include "InputBinder.h"
 #include "CollisionHandler.h"
 #include "TileMap.h"
@@ -19,7 +17,6 @@
 #include "GameStateMachine.h"
 #include "ThrownByPlayer.h"
 #include "Component.h"
-#include "Countdown.h"
 
 #include "PlayerFactory.h"
 
@@ -41,7 +38,7 @@ void PlayableMenuState::init()
 
 	BulletPool bulletPool_;
 	ConfettiPool confettiPool_;
-
+	
 	tmap = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
 		"assets/game/tilemaps/MenuRoom.json",
 		entityManager_, physicsWorld_, &bulletPool_, &confettiPool_, nullptr);
@@ -92,12 +89,4 @@ void PlayableMenuState::render()
 void PlayableMenuState::handleInput()
 {
 	GameState::handleInput();
-	for (MatchInfo::PlayerInfo* pInfo : *playerInfo)
-	{
-		if (pInfo->inputBinder->pressPause()) {
-			SDL_Game::instance()->getAudioMngr()->pauseMusic();
-			SDL_Game::instance()->getStateMachine()->setPauseOwner(pInfo->playerId);
-			//SDL_Game::instance()->getStateMachine()->transitionToState(States::pause);
-		}
-	}
 }

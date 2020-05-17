@@ -19,6 +19,7 @@ public:
 
 	virtual void init() override;
 	virtual void update() override;
+	virtual void handleInput() override {};
 	virtual void onCollisionEnter(Collision* c);
 	virtual void onCollisionExit(Collision* c);
 	void PassState();
