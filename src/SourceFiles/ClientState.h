@@ -41,5 +41,7 @@ public:
 	virtual void handleInput() override;
 
 	void receiveSprite();
+	void receiveAudio();
+	void receiveMusic();
 };
 
