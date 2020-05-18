@@ -35,8 +35,8 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 		}
 
 		else {
-			adjustNormal.x *= mainCollider_->getH(0) / 2.3;
-			adjustNormal.y *= mainCollider_->getH(0) / 2.3;
+			adjustNormal.x *= mainCollider_->getW(0) / 2;
+			adjustNormal.y *= mainCollider_->getW(0) / 2;
 
 			mainCollider_->setTransform(mainCollider_->getPos() + adjustNormal, attachAngle);
 		}
