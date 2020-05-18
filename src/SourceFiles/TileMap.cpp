@@ -66,6 +66,7 @@ void TileMap::init() {
 			}
 		}
 	}
+	if(gameMode_!=nullptr)
 	bulletPool_->init(entityManager_, physicsWorld_, gameMode_);
 }
 
