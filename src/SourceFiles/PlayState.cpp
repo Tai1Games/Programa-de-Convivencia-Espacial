@@ -20,6 +20,7 @@
 #include "ThrownByPlayer.h"
 #include "Component.h"
 #include "Countdown.h"
+#include "ColliderViewer.h"
 
 PlayState::PlayState(GameMode* gMode, string tmap) :GameState(),
 gameMode_(gMode), tilemapName_(tmap) {}
@@ -121,6 +122,7 @@ void PlayState::createDeadBodies() {
 				playerDensity_, playerFriction_, playerRestitution_, playerLinearDrag_, playerAngularDrag_, Collider::CollisionLayer::NormalAttachableObject, false));
 			deadBodies.back()->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "CORPSE_W_SPRITE"),CONST(int, "CORPSE_H_SPRITE") }, collDeadBodies.back());
 			deadBodies.back()->addComponent<Viewer>(Resources::SpaceSuit);
+			deadBodies.back()->addComponent<ColliderViewer>();
 			collDeadBodies.back()->setTransform(b2Vec2(bodies[i].pos.x, bodies[i].pos.y), bodies[i].angle);
 			collDeadBodies.back()->setLinearVelocity(bodies[i].linearVelocity);
 			collDeadBodies.back()->setAngularVelocity(bodies[i].angularVelocity);

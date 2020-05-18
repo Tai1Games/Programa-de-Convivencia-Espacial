@@ -1,6 +1,6 @@
 #include "UIViewer.h"
 
-UIViewer::UIViewer(int textureId, b2Vec2 pos, float scale, float angle, SDL_Rect clip, const SDL_RendererFlip& flip, ComponentType::CmpId ct) :
+UIViewer::UIViewer(int textureId, b2Vec2 pos, float scale, float angle, const SDL_RendererFlip& flip, ComponentType::CmpId ct) :
 	Component(ct),
 	pos_(b2Vec2(pos)),
 	scale_(scale), //
@@ -8,7 +8,6 @@ UIViewer::UIViewer(int textureId, b2Vec2 pos, float scale, float angle, SDL_Rect
 	flip_(flip)
 {
 	tex_ = nullptr;
-	clip_ = clip;
 	textureId_ = textureId;
 }
 
@@ -29,6 +28,6 @@ void UIViewer::draw() const
 		dest.y = pos_.y + renderOffset_.y;
 		dest.w = wH_.x * scale_;
 		dest.h = wH_.y * scale_;
-		tex_->render(dest, angle_, clip_, flip_);
+		tex_->render(dest, angle_, frameX_, frameY_, flip_);
 	}
 }

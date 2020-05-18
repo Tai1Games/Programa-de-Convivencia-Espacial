@@ -9,18 +9,21 @@
 
 void Fireball::init()
 {
-	vw_ = GETCMP1_(Viewer);
+	viewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
 	col_ = GETCMP1_(Collider);
+	damage_ = CONST(int, "FIREBALL_DMG");
+	coinDamage_ = CONST(int, "FIREBALL_COIN_DMG");
 }
 
 void Fireball::setActive(bool to,b2Vec2 pos)
 {
-	vw_->setDrawable(to);
+	viewer_->setDrawable(to);
 	col_->getFixture(0)->GetBody()->SetEnabled(to);
 	entity_->setActive(to);
 	col_->getFixture(0)->GetBody()->SetTransform(pos, 0);
 	if (to) {
 		col_->createCircularFixture(CONST(double, "FIREBALL_RADIUS_PHYSICS"), CONST(double, "FIREBALL_DENSITY"), CONST(double, "FIREBALL_FRICTION"), CONST(double, "FIREBALL_RESTITUTION"), Collider::CollisionLayer::NormalObject, true);
+		viewer_->startAnimation();
 	}
 	else if (col_->getNumFixtures() > 1) col_->destroyFixture(1);
 
@@ -35,11 +38,11 @@ void Fireball::onCollisionEnter(Collision* c)
 	if (c->myFixture->IsSensor())
 	{
 		if (health != nullptr) {
-			if (!health->subtractLife(15))
+			if (!health->subtractLife(damage_))
 				health->playerDead(c->collisionHandler);
 		}
 		else if (wallet != nullptr) {
-			c->collisionHandler->addCoinDrop(std::make_tuple(wallet, GETCMP2(c->entity, PlayerData), coinDMG));
+			c->collisionHandler->addCoinDrop(std::make_tuple(wallet, GETCMP2(c->entity, PlayerData), coinDamage_));
 		}
 	}
 

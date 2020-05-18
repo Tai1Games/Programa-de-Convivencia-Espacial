@@ -2,7 +2,8 @@
 #include "ParticleEmitter.h"
 #include "Hands.h"
 
-ExtinguisherWeapon::ExtinguisherWeapon(WeaponID wId, int impctDmg, int cooldownFrames) : ActionableWeapon(wId, impctDmg, cooldownFrames),
+ExtinguisherWeapon::ExtinguisherWeapon(WeaponID wId, int impctDmg, int cooldownFrames, int impctForce) : 
+	ActionableWeapon(wId, impctDmg, cooldownFrames, impctForce),
 impulse_(0.0), PIXELS_PER_METER(0), WINDOW_HEIGHT(0), emitter_(nullptr) {}
 
 void ExtinguisherWeapon::init() {

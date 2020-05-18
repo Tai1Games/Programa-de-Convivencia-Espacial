@@ -16,6 +16,7 @@ void PlayerController::init()
 	playerData_ = GETCMP1_(PlayerData);
 	coll_ = GETCMP1_(Collider); //pilla referencia al collider
 	attachesToObj_ = GETCMP1_(AttachesToObjects);
+	viewer_ = entity_->getComponent<AnimatedPlayer>(ComponentType::AdvancedAnimatedViewer);
 	playerNumber_ = playerData_->getPlayerNumber();
 	ib = playerData_->getBinder();
 	KeyboardBinder* bindAux = static_cast<KeyboardBinder*>(ib);
@@ -64,6 +65,10 @@ void PlayerController::handleInput()
 		impulseForce_ = 0;
 		if (kBinder_ != nullptr) kBinder_->grabbed = false;
 		impulseCooldownTimer_ = 0;
+
+		//HAY QUE BORRAR-----------------------------------------------------------
+		viewer_->startAnimation(1, 0, -1, 1);
+		//HAY QUE BORRAR-----------------------------------------------------------
 	}
 
 	if (ib->releaseGrab()) {

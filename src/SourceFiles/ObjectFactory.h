@@ -1,8 +1,8 @@
 #pragma once
 #include "Entity.h"
 #include "checkML.h"
-#include "WeaponPool.h"
 
+class WeaponPool;
 class EntityManager;
 class Weapon;
 class FireBallPool;
@@ -17,20 +17,11 @@ public:
 
 	~ObjectFactory() {}
 
-	//Crea una chancla (Podemos pasarle los p�rametros que queramos segun las necesidades del objeto)
-	static Entity* makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
+	static Entity* makeTable(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
-	static Entity* makeConfetti(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, GameMode* gM);
+	static Entity* makeLamp(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
-	//Crea una pelota saltarina (Podemos pasarle los p�rametros que queramos segun las necesidades del objeto)
-	static Entity* makeBall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
-
-	//Crea una grapadora (Podemos pasarle los p�rametros que queramos segun las necesidades del objeto)
-	static Entity* makeStapler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, BulletPool* bp);
-
-	static Entity* makeExtinguisher(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
-
-	static Entity* makeTomato(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
+	static Entity* makeSofa(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
 	static Entity* makeWall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
@@ -44,8 +35,6 @@ public:
 	//Crea un mando de la tele (especifico para el modo Pelea Por El Mando)
 	static Weapon* makeController(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
-	static Entity* makeDumbbell(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
-
 	static Entity* makePad(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
 	static Entity* makeCoin(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, int val);
@@ -57,8 +46,6 @@ public:
 	static Entity* makeTreadmill(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 
 	static Entity* makeCarnivorousPlant(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
-
-	static Entity* makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, BulletPool* bp);
 
 	static Entity* makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld, GameMode* gameMode);
 

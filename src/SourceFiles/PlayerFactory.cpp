@@ -13,7 +13,13 @@ Entity* PlayerFactory::createBasePlayer(EntityManager* eMan, b2World* physicsWor
 	Collider* collP = p->addComponent<Collider>(physicsWorld, b2_dynamicBody, posX, posY, CONST(double, "PLAYER_H_PHYSICS"), CONST(double, "PLAYER_W_PHYSICS"), CONST(double, "PLAYER_DENSITY"), CONST(double, "PLAYER_FRICTION"), CONST(double, "PLAYER_RESTITUTION"), CONST(double, "PLAYER_LINEAR_DRAG"), CONST(double, "PLAYER_ANGULAR_DRAG"), layer, false);
 	p->addComponent<PlayerData>(playerID,ib);
 	p->addComponent<Transform>(SDL_Rect{0,0, CONST(int, "PLAYER_W_SPRITE"), CONST(int, "PLAYER_H_SPRITE") }, collP);
-	p->addComponent<AnimatedPlayer>(Resources::PlayerAnimSheet, 0);
+	p->addComponent<AnimatedPlayer>(Resources::PlayerAnimSheet, CONST(int, "PLAYER_TIME_PER_FRAME"), 0);
+
+	//if (playerID == 0) { esto se activa despu�s del countdown
+	//p->addComponent<Hands>(Resources::Hands);
+	//p->addComponent<AttachesToObjects>();
+	//p->addComponent<PlayerController>();
+	//p->addComponent<ImpulseViewer>(Resources::ImpulseArrow, Resources::ImpulseBackground);
 	p->addComponent<ColliderViewer>();
 	return p;
 }

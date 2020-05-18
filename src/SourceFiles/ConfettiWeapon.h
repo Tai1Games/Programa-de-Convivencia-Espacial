@@ -9,11 +9,11 @@ class ConfettiWeapon : public MeleeWeapon
 private:
 	Collider* colWeapon_ = nullptr;
 	ParticleEmitter* particleEmitter_ = nullptr;
-	Viewer* viewer_ = nullptr;
+	AnimatedViewer* viewer_ = nullptr;
 	bool used = false;
 	int frameSize_ = 0;
 public:
-	ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames);
+	ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames, int impctForce);
 	virtual ~ConfettiWeapon() {};
 
 	virtual void init() override;
