@@ -27,6 +27,8 @@ public:
 
 	static Entity* makePipe(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, float rotation);
 
+	static Entity* makeTrasparentWall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, float rotation);
+
 	static Entity* makeSpaceJunk(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
 	static Entity* makeFireball(Entity* e,EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);

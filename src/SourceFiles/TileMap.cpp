@@ -248,6 +248,15 @@ void TileMap::executeMapFactory()
 
 			ObjectFactory::makeTriggerButton(entityManager_, physicsWorld_, pos, size,buttonType);
 		}
+
+		else if (name == "TWall") {
+			float rotation = o.getRotation();
+			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), s.y / CONST(double, "PIXELS_PER_METER"));
+			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
+			size *= 0.5f;
+
+			ObjectFactory::makeTrasparentWall(entityManager_, physicsWorld_, pos, size, rotation);
+		}
 	}
 	solvePostCreationProblems();
 }

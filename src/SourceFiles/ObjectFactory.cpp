@@ -114,6 +114,32 @@ Entity* ObjectFactory::makePipe(EntityManager* entityManager, b2World* physicsWo
 
 	return e;
 }
+Entity* ObjectFactory::makeTrasparentWall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, float rotation) {
+
+	Entity* e = entityManager->addEntity();								 // x, y,width, height, density,friction, restitution, linearDrag, angularDrag,	Layer, sensor
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::Wall, false);
+
+	//Por si se debe de invertir la imagen en tuberias horizontales
+	if (size.x > size.y) {
+		e->addComponent<Viewer>(Resources::Negro);
+		if (pos.y > CONST(int, "WINDOW_HEIGHT") / CONST(double, "PIXELS_PER_METER") / 2) {
+			aux->getBody()->SetTransform(pos, PI);
+		}
+	}
+	//Por si se debe de invertir la imagen en tuberias verticales
+	else {
+		e->addComponent<Viewer>(Resources::Negro);
+		if (pos.x > CONST(int, "WINDOW_WIDTH") / CONST(double, "PIXELS_PER_METER") / 2) {
+			aux->getBody()->SetTransform(pos, -PI);
+		}
+	}
+	//Si la tuberia tiene una rotacion especial se la aplicamos
+	if (rotation != 0) { aux->getBody()->SetTransform(pos, rotation * (-PI) / 180); }
+
+	e->addComponent<ColliderViewer>();
+
+	return e;
+}
 
 Entity* ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {

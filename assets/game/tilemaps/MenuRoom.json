@@ -7,48 +7,48 @@
          "name":"MapObjects",
          "objects":[
                 {
-                 "height":202.908787878788,
+                 "height":160.795224659285,
                  "id":42,
                  "name":"TriggerButton",
                  "rotation":0,
                  "type":"Play",
                  "visible":true,
-                 "width":695.515151515152,
-                 "x":620.484848484848,
-                 "y":42.3637878787879
+                 "width":383.481988005168,
+                 "x":777.342060657644,
+                 "y":70.4685609062941
                 }, 
                 {
-                 "height":129.03,
+                 "height":142.757691039179,
                  "id":43,
                  "name":"TriggerButton",
                  "rotation":0,
                  "type":"Exit",
                  "visible":true,
-                 "width":426,
-                 "x":746.84848484848,
-                 "y":916.485
+                 "width":403.329980390118,
+                 "x":753.806096714674,
+                 "y":869.953740655484
                 }, 
                 {
-                 "height":479.03,
+                 "height":343.919776021781,
                  "id":44,
                  "name":"TriggerButton",
                  "rotation":0,
                  "type":"Credits",
                  "visible":true,
-                 "width":302,
-                 "x":1580,
-                 "y":566.485
+                 "width":216.785673582918,
+                 "x":1312.56731476802,
+                 "y":373.753931031731
                 }, 
                 {
-                 "height":487.03,
+                 "height":337.68375138732,
                  "id":45,
                  "name":"TriggerButton",
                  "rotation":0,
                  "type":"Options",
                  "visible":true,
-                 "width":306,
-                 "x":35,
-                 "y":550.485
+                 "width":227.916642285289,
+                 "x":350.844913480363,
+                 "y":387.902331008841
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -62,158 +62,180 @@
          "name":"Walls",
          "objects":[
                 {
-                 "height":30,
+                 "height":33.1917440221294,
                  "id":1,
-                 "name":"Wall",
+                 "name":"TWall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":1920,
-                 "x":0,
-                 "y":0
+                 "width":469.621269145427,
+                 "x":728.753035380805,
+                 "y":30.3030303030303
                 }, 
                 {
-                 "height":30,
+                 "height":33.1917440221294,
                  "id":3,
-                 "name":"Wall",
+                 "name":"TWall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":1920,
-                 "x":0,
-                 "y":1050
+                 "width":497.406782133649,
+                 "x":714.478909100581,
+                 "y":1017.67359742597
                 }, 
                 {
-                 "height":1080,
+                 "height":353.669326453352,
                  "id":4,
-                 "name":"Wall",
+                 "name":"TWall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":30,
-                 "x":0,
-                 "y":0
+                 "width":49.1917440221294,
+                 "x":296.121212121212,
+                 "y":378.689380438961
                 }, 
                 {
-                 "height":1080,
+                 "height":350.803365194354,
                  "id":5,
-                 "name":"Wall",
+                 "name":"TWall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":30,
-                 "x":1890,
-                 "y":0
+                 "width":45.1917440221293,
+                 "x":1538.20412009017,
+                 "y":370.024251612596
                 }, 
                 {
-                 "height":113.030303030303,
+                 "height":41.2382274214335,
                  "id":30,
-                 "name":"Wall",
+                 "name":"TWall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":30,
-                 "x":353.787878787879,
-                 "y":939.393939393939
+                 "width":330.052016561605,
+                 "x":291.422955248686,
+                 "y":734.370327742139
                 }, 
                 {
-                 "height":104.363333333333,
+                 "height":41.7072703495842,
                  "id":32,
-                 "name":"Wall",
+                 "name":"TWall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":30,
-                 "x":1545.66666666667,
-                 "y":951.818333333333
+                 "width":284.233544584876,
+                 "x":1301.40281905149,
+                 "y":721.294959853341
                 }, 
                 {
-                 "height":238.03,
+                 "height":185.13583694218,
                  "id":35,
-                 "name":"Wall",
+                 "name":"TWall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":30,
-                 "x":576.394,
-                 "y":22.9395
+                 "width":33.1917440221294,
+                 "x":728.560322103392,
+                 "y":63.4948916697093
                 }, 
                 {
-                 "height":239.03,
+                 "height":174.943624636395,
                  "id":36,
-                 "name":"Wall",
+                 "name":"TWall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":30,
-                 "x":1325.606,
-                 "y":22.0305
+                 "width":33.1917440221294,
+                 "x":1165.21602046424,
+                 "y":63.7296813498982
                 }, 
                 {
-                 "height":31.03,
+                 "height":47.7421328990627,
                  "id":37,
-                 "name":"Wall",
+                 "name":"TWall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":325.818181818182,
-                 "x":23,
-                 "y":508.485
+                 "width":335.801231723034,
+                 "x":296.804708789628,
+                 "y":328.023083712353
                 }, 
                 {
-                 "height":31.03,
+                 "height":34.3313272335559,
                  "id":38,
-                 "name":"Wall",
+                 "name":"TWall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":323.212121212121,
-                 "x":1574.78787878788,
-                 "y":522.485
+                 "width":287.742260222245,
+                 "x":1298.21775270593,
+                 "y":333.789730148521
                 }, 
                 {
-                 "height":108.03,
-                 "id":46,
-                 "name":"Wall",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":345.984848484849,
-                 "y":508.66303030303
-                }, 
-                {
-                 "height":107.03,
-                 "id":47,
-                 "name":"Wall",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":1545.80681818182,
-                 "y":522.568333333333
-                }, 
-                {
-                 "height":150.03,
+                 "height":162.303940296655,
                  "id":50,
-                 "name":"Wall",
+                 "name":"TWall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":30,
-                 "x":710,
-                 "y":901.485
+                 "width":33.1917440221294,
+                 "x":715.551773553821,
+                 "y":867.103944451564
                 }, 
                 {
-                 "height":146.03,
+                 "height":161.566345985052,
                  "id":51,
-                 "name":"Wall",
+                 "name":"TWall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":30,
-                 "x":1181,
-                 "y":905.485
+                 "width":43.1917440221293,
+                 "x":1165.41724960325,
+                 "y":857.783434514037
+                }, 
+                {
+                 "height":180.505057548081,
+                 "id":52,
+                 "name":"TWall",
+                 "rotation":45,
+                 "type":"",
+                 "visible":true,
+                 "width":45.7091345701058,
+                 "x":729.901335615914,
+                 "y":214.316231939444
+                }, 
+                {
+                 "height":192.500890156558,
+                 "id":53,
+                 "name":"TWall",
+                 "rotation":45,
+                 "type":"",
+                 "visible":true,
+                 "width":50.3337265963492,
+                 "x":1301.33576502316,
+                 "y":722.11638846386
+                }, 
+                {
+                 "height":186.24219488257,
+                 "id":54,
+                 "name":"TWall",
+                 "rotation":135,
+                 "type":"",
+                 "visible":true,
+                 "width":46.0482309527943,
+                 "x":750.956300510759,
+                 "y":867.422467849627
+                }, 
+                {
+                 "height":186.24219488257,
+                 "id":55,
+                 "name":"TWall",
+                 "rotation":135,
+                 "type":"",
+                 "visible":true,
+                 "width":50.924713965096,
+                 "x":1336.7402919801,
+                 "y":332.532483880887
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -235,8 +257,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":974.62876829012,
-                 "y":510.235986522999
+                 "x":990.397832242108,
+                 "y":479.692005516323
                 }, 
                 {
                  "height":0,
@@ -259,8 +281,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":970.52433670258,
-                 "y":781.853400971092
+                 "x":1127.74304809617,
+                 "y":546.658014595312
                 }, 
                 {
                  "height":0,
@@ -281,7 +303,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":52,
+ "nextobjectid":56,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.5",
