@@ -179,13 +179,13 @@ void TileMap::executeMapFactory()
 			ObjectFactory::makeSpaceJunk(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
 		}
 		else if (name == "Table") {
-			ObjectFactory::makeTable(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "TABLE_X"), CONST(float, "TABLE_Y")));
+			ObjectFactory::makeTable(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "TABLE_W_PHYSICS"), CONST(float, "TABLE_H_PHYSICS")));
 		}
 		else if (name == "Lamp") {
-			ObjectFactory::makeLamp(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "LAMP_X"), CONST(float, "LAMP_Y")));
+			ObjectFactory::makeLamp(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "LAMP_W_PHYSICS"), CONST(float, "LAMP_H_PHYSICS")));
 		}
 		else if (name == "Sofa") {
-			ObjectFactory::makeSofa(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "SOFA_X"), CONST(float, "SOFA_Y")));
+			ObjectFactory::makeSofa(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "SOFA_W_PHYSICS"), CONST(float, "SOFA_H_PHYSICS")));
 		}
 		else if (name == "Pad") {
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
@@ -220,7 +220,7 @@ void TileMap::executeMapFactory()
 			ObjectFactory::makeCarnivorousPlant(entityManager_, physicsWorld_, pos, size);
 		}
 		else if (name == "TomatoTree") {
-			if (tomatoPool_ == nullptr) { 
+			if (tomatoPool_ == nullptr) {
 				tomatoPool_ = make_unique<TomatoPool>();
 				tomatoPool_->init(entityManager_, physicsWorld_);
 			}
@@ -261,21 +261,21 @@ void TileMap::createWeapons()
 		switch (weapon)
 		{
 		case 0: //slipper
-			e = WeaponFactory::makeSlipper(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "SLIPPER_X"), CONST(float, "SLIPPER_Y")));
+			e = WeaponFactory::makeSlipper(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "FLIPFLOP_W_PHYSICS"), CONST(float, "FLIPFLOP_H_PHYSICS")));
 			break;
 		case 1: //ball
-			e = WeaponFactory::makeBall(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "BALL_X"), CONST(float, "BALL_Y")));
+			e = WeaponFactory::makeBall(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "BALL_W_PHYSICS"), CONST(float, "BALL_H_PHYSICS")));
 			break;
 		case 2: //stapler
-			e = WeaponFactory::makeStapler(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "STAPLER_X"), CONST(float, "STAPLER_Y")), bulletPool_);
+			e = WeaponFactory::makeStapler(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "STAPLER_W_PHYSICS"), CONST(float, "STAPLER_H_PHYSICS")), bulletPool_);
 			break;
 		case 3: //extinguisher
-			e = WeaponFactory::makeExtinguisher(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "EXTINGUISHER_X"), CONST(float, "EXTINGUISHER_Y")));
+			e = WeaponFactory::makeExtinguisher(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "EXTINGUISHER_W_PHYSICS"), CONST(float, "FLIPFLOP_H_PHYSICS")));
 			break;
 		case 4: //rock
 			break;
 		case 5: //dumbbell
-			e = WeaponFactory::makeDumbbell(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "DUMBBELL_X"), CONST(float, "DUMBBELL_Y")));
+			e = WeaponFactory::makeDumbbell(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "DUMBBELL_W_PHYSICS"), CONST(float, "DUMBBELL_H_PHYSICS")));
 			break;
 		case 6: //bananGun
 			break;
@@ -288,4 +288,3 @@ void TileMap::createWeapons()
 		}
 	}
 }
-
