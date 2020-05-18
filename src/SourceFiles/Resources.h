@@ -174,10 +174,10 @@ public:
 		GymMusic = TextureId::GymRoom,
 		BoilerRoomMusic = TextureId::BoilerRoom,
 		TutorialMusic = TextureId::TutorialRoom,
-		EntranceMusic
+		EntranceMusic,
 
 		// sound effects
-
+		StartGame
 	};
 
 	enum FontId : std::size_t {

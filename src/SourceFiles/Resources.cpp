@@ -167,6 +167,7 @@ vector<Resources::MusicInfo> Resources::musics_{
 vector<Resources::SoundInfo> Resources::sounds_{
 	//Efectos de sonido {nombre_en_enum, ruta}. Ejemplo abajo
 	//{ Shoot, "../assets/game/sound/shoot.mp3" },
+	{ StartGame, resourcesPath + "sound/effects/UI/enterGame.mp3" },
 };
 
 map<std::string, Resources::TextureId> Resources::tilesetTag_{
