@@ -20,6 +20,7 @@ Entity* WeaponFactory::makeSlipper(EntityManager* entityManager, b2World* physic
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "FLIPFLOP_DENSITY"),
 		CONST(double, "FLIPFLOP_FRICTION"), CONST(double, "FLIPFLOP_RESTITUTION"),
 		CONST(double, "FLIPFLOP_LINEAR_DRAG"), CONST(double, "FLIPFLOP_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent<Transform>(SDL_Rect{0,0,CONST(int, "FLIPFLOP_W_SPRITE") ,CONST(int, "FLIPFLOP_W_SPRITE") }, aux);
 	e->addComponent<Viewer>(Resources::Slipper);
 	e->addComponent<SlipperWeapon>(WeaponID::Slipper, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"), 
 		CONST(int, "FLIPFLOP_COOLDOWN_FRAMES"), CONST(int, "FLIPFLOP_IMPACT_FORCE"));
@@ -34,6 +35,7 @@ Entity* WeaponFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2W
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "CONFETTI_DENSITY"),
 		CONST(double, "CONFETTI_FRICTION"), CONST(double, "CONFETTI_RESTITUTION"),
 		CONST(double, "CONFETTI_LINEAR_DRAG"), CONST(double, "CONFETTI_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "CONFETTI_W_SPRITE") ,CONST(int, "CONFETTI_H_SPRITE") }, aux);
 	e->addComponent<AnimatedViewer>(Resources::Confetti, 0);
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::ConfettiParticles, 10, 4, 4, 200, 50, 500, 3, 30);
 	pE->setOffset({ CONST(double, "CONFETTI_PARTICLE_OFFSET_X"), CONST(double, "CONFETTI_PARTICLE_OFFSET_Y") });
@@ -52,6 +54,7 @@ Entity* WeaponFactory::makeBall(EntityManager* entityManager, b2World* physicsWo
 		CONST(double, "BOUNCINGBALL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	aux->getBody()->SetLinearDamping(0);
 	aux->getBody()->SetAngularDamping(0);
+	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "BALL_W_SPRITE"), CONST(int, "BALL_H_SPRITE") }, aux);
 	e->addComponent <Viewer>(Resources::Ball);
 	e->addComponent<Weapon>(WeaponID::Pelota, CONST(int, "BOUNCINGBALL_IMPACT_DAMAGE"), CONST(int, "BOUNCINGBALL_IMPACT_FORCE"));
 	e->addComponent<ColliderViewer>();
@@ -64,6 +67,7 @@ Entity* WeaponFactory::makeStapler(Entity* e, EntityManager* entityManager, b2Wo
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "STAPLER_DENSITY"),
 		CONST(double, "STAPLER_FRICTION"), CONST(double, "STAPLER_RESTITUTION"), CONST(double, "STAPLER_LINEAR_DRAG"),
 		CONST(double, "STAPLER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "STAPLER_W_SPRITE"), CONST(int, "STAPLER_H_SPRITE") }, aux);
 	e->addComponent <Viewer>(Resources::Stapler);
 	e->addComponent<TimedDespawn>(CONST(double, "CONFETTI_TIME_FOR_DESPAWN") * FRAMES_PER_SECOND);
 	e->addComponent<StaplerWeapon>(CONST(int, "STAPLER_IMPACT_DAMAGE"), bp, CONST(int, "STAPLER_IMPACT_FORCE"));
@@ -78,6 +82,7 @@ Entity* WeaponFactory::makeExtinguisher(EntityManager* entityManager, b2World* p
 	Collider* aux = entity->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y,
 		CONST(double, "EXTINGUISHER_DENSITY"), CONST(double, "EXTINGUISHER_FRICTION"), CONST(double, "EXTINGUISHER_RESTITUTION"),
 		CONST(double, "EXTINGUISHER_LINEAR_DRAG"), CONST(double, "EXTINGUISHER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	entity->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "EXTINGUISHER_W_SPRITE"), CONST(int, "EXTINGUISHER_H_SPRITE") }, aux);
 	entity->addComponent<Viewer>(Resources::Extinguisher);
 	entity->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Coin, 10);
 	entity->addComponent<ExtinguisherWeapon>(WeaponID::Extinguisher, CONST(int, "EXTINGUISHER_IMPACT_DAMAGE"),
@@ -91,9 +96,10 @@ Entity* WeaponFactory::makeTomato(Entity* e, EntityManager* entityManager, b2Wor
 {
 	entityManager->addExistingEntity(e);
 
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "TOMATO_RADIUS"), CONST(double, "TOMATO_DENSITY"),
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "TOMATO_RADIUS_PHYSICS"), CONST(double, "TOMATO_DENSITY"),
 		CONST(double, "TOMATO_FRICTION"), CONST(double, "TOMATO_RESTITUTION"),
 		CONST(double, "TOMATO_LINEAR_DRAG"), CONST(double, "TOMATO_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "TOMATO_RADIUS_SPRITE"), CONST(int, "TOMATO_RADIUS_SPRITE") }, aux);
 	e->addComponent<AnimatedViewer>(Resources::Tomato, (int)(CONST(int, "TOMATO_TIME_CHARGE") / CONST(int, "TOMATO_N_FRAMES_ACTIVATED")));
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::TomatoRing, 5, 1, 5, 1000, 20, 100, 0, 360);
 	pE->setMaxParticles(1);
@@ -109,6 +115,7 @@ Entity* WeaponFactory::makeDumbbell(EntityManager* entityManager, b2World* physi
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "DUMBBELL_DENSITY"),
 		CONST(double, "DUMBBELL_FRICTION"), CONST(double, "DUMBBELL_RESTITUTION"),
 		CONST(double, "DUMBBELL_LINEAR_DRAG"), CONST(double, "DUMBBELL_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "DUMBBELL_W_SPRITE"), CONST(int, "DUMBBELL_H_SPRITE") }, aux);
 	e->addComponent <Viewer>(Resources::Dumbbell);
 	e->addComponent<MeleeWeapon>(WeaponID::Mancuerna, CONST(int, "DUMBBELL_DAMAGE"), CONST(int, "DUMBBELL_IMPACT_DAMAGE"),
 		CONST(int, "DUMBBELL_COOLDOWN_FRAMES"), CONST(int, "DUMBBELL_IMPACT_FORCE"));
@@ -121,9 +128,10 @@ Entity* WeaponFactory::makeBanana(Entity* e, EntityManager* entityManager, b2Wor
 {
 	entityManager->addExistingEntity(e);
 
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 5, 5, CONST(double, "BANANA_X"), CONST(double, "BANANA_Y"),
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 5, 5, CONST(double, "BANANA_W_PHYSICS"), CONST(double, "BANANA_H_PHYSICS"),
 		CONST(double, "BANANA_DENSITY"), CONST(double, "BANANA_FRICTION"), CONST(double, "BANANA_RESTITUTION"),
 		CONST(double, "BANANA_ANGULAR_DRAG"), CONST(double, "BANANA_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
+	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "BANANA_W_SPRITE") ,CONST(int, "BANANA_W_SPRITE") }, aux);
 	e->addComponent<Viewer>(Resources::Banana);
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::BananaSkin, 100, 1, 5, 1000, 50, 100, 0, 360);
 	pE->setMaxParticles(1);

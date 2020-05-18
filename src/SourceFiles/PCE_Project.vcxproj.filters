@@ -617,6 +617,11 @@
     <ClCompile Include="AbstractViewers.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
+
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+
     <ClCompile Include="AdvancedAnimatedViewer.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
@@ -628,6 +633,7 @@
     </ClCompile>
     <ClCompile Include="ConfettiPool.cpp">
       <Filter>Source Files</Filter>
+
     </ClCompile>
     <ClCompile Include="WeaponFactory.cpp">
       <Filter>Source Files\Factories</Filter>

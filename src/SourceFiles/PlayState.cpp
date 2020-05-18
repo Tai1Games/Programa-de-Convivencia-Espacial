@@ -121,6 +121,7 @@ void PlayState::createDeadBodies() {
 			deadBodies.push_back(entityManager_->addEntity());
 			collDeadBodies.push_back(deadBodies.back()->addComponent<Collider>(physicsWorld_, b2_dynamicBody, bodies[i].pos.x, bodies[i].pos.y, playerWidth_, playerHeight_,
 				playerDensity_, playerFriction_, playerRestitution_, playerLinearDrag_, playerAngularDrag_, Collider::CollisionLayer::NormalAttachableObject, false));
+			deadBodies.back()->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "CORPSE_W_SPRITE"),CONST(int, "CORPSE_H_SPRITE") }, collDeadBodies.back());
 			deadBodies.back()->addComponent<Viewer>(Resources::SpaceSuit);
 			deadBodies.back()->addComponent<ColliderViewer>();
 			collDeadBodies.back()->setTransform(b2Vec2(bodies[i].pos.x, bodies[i].pos.y), bodies[i].angle);

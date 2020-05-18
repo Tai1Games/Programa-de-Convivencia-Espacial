@@ -186,13 +186,13 @@ void TileMap::executeMapFactory()
 			ObjectFactory::makeSpaceJunk(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
 		}
 		else if (name == "Table") {
-			ObjectFactory::makeTable(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "TABLE_X"), CONST(float, "TABLE_Y")));
+			ObjectFactory::makeTable(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "TABLE_W_PHYSICS"), CONST(float, "TABLE_H_PHYSICS")));
 		}
 		else if (name == "Lamp") {
-			ObjectFactory::makeLamp(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "LAMP_X"), CONST(float, "LAMP_Y")));
+			ObjectFactory::makeLamp(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "LAMP_W_PHYSICS"), CONST(float, "LAMP_H_PHYSICS")));
 		}
 		else if (name == "Sofa") {
-			ObjectFactory::makeSofa(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "SOFA_X"), CONST(float, "SOFA_Y")));
+			ObjectFactory::makeSofa(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "SOFA_W_PHYSICS"), CONST(float, "SOFA_H_PHYSICS")));
 		}
 		else if (name == "Pad") {
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
@@ -275,4 +275,3 @@ void TileMap::createWeapons()
 		ObjectFactory::makeWeaponSpawner(entityManager_, physicsWorld_, spawnPoint, confettiPool_, staplerPool_, bulletPool_);
 	}
 }
-
