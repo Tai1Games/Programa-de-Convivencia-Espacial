@@ -16,7 +16,7 @@ bool PlayerController::isImpulseValid(const b2Vec2& dir)
 	cout << "angle " << angle << endl;
 	//comop mucho permite impulsos perpendiculares al agarre
 	//sumar radianes a PI/2 para restringir aun mas la direccion de impulso
-	return angle <= PI / 2 || angle >= 1.5 * PI;
+	return angle <= ((PI / 2) + impulseRadError_) || angle >= ((1.5 * PI) - impulseRadError_);
 	//return abs(angle) < PI / 2;
 }
 
@@ -44,6 +44,8 @@ void PlayerController::init()
 	maxSpeedAfterImpulse_ = CONST(float, "MAX_SPEED_AFTER_IMPULSE") + maxImpulseFloating_;
 
 	impulseCooldown_ = CONST(int, "IMPULSE_COOLDOWN");
+
+	impulseRadError_ = CONST(float, "IMPULSE_ANGLE_ERROR") * PI / 180.0;
 }
 
 void PlayerController::handleInput()

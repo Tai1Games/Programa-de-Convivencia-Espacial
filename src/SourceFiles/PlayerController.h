@@ -19,6 +19,7 @@ private:
 	float maxImpulseGrabbed_;
 	float maxImpulseFloating_;
 	float maxSpeedAfterImpulse_;
+	float impulseRadError_; //el angulo de impulso permitio es PI + 2*impulseRadError
 
 	int playerNumber_;
 	b2Vec2 dirImpulse_;
