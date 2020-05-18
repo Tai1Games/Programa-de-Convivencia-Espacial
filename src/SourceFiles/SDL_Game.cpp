@@ -34,7 +34,6 @@ SDL_Game::SDL_Game() {
 	MS_PER_FRAME_ = constants_.getConstant<double>("MS_PER_FRAME");
 
 	audio_->setMusicVolume(constants_.getConstant<int>("MAX_MUSIC_VOLUME"));
-	//audio_->playMusic(Resources::GymMusic, -1);
 	inputHandler_ = new InputHandler();
 	inputHandler_->initialiseGamepads();
 
@@ -67,7 +66,7 @@ void SDL_Game::initializeResources() {
 	gamestateMachine_ = new GameStateMachine();
 
 	for (auto& image : Resources::images_) {
-		textures_->loadFromImg(image.id, renderer_, image.fileName);
+		textures_->loadFromImg(image.id, renderer_, image.fileName, image.nHorizontalFrames, image.nVerticalFrames);
 	}
 
 	for (auto& font : Resources::fonts_) {

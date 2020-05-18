@@ -3,21 +3,20 @@
 
 class FireBallGenerator;
 class Collider;
-class Viewer;
+class AnimatedViewer;
 
 class BoilerButtonLogic : public Component
 {
 private:
 	FireBallGenerator* fbGen_ = nullptr;
-	Viewer* buttonViewer_ = nullptr;
+	AnimatedViewer* buttonViewer_ = nullptr;
 
 	bool inc_dec_ = false;
 	bool activated = true;
 	int timeForReactivation_ = 0;
 
 	//Initialized at init()
-	int reactivationCd_ = 0; 
-	int frameSize = 0;
+	int reactivationCd_ = 0;
 	int minForceForAcivation_ = 0;
 
 public:

@@ -14,7 +14,7 @@ static string resourcesPath = "assets/game/";
 class Resources {
 public:
 
-	enum TextureId : std::size_t {
+	enum TextureId : unsigned char {
 		// images
 
 		// room backgrounds
@@ -44,13 +44,17 @@ public:
 		ProgressBar,
 		ProgressBar2,
 
+		//Lobby
+		KeyboardIcon,
+		MouseIcon,
+		ControllerIcon,
+
 		//midGameState
 		Rocket,
 		SpaceStation,
 		Token,
-		KeyboardIcon,
-		MouseIcon,
-		ControllerIcon,
+		RocketSpriteSheet,
+		
 
 		// Weapons and map items
 
@@ -90,13 +94,17 @@ public:
 		BananaSkin,
 		BananaNonSkin,
 		Staple,
+		Confetti,
+		ConfettiParticles,
+		Lamp,
+		Table,
+		Sofa,
 
 		// Gamemode specific elements
 		Coin,
 		Router,
 		RoombaSpriteSheet,
 		Remote,
-		RocketSpriteSheet,
 
 		// miscel�nea
 		Debug,
@@ -159,7 +167,7 @@ public:
 		WiFiWave
 	};
 
-	enum AudioId : std::size_t {
+	enum AudioId : unsigned char {
 		// music
 		MainMenuMusic = TextureId::MainMenuRoom,
 		LivingRoomMusic = TextureId::LivingRoom,
@@ -186,6 +194,8 @@ public:
 	struct ImageInfo {
 		TextureId id;
 		string fileName;
+		unsigned short nHorizontalFrames = 1;
+		unsigned short nVerticalFrames = 1;
 	};
 
 	struct TextMsgInfo {

@@ -8,8 +8,8 @@ protected:
 
 	int damage_ = 0;
 public:
-	MeleeWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames);
-	MeleeWeapon(ComponentType::CmpId compType, WeaponID wId, int dmg, int impactDmg, int cooldownFrames);
+	MeleeWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames, int impctForce);
+	MeleeWeapon(ComponentType::CmpId compType, WeaponID wId, int dmg, int impactDmg, int cooldownFrames, int impctForce);
 	virtual ~MeleeWeapon() {};
 
 	//virtual void init() override;
