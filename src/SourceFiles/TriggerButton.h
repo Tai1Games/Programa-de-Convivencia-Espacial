@@ -8,14 +8,14 @@
 class TriggerButton : public Component
 {
 private:
-	int stateToChange = 0;
+	string stateToChange = " ";
 
 	int framesInside = 0;
 	int timeToActivate = 0;
 	bool playerDetected_ = false;
 
 public:
-	TriggerButton(int state) : Component(ComponentType::TriggerButton) { stateToChange = state; }
+	TriggerButton(string state) : Component(ComponentType::TriggerButton) { stateToChange = state; }
 
 	virtual void init() override;
 	virtual void update() override;

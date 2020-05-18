@@ -59,7 +59,7 @@ void PlayableMenuState::init()
 
 	playerInfo = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
 	MatchInfo* aux = SDL_Game::instance()->getStateMachine()->getMatchInfo();
-	Entity* player = PlayerFactory::createBasePlayer(entityManager_, physicsWorld_, 0,
+	player = PlayerFactory::createBasePlayer(entityManager_, physicsWorld_, 0,
 		Resources::Body, tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y, aux->getPlayersInfo()->at(0)->inputBinder);
 	
 	
@@ -91,4 +91,15 @@ void PlayableMenuState::render()
 void PlayableMenuState::handleInput()
 {
 	GameState::handleInput();
+	for (MatchInfo::PlayerInfo* pInfo : *playerInfo)
+	{
+		if (pInfo->inputBinder->pressPick()) {
+			player->getComponent<Collider>(ComponentType::Collider)->setTransform(b2Vec2(tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y), 0);
+		}
+		if (pInfo->inputBinder->pressPause()) {
+			SDL_Game::instance()->getAudioMngr()->pauseMusic();
+			SDL_Game::instance()->getStateMachine()->setPauseOwner(pInfo->playerId);
+			//SDL_Game::instance()->getStateMachine()->transitionToState(States::pause);
+		}
+	}
 }

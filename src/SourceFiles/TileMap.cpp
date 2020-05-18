@@ -238,15 +238,9 @@ void TileMap::executeMapFactory()
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
 			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
 			size *= 0.5f;
-			string i = o.getType();
-			States buttonType= States::lobby;	//Por defecto
+			string buttonType= o.getType();;	//Por defecto
 
-			if (i == "Play") {buttonType = States::lobby;}
-			else if (i == "Credits") {/*buttonType = States::Credits;*/}
-			else if (i == "Exit") {/*buttonType = States::lobby;*/ }
-			else if (i == "Options") {buttonType = States::pause;}
-
-			ObjectFactory::makeTriggerButton(entityManager_, physicsWorld_, pos, size,buttonType);
+			ObjectFactory::makeTriggerButton(entityManager_, physicsWorld_, pos, size, buttonType);
 		}
 
 		else if (name == "TWall") {

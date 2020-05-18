@@ -25,8 +25,7 @@ private:
 	double secondsPerFrame_ = 0;
 	CollisionHandler* collisionHandler_ = nullptr;
 	Texture* fondo_ = nullptr;
-
-
+	Entity* player = nullptr;
 	vector<MatchInfo::PlayerInfo*>* playerInfo;
 public:
 	PlayableMenuState() {};
