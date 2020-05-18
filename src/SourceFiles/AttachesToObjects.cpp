@@ -23,21 +23,22 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle()) > 0) ? -1 : 1;
 		attachAngle += (PI / 2) * tilt;
 
-		normalOnAttach_ = -collNormal;
+		normalOnAttach_ = collNormal;
 		normalOnAttach_.Normalize();
+		cout << "Normal on attach " << normalOnAttach_.x << " " << normalOnAttach_.y << endl;
+		angleOnAttach_ = attachedObject->GetAngle();
+		//float angleSin = sin(mainCollider_->getBody()->GetAngle());
 
-		float angleSin = sin(mainCollider_->getBody()->GetAngle());
+		//if (angleSin >= sin(attachAngle) - CONST(double, "GRAB_ANGLE_TOLERANCE") && angleSin <= sin(attachAngle) + CONST(double, "GRAB_ANGLE_TOLERANCE")) {
+		//	mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
+		//}
 
-		if (angleSin >= sin(attachAngle) - CONST(double, "GRAB_ANGLE_TOLERANCE") && angleSin <= sin(attachAngle) + CONST(double, "GRAB_ANGLE_TOLERANCE")) {
-			mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
-		}
+		//else {
+		//	normalOnAttach_.x *= mainCollider_->getH(0) / 2.3;
+		//	normalOnAttach_.y *= mainCollider_->getH(0) / 2.3;
 
-		else {
-			normalOnAttach_.x *= mainCollider_->getH(0) / 2.3;
-			normalOnAttach_.y *= mainCollider_->getH(0) / 2.3;
-
-			mainCollider_->setTransform(mainCollider_->getPos() + normalOnAttach_, attachAngle);
-		}
+		//	mainCollider_->setTransform(mainCollider_->getPos() + normalOnAttach_, attachAngle);
+		//}
 
 		b2WeldJointDef jointDef; //Definici�n del nuevo joint.
 		jointDef.bodyA = mainCollider_->getBody(); //Body del jugador.
@@ -81,8 +82,14 @@ void AttachesToObjects::onCollisionEnter(Collision* c) {
 			b2WorldManifold manifold;
 			attachedCollider_ = GETCMP2(c->entity, Collider);
 			c->contact->GetWorldManifold(&manifold);
+			b2Vec2 normal = manifold.normal;
+			if (GETCMP_FROM_FIXTURE_(c->contact->GetFixtureA(), PlayerController) != nullptr) {
+				cout << "normal was for player as fixA" << endl;
+				normal = -normal;
+				cout << "box2d te odio con todas las fuerzas de mi corazon" << endl;
+			}
 			c->collisionHandler->createWeld(CollisionHandler::weldData(this, c->hitFixture->GetBody(),
-				b2Vec2(manifold.points[0].x, manifold.points[0].y), manifold.normal));
+				b2Vec2(manifold.points[0].x, manifold.points[0].y), normal));
 			if (kBinder_ != nullptr) kBinder_->grabbed = true;
 		}
 		else {
