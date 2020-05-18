@@ -108,10 +108,12 @@ void PlayerController::handleInput()
 }
 
 void PlayerController::update() {
-	if (chargingImpulse_ && (attachesToObj_->isAttached() && impulseForce_ < maxImpulseGrabbed_) || impulseForce_ < maxImpulseFloating_) {
-		chargedFrames_++;
-		//Esta es la funcion del calculo de fuerza
-		impulseForce_ = chargedFrames_ * chargeMultiplier_;
+	if (chargingImpulse_) {
+		if ((attachesToObj_->isAttached() && impulseForce_ < maxImpulseGrabbed_) || impulseForce_ < maxImpulseFloating_) {
+			chargedFrames_++;
+			//Esta es la funcion del calculo de fuerza
+			impulseForce_ = chargedFrames_ * chargeMultiplier_;
+		}
 	}
 	impulseCooldownTimer_++;
 }
