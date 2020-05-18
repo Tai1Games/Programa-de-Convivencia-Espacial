@@ -6,7 +6,7 @@ StaplerPool::StaplerPool() : staplerPool_([](Entity* e) {return e->isActive(); }
 
 void StaplerPool::init(EntityManager* eMan, b2World* physicsWorld, BulletPool* bP)
 {
-	b2Vec2 staplerSize = b2Vec2(CONST(float, "STAPLER_X"), CONST(float, "STAPLER_Y"));
+	b2Vec2 staplerSize = b2Vec2(CONST(float, "STAPLER_W_PHYSICS"), CONST(float, "STAPLER_H_PHYSICS"));
 	vector<Entity*> staplerPoolVec = staplerPool_.getPool();
 	for (Entity* e : staplerPoolVec) {
 		e = WeaponFactory::makeStapler(e, eMan, physicsWorld, b2Vec2(0, 0), staplerSize, bP);

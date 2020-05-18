@@ -164,10 +164,10 @@ Entity* WeaponFactory::makeMidTierWeapon(EntityManager* entityManager, b2World* 
 	switch (weapon)
 	{
 	case 0: //extinguisher
-		e = WeaponFactory::makeExtinguisher(entityManager, physicsWorld, pos, b2Vec2(CONST(float, "EXTINGUISHER_X"), CONST(float, "EXTINGUISHER_Y")));
+		e = WeaponFactory::makeExtinguisher(entityManager, physicsWorld, pos, b2Vec2(CONST(float, "EXTINGUISHER_W_SPRITE"), CONST(float, "EXTINGUISHER_W_SPRITE")));
 		break;
 	case 1: //dumbbell
-		e = WeaponFactory::makeDumbbell(entityManager, physicsWorld, pos, b2Vec2(CONST(float, "DUMBBELL_X"), CONST(float, "DUMBBELL_Y")));
+		e = WeaponFactory::makeDumbbell(entityManager, physicsWorld, pos, b2Vec2(CONST(float, "DUMBBELL_W_PHYSICS"), CONST(float, "DUMBBELL_H_PHYSICS")));
 		break;
 	}
 	return e;
@@ -180,10 +180,10 @@ Entity* WeaponFactory::makeHighTierWeapon(EntityManager* entityManager, b2World*
 	switch (weapon)
 	{
 	case 0: //slipper
-		e = WeaponFactory::makeSlipper(entityManager, physicsWorld, pos, b2Vec2(CONST(float, "SLIPPER_X"), CONST(float, "SLIPPER_Y")));
+		e = WeaponFactory::makeSlipper(entityManager, physicsWorld, pos, b2Vec2(CONST(float, "FLIPFLOP_W_PHYSICS"), CONST(float, "FLIPFLOP_H_PHYSICS")));
 		break;
 	case 1: //ball
-		e = WeaponFactory::makeBall(entityManager, physicsWorld, pos, b2Vec2(CONST(float, "BALL_X"), CONST(float, "BALL_Y")));
+		e = WeaponFactory::makeBall(entityManager, physicsWorld, pos, b2Vec2(CONST(float, "BALL_W_PHYSICS"), CONST(float, "BALL_H_PHYSICS")));
 		break;
 	}
 
