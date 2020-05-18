@@ -78,25 +78,33 @@ void AbstractTimedGameMode::update()
 	GameMode::update();
 }
 
+void AbstractTimedGameMode::activateControl()
+{
+	setActiveTimer(true);
+	GameMode::activateControl();
+}
+
 void AbstractTimedGameMode::updateTime(const vector<int>& playerPoints)
 {
-	timeSinceStart_ += sPerFrame_;
-	if (timeSinceStart_ >= timeToEnd_ && !roundFinished_) {
-		int maxPoints = 0;
-		bool suddenDeath = false;
-		for (int i = 0; i < playerPoints.size(); i++) {
-			if (playerPoints[i] > maxPoints) {
-				maxPoints = playerPoints[i];
-				winnerId_ = i;
-				suddenDeath = false;
+	if (activeTimer_) {
+		timeSinceStart_ += sPerFrame_;
+		if (timeSinceStart_ >= timeToEnd_ && !roundFinished_) {
+			int maxPoints = 0;
+			bool suddenDeath = false;
+			for (int i = 0; i < playerPoints.size(); i++) {
+				if (playerPoints[i] > maxPoints) {
+					maxPoints = playerPoints[i];
+					winnerId_ = i;
+					suddenDeath = false;
+				}
+				else if (playerPoints[i] == maxPoints) {
+					suddenDeath = true;
+				}
 			}
-			else if (playerPoints[i] == maxPoints) {
-				suddenDeath = true;
+			if (!suddenDeath) {
+				roundFinished_ = true;
+				cout << "PLAYER: " << winnerId_ << " WON." << endl;
 			}
-		}
-		if (!suddenDeath) {
-			roundFinished_ = true;
-			cout << "PLAYER: " << winnerId_<< " WON." << endl;
 		}
 	}
 }
