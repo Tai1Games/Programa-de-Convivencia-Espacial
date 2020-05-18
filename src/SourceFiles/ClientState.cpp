@@ -34,6 +34,7 @@ void ClientState::init() {
 
 void ClientState::update()
 {
+	doneReceiving_ = false;
 	while (!doneReceiving_) {
 		if (SDLNet_CheckSockets(socketSet_, 0) > 0) {
 			if (SDLNet_SocketReady(hostConnection_)) {
@@ -44,9 +45,15 @@ void ClientState::update()
 				switch (buffer[0]) {
 				case 'A':
 					//Audio
+					receiveAudio();
 				case 'F':
 					//Finished
 					doneReceiving_ = true;
+					break;
+				case 'M':
+					//Musica
+					break;
+				case 'P':
 					break;
 				case 'S':
 					//Sprite
@@ -83,4 +90,10 @@ void ClientState::receiveSprite() {
 
 void ClientState::handleInput()
 {
+	for (MatchInfo::PlayerInfo* pInfo : *playerInfoVector) {
+		int offset = 0;
+		while (offset < InputPacket) {
+
+		}
+	}
 }

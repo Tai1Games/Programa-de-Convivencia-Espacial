@@ -85,6 +85,18 @@ enum MapID {
 	NUMBER_OF_MAPS
 };*/
 
+/*
+Identificadores de paquetes
+A -> Audio
+I -> Input
+F -> Final de stream de paquetes
+S -> Sprite
+P -> Informacion de jugadores
+	- Si lo envía el cliente indica el numero de jugadores que tiene
+	- Si lo envía el servidor indica la id de los jugadores para el cliente en orden
+M -> Musica
+*/
+
 #pragma pack(push,2)
 
 //Lo mejor es asegurarse de que los elementos que son multiplos de dos vayan en su propia palabra
@@ -120,6 +132,7 @@ struct AudioPacket {
 
 struct InputPacket {
 	char packetId = 'I'; //Input
+	char playerId;
 	bool holdGrab = false;
 	bool releaseGrab = false;
 	bool pressThrow = false;

@@ -2,6 +2,7 @@
 #include "GameState.h"
 #include "SDL_net.h"
 #include "Constants.h"
+#include "MatchInfo.h"
 #include <queue>
 
 /*
@@ -28,6 +29,8 @@ private:
 	int receivedBytes_ = 0;
 
 	std::queue<SpritePacket> spritesToRender_;
+
+	std::vector<MatchInfo::PlayerInfo*>* playerInfoVector;
 public:
 	ClientState(char* host);
 	virtual ~ClientState() { SDLNet_Quit(); };
