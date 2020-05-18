@@ -183,7 +183,7 @@ Entity* ObjectFactory::makeRoomba(EntityManager* entityManager, b2World* physics
 Entity* ObjectFactory::makeBoiler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
 {
 	Entity* e = entityManager->addEntity();
-	Collider* collRoomba = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "BOILER_WIDTH"), CONST(double, "BOILER_HEIGHT"), CONST(double, "BOILER_DENSITY"), CONST(double, "BOILER_FRICTION"),
+	e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "BOILER_WIDTH"), CONST(double, "BOILER_HEIGHT"), CONST(double, "BOILER_DENSITY"), CONST(double, "BOILER_FRICTION"),
 		CONST(double, "BOILER_RESTITUTION"), CONST(double, "BOILER_LINEAR_DRAG"), CONST(double, "BOILER_ANGULAR_DRAG"), Collider::CollisionLayer::Wall, false);
 	int nFrames = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Smoke)->getWidth() / SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Smoke)->getHeight();
 	e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Smoke, CONST(int, "FBGEN_PARTICLE_SPEED"), nFrames, CONST(int, "FBGEN_PARTICLE_GEN_ODDS"), CONST(int, "FBGEN_PARTICLE_LIFETIME"), CONST(int, "FBGEN_PARTICLE_SIZE"), 0, CONST(int, "FBGEN_PARTICLE_SPEED_VARIATION"), 180);
@@ -246,22 +246,6 @@ Entity* ObjectFactory::makeCarnivorousPlant(EntityManager* entityManager, b2Worl
 	planta->addComponent<ColliderViewer>();
 
 	return planta;
-}
-
-Entity* ObjectFactory::makeBanana(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, BulletPool* pb)
-{
-	entityManager->addExistingEntity(e);
-
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 5, 5, CONST(double, "BANANA_X"), CONST(double, "BANANA_Y"),
-		CONST(double, "BANANA_DENSITY"), CONST(double, "BANANA_FRICTION"), CONST(double, "BANANA_RESTITUTION"),
-		CONST(double, "BANANA_ANGULAR_DRAG"), CONST(double, "BANANA_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent<Viewer>(Resources::Banana);
-	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::BananaSkin, 100, 1, 5, 1000, 50, 100, 0, 360);
-	pE->setMaxParticles(1);
-	e->addComponent<BananaWeapon>(pb, CONST(double, "BANANA_DAMAGE"), CONST(double, "BANANA_IMPACT_FORCE"));
-	e->addComponent<ColliderViewer>();
-
-	return e;
 }
 
 Entity* ObjectFactory::makeBullet(Entity* e, EntityManager* entityManager, b2World* physicsWorld, GameMode* gameMode)
