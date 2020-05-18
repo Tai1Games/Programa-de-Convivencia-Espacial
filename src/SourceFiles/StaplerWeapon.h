@@ -18,7 +18,7 @@ private:
 	int currentAmmo;
 
 public:
-	StaplerWeapon(int damage, BulletPool* pb);
+	StaplerWeapon(int damage, BulletPool* pb, int impctForce);
 	~StaplerWeapon(){}
 
 	virtual void init() override;
