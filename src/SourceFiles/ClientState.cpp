@@ -52,6 +52,7 @@ void ClientState::update()
 					break;
 				case 'M':
 					//Musica
+					receiveMusic();
 					break;
 				case 'P':
 					break;
@@ -88,6 +89,7 @@ void ClientState::receiveSprite() {
 	spritesToRender_.push({ 'S', buffer[0],(us)buffer[1],(us)buffer[3],(us)buffer[5],(us)buffer[7],(us)buffer[9],(uc)buffer[11],(uc)buffer[12],(uc)buffer[13] });
 }
 
+
 void ClientState::handleInput()
 {
 	for (MatchInfo::PlayerInfo* pInfo : *playerInfoVector) {
@@ -96,4 +98,14 @@ void ClientState::handleInput()
 
 		}
 	}
+}
+
+
+void ClientState::receiveAudio()
+{
+	SDL_Game::instance()->getAudioMngr()->playChannel(buffer[0], 1, 0);
+}
+
+void ClientState::receiveMusic() {
+	SDL_Game::instance()->getAudioMngr()->playMusic(buffer[0],-1);
 }
