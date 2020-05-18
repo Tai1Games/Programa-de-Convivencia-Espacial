@@ -5,7 +5,7 @@
 #include "TimedDespawn.h"
 #include "AnimatedViewer.h"
 
-ConfettiWeapon::ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : MeleeWeapon(ComponentType::ConfettiWeapon, wId, dmg, impactDmg, cooldownFrames) {}
+ConfettiWeapon::ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : MeleeWeapon(wId, dmg, impactDmg, cooldownFrames) {}
 
 void ConfettiWeapon::init() {
 	MeleeWeapon::init();
