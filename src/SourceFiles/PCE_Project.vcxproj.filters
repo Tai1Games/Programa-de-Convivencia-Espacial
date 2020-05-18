@@ -509,9 +509,6 @@
     <ClCompile Include="SpawnTree.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="InputBinder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CarnivorousPlant.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
@@ -598,6 +595,9 @@
     </ClCompile>
     <ClCompile Include="ClientState.cpp">
       <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="InputBinder.cpp">
+      <Filter>Source Files\Managers &amp; Handlers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

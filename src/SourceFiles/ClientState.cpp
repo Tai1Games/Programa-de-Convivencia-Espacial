@@ -29,7 +29,7 @@ ClientState::ClientState(char* host) {
 }
 
 void ClientState::init() {
-
+	playerInfoVector = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
 }
 
 void ClientState::update()
@@ -45,7 +45,7 @@ void ClientState::update()
 				switch (buffer[0]) {
 				case 'A':
 					//Audio
-					receiveAudio();
+					//receiveAudio();
 				case 'F':
 					//Finished
 					doneReceiving_ = true;
@@ -90,10 +90,44 @@ void ClientState::receiveSprite() {
 
 void ClientState::handleInput()
 {
+	int schar = sizeof(char);
+	int sbool = sizeof(bool);
+	int sfloat = sizeof(float);
 	for (MatchInfo::PlayerInfo* pInfo : *playerInfoVector) {
 		int offset = 0;
-		while (offset < InputPacket) {
+		InputPacket pInputPacket = pInfo->inputBinder->getInputPacket();
+		buffer[offset] = pInputPacket.packetId;
+		offset += schar;
+		buffer[offset] = pInfo->playerId;
+		offset += schar;
+		buffer[offset] = pInputPacket.holdGrab;
+		offset += sbool;
+		buffer[offset] = pInputPacket.releaseGrab;
+		offset += sbool;
+		buffer[offset] = pInputPacket.pressThrow;
+		offset += sbool;
+		buffer[offset] = pInputPacket.pressPick;
+		offset += sbool;
+		buffer[offset] = pInputPacket.holdImpulse;
+		offset += sbool;
+		buffer[offset] = pInputPacket.aimDirX;
+		offset += sfloat;
+		buffer[offset] = pInputPacket.aimDirY;
+		offset += sfloat;
+		buffer[offset] = pInputPacket.pressImpulse;
+		offset += sbool;
+		buffer[offset] = pInputPacket.releaseImpulse;
+		offset += sbool;
+		buffer[offset] = pInputPacket.pressAttack;
+		offset += sbool;
+		buffer[offset] = pInputPacket.menuForward;
+		offset += sbool;
+		buffer[offset] = pInputPacket.menuBack;
+		offset += sbool;
+		buffer[offset] = pInputPacket.pressPause;
+		offset += sbool;
+		buffer[offset] = pInputPacket.menuMove;
 
-		}
+		SDLNet_TCP_Send(hostConnection_, buffer, sizeof(InputPacket));
 	}
 }
