@@ -27,18 +27,19 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 		normalOnAttach_.Normalize();
 		cout << "Normal on attach " << normalOnAttach_.x << " " << normalOnAttach_.y << endl;
 		angleOnAttach_ = attachedObject->GetAngle();
-		//float angleSin = sin(mainCollider_->getBody()->GetAngle());
+		float angleSin = sin(mainCollider_->getBody()->GetAngle());
 
-		//if (angleSin >= sin(attachAngle) - CONST(double, "GRAB_ANGLE_TOLERANCE") && angleSin <= sin(attachAngle) + CONST(double, "GRAB_ANGLE_TOLERANCE")) {
-		//	mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
-		//}
+		b2Vec2 adjustNormal = -collNormal;
+		if (angleSin >= sin(attachAngle) - CONST(double, "GRAB_ANGLE_TOLERANCE") && angleSin <= sin(attachAngle) + CONST(double, "GRAB_ANGLE_TOLERANCE")) {
+			mainCollider_->setTransform(mainCollider_->getPos(), attachAngle);
+		}
 
-		//else {
-		//	normalOnAttach_.x *= mainCollider_->getH(0) / 2.3;
-		//	normalOnAttach_.y *= mainCollider_->getH(0) / 2.3;
+		else {
+			adjustNormal.x *= mainCollider_->getH(0) / 2.3;
+			adjustNormal.y *= mainCollider_->getH(0) / 2.3;
 
-		//	mainCollider_->setTransform(mainCollider_->getPos() + normalOnAttach_, attachAngle);
-		//}
+			mainCollider_->setTransform(mainCollider_->getPos() + adjustNormal, attachAngle);
+		}
 
 		b2WeldJointDef jointDef; //Definici�n del nuevo joint.
 		jointDef.bodyA = mainCollider_->getBody(); //Body del jugador.
