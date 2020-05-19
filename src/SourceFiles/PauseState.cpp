@@ -51,11 +51,13 @@ void PauseState::handleInput()
 			if (currentMusicVolume_ > 0 && ownerBinder_->menuMove(Dir::Left)) {
 				currentMusicVolume_ -= 10;
 				updateMusicVolume();
+				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuMove, 0);
 				holdingX_ = true;
 			}
 			else if (currentMusicVolume_ < CONST(int, "MAX_MUSIC_VOLUME") && ownerBinder_->menuMove(Dir::Right)) {
 				currentMusicVolume_ += 10;
 				updateMusicVolume();
+				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuMove, 0);
 				holdingX_ = true;
 			}
 		}
@@ -65,6 +67,7 @@ void PauseState::handleInput()
 		break;
 	case Buttons::Exit:
 		if (ownerBinder_->menuForward()) {
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
 			cout << "Pause ended for " << ownerPlayerID_ << endl;
 			SDL_Game::instance()->getStateMachine()->changeToState(States::menu, ownerPlayerID_);
 		}
@@ -81,11 +84,13 @@ void PauseState::handleInput()
 	if (!holdingY_)
 	{
 		if (ownerBinder_->menuMove(Dir::Down)) {
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuMove, 0);
 			selectedBtn_++;
 			updateSelectedButton();
 			holdingY_ = true;
 		}
 		else if (ownerBinder_->menuMove(Dir::Up)) {
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuMove, 0);
 			selectedBtn_--;
 			updateSelectedButton();
 			holdingY_ = true;

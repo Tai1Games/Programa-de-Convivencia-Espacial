@@ -168,6 +168,11 @@ vector<Resources::SoundInfo> Resources::sounds_{
 	//Efectos de sonido {nombre_en_enum, ruta}. Ejemplo abajo
 	//{ Shoot, "../assets/game/sound/shoot.mp3" },
 	{ StartGame, resourcesPath + "sound/effects/UI/enterGame.mp3" },
+
+	//Menu
+	{MenuMove, resourcesPath + "sound/effects/UI/menuMove.wav"},
+	{MenuForward, resourcesPath + "sound/effects/UI/menuSelection.wav"},
+	{MenuBackward, resourcesPath + "sound/effects/UI/menuBack.wav"}
 };
 
 map<std::string, Resources::TextureId> Resources::tilesetTag_{
