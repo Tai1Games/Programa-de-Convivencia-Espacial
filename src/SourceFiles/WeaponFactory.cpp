@@ -164,7 +164,7 @@ Entity* WeaponFactory::makeMidTierWeapon(EntityManager* entityManager, b2World* 
 	switch (weapon)
 	{
 	case 0: //extinguisher
-		e = WeaponFactory::makeExtinguisher(entityManager, physicsWorld, pos, b2Vec2(CONST(float, "EXTINGUISHER_W_SPRITE"), CONST(float, "EXTINGUISHER_W_SPRITE")));
+		e = WeaponFactory::makeExtinguisher(entityManager, physicsWorld, pos, b2Vec2(CONST(float, "EXTINGUISHER_W_PHYSICS"), CONST(float, "EXTINGUISHER_W_PHYSICS")));
 		break;
 	case 1: //dumbbell
 		e = WeaponFactory::makeDumbbell(entityManager, physicsWorld, pos, b2Vec2(CONST(float, "DUMBBELL_W_PHYSICS"), CONST(float, "DUMBBELL_H_PHYSICS")));
