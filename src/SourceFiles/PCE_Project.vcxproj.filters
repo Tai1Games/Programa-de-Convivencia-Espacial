@@ -345,17 +345,26 @@
     <ClInclude Include="StaplerWeapon.h">
       <Filter>Header Files\Components\Weapons</Filter>
     </ClInclude>
+    <ClInclude Include="WeaponFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="TimedDespawn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponSpawner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StaplerPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfettiPool.h">
+      <Filter>Header Files\Pools</Filter>
+    </ClInclude>
     <ClInclude Include="AdvancedAnimatedViewer.h">
       <Filter>Header Files\Components\Viewers</Filter>
     </ClInclude>
     <ClInclude Include="CarnivorousPlantViewer.h">
       <Filter>Header Files\Components\Viewers</Filter>
-    </ClInclude>
-    <ClInclude Include="ConfettiPool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WeaponFactory.h">
-      <Filter>Header Files\Factories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -628,6 +637,15 @@
     </ClCompile>
     <ClCompile Include="WeaponFactory.cpp">
       <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="TimedDespawn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponSpawner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StaplerPool.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,9 @@
 #include "ThrownByPlayer.h"
 #include "TomatoWeapon.h"
 #include "Viewer.h"
+#include "TimedDespawn.h"
+#include "ConfettiPool.h"
+#include "StaplerPool.h"
 
 Entity* WeaponFactory::makeSlipper(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 
@@ -26,7 +29,7 @@ Entity* WeaponFactory::makeSlipper(EntityManager* entityManager, b2World* physic
 	return e;
 }
 
-Entity* WeaponFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, GameMode* gM)
+Entity* WeaponFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
 	entityManager->addExistingEntity(e);
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "CONFETTI_DENSITY"),
@@ -36,14 +39,12 @@ Entity* WeaponFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2W
 	e->addComponent<AnimatedViewer>(Resources::Confetti, 0);
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::ConfettiParticles, 10, 4, 4, 200, 50, 500, 3, 30);
 	pE->setOffset({ CONST(double, "CONFETTI_PARTICLE_OFFSET_X"), CONST(double, "CONFETTI_PARTICLE_OFFSET_Y") });
-	e->addComponent<ConfettiWeapon>(WeaponID::Confetti, CONST(int, "CONFETTI_DAMAGE"), CONST(int, "CONFETTI_IMPACT_DAMAGE"), 
-		CONST(int, "CONFETTI_COOLDOWN_FRAMES"), CONST(int, "CONFETTI_IMPACT_FORCE"));
+	e->addComponent<TimedDespawn>(CONST(double, "CONFETTI_TIME_FOR_DESPAWN") * FRAMES_PER_SECOND);
+	e->addComponent<ConfettiWeapon>(WeaponID::Confetti, CONST(int, "CONFETTI_DAMAGE"), CONST(int, "CONFETTI_IMPACT_DAMAGE"), CONST(int, "CONFETTI_COOLDOWN_FRAMES"), CONST(int, "CONFETTI_IMPACT_FORCE"));
 	e->addComponent<ColliderViewer>();
-	e->addComponent<ThrownByPlayer>(gM);
 
 	return e;
 }
-
 Entity* WeaponFactory::makeBall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size) {
 
 	Entity* e = entityManager->addEntity();
@@ -61,13 +62,14 @@ Entity* WeaponFactory::makeBall(EntityManager* entityManager, b2World* physicsWo
 	return e;
 }
 
-Entity* WeaponFactory::makeStapler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, BulletPool* bp) {
-	Entity* e = entityManager->addEntity();
+Entity* WeaponFactory::makeStapler(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, BulletPool* bp) {
+	entityManager->addExistingEntity(e);
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "STAPLER_DENSITY"),
 		CONST(double, "STAPLER_FRICTION"), CONST(double, "STAPLER_RESTITUTION"), CONST(double, "STAPLER_LINEAR_DRAG"),
 		CONST(double, "STAPLER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "STAPLER_W_SPRITE"), CONST(int, "STAPLER_H_SPRITE") }, aux);
 	e->addComponent <Viewer>(Resources::Stapler);
+	e->addComponent<TimedDespawn>(CONST(double, "CONFETTI_TIME_FOR_DESPAWN") * FRAMES_PER_SECOND);
 	e->addComponent<StaplerWeapon>(CONST(int, "STAPLER_IMPACT_DAMAGE"), bp, CONST(int, "STAPLER_IMPACT_FORCE"));
 	e->addComponent<ColliderViewer>();
 
@@ -135,6 +137,55 @@ Entity* WeaponFactory::makeBanana(Entity* e, EntityManager* entityManager, b2Wor
 	pE->setMaxParticles(1);
 	e->addComponent<BananaWeapon>(pb, CONST(double, "BANANA_DAMAGE"), CONST(double, "BANANA_IMPACT_FORCE"));
 	e->addComponent<ColliderViewer>(); 
+
+	return e;
+}
+
+Entity* WeaponFactory::makeLowTierWeapon(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, ConfettiPool* confettiPool, StaplerPool* staplerPool, BulletPool* bulletPool)
+{
+	Entity* e = nullptr;
+	int weapon = rand() % 2;
+	switch (weapon)
+	{
+	case 0: //slipper
+		e = confettiPool->addConfetti(pos);
+		break;
+	case 1:
+		e = staplerPool->addStapler(pos);
+		break;
+	}
+	return e;
+}
+
+Entity* WeaponFactory::makeMidTierWeapon(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
+{
+	int weapon = rand() % 2;
+	Entity* e = nullptr;
+	switch (weapon)
+	{
+	case 0: //extinguisher
+		e = WeaponFactory::makeExtinguisher(entityManager, physicsWorld, pos, b2Vec2(CONST(float, "EXTINGUISHER_W_PHYSICS"), CONST(float, "EXTINGUISHER_W_PHYSICS")));
+		break;
+	case 1: //dumbbell
+		e = WeaponFactory::makeDumbbell(entityManager, physicsWorld, pos, b2Vec2(CONST(float, "DUMBBELL_W_PHYSICS"), CONST(float, "DUMBBELL_H_PHYSICS")));
+		break;
+	}
+	return e;
+}
+
+Entity* WeaponFactory::makeHighTierWeapon(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos)
+{
+	int weapon = rand() % 2;
+	Entity* e = nullptr;
+	switch (weapon)
+	{
+	case 0: //slipper
+		e = WeaponFactory::makeSlipper(entityManager, physicsWorld, pos, b2Vec2(CONST(float, "FLIPFLOP_W_PHYSICS"), CONST(float, "FLIPFLOP_H_PHYSICS")));
+		break;
+	case 1: //ball
+		e = WeaponFactory::makeBall(entityManager, physicsWorld, pos, b2Vec2(CONST(float, "BALL_W_PHYSICS"), CONST(float, "BALL_H_PHYSICS")));
+		break;
+	}
 
 	return e;
 }
