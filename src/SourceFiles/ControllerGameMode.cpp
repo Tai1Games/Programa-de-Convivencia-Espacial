@@ -9,7 +9,8 @@ ControllerGameMode::~ControllerGameMode()
 void ControllerGameMode::init(PlayState* game)  {
 	GameMode::init(game);
 	GameMode::createPlayers(game);
-	controller_ = ObjectFactory::makeController(state_->getEntityManager(), state_->getPhysicsWorld(), b2Vec2(tilemap_->getObjSpecialSpawnPos().x, tilemap_->getObjSpecialSpawnPos().y), b2Vec2(0.50, 0.8));
+	controller_ = ObjectFactory::makeController(state_->getEntityManager(), state_->getPhysicsWorld(), b2Vec2(tilemap_->getObjSpecialSpawnPos().x, 
+		tilemap_->getObjSpecialSpawnPos().y), b2Vec2(CONST(float, "CONTROLLER_W_PHYSICS"), CONST(float, "CONTROLLER_H_PHYSICS")));
 	for (Entity* player : players_) controllerTimes_.push_back(0);
 	
 	GameMode::initProgressBars();

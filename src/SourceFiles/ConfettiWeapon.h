@@ -3,6 +3,8 @@
 
 class Collider;
 class ParticleEmitter;
+class TimedDespawn;
+class AnimatedViewer;
 
 class ConfettiWeapon : public MeleeWeapon
 {
@@ -10,6 +12,7 @@ private:
 	Collider* colWeapon_ = nullptr;
 	ParticleEmitter* particleEmitter_ = nullptr;
 	AnimatedViewer* viewer_ = nullptr;
+	TimedDespawn* timedDespawn_ = nullptr;
 	bool used = false;
 	int frameSize_ = 0;
 public:
