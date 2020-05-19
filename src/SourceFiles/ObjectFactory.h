@@ -9,6 +9,8 @@ class FireBallPool;
 class BulletPool;
 class Collider;
 class GameMode;
+class ConfettiPool;
+class StaplerPool;
 
 class ObjectFactory
 {
@@ -54,4 +56,6 @@ public:
 	static Entity* makeBananaTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WeaponPool* pool);
 
 	static Entity* makeWifiWave(Entity* e, EntityManager* entityManager, b2World* physicsWorld, Collider* colRouter);
+
+	static Entity* makeWeaponSpawner(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 position, ConfettiPool* confettiPool, StaplerPool* staplerPool, BulletPool* bulletPool);
 };
