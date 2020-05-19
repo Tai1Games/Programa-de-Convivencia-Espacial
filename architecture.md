@@ -30,3 +30,30 @@ pueden heredar directamente de Component.
 * **SDL2_TTF:** como librería de texto.
 
 * **SDL2_Mixer:** como librería de audio.
+
+* **SDL2_Net:** como librería de conexión de red.
+
+# Multijugador online
+
+El multijugador funciona con un sistema de clientes 'tontos', el host (jugador 0) se encarga de hacer el bucle principal del juego y el resto de jugadores reciben solo la información de los sprites en pantalla.
+
+## Host
+
+* **Envío de datos**: A medida que el host renderiza las entidades del juego, va enviando la información del sprite renderizado a los clientes.
+
+* **Manejo del input**: Antes de empezar el ciclo de juego, el host recibe el estado de los controles del resto de jugadores y lo guarda, lo utiliza como cualquier otro binder de control a la hora de hacer los cálculos usuales del ciclo.
+
+## Cliente
+
+Los clientes solo se tienen que preocupar de registrar el input de su jugador y recibir la información del host.
+
+* **Input:** El cliente recibe el input de su mando, lo codifica y lo envía al host.
+
+  * Codificación:
+      * Sprites: Cada sprite va codificado en un paquete de 14 bytes 
+        {identificador de mensaje, id de textura, posicion X, posicion Y, Ancho, Alto, rotación, numero de frame horizontal, numero de frame vertical}
+
+      * Audio: Cada audio va codificado en un paquete de 2 bytes
+        {identificador de mensaje, id de audio}
+
+* **Renderizado:** Recibe la información de cada uno de los sprites que tiene el host en pantalla, y los renderiza según le vayan llegando.
