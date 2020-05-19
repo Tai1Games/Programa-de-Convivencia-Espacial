@@ -9,8 +9,9 @@ void ColliderViewer::init() {
 	Viewer::init();
 	renderer_ = SDL_Game::instance()->getRenderer();
 	points_ = new SDL_Point[5];
-	body_ = collider_->getBody();
-	PIXELS_PER_METER = CONST(double, "PIXELS_PER_METER");
+    collider_ = transform_->getCollider();
+    body_ = collider_->getBody();
+    PIXELS_PER_METER = CONST(double, "PIXELS_PER_METER");
 }
 
 void ColliderViewer::drawRect(SDL_Rect* rect) const {

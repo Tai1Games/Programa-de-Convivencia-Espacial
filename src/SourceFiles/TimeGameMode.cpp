@@ -62,7 +62,7 @@ void TimeGameMode::render()
 void TimeGameMode::update()
 {
 	updateTime(playerKills_);
-	GameMode::update();
+	AbstractTimedGameMode::update();
 }
 
 void TimeGameMode::addPoints(int playerID)
