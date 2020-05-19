@@ -38,6 +38,7 @@ void TransitionState::render() {
 	}
 	else
 	{
+		(*gameStatesVector_)[currentState_]->render();
 		SDL_SetRenderDrawColor(SDL_Game::instance()->getRenderer(), 0, 0, 0, SDL_ALPHA_OPAQUE);
 		SDL_SetRenderDrawBlendMode(SDL_Game::instance()->getRenderer(), SDL_BLENDMODE_NONE);
 		SDL_Game::instance()->getStateMachine()->changeToState(currentState_);
