@@ -96,7 +96,6 @@ Entity* ObjectFactory::makeWall(EntityManager* entityManager, b2World* physicsWo
 }
 
 Entity* ObjectFactory::makePipe(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, float rotation) {
-
 	Entity* e = entityManager->addEntity();								 // x, y,width, height, density,friction, restitution, linearDrag, angularDrag,	Layer, sensor
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::Wall, false);
 	e->addComponent<Transform>(SDL_Rect{ 0,0,(int)size.x * CONST(int, "PIXELS_PER_METER") ,(int)size.y * CONST(int, "PIXELS_PER_METER") }, aux);

@@ -31,7 +31,7 @@ public:
 
 	static Entity* makeSpaceJunk(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size);
 
-	static Entity* makeFireball(Entity* e,EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
+	static Entity* makeFireball(Entity* e, EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 
 	static Entity* makeBoiler(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 	//Crea un mando de la tele (especifico para el modo Pelea Por El Mando)
