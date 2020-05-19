@@ -113,5 +113,5 @@ b2Vec2 AttachesToObjects::getAttachmentNormal()
 
 float AttachesToObjects::getRotationDifference()
 {
-	return (attachedObject_ != nullptr && attachedObject_->GetAngle() - angleOnAttach_);
+	return attachedObject_->GetAngle() - angleOnAttach_;
 }

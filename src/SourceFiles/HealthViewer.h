@@ -19,6 +19,9 @@ private:
 
 	int activeTextureId_;
 	int disableTextureId_;
+	int lifeWidth_ = 0;
+	int lifeHeight_ = 0;
+	double lifeDrawOffset_ = 0;
 
 public:
 	//Punteros a las 2 texturas de la vida y la posición de origen

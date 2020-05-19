@@ -47,8 +47,5 @@ public:
 	float getImpulseForce() { return impulseForce_; };
 	void resetImpulseForce() { impulseForce_ = 0;  chargedFrames_ = 0; };
 	bool isChargingImpulse() { return chargingImpulse_; };
-	bool getImpulseValid() {
-		const b2Vec2 aux = ib->getAimDir();
-		return (!attachesToObj_->isAttached() || isImpulseValid(aux));
-	}
+	bool getImpulseValid();
 };
