@@ -70,7 +70,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ PlayerAnimSheet, resourcesPath + "textures/playerAnim.png",23,4},
 	{ Hands, resourcesPath + "textures/hands.png", 11},
 	{ ImpulseArrow, resourcesPath + "textures/FlechaImpulso.png"},
-	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png", 12},
+	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png", 13},
 	{ SpaceSuit, resourcesPath + "textures/PinkTinky.png"},	// dead body
 
 	// Map elements
