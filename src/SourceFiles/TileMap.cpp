@@ -270,7 +270,7 @@ void TileMap::createWeapons()
 			e = WeaponFactory::makeStapler(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "STAPLER_W_PHYSICS"), CONST(float, "STAPLER_H_PHYSICS")), bulletPool_);
 			break;
 		case 3: //extinguisher
-			e = WeaponFactory::makeExtinguisher(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "EXTINGUISHER_W_PHYSICS"), CONST(float, "FLIPFLOP_H_PHYSICS")));
+			e = WeaponFactory::makeExtinguisher(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "EXTINGUISHER_W_PHYSICS"), CONST(float, "EXTINGUISHER_H_PHYSICS")));
 			break;
 		case 4: //rock
 			break;
