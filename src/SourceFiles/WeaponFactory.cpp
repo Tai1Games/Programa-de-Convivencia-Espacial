@@ -35,7 +35,7 @@ Entity* WeaponFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2W
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y, CONST(double, "CONFETTI_DENSITY"),
 		CONST(double, "CONFETTI_FRICTION"), CONST(double, "CONFETTI_RESTITUTION"),
 		CONST(double, "CONFETTI_LINEAR_DRAG"), CONST(double, "CONFETTI_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	e->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "CONFETTI_W_SPRITE") ,CONST(int, "CONFETTI_H_SPRITE") }, aux);
+	e->addComponent<Transform>(SDL_Rect{ CONST(int, "CONFETTI_X_SPRITE"),CONST(int, "CONFETTI_Y_SPRITE"),CONST(int, "CONFETTI_W_SPRITE") ,CONST(int, "CONFETTI_H_SPRITE") }, aux);
 	e->addComponent<AnimatedViewer>(Resources::Confetti, 0);
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::ConfettiParticles, 10, 4, 4, 200, 50, 500, 3, 30);
 	pE->setOffset({ CONST(double, "CONFETTI_PARTICLE_OFFSET_X"), CONST(double, "CONFETTI_PARTICLE_OFFSET_Y") });
@@ -82,7 +82,7 @@ Entity* WeaponFactory::makeExtinguisher(EntityManager* entityManager, b2World* p
 	Collider* aux = entity->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, size.x, size.y,
 		CONST(double, "EXTINGUISHER_DENSITY"), CONST(double, "EXTINGUISHER_FRICTION"), CONST(double, "EXTINGUISHER_RESTITUTION"),
 		CONST(double, "EXTINGUISHER_LINEAR_DRAG"), CONST(double, "EXTINGUISHER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
-	entity->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "EXTINGUISHER_W_SPRITE"), CONST(int, "EXTINGUISHER_H_SPRITE") }, aux);
+	entity->addComponent<Transform>(SDL_Rect{ CONST(int, "EXTINGUISHER_X_SPRITE"),CONST(int, "EXTINGUISHER_Y_SPRITE"), CONST(int, "EXTINGUISHER_W_SPRITE"), CONST(int, "EXTINGUISHER_H_SPRITE") }, aux);
 	entity->addComponent<Viewer>(Resources::Extinguisher);
 	entity->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Coin, 10);
 	entity->addComponent<ExtinguisherWeapon>(WeaponID::Extinguisher, CONST(int, "EXTINGUISHER_IMPACT_DAMAGE"),

@@ -87,8 +87,8 @@ Entity* ObjectFactory::makeWall(EntityManager* entityManager, b2World* physicsWo
 {
 	Entity* e = entityManager->addEntity();								 // x, y,width, height, density,friction, restitution, linearDrag, angularDrag,	Layer, sensor
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::Wall, false);
-	e->addComponent<Transform>(SDL_Rect{ 0,0,	CONST(int, "WALLS_BASE_W_SPRITE") + (int)size.x * (int)CONST(double, "PIXELS_PER_METER") * CONST(int, "WALLS_SCALE_W_SPRITE"),
-												CONST(int, "WALLS_BASE_H_SPRITE") + (int)size.y * (int)CONST(double, "PIXELS_PER_METER") * CONST(int, "WALLS_SCALE_W_SPRITE") }, aux);
+	e->addComponent<Transform>(SDL_Rect{ 0,0,	CONST(int, "WALLS_BASE_W_SPRITE") + (int)(size.x * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "WALLS_SCALE_W_SPRITE")),
+												CONST(int, "WALLS_BASE_H_SPRITE") + (int)(size.y * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "WALLS_SCALE_W_SPRITE")) }, aux);
 	e->addComponent<Viewer>(Resources::Negro);
 	e->addComponent<ColliderViewer>();
 
@@ -99,8 +99,8 @@ Entity* ObjectFactory::makePipe(EntityManager* entityManager, b2World* physicsWo
 	Entity* e = entityManager->addEntity();								 // x, y,width, height, density,friction, restitution, linearDrag, angularDrag,	Layer, sensor
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::Wall, false);
 	e->addComponent<Transform>(SDL_Rect{ 0,0,(int)size.x * CONST(int, "PIXELS_PER_METER") ,(int)size.y * CONST(int, "PIXELS_PER_METER") }, aux);
-	e->addComponent<Transform>(SDL_Rect{ 0,0,	CONST(int, "PIPES_BASE_W_SPRITE") + (int)size.x * (int)CONST(double, "PIXELS_PER_METER") * CONST(int, "PIPES_SCALE_W_SPRITE"),
-												CONST(int, "PIPES_BASE_H_SPRITE") + (int)size.y * (int)CONST(double, "PIXELS_PER_METER") * CONST(int, "PIPES_SCALE_W_SPRITE") }, aux);
+	e->addComponent<Transform>(SDL_Rect{ 0,0,	CONST(int, "PIPES_BASE_W_SPRITE") + (int)(size.x * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "PIPES_SCALE_W_SPRITE")),
+												CONST(int, "PIPES_BASE_H_SPRITE") + (int)(size.y * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "PIPES_SCALE_H_SPRITE")) }, aux);
 	//Por si se debe de invertir la imagen en tuberias horizontales
 	if (size.x > size.y) {
 		e->addComponent<Viewer>(Resources::PipeHor);
@@ -126,7 +126,7 @@ Entity* ObjectFactory::makePipe(EntityManager* entityManager, b2World* physicsWo
 Entity* ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
 	Entity* e = entityManager->addEntity();
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(int, "SPACE_JUNK_H_PHYSICS"), CONST(int, "SPACE_JUNK_H_PHYSICS"), 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false);
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(float, "SPACE_JUNK_W_PHYSICS"), CONST(float, "SPACE_JUNK_H_PHYSICS"), 1, 0.1, 0.2, 0, 0, Collider::CollisionLayer::NormalObject, false);
 	e->addComponent<Transform>(SDL_Rect{ 0, 0, CONST(int, "SPACE_JUNK_H_SPRITE"), CONST(int, "SPACE_JUNK_W_SPRITE") }, aux);
 	e->addComponent<Viewer>(Resources::Stone);
 
@@ -140,8 +140,8 @@ Entity* ObjectFactory::makePad(EntityManager* entityManager, b2World* physicsWor
 {
 	Entity* e = entityManager->addEntity();
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 1, 0, 0, Collider::CollisionLayer::NonGrababbleWall, false);
-	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "PAD_BASE_W_SPRITE") + (int)size.x * (int)CONST(double, "PIXELS_PER_METER") * CONST(int, "PAD_SCALE_W_SPRITE"),
-												CONST(int, "PAD_BASE_H_SPRITE") + (int)size.y * (int)CONST(double, "PIXELS_PER_METER") * CONST(int, "PAD_SCALE_W_SPRITE") }, aux);
+	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "PAD_BASE_W_SPRITE") + (int)(size.x * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "PAD_SCALE_W_SPRITE")),
+												CONST(int, "PAD_BASE_H_SPRITE") + (int)(size.y * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "PAD_SCALE_W_SPRITE")) }, aux);
 	e->addComponent<AnimatedViewer>(Resources::PadSpriteSheet, CONST(int, "PAD_ANIMATION_SPEED"))->stopAnimation();
 	e->addComponent<Pad>();
 	e->addComponent<ColliderViewer>();
@@ -273,7 +273,7 @@ Entity* ObjectFactory::makeBullet(Entity* e, EntityManager* entityManager, b2Wor
 {
 	entityManager->addExistingEntity(e);
 
-	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 0, 0, 0.7, 0.7, //estos 0.7 son la escala, es provisional hasta que se pueda cambiar mas adelante en el setActive
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_dynamicBody, 0, 0, CONST(double, "BULLET_W_PHYSICS"), CONST(double, "BULLET_H_PHYSICS"), //estos 0.7 son la escala, es provisional hasta que se pueda cambiar mas adelante en el setActive
 		CONST(double, "BULLET_DENSITY"), CONST(double, "BULLET_FRICTION"), CONST(double, "BULLET_RESTITUTION"),
 		CONST(double, "BULLET_LINEAR_DRAG"), CONST(double, "BULLET_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, true);
 	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "BULLET_W_SPRITE"),CONST(int, "BULLET_H_SPRITE") }, aux);
