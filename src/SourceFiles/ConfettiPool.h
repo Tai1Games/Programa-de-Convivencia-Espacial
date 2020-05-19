@@ -12,7 +12,7 @@ private:
 public:
 	ConfettiPool();
 	virtual ~ConfettiPool() {};
-	void init(EntityManager* eMan, b2World* physicsWorld);
+	void init(EntityManager* eMan, b2World* physicsWorld, GameMode* gM);
 
-	Entity* addConfetti(b2Vec2 pos);
+	void addConfetti(b2Vec2 pos);
 };

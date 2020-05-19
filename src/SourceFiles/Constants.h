@@ -26,8 +26,7 @@ const int COIN_POOL_SIZE = 140;
 const int FIREBALL_POOL_SIZE = 5;
 const int TOMATO_POOL_SIZE = 10;
 const int BANANA_POOL_SIZE = 5;
-const int CONFETTI_POOL_SIZE = 5;
-const int STAPLER_POOL_SIZE = 5;
+const int CONFETTI_POOL_SIZE = 10;
 
 //Estados de juego
 enum States

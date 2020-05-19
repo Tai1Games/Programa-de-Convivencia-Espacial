@@ -26,8 +26,6 @@
 #include "Weapon.h"
 #include "WeaponPool.h"
 #include "WiFiBullet.h"
-#include "WeaponSpawner.h"
-#include "ConfettiPool.h"
 
 Entity* ObjectFactory::makeTable(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
@@ -339,14 +337,6 @@ Entity* ObjectFactory::makeWifiWave(Entity* e, EntityManager* entityManager, b2W
 	e->addComponent<AnimatedViewer>(Resources::WiFiWave, 100);
 	e->addComponent<WiFiBullet>(colRouter);
 	e->addComponent<ColliderViewer>();
-
-	return e;
-}
-
-Entity* ObjectFactory::makeWeaponSpawner(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 position, ConfettiPool* confettiPool, StaplerPool* staplerPool, BulletPool* bulletPool)
-{
-	Entity* e = entityManager->addEntity();
-	e->addComponent<WeaponSpawner>(position, entityManager, physicsWorld, confettiPool, staplerPool, bulletPool);
 
 	return e;
 }

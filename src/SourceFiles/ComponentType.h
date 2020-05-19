@@ -40,8 +40,6 @@ namespace ComponentType {
 		RocketLogic,
 		Countdown,
 		SpawnTree,
-		TimedDespawn,
-		WeaponSpawner,
 
 		// don't touch the rest of this enum, it is to identify the max
 		// number of components

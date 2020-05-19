@@ -162,7 +162,7 @@
                  "visible":true,
                  "width":0,
                  "x":1756,
-                 "y":211
+                 "y":175
                 }, 
                 {
                  "height":0,
@@ -185,8 +185,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1769,
-                 "y":928
+                 "x":1719,
+                 "y":882
                 }, 
                 {
                  "height":0,
@@ -197,8 +197,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":234,
-                 "y":937
+                 "x":316,
+                 "y":917
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -208,126 +208,68 @@
         }, 
         {
          "draworder":"topdown",
-         "id":9,
-         "name":"HighTierWeapons",
+         "id":7,
+         "name":"Weapons",
          "objects":[
                 {
                  "height":0,
-                 "id":38,
+                 "id":20,
                  "name":"Weapon",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":742,
-                 "y":522
+                 "x":488,
+                 "y":272
                 }, 
                 {
                  "height":0,
-                 "id":39,
+                 "id":21,
                  "name":"Weapon",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1162,
-                 "y":528
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "id":10,
-         "name":"MidTierWeapons",
-         "objects":[
-                {
-                 "height":0,
-                 "id":34,
-                 "name":"Weapon",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":536,
-                 "y":122
+                 "x":1146,
+                 "y":236
                 }, 
                 {
                  "height":0,
-                 "id":35,
+                 "id":22,
                  "name":"Weapon",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1504,
-                 "y":122
+                 "x":1478,
+                 "y":380
                 }, 
                 {
                  "height":0,
-                 "id":36,
+                 "id":23,
                  "name":"Weapon",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":512,
-                 "y":954
+                 "x":1404,
+                 "y":922
                 }, 
                 {
                  "height":0,
-                 "id":37,
+                 "id":24,
                  "name":"Weapon",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1474,
-                 "y":950
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "id":8,
-         "name":"LowTierWeapons",
-         "objects":[
-                {
-                 "height":0,
-                 "id":32,
-                 "name":"Weapon",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":284,
-                 "y":536
-                }, 
-                {
-                 "height":0,
-                 "id":33,
-                 "name":"Weapon",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1564,
-                 "y":512
+                 "x":404,
+                 "y":868
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -394,8 +336,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":11,
- "nextobjectid":40,
+ "nextlayerid":8,
+ "nextobjectid":32,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.3.4",

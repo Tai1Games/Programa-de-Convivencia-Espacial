@@ -2,17 +2,16 @@
 #include "Collider.h"
 #include "ParticleEmitter.h"
 #include "Hands.h"
-#include "TimedDespawn.h"
-#include "AnimatedViewer.h"
 
-ConfettiWeapon::ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames, int impctForce) : MeleeWeapon(wId, dmg, impactDmg, cooldownFrames, impctForce) {}
+ConfettiWeapon:: ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames, int impctForce) :
+	MeleeWeapon( wId, dmg, impactDmg, cooldownFrames, impctForce) {}
 
 void ConfettiWeapon::init() {
 	MeleeWeapon::init();
 	colWeapon_ = GETCMP1_(Collider);
 	particleEmitter_ = GETCMP1_(ParticleEmitter);
 	viewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
-	timedDespawn_ = GETCMP1_(TimedDespawn);
+	frameSize_ = viewer_->getTexture()->getHeight();
 
 	viewer_->stopAnimation();
 	viewer_->setFrame(0);
@@ -30,23 +29,18 @@ void ConfettiWeapon::action() {
 		particleEmitter_->PlayStop();
 		used = true;
 		viewer_->setFrame(1);
-		timedDespawn_->startTimer(this);
 		MeleeWeapon::action();
 	}
 }
 
 void ConfettiWeapon::setActive(bool a, b2Vec2 pos)
 {
-	if (used) {
-		if (currentHand_ != nullptr) UnPickObject();
-		viewer_->setFrame(0);
-		used = false;
-		cout << "tesst";
-		colWeapon_->setLinearVelocity(b2Vec2(0, 0));
-		colWeapon_->setAngularVelocity(0);
-	}
 	entity_->setActive(a);
 	viewer_->setDrawable(a);
 	colWeapon_->getBody()->SetEnabled(a);
 	colWeapon_->getBody()->SetTransform(pos, 0);
+	if (used) {
+		viewer_->setFrame(0);
+		used = false;
+	}
 }
