@@ -161,6 +161,7 @@ vector<Resources::MusicInfo> Resources::musics_{
 	{ LivingRoomMusic , resourcesPath + "sound/livingRoom.mp3" },
 	{ GymMusic , resourcesPath + "sound/gym.mp3" },
 	{ TutorialMusic , resourcesPath + "sound/tutorial.mp3" },
+	{ GardenMusic , resourcesPath + "sound/garden.mp3" },
 	{ BoilerRoomMusic, resourcesPath + "sound/boilerRoom.mp3" }
 };
 
