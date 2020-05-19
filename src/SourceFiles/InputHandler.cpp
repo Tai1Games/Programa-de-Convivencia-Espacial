@@ -12,6 +12,7 @@ InputHandler::InputHandler() {
 	for (int i = 0; i < kbSize; i++) {
 		kbState_.push_back(ButtonState::Up);
 	}
+	cout << "downoninit " << justDownKeys.size() << endl;
 }
 
 InputHandler::~InputHandler() {
@@ -78,17 +79,16 @@ void InputHandler::initialiseGamepads() {
 		SDL_InitSubSystem(SDL_INIT_JOYSTICK);
 	}
 	numControllers_ = SDL_NumJoysticks();
-	if (SDL_NumJoysticks() > 0) {
-		for (int i = 0; i < SDL_NumJoysticks(); i++) {
-			initialiseNewController(i);
-		}
-	}
-	else
-	{
-		m_bJoysticksInitialised = false;
-	}
+	//if (SDL_NumJoysticks() > 0) {
+	//	for (int i = 0; i < SDL_NumJoysticks(); i++) {
+	//		initialiseNewController(i);
+	//	}
+	//}
+	//else
+	//{
+	//	m_bJoysticksInitialised = false;
+	//}
 }
-
 
 void InputHandler::clearJoysticks()
 {
@@ -151,8 +151,9 @@ void InputHandler::clearState() {
 	}
 }
 
-double InputHandler::getStickX(int joy, GAMEPADSTICK stick)
+double InputHandler::getStickX(int gameJoy, GAMEPADSTICK stick)
 {
+	int joy = gameToSystemCtrlId[gameJoy];
 	if (joy >= m_gameControllers.size())
 		return 0.0;
 	if (m_joystickValues.size() > 0)
@@ -170,8 +171,9 @@ double InputHandler::getStickX(int joy, GAMEPADSTICK stick)
 	return 0;
 }
 
-double InputHandler::getStickY(int joy, GAMEPADSTICK stick)
+double InputHandler::getStickY(int gameJoy, GAMEPADSTICK stick)
 {
+	int joy = gameToSystemCtrlId[gameJoy];
 	if (joy >= m_gameControllers.size())
 		return 0.0;
 	if (m_joystickValues.size() > joy)
@@ -188,7 +190,8 @@ double InputHandler::getStickY(int joy, GAMEPADSTICK stick)
 	return 0;
 }
 
-double InputHandler::getTrigger(int joy, GAMEPADTRIGGER trigger) {
+double InputHandler::getTrigger(int gameJoy, GAMEPADTRIGGER trigger) {
+	int joy = gameToSystemCtrlId[gameJoy];
 	if (m_joystickValues.size() > joy)
 	{
 		if (trigger == LEFTTRIGGER)
@@ -382,17 +385,24 @@ bool InputHandler::mapJoystick(SDL_GameController* ctrl, json mapData) {
 
 inline void InputHandler::onControllerAddedEvent(const SDL_Event& event)
 {
-	cout << "Added device with id " << event.cdevice.which << endl;
-	cout << "new total " << SDL_NumJoysticks() << endl;
+	int sysId = m_gameControllers.size();//su id sera el lugar en el que se inicialice
+	int gameId;
 	if (disconnectedGameControllers_.empty()) {
-		cout << "Nueva conexion" << endl;
-		initialiseNewController(SDL_NumJoysticks() - 1);
+		cout << "Nueva conexion de mando " << m_gameControllers.size() << endl;
+		initialiseNewController(event.cdevice.which, sysId);
+		gameId = sysId;
 	}
 	else {
-		cout << "Reconectado mando" << endl;
-		initialiseNewController(SDL_NumJoysticks() - 1, disconnectedGameControllers_.front());
+		debugFlag_ReconectedController = true;
+		int id = disconnectedGameControllers_.front();
+		cout << "Reconectado mando " << id << " en sistema" << m_gameControllers.size() << endl;
+		initialiseNewController(event.cdevice.which, id);
 		disconnectedGameControllers_.pop();
+		gameId = id;
 	}
+	numControllers_++;
+	systemToGameCtrlId.emplace(sysId, gameId);
+	gameToSystemCtrlId[gameId] = sysId;
 }
 
 inline void InputHandler::onControllerRemovedEvent(const SDL_Event& event)
@@ -428,9 +438,6 @@ inline void InputHandler::initialiseNewController(int sysId, int gameId)
 			tempButtons.push_back(Up);
 		}
 		m_buttonStates.push_back(tempButtons);
-		numControllers_++;
-		systemToGameCtrlId.emplace(sysId, gameId);
-		gameToSystemCtrlId[gameId] = sysId;
 	}
 	else
 	{
@@ -461,6 +468,7 @@ bool InputHandler::isButtonJustDown(int gameCtrl, SDL_GameControllerButton b)
 bool InputHandler::isButtonDown(int gameCtrl, SDL_GameControllerButton b)
 {
 	int ctrl = gameToSystemCtrlId[gameCtrl];
+
 	if (ctrl >= m_gameControllers.size())
 		return false;
 	return(m_buttonStates[ctrl][b] == Down);
@@ -473,6 +481,7 @@ bool InputHandler::isButtonUp(int gameCtrl, SDL_GameControllerButton b)
 		return false;
 	return(m_buttonStates[ctrl][b] == Up);
 }
+
 b2Vec2 InputHandler::getStickDir(int gameCtrl, GAMEPADSTICK stick) {
 	int ctrl = gameToSystemCtrlId[gameCtrl];
 	if (ctrl >= m_gameControllers.size())

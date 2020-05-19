@@ -57,9 +57,11 @@ private:
 	std::vector<SDL_Scancode> m_keysJustUp; //vector de teclas recien soltadas
 	const int kbSize = 300;
 	std::vector<ButtonState> kbState_;
-	std::queue<int> justUpKeys, justDownKeys;
+	std::queue<int> justUpKeys;
+	std::queue<int> justDownKeys;
 	int gameToSystemCtrlId[4] = { -1,-1,-1,-1 }; //guarda las ids con las que sdl reconoce cada mando del que se pide input
 	std::map<int, int> systemToGameCtrlId; //guarda los ids que el juego asocia a cada input fisico
+	bool debugFlag_ReconectedController = false;
 
 	bool m_bJoysticksInitialised;
 	bool isButtonDownEvent_;
