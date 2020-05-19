@@ -48,7 +48,7 @@ private:
 	//controllers
 	int numControllers_;
 	std::vector<SDL_GameController*> m_gameControllers;
-	std::queue<int> m_freeGameControllers;
+	std::queue<int> disconnectedGameControllers_;
 	std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
 	std::vector<std::pair<double*, double*>> m_triggerValues;
 	std::vector<std::vector<ButtonState>> m_buttonStates;
@@ -58,7 +58,8 @@ private:
 	const int kbSize = 300;
 	std::vector<ButtonState> kbState_;
 	std::queue<int> justUpKeys, justDownKeys;
-
+	int gameToSystemCtrlId[4] = { -1,-1,-1,-1 }; //guarda las ids con las que sdl reconoce cada mando del que se pide input
+	std::map<int, int> systemToGameCtrlId; //guarda los ids que el juego asocia a cada input fisico
 
 	bool m_bJoysticksInitialised;
 	bool isButtonDownEvent_;
@@ -76,10 +77,14 @@ private:
 	inline void onJoyAxisChange(SDL_Event& event);
 	inline void onJoyButtonChange(SDL_Event& event, ButtonState just);
 	inline bool mapJoystick(SDL_GameController* joy, json mapData);
+	inline void onControllerAddedEvent(const SDL_Event& event);
+	inline void onControllerRemovedEvent(const SDL_Event& event);
+	inline void initialiseNewController(int i, int id);
+	inline void initialiseNewController(int i) { initialiseNewController(i, i); };
 	//---------------------------------------------
 	//keyboard
 	inline void onKeyDown(SDL_Event& event) {
-		isKeyDownEvent_  = true;
+		isKeyDownEvent_ = true;
 		if (kbState_[event.key.keysym.scancode] == ButtonState::Up) {
 			kbState_[event.key.keysym.scancode] = ButtonState::JustDown;
 			justDownKeys.push(event.key.keysym.scancode);
@@ -142,7 +147,7 @@ public:
 	}
 	inline bool isKeyUp(SDL_Scancode key) {
 		// kbState_[key] == 0;
-		 return kbState_[key] == ButtonState::Up;
+		return kbState_[key] == ButtonState::Up;
 	}
 	inline bool isKeyUp(SDL_Keycode key) {
 		return isKeyUp(SDL_GetScancodeFromKey(key));
@@ -202,27 +207,11 @@ public:
 		return isAxisMovementEvent_;
 	}
 	//justup/down for the exact press or release
-	inline bool isButtonJustUp(int ctrl, SDL_GameControllerButton b) {
-		if (ctrl >= m_gameControllers.size())
-			return false;
-		return(isButtonUpEvent_ && m_buttonStates[ctrl][b] == JustUp);
-	}
-	inline bool isButtonJustDown(int ctrl, SDL_GameControllerButton b) {
-		if (ctrl >= m_gameControllers.size())
-			return false;
-		return(isButtonDownEvent_ && m_buttonStates[ctrl][b] == JustDown);
-	}
+	bool isButtonJustUp(int gameCtrl, SDL_GameControllerButton b);
+	bool isButtonJustDown(int gameCtrl, SDL_GameControllerButton b);
 	//isup/down for holding a button
-	inline bool isButtonDown(int ctrl, SDL_GameControllerButton b) {
-		if (ctrl >= m_gameControllers.size())
-			return false;
-		return(m_buttonStates[ctrl][b] == Down);
-	}
-	inline bool isButtonUp(int ctrl, SDL_GameControllerButton b) {
-		if (ctrl >= m_gameControllers.size())
-			return false;
-		return(m_buttonStates[ctrl][b] == Up);
-	}
+	bool isButtonDown(int gameCtrl, SDL_GameControllerButton b);
+	bool isButtonUp(int gameCtrl, SDL_GameControllerButton b);
 
 
 	//get the direction or a value from a stick/trigger given a controller
@@ -231,9 +220,4 @@ public:
 	double getStickX(int ctrl, GAMEPADSTICK stick);
 	double getStickY(int ctrl, GAMEPADSTICK stick);
 	double getTrigger(int ctrl, GAMEPADTRIGGER trigger);
-
-	int getFreeGamePad();
-	void returnGamePad(int g);
-
 };
-
