@@ -49,6 +49,6 @@ public:
 	bool isChargingImpulse() { return chargingImpulse_; };
 	bool getImpulseValid() {
 		const b2Vec2 aux = ib->getAimDir();
-		return isImpulseValid(aux);
+		return (!attachesToObj_->isAttached() || isImpulseValid(aux));
 	}
 };
