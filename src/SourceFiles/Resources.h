@@ -48,6 +48,7 @@ public:
 		KeyboardIcon,
 		MouseIcon,
 		ControllerIcon,
+		PlayerPlaceholder,
 
 		//midGameState
 		Rocket,

@@ -29,7 +29,7 @@ void LobbyState::init()
 	joinedMouse_ = false;
 
 	playerTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::Body);
-	voidTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::SpaceSuit);
+	voidTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::PlayerPlaceholder);
 	ctrlTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::ControllerIcon);
 	kbTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::KeyboardIcon);
 	mouseTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::MouseIcon);
