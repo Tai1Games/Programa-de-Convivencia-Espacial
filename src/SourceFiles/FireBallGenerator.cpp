@@ -81,7 +81,7 @@ void FireBallGenerator::addFireball(int n) {
 }
 
 void FireBallGenerator::onButtonAction(bool inc_dec) {
-
+	SDL_Game::instance()->getAudioMngr()->playChannel(Resources::AudioId::BoilerButton, 0);
 	if (inc_dec) {
 		particleEmitter_->modifyGenerationOdds(-particleGenOddsModifier_);
 		framesBetweenShakes_ -= incrementFramesShakeFreq_;

@@ -177,7 +177,11 @@ public:
 		EntranceMusic,
 
 		// sound effects
-		StartGame
+		StartGame,
+
+		// boiler
+		BoilerShoot,
+		BoilerButton
 	};
 
 	enum FontId : std::size_t {
