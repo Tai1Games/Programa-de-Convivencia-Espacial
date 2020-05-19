@@ -7,7 +7,7 @@
 
 ClientState::ClientState(char* host) {
 	if (SDLNet_Init() < 0) {
-		std::cout << "Algo salió mal :c" << std::endl;
+		std::cout << "Algo saliÃ³ mal :c" << std::endl;
 		throw;
 	}
 
@@ -45,7 +45,7 @@ void ClientState::update()
 				switch (buffer[0]) {
 				case 'A':
 					//Audio
-					//receiveAudio();
+					receiveAudio();
 				case 'F':
 					//Finished
 					doneReceiving_ = true;
