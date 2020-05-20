@@ -131,6 +131,7 @@ void Health::onCollisionEnter(Collision* c)
 			//Lo que ha golpeado es un arma?
 			if (w != nullptr) {
 				force *= w->getImpactForce();
+				impact = force.Length();
 				//Si se impacta con un arma al umbral m�s alto de fuerza, se recibe su daño de impacto
 				impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
 			}
