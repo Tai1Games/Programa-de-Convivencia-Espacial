@@ -63,10 +63,8 @@ public:
 
 
 		// Map elements
-		IncreasingFreqButtonUp,
-		IncreasingFreqButtonDown,
-		DecreasingFreqButtonUp,
-		DecreasingFreqButtonDown,
+		IncreasingFreqButton,
+		DecreasingFreqButton,
 		TSet_Kenney1bit,
 		TSet_Dungeon,
 		Slipper,

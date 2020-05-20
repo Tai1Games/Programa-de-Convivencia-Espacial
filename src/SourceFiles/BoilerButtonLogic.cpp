@@ -13,17 +13,21 @@ BoilerButtonLogic::BoilerButtonLogic(bool inc_dec) :
 
 void BoilerButtonLogic::init() {
 	buttonViewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
-	buttonViewer_->setAnimSpeed(30);
-	reactivationCd_ = CONST(int, "BOILER_BUTTON_COOLDOWN");
-	framesForReactivation_ = CONST(int, "BOILER_MIN_FORCE_FOR_ACTIVATION") * FRAMES_PER_SECOND;
+	buttonViewer_->setAnimSpeed(CONST(int, "BOILER_BUTTON_ANIMATION_SPEED"));
+	framesForReactivation_ = CONST(int, "BOILER_BUTTON_COOLDOWN") * FRAMES_PER_SECOND;
+	animationDuration_ = CONST(int, "BOILER_BUTTON_ANIMATION_SPEED") * buttonViewer_->getTexture()->getNumFramesX();
 }
 
 void BoilerButtonLogic::update() {
 	if (activated) {
 		currentFrame_++;
-		if (currentFrame_ >= reactivationFrame_) {
+		if (currentFrame_ == animationEndedFrame_) {
+			buttonViewer_->setFrame(2);
+		}
+
+		if (currentFrame_ == reactivationFrame_) {
 			activated = false;
-			//buttonViewer_->setFrame(2);
+			buttonViewer_->setFrame(0);
 		}
 	}
 }
@@ -34,8 +38,10 @@ void BoilerButtonLogic::onCollisionEnter(Collision* c) {
 		c->hitFixture->GetBody()->GetLinearVelocity().Length() > minForceForAcivation_ && !activated) {
 
 		fbGen_->onButtonAction(inc_dec_);
-		buttonViewer_->startAnimation(1, 0, 3);
+		buttonViewer_->startAnimation(0);
 		reactivationFrame_ = currentFrame_ + framesForReactivation_;
+		animationEndedFrame_ = currentFrame_ + animationDuration_;
+
 		activated = true;
 	}
 }

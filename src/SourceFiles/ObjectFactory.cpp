@@ -215,7 +215,7 @@ Entity* ObjectFactory::makeBoilerButton(EntityManager* entityManager, b2World* p
 	Collider* collBoilerButton = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, CONST(double, "BOILER_BUTTON_RADIUS_PHYSICS"), 0, 0,
 		0, 0, 0, Collider::CollisionLayer::NormalObject, true);
 	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "BOILER_BUTTON_RADIUS_SPRITE"),CONST(int, "BOILER_BUTTON_RADIUS_SPRITE") }, collBoilerButton);
-	e->addComponent<AnimatedViewer>((inc_dec) ? Resources::IncreasingFreqButtonDown : Resources::DecreasingFreqButtonDown, 0)->stopAnimation();
+	e->addComponent<AnimatedViewer>((inc_dec) ? Resources::IncreasingFreqButton : Resources::DecreasingFreqButton, 0)->stopAnimation();
 	e->addComponent<BoilerButtonLogic>(inc_dec);
 	e->addComponent<ColliderViewer>();
 

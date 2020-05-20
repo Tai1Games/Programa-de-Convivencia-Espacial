@@ -75,10 +75,8 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	// Map elements
 	{ Boiler,resourcesPath + "textures/CalderaPro.png"},
-	{ IncreasingFreqButtonUp,resourcesPath + "textures/IncBoilerButtonUp.png", 3, 1},
-	{ IncreasingFreqButtonDown,resourcesPath + "textures/IncBoilerButtonDown.png", 3, 1},
-	{ DecreasingFreqButtonUp,resourcesPath + "textures/DecBoilerButtonUp.png", 3, 1},
-	{ DecreasingFreqButtonDown,resourcesPath + "textures/DecBoilerButtonDown.png", 3, 1},
+	{ IncreasingFreqButton,resourcesPath + "textures/IncBoilerButtonDown.png", 3, 1},
+	{ DecreasingFreqButton,resourcesPath + "textures/DecBoilerButtonDown.png", 3, 1},
 	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png", 4},
 	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
 	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
