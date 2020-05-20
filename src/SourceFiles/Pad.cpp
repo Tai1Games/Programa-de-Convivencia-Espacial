@@ -1,6 +1,7 @@
 #include "Pad.h"
 #include "Collision.h"
 #include "Entity.h"
+#include "Resources.h"
 
 void Pad::init()
 {
@@ -10,4 +11,5 @@ void Pad::init()
 void Pad::onCollisionExit(Collision* c)
 {
 	viewer_->startAnimation(1);
+	SDL_Game::instance()->getAudioMngr()->playChannel(Resources::PadSound, 0);
 }

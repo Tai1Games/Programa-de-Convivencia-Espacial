@@ -177,7 +177,10 @@ public:
 		EntranceMusic,
 
 		// sound effects
-		StartGame
+		StartGame,
+
+		ExtinguisherSound,
+		PadSound,
 	};
 
 	enum FontId : std::size_t {
