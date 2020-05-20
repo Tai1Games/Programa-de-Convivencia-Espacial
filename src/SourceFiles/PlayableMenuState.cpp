@@ -23,6 +23,7 @@
 
 PlayableMenuState::~PlayableMenuState()
 {
+	/*delete playerControl;     playerControl = nullptr;*/
 	delete tmap;				tmap = nullptr;
 	delete entityManager_;		entityManager_ = nullptr;
 	delete collisionHandler_;	collisionHandler_ = nullptr;
@@ -59,15 +60,19 @@ void PlayableMenuState::init()
 	tmap->createWeapons();
 
 	
-	if (SDL_Game::instance()->getInputHandler()->getNumControllers() >= 0) {
+	if (SDL_Game::instance()->getInputHandler()->getNumControllers() > 0) {
 		playerControl = new ControllerBinder(0);
+		player = PlayerFactory::createBasePlayer(entityManager_, physicsWorld_, 0,
+			Resources::Body, tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y, playerControl);
 	}
 	else {
-		playerControl = new PureKeyboardBinder(1);
-	}
+		playerControl = new MouseKeyboardBinder(nullptr, 1);
+		player = PlayerFactory::createBasePlayer(entityManager_, physicsWorld_, 0,
+			Resources::Body, tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y, playerControl);
 
-	player = PlayerFactory::createBasePlayer(entityManager_, physicsWorld_, 0,
-		Resources::Body, tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y, playerControl);
+		playerControl->setPlayerCol(player->getComponent<Collider>(ComponentType::Collider));
+		//player->getComponent<PlayerData>(ComponentType::PlayerData)->
+	}
 	
 	
 	//ObjectFactory::makeWall(entityManager_, physicsWorld_, b2Vec2(10, 13), b2Vec2(6, 6));
@@ -101,10 +106,10 @@ void PlayableMenuState::handleInput()
 	if (playerControl->pressPick()) {
 			player->getComponent<Collider>(ComponentType::Collider)->setTransform(b2Vec2(tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y), 0);
 	}
-	else if (playerControl->pressPause()) {
-			SDL_Game::instance()->getAudioMngr()->pauseMusic();
-			SDL_Game::instance()->getStateMachine()->setPauseOwner(0);
-			//SDL_Game::instance()->getStateMachine()->transitionToState(States::pause);
-	}
+	//else if (playerControl->pressPause()) {
+	//		SDL_Game::instance()->getAudioMngr()->pauseMusic();
+	//		SDL_Game::instance()->getStateMachine()->setPauseOwner(0);
+	//		//SDL_Game::instance()->getStateMachine()->transitionToState(States::pause);
+	//}
 	
 }
