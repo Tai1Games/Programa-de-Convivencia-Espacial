@@ -48,6 +48,7 @@ public:
 		KeyboardIcon,
 		MouseIcon,
 		ControllerIcon,
+		PlayerPlaceholder,
 
 		//midGameState
 		Rocket,
@@ -99,6 +100,8 @@ public:
 		Lamp,
 		Table,
 		Sofa,
+		TomatoTree,
+		BananaTree,
 
 		// Gamemode specific elements
 		Coin,
@@ -164,7 +167,8 @@ public:
 
 		// particles
 		Smoke,
-		WiFiWave
+		WiFiWave,
+		Foam
 	};
 
 	enum AudioId : unsigned char {
@@ -174,6 +178,7 @@ public:
 		GymMusic = TextureId::GymRoom,
 		BoilerRoomMusic = TextureId::BoilerRoom,
 		TutorialMusic = TextureId::TutorialRoom,
+		GardenMusic = TextureId::GardenRoom,
 		EntranceMusic,
 
 		// sound effects
@@ -223,7 +228,6 @@ public:
 	struct SoundInfo {
 		AudioId id;
 		string fileName;
-
 	};
 
 	static vector<FontInfo> fonts_; // initialized in .cpp
@@ -232,5 +236,4 @@ public:
 	static vector<MusicInfo> musics_; // initialized in .cpp
 	static vector<SoundInfo> sounds_; // initialized in .cpp
 	static map<std::string, Resources::TextureId> tilesetTag_; // initialized in .cpp
-
 };

@@ -243,7 +243,7 @@ protected:
 	int id_ = -1;
 public:
 	ControllerBinder(int id) : InputBinder(), id_(id) {}
-	virtual ~ControllerBinder() { ih->returnGamePad(id_); }
+	virtual ~ControllerBinder() {}
 	virtual bool holdGrab() {
 		return ih->getTrigger(id_, InputHandler::GAMEPADTRIGGER::LEFTTRIGGER);
 	}
@@ -290,7 +290,7 @@ public:
 		return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_START)
 			|| ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_GUIDE);
 	}
-	virtual bool secretWinButton() {return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_LEFTSHOULDER); }
+	virtual bool secretWinButton() { return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_LEFTSHOULDER); }
 };
 
 //pero seguid con los meme xfa
