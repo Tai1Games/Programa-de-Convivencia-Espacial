@@ -184,7 +184,10 @@ public:
 		// boiler
 		BoilerShoot,
 		BoilerButtonSlow,
-		BoilerButtonFast
+		BoilerButtonFast,
+
+		// Weapons
+		BananaShoot
 	};
 
 	enum FontId : std::size_t {
