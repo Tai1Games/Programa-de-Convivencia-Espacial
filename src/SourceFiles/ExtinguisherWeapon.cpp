@@ -20,6 +20,7 @@ void ExtinguisherWeapon::action() {
 	if (!beenActivated_) {
 		b2Vec2 handDirection = currentHand_->getDir();
 		Collider* playerCollider = currentHand_->getEntity()->getComponent<Collider>(ComponentType::Collider);
+		emitter_->setOffset({ handDirection.x * armLength_, handDirection.y * armLength_ });
 		emitter_->setPositionCollider(playerCollider);
 		emitter_->setDirection({ handDirection.x, handDirection.y });
 		emitter_->PlayStop();
