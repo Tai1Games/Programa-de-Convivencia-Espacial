@@ -84,6 +84,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ TreadmillPanel, resourcesPath + "textures/TreadmillPanel.png"},
 	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png", 8},
 	{ CarnivorousPlant , resourcesPath + "textures/PlantaCarnivora.png", 7, 1},
+	{ TomatoTree, resourcesPath + "textures/TomatoTree.png"},
+	{ BananaTree, resourcesPath + "textures/BananaTree.png"},
 
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/Moneda.png" },

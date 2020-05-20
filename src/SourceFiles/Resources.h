@@ -99,6 +99,8 @@ public:
 		Lamp,
 		Table,
 		Sofa,
+		TomatoTree,
+		BananaTree,
 
 		// Gamemode specific elements
 		Coin,
