@@ -43,6 +43,9 @@ SDL_Game::SDL_Game() {
 SDL_Game::~SDL_Game() {
 	closeResources();
 
+	if (mpHost_ != nullptr)
+		delete mpHost_;
+
 	SDL_DestroyRenderer(renderer_);
 	renderer_ = nullptr;
 

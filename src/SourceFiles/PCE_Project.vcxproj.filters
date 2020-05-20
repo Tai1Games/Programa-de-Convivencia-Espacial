@@ -346,10 +346,13 @@
       <Filter>Header Files\Components\Viewers</Filter>
     </ClInclude>
     <ClInclude Include="CarnivorousPlantViewer.h">
-      <Filter>Header Files\Components\Viewers</Filter>    
+      <Filter>Header Files\Components\Viewers</Filter>
     </ClInclude>
     <ClInclude Include="ClientState.h">
       <Filter>Header Files\Gamestates</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerHost.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -610,6 +613,9 @@
     </ClCompile>
     <ClCompile Include="InputBinder.cpp">
       <Filter>Source Files\Managers &amp; Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerHost.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
