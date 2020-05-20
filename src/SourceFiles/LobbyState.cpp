@@ -136,6 +136,7 @@ void LobbyState::playerOut(std::vector<PlayerLobbyInfo>::iterator it)
 		//it es el jugador que se quiere salir
 		delete it->inputBinder;
 		it = joinedPlayers_.erase(it);
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuBackward, 0);
 		//it ahora apunta al siguiente elemento
 		//ajustamos el resto de ids en funcion
 		while (it != joinedPlayers_.end()) {
@@ -207,6 +208,7 @@ void LobbyState::handleJoinLeave() {
 				joinedPlayers_[newId].binderType = BinderType::ControllerB;
 				// crea un nuevo jugador con id newId
 				// lo mete en joinedPlayers
+				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
 			}
 		}
 	}
@@ -225,6 +227,7 @@ void LobbyState::handleJoinLeave() {
 					joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(kb + 1)));
 					joinedPlayers_[newId].kbId = kb;
 					joinedPlayers_[newId].binderType = KeyboardB;
+					SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
 				}
 			}
 		}
@@ -245,6 +248,7 @@ void LobbyState::handleJoinLeave() {
 				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new MouseKeyboardBinder(nullptr, 1)));
 				joinedPlayers_[newId].kbmId = 0;
 				joinedPlayers_[newId].binderType = MouseB;
+				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
 			}
 		}
 	}
@@ -264,6 +268,7 @@ void LobbyState::handleJoinLeave() {
 				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(2)));
 				joinedPlayers_[newId].kbId = 1;
 				joinedPlayers_[newId].binderType = BinderType::KeyboardB;
+				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
 			}
 		}
 	}
