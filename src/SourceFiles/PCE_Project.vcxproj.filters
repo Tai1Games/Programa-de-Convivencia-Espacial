@@ -346,7 +346,10 @@
       <Filter>Header Files\Components\Viewers</Filter>
     </ClInclude>
     <ClInclude Include="CarnivorousPlantViewer.h">
-      <Filter>Header Files\Components\Viewers</Filter>
+      <Filter>Header Files\Components\Viewers</Filter>    
+    </ClInclude>
+    <ClInclude Include="ClientState.h">
+      <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -512,9 +515,6 @@
     <ClCompile Include="SpawnTree.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="InputBinder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CarnivorousPlant.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
@@ -604,6 +604,12 @@
     </ClCompile>
     <ClCompile Include="CarnivorousPlantViewer.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="InputBinder.cpp">
+      <Filter>Source Files\Managers &amp; Handlers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
