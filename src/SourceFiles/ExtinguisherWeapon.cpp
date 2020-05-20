@@ -1,6 +1,7 @@
 #include "ExtinguisherWeapon.h"
 #include "ParticleEmitter.h"
 #include "Hands.h"
+#include "Resources.h"
 
 ExtinguisherWeapon::ExtinguisherWeapon(WeaponID wId, int impctDmg, int cooldownFrames, int impctForce) : 
 	ActionableWeapon(wId, impctDmg, cooldownFrames, impctForce),
@@ -25,6 +26,7 @@ void ExtinguisherWeapon::action() {
 		b2Vec2 impulse = { -handDirection.x,handDirection.y };
 		impulse *= (impulse_);
 		playerCollider->applyLinearImpulse(impulse, { 0, 0 });
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::ExtinguisherSound, 0);
 
 		beenActivated_ = true;
 	}

@@ -169,6 +169,8 @@ vector<Resources::SoundInfo> Resources::sounds_{
 	//{ Shoot, "../assets/game/sound/shoot.mp3" },
 	{ StartGame, resourcesPath + "sound/effects/UI/enterGame.mp3" },
 
+	{ ExtinguisherSound, resourcesPath + "sound/effects/extinguisherSound.wav" },
+	{ PadSound, resourcesPath + "sound/effects/padSound.wav" },
 	// boiler
 	{ BoilerShoot, resourcesPath + "sound/effects/boilerShoot.wav" },
 	{ BoilerButtonSlow, resourcesPath + "sound/effects/boilerSlow.wav" },
