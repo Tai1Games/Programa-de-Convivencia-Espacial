@@ -7,6 +7,7 @@
 
 bool PlayerController::isImpulseValid(const b2Vec2& dir)
 {
+	if (attachesToObj_->getAttachedObject() == nullptr) return true;
 	b2Vec2 normal = attachesToObj_->getAttachmentNormal();
 	//b2Vec2 normalDir(dir.x, dir.y);
 	float angle = atan2(dir.y, dir.x) - atan2(normal.y, normal.x);
@@ -116,4 +117,9 @@ void PlayerController::update() {
 		}
 	}
 	impulseCooldownTimer_++;
+}
+
+bool PlayerController::getImpulseValid()
+{
+	return isImpulseValid({ ib->getAimDir().x, -ib->getAimDir().y });
 }
