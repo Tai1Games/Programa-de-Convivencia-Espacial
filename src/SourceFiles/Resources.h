@@ -181,7 +181,8 @@ public:
 
 		// boiler
 		BoilerShoot,
-		BoilerButton
+		BoilerButtonSlow,
+		BoilerButtonFast
 	};
 
 	enum FontId : std::size_t {

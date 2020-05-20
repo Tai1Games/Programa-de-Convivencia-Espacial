@@ -171,7 +171,8 @@ vector<Resources::SoundInfo> Resources::sounds_{
 
 	// boiler
 	{ BoilerShoot, resourcesPath + "sound/effects/boilerShoot.wav" },
-	{ BoilerButton, resourcesPath + "sound/effects/boilerButton.wav" }
+	{ BoilerButtonSlow, resourcesPath + "sound/effects/boilerSlow.wav" },
+	{ BoilerButtonFast, resourcesPath + "sound/effects/boilerFast.wav" }
 };
 
 map<std::string, Resources::TextureId> Resources::tilesetTag_{
