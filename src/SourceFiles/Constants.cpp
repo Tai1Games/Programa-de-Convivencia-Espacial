@@ -13,7 +13,7 @@ Constants::Constants(const std::string& path) {
 template<typename T>
 T Constants::getConstant(const std::string& key) const {
 	T d;
-	std::cout << "BUSCANDO " << key << "\n";
+	//std::cout << "BUSCANDO " << key << "\n";
 	if (!data[key].is_null())
 		d = data[key].get<T>();
 	return d;
@@ -21,7 +21,7 @@ T Constants::getConstant(const std::string& key) const {
 template<>
 int Constants::getConstant<int>(const std::string& key) const {
 	int pt = 0;
-	std::cout << "BUSCANDO " << key << "\n";
+	//std::cout << "BUSCANDO " << key << "\n";
 	if (!data[key].is_null() && data[key].is_number_integer())
 
 		pt = data[key].get<int>();
@@ -30,7 +30,7 @@ int Constants::getConstant<int>(const std::string& key) const {
 template<>
 bool Constants::getConstant<bool>(const std::string& key) const {
 	bool r;
-	std::cout << "BUSCANDO " << key << "\n";
+	//std::cout << "BUSCANDO " << key << "\n";
 	if (!data[key].is_null() && data[key].is_boolean())
 
 		r = data[key].get<bool>();
@@ -39,7 +39,7 @@ bool Constants::getConstant<bool>(const std::string& key) const {
 template<>
 double Constants::getConstant<double>(const std::string& key) const {
 	double pt = 0;
-	std::cout << "BUSCANDO " << key << "\n";
+	//std::cout << "BUSCANDO " << key << "\n";
 	if (!data[key].is_null() && data[key].is_number())
 
 		pt = data[key].get<double>();
@@ -48,7 +48,7 @@ double Constants::getConstant<double>(const std::string& key) const {
 template<>
 std::string Constants::getConstant<std::string>(const std::string& key) const {
 	std::string pt = "";
-	std::cout << "BUSCANDO " << key << "\n";
+	//std::cout << "BUSCANDO " << key << "\n";
 
 	if (!data[key].is_null() && data[key].is_string())
 		pt = data[key].get<std::string>();
@@ -57,7 +57,7 @@ std::string Constants::getConstant<std::string>(const std::string& key) const {
 template<>
 float Constants::getConstant<float>(const std::string& key) const {
 	float pt = 0.0;
-	std::cout << "BUSCANDO " << key << "\n";
+	//std::cout << "BUSCANDO " << key << "\n";
 	if (!data[key].is_null() && data[key].is_number())
 		pt = data[key].get<float>();
 	return pt;

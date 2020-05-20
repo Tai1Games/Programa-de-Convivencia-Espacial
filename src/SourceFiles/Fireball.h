@@ -15,8 +15,7 @@ public:
 	Fireball() : Component(ComponentType::Fireball) {}
 	~Fireball() {};
 	virtual void init() override;
-	void setActive(bool to, b2Vec2 pos);
+	void setActive(bool to, b2Vec2 pos, double angle = 0);
 
 	virtual void onCollisionEnter(Collision* c);
 };
-

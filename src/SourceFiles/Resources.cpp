@@ -47,7 +47,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	// Weapons and map items
 	{ Ball, resourcesPath + "textures/PelotaSaltarina.png" },
 	{ Extinguisher, resourcesPath + "textures/Extintor.png" },
-	{ Fireball,resourcesPath + "textures/fireball.png", 4},
+	{ Fireball,resourcesPath + "textures/fireballSP.png", 6},
 	{ Dumbbell, resourcesPath + "textures/Mancuerna.png" },
 	{ Slipper, resourcesPath + "textures/Chancla.png" },
 	{ Stapler, resourcesPath + "textures/Grapadora.png" },
@@ -170,5 +170,4 @@ vector<Resources::SoundInfo> Resources::sounds_{
 };
 
 map<std::string, Resources::TextureId> Resources::tilesetTag_{
-
 };
