@@ -100,6 +100,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	// particles
 	{ Smoke, resourcesPath + "textures/SmokeParticles-Sheet.png", 4},
 	{ WiFiWave, resourcesPath + "textures/WiFiWave.png" },
+	{ Foam, resourcesPath + "textures/foam_particles.png",4 },
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{
@@ -170,5 +171,4 @@ vector<Resources::SoundInfo> Resources::sounds_{
 };
 
 map<std::string, Resources::TextureId> Resources::tilesetTag_{
-
 };
