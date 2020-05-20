@@ -54,7 +54,7 @@ public:
 		SpaceStation,
 		Token,
 		RocketSpriteSheet,
-		
+
 
 		// Weapons and map items
 
@@ -140,7 +140,7 @@ public:
 		FourPlayers,
 		FivePlayers, //es solo para iterar
 
-		//tutorial	
+		//tutorial
 		Completed,
 		Slash,
 		Zero,
@@ -156,12 +156,12 @@ public:
 		DeathTutorial,
 		TutorialEnd,
 
-		//MidGame 
+		//MidGame
 		ContinueText,
 
 		//Countdown
 		Go,
-      
+
 		// particles
 		Smoke,
 		WiFiWave
@@ -181,6 +181,10 @@ public:
 
 		ExtinguisherSound,
 		PadSound,
+		// boiler
+		BoilerShoot,
+		BoilerButtonSlow,
+		BoilerButtonFast
 	};
 
 	enum FontId : std::size_t {
