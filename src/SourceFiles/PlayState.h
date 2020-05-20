@@ -10,6 +10,7 @@
 #include "BananaPool.h"
 #include "BulletPool.h"
 #include "ConfettiPool.h"
+#include "StaplerPool.h"
 
 using namespace std;
 
@@ -44,9 +45,11 @@ protected:
 	vector<MatchInfo::PlayerInfo*>* playerInfo;
 	BulletPool bulletPool_;
 	ConfettiPool confettiPool_;
+	StaplerPool staplerPool_;
+	
 	int maxCorpses_ = CONST(int, "MAX_CORPSES");
-	double playerHeight_ = CONST(double, "PLAYER_HEIGHT");
-	double playerWidth_ = CONST(double, "PLAYER_WIDTH");
+	double playerHeight_ = CONST(double, "PLAYER_H_PHYSICS");
+	double playerWidth_ = CONST(double, "PLAYER_W_PHYSICS");
 	double playerDensity_ = CONST(double, "PLAYER_DENSITY");
 	double playerFriction_ = CONST(double, "PLAYER_FRICTION");
 	double playerRestitution_ = CONST(double, "PLAYER_RESTITUTION");

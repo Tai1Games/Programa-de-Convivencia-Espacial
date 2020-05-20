@@ -190,9 +190,12 @@ copy "$(SolutionDir)SDL2_net-2.0.1\lib\$(Platform)\*.dll" "$(TargetDir)"</Comman
     <ClInclude Include="ActionableWeapon.h" />
     <ClInclude Include="PlayableMenuState.h" />
     <ClInclude Include="TriggerButton.h" />
+    <ClInclude Include="StaplerPool.h" />
+    <ClInclude Include="TimedDespawn.h" />
+    <ClInclude Include="WeaponFactory.h" />
+    <ClInclude Include="WeaponSpawner.h" />
     <ClInclude Include="AdvancedAnimatedViewer.h" />
     <ClInclude Include="CarnivorousPlantViewer.h" />
-    <ClInclude Include="WeaponFactory.h" />
     <ClInclude Include="WiFiWavePool.h" />
     <ClInclude Include="WiFiBullet.h" />
     <ClInclude Include="AnimatedPlayer.h" />
@@ -291,9 +294,14 @@ copy "$(SolutionDir)SDL2_net-2.0.1\lib\$(Platform)\*.dll" "$(TargetDir)"</Comman
     <ClCompile Include="ActionableWeapon.cpp" />
     <ClCompile Include="PlayableMenuState.cpp" />
     <ClCompile Include="TriggerButton.cpp" />
+    <ClCompile Include="StaplerPool.cpp" />
+    <ClCompile Include="TimedDespawn.cpp" />
+    <ClCompile Include="WeaponFactory.cpp" />
+    <ClCompile Include="WeaponSpawner.cpp" />
+
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="AdvancedAnimatedViewer.cpp" />
     <ClCompile Include="CarnivorousPlantViewer.cpp" />
-    <ClCompile Include="WeaponFactory.cpp" />
     <ClCompile Include="WiFiWavePool.cpp" />
     <ClCompile Include="WiFiBullet.cpp" />
     <ClCompile Include="AnimatedPlayer.cpp" />

@@ -175,6 +175,7 @@ public:
 		GymMusic = TextureId::GymRoom,
 		BoilerRoomMusic = TextureId::BoilerRoom,
 		TutorialMusic = TextureId::TutorialRoom,
+		GardenMusic = TextureId::GardenRoom,
 		EntranceMusic
 
 		// sound effects

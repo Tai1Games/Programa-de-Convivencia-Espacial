@@ -41,6 +41,8 @@ namespace ComponentType {
 		Countdown,
 		SpawnTree,
 		TriggerButton,
+		TimedDespawn,
+		WeaponSpawner,
 
 		// don't touch the rest of this enum, it is to identify the max
 		// number of components
