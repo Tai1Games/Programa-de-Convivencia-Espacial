@@ -321,7 +321,7 @@ Entity* ObjectFactory::makeTomatoTree(EntityManager* entityManager, b2World* phy
 		CONST(double, "SPAWN_TREE_RESTITUTION"), CONST(double, "SPAWN_TREE_LINEAR_DRAG"), CONST(double, "SPAWN_TREE_ANGULAR_DRAG"),
 		Collider::CollisionLayer::UnInteractableObject, false);
 	e->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "SPAWN_TREE_W_SPRITE") , CONST(int, "SPAWN_TREE_H_SPRITE") }, col);
-	e->addComponent<Viewer>();
+	e->addComponent<Viewer>(Resources::TomatoTree);
 	//SDL_Rect clip;
 	//clip.h = tomatoTex->getHeight();
 	//clip.w = tomatoTex->getWidth() / 17;
@@ -340,7 +340,7 @@ Entity* ObjectFactory::makeBananaTree(EntityManager* entityManager, b2World* phy
 		CONST(double, "SPAWN_TREE_RESTITUTION"), CONST(double, "SPAWN_TREE_LINEAR_DRAG"), CONST(double, "SPAWN_TREE_ANGULAR_DRAG"),
 		Collider::CollisionLayer::UnInteractableObject, false);
 	e->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "SPAWN_TREE_W_SPRITE") , CONST(int, "SPAWN_TREE_H_SPRITE") }, col);
-	e->addComponent<Viewer>();
+	e->addComponent<Viewer>(Resources::BananaTree);
 	SDL_Rect clip;
 	clip.h = bananaTex->getHeight(); clip.w = bananaTex->getWidth() / 17;
 	clip.x = 0; clip.y = 0;

@@ -42,7 +42,7 @@ void ParticleEmitter::update() {
 	}
 
 	if (particles_.size() > 0) {
-		for (list<Particle>::iterator part = particles_.begin(); part != particles_.end(); part++) {
+		for (list<Particle>::iterator part = particles_.begin(); part != particles_.end(); ++part) {
 			part->lifeTime += msPerFrame_;
 			if (part->lifeTime > particleLifetime_)
 				particlesToDelete_.push(part);

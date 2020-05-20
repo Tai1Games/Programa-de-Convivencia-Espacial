@@ -11,6 +11,7 @@ protected:
 	float impulse_;
 	float PIXELS_PER_METER;
 	int WINDOW_HEIGHT;
+	float armLength_ = 0;
 public:
 	ExtinguisherWeapon(WeaponID wId, int impctDmg, int cooldownFrames, int impctForce);
 	~ExtinguisherWeapon() {}
