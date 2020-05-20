@@ -13,6 +13,7 @@ void ExtinguisherWeapon::init() {
 	impulse_ = CONST(float, "EXTINGUISHER_IMPULSE");
 	PIXELS_PER_METER = CONST(float, "PIXELS_PER_METER");
 	WINDOW_HEIGHT = CONST(int, "WINDOW_HEIGHT");
+	armLength_ = CONST(float, "EXTINGUISHER_ARM_LENGTH");
 }
 
 void ExtinguisherWeapon::action() {
@@ -33,4 +34,5 @@ void ExtinguisherWeapon::action() {
 void ExtinguisherWeapon::UnPickObject() {
 	emitter_->setPositionCollider(GETCMP1_(Collider));
 	Weapon::UnPickObject();
+	emitter_->PlayStop();
 }
