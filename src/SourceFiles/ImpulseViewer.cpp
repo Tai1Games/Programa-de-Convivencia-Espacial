@@ -33,7 +33,9 @@ void ImpulseViewer::update()
 {
 	b2Vec2 stickDir = ib_->getAimDir();
 	angle_ = std::atan2((double)stickDir.x, -(double)stickDir.y) * (180.0 / PI);
-	frameX_ = (playerController_->getImpulseForce() / maxImpulseGrabbed_) * (numFramesCharge_ - 1);
+	if (playerController_->getImpulseValid())
+		frameX_ = min((float)numFramesCharge_ - 2, (playerController_->getImpulseForce() / maxImpulseGrabbed_) * (numFramesCharge_ - 1));
+	else frameX_ = numFramesCharge_ - 1;
 }
 
 void ImpulseViewer::draw() const {

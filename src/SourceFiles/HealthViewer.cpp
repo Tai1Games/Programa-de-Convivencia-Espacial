@@ -19,6 +19,10 @@ void HealthViewer::init()
 	int playerNumber = playerData_->getPlayerNumber();
 	setPos(playerNumber);
 	flip_ = (playerNumber % 2 == 0) ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL;
+
+	lifeWidth_ = CONST(int, "LIFE_WIDTH");
+	lifeHeight_ = CONST(int, "LIFE_HEIGTH");
+	lifeDrawOffset_ = CONST(double, "LIFE_DRAW_OFFSET");
 }
 void HealthViewer::update()
 {
@@ -27,13 +31,13 @@ void HealthViewer::update()
 void HealthViewer::draw() const
 {
 	int player = playerData_->getPlayerNumber();
-	SDL_Rect dest = {pos_.x,pos_.y,CONST(int,"LIFE_WIDTH"),CONST(int,"LIFE_HEIGTH")};
+	SDL_Rect dest = {pos_.x,pos_.y, lifeWidth_, lifeHeight_};
 	for (int i = 0; i < he->getHealthMax(); i++) {
 		if (player % 2 == 0){
-			dest.x = pos_.x + i*((CONST(int,"LIFE_WIDTH") + CONST(double, "LIFE_DRAW_OFFSET")));
+			dest.x = pos_.x + i*(lifeWidth_ + lifeDrawOffset_);
 		}
 		else{
-			dest.x = pos_.x -(i*((CONST(int,"LIFE_WIDTH") + CONST(double, "LIFE_DRAW_OFFSET"))));
+			dest.x = pos_.x -(i*(lifeWidth_ + lifeDrawOffset_));
 		}
 
 		if ((i+1) <= he->getHealth()) {		//Si tiene esas X vidas las muertra como llenas
