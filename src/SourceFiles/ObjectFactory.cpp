@@ -127,7 +127,7 @@ Entity* ObjectFactory::makeTrasparentWall(EntityManager* entityManager, b2World*
 
 	Entity* e = entityManager->addEntity();								 // x, y,width, height, density,friction, restitution, linearDrag, angularDrag,	Layer, sensor
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::Wall, false);
-
+	e->addComponent<Transform>(SDL_Rect{ 0,0,(int)size.x, (int)size.y }, aux);
 	//Por si se debe de invertir la imagen en tuberias horizontales
 	if (size.x > size.y) {
 		e->addComponent<Viewer>(Resources::Negro);
@@ -371,12 +371,14 @@ Entity* ObjectFactory::makeWifiWave(Entity* e, EntityManager* entityManager, b2W
 
 Entity* ObjectFactory::makeTriggerButton(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, string state) {
 	Entity* trButton = entityManager->addEntity();
-	trButton->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
-	//trButton->addComponent<CarnivorousPlantViewer>(Resources::CarnivorousPlant, CONST(int, "CARNIVOROUSPLANT_MIN_SPEED"));
+	Collider* trigger = trButton->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
+	trButton->addComponent<Transform>(SDL_Rect{ 0,0,(int)size.x, (int)size.y }, trigger);
 	trButton->addComponent<TriggerButton>(state);
 	trButton->addComponent<ColliderViewer>();
 
 	return trButton;
+}
+
 Entity* ObjectFactory::makeWeaponSpawner(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 position, ConfettiPool* confettiPool, StaplerPool* staplerPool, BulletPool* bulletPool)
 {
 	Entity* e = entityManager->addEntity();

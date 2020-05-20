@@ -26,7 +26,8 @@ private:
 	CollisionHandler* collisionHandler_ = nullptr;
 	Texture* fondo_ = nullptr;
 	Entity* player = nullptr;
-	vector<MatchInfo::PlayerInfo*>* playerInfo;
+
+	InputBinder* playerControl;
 public:
 	PlayableMenuState() {};
 	virtual ~PlayableMenuState();

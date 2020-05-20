@@ -25,7 +25,7 @@ void TriggerButton::update()
 void TriggerButton::PassState()
 {
 	if (stateToChange == "Play") {
-		SDL_Game::instance()->getStateMachine()->changeToState(States::menu, 0);
+		SDL_Game::instance()->getStateMachine()->transitionToState(States::lobby, 0);
 	}
 	else if (stateToChange == "Options") {
 		//SDL_Game::instance()->getStateMachine()->changeToState(States::pause, 0);

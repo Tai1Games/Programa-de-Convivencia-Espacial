@@ -38,10 +38,11 @@ void PlayableMenuState::init()
 
 	BulletPool bulletPool_;
 	ConfettiPool confettiPool_;
+	StaplerPool staplerPool_;
 	
 	tmap = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
 		"assets/game/tilemaps/MenuRoom.json",
-		entityManager_, physicsWorld_, &bulletPool_, &confettiPool_, nullptr);
+		entityManager_, physicsWorld_, &bulletPool_, &confettiPool_, &staplerPool_ ,nullptr);
 	tmap->init();
 	
 	collisionHandler_ = new CollisionHandler(nullptr, tmap);
@@ -57,10 +58,16 @@ void PlayableMenuState::init()
 	tmap->executeMapFactory();
 	tmap->createWeapons();
 
-	playerInfo = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
-	MatchInfo* aux = SDL_Game::instance()->getStateMachine()->getMatchInfo();
+	
+	if (SDL_Game::instance()->getInputHandler()->getNumControllers() >= 0) {
+		playerControl = new ControllerBinder(0);
+	}
+	else {
+		playerControl = new PureKeyboardBinder(1);
+	}
+
 	player = PlayerFactory::createBasePlayer(entityManager_, physicsWorld_, 0,
-		Resources::Body, tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y, aux->getPlayersInfo()->at(0)->inputBinder);
+		Resources::Body, tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y, playerControl);
 	
 	
 	//ObjectFactory::makeWall(entityManager_, physicsWorld_, b2Vec2(10, 13), b2Vec2(6, 6));
@@ -91,15 +98,13 @@ void PlayableMenuState::render()
 void PlayableMenuState::handleInput()
 {
 	GameState::handleInput();
-	for (MatchInfo::PlayerInfo* pInfo : *playerInfo)
-	{
-		if (pInfo->inputBinder->pressPick()) {
+	if (playerControl->pressPick()) {
 			player->getComponent<Collider>(ComponentType::Collider)->setTransform(b2Vec2(tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y), 0);
-		}
-		if (pInfo->inputBinder->pressPause()) {
-			SDL_Game::instance()->getAudioMngr()->pauseMusic();
-			SDL_Game::instance()->getStateMachine()->setPauseOwner(pInfo->playerId);
-			//SDL_Game::instance()->getStateMachine()->transitionToState(States::pause);
-		}
 	}
+	else if (playerControl->pressPause()) {
+			SDL_Game::instance()->getAudioMngr()->pauseMusic();
+			SDL_Game::instance()->getStateMachine()->setPauseOwner(0);
+			//SDL_Game::instance()->getStateMachine()->transitionToState(States::pause);
+	}
+	
 }
