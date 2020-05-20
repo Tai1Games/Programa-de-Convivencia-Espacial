@@ -96,7 +96,6 @@ P -> Informacion de jugadores
 	- Si lo envía el servidor indica la id de los jugadores para el cliente en orden
 M -> Musica
 */
-
 #pragma pack(push,2)
 
 //Lo mejor es asegurarse de que los elementos que son multiplos de dos vayan en su propia palabra

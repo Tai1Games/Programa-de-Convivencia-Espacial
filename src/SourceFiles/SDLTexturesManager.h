@@ -23,7 +23,7 @@ public:
 		return textures_[tag];
 	}
 	bool loadFromImg(std::size_t, SDL_Renderer* renderer,
-		const string& fileName);
+		const string& fileName, unsigned short nHorFrames, unsigned short nVerFrames);
 	bool loadFromText(std::size_t, SDL_Renderer* renderer, const string& text,
 		const Font* font, const SDL_Color& color);
 private:

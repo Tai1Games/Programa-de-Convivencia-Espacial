@@ -31,6 +31,8 @@ int main(int argc, char* argv[]) {
 		throw;
 	}*/
 
+	cout << sizeof(SpritePacket) << endl;
+
 	SDL_Game::instance()->start();
 
 	//descomentar para depurar

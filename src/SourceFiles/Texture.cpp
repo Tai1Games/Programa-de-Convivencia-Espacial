@@ -6,11 +6,11 @@
 using namespace std;
 
 Texture::Texture() :
-		texture_(nullptr), renderer_(nullptr), width_(0), height_(0) {
+		texture_(nullptr), renderer_(nullptr), width_(0), height_(0), frameWidth_(0), frameHeight_(0) {
 }
 
-Texture::Texture(SDL_Renderer *renderer, const string& fileName) :
-		texture_(nullptr), width_(0), height_(0) {
+Texture::Texture(SDL_Renderer *renderer, const string& fileName, unsigned short nHorFrames, unsigned short nVerFrames) :
+		texture_(nullptr), width_(0), height_(0), nHorizontalFrames_(nHorFrames), nVerticalFrames_(nVerFrames) {
 	loadFromImg(renderer, fileName);
 }
 
@@ -41,6 +41,8 @@ bool Texture::loadFromImg(SDL_Renderer *renderer, const string& fileName) {
 		if (texture_ != nullptr) {
 			width_ = surface->w;
 			height_ = surface->h;
+			frameWidth_ = width_ / nHorizontalFrames_;
+			frameHeight_ = height_ / nVerticalFrames_;
 		}
 		SDL_FreeSurface(surface);
 	} else {
@@ -59,6 +61,8 @@ bool Texture::loadFromText(SDL_Renderer *renderer, const string& text, const Fon
 		if (texture_ != nullptr) {
 			width_ = textSurface->w;
 			height_ = textSurface->h;
+			frameWidth_ = width_ / nHorizontalFrames_;
+			frameHeight_ = height_ / nVerticalFrames_;
 		}
 		SDL_FreeSurface(textSurface);
 	} else {
@@ -100,17 +104,18 @@ void Texture::render(const SDL_Rect& dest, double angle, const SDL_Rect& clip, S
 void Texture::render(const SDL_Rect& dest, double angle, const SDL_RendererFlip& flip) const
 {
 	SDL_Rect clip = { 0, 0, width_, height_ };
-	if (texture_) {
-		SDL_RenderCopyEx(renderer_, texture_, &clip, &dest, angle, nullptr,
-			flip);
-	}
+	render(dest, angle, clip, flip);
 }
 
-void Texture::render(const SDL_Rect &dest, double angle,
-		const SDL_Rect &clip) const {
+void Texture::render(const SDL_Rect& dest, double angle,
+	const SDL_Rect& clip) const {
+	render(dest, angle, clip, SDL_FLIP_NONE);
+}
 
-		render(dest, angle, clip, SDL_FLIP_NONE);
-
+// this overloaded function gets the clip for you. frameY and flip are optional parameters
+void Texture::render(const SDL_Rect& dest, double angle, unsigned short frameX, unsigned short frameY, SDL_RendererFlip flip) const {
+	SDL_Rect clip = { frameWidth_ * frameX, frameHeight_ * frameY, frameWidth_, frameHeight_ };
+	render(dest, angle, clip, flip);
 }
 
 void Texture::render(const SDL_Rect &dest, double angle) const {

@@ -7,6 +7,7 @@
 #include "checkML.h"
 #include "InputBinder.h"
 
+class AnimatedPlayer;
 
 class PlayerController : public Component
 {
@@ -26,6 +27,7 @@ private:
 	AttachesToObjects* attachesToObj_ = nullptr;
 	PlayerData* playerData_ = nullptr;
 	InputBinder* ib = nullptr;
+	AnimatedPlayer* viewer_ = nullptr;
 
 	KeyboardBinder* kBinder_ = nullptr;
 

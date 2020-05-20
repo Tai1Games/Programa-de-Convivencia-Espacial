@@ -67,7 +67,7 @@ void SDL_Game::initializeResources() {
 	gamestateMachine_ = new GameStateMachine();
 
 	for (auto& image : Resources::images_) {
-		textures_->loadFromImg(image.id, renderer_, image.fileName);
+		textures_->loadFromImg(image.id, renderer_, image.fileName, image.nHorizontalFrames, image.nVerticalFrames);
 	}
 
 	for (auto& font : Resources::fonts_) {

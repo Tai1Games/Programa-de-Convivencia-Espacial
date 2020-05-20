@@ -34,12 +34,12 @@ bool SDLTexturesManager::init() {
 }
 
 bool SDLTexturesManager::loadFromImg(std::size_t tag,
-	SDL_Renderer* renderer, const string& fileName) {
+	SDL_Renderer* renderer, const string& fileName, unsigned short nHorFrames, unsigned short nVerFrames) {
 
 	if (!initialized_)
 		return false;
 
-	Texture* texture = new Texture(renderer, fileName);
+	Texture* texture = new Texture(renderer, fileName, nHorFrames, nVerFrames);
 	if (texture->isReady()) {
 		storeTexture(tag, texture);
 		return true;
