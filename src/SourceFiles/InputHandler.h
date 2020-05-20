@@ -34,7 +34,6 @@ private:
 	//variables
 	//
 	//keyboard
-	//ButtonState kbState_[1000];
 	bool isKeyUpEvent_;
 	bool isKeyDownEvent_;
 
@@ -45,13 +44,18 @@ private:
 	b2Vec2 mousePos_;
 	std::array<ButtonState, 3> mbState_;
 	//---------------------------------------------
-	//controllers
+	//mandos
 	int numControllers_;
-	std::vector<SDL_GameController*> m_gameControllers;
-	std::queue<int> disconnectedGameControllers_;
+	std::vector<SDL_GameController*> m_gameControllers; //punteros a los controllers de sdl
+	std::queue<int> disconnectedGameControllers_;//cola de los mandos desconectados
+		//almacenamiento del estado de los mandos
 	std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
 	std::vector<std::pair<double*, double*>> m_triggerValues;
 	std::vector<std::vector<ButtonState>> m_buttonStates;
+	std::vector<b2Vec2> lastLStickValue_;
+
+	//teclado y raton
+	//almacenamiento del estado de teclado y raton
 	ButtonState m_mouseButtonStates[3];
 	std::vector<SDL_Scancode> m_keysJustDown; //vector de teclas recien pulsadas
 	std::vector<SDL_Scancode> m_keysJustUp; //vector de teclas recien soltadas
@@ -59,8 +63,11 @@ private:
 	std::vector<ButtonState> kbState_;
 	std::queue<int> justUpKeys;
 	std::queue<int> justDownKeys;
+
+	//estructuras auxiliares para la reconexion y desconexion de mandos
 	int gameToSystemCtrlId[4] = { -1,-1,-1,-1 }; //guarda las ids con las que sdl reconoce cada mando del que se pide input
 	std::map<int, int> systemToGameCtrlId; //guarda los ids que el juego asocia a cada input fisico
+
 	bool debugFlag_ReconectedController = false;
 
 	bool m_bJoysticksInitialised;
@@ -68,7 +75,6 @@ private:
 	bool isButtonUpEvent_;
 	bool isAxisMovementEvent_;
 
-	std::vector<b2Vec2> lastLStickValue_;
 	//
 	//Methods
 	//
@@ -81,8 +87,7 @@ private:
 	inline bool mapJoystick(SDL_GameController* joy, json mapData);
 	inline void onControllerAddedEvent(const SDL_Event& event);
 	inline void onControllerRemovedEvent(const SDL_Event& event);
-	inline void initialiseNewController(int i, int id);
-	inline void initialiseNewController(int i) { initialiseNewController(i, i); };
+	inline void initialiseNewController(int i);
 	//---------------------------------------------
 	//keyboard
 	inline void onKeyDown(SDL_Event& event) {
