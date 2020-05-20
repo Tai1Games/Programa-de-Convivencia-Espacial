@@ -54,7 +54,7 @@ public:
 		SpaceStation,
 		Token,
 		RocketSpriteSheet,
-		
+
 
 		// Weapons and map items
 
@@ -140,7 +140,7 @@ public:
 		FourPlayers,
 		FivePlayers, //es solo para iterar
 
-		//tutorial	
+		//tutorial
 		Completed,
 		Slash,
 		Zero,
@@ -156,15 +156,16 @@ public:
 		DeathTutorial,
 		TutorialEnd,
 
-		//MidGame 
+		//MidGame
 		ContinueText,
 
 		//Countdown
 		Go,
-      
+
 		// particles
 		Smoke,
-		WiFiWave
+		WiFiWave,
+		Foam
 	};
 
 	enum AudioId : unsigned char {
@@ -178,7 +179,6 @@ public:
 		EntranceMusic
 
 		// sound effects
-
 	};
 
 	enum FontId : std::size_t {
@@ -214,7 +214,6 @@ public:
 	struct SoundInfo {
 		AudioId id;
 		string fileName;
-
 	};
 
 	static vector<FontInfo> fonts_; // initialized in .cpp
@@ -223,5 +222,4 @@ public:
 	static vector<MusicInfo> musics_; // initialized in .cpp
 	static vector<SoundInfo> sounds_; // initialized in .cpp
 	static map<std::string, Resources::TextureId> tilesetTag_; // initialized in .cpp
-
 };
