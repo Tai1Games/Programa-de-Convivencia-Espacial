@@ -65,6 +65,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Lamp,resourcesPath + "textures/Lampara.png"},
 	{ Table,resourcesPath + "textures/Mesa.png"},
 	{ Sofa,resourcesPath + "textures/Sofa.png"},
+	{ DeadBody,resourcesPath + "textures/cadaver.png"},
 
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },

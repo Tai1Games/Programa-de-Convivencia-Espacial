@@ -102,6 +102,7 @@ public:
 		Sofa,
 		TomatoTree,
 		BananaTree,
+		DeadBody,
 
 		// Gamemode specific elements
 		Coin,
