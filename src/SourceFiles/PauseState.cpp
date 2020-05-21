@@ -9,26 +9,38 @@
 
 void PauseState::init()
 {
+	offsetBetweenButtons_ = CONST(int, "PAUSE_OFFSET_BETWEEN_BUTTONS");
+	maxMusicVolume_ = CONST(int, "MAX_MUSIC_VOLUME");
+	maxEffectsVolume_ = CONST(int, "MAX_EFFECTS_VOLUME");
+	currentMusicVolume_ = maxMusicVolume_;
+	currentEffectsVolume_ = maxEffectsVolume_;
+
 	entityManager_ = new EntityManager();
 
 	Entity* pauseText = entityManager_->addEntity();
 	Entity* resumeText = entityManager_->addEntity();
-	Entity* soundText = entityManager_->addEntity();
+	Entity* musicText = entityManager_->addEntity();
+	Entity* effectsText = entityManager_->addEntity();
 	Entity* exitText = entityManager_->addEntity();
-	Entity* slider = entityManager_->addEntity();
+	Entity* musicSlider = entityManager_->addEntity();
+	Entity* effectsSlider = entityManager_->addEntity();
 
 	Entity* miniTinky = entityManager_->addEntity();
-	Entity* sliderControl = entityManager_->addEntity();
+	Entity* musicSliderControl = entityManager_->addEntity();
+	Entity* effectsSliderControl = entityManager_->addEntity();
 
 	pauseText->addComponent<UIViewer>(Resources::PauseText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 230, (CONST(int, "WINDOW_HEIGHT") / 2) - 310), 2.5, 0);
-
-	btns_.push_back(resumeText->addComponent<UIViewer>(Resources::ResumeText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) - 120), 1.5, 0));
-	btns_.push_back(soundText->addComponent<UIViewer>(Resources::SoundText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2)), 1.5, 0));
-	btns_.push_back(exitText->addComponent<UIViewer>(Resources::ExitText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) + 120), 1.5, 0));
+	
+	btns_.push_back(resumeText->addComponent<UIViewer>(Resources::ResumeText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) + offsetBetweenButtons_ * -1), 1.5, 0));
+	btns_.push_back(musicText->addComponent<UIViewer>(Resources::MusicText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) + offsetBetweenButtons_ * 0), 1.5, 0));
+	btns_.push_back(effectsText->addComponent<UIViewer>(Resources::EffectsText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) + offsetBetweenButtons_ * 1), 1.5, 0));
+	btns_.push_back(exitText->addComponent<UIViewer>(Resources::ExitText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) + +offsetBetweenButtons_ * 2), 1.5, 0));
 
 	buttonSelectorImage_ = miniTinky->addComponent<UIViewer>(Resources::Tinky, b2Vec2(btns_[selectedBtn_]->getPosUIElement().x - 80, btns_[selectedBtn_]->getPosUIElement().y - 15), 0.5, 0);
-	sliderControlImage_ = sliderControl->addComponent<UIViewer>(Resources::SliderControl, b2Vec2(btns_[Buttons::Sound]->getPosUIElement().x + 645, btns_[Buttons::Sound]->getPosUIElement().y), 2, 0);
-	slider->addComponent<UIViewer>(Resources::Slider, b2Vec2(btns_[Buttons::Sound]->getPosUIElement().x + 360, btns_[Buttons::Sound]->getPosUIElement().y), 2, 0);
+	musicSliderControlImage_ = musicSliderControl->addComponent<UIViewer>(Resources::SliderControl, b2Vec2(btns_[Buttons::Music]->getPosUIElement().x + 645, btns_[Buttons::Music]->getPosUIElement().y), 2, 0);
+	effectsSliderControlImage_ = effectsSliderControl->addComponent<UIViewer>(Resources::SliderControl, b2Vec2(btns_[Buttons::Effects]->getPosUIElement().x + 645, btns_[Buttons::Effects]->getPosUIElement().y), 2, 0);
+	musicSlider->addComponent<UIViewer>(Resources::Slider, b2Vec2(musicSliderControlImage_->getPosUIElement().x , btns_[Buttons::Music]->getPosUIElement().y), 2, 0);
+	effectsSlider->addComponent<UIViewer>(Resources::Slider, b2Vec2(musicSliderControlImage_->getPosUIElement().x , btns_[Buttons::Effects]->getPosUIElement().y), 2, 0);
 
 	cout << "Pause initialized to " << ownerPlayerID_ << endl;
 	ownerBinder_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo()->at(ownerPlayerID_)->inputBinder;
@@ -45,23 +57,11 @@ void PauseState::handleInput()
 		if (ownerBinder_->menuForward())
 			resumeGame();
 		break;
-	case Buttons::Sound:
-		if (!holdingX_)
-		{
-			if (currentMusicVolume_ > 0 && ownerBinder_->menuMove(Dir::Left)) {
-				currentMusicVolume_ -= 10;
-				updateMusicVolume();
-				holdingX_ = true;
-			}
-			else if (currentMusicVolume_ < CONST(int, "MAX_MUSIC_VOLUME") && ownerBinder_->menuMove(Dir::Right)) {
-				currentMusicVolume_ += 10;
-				updateMusicVolume();
-				holdingX_ = true;
-			}
-		}
-		else if (holdingX_ && !ownerBinder_->menuMove(Dir::Right) && !ownerBinder_->menuMove(Dir::Left)) {
-			holdingX_ = false;
-		}
+	case Buttons::Music:
+		handleSlider(currentMusicVolume_, maxMusicVolume_);
+		break;
+	case Buttons::Effects:
+		handleSlider(currentEffectsVolume_, maxEffectsVolume_);
 		break;
 	case Buttons::Exit:
 		if (ownerBinder_->menuForward()) {
@@ -117,10 +117,31 @@ void PauseState::updateSelectedButton()
 void PauseState::updateMusicVolume()
 {
 	SDL_Game::instance()->getAudioMngr()->setMusicVolume(currentMusicVolume_);
+	SDL_Game::instance()->getAudioMngr()->setChannelVolume(currentEffectsVolume_, 0);
 
-	float newXPos = (btns_[Buttons::Sound]->getPosUIElement().x + 395) + ((currentMusicVolume_ / 10) * (250 / (CONST(double, "MAX_MUSIC_VOLUME") / 10)));
-	sliderControlImage_->setPosUIElement(b2Vec2(newXPos,
-		btns_[Buttons::Sound]->getPosUIElement().y));
+	float newXPos = (btns_[Buttons::Music]->getPosUIElement().x + 395) + ((currentMusicVolume_ / 10) * (250 / (CONST(double, "MAX_MUSIC_VOLUME") / 10)));
+	musicSliderControlImage_->setPosUIElement(b2Vec2(newXPos,
+		btns_[Buttons::Music]->getPosUIElement().y));
+}
+
+void PauseState::handleSlider(int& currentVolumeValue, const int& maxVolumeValue)
+{
+	if (!holdingX_)
+	{
+		if (currentVolumeValue > 0 && ownerBinder_->menuMove(Dir::Left)) {
+			currentVolumeValue -= 10;
+			updateMusicVolume();
+			holdingX_ = true;
+		}
+		else if (currentVolumeValue < maxVolumeValue && ownerBinder_->menuMove(Dir::Right)) {
+			currentVolumeValue += 10;
+			updateMusicVolume();
+			holdingX_ = true;
+		}
+	}
+	else if (holdingX_ && !ownerBinder_->menuMove(Dir::Right) && !ownerBinder_->menuMove(Dir::Left)) {
+		holdingX_ = false;
+	}
 }
 
 void PauseState::resumeGame()

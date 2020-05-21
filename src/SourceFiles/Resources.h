@@ -119,7 +119,8 @@ public:
 		// text
 		PauseText,
 		ResumeText,
-		SoundText,
+		MusicText,
+		EffectsText,
 		ExitText,
 
 		//modes

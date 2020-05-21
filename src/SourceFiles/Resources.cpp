@@ -112,7 +112,8 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	//{ HelloWorld, "Hello World", { COLOR(0xaaffffff) }, ARIAL16 }
 	{ PauseText, "PAUSA", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ ResumeText, "Reanudar", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ SoundText, "Sonido", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ MusicText, "Musica", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ EffectsText, "Efectos", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ ExitText, "Salir", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 
 	//Menu Provisional
