@@ -7,6 +7,8 @@
 #include "Constants.h"
 #include "checkML.h"
 
+class AnimatedViewer;
+
 class Hands : public Component
 {
 private:
@@ -26,6 +28,7 @@ private:
 	float angle_ = 0;
 	SDL_RendererFlip Flipped_ = SDL_FLIP_NONE; //si las manos estan o no flipeadas
 	Weapon* currentWeapon_ = nullptr;
+	AnimatedViewer* viewerHands_ = nullptr;
 
 public:
 	Hands(int textureId, WeaponID wId = NoWeapon);
