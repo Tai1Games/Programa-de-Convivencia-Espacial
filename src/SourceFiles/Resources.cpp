@@ -43,11 +43,12 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SpaceStation, resourcesPath + "textures/SpaceStation.png"},
 	{ Token, resourcesPath + "textures/Marcador.png"},
 	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png", 8, 1},
+	{ PlayerPlaceholder,resourcesPath + "textures/playerPlaceholder.png"},
 
 	// Weapons and map items
 	{ Ball, resourcesPath + "textures/PelotaSaltarina.png" },
 	{ Extinguisher, resourcesPath + "textures/Extintor.png" },
-	{ Fireball,resourcesPath + "textures/fireball.png", 4},
+	{ Fireball,resourcesPath + "textures/fireballSP.png", 6},
 	{ Dumbbell, resourcesPath + "textures/Mancuerna.png" },
 	{ Slipper, resourcesPath + "textures/Chancla.png" },
 	{ Stapler, resourcesPath + "textures/Grapadora.png" },
@@ -70,7 +71,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ PlayerAnimSheet, resourcesPath + "textures/playerAnim.png",23,4},
 	{ Hands, resourcesPath + "textures/hands.png", 11},
 	{ ImpulseArrow, resourcesPath + "textures/FlechaImpulso.png"},
-	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png", 12},
+	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png", 13},
 	{ SpaceSuit, resourcesPath + "textures/PinkTinky.png"},	// dead body
 
 	// Map elements
@@ -84,6 +85,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ TreadmillPanel, resourcesPath + "textures/TreadmillPanel.png"},
 	{ TreadmillSpriteSheet , resourcesPath + "textures/TreadmillSpriteSheet.png", 8},
 	{ CarnivorousPlant , resourcesPath + "textures/PlantaCarnivora.png", 7, 1},
+	{ TomatoTree, resourcesPath + "textures/TomatoTree.png"},
+	{ BananaTree, resourcesPath + "textures/BananaTree.png"},
 
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/Moneda.png" },
@@ -100,6 +103,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	// particles
 	{ Smoke, resourcesPath + "textures/SmokeParticles-Sheet.png", 4},
 	{ WiFiWave, resourcesPath + "textures/WiFiWave.png" },
+	{ Foam, resourcesPath + "textures/foam_particles.png",4 },
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{
@@ -161,6 +165,7 @@ vector<Resources::MusicInfo> Resources::musics_{
 	{ LivingRoomMusic , resourcesPath + "sound/livingRoom.mp3" },
 	{ GymMusic , resourcesPath + "sound/gym.mp3" },
 	{ TutorialMusic , resourcesPath + "sound/tutorial.mp3" },
+	{ GardenMusic , resourcesPath + "sound/garden.mp3" },
 	{ BoilerRoomMusic, resourcesPath + "sound/boilerRoom.mp3" }
 };
 
@@ -172,9 +177,19 @@ vector<Resources::SoundInfo> Resources::sounds_{
 	//Menu
 	{MenuMove, resourcesPath + "sound/effects/UI/menuMove.wav"},
 	{MenuForward, resourcesPath + "sound/effects/UI/menuSelection.wav"},
-	{MenuBackward, resourcesPath + "sound/effects/UI/menuBack.wav"}
+	{MenuBackward, resourcesPath + "sound/effects/UI/menuBack.wav"},
+
+	{ PadSound, resourcesPath + "sound/effects/padSound.wav" },
+	// boiler
+	{ BoilerShoot, resourcesPath + "sound/effects/boilerShoot.wav" },
+	{ BoilerButtonSlow, resourcesPath + "sound/effects/boilerSlow.wav" },
+	{ BoilerButtonFast, resourcesPath + "sound/effects/boilerFast.wav" },
+
+	// Weapons
+	{ BananaShoot, resourcesPath + "sound/effects/bananaShoot.wav"},
+	{ ExtinguisherSound, resourcesPath + "sound/effects/extinguisherSound.wav" },
+	{ PickSound, resourcesPath + "sound/effects/pick.wav"}
 };
 
 map<std::string, Resources::TextureId> Resources::tilesetTag_{
-
 };

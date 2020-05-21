@@ -5,6 +5,7 @@
 #include "ComponentType.h"
 #include "SDL_Game.h"
 #include "checkML.h"
+#include "Resources.h"
 
 class Entity;
 struct Collision;
