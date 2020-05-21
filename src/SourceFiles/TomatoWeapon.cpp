@@ -112,6 +112,8 @@ void TomatoWeapon::PickObjectBy(Hands* playerHands)
 		pickUpCollider.categoryBits = 0;
 		pickUpCollider.maskBits = 0;
 		mainCollider_->getFixture(0)->SetFilterData(pickUpCollider);
+
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::PickSound, 0);
 	}
 }
 

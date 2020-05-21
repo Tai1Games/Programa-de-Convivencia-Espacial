@@ -174,7 +174,6 @@ vector<Resources::SoundInfo> Resources::sounds_{
 	//{ Shoot, "../assets/game/sound/shoot.mp3" },
 	{ StartGame, resourcesPath + "sound/effects/UI/enterGame.mp3" },
 
-	{ ExtinguisherSound, resourcesPath + "sound/effects/extinguisherSound.wav" },
 	{ PadSound, resourcesPath + "sound/effects/padSound.wav" },
 	// boiler
 	{ BoilerShoot, resourcesPath + "sound/effects/boilerShoot.wav" },
@@ -182,7 +181,9 @@ vector<Resources::SoundInfo> Resources::sounds_{
 	{ BoilerButtonFast, resourcesPath + "sound/effects/boilerFast.wav" },
 
 	// Weapons
-	{ BananaShoot, resourcesPath + "sound/effects/bananaShoot.wav"}
+	{ BananaShoot, resourcesPath + "sound/effects/bananaShoot.wav"},
+	{ ExtinguisherSound, resourcesPath + "sound/effects/extinguisherSound.wav" },
+	{ PickSound, resourcesPath + "sound/effects/pick.wav"}
 };
 
 map<std::string, Resources::TextureId> Resources::tilesetTag_{

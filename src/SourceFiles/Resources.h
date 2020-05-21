@@ -184,15 +184,16 @@ public:
 		// sound effects
 		StartGame,
 
-		ExtinguisherSound,
 		PadSound,
+		PickSound,
 		// boiler
 		BoilerShoot,
 		BoilerButtonSlow,
 		BoilerButtonFast,
 
 		// Weapons
-		BananaShoot
+		BananaShoot,
+		ExtinguisherSound
 	};
 
 	enum FontId : std::size_t {
