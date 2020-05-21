@@ -15,18 +15,17 @@ void Fireball::init()
 	coinDamage_ = CONST(int, "FIREBALL_COIN_DMG");
 }
 
-void Fireball::setActive(bool to,b2Vec2 pos)
+void Fireball::setActive(bool to, b2Vec2 pos, double angle)
 {
 	viewer_->setDrawable(to);
 	col_->getFixture(0)->GetBody()->SetEnabled(to);
 	entity_->setActive(to);
-	col_->getFixture(0)->GetBody()->SetTransform(pos, 0);
+	col_->getFixture(0)->GetBody()->SetTransform(pos, angle);
 	if (to) {
-		col_->createCircularFixture(CONST(double, "FIREBALL_RADIUS"), CONST(double, "FIREBALL_DENSITY"), CONST(double, "FIREBALL_FRICTION"), CONST(double, "FIREBALL_RESTITUTION"), Collider::CollisionLayer::NormalObject, true);
+		col_->createCircularFixture(CONST(double, "FIREBALL_RADIUS_PHYSICS"), CONST(double, "FIREBALL_DENSITY"), CONST(double, "FIREBALL_FRICTION"), CONST(double, "FIREBALL_RESTITUTION"), Collider::CollisionLayer::NormalObject, true);
 		viewer_->startAnimation();
 	}
 	else if (col_->getNumFixtures() > 1) col_->destroyFixture(1);
-
 }
 
 void Fireball::onCollisionEnter(Collision* c)

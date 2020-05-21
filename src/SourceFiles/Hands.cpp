@@ -30,11 +30,6 @@ void Hands::draw() const
 	SDL_Rect playerRect = collider_->getRectRender();
 	SDL_Rect destRect{ playerRect.x + playerRect.w / 2 - handSize_ / 2,playerRect.y + playerRect.h / 2 - handSize_ / 2 , handSize_ , handSize_ };
 
-	//SDL_Rect clip;
-	//clip.w = tex_->getWidth() / WEAPON_NUMBER;
-	//clip.h = tex_->getHeight();
-	//clip.y = 0; clip.x = clip.w * currentWeaponID_;
-
 	tex_->render(destRect, angle_, currentWeaponID_, 0, Flipped_);
 }
 

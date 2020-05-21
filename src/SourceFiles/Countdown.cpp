@@ -4,7 +4,10 @@ void Countdown::update() {
 	if (currentFrame_ < maxFrames_) {
 		currentFrame_++;
 		currentSize_ = minSize_ + sizeChangeRate_ * (4 * currentFrame_ % maxFrames_); //tamaño actual teniendo en cuenta que hay 4 texturas
-		if (currentFrame_ == maxFrames_) gMode_->activateControl();
+		if (currentFrame_ == maxFrames_) {
+			gMode_->activateControl();
+			if (fGen_ != nullptr) fGen_->activate(true);
+		}
 	}
 }
 

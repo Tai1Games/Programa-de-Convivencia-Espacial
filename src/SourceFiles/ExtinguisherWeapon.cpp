@@ -2,7 +2,8 @@
 #include "ParticleEmitter.h"
 #include "Hands.h"
 
-ExtinguisherWeapon::ExtinguisherWeapon(WeaponID wId, int impctDmg, int cooldownFrames) : ActionableWeapon(ComponentType::ExtinguisherWeapon, wId, impctDmg, cooldownFrames),
+ExtinguisherWeapon::ExtinguisherWeapon(WeaponID wId, int impctDmg, int cooldownFrames, int impctForce) : 
+	ActionableWeapon(wId, impctDmg, cooldownFrames, impctForce),
 impulse_(0.0), PIXELS_PER_METER(0), WINDOW_HEIGHT(0), emitter_(nullptr) {}
 
 void ExtinguisherWeapon::init() {
@@ -12,12 +13,14 @@ void ExtinguisherWeapon::init() {
 	impulse_ = CONST(float, "EXTINGUISHER_IMPULSE");
 	PIXELS_PER_METER = CONST(float, "PIXELS_PER_METER");
 	WINDOW_HEIGHT = CONST(int, "WINDOW_HEIGHT");
+	armLength_ = CONST(float, "EXTINGUISHER_ARM_LENGTH");
 }
 
 void ExtinguisherWeapon::action() {
 	if (!beenActivated_) {
 		b2Vec2 handDirection = currentHand_->getDir();
 		Collider* playerCollider = currentHand_->getEntity()->getComponent<Collider>(ComponentType::Collider);
+		emitter_->setOffset({ handDirection.x * armLength_, handDirection.y * armLength_ });
 		emitter_->setPositionCollider(playerCollider);
 		emitter_->setDirection({ handDirection.x, handDirection.y });
 		emitter_->PlayStop();
@@ -32,4 +35,5 @@ void ExtinguisherWeapon::action() {
 void ExtinguisherWeapon::UnPickObject() {
 	emitter_->setPositionCollider(GETCMP1_(Collider));
 	Weapon::UnPickObject();
+	emitter_->PlayStop();
 }

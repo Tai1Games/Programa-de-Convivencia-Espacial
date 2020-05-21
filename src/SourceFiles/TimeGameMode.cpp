@@ -62,7 +62,7 @@ void TimeGameMode::render()
 void TimeGameMode::update()
 {
 	updateTime(playerKills_);
-	GameMode::update();
+	AbstractTimedGameMode::update();
 }
 
 void TimeGameMode::addPoints(int playerID)
@@ -94,7 +94,7 @@ void TimeGameMode::renderKillMarker() {
 
 		SDL_Rect skullImageRect;
 		skullImageRect.x = killsTextTexture.x + killsTextTexture.w + skullUIMarginX_;
-		skullImageRect.y = killsTextTexture.y - killsTextTexture.h/2;
+		skullImageRect.y = killsTextTexture.y - killsTextTexture.h * 0.5;
 		skullImageRect.w = skullUISize_;
 		skullImageRect.h = skullUISize_;
 

@@ -324,6 +324,9 @@
     <ClInclude Include="AbstractTimedGameMode.h">
       <Filter>Header Files\GameModes</Filter>
     </ClInclude>
+    <ClInclude Include="ConfettiWeapon.h">
+      <Filter>Header Files\Components\Weapons</Filter>
+    </ClInclude>
     <ClInclude Include="WiFiBullet.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -581,11 +584,11 @@
     <ClCompile Include="AnimatedPlayer.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
-    <ClCompile Include="StaplerWeapon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AbstractTimedGameMode.cpp">
       <Filter>Source Files\GameModes</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfettiWeapon.cpp">
+      <Filter>Source Files\Components\Weapons</Filter>
     </ClCompile>
     <ClCompile Include="WiFiBullet.cpp">
       <Filter>Source Files\Components</Filter>
@@ -602,6 +605,9 @@
     <ClCompile Include="AbstractViewers.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
     <ClCompile Include="AdvancedAnimatedViewer.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
@@ -615,6 +621,25 @@
       <Filter>Source Files\Managers &amp; Handlers</Filter>
     </ClCompile>
     <ClCompile Include="MultiplayerHost.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StaplerWeapon.cpp">
+      <Filter>Source Files\Components\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfettiPool.cpp">
+      <Filter>Source Files</Filter>
+
+    </ClCompile>
+    <ClCompile Include="WeaponFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="TimedDespawn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponSpawner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StaplerPool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

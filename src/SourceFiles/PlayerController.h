@@ -19,6 +19,7 @@ private:
 	float maxImpulseGrabbed_;
 	float maxImpulseFloating_;
 	float maxSpeedAfterImpulse_;
+	float impulseRadError_; //el angulo de impulso permitio es PI + 2*impulseRadError
 
 	int playerNumber_;
 	b2Vec2 dirImpulse_;
@@ -33,6 +34,8 @@ private:
 
 	int impulseCooldown_ = 0;
 	int impulseCooldownTimer_ = 0;
+
+	bool isImpulseValid(const b2Vec2& dir); //prevents the player from impulsing against the body is attached to
 public:
 	PlayerController();
 	virtual ~PlayerController() { Component::~Component(); };
@@ -44,5 +47,5 @@ public:
 	float getImpulseForce() { return impulseForce_; };
 	void resetImpulseForce() { impulseForce_ = 0;  chargedFrames_ = 0; };
 	bool isChargingImpulse() { return chargingImpulse_; };
+	bool getImpulseValid();
 };
-
