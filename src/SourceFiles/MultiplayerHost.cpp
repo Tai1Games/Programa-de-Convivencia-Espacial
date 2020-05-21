@@ -1,6 +1,9 @@
 #include "MultiplayerHost.h"
+#include "SDL_Game.h"
+#include "MatchInfo.h"
 #include <vector>
 #include <sstream>
+#include <iostream>
 
 MultiplayerHost::MultiplayerHost() {
 	if (SDLNet_Init() < 0) {
@@ -67,7 +70,7 @@ std::string MultiplayerHost::getHostIpAddress() {
 
 	SDLNet_TCP_Close(conn);
 
-	
+
 	return tokens.back();
 }
 
@@ -77,8 +80,66 @@ void MultiplayerHost::checkActivity() {
 		//Alguien se une
 		if (SDLNet_SocketReady(masterSocket_)) {
 			TCPsocket client = SDLNet_TCP_Accept(masterSocket_);
+
+			int clientPlace = 0;
+			while (clientPlace < 3 && clients_[clientPlace] != nullptr)
+				clientPlace++;
+
+			if (clientPlace < 3) {
+				std::cout << "Jugador conectado, id asignada: " << clientPlace << std::endl;
+				SDLNet_TCP_AddSocket(socketSet_, client);
+				SDLNet_TCP_Send(client, "0", 9);
+			}
+			else {
+				SDLNet_TCP_Send(client, "L", 1);
+			}
 		}
 
 		//Revisar actividad de los demas
+		for (int i = 0; i < 3; i++) {
+			if (clients_[i] != nullptr && SDLNet_SocketReady(clients_[i])) {
+				memset(buffer, 0, 2048);
+				receivedBytes_ = SDLNet_TCP_Recv(clients_[i], buffer, 1);
+				if (receivedBytes_ <= 0) {
+					//Usuario ha desconectado o perdido conexion
+					SDLNet_TCP_Close(clients_[i]);
+					SDLNet_TCP_DelSocket(socketSet_, clients_[i]);
+					clients_[i] = nullptr;
+				}
+				else {
+					//Tratamiento de mensajes de los jugadores
+					switch (buffer[0]) {
+					case 'P':
+						//Recibimos cuantos jugadores quiere agregar el jugador
+						receivedBytes_ = SDLNet_TCP_Recv(clients_[i], buffer, sizeof(PlayerInfoPacket) - 1);
+						//Revisamos si caben el numero que quieren entrar
+						int nStartingPlayers = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers();
+						int nPlayersIncoming = (int)buffer[0];
+						if (nPlayersIncoming + nStartingPlayers < 5) {
+							//Aceptamos
+							std::vector<MatchInfo::PlayerInfo*>* playersVector = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
+							for (int i = 0; i < nPlayersIncoming; i++) {
+								playersVector->push_back(new MatchInfo::PlayerInfo(SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers(), new ClientBinder(), buffer[i + 1]));
+								SDL_Game::instance()->getStateMachine()->getMatchInfo()->updateNumberOfPlayers();
+							}
+
+							//Enviamos de vuelta al cliente la informacion de los jugadores
+							buffer[0] = 'P';
+							buffer[1] = nPlayersIncoming;
+							for (int i = 0; i < nPlayersIncoming; i++) {
+								buffer[i + 2] = nStartingPlayers + i;
+							}
+						}
+						else { //Ya hay demasiados jugadores, avisamos que estamos llenos y tiramos la conexion
+							SDLNet_TCP_Send(clients_[i], "L", 1);
+							SDLNet_TCP_Close(clients_[i]);
+							SDLNet_TCP_DelSocket(socketSet_, clients_[i]);
+							clients_[i] = nullptr;
+						}
+						break;
+					}
+				}
+			}
+		}
 	}
 }

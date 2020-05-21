@@ -5,13 +5,6 @@
 #include "MatchInfo.h"
 #include <queue>
 
-/*
-* Tipos de mensajes del servidor
-* 1 -> Te has conectado correctamente
-* 2 -> Lo que sigue es la informacion de un sprite
-* 0 -> He acabado de enviar sprites
-*/
-
 class ClientState :
 	public GameState
 {

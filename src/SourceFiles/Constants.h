@@ -92,6 +92,7 @@ enum MapID {
 Identificadores de paquetes
 A -> Audio
 I -> Input
+L -> Error, el servidor no puede recibir tantos jugadores
 F -> Final de stream de paquetes
 S -> Sprite
 P -> Informacion de jugadores
@@ -125,7 +126,17 @@ struct SpritePacket {
 
 struct AudioPacket {
 	char packetId = 'A'; //Audio
+	char isMusic;
 	char soundId;
+	char nLoops = 0; //cambiar en cliente
+};
+
+struct PlayerInfoPacket {
+	char packetId = 'P';
+	char numberOfPlayers;
+	char player1Info;
+	char player2Info;
+	char player3Info;
 };
 
 #pragma pack(pop)
