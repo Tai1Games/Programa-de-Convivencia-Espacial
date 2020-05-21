@@ -81,7 +81,7 @@ Entity* WeaponFactory::makeExtinguisher(EntityManager* entityManager, b2World* p
 		CONST(double, "EXTINGUISHER_LINEAR_DRAG"), CONST(double, "EXTINGUISHER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	entity->addComponent<Transform>(SDL_Rect{ CONST(int, "EXTINGUISHER_X_SPRITE"),CONST(int, "EXTINGUISHER_Y_SPRITE"), CONST(int, "EXTINGUISHER_W_SPRITE"), CONST(int, "EXTINGUISHER_H_SPRITE") }, aux);
 	entity->addComponent<Viewer>(Resources::Extinguisher);
-	ParticleEmitter* emitter = entity->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Foam, 6, 4, 5, 1000, 40, 1000, 0.5, 20);
+	ParticleEmitter* emitter = entity->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Foam, 6, 4, 10, 200, 80, 1000, 0.5, 20);
 	entity->addComponent<ExtinguisherWeapon>(WeaponID::Extinguisher, CONST(int, "EXTINGUISHER_IMPACT_DAMAGE"),
 		CONST(int, "EXTINGUISHER_COOLDOWN_FRAMES"), CONST(int, "EXTINGUISHER_IMPACT_FORCE"));
 	entity->addComponent<ColliderViewer>();
