@@ -23,5 +23,7 @@ public:
 	~MultiplayerHost();
 
 	void checkActivity();
+	void handlePlayerJoin(int clientNumber);
+	void handlePlayerInput(int clientNumber);
 };
 

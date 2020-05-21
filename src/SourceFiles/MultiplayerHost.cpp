@@ -110,36 +110,60 @@ void MultiplayerHost::checkActivity() {
 					//Tratamiento de mensajes de los jugadores
 					switch (buffer[0]) {
 					case 'P':
-						//Recibimos cuantos jugadores quiere agregar el jugador
-						receivedBytes_ = SDLNet_TCP_Recv(clients_[i], buffer, sizeof(PlayerInfoPacket) - 1);
-						//Revisamos si caben el numero que quieren entrar
-						int nStartingPlayers = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers();
-						int nPlayersIncoming = (int)buffer[0];
-						if (nPlayersIncoming + nStartingPlayers < 5) {
-							//Aceptamos
-							std::vector<MatchInfo::PlayerInfo*>* playersVector = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
-							for (int i = 0; i < nPlayersIncoming; i++) {
-								playersVector->push_back(new MatchInfo::PlayerInfo(SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers(), new ClientBinder(), buffer[i + 1]));
-								SDL_Game::instance()->getStateMachine()->getMatchInfo()->updateNumberOfPlayers();
-							}
-
-							//Enviamos de vuelta al cliente la informacion de los jugadores
-							buffer[0] = 'P';
-							buffer[1] = nPlayersIncoming;
-							for (int i = 0; i < nPlayersIncoming; i++) {
-								buffer[i + 2] = nStartingPlayers + i;
-							}
-						}
-						else { //Ya hay demasiados jugadores, avisamos que estamos llenos y tiramos la conexion
-							SDLNet_TCP_Send(clients_[i], "L", 1);
-							SDLNet_TCP_Close(clients_[i]);
-							SDLNet_TCP_DelSocket(socketSet_, clients_[i]);
-							clients_[i] = nullptr;
-						}
+						handlePlayerJoin(i);
+						break;
+					case 'I':
+						//Nos llega input del jugador
+						handlePlayerInput(i);
 						break;
 					}
 				}
 			}
 		}
 	}
+}
+
+
+void MultiplayerHost::handlePlayerJoin(int clientNumber) {
+	//Recibimos cuantos jugadores quiere agregar el jugador
+	receivedBytes_ = SDLNet_TCP_Recv(clients_[clientNumber], buffer, sizeof(PlayerInfoPacket) - 1);
+	//Revisamos si caben el numero que quieren entrar
+	int nStartingPlayers = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers();
+	int nPlayersIncoming = (int)buffer[0];
+	if (nPlayersIncoming + nStartingPlayers < 5) {
+		//Aceptamos
+		std::vector<MatchInfo::PlayerInfo*>* playersVector = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
+		for (int i = 0; i < nPlayersIncoming; i++) {
+			playersVector->push_back(new MatchInfo::PlayerInfo(SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers(), new ClientBinder(), buffer[i + 1]));
+			SDL_Game::instance()->getStateMachine()->getMatchInfo()->updateNumberOfPlayers();
+		}
+
+		//Enviamos de vuelta al cliente la informacion de los jugadores
+		buffer[0] = 'P';
+		buffer[1] = nPlayersIncoming;
+		for (int i = 0; i < nPlayersIncoming; i++) {
+			buffer[i + 2] = nStartingPlayers + i;
+		}
+
+		SDLNet_TCP_Send(clients_[clientNumber], buffer, sizeof(PlayerInfoPacket));
+	}
+	else { //Ya hay demasiados jugadores, avisamos que estamos llenos y tiramos la conexion
+		SDLNet_TCP_Send(clients_[clientNumber], "L", 1);
+		SDLNet_TCP_Close(clients_[clientNumber]);
+		SDLNet_TCP_DelSocket(socketSet_, clients_[clientNumber]);
+		clients_[clientNumber] = nullptr;
+	}
+}
+
+void MultiplayerHost::handlePlayerInput(int clientNumber) {
+	receivedBytes_ = SDLNet_TCP_Recv(clients_[i], buffer, sizeof(InputPacket) - 1);
+
+	std::vector<MatchInfo::PlayerInfo*>* playersVector = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
+
+	InputPacket inputPacket{ 'I',buffer[0],(bool)buffer[1],(bool)buffer[2],(bool)buffer[3],
+	,(bool)buffer[4] ,(bool)buffer[5], (float)buffer[6], (float)buffer[8],
+	,(bool)buffer[10] ,(bool)buffer[11] ,(bool)buffer[12] ,(bool)buffer[13] ,(bool)buffer[14] ,
+	,(bool)buffer[15] ,(bool)buffer[16] }; //Duda para pasar de buffer a float
+
+	(*playersVector)[buffer[0]]->inputBinder->syncInput(inputPacket);
 }
