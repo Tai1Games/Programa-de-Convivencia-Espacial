@@ -174,6 +174,11 @@ vector<Resources::SoundInfo> Resources::sounds_{
 	//{ Shoot, "../assets/game/sound/shoot.mp3" },
 	{ StartGame, resourcesPath + "sound/effects/UI/enterGame.mp3" },
 
+	//Menu
+	{MenuMove, resourcesPath + "sound/effects/UI/menuMove.wav"},
+	{MenuForward, resourcesPath + "sound/effects/UI/menuSelection.wav"},
+	{MenuBackward, resourcesPath + "sound/effects/UI/menuBack.wav"},
+
 	{ PadSound, resourcesPath + "sound/effects/padSound.wav" },
 	// boiler
 	{ BoilerShoot, resourcesPath + "sound/effects/boilerShoot.wav" },
