@@ -33,6 +33,8 @@ void LobbyState::init()
 	ctrlTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::ControllerIcon);
 	kbTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::KeyboardIcon);
 	mouseTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::MouseIcon);
+	pressReadyTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::PressReady);
+	readyTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::Ready);
 
 
 	verticalIniPoint_ = CONST(int, "WINDOW_HEIGHT") / 2 - playerTexture_->getHeight() / 2;
@@ -40,6 +42,7 @@ void LobbyState::init()
 	horizontalOffset_ = playerTexture_->getWidth() + CONST(int, "LOBBY_OFFSET_X");
 	playerIdVerticalOffset_ = playerTexture_->getWidth() + CONST(int, "LOBBY_PLAYERID_OFFSET_Y");
 	iconHorizontalOffset_ = CONST(int, "LOBBY_ICON_OFFSET");
+	pressReadyOffset_ = CONST(int, "LOBBY_READY_OFFSET");
 }
 
 void LobbyState::update()
@@ -126,11 +129,28 @@ void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
 		else if (playerInfo->kbmId != -1) {
 			mouseTexture_->render(destRect);
 		}
+
+		if (playerInfo->ready) {
+			destRect.w = readyTexture_->getWidth();
+			destRect.h = readyTexture_->getHeight();
+			destRect.x = horizontalIniPoint_ + index * horizontalOffset_;
+			destRect.y = playerTexture_->getHeight() + pressReadyOffset_ + verticalIniPoint_;
+			readyTexture_->render(destRect);
+		}
+		else {
+			destRect.w = pressReadyTexture_->getWidth() / 2;
+			destRect.h = pressReadyTexture_->getHeight() / 2;
+			destRect.x = horizontalIniPoint_ + index * horizontalOffset_;
+			destRect.y = playerTexture_->getHeight() + pressReadyOffset_ + verticalIniPoint_;
+			pressReadyTexture_->render(destRect);
+		}
 	}
+
 }
 
 void LobbyState::playerOut(std::vector<PlayerLobbyInfo>::iterator it)
 {
+	std::cout << "un jugador ha salido" << endl;
 	if (it != joinedPlayers_.end())
 	{
 		//it es el jugador que se quiere salir
@@ -283,6 +303,7 @@ void LobbyState::handleJoinedPlayers() {
 		}
 		else if (player.inputBinder->menuForward()) {
 			player.ready = true;
+		std:cout << "Jufador listisimo" << endl;
 		}
 		else if (player.inputBinder->menuBack()) {
 			if (player.ready)
