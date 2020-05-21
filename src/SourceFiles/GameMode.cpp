@@ -59,7 +59,6 @@ void GameMode::init(PlayState* game) {
 void GameMode::activateControl() {
 	for (Entity* p : players_) {
 		p->addComponent<Hands>(Resources::Hands);
-		p->addComponent<AnimatedViewer>(Resources::Hands, 20);
 		p->addComponent<AttachesToObjects>();
 		p->addComponent<PlayerController>();
 		p->addComponent<ImpulseViewer>(Resources::ImpulseArrow, Resources::ImpulseBackground);

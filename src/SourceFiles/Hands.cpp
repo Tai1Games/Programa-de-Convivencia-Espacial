@@ -3,7 +3,6 @@
 #include "Resources.h"
 #include "InputHandler.h"
 #include "InputBinder.h"
-#include "AnimatedViewer.h"
 
 Hands::Hands(int textureId, WeaponID wId) :
 	Component(ComponentType::Hands),
@@ -15,7 +14,6 @@ void Hands::init()
 {
 	playerData_ = GETCMP1_(PlayerData);
 	collider_ = GETCMP1_(Collider);
-	viewerHands_ = GETCMP1_(AnimatedViewer);
 	armLengthPhysics_ = CONST(double, "ARM_LENGTH_PHYSICS");
 	handSize_ = (CONST(double, "HAND_SIZE"));
 	ib_ = playerData_->getBinder();
@@ -26,13 +24,13 @@ void Hands::init()
 
 void Hands::draw() const
 {
-	/*b2Vec2 stickDir = dir_;
+	b2Vec2 stickDir = dir_;
 
 	double angle = std::atan2((double)stickDir.x, -(double)stickDir.y) * (180.0 / PI);
 	SDL_Rect playerRect = collider_->getRectRender();
 	SDL_Rect destRect{ playerRect.x + playerRect.w / 2 - handSize_ / 2,playerRect.y + playerRect.h / 2 - handSize_ / 2 , handSize_ , handSize_ };
 
-	tex_->render(destRect, angle_, currentWeaponID_, 0, Flipped_);*/
+	tex_->render(destRect, angle_, currentWeaponID_, 0, Flipped_);
 }
 
 void Hands::handleInput()
@@ -59,19 +57,10 @@ void Hands::update()
 
 	pos_.Set(collider_->getPos().x, collider_->getPos().y);
 	handPos_.Set(pos_.x + dir_.x * 1, pos_.y - dir_.y * 1);
-
-	b2Vec2 stickDir = dir_;
-
-	double angle = std::atan2((double)stickDir.x, -(double)stickDir.y) * (180.0 / PI);
-
-	SDL_Rect playerRect = collider_->getRectRender();
-	SDL_Rect destRect{ playerRect.x + playerRect.w / 2 - handSize_ / 2,playerRect.y + playerRect.h / 2 - handSize_ / 2 , handSize_ , handSize_ };
-
-	//tex_->render(destRect, angle_, currentWeaponID_, 0, Flipped_);
 }
 
 void Hands::setWeapon(WeaponID wId, Weapon* w)
 {
-	viewerHands_->setFrame(wId);
+	currentWeaponID_ = wId;
 	currentWeapon_ = w;
 }
