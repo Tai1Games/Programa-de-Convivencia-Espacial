@@ -110,11 +110,11 @@ vector<Resources::ImageInfo> Resources::images_{
 vector<Resources::TextMsgInfo> Resources::messages_{
 	//Mensajes predeterminados {nombre_en_enum, texto, color, fuente}. Ejemplo abajo
 	//{ HelloWorld, "Hello World", { COLOR(0xaaffffff) }, ARIAL16 }
-	{ PauseText, "PAUSA", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ ResumeText, "Reanudar", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ MusicText, "Musica", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ EffectsText, "Efectos", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ ExitText, "Salir", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ PauseText, "PAUSE", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ ResumeText, "Resume", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ MusicText, "Music", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ EffectsText, "Effects", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ MainMenuText, "Main Menu", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 
 	//Menu Provisional
 	//gamemodes

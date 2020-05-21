@@ -121,7 +121,7 @@ public:
 		ResumeText,
 		MusicText,
 		EffectsText,
-		ExitText,
+		MenuText,
 
 		//modes
 		Capitalism,
