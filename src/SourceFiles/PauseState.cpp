@@ -34,7 +34,7 @@ void PauseState::init()
 	btns_.push_back(resumeText->addComponent<UIViewer>(Resources::ResumeText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) + offsetBetweenButtons_ * -1), 1.5, 0));
 	btns_.push_back(musicText->addComponent<UIViewer>(Resources::MusicText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) + offsetBetweenButtons_ * 0), 1.5, 0));
 	btns_.push_back(effectsText->addComponent<UIViewer>(Resources::EffectsText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) + offsetBetweenButtons_ * 1), 1.5, 0));
-	btns_.push_back(exitText->addComponent<UIViewer>(Resources::MenuText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) + +offsetBetweenButtons_ * 2), 1.5, 0));
+	btns_.push_back(exitText->addComponent<UIViewer>(Resources::MainMenuText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) + +offsetBetweenButtons_ * 2), 1.5, 0));
 
 	buttonSelectorImage_ = rocket->addComponent<UIViewer>(Resources::Rocket, b2Vec2(btns_[selectedBtn_]->getPosUIElement().x - 160, btns_[selectedBtn_]->getPosUIElement().y - 30), 0.8, 90);
 	
