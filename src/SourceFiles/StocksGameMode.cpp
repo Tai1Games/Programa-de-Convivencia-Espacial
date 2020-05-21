@@ -58,6 +58,8 @@ bool StocksGameMode::onPlayerDead(int id) { //Returns false when player runs out
 	if (id < playerStocks_.size()) {
 		playerStocks_[id]--;
 		if (playerStocks_[id] <= 0) { 
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::EliminatedSound, 0);
+
 			roundResults_.push_back(players_[id]);
 			if (roundResults_.size() == playerStocks_.size() - 1) {
 				int k = 0;

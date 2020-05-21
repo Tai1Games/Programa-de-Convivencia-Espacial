@@ -192,7 +192,8 @@ vector<Resources::SoundInfo> Resources::sounds_{
 
 	//Player
 	{ RespawnSound, resourcesPath + "sound/effects/RespawnSound.wav"},
-	{ DeathSound, resourcesPath + "sound/effects/DeathSound.wav" }
+	{ DeathSound, resourcesPath + "sound/effects/DeathSound.wav" },
+	{ EliminatedSound, resourcesPath + "sound/effects/EliminatedSound.wav" }
 };
 
 map<std::string, Resources::TextureId> Resources::tilesetTag_{

@@ -197,6 +197,8 @@ public:
 		//Player
 		DeathSound,
 		RespawnSound,
+		EliminatedSound,
+
     //menu
 		MenuMove,
 		MenuForward,
