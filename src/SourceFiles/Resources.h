@@ -193,7 +193,10 @@ public:
 		// Weapons
 		BananaShoot,
 		ExtinguisherSound,
-    
+
+		//Player
+		DeathSound,
+		RespawnSound,
     //menu
 		MenuMove,
 		MenuForward,

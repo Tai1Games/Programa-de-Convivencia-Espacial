@@ -188,7 +188,11 @@ vector<Resources::SoundInfo> Resources::sounds_{
 	// Weapons
 	{ BananaShoot, resourcesPath + "sound/effects/bananaShoot.wav"},
 	{ ExtinguisherSound, resourcesPath + "sound/effects/extinguisherSound.wav" },
-	{ PickSound, resourcesPath + "sound/effects/pick.wav"}
+	{ PickSound, resourcesPath + "sound/effects/pick.wav"},
+
+	//Player
+	{ RespawnSound, resourcesPath + "sound/effects/RespawnSound.wav"},
+	{ DeathSound, resourcesPath + "sound/effects/DeathSound.wav" }
 };
 
 map<std::string, Resources::TextureId> Resources::tilesetTag_{

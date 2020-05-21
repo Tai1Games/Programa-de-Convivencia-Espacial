@@ -40,8 +40,11 @@ bool Health::subtractLife(int damage)
 		if (lives_ > 0) {
 			lives_ -= damage;
 			invFrames_ = INV_FRAMES_HIT_;
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::DeathSound, 0);
+
 			if (lives_ <= 0) {
 				lives_ = 0;
+				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::RespawnSound, 0);
 				return false;
 			}	//Evitar vidas negativas
 			return true;
