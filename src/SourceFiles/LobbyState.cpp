@@ -138,8 +138,8 @@ void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
 			readyTexture_->render(destRect);
 		}
 		else {
-			destRect.w = pressReadyTexture_->getWidth() / 2;
-			destRect.h = pressReadyTexture_->getHeight() / 2;
+			destRect.w = pressReadyTexture_->getWidth();
+			destRect.h = pressReadyTexture_->getHeight();
 			destRect.x = horizontalIniPoint_ + index * horizontalOffset_;
 			destRect.y = playerTexture_->getHeight() + pressReadyOffset_ + verticalIniPoint_;
 			pressReadyTexture_->render(destRect);
