@@ -9,9 +9,9 @@ void ColliderViewer::init() {
 	Viewer::init();
 	renderer_ = SDL_Game::instance()->getRenderer();
 	points_ = new SDL_Point[5];
-    collider_ = transform_->getCollider();
-    body_ = collider_->getBody();
-    PIXELS_PER_METER = CONST(double, "PIXELS_PER_METER");
+	collider_ = transform_->getCollider();
+	body_ = collider_->getBody();
+	PIXELS_PER_METER = CONST(double, "PIXELS_PER_METER");
 }
 
 void ColliderViewer::drawRect(SDL_Rect* rect) const {
@@ -39,32 +39,32 @@ void ColliderViewer::setPoints(double originX, double originY, double width, dou
 }
 
 void ColliderViewer::draw() const {
-	if (drawable_) {
-		// lista de fixtures del body
-		b2Fixture* f = body_->GetFixtureList();
-		int maxFixtures = collider_->getNumFixtures() - 1;
-		int i = 0;
-		// recorre todos los fixtures del objeto
-		while (f != nullptr) {
-			/*if (f->GetNext() != nullptr)    // debug
-				std::cout << "collider: " <<((f->GetShape()->GetType() == b2Shape::e_circle) ? "circle" : "rect") << endl
-				<< ((f->GetNext()->GetShape()->GetType() == b2Shape::e_circle) ? "circle" : "rect") << endl;*/
+	//if (drawable_) {
+	//	// lista de fixtures del body
+	//	b2Fixture* f = body_->GetFixtureList();
+	//	int maxFixtures = collider_->getNumFixtures() - 1;
+	//	int i = 0;
+	//	// recorre todos los fixtures del objeto
+	//	while (f != nullptr) {
+	//		/*if (f->GetNext() != nullptr)    // debug
+	//			std::cout << "collider: " <<((f->GetShape()->GetType() == b2Shape::e_circle) ? "circle" : "rect") << endl
+	//			<< ((f->GetNext()->GetShape()->GetType() == b2Shape::e_circle) ? "circle" : "rect") << endl;*/
 
-			uint16 layer = f->GetFilterData().categoryBits;             // obtiene la capa de la fixture
-			int posColor = (layer > 0) ? round(log2(layer)) : 8;        // escoge color de dibujado según la capa
-			SDL_SetRenderDrawColor(renderer_, colors[posColor].r, colors[posColor].g, colors[posColor].b, SDL_ALPHA_OPAQUE);   // cambia color de dibujado
+	//		uint16 layer = f->GetFilterData().categoryBits;             // obtiene la capa de la fixture
+	//		int posColor = (layer > 0) ? round(log2(layer)) : 8;        // escoge color de dibujado según la capa
+	//		SDL_SetRenderDrawColor(renderer_, colors[posColor].r, colors[posColor].g, colors[posColor].b, SDL_ALPHA_OPAQUE);   // cambia color de dibujado
 
-			SDL_Rect renderRect = collider_->getRectRender(maxFixtures - i);
-			(f->GetShape()->GetType() != b2Shape::e_circle) ? // pregunta tipo de collider
-				drawRect(&renderRect)        // collider rectangular
-				:
-				drawCircle(&renderRect);     // collider circular
+	//		SDL_Rect renderRect = collider_->getRectRender(maxFixtures - i);
+	//		(f->GetShape()->GetType() != b2Shape::e_circle) ? // pregunta tipo de collider
+	//			drawRect(&renderRect)        // collider rectangular
+	//			:
+	//			drawCircle(&renderRect);     // collider circular
 
-			f = f->GetNext();   // siguiente fixture del body
-			i++;
-		}
-		SDL_SetRenderDrawColor(renderer_, 0, 0, 0, SDL_ALPHA_OPAQUE);
-	}
+	//		f = f->GetNext();   // siguiente fixture del body
+	//		i++;
+	//	}
+	//	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, SDL_ALPHA_OPAQUE);
+	//}
 }
 
 // este algoritmo es bastante r�pido (~500 microsegundos)
