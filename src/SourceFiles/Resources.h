@@ -185,6 +185,8 @@ public:
 
 		// sound effects
 		StartGame,
+		ThreeTwoOneSound,
+		GoSound,
 		PadSound,
 		PickSound,
 		// boiler
