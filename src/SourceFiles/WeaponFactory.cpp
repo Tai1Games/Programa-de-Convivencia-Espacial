@@ -100,7 +100,7 @@ Entity* WeaponFactory::makeTomato(Entity* e, EntityManager* entityManager, b2Wor
 		CONST(double, "TOMATO_FRICTION"), CONST(double, "TOMATO_RESTITUTION"),
 		CONST(double, "TOMATO_LINEAR_DRAG"), CONST(double, "TOMATO_ANGULAR_DRAG"), Collider::CollisionLayer::NormalObject, false);
 	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "TOMATO_RADIUS_SPRITE"), CONST(int, "TOMATO_RADIUS_SPRITE") }, aux);
-	e->addComponent<AnimatedViewer>(Resources::Tomato, (int)(CONST(int, "TOMATO_TIME_CHARGE") / CONST(int, "TOMATO_N_FRAMES_ACTIVATED")));
+	e->addComponent<AnimatedViewer>(Resources::Tomato, (int)(CONST(int, "TOMATO_TIME_CHARGE") * FRAMES_PER_SECOND/ CONST(int, "TOMATO_N_FRAMES_ACTIVATED")));
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::TomatoRing, 5, 1, 5, 1000, 20, 100, 0, 360);
 	pE->setMaxParticles(1);
 	e->addComponent<TomatoWeapon>();

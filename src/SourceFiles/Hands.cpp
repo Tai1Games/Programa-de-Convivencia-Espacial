@@ -5,7 +5,7 @@
 #include "InputBinder.h"
 
 Hands::Hands(int textureId, WeaponID wId) :
-	AnimatedViewer(textureId, 20, ComponentType::Hands)
+	AnimatedViewer(textureId, CONST(int, "HAND_BASE_ANIMATION_SPEED"), ComponentType::Hands)
 {
 }
 
@@ -25,13 +25,11 @@ void Hands::draw() const
 {
 	b2Vec2 stickDir = dir_;
 	double angle = std::atan2((double)stickDir.x, -(double)stickDir.y) * (180.0 / PI) + 90;
-	
-	if (drawable_) {
-		SDL_Rect drawRect = transform_->getRectRender();
-		drawRect.x += renderOffset_.x;
-		drawRect.y += renderOffset_.y;
-		tex_->render(drawRect, angle, frameX_, frameY_, Flipped_); // getAngle devuelve radianes, hay que pasarlos a �ngulos
-	}
+
+	SDL_Rect playerRect = collider_->getRectRender();
+	SDL_Rect destRect{ playerRect.x + playerRect.w / 2 - handSize_ / 2,playerRect.y + playerRect.h / 2 - handSize_ / 2 , handSize_ , handSize_ };
+
+	tex_->render(destRect, angle, frameX_, frameY_, Flipped_);
 }
 
 void Hands::handleInput()

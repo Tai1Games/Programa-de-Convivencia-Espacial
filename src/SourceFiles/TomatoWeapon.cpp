@@ -11,6 +11,7 @@
 #include "Hands.h"
 #include "CollisionHandler.h"
 #include "ThrownByPlayer.h"
+#include "Constants.h"
 
 void TomatoWeapon::init() {
 	ActionableWeapon::init();
@@ -18,16 +19,16 @@ void TomatoWeapon::init() {
 	tomatoViewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
 	particleEmitterTomato_ = GETCMP1_(ParticleEmitter);
 
-	timeForExplosion_ = CONST(int, "TOMATO_TIME_CHARGE");
-	timeForExplosionExpire_ = CONST(int, "TOMATO_TIME_EXPLOSION");
+	framesCharge_ = CONST(int, "TOMATO_TIME_CHARGE") * FRAMES_PER_SECOND;
+	framesExplosion_ = CONST(int, "TOMATO_TIME_EXPLOSION") * FRAMES_PER_SECOND;
 	nFramesCharge_ = CONST(int, "TOMATO_N_FRAMES_ACTIVATED");
 	nFramesExplosion_ = CONST(int, "TOMATO_N_FRAMES_EXPLOSION");
 	damageOnExplosionImpact_ = CONST(int, "TOMATO_DAMAGE");
 	explosionSize_ = CONST(int, "TOMATO_EXPLOSION_SIZE");
 	explosionForce_ = CONST(int, "TOMATO_EXPLOSION_FORCE");
 
-	timePerFrame_ = timeForExplosion_ / nFramesCharge_;
-	timePerFrameUntilExplosion_ = timeForExplosionExpire_ / nFramesExplosion_;
+	timePerFrameCharge_ = framesCharge_ / nFramesCharge_;
+	timePerFrameExplosion_ = framesExplosion_ / nFramesExplosion_;
 }
 
 void TomatoWeapon::update() {
@@ -35,26 +36,25 @@ void TomatoWeapon::update() {
 	if (currentHand_) mainCollider_->setTransform(currentHand_->getPointerPos(), 0.0);
 
 	if (activated_) {
-
-		if (SDL_Game::instance()->getTime() > timeForExplosion_) {
+		currentFrame_++;
+		if (currentFrame_ == framesCharge_) {
 			colTomato_->createCircularFixture(explosionSize_, 0, 0, 0, Collider::CollisionLayer::NormalObject, true);
-			timeForExplosionExpire_ = SDL_Game::instance()->getTime() + timeForExplosionExpire_;
-			timeExploded_ = SDL_Game::instance()->getTime();
 			exploded_ = true;
 			activated_ = false;
 			if (picked_) UnPickObject();
+			tomatoViewer_->setFrame(nFramesCharge_);
+			tomatoViewer_->startAnimation(0, nFramesCharge_ - 1, nFramesCharge_ + nFramesExplosion_);
+			tomatoViewer_->setAnimSpeed(timePerFrameExplosion_);
 			colTomato_->setLinearVelocity({ 0,0 });
+			currentFrame_ = 0;
+			cout << "esto es un test borrame @ tomatoWeapon.cpp 50";
 		}
-		frame = (SDL_Game::instance()->getTime() - timeActivated_) / timePerFrame_;
-		tomatoViewer_->setFrame(frame);
 	}
 	else if (exploded_) {
-		if (SDL_Game::instance()->getTime() > timeForExplosionExpire_) {
-			colTomato_->destroyFixture(1);
+		currentFrame_++;
+		if (currentFrame_ == framesExplosion_) {
 			setActive(false);
 		}
-		frame = nFramesCharge_ + (SDL_Game::instance()->getTime() - timeExploded_) / timePerFrameUntilExplosion_;
-		tomatoViewer_->setFrame(frame);
 	}
 }
 
@@ -93,8 +93,8 @@ void TomatoWeapon::onCollisionEnter(Collision* c) {
 void TomatoWeapon::action() {
 	if (!activated_) {
 		activated_ = true;
-		timeForExplosion_ = SDL_Game::instance()->getTime() + timeForExplosion_;
-		timeActivated_ = SDL_Game::instance()->getTime();
+		currentHand_->startAnimation(0, 0, nFramesCharge_);
+		currentHand_->setAnimSpeed(timePerFrameCharge_);
 		particleEmitterTomato_->setPositionCollider(colTomato_);
 		particleEmitterTomato_->setDirection({ 0, -1 });
 		particleEmitterTomato_->PlayStop();
@@ -122,12 +122,22 @@ void TomatoWeapon::UnPickObject() {
 	mainCollider_->getFixture(0)->SetFilterData(pickUpCollider);
 
 	ActionableWeapon::UnPickObject();
+
+	if (!exploded_) {
+		tomatoViewer_->startAnimation(0, currentFrame_ / framesCharge_, nFramesCharge_);
+	}
 }
 
 void TomatoWeapon::setActive(bool a, b2Vec2 pos) {
 	entity_->setActive(a);
 	tomatoViewer_->setDrawable(a);
 	colTomato_->getBody()->SetEnabled(a);
+	if (exploded_) {
+		currentFrame_ = 0;
+		tomatoViewer_->setFrame(0);
+		colTomato_->destroyFixture(1);
+	}
+
 	if (a) colTomato_->getBody()->SetTransform(pos, 0);
 	else {
 		tomatoViewer_->stopAnimation();

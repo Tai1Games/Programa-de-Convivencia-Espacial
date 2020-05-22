@@ -52,7 +52,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Slipper, resourcesPath + "textures/Chancla.png" },
 	{ Stapler, resourcesPath + "textures/Grapadora.png" },
 	{ Stone, resourcesPath + "textures/Piedra.png" },
-	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png", 17},
+	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png", 15},
 	{ TomatoRing, resourcesPath + "textures/TomatoRing.png"},
 	{ TreeTomato, resourcesPath + "textures/TreeTomato.png"},
 	{ Banana, resourcesPath + "textures/Banana.png"},
@@ -68,7 +68,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },
 	{ PlayerAnimSheet, resourcesPath + "textures/playerAnim.png",23,4},
-	{ Hands, resourcesPath + "textures/hands.png", 3, 11},
+	{ Hands, resourcesPath + "textures/hands.png", 7, 11},
 	{ ImpulseArrow, resourcesPath + "textures/FlechaImpulso.png"},
 	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png", 12},
 	{ SpaceSuit, resourcesPath + "textures/PinkTinky.png"},	// dead body

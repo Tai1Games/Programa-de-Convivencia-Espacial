@@ -32,7 +32,7 @@ void ConfettiWeapon::action() {
 		used = true;
 		viewer_->setFrame(1);
 		timedDespawn_->startTimer(this);
-		currentHand_->setFrame(1, WeaponID::Confetti);
+		currentHand_->setFrame(1, weaponType_);
 	}
 }
 
@@ -42,7 +42,6 @@ void ConfettiWeapon::setActive(bool a, b2Vec2 pos)
 		if (currentHand_ != nullptr) UnPickObject();
 		viewer_->setFrame(0);
 		used = false;
-		cout << "tesst";
 		colWeapon_->setLinearVelocity(b2Vec2(0, 0));
 		colWeapon_->setAngularVelocity(0);
 		currentFrame_ = 0;
@@ -59,7 +58,7 @@ void ConfettiWeapon::update()
 	if (used) {
 		currentFrame_++;
 		if (currentFrame_ == animationDuration_) {
-			if (currentHand_) currentHand_->setFrame(2, WeaponID::Confetti);
+			if (currentHand_) currentHand_->setFrame(2, weaponType_);
 		}
 	}
 }
@@ -67,6 +66,8 @@ void ConfettiWeapon::update()
 void ConfettiWeapon::PickObjectBy(int index)
 {
 	MeleeWeapon::PickObjectBy(index);
-	if (used) currentHand_->setFrame(2, WeaponID::Confetti);
-	else currentHand_->setFrame(0, WeaponID::Confetti);
+	if (currentHand_) {
+		if (used) currentHand_->setFrame(2, weaponType_);
+		else currentHand_->setFrame(0, weaponType_);
+	}
 }
