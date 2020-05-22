@@ -24,7 +24,7 @@ protected:
 
 	void SpawnObject();
 public:
-	SpawnTree(Texture* objectText, int objectW, int objectH, WeaponPool* pool, EntityManager* eMan, b2World* pWorld);
+	SpawnTree(Texture* objectText, double objectW, double objectH, WeaponPool* pool, EntityManager* eMan, b2World* pWorld);
 	~SpawnTree() {}
 	virtual void init() override;
 	virtual void update() override;
