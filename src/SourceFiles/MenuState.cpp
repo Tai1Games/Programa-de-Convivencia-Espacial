@@ -13,7 +13,7 @@ void MenuState::init() {
 	entityManager_ = new EntityManager();
 	ownerPlayerBinder_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo()->at(ownerPlayerID_)->inputBinder;
 	Entity* miniTinky = entityManager_->addEntity();
-	menuCursor_ = miniTinky->addComponent<UIViewer>(Resources::Tinky, b2Vec2(0, 0), 0.5, 0);
+	menuCursor_ = miniTinky->addComponent<UIViewer>(Resources::Rocket, b2Vec2(0, 0), 0.8, 90);
 	createText();
 	updateText();
 
@@ -98,11 +98,11 @@ void MenuState::updatePointer(int n) {
 	pointers_[menuPointer_] += size + n;
 	pointers_[menuPointer_] %= size;
 
-	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (pointers_[menuPointer_] + 1)));
+	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, (yOffset_ * (pointers_[menuPointer_] + 1)) - 35));
 }
 
 void MenuState::updateText() { //activar la pantalla actual y desactivar la otra, si solo hay dos no necesita m�s informaci�n
-	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (pointers_[menuPointer_] + 1)));
+	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, (yOffset_ * (pointers_[menuPointer_] + 1)) - 35));
 
 	for (Entity* e : texts_[menuPointer_]) e->setActive(true); //activar actual
 	for (Entity* e : texts_[1 - menuPointer_]) e->setActive(false); //desactivar otra
