@@ -157,16 +157,16 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	//Countdown
 	{ Go, "GO!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 
-	{NumZero,"0",{ COLOR(0xc32454) },FontId::NES_Chimera},
-	{NumOne,"1",{ COLOR(0xc32454) },FontId::NES_Chimera},
-	{NumTwo,"2",{ COLOR(0xc32454) },FontId::NES_Chimera},
-	{NumThree,"3",{ COLOR(0xc32454) },FontId::NES_Chimera},
-	{NumFour,"4",{ COLOR(0xc32454) },FontId::NES_Chimera},
-	{NumFive,"5",{ COLOR(0xc32454) },FontId::NES_Chimera},
-	{NumSix,"6",{ COLOR(0xc32454) },FontId::NES_Chimera},
-	{NumSeven,"7",{ COLOR(0xc32454) },FontId::NES_Chimera},
-	{NumEight,"8",{ COLOR(0xc32454) },FontId::NES_Chimera},
-	{NumNine,"9",{ COLOR(0xc32454) },FontId::NES_Chimera},
+	{NumZero,"0",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumOne,"1",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumTwo,"2",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumThree,"3",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumFour,"4",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumFive,"5",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumSix,"6",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumSeven,"7",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumEight,"8",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumNine,"9",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
 };
 
 vector<Resources::MusicInfo> Resources::musics_{
