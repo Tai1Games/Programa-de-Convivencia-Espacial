@@ -65,6 +65,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Lamp,resourcesPath + "textures/Lampara.png"},
 	{ Table,resourcesPath + "textures/Mesa.png"},
 	{ Sofa,resourcesPath + "textures/Sofa.png"},
+	{ DeadBody,resourcesPath + "textures/cadaver.png"},
 
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },
@@ -76,8 +77,8 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	// Map elements
 	{ Boiler,resourcesPath + "textures/CalderaPro.png"},
-	{ DecreasingFreqButton,resourcesPath + "textures/DecreasingFrecButton.png", 2, 1},
-	{ IncreasingFreqButton,resourcesPath + "textures/InreasingFrecButton.png", 2, 1},
+	{ IncreasingFreqButton,resourcesPath + "textures/IncBoilerButtonDown.png", 3, 1},
+	{ DecreasingFreqButton,resourcesPath + "textures/DecBoilerButtonDown.png", 3, 1},
 	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png", 4},
 	{ PipeHor,resourcesPath + "textures/TuberiasHor.png"},
 	{ PipeVer,resourcesPath + "textures/TuberiasVer.png"},
@@ -109,10 +110,11 @@ vector<Resources::ImageInfo> Resources::images_{
 vector<Resources::TextMsgInfo> Resources::messages_{
 	//Mensajes predeterminados {nombre_en_enum, texto, color, fuente}. Ejemplo abajo
 	//{ HelloWorld, "Hello World", { COLOR(0xaaffffff) }, ARIAL16 }
-	{ PauseText, "PAUSA", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ ResumeText, "Reanudar", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ SoundText, "Sonido", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ ExitText, "Salir", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ PauseText, "PAUSE", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ ResumeText, "Resume", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ MusicText, "Music", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ EffectsText, "Effects", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ MainMenuText, "Main Menu", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 
 	//Menu Provisional
 	//gamemodes
@@ -188,7 +190,12 @@ vector<Resources::SoundInfo> Resources::sounds_{
 	// Weapons
 	{ BananaShoot, resourcesPath + "sound/effects/bananaShoot.wav"},
 	{ ExtinguisherSound, resourcesPath + "sound/effects/extinguisherSound.wav" },
-	{ PickSound, resourcesPath + "sound/effects/pick.wav"}
+	{ PickSound, resourcesPath + "sound/effects/pick.wav"},
+
+	//Player
+	{ RespawnSound, resourcesPath + "sound/effects/RespawnSound.wav"},
+	{ DeathSound, resourcesPath + "sound/effects/DeathSound.wav" },
+	{ EliminatedSound, resourcesPath + "sound/effects/EliminatedSound.wav" }
 };
 
 map<std::string, Resources::TextureId> Resources::tilesetTag_{

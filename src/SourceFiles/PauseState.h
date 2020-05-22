@@ -7,7 +7,8 @@ using namespace std;
 
 enum Buttons {
 	Resume = 0,
-	Sound,
+	Music,
+	Effects,
 	Exit
 };
 
@@ -17,7 +18,10 @@ class PauseState : public GameState
 {
 private:
 	UIViewer* buttonSelectorImage_ = nullptr;
-	UIViewer* sliderControlImage_ = nullptr;
+	UIViewer* musicSliderImage_ = nullptr;
+	UIViewer* effectsSliderImage_ = nullptr;
+	UIViewer* musicSliderControlImage_ = nullptr;
+	UIViewer* effectsSliderControlImage_ = nullptr;
 	/*Evita que se mueva varias veces hacia izq/derch al mantener el joystick*/
 	bool holdingX_ = false;
 	/*Evita que se mueva varias veces hacia arriba/abajo al mantener el joystick*/
@@ -27,12 +31,19 @@ private:
 	vector<UIViewer*> btns_;
 	/*Indice para el bot�n seleccionado en el vector de botones*/
 	int selectedBtn_ = 0;
-	int currentMusicVolume_ = CONST(double, "MAX_MUSIC_VOLUME");
+	int currentMusicVolume_;
+	int currentEffectsVolume_;
+	int maxMusicVolume_;
+	int maxEffectsVolume_;
+
+	int offsetBetweenButtons_;
 
 	/*Actualiza la posici�n de la selecci�n y el bot�n seleccionado*/
 	void updateSelectedButton();
-	/*Actualiza la posici�n del slider y el volumen de la m�sica*/
-	void updateMusicVolume();
+	/*Actualiza la posici�n del slider y el volumen del sonido*/
+	void updateSoundVolume();
+	/*Gestiona el input en el Slider*/
+	bool handleSlider(int& currentVolumeValue, const int& maxVolumeValue);
 
 	void resumeGame();
 public:

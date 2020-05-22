@@ -40,8 +40,11 @@ bool Health::subtractLife(int damage)
 		if (lives_ > 0) {
 			lives_ -= damage;
 			invFrames_ = INV_FRAMES_HIT_;
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::DeathSound, 0);
+
 			if (lives_ <= 0) {
 				lives_ = 0;
+				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::RespawnSound, 0);
 				return false;
 			}	//Evitar vidas negativas
 			return true;
@@ -131,6 +134,7 @@ void Health::onCollisionEnter(Collision* c)
 			//Lo que ha golpeado es un arma?
 			if (w != nullptr) {
 				force *= w->getImpactForce();
+				impact = force.Length();
 				//Si se impacta con un arma al umbral m�s alto de fuerza, se recibe su daño de impacto
 				impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
 			}
