@@ -102,6 +102,7 @@ public:
 		Sofa,
 		TomatoTree,
 		BananaTree,
+		DeadBody,
 
 		// Gamemode specific elements
 		Coin,
@@ -118,8 +119,9 @@ public:
 		// text
 		PauseText,
 		ResumeText,
-		SoundText,
-		ExitText,
+		MusicText,
+		EffectsText,
+		MainMenuText,
 
 		//modes
 		Capitalism,
