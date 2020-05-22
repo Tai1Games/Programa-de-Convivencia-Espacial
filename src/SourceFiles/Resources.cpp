@@ -45,6 +45,9 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png", 8, 1},
 	{ PlayerPlaceholder,resourcesPath + "textures/playerPlaceholder.png"},
 
+	{Ready , resourcesPath + "textures/ready.png"},
+	{PressReady , resourcesPath + "textures/pressready.png"},
+
 	// Weapons and map items
 	{ Ball, resourcesPath + "textures/PelotaSaltarina.png" },
 	{ Extinguisher, resourcesPath + "textures/Extintor.png" },

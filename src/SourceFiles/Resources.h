@@ -44,6 +44,9 @@ public:
 		ProgressBar,
 		ProgressBar2,
 
+		Ready,
+		PressReady,
+
 		//Lobby
 		KeyboardIcon,
 		MouseIcon,
