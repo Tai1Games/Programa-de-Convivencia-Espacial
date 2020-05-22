@@ -86,9 +86,9 @@ void MultiplayerHost::checkActivity() {
 				clientPlace++;
 
 			if (clientPlace < 3) {
-				std::cout << "Jugador conectado, id asignada: " << clientPlace << std::endl;
+				//std::cout << "Jugador conectado, id asignada: " << clientPlace << std::endl;
 				SDLNet_TCP_AddSocket(socketSet_, client);
-				SDLNet_TCP_Send(client, "0", 9);
+				SDLNet_TCP_Send(client, "C", 9);
 			}
 			else {
 				SDLNet_TCP_Send(client, "L", 1);
@@ -156,14 +156,14 @@ void MultiplayerHost::handlePlayerJoin(int clientNumber) {
 }
 
 void MultiplayerHost::handlePlayerInput(int clientNumber) {
-	receivedBytes_ = SDLNet_TCP_Recv(clients_[i], buffer, sizeof(InputPacket) - 1);
+	receivedBytes_ = SDLNet_TCP_Recv(clients_[clientNumber], buffer, sizeof(InputPacket) - 1);
 
 	std::vector<MatchInfo::PlayerInfo*>* playersVector = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
 
 	InputPacket inputPacket{ 'I',buffer[0],(bool)buffer[1],(bool)buffer[2],(bool)buffer[3],
-	,(bool)buffer[4] ,(bool)buffer[5], (float)buffer[6], (float)buffer[8],
-	,(bool)buffer[10] ,(bool)buffer[11] ,(bool)buffer[12] ,(bool)buffer[13] ,(bool)buffer[14] ,
-	,(bool)buffer[15] ,(bool)buffer[16] }; //Duda para pasar de buffer a float
+	(bool)buffer[4] ,(bool)buffer[5], (*(float*)buffer[6]), (*(float*)buffer[8]),
+	(bool)buffer[10] ,(bool)buffer[11] ,(bool)buffer[12] ,(bool)buffer[13] ,(bool)buffer[14] ,
+	(bool)buffer[15] ,(bool)buffer[16] }; //Duda para pasar de buffer a float
 
 	(*playersVector)[buffer[0]]->inputBinder->syncInput(inputPacket);
 }
