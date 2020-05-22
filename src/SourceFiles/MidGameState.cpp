@@ -18,6 +18,8 @@ void MidGameState::init()
 {
 	totalRounds_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfRounds();
 
+	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::TutorialMusic, -1);
+
 	entityManager_ = new EntityManager();
 
 	//Fondo del modo
