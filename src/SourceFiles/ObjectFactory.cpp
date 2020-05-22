@@ -129,8 +129,8 @@ Entity* ObjectFactory::makeTrasparentWall(EntityManager* entityManager, b2World*
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::Wall, false);
 	e->addComponent<Transform>(SDL_Rect{ 0,0,(int)size.x, (int)size.y }, aux);
 	
-	e->addComponent<ColliderViewer>();
-
+	//e->addComponent<ColliderViewer>();
+	
 	return e;
 }
 
