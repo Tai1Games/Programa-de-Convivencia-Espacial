@@ -168,7 +168,19 @@ public:
 		// particles
 		Smoke,
 		WiFiWave,
-		Foam
+		Foam,
+
+		// numbers
+		NumZero,
+		NumOne,
+		NumTwo,
+		NumThree,
+		NumFour,
+		NumFive,
+		NumSix,
+		NumSeven,
+		NumEight,
+		NumNine,
 	};
 
 	enum AudioId : unsigned char {
