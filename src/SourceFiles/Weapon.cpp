@@ -105,6 +105,7 @@ void Weapon::UnPickObject()
 	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * resultThrowSpeed, -currentHand_->getDir().y * resultThrowSpeed), mainCollider_->getBody()->GetLocalCenter());
 	mainCollider_->getBody()->SetAngularVelocity(spinOnThrowSpeed_);
 	currentHand_->setFrame(0, 0);
+	currentHand_->stopAnimation();
 	currentHand_ = nullptr;
 }
 

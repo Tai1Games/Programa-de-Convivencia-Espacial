@@ -33,6 +33,8 @@ void ConfettiWeapon::action() {
 		viewer_->setFrame(1);
 		timedDespawn_->startTimer(this);
 		currentHand_->setFrame(1, weaponType_);
+
+		MeleeWeapon::action();
 	}
 }
 
