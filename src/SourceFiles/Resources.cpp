@@ -92,6 +92,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ CarnivorousPlant , resourcesPath + "textures/PlantaCarnivora.png", 7, 1},
 	{ TomatoTree, resourcesPath + "textures/TomatoTree.png"},
 	{ BananaTree, resourcesPath + "textures/BananaTree.png"},
+	{ TriggerButton , resourcesPath + "textures/PuertasMenu_Play.png", 8, 1},
 
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/Moneda.png" },

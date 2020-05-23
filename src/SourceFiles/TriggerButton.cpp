@@ -2,7 +2,8 @@
 
 void TriggerButton::init()
 {
-	//viewer_ = entity_->getComponent<CarnivorousPlantViewer>(ComponentType::AdvancedAnimatedViewer);
+
+	viewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer); //pilla referencia al viewer
 	timeToActivate = CONST(int, "TRIGGER_BUTTON_TIME");
 	
 	
@@ -43,6 +44,7 @@ void TriggerButton::onCollisionEnter(Collision* c)
 {
 	if (c->hitFixture->GetFilterData().categoryBits & Collider::CollisionLayer::Player) {
 		playerDetected_ = true;
+		viewer_->startAnimation(-1, 0, 8, 0);
 	}
 }
 
@@ -51,7 +53,8 @@ void TriggerButton::onCollisionExit(Collision* c)
 	if (c->hitFixture->GetFilterData().categoryBits & Collider::CollisionLayer::Player) {
 		
 		playerDetected_ = false;
-		
+		viewer_->setFrame(0, 0);
+		viewer_->stopAnimation();
 		framesInside = 0;
 	}
 }

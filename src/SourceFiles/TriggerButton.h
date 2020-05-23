@@ -4,6 +4,7 @@
 #include "Collision.h"
 #include "PlayerData.h"
 #include "CollisionHandler.h"
+#include "AdvancedAnimatedViewer.h"
 
 class TriggerButton : public Component
 {
@@ -13,6 +14,8 @@ private:
 	int framesInside = 0;
 	int timeToActivate = 0;
 	bool playerDetected_ = false;
+
+	AnimatedViewer* viewer_ = nullptr;
 
 public:
 	TriggerButton(string state) : Component(ComponentType::TriggerButton) { stateToChange = state; }
