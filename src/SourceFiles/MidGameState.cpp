@@ -18,8 +18,6 @@ void MidGameState::init()
 {
 	totalRounds_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfRounds();
 
-	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::TutorialMusic, -1);
-
 	entityManager_ = new EntityManager();
 
 	//Fondo del modo
@@ -182,6 +180,8 @@ void MidGameState::handleInput()
 
 void MidGameState::onLoaded() {
 	SDL_Game::instance()->getStateMachine()->deleteState(States::play);
+
+	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::TutorialMusic, -1);
 
 	//Reseteamos el estado a como estaba en origen
 	currentState = waiting;
