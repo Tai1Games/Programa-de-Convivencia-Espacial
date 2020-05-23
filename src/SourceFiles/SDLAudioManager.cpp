@@ -78,7 +78,7 @@ int SDLAudioManager::playChannel(int tag, int loops, int channel) {
 	if (chunk != nullptr) {
 		return Mix_PlayChannel(channel, chunk, loops);
 		if (SDL_Game::instance()->isHosting())
-			SDL_Game::instance()->getHost()->sendAudio({ 'A',false, (char)tag, loops });
+			SDL_Game::instance()->getHost()->sendAudio({ 'A',false, (char)tag, (char)loops });
 	}
 	else {
 		return -1;
