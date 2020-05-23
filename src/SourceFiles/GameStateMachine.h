@@ -7,13 +7,15 @@
 #include "Constants.h"
 
 class MatchInfo;
+class MultiplayerHost;
 
 class GameStateMachine
 {
 private:
 	std::vector<GameState*> states_;
 
-	MatchInfo* matchInfo_;
+	MatchInfo* matchInfo_ = nullptr;
+	MultiplayerHost* mpHost_ = nullptr;
 
 	int currentState_ = -1;
 
@@ -38,5 +40,6 @@ public:
 	void deleteState(int state);
 
 	void gameCycle();
-};
 
+	void setMpHost(MultiplayerHost* host);
+};

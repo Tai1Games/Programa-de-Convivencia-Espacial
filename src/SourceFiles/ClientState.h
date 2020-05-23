@@ -5,13 +5,6 @@
 #include "MatchInfo.h"
 #include <queue>
 
-/*
-* Tipos de mensajes del servidor
-* 1 -> Te has conectado correctamente
-* 2 -> Lo que sigue es la informacion de un sprite
-* 0 -> He acabado de enviar sprites
-*/
-
 class ClientState :
 	public GameState
 {
@@ -30,7 +23,13 @@ private:
 
 	std::queue<SpritePacket> spritesToRender_;
 
-	std::vector<MatchInfo::PlayerInfo*>* playerInfoVector;
+	std::vector<MatchInfo::PlayerInfo*>* playerInfoVector_;
+
+	void receiveSprite();
+	void receiveAudio();
+	void receiveMusic();
+	void connectToServer();
+	void receivePlayerInfo();
 public:
 	ClientState(char* host);
 	virtual ~ClientState() { SDLNet_Quit(); };
@@ -39,9 +38,5 @@ public:
 	virtual void update() override;
 	virtual void render() override;
 	virtual void handleInput() override;
-
-	void receiveSprite();
-	void receiveAudio();
-	void receiveMusic();
 };
 

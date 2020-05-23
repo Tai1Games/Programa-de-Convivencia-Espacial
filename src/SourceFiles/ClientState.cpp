@@ -29,7 +29,7 @@ ClientState::ClientState(char* host) {
 }
 
 void ClientState::init() {
-	playerInfoVector = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
+	playerInfoVector_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
 }
 
 void ClientState::update()
@@ -46,15 +46,17 @@ void ClientState::update()
 				case 'A':
 					//Audio
 					receiveAudio();
+					break;
+				case 'C':
+					connectToServer();
+					break;
 				case 'F':
 					//Finished
 					doneReceiving_ = true;
 					break;
-				case 'M':
-					//Musica
-					receiveMusic();
-					break;
 				case 'P':
+					//Player ids info
+					receivePlayerInfo();
 					break;
 				case 'S':
 					//Sprite
@@ -95,7 +97,7 @@ void ClientState::handleInput()
 	int schar = sizeof(char);
 	int sbool = sizeof(bool);
 	int sfloat = sizeof(float);
-	for (MatchInfo::PlayerInfo* pInfo : *playerInfoVector) {
+	for (MatchInfo::PlayerInfo* pInfo : *playerInfoVector_) {
 		int offset = 0;
 		InputPacket pInputPacket = pInfo->inputBinder->getInputPacket();
 		buffer[offset] = pInputPacket.packetId;
@@ -137,9 +139,30 @@ void ClientState::handleInput()
 
 void ClientState::receiveAudio()
 {
-	SDL_Game::instance()->getAudioMngr()->playChannel(buffer[0], 1, 0);
+	SDLNet_TCP_Recv(hostConnection_, buffer, sizeof(AudioPacket) - 1);
+	if ((bool)buffer[0]) {//Music
+		SDL_Game::instance()->getAudioMngr()->playMusic(buffer[1], -1);
+	}
+	else {
+		SDL_Game::instance()->getAudioMngr()->playChannel(buffer[1], buffer[2], 0);
+	}
+	
 }
 
-void ClientState::receiveMusic() {
-	SDL_Game::instance()->getAudioMngr()->playMusic(buffer[0],-1);
+void ClientState::connectToServer() {
+	buffer[0] = 'P';
+	buffer[1] = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers();
+	for (int i = 0; i < SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers(); i++)
+		buffer[2 + i] = (char)(*playerInfoVector_)[i]->playerSkin;
+
+	SDLNet_TCP_Send(hostConnection_, buffer, sizeof(PlayerInfoPacket));
+	memset(buffer, 0, 2048);
+}
+
+void ClientState::receivePlayerInfo() {
+	SDLNet_TCP_Recv(hostConnection_, buffer, sizeof(PlayerInfoPacket) - 1);
+	for (int i = 0; i < (int)buffer[0]; i++) {
+		(*playerInfoVector_)[i]->playerId = (size_t)buffer[i + 1];
+	}
+	memset(buffer, 0, 2048);
 }

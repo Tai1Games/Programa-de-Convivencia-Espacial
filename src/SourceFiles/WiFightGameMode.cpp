@@ -18,6 +18,7 @@ void WiFightGameMode::init(PlayState* game)
 	//				x,								y,						width, height, density,	friction, restitution, linearDrag, angularDrag,	 Laye,  sensor,  canBeAttached
 	Collider* collRouter = router->addComponent<Collider>(state_->getPhysicsWorld(), b2_dynamicBody, tilemap_->getObjSpecialSpawnPos().x, tilemap_->getObjSpecialSpawnPos().y, 1, 0.7, 1, 0, 1, 0, 0, Collider::CollisionLayer::UnInteractableObject, false);
 	collRouter->createCircularFixture(5, 1, 0, 0, Collider::CollisionLayer::Trigger, true);
+	router->addComponent<Transform>(SDL_Rect{0,0,CONST(int, "ROUTER_W_SPRITE"), CONST(int, "ROUTER_H_SPRITE")}, collRouter);
 	router->addComponent<Viewer>(Resources::Router);
 	router->addComponent<RouterLogic>(this, &wifiWavesPool_);
 	router->addComponent<ColliderViewer>();

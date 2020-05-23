@@ -3,6 +3,8 @@
 #include "Collider.h"
 #include "Collision.h"
 #include "Weapon.h"
+#include "MeleeWeapon.h"
+#include "ExtinguisherWeapon.h"
 #include "AttachesToObjects.h"
 #include "CollisionHandler.h"
 #include "ThrownByPlayer.h"
@@ -34,7 +36,7 @@ Health::~Health()
 
 bool Health::subtractLife(int damage)
 {
-	if (invFrames_ <= 0 && damage> 0) {
+	if (invFrames_ <= 0 && damage > 0) {
 		if (lives_ > 0) {
 			lives_ -= damage;
 			invFrames_ = INV_FRAMES_HIT_;
@@ -71,6 +73,17 @@ void Health::playerDead(CollisionHandler* c)
 	//reset impulso
 	PlayerController* pc = GETCMP1_(PlayerController);
 	pc->resetImpulseForce();
+
+	//cuerpo muerto
+	CollisionHandler::bodyData body;
+	b2Fixture* fix = GETCMP1_(Collider)->getFixture(0);
+	body.pos = fix->GetBody()->GetPosition();
+	body.angle = GETCMP1_(Collider)->getAngle();
+	body.linearVelocity = fix->GetBody()->GetLinearVelocity();
+	body.angularVelocity = fix->GetBody()->GetAngularVelocity();
+	cout << " player dead with angle: " << body.angle << endl;
+	c->addCorpse(body);
+
 	//respawn
 	GameMode* s = c->getGamemode();
 	PlayerData* p = GETCMP1_(PlayerData);
@@ -85,33 +98,46 @@ void Health::playerDead(CollisionHandler* c)
 		mov.pos = b2Vec2((1 + p->getPlayerNumber()) * 50, 0);
 	}
 	c->addMove(mov);
-
-	//cuerpo muerto
-	CollisionHandler::bodyData body;
-	b2Fixture* fix = GETCMP1_(Collider)->getFixture(0);
-	body.pos = fix->GetBody()->GetPosition();
-	body.angle = fix->GetBody()->GetAngle();
-	c->addCorpse(body);
 }
 
 void Health::onCollisionEnter(Collision* c)
 {
 	if (invFrames_ <= 0) {
-
 		b2Fixture* fix = c->hitFixture;
 		if (!fix->IsSensor())
 		{
-			b2Vec2 force = c->hitFixture->GetBody()->GetMass() * c->hitFixture->GetBody()->GetLinearVelocity();
-			int impact = force.Length();
+			b2Vec2 force = c->hitFixture->GetBody()->GetLinearVelocity();
+			int impact;
+
 			Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
 			PlayerData* playerWhoHitMe = nullptr;
-			//Si se impacta con un arma al umbral m�s alto de fuerza, se recibe su daño de impacto
+
+			//¿Es un objeto lanzable? (Por lo tanto puede desarmar)
+			ThrownByPlayer* thrown = GETCMP_FROM_FIXTURE_(fix, ThrownByPlayer);
+
+			//Cogemos nuestras manos
+			Hands* h = GETCMP1_(Hands);
+			impact = force.Length();
+			//Comprobamos si el golpe con el arma es suficientemente fuerte (indica que se ha lanzado o llevaba impulso)
+			if (impact >= CONST(double, "DISARM_IMPACT") && thrown != nullptr && thrown->getOwnerId() != h->getPlayerId()) {
+				//Nos desarman con el golpe
+				Weapon* we = nullptr;
+				if (h != nullptr) we = h->getWeapon();
+
+				//Si tenemos un arma cogida la soltamos al haber sido golpeados
+				if (we != nullptr) c->collisionHandler->dropWeapon(we);
+			}
+
+			//Lo que ha golpeado es un arma?
 			if (w != nullptr) {
+				force *= w->getImpactForce();
+				//Si se impacta con un arma al umbral m�s alto de fuerza, se recibe su daño de impacto
 				impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
 			}
 			else {
+				force *= c->hitFixture->GetBody()->GetMass();
+				impact = force.Length();
 				//Depending on the force of impact we apply damage to the player
-
 				if (impact < CONST(int, "LOW_DAMAGE")) impact = 0;
 
 				else if (impact >= CONST(int, "LOW_DAMAGE") && impact < CONST(double, "MEDIUM_DAMAGE")) impact = 1;

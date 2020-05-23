@@ -5,12 +5,16 @@
 #include "vector"
 #include "EntityManager.h"
 #include "ObjectFactory.h"
+#include "WeaponFactory.h"
 #include "checkML.h"
+
 
 class BoilerButtonLogic;
 class FireBallGenerator;
+class ConfettiPool;
 class TomatoPool;
 class BananaPool;
+class StaplerPool;
 class GameMode;
 
 class TileMap : public Component
@@ -30,13 +34,18 @@ protected:
 
 private:
 	Texture* debugT_;
-	Texture* tinkyT_; 
+	Texture* tinkyT_;
 
 	b2World* physicsWorld_;
 	EntityManager* entityManager_;
 	vector<tson::Object> factoryItems_;
-	std::vector<b2Vec2> weaponSpawnPoints_;
 
+	std::vector<b2Vec2> lowTierWeaponSpawnPoints_;
+	std::vector<b2Vec2> midTierWeaponSpawnPoints_;
+	std::vector<b2Vec2> highTierWeaponSpawnPoints_;
+
+	ConfettiPool* confettiPool_;
+	StaplerPool* staplerPool_;
 	BulletPool* bulletPool_ = nullptr;
 	unique_ptr<TomatoPool> tomatoPool_;
 	unique_ptr<BananaPool> bananaPool_;
@@ -45,7 +54,7 @@ private:
 
 	void solvePostCreationProblems(); //Called when reading of tilemap ends. Use this to assign references and solve similar problems.
 public:
-	TileMap(int w,int h,string map, EntityManager* entityManager_, b2World* physicsWorld_, BulletPool* bp, GameMode* gameMode);
+	TileMap(int w, int h, string map, EntityManager* entityManager_, b2World* physicsWorld_, BulletPool* bp, ConfettiPool* cP, StaplerPool* staplerPool, GameMode* gameMode);
 	~TileMap();
 	virtual void update() override;
 	virtual void init() override;
@@ -57,5 +66,6 @@ public:
 	b2Vec2 getPlayerSpawnPoint(int id);
 	b2Vec2 getObjSpecialSpawnPos() { return specialObjectsSpawnPoint_; };
 	std::vector<b2Vec2> getCoinsSpawnPoints() { return coinsSpawnPoints_; }
+	FireBallGenerator* getFireballGen() { return boilerAux_; }
 };
 

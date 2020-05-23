@@ -44,17 +44,31 @@ void Wallet::onCollisionEnter(Collision* c)
 		b2Fixture* fix = c->hitFixture;
 		if (!fix->IsSensor())
 		{
-			//Measure de impact of an object with the player
-			b2Vec2 force = fix->GetBody()->GetMass() * fix->GetBody()->GetLinearVelocity();
-
-			int impact = force.Length();
+			b2Vec2 force = c->hitFixture->GetBody()->GetLinearVelocity();
+			int impact;
 
 			Weapon* w = GETCMP_FROM_FIXTURE_(fix, Weapon);
 			//Si se impacta con un arma al umbral más alto de fuerza, se recibe su daño de impacto
 			if (w != nullptr) {
+				force *= w->getImpactForce();
+				impact = force.Length();
+				//Cogemos nuestras manos
+				Hands* h = GETCMP1_(Hands);
+
+				if (impact >= CONST(double, "DISARM_IMPACT")) {
+					//Nos desarman con el golpe
+					Weapon* we = nullptr;
+					if (h != nullptr) we = h->getWeapon();
+
+					//Si tenemos un arma cogida la soltamos al haber sido golpeados
+					if (we != nullptr) c->collisionHandler->dropWeapon(we);
+				}
+
 				impact = (impact >= CONST(double, "HIGH_DAMAGE")) ? w->getImpactDamage() : 0;
 			}
 			else {
+				force *= c->hitFixture->GetBody()->GetMass();
+				impact = force.Length();
 				//Depending on the force of impact we apply damage to the player
 
 				if (impact < CONST(int, "LOW_DAMAGE")) impact = 0;

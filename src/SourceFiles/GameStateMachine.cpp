@@ -7,6 +7,7 @@
 #include "TutorialGameMode.h"
 #include "Constants.h"
 #include "MatchInfo.h"
+#include "MultiplayerHost.h"
 
 #include "PlayState.h"
 #include "PauseState.h"
@@ -26,7 +27,8 @@ GameStateMachine::~GameStateMachine() {
 	}
 	states_.clear();
 
-	delete matchInfo_;
+	if (matchInfo_ != nullptr)
+		delete matchInfo_;
 }
 
 void GameStateMachine::setPauseOwner(int ownerID)
@@ -41,7 +43,7 @@ void GameStateMachine::changeToState(int state, int gameMode, string tileMap) {
 		if (currentState_ != States::transition) {
 			loadState(state, gameMode, tileMap); //Evita cargar el mapa dos veces si viene de transition
 			states_[state]->onLoaded();
-		}			
+		}
 		else if (states_[States::transition] != nullptr) //Viene de transition, borrar la escena
 		{
 			deleteState(States::transition);
@@ -63,7 +65,7 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 		//create state
 		//states_[state] = new... se necesita struct? o switch tal cual xd
 		switch (state) {
-		case States::menu:		
+		case States::menu:
 			states_[state] = new MenuState(0); //numberOfPlayers usado como ownerID
 			break;
 		case States::play:
@@ -90,7 +92,7 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 				case (GamemodeID::Tutorial):
 					states_[state] = new PlayState(new TutorialGameMode(matchInfo_), round.second);
 					break;
-				default: 
+				default:
 					break;
 				}
 			}
@@ -99,7 +101,7 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 		case States::lobby: {
 			states_[state] = new LobbyState();
 		}
-		break;
+						  break;
 		case States::pause:
 			//if (states_[state] != nullptr)	delete states_[state];
 			states_[state] = new PauseState();
@@ -112,13 +114,13 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 		//inicializar la nueva escena
 		states_[state]->init();
 	}
-		else if (state == States::menu) {
-			//borrar playState para crear otro
-			deleteState(States::play);
-		}
-		else if (state == States::midGame) {
-			static_cast<MidGameState*>(states_[States::midGame])->setWinner(gameMode);
-		}
+	else if (state == States::menu) {
+		//borrar playState para crear otro
+		deleteState(States::play);
+	}
+	else if (state == States::midGame) {
+		static_cast<MidGameState*>(states_[States::midGame])->setWinner(gameMode);
+	}
 }
 
 void GameStateMachine::deleteState(int state) {
@@ -144,6 +146,15 @@ void GameStateMachine::handleInput() {
 
 void GameStateMachine::gameCycle() {
 	handleInput();
+	if (mpHost_ != nullptr)
+		mpHost_->checkActivity();
 	update();
 	render();
+	if (mpHost_ != nullptr)
+		mpHost_->finishSending();
+}
+
+void GameStateMachine::setMpHost(MultiplayerHost* host)
+{
+	mpHost_ = host;
 }

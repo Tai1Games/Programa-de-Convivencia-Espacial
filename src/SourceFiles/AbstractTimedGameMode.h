@@ -17,11 +17,17 @@ protected:
 	double timeToEnd_ = 0;
 	int winWidth_ = 0;
 	int winHeigth_ = 0;
+	const float minutesFreq_ = 0.016666667;
+
+	int halfWinWidth_ = 0, halfWinHeight_ = 0;
 
 	virtual void updateTime(const vector<int>& playerPoints);
 
 private:
+	bool activeTimer_ = false;
+
 	virtual void renderTimer(int secs, int mins);
+	void setActiveTimer(bool b) { activeTimer_ = b; };
 
 public:
 	AbstractTimedGameMode(MatchInfo* mInfo, GamemodeID id) : GameMode(mInfo, id) {};
@@ -31,5 +37,6 @@ public:
 	virtual void render();
 	virtual void update();
 	virtual void playerKillsPlayer(int killerId, int deadId = -1) {};
+	virtual void activateControl();
 };
 

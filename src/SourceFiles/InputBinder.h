@@ -246,7 +246,7 @@ protected:
 	int id_ = -1;
 public:
 	ControllerBinder(int id) : InputBinder(), id_(id) {}
-	virtual ~ControllerBinder() { ih->returnGamePad(id_); }
+	virtual ~ControllerBinder() {}
 	virtual bool holdGrab() {
 		return ih->getTrigger(id_, InputHandler::GAMEPADTRIGGER::LEFTTRIGGER);
 	}
