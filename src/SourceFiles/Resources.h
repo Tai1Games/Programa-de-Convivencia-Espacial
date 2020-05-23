@@ -189,6 +189,8 @@ public:
 		GoSound,
 		PadSound,
 		PickSound,
+		ImpulseWall,
+		ImpulseAir,
 		// boiler
 		BoilerShoot,
 		BoilerButtonSlow,

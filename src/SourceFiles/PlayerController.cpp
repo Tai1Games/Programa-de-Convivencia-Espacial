@@ -65,6 +65,7 @@ void PlayerController::handleInput()
 		dirImpulse_.y *= -1; //hay que invertirlo para convertirlo en vector compatible con box2D
 		//si estamos agarrados
 		if (attachedTo != nullptr) {
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::ImpulseWall, 0);
 			if (isImpulseValid(dirImpulse_))
 			{
 				dirImpulse_ *= -1;
@@ -76,6 +77,7 @@ void PlayerController::handleInput()
 		}
 		//si estamos flotando
 		else {
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::ImpulseAir, 0);
 			// si se pasa del l�mite de velocidad le bajamos los humos (s�lo aplica cuando no est�s agarrao)
 			Vector2D velAfterImpulse = { (coll_->getLinearVelocity() + dirImpulse_).x, (coll_->getLinearVelocity() + dirImpulse_).y };
 			if (!attachesToObj_->isAttached()) {
