@@ -54,10 +54,6 @@ void ClientState::update()
 					//Finished
 					doneReceiving_ = true;
 					break;
-				case 'M':
-					//Musica
-					receiveMusic();
-					break;
 				case 'P':
 					//Player ids info
 					receivePlayerInfo();
@@ -144,12 +140,13 @@ void ClientState::handleInput()
 void ClientState::receiveAudio()
 {
 	SDLNet_TCP_Recv(hostConnection_, buffer, sizeof(AudioPacket) - 1);
-	SDL_Game::instance()->getAudioMngr()->playChannel(buffer[0], buffer[1], 0);
-}
-
-void ClientState::receiveMusic() {
-	SDLNet_TCP_Recv(hostConnection_, buffer, sizeof(AudioPacket) - 1);
-	SDL_Game::instance()->getAudioMngr()->playMusic(buffer[0],-1);
+	if ((bool)buffer[0]) {//Music
+		SDL_Game::instance()->getAudioMngr()->playMusic(buffer[1], -1);
+	}
+	else {
+		SDL_Game::instance()->getAudioMngr()->playChannel(buffer[1], buffer[2], 0);
+	}
+	
 }
 
 void ClientState::connectToServer() {

@@ -191,6 +191,17 @@ void MultiplayerHost::sendTexture(const SpritePacket& sPacket)
 
 void MultiplayerHost::sendAudio(const AudioPacket& aPacket)
 {
+	memset(buffer, 0, sizeof(AudioPacket));
+	buffer[0] = 'A';
+	buffer[1] = aPacket.isMusic;
+	buffer[2] = aPacket.soundId;
+	buffer[3] = aPacket.nLoops;
+
+	for (int i = 0; i < 3; i++) {
+		if (clients_[i] != nullptr) {
+			SDLNet_TCP_Send(masterSocket_, buffer, sizeof(AudioPacket));
+		}
+	}
 }
 
 void MultiplayerHost::finishSending()

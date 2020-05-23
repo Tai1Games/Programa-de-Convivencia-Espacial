@@ -127,6 +127,7 @@ struct SpritePacket {
 
 struct AudioPacket {
 	char packetId = 'A'; //Audio
+	bool isMusic;
 	char soundId;
 	char nLoops = 0; //cambiar en cliente
 };
