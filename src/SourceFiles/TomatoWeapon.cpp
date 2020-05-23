@@ -43,7 +43,6 @@ void TomatoWeapon::update() {
 			exploded_ = true;
 			activated_ = false;
 			if (picked_) UnPickObject();
-			tomatoViewer_->setFrame(nFramesCharge_);
 			tomatoViewer_->startAnimation(0, nFramesCharge_ - 1, tomatoViewer_->getTexture()->getNumFramesX());
 			tomatoViewer_->setAnimSpeed(timePerFrameExplosion_);
 			colTomato_->setLinearVelocity({ 0,0 });
