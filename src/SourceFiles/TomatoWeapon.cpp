@@ -19,16 +19,16 @@ void TomatoWeapon::init() {
 	tomatoViewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
 	particleEmitterTomato_ = GETCMP1_(ParticleEmitter);
 
-	framesCharge_ = CONST(int, "TOMATO_TIME_CHARGE") * FRAMES_PER_SECOND;
-	framesExplosion_ = CONST(int, "TOMATO_TIME_EXPLOSION") * FRAMES_PER_SECOND;
+	framesCharge_ = CONST(float, "TOMATO_TIME_CHARGE") * FRAMES_PER_SECOND;
+	framesExplosion_ = CONST(float, "TOMATO_TIME_EXPLOSION") * FRAMES_PER_SECOND;
 	nFramesCharge_ = CONST(int, "TOMATO_N_FRAMES_ACTIVATED");
 	nFramesExplosion_ = CONST(int, "TOMATO_N_FRAMES_EXPLOSION");
 	damageOnExplosionImpact_ = CONST(int, "TOMATO_DAMAGE");
 	explosionSize_ = CONST(int, "TOMATO_EXPLOSION_SIZE");
 	explosionForce_ = CONST(int, "TOMATO_EXPLOSION_FORCE");
 
-	timePerFrameCharge_ = framesCharge_ / nFramesCharge_;
-	timePerFrameExplosion_ = framesExplosion_ / nFramesExplosion_;
+	timePerFrameCharge_ = framesCharge_ / (nFramesCharge_ - 1);
+	timePerFrameExplosion_ = framesExplosion_ / (nFramesExplosion_ - 1);
 }
 
 void TomatoWeapon::update() {
@@ -43,11 +43,10 @@ void TomatoWeapon::update() {
 			activated_ = false;
 			if (picked_) UnPickObject();
 			tomatoViewer_->setFrame(nFramesCharge_);
-			tomatoViewer_->startAnimation(0, nFramesCharge_ - 1, nFramesCharge_ + nFramesExplosion_);
+			tomatoViewer_->startAnimation(0, nFramesCharge_ - 1, tomatoViewer_->getTexture()->getNumFramesX());
 			tomatoViewer_->setAnimSpeed(timePerFrameExplosion_);
 			colTomato_->setLinearVelocity({ 0,0 });
 			currentFrame_ = 0;
-			cout << "esto es un testtttt borrame @ tomatoWeapon.cpp 50";
 		}
 	}
 	else if (exploded_) {

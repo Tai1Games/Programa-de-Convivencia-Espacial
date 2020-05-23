@@ -15,11 +15,9 @@ private:
 
 	bool activated_ = false;
 	bool exploded_ = false;
-	int timeActivated_ = 0;
-	int timeExploded_ = 0;
 	int currentFrame_ = 0;
-	//Constants loaded in Init()
 
+	//Constants loaded in Init()
 	int framesCharge_ = 0;
 	int framesExplosion_ = 0;
 	int nFramesCharge_ = 0;
