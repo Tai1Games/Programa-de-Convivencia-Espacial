@@ -44,7 +44,7 @@ void CarnivorousPlantViewer::update()
 		frameX_ = animationsInfo_[anim_].animOrigin_ + frame_;
 		if (loops_ != -1 && currentLoop_ >= loops_) {	// para saber si hay que volver al idle
 			if (anim_ == 1) {
-				if (frame_ == frameClosedMouth_) {
+				if (frameX_ == frameClosedMouth_ + animationsInfo_[anim_].animOrigin_) {
 					pauseAnimation();
 				}
 				else if(frame_ == animationsInfo_[anim_].numFrames_ - 1){
