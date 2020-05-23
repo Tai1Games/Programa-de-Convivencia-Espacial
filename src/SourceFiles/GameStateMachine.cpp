@@ -7,6 +7,7 @@
 #include "TutorialGameMode.h"
 #include "Constants.h"
 #include "MatchInfo.h"
+#include "MultiplayerHost.h"
 
 #include "PlayState.h"
 #include "PauseState.h"
@@ -145,6 +146,15 @@ void GameStateMachine::handleInput() {
 
 void GameStateMachine::gameCycle() {
 	handleInput();
+	if (mpHost_ != nullptr)
+		mpHost_->checkActivity();
 	update();
 	render();
+	if (mpHost_ != nullptr)
+		mpHost_->finishSending();
+}
+
+void GameStateMachine::setMpHost(MultiplayerHost* host)
+{
+	mpHost_ = host;
 }

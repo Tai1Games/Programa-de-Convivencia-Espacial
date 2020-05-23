@@ -83,5 +83,11 @@ public:
 	const Constants* getConstants() { return &constants_; }
 
 	bool isHosting() const { return isHosting_; };
-	MultiplayerHost* getHost() { if (mpHost_ == nullptr) mpHost_ = new MultiplayerHost(); return mpHost_; }
+	MultiplayerHost* getHost() {
+		if (mpHost_ == nullptr) {
+			mpHost_ = new MultiplayerHost();
+			isHosting_ = true;
+			gamestateMachine_->setMpHost(mpHost_);
+		} return mpHost_;
+	}
 };

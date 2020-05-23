@@ -1,6 +1,7 @@
 #include "Texture.h"
 #include <SDL_image.h>
-
+#include "MultiplayerHost.h"
+#include "SDL_Game.h"
 #include <iostream>
 
 using namespace std;
@@ -9,8 +10,8 @@ Texture::Texture() :
 		texture_(nullptr), renderer_(nullptr), width_(0), height_(0), frameWidth_(0), frameHeight_(0) {
 }
 
-Texture::Texture(SDL_Renderer *renderer, const string& fileName, unsigned short nHorFrames, unsigned short nVerFrames) :
-		texture_(nullptr), width_(0), height_(0), nHorizontalFrames_(nHorFrames), nVerticalFrames_(nVerFrames) {
+Texture::Texture(SDL_Renderer *renderer, const string& fileName, unsigned short nHorFrames, unsigned short nVerFrames, char texId) :
+		texture_(nullptr), width_(0), height_(0), nHorizontalFrames_(nHorFrames), nVerticalFrames_(nVerFrames), texId_(texId) {
 	loadFromImg(renderer, fileName);
 }
 
@@ -81,17 +82,18 @@ void Texture::render(int x, int y) const {
 	render(dest);
 }
 
-void Texture::render(const SDL_Rect &dest, const SDL_Rect& clip) const {
-	if (texture_) {
-		SDL_RenderCopy(renderer_, texture_, &clip, &dest);
-	}
-}
-
-void Texture::render(const SDL_Rect &dest) const {
-	SDL_Rect clip = {0, 0, width_, height_ };
+void Texture::render(const SDL_Rect& dest) const {
+	SDL_Rect clip = { 0, 0, width_, height_ };
 	render(dest, clip);
 }
 
+void Texture::render(const SDL_Rect &dest, const SDL_Rect& clip) const {
+	if (texture_) {
+		SDL_RenderCopy(renderer_, texture_, &clip, &dest);
+		if(SDL_Game::instance()->isHosting())
+			SDL_Game::instance()->getHost()->sendTexture({ 'S',texId_,dest.x,dest.y, dest.w, dest.h });
+	}
+}
 
 void Texture::render(const SDL_Rect& dest, double angle, const SDL_Rect& clip, SDL_RendererFlip flip) const
 {
@@ -115,10 +117,14 @@ void Texture::render(const SDL_Rect& dest, double angle,
 // this overloaded function gets the clip for you. frameY and flip are optional parameters
 void Texture::render(const SDL_Rect& dest, double angle, unsigned short frameX, unsigned short frameY, SDL_RendererFlip flip) const {
 	SDL_Rect clip = { frameWidth_ * frameX, frameHeight_ * frameY, frameWidth_, frameHeight_ };
+	if (SDL_Game::instance()->isHosting())
+		SDL_Game::instance()->getHost()->sendTexture({ 'S',texId_,dest.x,dest.y, dest.w, dest.h, angle, frameX, frameY, flip});
 	render(dest, angle, clip, flip);
 }
 
 void Texture::render(const SDL_Rect &dest, double angle) const {
 	SDL_Rect clip = {0, 0, width_, height_ };
+	if (SDL_Game::instance()->isHosting())
+		SDL_Game::instance()->getHost()->sendTexture({ 'S',texId_,dest.x,dest.y, dest.w, dest.h, angle});
 	render(dest, angle, clip);
 }

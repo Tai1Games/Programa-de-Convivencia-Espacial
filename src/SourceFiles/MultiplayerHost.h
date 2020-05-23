@@ -2,6 +2,7 @@
 
 #include "SDL_net.h"
 #include <string>
+#include "Constants.h"
 
 class MultiplayerHost
 {
@@ -25,5 +26,8 @@ public:
 	void checkActivity();
 	void handlePlayerJoin(int clientNumber);
 	void handlePlayerInput(int clientNumber);
+	void sendTexture(const SpritePacket& sPacket);
+	void sendAudio(const AudioPacket& aPacket);
+	void finishSending();
 };
 

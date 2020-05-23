@@ -163,7 +163,41 @@ void MultiplayerHost::handlePlayerInput(int clientNumber) {
 	InputPacket inputPacket{ 'I',buffer[0],(bool)buffer[1],(bool)buffer[2],(bool)buffer[3],
 	(bool)buffer[4] ,(bool)buffer[5], (*(float*)buffer[6]), (*(float*)buffer[8]),
 	(bool)buffer[10] ,(bool)buffer[11] ,(bool)buffer[12] ,(bool)buffer[13] ,(bool)buffer[14] ,
-	(bool)buffer[15] ,(bool)buffer[16] }; //Duda para pasar de buffer a float
+	(bool)buffer[15] ,(bool)buffer[16] };
 
 	(*playersVector)[buffer[0]]->inputBinder->syncInput(inputPacket);
+}
+
+void MultiplayerHost::sendTexture(const SpritePacket& sPacket)
+{
+	memset(buffer, 0, sizeof(SpritePacket));
+	buffer[0] = 'S';
+	buffer[1] = sPacket.textureId;
+	buffer[2] = sPacket.posX;
+	buffer[4] = sPacket.posY;
+	buffer[6] = sPacket.width;
+	buffer[8] = sPacket.height;
+	buffer[10] = sPacket.rotationDegrees;
+	buffer[12] = sPacket.frameNumberX;
+	buffer[13] = sPacket.frameNumberY;
+	buffer[14] = sPacket.flip;
+
+	for (int i = 0; i < 3; i++) {
+		if (clients_[i] != nullptr) {
+			SDLNet_TCP_Send(masterSocket_, buffer, sizeof(SpritePacket));
+		}
+	}
+}
+
+void MultiplayerHost::sendAudio(const AudioPacket& aPacket)
+{
+}
+
+void MultiplayerHost::finishSending()
+{
+	for (int i = 0; i < 3; i++) {
+		if (clients_[i] != nullptr) {
+			SDLNet_TCP_Send(masterSocket_, "F", 1);
+		}
+	}
 }
