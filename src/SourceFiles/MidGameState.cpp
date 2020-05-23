@@ -202,6 +202,8 @@ void MidGameState::handleInput()
 void MidGameState::onLoaded() {
 	SDL_Game::instance()->getStateMachine()->deleteState(States::play);
 
+	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::TutorialMusic, -1);
+
 	//Reseteamos el estado a como estaba en origen
 	currentState = waiting;
 	currentFrame = 0;
