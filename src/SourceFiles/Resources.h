@@ -44,17 +44,21 @@ public:
 		ProgressBar,
 		ProgressBar2,
 
+		Ready,
+		PressReady,
+
 		//Lobby
 		KeyboardIcon,
 		MouseIcon,
 		ControllerIcon,
+		PlayerPlaceholder,
 
 		//midGameState
 		Rocket,
 		SpaceStation,
 		Token,
 		RocketSpriteSheet,
-		
+
 
 		// Weapons and map items
 
@@ -99,6 +103,9 @@ public:
 		Lamp,
 		Table,
 		Sofa,
+		TomatoTree,
+		BananaTree,
+		DeadBody,
 
 		// Gamemode specific elements
 		Coin,
@@ -115,8 +122,9 @@ public:
 		// text
 		PauseText,
 		ResumeText,
-		SoundText,
-		ExitText,
+		MusicText,
+		EffectsText,
+		MainMenuText,
 
 		//modes
 		Capitalism,
@@ -140,7 +148,7 @@ public:
 		FourPlayers,
 		FivePlayers, //es solo para iterar
 
-		//tutorial	
+		//tutorial
 		Completed,
 		Slash,
 		Zero,
@@ -156,15 +164,28 @@ public:
 		DeathTutorial,
 		TutorialEnd,
 
-		//MidGame 
+		//MidGame
 		ContinueText,
 
 		//Countdown
 		Go,
-      
+
 		// particles
 		Smoke,
-		WiFiWave
+		WiFiWave,
+		Foam,
+
+		// numbers
+		NumZero,
+		NumOne,
+		NumTwo,
+		NumThree,
+		NumFour,
+		NumFive,
+		NumSix,
+		NumSeven,
+		NumEight,
+		NumNine,
 	};
 
 	enum AudioId : unsigned char {
@@ -178,7 +199,6 @@ public:
 		EntranceMusic
 
 		// sound effects
-
 	};
 
 	enum FontId : std::size_t {
@@ -214,7 +234,6 @@ public:
 	struct SoundInfo {
 		AudioId id;
 		string fileName;
-
 	};
 
 	static vector<FontInfo> fonts_; // initialized in .cpp
@@ -223,5 +242,4 @@ public:
 	static vector<MusicInfo> musics_; // initialized in .cpp
 	static vector<SoundInfo> sounds_; // initialized in .cpp
 	static map<std::string, Resources::TextureId> tilesetTag_; // initialized in .cpp
-
 };
