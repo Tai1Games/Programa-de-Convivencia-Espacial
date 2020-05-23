@@ -7,11 +7,17 @@
 #include "SDLTexturesManager.h"
 #include "Resources.h"
 
+bool comparePoints(MatchInfo::PlayerInfo* a, MatchInfo::PlayerInfo* b) { return a->totalPoints > b->totalPoints; }
+
 void EndGameState::init()
 {
 	backgroundT_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::RocketRoom);
+	vector<MatchInfo::PlayerInfo*>* playerInfo_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
+	for (auto& player : *playerInfo_) {
+		sortedPlayerInfo_.push_back(player);
+	}
+	sort(sortedPlayerInfo_.begin(), sortedPlayerInfo_.end(), comparePoints);
 }
-
 void EndGameState::render()
 {
 	backgroundT_->render(0, 0);
