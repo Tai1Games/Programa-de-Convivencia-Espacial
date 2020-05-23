@@ -187,15 +187,20 @@ vector<Resources::SoundInfo> Resources::sounds_{
 
 	// specific to a map sounds
 	{ PadSound, resourcesPath + "sound/effects/padSound.wav" },
+
+	// specific to a mode sounds
+	{ CoinSound, resourcesPath + "sound/effects/coinSound.wav" },
+
 	// boiler
-	{ BoilerShoot, resourcesPath + "sound/effects/boilerShoot.wav" },
-	{ BoilerButtonSlow, resourcesPath + "sound/effects/boilerSlow.wav" },
-	{ BoilerButtonFast, resourcesPath + "sound/effects/boilerFast.wav" },
+	{ BoilerShootSound, resourcesPath + "sound/effects/boilerShoot.wav" },
+	{ BoilerButtonSlowSound, resourcesPath + "sound/effects/boilerSlow.wav" },
+	{ BoilerButtonFastSound, resourcesPath + "sound/effects/boilerFast.wav" },
 
 	// Weapons
-	{ BananaShoot, resourcesPath + "sound/effects/bananaShoot.wav"},
+	{ BananaShootSound, resourcesPath + "sound/effects/bananaShoot.wav"},
 	{ ExtinguisherSound, resourcesPath + "sound/effects/extinguisherSound.wav" },
 	{ PickSound, resourcesPath + "sound/effects/pick.wav"},
+	{ TomatoExplosionSound, resourcesPath + "sound/effects/tomatoExplosionSound.wav"},
 
 	//Player
 	{ RespawnSound, resourcesPath + "sound/effects/RespawnSound.wav"},

@@ -189,14 +189,16 @@ public:
 		GoSound,
 		PadSound,
 		PickSound,
+		CoinSound,
 		// boiler
-		BoilerShoot,
-		BoilerButtonSlow,
-		BoilerButtonFast,
+		BoilerShootSound,
+		BoilerButtonSlowSound,
+		BoilerButtonFastSound,
 
 		// Weapons
-		BananaShoot,
+		BananaShootSound,
 		ExtinguisherSound,
+		TomatoExplosionSound,
 
 		//Player
 		DeathSound,
