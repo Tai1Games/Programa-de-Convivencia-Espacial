@@ -12,7 +12,10 @@ private:
 	Texture* backgroundT_ = nullptr;
 	vector<MatchInfo::PlayerInfo*> sortedPlayerInfo_;
 	bool anyButtonPush = false;
+	vector<Entity*> leaderboardUI;
+	virtual void drawPlayer(int x, int y);
 public:
+	virtual ~EndGameState();
 	virtual void init();
 	virtual void render();
 	virtual void update();

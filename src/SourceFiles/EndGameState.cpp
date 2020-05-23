@@ -6,8 +6,20 @@
 #include "Texture.h"
 #include "SDLTexturesManager.h"
 #include "Resources.h"
+#include "AnimatedViewer.h"
+#include "Entity.h"
+#include "UIViewer.h"
 
 bool comparePoints(MatchInfo::PlayerInfo* a, MatchInfo::PlayerInfo* b) { return a->totalPoints > b->totalPoints; }
+
+void EndGameState::drawPlayer(int x, int y)
+{
+}
+
+EndGameState::~EndGameState()
+{
+	delete entityManager_;		entityManager_ = nullptr;
+}
 
 void EndGameState::init()
 {
@@ -17,6 +29,17 @@ void EndGameState::init()
 		sortedPlayerInfo_.push_back(player);
 	}
 	sort(sortedPlayerInfo_.begin(), sortedPlayerInfo_.end(), comparePoints);
+	int auxX = CONST(int, "LEADERBOARD_ANCHOR_X");
+	int auxY = CONST(int, "LEADERBOARD_ANCHOR_Y");
+	int zeroTex = Resources::NumZero;
+	entityManager_ = new EntityManager();
+
+	for (int i = 0; i < sortedPlayerInfo_.size(); i++) {
+		Entity* auxEntity = entityManager_->addEntity();
+		int y = auxY + i * CONST(int, "LEADERBOARD_PLAYER_MARGIN");
+		auxEntity->addComponent<UIViewer>(Resources::Token, b2Vec2(auxX, y), 0);
+		auxEntity->addComponent<UIViewer>((Resources::TextureId)zeroTex + i, b2Vec2(auxX + CONST(int, "LEADERBOARD_ICON_OFFSET"), y), 0);
+	}
 }
 void EndGameState::render()
 {
