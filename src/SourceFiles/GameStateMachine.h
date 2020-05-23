@@ -15,7 +15,7 @@ private:
 	std::vector<GameState*> states_;
 
 	MatchInfo* matchInfo_ = nullptr;
-	MultiplayerHost* mpHost_;
+	MultiplayerHost* mpHost_ = nullptr;
 
 	int currentState_ = -1;
 

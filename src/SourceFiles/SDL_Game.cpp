@@ -21,15 +21,15 @@ SDL_Game::SDL_Game() {
 
 
 	//Splashscreen
-	textures_->getTexture(Resources::Tinky)->render({ constants_.getConstant<int>("WINDOW_WIDTH") / 2 - 70,constants_.getConstant<int>("WINDOW_HEIGHT") / 2 - 135,140,200 });
+	//textures_->getTexture(Resources::Tinky)->render({ constants_.getConstant<int>("WINDOW_WIDTH") / 2 - 70,constants_.getConstant<int>("WINDOW_HEIGHT") / 2 - 135,140,200 });
 
-	Texture introText(renderer_,
+	/*Texture introText(renderer_,
 		"PROGRAMA DE CONVIVENCIA ESPACIAL",
 		fonts_->getFont(Resources::NES_Chimera),
 		{ COLOR(0xc7f2edff) });
 	introText.render(
 		constants_.getConstant<int>("WINDOW_WIDTH") / 2 - introText.getWidth() / 2, constants_.getConstant<int>("WINDOW_HEIGHT") - 250);
-	SDL_RenderPresent(renderer_);
+	SDL_RenderPresent(renderer_);*/
 
 	MS_PER_FRAME_ = constants_.getConstant<double>("MS_PER_FRAME");
 
