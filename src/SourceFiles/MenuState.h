@@ -6,7 +6,7 @@
 
 class InputBinder;
 class UIViewer;
-class MenuState:
+class MenuState :
 	public GameState
 {
 private:
@@ -18,13 +18,13 @@ private:
 
 	int tinkyOffset_ = CONST(int, "WINDOW_WIDTH") / 4;
 
-	int xOffset_ = CONST(int, "WINDOW_WIDTH")/3;
-	int yOffset_ = CONST(int, "WINDOW_HEIGHT")/9;
+	int xOffset_ = CONST(int, "WINDOW_WIDTH") / 3;
+	int yOffset_ = CONST(int, "WINDOW_HEIGHT") / 9;
 
 	int numberOfRounds_ = 3;
 
 	UIViewer* menuCursor_ = nullptr;
-	std::vector<Entity*> texts_ [3];
+	std::vector<Entity*> texts_[3];
 	vector<pair<GamemodeID, string>>* roundsVector_ = new vector<pair<GamemodeID, string>>();  //vector de rondas
 
 	std::map<int, string> maps_ = { //a�adir aqu� los mapas que se vayan haciendo, tutorial no
@@ -49,4 +49,3 @@ public:
 	virtual void onLoaded() override;
 	virtual void handleInput() override;
 };
-

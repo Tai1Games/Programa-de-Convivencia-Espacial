@@ -9,6 +9,9 @@
 #include "AnimatedViewer.h"
 #include "Entity.h"
 #include "UIViewer.h"
+#include <algorithm>
+#include <random>
+
 
 bool comparePoints(MatchInfo::PlayerInfo* a, MatchInfo::PlayerInfo* b) { return a->totalPoints > b->totalPoints; }
 
@@ -31,14 +34,33 @@ void EndGameState::init()
 	sort(sortedPlayerInfo_.begin(), sortedPlayerInfo_.end(), comparePoints);
 	int auxX = CONST(int, "LEADERBOARD_ANCHOR_X");
 	int auxY = CONST(int, "LEADERBOARD_ANCHOR_Y");
+	int iconOffset = CONST(int, "LEADERBOARD_ICON_OFFSET");
+	int iconMargin = CONST(int, "LEADERBOARD_ICON_MARGIN");
 	int zeroTex = Resources::NumZero;
 	entityManager_ = new EntityManager();
 
 	for (int i = 0; i < sortedPlayerInfo_.size(); i++) {
 		Entity* auxEntity = entityManager_->addEntity();
-		int y = auxY + i * CONST(int, "LEADERBOARD_PLAYER_MARGIN");
-		auxEntity->addComponent<UIViewer>(Resources::Token, b2Vec2(auxX, y), 0);
-		auxEntity->addComponent<UIViewer>((Resources::TextureId)zeroTex + i, b2Vec2(auxX + CONST(int, "LEADERBOARD_ICON_OFFSET"), y), 0);
+		int y = auxY + (i * CONST(int, "LEADERBOARD_PLAYER_MARGIN"));
+		int x = auxX;
+		auxEntity->addComponent<UIViewer>(Resources::DeadBody, b2Vec2(auxX, y), 1);
+		x += iconOffset;
+		auxEntity->addComponent<UIViewer>((Resources::TextureId)zeroTex + i + 1, b2Vec2(x, y), 1);
+		//lista de chapitas
+		vector<int> chapitas;
+		for (int j = 0; j < sortedPlayerInfo_[i]->matchesWon.size(); j++) {
+			for (int n = 0; n < sortedPlayerInfo_[i]->matchesWon[j]; n++) {
+				chapitas.push_back(j);
+			}
+		}
+		auto rng = std::default_random_engine{};
+		std::shuffle(chapitas.begin(), chapitas.end(), rng);
+
+		x += iconOffset;
+		for (auto& chapa : chapitas) {
+			auxEntity->addComponent<UIViewer>(Resources::TomatoTree, b2Vec2(x, y), 1);
+			x += iconOffset;
+		}
 	}
 }
 void EndGameState::render()
