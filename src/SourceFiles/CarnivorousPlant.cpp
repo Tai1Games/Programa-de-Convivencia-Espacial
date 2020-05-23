@@ -5,8 +5,6 @@ void CarnivorousPlant::init()
 	viewer_ = entity_->getComponent<CarnivorousPlantViewer>(ComponentType::AdvancedAnimatedViewer);
 	maxAnimationSpeed_ = CONST(int, "CARNIVOROUSPLANT_MAX_SPEED");
 	minAnimationSpeed_ = CONST(int, "CARNIVOROUSPLANT_MIN_SPEED");
-	idleFrames_ = CONST(int, "CARNIVOROUSPLANT_NFRAMES_ANIM0");
-	eatingFrames_ = CONST(int, "CARNIVOROUSPLANT_NFRAMES_ANIM1");
 	coinDamage_ = CONST(int, "CARNIVOROUSPLANT_COIN_DMG");
 	damage_ = CONST(int, "CARNIVOROUSPLANT_DMG");
 	maxFrames_ = CONST(int, "CARNIVOROUSPLANT_TIME");
@@ -15,7 +13,7 @@ void CarnivorousPlant::init()
 	increase_ = (float)(minAnimationSpeed_ - maxAnimationSpeed_) / maxFrames_;
 	actualSpeed_ = minAnimationSpeed_;
 
-	viewer_->startAnimation(-1, 0, idleFrames_, 0);
+	viewer_->startAnimation(-1, 0, CONST(int, "CARNIVOROUSPLANT_NFRAMES_ANIM0"), 0);
 }
 
 void CarnivorousPlant::update()
