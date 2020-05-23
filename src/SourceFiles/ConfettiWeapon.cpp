@@ -58,7 +58,7 @@ void ConfettiWeapon::update()
 	if (used) {
 		currentFrame_++;
 		if (currentFrame_ == animationDuration_) {
-			if (currentHand_) currentHand_->setFrame(2, weaponType_);
+			if (currentHand_ != nullptr) currentHand_->setFrame(2, weaponType_);
 		}
 	}
 }
