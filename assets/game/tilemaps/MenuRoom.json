@@ -40,15 +40,15 @@
                  "y":381.753931031731
                 }, 
                 {
-                 "height":337.5,
+                 "height":337,
                  "id":45,
                  "name":"TriggerButton",
                  "rotation":0,
                  "type":"Options",
                  "visible":true,
-                 "width":168.5,
-                 "x":456.844913480363,
-                 "y":382.902331008841
+                 "width":157,
+                 "x":456.178246813696,
+                 "y":381.235664342174
                 }],
          "opacity":1,
          "type":"objectgroup",

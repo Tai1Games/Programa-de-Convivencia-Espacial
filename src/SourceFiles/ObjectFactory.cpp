@@ -376,16 +376,16 @@ Entity* ObjectFactory::makeTriggerButton(EntityManager* entityManager, b2World* 
 												CONST(int, "WALLS_BASE_H_SPRITE") + (int)(size.y * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "WALLS_SCALE_W_SPRITE")) }, trigger);
 	
 	if (state == "Play") {
-		trButton->addComponent<AnimatedViewer>(Resources::TriggerButtonPlay, 25);
+		trButton->addComponent<AnimatedViewer>(Resources::TriggerButtonPlay, 23);
 	}
 	else if (state == "Options") {
-		trButton->addComponent<AnimatedViewer>(Resources::TriggerButtonOptions, 25);
+		trButton->addComponent<AnimatedViewer>(Resources::TriggerButtonOptions, 23);
 	}
 	else if (state == "Credits") {
-		trButton->addComponent<AnimatedViewer>(Resources::TriggerButtonCredits, 25);
+		trButton->addComponent<AnimatedViewer>(Resources::TriggerButtonCredits, 23);
 	}
 	else if (state == "Exit") {
-		trButton->addComponent<AnimatedViewer>(Resources::TriggerButtonExit, 25);
+		trButton->addComponent<AnimatedViewer>(Resources::TriggerButtonExit, 23);	//25 está genial en 8 frames
 	}
 	trButton->addComponent<TriggerButton>(state);
 	
