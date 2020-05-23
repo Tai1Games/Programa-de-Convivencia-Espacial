@@ -100,7 +100,7 @@ void FireBallGenerator::onButtonAction(bool inc_dec) {
 			maxCd_ = minCd_ + cdVariability;
 		}
 		cout << "Generation rate increased to [" << minCd_ << ", " << maxCd_ << "](ms)." << endl;
-		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::AudioId::BoilerButtonFast, 0);
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::AudioId::BoilerButtonFastSound, 0);
 	}
 	else if (!inc_dec && maxCd_ <= limitMaxCd_) {
 		maxCd_ += cdTimeChange_;
@@ -110,6 +110,6 @@ void FireBallGenerator::onButtonAction(bool inc_dec) {
 			minCd_ = limitMaxCd_ - cdVariability;
 		}
 		cout << "Generation rate decreased to [" << minCd_ << ", " << maxCd_ << "](ms)." << endl;
-		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::AudioId::BoilerButtonSlow, 0);
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::AudioId::BoilerButtonSlowSound, 0);
 	}
 }

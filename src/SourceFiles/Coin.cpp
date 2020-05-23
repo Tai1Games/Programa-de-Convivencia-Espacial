@@ -46,5 +46,6 @@ void Coin::onCollisionEnter(Collision* c)
 	if (wallet != nullptr && justDroppedByPlayer_ != GETCMP2(c->entity,PlayerData)->getPlayerNumber()) {
 		wallet->addCoins(value_);
 		c->collisionHandler->addCoinPick(this);
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::CoinSound, 0);
 	}
 }

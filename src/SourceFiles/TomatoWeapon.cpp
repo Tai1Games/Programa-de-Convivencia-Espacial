@@ -44,6 +44,7 @@ void TomatoWeapon::update() {
 			activated_ = false;
 			if (picked_) UnPickObject();
 			colTomato_->setLinearVelocity({ 0,0 });
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::TomatoExplosionSound, 0);
 		}
 		frame = (SDL_Game::instance()->getTime() - timeActivated_) / timePerFrame_;
 		tomatoViewer_->setFrame(frame);

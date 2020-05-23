@@ -19,7 +19,7 @@ void BananaWeapon::action()
 	bulletPool_->addBullet(currentHand_->getPos(), { 1,1 }, { -dir.x, dir.y }, Resources::BananaSkin,
 		0, currentHand_->getPlayerId());
 
-	SDL_Game::instance()->getAudioMngr()->playChannel(Resources::BananaShoot, 0);
+	SDL_Game::instance()->getAudioMngr()->playChannel(Resources::BananaShootSound, 0);
 
 	currentHand_->setWeapon(NoWeapon, nullptr);
 	picked_ = false;

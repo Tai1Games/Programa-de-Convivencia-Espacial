@@ -29,6 +29,6 @@ void FireBallPool::addFireBall(b2Vec2 pos, b2Vec2 impulse) {
 		cout << endl;
 		cout << "---- BOLA ACTIVADA ----" << endl;
 
-		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::AudioId::BoilerShoot, 0);
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::AudioId::BoilerShootSound, 0);
 	}
 }
