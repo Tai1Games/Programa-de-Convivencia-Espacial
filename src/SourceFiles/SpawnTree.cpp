@@ -1,7 +1,7 @@
 #include "SpawnTree.h"
 #include "Collider.h"
 
-SpawnTree::SpawnTree(Texture* objectText, int objectW, int objectH, WeaponPool* pool, EntityManager* eMan, b2World* pWorld) :
+SpawnTree::SpawnTree(Texture* objectText, double objectW, double objectH, WeaponPool* pool, EntityManager* eMan, b2World* pWorld) :
 	Component(ComponentType::SpawnTree), objectTex_(objectText), pool_(pool), eMan_(eMan), pWorld_(pWorld) {
 	int pixPerMeter = CONST(double, "PIXELS_PER_METER");
 	objectW_ = objectW * pixPerMeter;
@@ -14,10 +14,11 @@ void SpawnTree::init() {
 	sPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 	Collider* coll = GETCMP1_(Collider);
 	SDL_Rect rectRender = coll->getRectRender();
-	double spawnPosX = rectRender.x + (rectRender.w / 2);
-	double spawnPosY = rectRender.y;
+	double spawnPosX = rectRender.x + (rectRender.w / 1.5);
+	double spawnPosY = rectRender.y + objectH_ * 2;
 	renderSpawnPos_ = b2Vec2(spawnPosX - (objectW_/2), spawnPosY - (objectH_/2));
 	physicsSpawnPos_ = b2Vec2((spawnPosX / pixPerM_), (CONST(double, "WINDOW_HEIGHT") - spawnPosY) / pixPerM_);
+	cout << renderSpawnPos_.x << " " << renderSpawnPos_.y << endl;
 }
 
 void SpawnTree::update() {
@@ -31,10 +32,12 @@ void SpawnTree::update() {
 }
 
 void SpawnTree::draw() const {
-	SDL_Rect rect;
-	rect.x = renderSpawnPos_.x; rect.y = renderSpawnPos_.y;
-	rect.w = currentW_; rect.h = currentH_;
-	objectTex_->render(rect);
+	if (pool_->isRendering()) {
+		SDL_Rect rect;
+		rect.x = renderSpawnPos_.x; rect.y = renderSpawnPos_.y;
+		rect.w = currentW_; rect.h = currentH_;
+		objectTex_->render(rect);
+	}
 }
 
 void SpawnTree::SpawnObject() {
