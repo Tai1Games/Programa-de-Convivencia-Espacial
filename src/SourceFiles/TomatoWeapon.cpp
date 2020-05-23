@@ -47,7 +47,7 @@ void TomatoWeapon::update() {
 			tomatoViewer_->setAnimSpeed(timePerFrameExplosion_);
 			colTomato_->setLinearVelocity({ 0,0 });
 			currentFrame_ = 0;
-			cout << "esto es un test borrame @ tomatoWeapon.cpp 50";
+			cout << "esto es un testtttt borrame @ tomatoWeapon.cpp 50";
 		}
 	}
 	else if (exploded_) {
@@ -86,6 +86,16 @@ void TomatoWeapon::onCollisionEnter(Collision* c) {
 		}
 
 		b2Vec2 dir = (collPlayer->getPos() - colTomato_->getPos()).NormalizedVector();
+		if (dir.x == 0 && dir.y == 0) { //This happens when the tomato explodes in the hand of the player.
+			int dirX = rand() % 2;
+			int dirY = rand() % 2;
+
+			if (dirX == 0) dirX = -1;
+			if (dirY == 0) dirY = -1;
+
+			dir.x = (float)(rand() % 100) / 100 * dirX;
+			dir.y = 1 - dir.x * dirY;
+		}
 		collPlayer->applyForce({ dir.x * explosionForce_, dir.y * explosionForce_ }, { 0,0 });
 	}
 }
@@ -135,7 +145,7 @@ void TomatoWeapon::setActive(bool a, b2Vec2 pos) {
 	if (exploded_) {
 		currentFrame_ = 0;
 		tomatoViewer_->setFrame(0);
-		colTomato_->destroyFixture(1);
+		colTomato_->destroyFixture(2);
 	}
 
 	if (a) colTomato_->getBody()->SetTransform(pos, 0);
