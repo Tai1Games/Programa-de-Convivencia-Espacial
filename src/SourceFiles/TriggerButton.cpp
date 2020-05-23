@@ -5,10 +5,7 @@ void TriggerButton::init()
 
 	viewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer); //pilla referencia al viewer
 	timeToActivate = CONST(int, "TRIGGER_BUTTON_TIME");
-	
-	
-
-	//viewer_->startAnimation(-1, 0, idleFrames_, 0);
+	viewer_->stopAnimation();
 }
 
 void TriggerButton::update()

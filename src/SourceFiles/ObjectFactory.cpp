@@ -374,8 +374,19 @@ Entity* ObjectFactory::makeTriggerButton(EntityManager* entityManager, b2World* 
 	//trButton->addComponent<Transform>(SDL_Rect{ 0,0,(int)size.x, (int)size.y }, trigger);
 	trButton->addComponent<Transform>(SDL_Rect{ 0,0,	CONST(int, "WALLS_BASE_W_SPRITE") + (int)(size.x * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "WALLS_SCALE_W_SPRITE")),
 												CONST(int, "WALLS_BASE_H_SPRITE") + (int)(size.y * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "WALLS_SCALE_W_SPRITE")) }, trigger);
-
-	trButton->addComponent<AnimatedViewer>(Resources::TriggerButton, 25)->stopAnimation();
+	
+	if (state == "Play") {
+		trButton->addComponent<AnimatedViewer>(Resources::TriggerButtonPlay, 25);
+	}
+	else if (state == "Options") {
+		trButton->addComponent<AnimatedViewer>(Resources::TriggerButtonOptions, 25);
+	}
+	else if (state == "Credits") {
+		trButton->addComponent<AnimatedViewer>(Resources::TriggerButtonCredits, 25);
+	}
+	else if (state == "Exit") {
+		trButton->addComponent<AnimatedViewer>(Resources::TriggerButtonExit, 25);
+	}
 	trButton->addComponent<TriggerButton>(state);
 	
 	trButton->addComponent<ColliderViewer>();

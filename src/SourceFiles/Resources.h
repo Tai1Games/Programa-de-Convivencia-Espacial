@@ -107,7 +107,10 @@ public:
 		TomatoTree,
 		BananaTree,
 		DeadBody,
-		TriggerButton,
+		TriggerButtonPlay,
+		TriggerButtonExit,
+		TriggerButtonCredits,
+		TriggerButtonOptions,
 
 		// Gamemode specific elements
 		Coin,
