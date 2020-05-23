@@ -29,6 +29,7 @@
 #include "TriggerButton.h"
 #include "WeaponSpawner.h"
 #include "ConfettiPool.h"
+#include "RouterLogic.h"
 
 Entity* ObjectFactory::makeTable(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
@@ -324,14 +325,29 @@ Entity* ObjectFactory::makeBananaTree(EntityManager* entityManager, b2World* phy
 		CONST(double, "SPAWN_TREE_RESTITUTION"), CONST(double, "SPAWN_TREE_LINEAR_DRAG"), CONST(double, "SPAWN_TREE_ANGULAR_DRAG"),
 		Collider::CollisionLayer::UnInteractableObject, false);
 	e->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "SPAWN_TREE_W_SPRITE") , CONST(int, "SPAWN_TREE_H_SPRITE") }, col);
-	e->addComponent<Viewer>(Resources::BananaTree);
 	SDL_Rect clip;
 	clip.h = bananaTex->getHeight(); clip.w = bananaTex->getWidth() / 17;
 	clip.x = 0; clip.y = 0;
+	e->addComponent<Viewer>(Resources::BananaTree);
 	e->addComponent<SpawnTree>(bananaTex, CONST(double, "BANANA_W_PHYSICS"),
 		CONST(double, "BANANA_H_PHYSICS"), pool, entityManager, physicsWorld);
 
 	return e;
+}
+
+Entity* ObjectFactory::makeRouter(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WiFightGameMode* gMode, WiFiWavePool* wavePool) {
+	Entity* router = entityManager->addEntity();
+	//				x,								y,						width, height, density,	friction, restitution, linearDrag, angularDrag,	 Laye,  sensor,  canBeAttached
+	Collider* collRouter = router->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, 1, 0.7, 1, 0, 1, 0, 0, Collider::CollisionLayer::UnInteractableObject, false);
+	collRouter->createCircularFixture(5, 1, 0, 0, Collider::CollisionLayer::Trigger, true);
+	router->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "ROUTER_W_SPRITE"), CONST(int, "ROUTER_H_SPRITE") }, collRouter);
+	router->addComponent<Viewer>(Resources::Router);
+	router->addComponent<RouterLogic>(gMode, wavePool);
+	router->addComponent<ColliderViewer>();
+
+	collRouter->applyLinearImpulse(b2Vec2(100, 100), b2Vec2(0, 0));
+
+	return router;
 }
 
 Entity* ObjectFactory::makeWifiWave(Entity* e, EntityManager* entityManager, b2World* physicsWorld, Collider* colRouter)

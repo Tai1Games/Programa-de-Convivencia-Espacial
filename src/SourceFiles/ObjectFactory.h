@@ -11,6 +11,8 @@ class Collider;
 class GameMode;
 class ConfettiPool;
 class StaplerPool;
+class WiFightGameMode;
+class WiFiWavePool;
 
 class ObjectFactory
 {
@@ -56,6 +58,8 @@ public:
 	static Entity* makeTomatoTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WeaponPool* pool);
 
 	static Entity* makeBananaTree(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WeaponPool* pool);
+
+	static Entity* makeRouter(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WiFightGameMode* gMode, WiFiWavePool* wavePool);
 
 	static Entity* makeWifiWave(Entity* e, EntityManager* entityManager, b2World* physicsWorld, Collider* colRouter);
 	
