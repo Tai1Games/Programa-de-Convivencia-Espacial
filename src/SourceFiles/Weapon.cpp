@@ -38,8 +38,8 @@ void Weapon::handleInput()
 {
 	if (currentHand_ == nullptr) {
 		for (int i = 0; i < playerInfo_.size(); i++) {
-			if (!IsPicked() && playerInfo_[i].isNear &&
-				playerInfo_[i].playerBinder->pressPick()) {
+			if (!IsPicked() && playerInfo_[i].isNear && 
+				playerInfo_[i].playerHands->getCanPickWeapon() && playerInfo_[i].playerBinder->pressPick()) {
 				PickObjectBy(i);
 			}
 		}
@@ -85,6 +85,7 @@ void Weapon::UnPickObject()
 	//
 	
 	currentHand_->setWeapon(NoWeapon, nullptr);
+	currentHand_->setCanPickWeapon(false);
 	picked_ = false;
 	pickedIndex_ = -1;
 	mainCollider_->getBody()->SetEnabled(true);
