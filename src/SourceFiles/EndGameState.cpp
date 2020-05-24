@@ -45,7 +45,10 @@ void EndGameState::init()
 		int x = auxX;
 		auxEntity->addComponent<UIViewer>(Resources::DeadBody, b2Vec2(auxX, y), 1);
 		x += iconOffset;
-		auxEntity->addComponent<UIViewer>((Resources::TextureId)zeroTex + i + 1, b2Vec2(x, y), 1);
+		if (i < 3) {//si le toca medallita
+			UIViewer* medalV = auxEntity->addComponent<UIViewer>(Resources::medals, b2Vec2(x, y), 1);
+			medalV->setFrame(i);
+		}
 		//lista de chapitas
 		vector<int> chapitas;
 		for (int j = 0; j < sortedPlayerInfo_[i]->matchesWon.size(); j++) {

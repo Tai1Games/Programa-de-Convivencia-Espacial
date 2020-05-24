@@ -116,6 +116,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ badgeStocks,resourcesPath + "textures/skullUI.png" },
 	{ badgeWifi,resourcesPath + "textures/Router.png" },
 	{ badgeTimed,resourcesPath + "textures/TreadmillPanel.png" },
+
+	{medals,resourcesPath + "textures/medals.png",3}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{

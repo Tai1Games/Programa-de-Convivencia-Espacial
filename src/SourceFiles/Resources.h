@@ -193,6 +193,8 @@ public:
 		badgeStocks,
 		badgeWifi,
 		badgeTimed,
+
+		medals,
 	};
 
 	enum AudioId : unsigned char {
