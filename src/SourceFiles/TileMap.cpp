@@ -73,6 +73,7 @@ void TileMap::init() {
 			}
 		}
 	}
+	if(gameMode_!=nullptr)
 	bulletPool_->init(entityManager_, physicsWorld_, gameMode_);
 }
 
@@ -239,6 +240,23 @@ void TileMap::executeMapFactory()
 				bananaPool_->init(entityManager_, physicsWorld_);
 			}
 			ObjectFactory::makeBananaTree(entityManager_, physicsWorld_, pos, bananaPool_.get());
+		}
+		else if (name == "TriggerButton") {
+			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
+			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
+			size *= 0.5f;
+			string buttonType= o.getType();;	//Por defecto
+
+			ObjectFactory::makeTriggerButton(entityManager_, physicsWorld_, pos, size, buttonType);
+		}
+
+		else if (name == "TWall") {
+			float rotation = o.getRotation();
+			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), s.y / CONST(double, "PIXELS_PER_METER"));
+			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
+			size *= 0.5f;
+
+			ObjectFactory::makeTrasparentWall(entityManager_, physicsWorld_, pos, size, rotation);
 		}
 	}
 	solvePostCreationProblems();

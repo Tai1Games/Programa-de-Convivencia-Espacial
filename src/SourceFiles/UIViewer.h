@@ -11,7 +11,7 @@ protected:
 	float angle_;
 	SDL_RendererFlip flip_;
 public:
-	UIViewer(int textureId, b2Vec2 pos, float scale, float angle, const SDL_RendererFlip& flip = SDL_FLIP_NONE, ComponentType::CmpId id = ComponentType::UIViewer);
+	UIViewer(int textureId, b2Vec2 pos, float scale, float angle = 0, const SDL_RendererFlip& flip = SDL_FLIP_NONE, ComponentType::CmpId id = ComponentType::UIViewer);
 
 	virtual ~UIViewer();
 
