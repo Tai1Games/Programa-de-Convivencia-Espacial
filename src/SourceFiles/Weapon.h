@@ -60,8 +60,7 @@ private:
 	int framesUntilRecoveringCollision_ = 0;
 	int framesUntilRecoveringCollisionTimer_ = 0;
 
-	void throwWeaponBeforeImpulse_();
-	void throwWeaponAfterImpulse_();
+	void separateWeapon(double resultThrowSpeed);
 
 public:
 	Weapon(WeaponID wId, int impctDmg, int impctForce=0) : Component(ComponentType::Weapon), weaponType_(wId), impactDamage_(impctDmg), impactForce_(impctForce){}
