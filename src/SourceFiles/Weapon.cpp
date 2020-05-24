@@ -117,7 +117,7 @@ void Weapon::UnPickObject()
 }
 
 void Weapon::letFallObject() {
-	separateWeapon(1.5);
+	if(picked_) separateWeapon(1.5);
 }
 
 int Weapon::getPlayerId() {
@@ -173,8 +173,10 @@ void Weapon::update() {
 		if (framesUntilRecoveringCollisionTimer_ >= framesUntilRecoveringCollision_) {
 			hasBeenThrownRecently_ = false;
 			framesUntilRecoveringCollisionTimer_ = 0;
-			if(currentHand_ == nullptr)
+			if (currentHand_ == nullptr) {
 				mainCollider_->getFixture(0)->SetFilterData(mainCollider_->getFilterFromLayer(Collider::CollisionLayer::NormalObject));
+				mainCollider_->getFixture(1)->SetFilterData(mainCollider_->getFilterFromLayer(Collider::CollisionLayer::Trigger));
+			}
 		}
 	}
 }
