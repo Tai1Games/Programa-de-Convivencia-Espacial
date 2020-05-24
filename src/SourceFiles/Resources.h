@@ -25,6 +25,8 @@ public:
 		RocketRoom,
 		TutorialRoom,
 		GardenRoom,
+		MenuRoom,
+		CreditsRoom,
 
 		// UI
 		ActiveHealth,
@@ -43,6 +45,9 @@ public:
 		EmptyProgressBar2,
 		ProgressBar,
 		ProgressBar2,
+
+		Ready,
+		PressReady,
 
 		//Lobby
 		KeyboardIcon,
@@ -103,6 +108,10 @@ public:
 		TomatoTree,
 		BananaTree,
 		DeadBody,
+		TriggerButtonPlay,
+		TriggerButtonExit,
+		TriggerButtonCredits,
+		TriggerButtonOptions,
 
 		// Gamemode specific elements
 		Coin,
@@ -170,7 +179,37 @@ public:
 		// particles
 		Smoke,
 		WiFiWave,
-		Foam
+		Foam,
+
+		// numbers
+		NumZero,
+		NumOne,
+		NumTwo,
+		NumThree,
+		NumFour,
+		NumFive,
+		NumSix,
+		NumSeven,
+		NumEight,
+		NumNine,
+
+		//badges ordenadas como GameModeId
+		badgeCapitalism,
+		badgeController,
+		badgeStocks,
+		badgeWifi,
+		badgeTimed,
+
+		medals,
+
+		//winner msgs
+		winner1,
+		winner2,
+		winner3,
+		winner4,
+
+		//Credits
+		ReturnText,
 	};
 
 	enum AudioId : unsigned char {
