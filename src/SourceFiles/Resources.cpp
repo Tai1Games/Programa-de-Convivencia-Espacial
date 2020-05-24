@@ -184,10 +184,10 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{NumNine,"9",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
 
 	//winner msgs
-	{winner1,"Player 1 WINS",{COLOR(0xf79617ff)},FontId::NES_Chimera},
-	{winner2,"Player 2 WINS",{COLOR(0xf79617ff)},FontId::NES_Chimera},
-	{winner3,"Player 3 WINS",{COLOR(0xf79617ff)},FontId::NES_Chimera},
-	{winner4,"Player 4 WINS",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+	{winner1,"GANA EL JUGADOR 1",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+	{winner2,"GANA EL JUGADOR 2",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+	{winner3,"GANA EL JUGADOR 3",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+	{winner4,"GANA EL JUGADOR 4",{COLOR(0xf79617ff)},FontId::NES_Chimera},
 };
 
 vector<Resources::MusicInfo> Resources::musics_{

@@ -50,16 +50,14 @@ void EndGameState::init()
 
 		Entity* auxEntity = entityManager_->addEntity();
 		int x = auxX - actPlayerWH.x / 2;
-		cout << "player en " << x << " " << y << endl;
 
 		UIViewer* playerV = auxEntity->addComponent<UIViewer>(Resources::PlayerAnimSheet, b2Vec2(x, y), 1);
 		playerV->setWHUIElement(actPlayerWH);
 		playerV->setFrame(0, sortedPlayerInfo_[i]->playerSkin);
 
 		x = medalOffset - actMedalWH.x / 2;
-		//x -= actMedalWH.x / 2;
+
 		if (i < 3) {//si le toca medallita
-			cout << "medallita en " << x << " " << y << endl;
 			UIViewer* medalV = auxEntity->addComponent<UIViewer>(Resources::medals, b2Vec2(x, y), 1);
 			medalV->setFrame(i);
 			medalV->setWHUIElement(actMedalWH);
@@ -85,7 +83,6 @@ void EndGameState::init()
 		}
 
 		y += actPlayerWH.y;
-		cout << "---------------------------" << endl;
 	}
 
 	b2Vec2 textWH(CONST(int, "LEADERBOARD_TEXT_W"), CONST(int, "LEADERBOARD_TEXT_H"));
