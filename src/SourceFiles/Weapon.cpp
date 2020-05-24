@@ -137,7 +137,7 @@ void Weapon::onCollisionEnter(Collision* c)
 	Entity* other = c->entity;
 	Hands* otherHand = GETCMP2(other, Hands);
 	Collider* coll = GETCMP1_(Collider);
-	b2Fixture* auxF = coll->getFixture(1);
+	b2Fixture* auxF = c->myFixture ;
 
 	if (otherHand != nullptr &&
 		auxF->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
@@ -148,8 +148,10 @@ void Weapon::onCollisionEnter(Collision* c)
 void Weapon::onCollisionExit(Collision* c)
 {
 	Hands* otherHand = GETCMP2(c->entity, Hands);
+	b2Fixture* auxF = c->myFixture;
 
-	if (otherHand != nullptr) {
+	if (otherHand != nullptr &&
+		auxF->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
 		DeletePlayerInfo(otherHand->getPlayerId());
 	}
 }
