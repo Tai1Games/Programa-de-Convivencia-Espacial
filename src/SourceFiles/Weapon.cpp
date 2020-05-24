@@ -129,25 +129,6 @@ void Weapon::letFallObject()
 	currentHand_ = nullptr;
 }
 
-void Weapon::letFallObject()
-{
-	//Si se tira un objeto, se guarda en el objeto lanzado la ID de quien lo lanza.
-	GETCMP1_(ThrownByPlayer)->throwObject(pickedIndex_);
-
-	currentHand_->setWeapon(NoWeapon, nullptr);
-	picked_ = false;
-	pickedIndex_ = -1;
-	mainCollider_->getBody()->SetEnabled(true);
-	vw_->setDrawable(true);
-
-	mainCollider_->setLinearVelocity(b2Vec2(0, 0));
-	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x + currentHand_->getDir().x * currentHand_->getArmLengthPhysics(), currentHand_->getPos().y - currentHand_->getDir().y * currentHand_->getArmLengthPhysics()), currentHand_->getAngle());
-	double resultThrowSpeed = 1.5;
-	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * resultThrowSpeed, -currentHand_->getDir().y * resultThrowSpeed), mainCollider_->getBody()->GetLocalCenter());
-	//mainCollider_->getBody()->SetAngularVelocity(spinOnThrowSpeed_);
-	currentHand_ = nullptr;
-}
-
 int Weapon::getPlayerId() {
 	return currentHand_->getPlayerId();
 }
