@@ -23,11 +23,12 @@
 
 PlayableMenuState::~PlayableMenuState()
 {
-	/*delete playerControl;     playerControl = nullptr;*/
+	
 	delete tmap;				tmap = nullptr;
 	delete entityManager_;		entityManager_ = nullptr;
 	delete collisionHandler_;	collisionHandler_ = nullptr;
 	delete physicsWorld_;		physicsWorld_ = nullptr;
+	delete playerControl;       playerControl = nullptr;
 }
 
 void PlayableMenuState::init()
