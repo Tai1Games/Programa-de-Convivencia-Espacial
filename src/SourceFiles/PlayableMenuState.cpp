@@ -71,18 +71,13 @@ void PlayableMenuState::init()
 			Resources::Body, tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y, playerControl);
 
 		playerControl->setPlayerCol(player->getComponent<Collider>(ComponentType::Collider));
-		//player->getComponent<PlayerData>(ComponentType::PlayerData)->
 	}
-	
-	
-	//ObjectFactory::makeWall(entityManager_, physicsWorld_, b2Vec2(10, 13), b2Vec2(6, 6));
 
 	player->addComponent<Hands>(Resources::Hands);
 	player->addComponent<AttachesToObjects>();
 	player->addComponent<PlayerController>();
 	player->addComponent<ImpulseViewer>(Resources::ImpulseArrow, Resources::ImpulseBackground);
-	
-}
+	}
 
 void PlayableMenuState::update()
 {
@@ -103,13 +98,13 @@ void PlayableMenuState::render()
 void PlayableMenuState::handleInput()
 {
 	GameState::handleInput();
-	if (playerControl->pressPick()) {
+	/*if (playerControl->pressPick()) {
 			player->getComponent<Collider>(ComponentType::Collider)->setTransform(b2Vec2(tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y), 0);
-	}
-	//else if (playerControl->pressPause()) {
-	//		SDL_Game::instance()->getAudioMngr()->pauseMusic();
-	//		SDL_Game::instance()->getStateMachine()->setPauseOwner(0);
-	//		//SDL_Game::instance()->getStateMachine()->transitionToState(States::pause);
-	//}
+	}*/
 	
+}
+
+void PlayableMenuState::onLoaded()
+{
+	player->getComponent<Collider>(ComponentType::Collider)->setTransform(b2Vec2(tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y), 0);
 }
