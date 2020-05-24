@@ -26,6 +26,7 @@
 #include "Weapon.h"
 #include "WeaponPool.h"
 #include "WiFiBullet.h"
+#include "TriggerButton.h"
 #include "WeaponSpawner.h"
 #include "ConfettiPool.h"
 #include "RouterLogic.h"
@@ -121,6 +122,15 @@ Entity* ObjectFactory::makePipe(EntityManager* entityManager, b2World* physicsWo
 
 	e->addComponent<ColliderViewer>();
 
+	return e;
+}
+Entity* ObjectFactory::makeTrasparentWall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, float rotation) {
+
+	Entity* e = entityManager->addEntity();								 // x, y,width, height, density,friction, restitution, linearDrag, angularDrag,	Layer, sensor
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::Wall, false);
+	//e->addComponent<Transform>(SDL_Rect{ 0,0,(int)size.x, (int)size.y }, aux);
+	//e->addComponent<ColliderViewer>();
+	
 	return e;
 }
 
@@ -357,6 +367,26 @@ Entity* ObjectFactory::makeWifiWave(Entity* e, EntityManager* entityManager, b2W
 	e->addComponent<ColliderViewer>();
 
 	return e;
+}
+
+Entity* ObjectFactory::makeTriggerButton(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, string state) {
+	Entity* trButton = entityManager->addEntity();
+	Collider* trigger = trButton->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
+	//trButton->addComponent<Transform>(SDL_Rect{ 0,0,(int)size.x, (int)size.y }, trigger);
+	trButton->addComponent<Transform>(SDL_Rect{ 0,0,	CONST(int, "WALLS_BASE_W_SPRITE") + (int)(size.x * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "WALLS_SCALE_W_SPRITE")),
+												CONST(int, "WALLS_BASE_H_SPRITE") + (int)(size.y * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "WALLS_SCALE_W_SPRITE")) }, trigger);
+
+	Resources::TextureId texId;
+	if (state == "Play") texId = Resources::TriggerButtonPlay;
+	else if (state == "Options") texId = Resources::TriggerButtonOptions;
+	else if (state == "Credits") texId = Resources::TriggerButtonCredits;
+	else if (state == "Exit") texId = Resources::TriggerButtonExit;
+	trButton->addComponent<AnimatedViewer>(texId, CONST(int, "TRIGGER_BUTTON_ANIM_SPEED"));
+
+	trButton->addComponent<TriggerButton>(state);
+	trButton->addComponent<ColliderViewer>();
+
+	return trButton;
 }
 
 Entity* ObjectFactory::makeWeaponSpawner(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 position, ConfettiPool* confettiPool, StaplerPool* staplerPool, BulletPool* bulletPool)

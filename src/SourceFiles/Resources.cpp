@@ -17,6 +17,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ RocketRoom ,resourcesPath + "textures/Background_RocketRoom.png"},
 	{ TutorialRoom,resourcesPath + "textures/Background_TutorialRoom.png"},
 	{ GardenRoom,resourcesPath + "textures/Background_garden.png"},
+	{ MenuRoom, resourcesPath + "textures/Background_Menu.png"},
+	{ CreditsRoom, resourcesPath + "textures/CreditsRoom.png"},
 
 	// UI
 	{ ActiveHealth, resourcesPath + "textures/VidaActiva.png" },
@@ -91,6 +93,10 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ CarnivorousPlant , resourcesPath + "textures/PlantaCarnivora.png", 7, 1},
 	{ TomatoTree, resourcesPath + "textures/TomatoTree.png"},
 	{ BananaTree, resourcesPath + "textures/BananaTree.png"},
+	{ TriggerButtonPlay , resourcesPath + "textures/PuertasMenu_Play.png", 13, 1},
+	{ TriggerButtonExit , resourcesPath + "textures/PuertasMenu_Exit.png", 13, 1},
+	{ TriggerButtonCredits , resourcesPath + "textures/PuertasMenu_Credits.png", 13, 1},
+	{ TriggerButtonOptions , resourcesPath + "textures/PuertasMenu_Options.png", 13, 1},
 
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/Moneda.png" },
@@ -188,6 +194,9 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{winner2,"GANA EL JUGADOR 2",{COLOR(0xf79617ff)},FontId::NES_Chimera},
 	{winner3,"GANA EL JUGADOR 3",{COLOR(0xf79617ff)},FontId::NES_Chimera},
 	{winner4,"GANA EL JUGADOR 4",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+
+	//Credits
+	{ ReturnText, "Press any key/button to return", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 };
 
 vector<Resources::MusicInfo> Resources::musics_{

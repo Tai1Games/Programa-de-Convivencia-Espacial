@@ -40,6 +40,7 @@ namespace ComponentType {
 		RocketLogic,
 		Countdown,
 		SpawnTree,
+		TriggerButton,
 		TimedDespawn,
 		WeaponSpawner,
 

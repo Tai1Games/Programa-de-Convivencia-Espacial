@@ -25,6 +25,8 @@ public:
 		RocketRoom,
 		TutorialRoom,
 		GardenRoom,
+		MenuRoom,
+		CreditsRoom,
 
 		// UI
 		ActiveHealth,
@@ -106,6 +108,10 @@ public:
 		TomatoTree,
 		BananaTree,
 		DeadBody,
+		TriggerButtonPlay,
+		TriggerButtonExit,
+		TriggerButtonCredits,
+		TriggerButtonOptions,
 
 		// Gamemode specific elements
 		Coin,
@@ -201,6 +207,9 @@ public:
 		winner2,
 		winner3,
 		winner4,
+
+		//Credits
+		ReturnText,
 	};
 
 	enum AudioId : unsigned char {

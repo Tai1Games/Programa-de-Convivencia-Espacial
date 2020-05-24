@@ -14,6 +14,8 @@
 #include "MidGameState.h"
 #include "TransitionState.h"
 #include "LobbyState.h"
+#include "PlayableMenuState.h"
+#include "CreditsState.h"
 #include "EndGameState.h"
 
 GameStateMachine::GameStateMachine() {
@@ -101,7 +103,17 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 		case States::lobby: {
 			states_[state] = new LobbyState();
 		}
-						  break;
+		break;
+
+		case States::playableMenu: {
+			states_[state] = new PlayableMenuState();
+		}
+			break;
+		case States::credits: {
+			states_[state] = new CreditsState();
+		}
+			break;
+
 		case States::pause:
 			//if (states_[state] != nullptr)	delete states_[state];
 			states_[state] = new PauseState();
