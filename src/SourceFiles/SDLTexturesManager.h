@@ -22,12 +22,12 @@ public:
 	Texture* getTexture(std::size_t tag) {
 		return textures_[tag];
 	}
-	bool loadFromImg(std::size_t, SDL_Renderer* renderer,
+	bool loadFromImg(unsigned char tag, SDL_Renderer* renderer,
 		const string& fileName, unsigned short nHorFrames, unsigned short nVerFrames);
-	bool loadFromText(std::size_t, SDL_Renderer* renderer, const string& text,
+	bool loadFromText(unsigned char tag, SDL_Renderer* renderer, const string& text,
 		const Font* font, const SDL_Color& color);
 private:
-	void storeTexture(std::size_t tag, Texture* texture);
+	void storeTexture(unsigned char tag, Texture* texture);
 
 	bool initialized_;
 	map<std::size_t, Texture*> textures_;

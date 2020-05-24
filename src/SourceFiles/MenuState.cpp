@@ -114,13 +114,13 @@ void MenuState::createText() { //preparar los textos
 	for (int i = 0; i < 2; i++) {
 		if (i == 0) {
 			start = Resources::Capitalism;
-			end = Resources::LivingRoomText;
+			end = Resources::Exit;
 		}
-		else end = Resources::OnePlayer;
+		else end = Resources::GardenRoomText;
 
 		offset = start - 1;
 
-		while (start < end) {
+		while (start <= end) {
 			texts_[i].push_back(entityManager_->addEntity());
 			texts_[i].back()->addComponent<UIViewer>(start, b2Vec2(xOffset_, (start - offset) * yOffset_), 1.5, 0);
 			texts_[i].back()->setActive(false);

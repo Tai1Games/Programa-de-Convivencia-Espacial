@@ -1,5 +1,6 @@
 #include "ClientState.h"
 #include "SDL_Game.h"
+#include "Texture.h"
 #include <iostream>
 
 #define us unsigned short
@@ -74,6 +75,7 @@ void ClientState::render()
 	while (!spritesToRender_.empty()) {
 		sprite = spritesToRender_.front();
 		//SDL_Game::instance()->getTexturesMngr()->getTexture(sprite.textureId)->render({sprite.posX,sprite.posY,sprite.width,sprite.height},sprite.rotationDegrees,sprite.frameNumberX,sprite.frameNumberY,sprite.flip);
+		SDL_Game::instance()->getTexturesMngr()->getTexture(sprite.textureId)->render({ sprite.posX, sprite.posY, sprite.width, sprite.height }, (double)sprite.rotationDegrees, (us)sprite.frameNumberX, (us)sprite.frameNumberY, (SDL_RendererFlip)sprite.flip);
 		spritesToRender_.pop();
 	}
 }
@@ -86,9 +88,11 @@ void ClientState::receiveSprite() {
 		n = SDLNet_TCP_Recv(hostConnection_, buffer + receivedBytes_, sizeof(SpritePacket) - 1 - receivedBytes_);
 		receivedBytes_ += n;
 	}
-
+	//*((us*)(buffer+sizeof(char)*7))
 	//id      pos x			pos y		  width	         height		   rot				frameX		     frameY			flip
-	spritesToRender_.push({ 'S', buffer[0],(us)buffer[1],(us)buffer[3],(us)buffer[5],(us)buffer[7],(us)buffer[9],(uc)buffer[11],(uc)buffer[12],(uc)buffer[13] });
+	//spritesToRender_.push({ 'S', buffer[0],(us)buffer[1],(us)buffer[3],(us)buffer[5],(us)buffer[7],(us)buffer[9],(uc)buffer[11],(uc)buffer[12],(uc)buffer[13] });
+	spritesToRender_.push({ 'S', (uc)buffer[0], *((us*)(buffer + sizeof(char) * 1)), *((us*)(buffer + sizeof(char) * 3)), *((us*)(buffer + sizeof(char) * 5)),
+		*((us*)(buffer + sizeof(char) * 7)),*((short*)(buffer + sizeof(char) * 9)),(uc)buffer[11],(uc)buffer[12],(uc)buffer[13] });
 }
 
 
@@ -114,12 +118,12 @@ void ClientState::handleInput()
 		offset += sbool;
 		buffer[offset] = pInputPacket.holdImpulse;
 		offset += sbool;
+		buffer[offset] = pInputPacket.pressImpulse;
+		offset += sbool;
 		buffer[offset] = pInputPacket.aimDirX;
 		offset += sfloat;
 		buffer[offset] = pInputPacket.aimDirY;
 		offset += sfloat;
-		buffer[offset] = pInputPacket.pressImpulse;
-		offset += sbool;
 		buffer[offset] = pInputPacket.releaseImpulse;
 		offset += sbool;
 		buffer[offset] = pInputPacket.pressAttack;
@@ -146,7 +150,7 @@ void ClientState::receiveAudio()
 	else {
 		SDL_Game::instance()->getAudioMngr()->playChannel(buffer[1], buffer[2], 0);
 	}
-	
+
 }
 
 void ClientState::connectToServer() {

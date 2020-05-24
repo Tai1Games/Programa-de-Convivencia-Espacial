@@ -87,6 +87,7 @@ void MultiplayerHost::checkActivity() {
 
 			if (clientPlace < 3) {
 				//std::cout << "Jugador conectado, id asignada: " << clientPlace << std::endl;
+				clients_[clientPlace] = client;
 				SDLNet_TCP_AddSocket(socketSet_, client);
 				SDLNet_TCP_Send(client, "C", 9);
 			}
@@ -161,9 +162,9 @@ void MultiplayerHost::handlePlayerInput(int clientNumber) {
 	std::vector<MatchInfo::PlayerInfo*>* playersVector = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
 
 	InputPacket inputPacket{ 'I',buffer[0],(bool)buffer[1],(bool)buffer[2],(bool)buffer[3],
-	(bool)buffer[4] ,(bool)buffer[5], (*(float*)buffer[6]), (*(float*)buffer[8]),
-	(bool)buffer[10] ,(bool)buffer[11] ,(bool)buffer[12] ,(bool)buffer[13] ,(bool)buffer[14] ,
-	(bool)buffer[15] ,(bool)buffer[16] };
+	(bool)buffer[4] ,(bool)buffer[5], (bool)buffer[6] ,*((float*)(buffer+sizeof(char)*7)), *((float*)(buffer + sizeof(char) * 11)),
+	(bool)buffer[15] ,(bool)buffer[16] ,(bool)buffer[17] ,(bool)buffer[18] ,
+	(bool)buffer[19] ,(bool)buffer[20] };
 
 	(*playersVector)[buffer[0]]->inputBinder->syncInput(inputPacket);
 }
@@ -184,7 +185,7 @@ void MultiplayerHost::sendTexture(const SpritePacket& sPacket)
 
 	for (int i = 0; i < 3; i++) {
 		if (clients_[i] != nullptr) {
-			SDLNet_TCP_Send(masterSocket_, buffer, sizeof(SpritePacket));
+			SDLNet_TCP_Send(clients_[i], buffer, sizeof(SpritePacket));
 		}
 	}
 }
@@ -199,7 +200,7 @@ void MultiplayerHost::sendAudio(const AudioPacket& aPacket)
 
 	for (int i = 0; i < 3; i++) {
 		if (clients_[i] != nullptr) {
-			SDLNet_TCP_Send(masterSocket_, buffer, sizeof(AudioPacket));
+			SDLNet_TCP_Send(clients_[i], buffer, sizeof(AudioPacket));
 		}
 	}
 }
@@ -208,7 +209,7 @@ void MultiplayerHost::finishSending()
 {
 	for (int i = 0; i < 3; i++) {
 		if (clients_[i] != nullptr) {
-			SDLNet_TCP_Send(masterSocket_, "F", 1);
+			SDLNet_TCP_Send(clients_[i], "F", 1);
 		}
 	}
 }
