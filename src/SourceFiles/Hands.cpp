@@ -18,6 +18,7 @@ void Hands::init()
 	collider_ = GETCMP1_(Collider);
 	armLengthPhysics_ = CONST(double, "ARM_LENGTH_PHYSICS");
 	handSize_ = (CONST(double, "HAND_SIZE"));
+	canPickWeaponCooldown_ = CONST(int, "PICK_COOLDOWN");
 	ib_ = playerData_->getBinder();
 }
 
@@ -57,6 +58,14 @@ void Hands::update()
 
 	pos_.Set(collider_->getPos().x, collider_->getPos().y);
 	handPos_.Set(pos_.x + dir_.x * 1, pos_.y - dir_.y * 1);
+
+	if (!canPickWeapon_) {
+		canPickWeaponTimer_++;
+		if (canPickWeaponTimer_ >= canPickWeaponCooldown_) {
+			canPickWeapon_ = true;
+			canPickWeaponTimer_ = 0;
+		}
+	} 
 }
 
 void Hands::setWeapon(WeaponID wId, Weapon* w)
