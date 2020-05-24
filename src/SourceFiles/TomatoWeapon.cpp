@@ -17,6 +17,7 @@ void TomatoWeapon::init() {
 	ActionableWeapon::init();
 	colTomato_ = GETCMP1_(Collider); 
 	tomatoViewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
+	tomatoViewer_->stopAnimation();
 	particleEmitterTomato_ = GETCMP1_(ParticleEmitter);
 
 	framesCharge_ = CONST(float, "TOMATO_TIME_CHARGE") * FRAMES_PER_SECOND;
@@ -42,7 +43,6 @@ void TomatoWeapon::update() {
 			exploded_ = true;
 			activated_ = false;
 			if (picked_) UnPickObject();
-			tomatoViewer_->setFrame(nFramesCharge_);
 			tomatoViewer_->startAnimation(0, nFramesCharge_ - 1, tomatoViewer_->getTexture()->getNumFramesX());
 			tomatoViewer_->setAnimSpeed(timePerFrameExplosion_);
 			colTomato_->setLinearVelocity({ 0,0 });
@@ -132,7 +132,7 @@ void TomatoWeapon::UnPickObject() {
 
 	ActionableWeapon::UnPickObject();
 
-	if (!exploded_) {
+	if (activated_ && !exploded_) {
 		tomatoViewer_->startAnimation(0, currentFrame_ / framesCharge_, nFramesCharge_);
 	}
 }

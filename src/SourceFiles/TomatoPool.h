@@ -19,4 +19,5 @@ public:
 	~TomatoPool() {};
 	virtual void init(EntityManager* eMan, b2World* physicsWorld) override;
 	virtual void addWeapon(b2Vec2 pos) override;
+	virtual bool isRendering() override { return tomatoPool_.getObj() != nullptr; }
 };

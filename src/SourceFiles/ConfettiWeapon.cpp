@@ -33,6 +33,8 @@ void ConfettiWeapon::action() {
 		viewer_->setFrame(1);
 		timedDespawn_->startTimer(this);
 		currentHand_->setFrame(1, weaponType_);
+
+		MeleeWeapon::action();
 	}
 }
 
@@ -58,7 +60,7 @@ void ConfettiWeapon::update()
 	if (used) {
 		currentFrame_++;
 		if (currentFrame_ == animationDuration_) {
-			if (currentHand_) currentHand_->setFrame(2, weaponType_);
+			if (currentHand_ != nullptr) currentHand_->setFrame(2, weaponType_);
 		}
 	}
 }
