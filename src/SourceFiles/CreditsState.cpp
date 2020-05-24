@@ -31,11 +31,6 @@ void CreditsState::init()
 	continueText->addComponent<UIViewer>(Resources::ReturnText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 600, CONST(int, "WINDOW_HEIGHT") - 90), 1, 0);
 }
 
-void CreditsState::update()
-{
-	GameState::update();
-}
-
 void CreditsState::render()
 {
 	fondo_->render(0, 0);
@@ -51,9 +46,4 @@ void CreditsState::handleInput()
 		GameStateMachine* gsMachine = SDL_Game::instance()->getStateMachine();
 		gsMachine->transitionToState(States::playableMenu);
 	}
-
-}
-
-void CreditsState::onLoaded()
-{
 }

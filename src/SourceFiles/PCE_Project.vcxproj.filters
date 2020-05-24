@@ -378,10 +378,11 @@
     <ClInclude Include="ConfettiPool.h">
       <Filter>Header Files\Pools</Filter>
     </ClInclude>
-    <ClInclude Include="CreditsState.h">
-    </ClInclude>
     <ClInclude Include="EndGameState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Gamestates</Filter>
+    </ClInclude>
+    <ClInclude Include="CreditsState.h">
+      <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -668,9 +669,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CreditsState.cpp">
-     </ClCompile>
+      <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
     <ClCompile Include="EndGameState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

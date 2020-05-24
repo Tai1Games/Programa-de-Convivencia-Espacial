@@ -375,21 +375,15 @@ Entity* ObjectFactory::makeTriggerButton(EntityManager* entityManager, b2World* 
 	//trButton->addComponent<Transform>(SDL_Rect{ 0,0,(int)size.x, (int)size.y }, trigger);
 	trButton->addComponent<Transform>(SDL_Rect{ 0,0,	CONST(int, "WALLS_BASE_W_SPRITE") + (int)(size.x * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "WALLS_SCALE_W_SPRITE")),
 												CONST(int, "WALLS_BASE_H_SPRITE") + (int)(size.y * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "WALLS_SCALE_W_SPRITE")) }, trigger);
-	
-	if (state == "Play") {
-		trButton->addComponent<AnimatedViewer>(Resources::TriggerButtonPlay, CONST(int, "TRIGGER_BUTTON_ANIM_SPEED"));
-	}
-	else if (state == "Options") {
-		trButton->addComponent<AnimatedViewer>(Resources::TriggerButtonOptions, CONST(int, "TRIGGER_BUTTON_ANIM_SPEED"));
-	}
-	else if (state == "Credits") {
-		trButton->addComponent<AnimatedViewer>(Resources::TriggerButtonCredits, CONST(int, "TRIGGER_BUTTON_ANIM_SPEED"));
-	}
-	else if (state == "Exit") {
-		trButton->addComponent<AnimatedViewer>(Resources::TriggerButtonExit, CONST(int, "TRIGGER_BUTTON_ANIM_SPEED"));
-	}
+
+	Resources::TextureId texId;
+	if (state == "Play") texId = Resources::TriggerButtonPlay;
+	else if (state == "Options") texId = Resources::TriggerButtonOptions;
+	else if (state == "Credits") texId = Resources::TriggerButtonCredits;
+	else if (state == "Exit") texId = Resources::TriggerButtonExit;
+	trButton->addComponent<AnimatedViewer>(texId, CONST(int, "TRIGGER_BUTTON_ANIM_SPEED"));
+
 	trButton->addComponent<TriggerButton>(state);
-	
 	trButton->addComponent<ColliderViewer>();
 
 	return trButton;

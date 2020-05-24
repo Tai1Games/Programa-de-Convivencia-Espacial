@@ -40,12 +40,12 @@ void PlayableMenuState::init()
 	BulletPool bulletPool_;
 	ConfettiPool confettiPool_;
 	StaplerPool staplerPool_;
-	
+
 	tmap = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
 		"assets/game/tilemaps/MenuRoom.json",
-		entityManager_, physicsWorld_, &bulletPool_, &confettiPool_, &staplerPool_ ,nullptr);
+		entityManager_, physicsWorld_, &bulletPool_, &confettiPool_, &staplerPool_, nullptr);
 	tmap->init();
-	
+
 	collisionHandler_ = new CollisionHandler(nullptr, tmap);
 	physicsWorld_->SetContactListener(collisionHandler_);
 
@@ -59,7 +59,7 @@ void PlayableMenuState::init()
 	tmap->executeMapFactory();
 	tmap->createWeapons();
 
-	
+
 	if (SDL_Game::instance()->getInputHandler()->getNumControllers() > 0) {
 		playerControl = new ControllerBinder(0);
 		player = PlayerFactory::createBasePlayer(entityManager_, physicsWorld_, 0,
@@ -77,7 +77,7 @@ void PlayableMenuState::init()
 	player->addComponent<AttachesToObjects>();
 	player->addComponent<PlayerController>();
 	player->addComponent<ImpulseViewer>(Resources::ImpulseArrow, Resources::ImpulseBackground);
-	}
+}
 
 void PlayableMenuState::update()
 {
@@ -92,11 +92,6 @@ void PlayableMenuState::render()
 {
 	fondo_->render(0, 0);
 	GameState::render();
-}
-
-void PlayableMenuState::handleInput()
-{
-	GameState::handleInput();
 }
 
 void PlayableMenuState::onLoaded()
