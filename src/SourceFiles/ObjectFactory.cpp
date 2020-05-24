@@ -214,7 +214,7 @@ Entity* ObjectFactory::makeBoiler(EntityManager* entityManager, b2World* physics
 	int nFrames = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Smoke)->getWidth() / SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Smoke)->getHeight();
 	e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Smoke, CONST(int, "FBGEN_PARTICLE_SPEED"), nFrames, CONST(int, "FBGEN_PARTICLE_GEN_ODDS"), CONST(int, "FBGEN_PARTICLE_LIFETIME"), CONST(int, "FBGEN_PARTICLE_SIZE"), 0, CONST(int, "FBGEN_PARTICLE_SPEED_VARIATION"), 180);
 	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "BOILER_W_SPRITE"), CONST(int, "BOILER_H_SPRITE") }, collBoiler);
-	e->addComponent<Viewer>(Resources::Boiler);
+	e->addComponent<AnimatedViewer>(Resources::Boiler, CONST(int, "BOILER_ANIMATION_SPEED"));
 	e->addComponent<FireBallGenerator>(physicsWorld);
 	e->addComponent<ColliderViewer>();
 
