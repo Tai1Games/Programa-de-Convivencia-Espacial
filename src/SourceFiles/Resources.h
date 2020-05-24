@@ -204,6 +204,8 @@ public:
 		DeathSound,
 		RespawnSound,
 		EliminatedSound,
+		ImpulseFromAirSound,
+		ImpulseAttachedSound,
 
     //menu
 		MenuMove,
