@@ -41,9 +41,12 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	{ Rocket, resourcesPath + "textures/Rocket.png"},
 	{ SpaceStation, resourcesPath + "textures/SpaceStation.png"},
-	{ Token, resourcesPath + "textures/Marcador.png"},
+	{ Token, resourcesPath + "textures/Marker.png"},
 	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png", 8, 1},
 	{ PlayerPlaceholder,resourcesPath + "textures/playerPlaceholder.png"},
+
+	{Ready , resourcesPath + "textures/ready.png"},
+	{PressReady , resourcesPath + "textures/pressready.png"},
 
 	// Weapons and map items
 	{ Ball, resourcesPath + "textures/PelotaSaltarina.png" },
@@ -53,7 +56,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Slipper, resourcesPath + "textures/Chancla.png" },
 	{ Stapler, resourcesPath + "textures/Grapadora.png" },
 	{ Stone, resourcesPath + "textures/Piedra.png" },
-	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png", 17},
+	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png", 15},
 	{ TomatoRing, resourcesPath + "textures/TomatoRing.png"},
 	{ TreeTomato, resourcesPath + "textures/TreeTomato.png"},
 	{ Banana, resourcesPath + "textures/Banana.png"},
@@ -65,11 +68,12 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Lamp,resourcesPath + "textures/Lampara.png"},
 	{ Table,resourcesPath + "textures/Mesa.png"},
 	{ Sofa,resourcesPath + "textures/Sofa.png"},
+	{ DeadBody,resourcesPath + "textures/cadaver.png"},
 
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },
 	{ PlayerAnimSheet, resourcesPath + "textures/playerAnim.png",23,4},
-	{ Hands, resourcesPath + "textures/hands.png", 11},
+	{ Hands, resourcesPath + "textures/hands.png", 7, 11},
 	{ ImpulseArrow, resourcesPath + "textures/FlechaImpulso.png"},
 	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png", 13},
 	{ SpaceSuit, resourcesPath + "textures/PinkTinky.png"},	// dead body
@@ -109,10 +113,11 @@ vector<Resources::ImageInfo> Resources::images_{
 vector<Resources::TextMsgInfo> Resources::messages_{
 	//Mensajes predeterminados {nombre_en_enum, texto, color, fuente}. Ejemplo abajo
 	//{ HelloWorld, "Hello World", { COLOR(0xaaffffff) }, ARIAL16 }
-	{ PauseText, "PAUSA", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ ResumeText, "Reanudar", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ SoundText, "Sonido", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ ExitText, "Salir", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ PauseText, "PAUSE", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ ResumeText, "Resume", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ MusicText, "Music", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ EffectsText, "Effects", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ MainMenuText, "Main Menu", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 
 	//OnlineMenu
 	{ Local, "Local", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
@@ -156,6 +161,17 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 
 	//Countdown
 	{ Go, "GO!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+
+	{NumZero,"0",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumOne,"1",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumTwo,"2",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumThree,"3",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumFour,"4",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumFive,"5",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumSix,"6",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumSeven,"7",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumEight,"8",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumNine,"9",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
 };
 
 vector<Resources::MusicInfo> Resources::musics_{

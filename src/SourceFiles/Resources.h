@@ -44,6 +44,9 @@ public:
 		ProgressBar,
 		ProgressBar2,
 
+		Ready,
+		PressReady,
+
 		//Lobby
 		KeyboardIcon,
 		MouseIcon,
@@ -101,6 +104,7 @@ public:
 		Sofa,
 		TomatoTree,
 		BananaTree,
+		DeadBody,
 
 		// Gamemode specific elements
 		Coin,
@@ -117,8 +121,9 @@ public:
 		// text
 		PauseText,
 		ResumeText,
-		SoundText,
-		ExitText,
+		MusicText,
+		EffectsText,
+		MainMenuText,
 
 		//online menu
 		Local,
@@ -165,7 +170,19 @@ public:
 		// particles
 		Smoke,
 		WiFiWave,
-		Foam
+		Foam,
+
+		// numbers
+		NumZero,
+		NumOne,
+		NumTwo,
+		NumThree,
+		NumFour,
+		NumFive,
+		NumSix,
+		NumSeven,
+		NumEight,
+		NumNine,
 	};
 
 	enum AudioId : unsigned char {
