@@ -116,7 +116,7 @@ M -> Musica
 
 struct SpritePacket {
 	char packetId = 'S'; //Sprite
-	char textureId;
+	unsigned char textureId;
 	unsigned short posX;
 	unsigned short posY;
 	unsigned short width;

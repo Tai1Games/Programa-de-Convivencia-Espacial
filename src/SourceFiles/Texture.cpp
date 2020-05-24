@@ -10,9 +10,15 @@ Texture::Texture() :
 	texture_(nullptr), renderer_(nullptr), width_(0), height_(0), frameWidth_(0), frameHeight_(0) {
 }
 
-Texture::Texture(SDL_Renderer* renderer, const string& fileName, unsigned short nHorFrames, unsigned short nVerFrames, char texId) :
+Texture::Texture(SDL_Renderer* renderer, const string& fileName, unsigned short nHorFrames, unsigned short nVerFrames, unsigned char texId) :
 	texture_(nullptr), width_(0), height_(0), nHorizontalFrames_(nHorFrames), nVerticalFrames_(nVerFrames), texId_(texId) {
 	loadFromImg(renderer, fileName);
+}
+
+Texture::Texture(SDL_Renderer* renderer, const string& text, const Font* font,
+	const SDL_Color& color, unsigned char tag) :
+	texture_(nullptr), width_(0), height_(0), texId_(tag) {
+	loadFromText(renderer, text, font, color);
 }
 
 Texture::Texture(SDL_Renderer* renderer, const string& text, const Font* font,
