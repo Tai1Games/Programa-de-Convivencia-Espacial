@@ -33,23 +33,18 @@ void CarnivorousPlantViewer::init()
 
 void CarnivorousPlantViewer::update()
 {
-	if (!isPlaying_) {
-		frameCounter_++;
-		if (frameCounter_ >= framesUntilReopenMouth_) {
-			frameCounter_ = 0;
-			resumeAnimation();
-		}
-	}
 	if (isPlaying_ && anim_ != -1 && updateTime(animationsInfo_[anim_].numFrames_)) {
 		frameX_ = animationsInfo_[anim_].animOrigin_ + frame_;
 		if (loops_ != -1 && currentLoop_ >= loops_) {	// para saber si hay que volver al idle
 			if (anim_ == 1) {
 				if (frameX_ == frameClosedMouth_ + animationsInfo_[anim_].animOrigin_) {
-					pauseAnimation();
+					setAnimSpeed(minFramesSpeed_ * framesUntilReopenMouth_);
+				}
+				else if (frameX_ == frameClosedMouth_ + 1 + animationsInfo_[anim_].animOrigin_) {
+					setAnimSpeed(minFramesSpeed_);
 				}
 				else if(frame_ == animationsInfo_[anim_].numFrames_ - 1){
 					resetAnimation();
-					setAnimSpeed(minFramesSpeed_);
 				}
 			}
 		}

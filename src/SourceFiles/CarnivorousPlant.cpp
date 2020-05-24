@@ -20,15 +20,15 @@ void CarnivorousPlant::update()
 {
 	if (playerDetected_) {
 		frameCount_++;
-		if (viewer_->getCurrentAnim() != 1 && frameCount_ >= maxFrames_ - marginUntilBite_) {
-			viewer_->startAnimation(0, 0, -1, 1);
-		}
-		if (frameCount_ >= maxFrames_) { //tiene que morder xd
-			bite();
-		}
-		else {
-			actualSpeed_ -= increase_;
-			viewer_->setAnimSpeed(actualSpeed_);
+		if (viewer_->getCurrentAnim() != 1) {
+			if (frameCount_ >= maxFrames_ - marginUntilBite_) {
+				viewer_->startAnimation(0, 0, -1, 1);
+				bite();
+			}
+			else {
+				actualSpeed_ -= increase_;
+				viewer_->setAnimSpeed(actualSpeed_);
+			}
 		}
 	}
 }
