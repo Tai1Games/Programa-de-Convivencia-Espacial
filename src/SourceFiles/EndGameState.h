@@ -13,7 +13,6 @@ private:
 	vector<MatchInfo::PlayerInfo*> sortedPlayerInfo_;
 	bool anyButtonPush = false;
 	vector<Entity*> leaderboardUI;
-	virtual void drawPlayer(int x, int y);
 public:
 	virtual ~EndGameState();
 	virtual void init();

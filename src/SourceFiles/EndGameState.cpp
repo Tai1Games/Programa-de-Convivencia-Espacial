@@ -15,10 +15,6 @@
 
 bool comparePoints(MatchInfo::PlayerInfo* a, MatchInfo::PlayerInfo* b) { return a->totalPoints > b->totalPoints; }
 
-void EndGameState::drawPlayer(int x, int y)
-{
-}
-
 EndGameState::~EndGameState()
 {
 	delete entityManager_;		entityManager_ = nullptr;
