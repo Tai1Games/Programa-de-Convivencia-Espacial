@@ -5,8 +5,6 @@ void CarnivorousPlant::init()
 	viewer_ = entity_->getComponent<CarnivorousPlantViewer>(ComponentType::AdvancedAnimatedViewer);
 	maxAnimationSpeed_ = CONST(int, "CARNIVOROUSPLANT_MAX_SPEED");
 	minAnimationSpeed_ = CONST(int, "CARNIVOROUSPLANT_MIN_SPEED");
-	idleFrames_ = CONST(int, "CARNIVOROUSPLANT_NFRAMES_ANIM0");
-	eatingFrames_ = CONST(int, "CARNIVOROUSPLANT_NFRAMES_ANIM1");
 	coinDamage_ = CONST(int, "CARNIVOROUSPLANT_COIN_DMG");
 	damage_ = CONST(int, "CARNIVOROUSPLANT_DMG");
 	maxFrames_ = CONST(int, "CARNIVOROUSPLANT_TIME");
@@ -15,22 +13,22 @@ void CarnivorousPlant::init()
 	increase_ = (float)(minAnimationSpeed_ - maxAnimationSpeed_) / maxFrames_;
 	actualSpeed_ = minAnimationSpeed_;
 
-	viewer_->startAnimation(-1, 0, idleFrames_, 0);
+	viewer_->startAnimation(-1, 0, CONST(int, "CARNIVOROUSPLANT_NFRAMES_ANIM0"), 0);
 }
 
 void CarnivorousPlant::update()
 {
 	if (playerDetected_) {
 		frameCount_++;
-		if (viewer_->getCurrentAnim() != 1 && frameCount_ >= maxFrames_ - marginUntilBite_) {
-			viewer_->startAnimation(0, 0, -1, 1);
-		}
-		if (frameCount_ >= maxFrames_) { //tiene que morder xd
-			bite();
-		}
-		else {
-			actualSpeed_ -= increase_;
-			viewer_->setAnimSpeed(actualSpeed_);
+		if (viewer_->getCurrentAnim() != 1) {
+			if (frameCount_ >= maxFrames_ - marginUntilBite_) {
+				viewer_->startAnimation(0, 0, -1, 1);
+				bite();
+			}
+			else {
+				actualSpeed_ -= increase_;
+				viewer_->setAnimSpeed(actualSpeed_);
+			}
 		}
 	}
 }
