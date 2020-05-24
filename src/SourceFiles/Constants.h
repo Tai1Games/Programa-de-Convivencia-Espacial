@@ -40,6 +40,7 @@ enum States
 	lobby,
 	playableMenu,
 	credits,
+	endGame,
 	//No toques
 	NUMBER_OF_STATES
 };

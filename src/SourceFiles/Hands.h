@@ -7,7 +7,7 @@
 #include "Constants.h"
 #include "checkML.h"
 
-class Hands : public Component
+class Hands : public AnimatedViewer
 {
 private:
 	b2Vec2 handPos_ = b2Vec2(0, 0);
@@ -17,7 +17,6 @@ private:
 	double armLengthPhysics_ = 0;
 	double handSize_ = 0;
 
-	Texture* tex_ = nullptr;
 	Collider* collider_ = nullptr;
 	int textureId_ = 0;
 	PlayerData* playerData_ = nullptr;

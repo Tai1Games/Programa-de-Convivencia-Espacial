@@ -271,10 +271,11 @@ Entity* ObjectFactory::makeTreadmill(EntityManager* entityManager, b2World* phys
 Entity* ObjectFactory::makeCarnivorousPlant(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
 	Entity* plant = entityManager->addEntity();
-	Collider* collPlant = plant->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
-	plant->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int,"CARNIVOROUSPLANT_W_SPRITE"), CONST(int,"CARNIVOROUSPLANT_H_SPRITE") }, collPlant);
+	double diff = CONST(double, "CARNIVOROUSPLANT_H_SPRITE") / CONST(double, "CARNIVOROUSPLANT_W_SPRITE");
+	Collider* collPlant = plant->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y * diff, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
+	plant->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int,"CARNIVOROUSPLANT_W_SPRITE")*(int)size.x, CONST(int,"CARNIVOROUSPLANT_H_SPRITE")*(int)size.y }, collPlant);
 	plant->addComponent<CarnivorousPlantViewer>(Resources::CarnivorousPlant, CONST(int, "CARNIVOROUSPLANT_MIN_SPEED"));
-	plant->addComponent<CarnivorousPlant>();
+	plant->addComponent<CarnivorousPlant>(); 
 	plant->addComponent<ColliderViewer>();
 
 	return plant;

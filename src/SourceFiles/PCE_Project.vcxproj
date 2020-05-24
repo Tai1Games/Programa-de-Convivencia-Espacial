@@ -191,6 +191,7 @@ copy "$(SolutionDir)SDL2_net-2.0.1\lib\$(Platform)\*.dll" "$(TargetDir)"</Comman
     <ClInclude Include="CreditsState.h" />
     <ClInclude Include="PlayableMenuState.h" />
     <ClInclude Include="TriggerButton.h" />
+    <ClInclude Include="EndGameState.h" />
     <ClInclude Include="StaplerPool.h" />
     <ClInclude Include="TimedDespawn.h" />
     <ClInclude Include="WeaponFactory.h" />
@@ -296,6 +297,7 @@ copy "$(SolutionDir)SDL2_net-2.0.1\lib\$(Platform)\*.dll" "$(TargetDir)"</Comman
     <ClCompile Include="CreditsState.cpp" />
     <ClCompile Include="PlayableMenuState.cpp" />
     <ClCompile Include="TriggerButton.cpp" />
+    <ClCompile Include="EndGameState.cpp" />
     <ClCompile Include="StaplerPool.cpp" />
     <ClCompile Include="TimedDespawn.cpp" />
     <ClCompile Include="WeaponFactory.cpp" />

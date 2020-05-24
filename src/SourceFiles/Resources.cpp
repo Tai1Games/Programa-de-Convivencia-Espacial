@@ -58,7 +58,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Slipper, resourcesPath + "textures/Chancla.png" },
 	{ Stapler, resourcesPath + "textures/Grapadora.png" },
 	{ Stone, resourcesPath + "textures/Piedra.png" },
-	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png", 17},
+	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png", 15},
 	{ TomatoRing, resourcesPath + "textures/TomatoRing.png"},
 	{ TreeTomato, resourcesPath + "textures/TreeTomato.png"},
 	{ Banana, resourcesPath + "textures/Banana.png"},
@@ -75,7 +75,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },
 	{ PlayerAnimSheet, resourcesPath + "textures/playerAnim.png",23,4},
-	{ Hands, resourcesPath + "textures/hands.png", 11},
+	{ Hands, resourcesPath + "textures/hands.png", 7, 11},
 	{ ImpulseArrow, resourcesPath + "textures/FlechaImpulso.png"},
 	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png", 13},
 	{ SpaceSuit, resourcesPath + "textures/PinkTinky.png"},	// dead body
@@ -114,6 +114,16 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Smoke, resourcesPath + "textures/SmokeParticles-Sheet.png", 4},
 	{ WiFiWave, resourcesPath + "textures/WiFiWave.png" },
 	{ Foam, resourcesPath + "textures/foam_particles.png",4 },
+
+
+	//badges
+	{ badgeCapitalism,resourcesPath + "textures/MonedaUI.png" },
+	{ badgeController,resourcesPath + "textures/Mando.png" },
+	{ badgeStocks,resourcesPath + "textures/skullUI.png" },
+	{ badgeWifi,resourcesPath + "textures/Router.png" },
+	{ badgeTimed,resourcesPath + "textures/TreadmillPanel.png" },
+
+	{medals,resourcesPath + "textures/medals.png",3}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{
@@ -178,6 +188,12 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{NumSeven,"7",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
 	{NumEight,"8",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
 	{NumNine,"9",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+
+	//winner msgs
+	{winner1,"GANA EL JUGADOR 1",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+	{winner2,"GANA EL JUGADOR 2",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+	{winner3,"GANA EL JUGADOR 3",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+	{winner4,"GANA EL JUGADOR 4",{COLOR(0xf79617ff)},FontId::NES_Chimera},
 };
 
 vector<Resources::MusicInfo> Resources::musics_{

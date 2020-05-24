@@ -105,6 +105,8 @@ void Weapon::UnPickObject()
 	resultThrowSpeed *= tam;
 	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * resultThrowSpeed, -currentHand_->getDir().y * resultThrowSpeed), mainCollider_->getBody()->GetLocalCenter());
 	mainCollider_->getBody()->SetAngularVelocity(spinOnThrowSpeed_);
+	currentHand_->setFrame(0, 0);
+	currentHand_->stopAnimation();
 	currentHand_ = nullptr;
 }
 
@@ -136,7 +138,7 @@ void Weapon::onCollisionEnter(Collision* c)
 	Entity* other = c->entity;
 	Hands* otherHand = GETCMP2(other, Hands);
 	Collider* coll = GETCMP1_(Collider);
-	b2Fixture* auxF = coll->getFixture(1);
+	b2Fixture* auxF = c->myFixture ;
 
 	if (otherHand != nullptr &&
 		auxF->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
@@ -147,8 +149,10 @@ void Weapon::onCollisionEnter(Collision* c)
 void Weapon::onCollisionExit(Collision* c)
 {
 	Hands* otherHand = GETCMP2(c->entity, Hands);
+	b2Fixture* auxF = c->myFixture;
 
-	if (otherHand != nullptr) {
+	if (otherHand != nullptr &&
+		auxF->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
 		DeletePlayerInfo(otherHand->getPlayerId());
 	}
 }
