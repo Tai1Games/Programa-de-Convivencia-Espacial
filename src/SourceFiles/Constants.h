@@ -144,8 +144,6 @@ struct PlayerInfoPacket {
 
 #pragma pack(pop)
 
-#pragma pack(push, 4)
-
 struct InputPacket {
 	char packetId = 'I'; //Input
 	char playerId;
@@ -154,9 +152,9 @@ struct InputPacket {
 	bool pressThrow = false;
 	bool pressPick = false;
 	bool holdImpulse = false;
+	bool pressImpulse = false;
 	float aimDirX = 0;
 	float aimDirY = 0;
-	bool pressImpulse = false;
 	bool releaseImpulse = false;
 	bool pressAttack = false;
 	bool menuForward = false;
@@ -164,5 +162,3 @@ struct InputPacket {
 	bool pressPause = false;
 	char menuMove = false;
 };
-
-#pragma pack(pop)

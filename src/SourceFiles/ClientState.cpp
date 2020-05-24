@@ -114,12 +114,12 @@ void ClientState::handleInput()
 		offset += sbool;
 		buffer[offset] = pInputPacket.holdImpulse;
 		offset += sbool;
+		buffer[offset] = pInputPacket.pressImpulse;
+		offset += sbool;
 		buffer[offset] = pInputPacket.aimDirX;
 		offset += sfloat;
 		buffer[offset] = pInputPacket.aimDirY;
 		offset += sfloat;
-		buffer[offset] = pInputPacket.pressImpulse;
-		offset += sbool;
 		buffer[offset] = pInputPacket.releaseImpulse;
 		offset += sbool;
 		buffer[offset] = pInputPacket.pressAttack;
