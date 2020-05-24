@@ -24,6 +24,7 @@ void CarnivorousPlant::update()
 		frameCount_++;
 		if (viewer_->getCurrentAnim() != 1 && frameCount_ >= maxFrames_ - marginUntilBite_) {
 			viewer_->startAnimation(0, 0, -1, 1);
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::AudioId::CarnivorousPlantSound, 0);
 		}
 		if (frameCount_ >= maxFrames_) { //tiene que morder xd
 			bite();
