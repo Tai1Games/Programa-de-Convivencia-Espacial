@@ -89,10 +89,11 @@ void ClientState::receiveSprite() {
 		receivedBytes_ += n;
 	}
 	//*((us*)(buffer+sizeof(char)*7))
+	short testWidth = *((short*)(buffer + sizeof(char) * 5));
+	short testHeight = *((short*)(buffer + sizeof(char) * 7));
 	//id      pos x			pos y		  width	         height		   rot				frameX		     frameY			flip
-	//spritesToRender_.push({ 'S', buffer[0],(us)buffer[1],(us)buffer[3],(us)buffer[5],(us)buffer[7],(us)buffer[9],(uc)buffer[11],(uc)buffer[12],(uc)buffer[13] });
-	spritesToRender_.push({ 'S', (uc)buffer[0], *((us*)(buffer + sizeof(char) * 1)), *((us*)(buffer + sizeof(char) * 3)), *((us*)(buffer + sizeof(char) * 5)),
-		*((us*)(buffer + sizeof(char) * 7)),*((short*)(buffer + sizeof(char) * 9)),(uc)buffer[11],(uc)buffer[12],(uc)buffer[13] });
+	spritesToRender_.push({ 'S', (uc)buffer[0], *((short*)(buffer + 1)), *((short*)(buffer + 3)), *((short*)(buffer + 5)),
+		*((short*)(buffer + 7)),*((short*)(buffer + 9)),(uc)buffer[11],(uc)buffer[12],(uc)buffer[13] });
 }
 
 
@@ -108,31 +109,31 @@ void ClientState::handleInput()
 		offset += schar;
 		buffer[offset] = pInfo->playerId;
 		offset += schar;
-		buffer[offset] = pInputPacket.holdGrab;
+		*((bool*)(buffer + offset)) = pInputPacket.holdGrab;
 		offset += sbool;
-		buffer[offset] = pInputPacket.releaseGrab;
+		*((bool*)(buffer + offset)) = pInputPacket.releaseGrab;
 		offset += sbool;
-		buffer[offset] = pInputPacket.pressThrow;
+		*((bool*)(buffer + offset)) = pInputPacket.pressThrow;
 		offset += sbool;
-		buffer[offset] = pInputPacket.pressPick;
+		*((bool*)(buffer + offset)) = pInputPacket.pressPick;
 		offset += sbool;
-		buffer[offset] = pInputPacket.holdImpulse;
+		*((bool*)(buffer + offset)) = pInputPacket.holdImpulse;
 		offset += sbool;
-		buffer[offset] = pInputPacket.pressImpulse;
+		*((bool*)(buffer + offset)) = pInputPacket.pressImpulse;
 		offset += sbool;
-		buffer[offset] = pInputPacket.aimDirX;
+		*((float*)(buffer + offset)) = pInputPacket.aimDirX;
 		offset += sfloat;
-		buffer[offset] = pInputPacket.aimDirY;
+		*((float*)(buffer + offset)) = pInputPacket.aimDirY;
 		offset += sfloat;
-		buffer[offset] = pInputPacket.releaseImpulse;
+		*((bool*)(buffer + offset)) = pInputPacket.releaseImpulse;
 		offset += sbool;
-		buffer[offset] = pInputPacket.pressAttack;
+		*((bool*)(buffer + offset)) = pInputPacket.pressAttack;
 		offset += sbool;
-		buffer[offset] = pInputPacket.menuForward;
+		*((bool*)(buffer + offset)) = pInputPacket.menuForward;
 		offset += sbool;
-		buffer[offset] = pInputPacket.menuBack;
+		*((bool*)(buffer + offset)) = pInputPacket.menuBack;
 		offset += sbool;
-		buffer[offset] = pInputPacket.pressPause;
+		*((bool*)(buffer + offset)) = pInputPacket.pressPause;
 		offset += sbool;
 		buffer[offset] = pInputPacket.menuMove;
 

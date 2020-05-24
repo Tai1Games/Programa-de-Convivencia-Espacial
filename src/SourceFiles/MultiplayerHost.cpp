@@ -162,7 +162,7 @@ void MultiplayerHost::handlePlayerInput(int clientNumber) {
 	std::vector<MatchInfo::PlayerInfo*>* playersVector = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
 
 	InputPacket inputPacket{ 'I',buffer[0],(bool)buffer[1],(bool)buffer[2],(bool)buffer[3],
-	(bool)buffer[4] ,(bool)buffer[5], (bool)buffer[6] ,*((float*)(buffer+sizeof(char)*7)), *((float*)(buffer + sizeof(char) * 11)),
+	(bool)buffer[4] ,(bool)buffer[5], (bool)buffer[6] ,*((float*)(buffer + 7)),*((float*)(buffer + 11)),
 	(bool)buffer[15] ,(bool)buffer[16] ,(bool)buffer[17] ,(bool)buffer[18] ,
 	(bool)buffer[19] ,(bool)buffer[20] };
 
@@ -173,15 +173,15 @@ void MultiplayerHost::sendTexture(const SpritePacket& sPacket)
 {
 	memset(buffer, 0, sizeof(SpritePacket));
 	buffer[0] = 'S';
-	buffer[1] = sPacket.textureId;
-	buffer[2] = sPacket.posX;
-	buffer[4] = sPacket.posY;
-	buffer[6] = sPacket.width;
-	buffer[8] = sPacket.height;
-	buffer[10] = sPacket.rotationDegrees;
-	buffer[12] = sPacket.frameNumberX;
-	buffer[13] = sPacket.frameNumberY;
-	buffer[14] = sPacket.flip;
+	*((unsigned char*)(buffer + 1)) = sPacket.textureId;
+	*((short*)(buffer + 2)) = sPacket.posX;
+	*((short*)(buffer + 4)) = sPacket.posY;
+	*((short*)(buffer + 6)) = sPacket.width;
+	*((short*)(buffer + 8)) = sPacket.height;
+	*((short*)(buffer + 10)) = sPacket.rotationDegrees;
+	*((unsigned char*)(buffer + 12)) = sPacket.frameNumberX;
+	*((unsigned char*)(buffer + 13)) = sPacket.frameNumberY;
+	*((unsigned char*)(buffer + 14)) = sPacket.flip;
 
 	for (int i = 0; i < 3; i++) {
 		if (clients_[i] != nullptr) {
