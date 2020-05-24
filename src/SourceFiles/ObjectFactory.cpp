@@ -365,3 +365,13 @@ Entity* ObjectFactory::makeWeaponSpawner(EntityManager* entityManager, b2World* 
 
 	return e;
 }
+
+void ObjectFactory::makeDeadBody(Entity* e,EntityManager* entityManager, b2World* physicsWorld, vector<Collider*>& collDeadBodies, vector<Entity*>& deadBodies, b2Vec2 pos, float angle, b2Vec2 linearVelocity, float angularVelocity) {
+	entityManager->addExistingEntity(e);
+	deadBodies.push_back(e);
+	collDeadBodies.push_back(deadBodies.back()->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "PLAYER_W_PHYSICS"), CONST(double, "PLAYER_H_PHYSICS"),
+		CONST(double, "PLAYER_DENSITY"), CONST(double, "PLAYER_FRICTION"), CONST(double, "PLAYER_RESTITUTION"), CONST(double, "PLAYER_LINEAR_DRAG"), CONST(double, "PLAYER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false));
+	deadBodies.back()->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "CORPSE_W_SPRITE"),CONST(int, "CORPSE_H_SPRITE") }, collDeadBodies.back());
+	deadBodies.back()->addComponent<Viewer>(Resources::DeadBody);
+	deadBodies.back()->addComponent<ColliderViewer>();
+}

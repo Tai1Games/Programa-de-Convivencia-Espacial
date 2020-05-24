@@ -62,4 +62,6 @@ public:
 	static Entity* makeWifiWave(Entity* e, EntityManager* entityManager, b2World* physicsWorld, Collider* colRouter);
 
 	static Entity* makeWeaponSpawner(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 position, ConfettiPool* confettiPool, StaplerPool* staplerPool, BulletPool* bulletPool);
+
+	static void makeDeadBody(Entity* e, EntityManager* entityManager, b2World* physicsWorld, vector<Collider*>& collDeadBodies, vector<Entity*>& deadBodies, b2Vec2 pos, float angle, b2Vec2 linearVelocity, float angularVelocity);
 };
