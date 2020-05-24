@@ -294,7 +294,6 @@ copy "$(SolutionDir)SDL2_net-2.0.1\lib\$(Platform)\*.dll" "$(TargetDir)"</Comman
     <ClCompile Include="TimedDespawn.cpp" />
     <ClCompile Include="WeaponFactory.cpp" />
     <ClCompile Include="WeaponSpawner.cpp" />
-
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="AdvancedAnimatedViewer.cpp" />
     <ClCompile Include="CarnivorousPlantViewer.cpp" />
