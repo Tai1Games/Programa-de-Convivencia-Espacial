@@ -50,7 +50,7 @@ void LobbyState::update()
 	//outDebug();
 	if (ready()) {
 		SDL_Game::instance()->getStateMachine()->setMatchInfo(new MatchInfo(joinedPlayers_));
-		SDL_Game::instance()->getStateMachine()->changeToState(States::menu,0);
+		SDL_Game::instance()->getStateMachine()->changeToState(States::menu);
 	}
 }
 
