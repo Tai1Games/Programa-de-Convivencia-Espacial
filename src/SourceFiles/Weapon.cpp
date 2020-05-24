@@ -73,6 +73,33 @@ void Weapon::PickObjectBy(int index)
 
 void Weapon::UnPickObject()
 {
+	throwWeaponBeforeImpulse_();
+	currentHand_->setCanPickWeapon(false);
+	
+	double actualMagnitude = currentHand_->getVel().Length();
+	double resultThrowSpeed = minThrowSpeed_ +
+		((actualMagnitude * (maxThrowSpeed_ - minThrowSpeed_)) / 10/*Media de magnitud maxima del jugador*/);
+	/*Hay que tener en cuenta el tamaño de la fixture principal del arma*/
+	float tam =  mainCollider_->getW(0) +  mainCollider_->getH(0);
+	resultThrowSpeed *= tam;
+	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * resultThrowSpeed, -currentHand_->getDir().y * resultThrowSpeed), mainCollider_->getBody()->GetLocalCenter());
+	mainCollider_->getBody()->SetAngularVelocity(spinOnThrowSpeed_);
+
+	throwWeaponAfterImpulse_();
+}
+
+void Weapon::letFallObject()
+{
+	throwWeaponBeforeImpulse_();
+
+	double resultThrowSpeed = 1.5;
+	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * resultThrowSpeed, -currentHand_->getDir().y * resultThrowSpeed), mainCollider_->getBody()->GetLocalCenter());
+	
+	throwWeaponAfterImpulse_();
+}
+
+void Weapon::throwWeaponBeforeImpulse_() {
+
 	//Si se tira un objeto, se guarda en el objeto lanzado la ID de quien lo lanza.
 	GETCMP1_(ThrownByPlayer)->throwObject(pickedIndex_);
 
@@ -83,49 +110,21 @@ void Weapon::UnPickObject()
 	mainCollider_->getFixture(0)->SetFilterData(f);
 	hasBeenThrownRecently_ = true;
 	//
-	
 	currentHand_->setWeapon(NoWeapon, nullptr);
-	currentHand_->setCanPickWeapon(false);
 	picked_ = false;
 	pickedIndex_ = -1;
 	mainCollider_->getBody()->SetEnabled(true);
 	vw_->setDrawable(true);
-
-	cout << "dirHand: " << currentHand_->getDir().x << ", " << currentHand_->getDir().y << "\n";
-	cout << "dirplayer: " << currentHand_->getVel().x << ", " << currentHand_->getVel().y << "\n";
-
 	mainCollider_->setLinearVelocity(b2Vec2(0, 0));
-	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x + currentHand_->getDir().x * currentHand_->getArmLengthPhysics(), currentHand_->getPos().y - currentHand_->getDir().y * currentHand_->getArmLengthPhysics()), currentHand_->getAngle());
 	
-	double actualMagnitude = currentHand_->getVel().Length();
-	double resultThrowSpeed = minThrowSpeed_ + 
-		((actualMagnitude*(maxThrowSpeed_ - minThrowSpeed_))/10/*Media de magnitud maxima del jugador*/);
-	/*Hay que tener en cuenta el tamaño de la fixture principal del arma*/
-	float tam =  mainCollider_->getW(0) +  mainCollider_->getH(0);
-	resultThrowSpeed *= tam;
-	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * resultThrowSpeed, -currentHand_->getDir().y * resultThrowSpeed), mainCollider_->getBody()->GetLocalCenter());
-	mainCollider_->getBody()->SetAngularVelocity(spinOnThrowSpeed_);
-	currentHand_->setFrame(0, 0);
-	currentHand_->stopAnimation();
-	currentHand_ = nullptr;
+	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x + currentHand_->getDir().x * currentHand_->getArmLengthPhysics(), currentHand_->getPos().y - currentHand_->getDir().y * currentHand_->getArmLengthPhysics()), currentHand_->getAngle());
+
 }
 
-void Weapon::letFallObject()
-{
-	//Si se tira un objeto, se guarda en el objeto lanzado la ID de quien lo lanza.
-	GETCMP1_(ThrownByPlayer)->throwObject(pickedIndex_);
+void Weapon::throwWeaponAfterImpulse_() {
 
-	currentHand_->setWeapon(NoWeapon, nullptr);
-	picked_ = false;
-	pickedIndex_ = -1;
-	mainCollider_->getBody()->SetEnabled(true);
-	vw_->setDrawable(true);
-
-	mainCollider_->setLinearVelocity(b2Vec2(0, 0));
-	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x + currentHand_->getDir().x * currentHand_->getArmLengthPhysics(), currentHand_->getPos().y - currentHand_->getDir().y * currentHand_->getArmLengthPhysics()), currentHand_->getAngle());
-	double resultThrowSpeed = 1.5;
-	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * resultThrowSpeed, -currentHand_->getDir().y * resultThrowSpeed), mainCollider_->getBody()->GetLocalCenter());
-	//mainCollider_->getBody()->SetAngularVelocity(spinOnThrowSpeed_);
+	currentHand_->setFrame(0, 0);
+	currentHand_->stopAnimation();
 	currentHand_ = nullptr;
 }
 
