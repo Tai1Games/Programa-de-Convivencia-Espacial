@@ -38,6 +38,7 @@ enum States
 	midGame,
 	transition,
 	lobby,
+	endGame,
 	//No toques
 	NUMBER_OF_STATES
 };

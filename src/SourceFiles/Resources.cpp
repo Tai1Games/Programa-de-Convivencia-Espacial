@@ -108,6 +108,16 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Smoke, resourcesPath + "textures/SmokeParticles-Sheet.png", 4},
 	{ WiFiWave, resourcesPath + "textures/WiFiWave.png" },
 	{ Foam, resourcesPath + "textures/foam_particles.png",4 },
+
+
+	//badges
+	{ badgeCapitalism,resourcesPath + "textures/MonedaUI.png" },
+	{ badgeController,resourcesPath + "textures/Mando.png" },
+	{ badgeStocks,resourcesPath + "textures/skullUI.png" },
+	{ badgeWifi,resourcesPath + "textures/Router.png" },
+	{ badgeTimed,resourcesPath + "textures/TreadmillPanel.png" },
+
+	{medals,resourcesPath + "textures/medals.png",3}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{
@@ -172,6 +182,12 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{NumSeven,"7",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
 	{NumEight,"8",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
 	{NumNine,"9",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+
+	//winner msgs
+	{winner1,"GANA EL JUGADOR 1",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+	{winner2,"GANA EL JUGADOR 2",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+	{winner3,"GANA EL JUGADOR 3",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+	{winner4,"GANA EL JUGADOR 4",{COLOR(0xf79617ff)},FontId::NES_Chimera},
 };
 
 vector<Resources::MusicInfo> Resources::musics_{

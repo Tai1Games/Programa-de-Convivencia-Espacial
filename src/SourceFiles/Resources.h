@@ -186,6 +186,21 @@ public:
 		NumSeven,
 		NumEight,
 		NumNine,
+
+		//badges ordenadas como GameModeId
+		badgeCapitalism,
+		badgeController,
+		badgeStocks,
+		badgeWifi,
+		badgeTimed,
+
+		medals,
+
+		//winner msgs
+		winner1,
+		winner2,
+		winner3,
+		winner4,
 	};
 
 	enum AudioId : unsigned char {
