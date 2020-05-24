@@ -15,6 +15,8 @@
 #include "MidGameState.h"
 #include "TransitionState.h"
 #include "LobbyState.h"
+#include "OnlineMenuState.h"
+#include "ClientState.h"
 
 GameStateMachine::GameStateMachine() {
 	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
@@ -66,7 +68,7 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 		//states_[state] = new... se necesita struct? o switch tal cual xd
 		switch (state) {
 		case States::menu:
-			states_[state] = new MenuState(0); //numberOfPlayers usado como ownerID
+			states_[state] = new MenuState(); //numberOfPlayers usado como ownerID
 			break;
 		case States::play:
 		{
@@ -109,6 +111,14 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 		case States::midGame:			//Jugadores totales-----Jugador que gana la ronda
 			//Se usa el parametro gamemode como indicador de quien gana la ronda
 			states_[state] = new MidGameState(matchInfo_->getNumberOfPlayers(), gameMode);
+			break;
+		case States::onlineMenu:
+			states_[state] = new OnlineMenuState();
+			break;
+		case States::client:
+			string aux = "localhost";
+			char* host = &aux[0];
+			states_[state] = new ClientState(host);
 			break;
 		}
 		//inicializar la nueva escena

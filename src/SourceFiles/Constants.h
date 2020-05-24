@@ -38,6 +38,8 @@ enum States
 	midGame,
 	transition,
 	lobby,
+	onlineMenu,
+	client,
 	//No toques
 	NUMBER_OF_STATES
 };

@@ -190,6 +190,7 @@ copy "$(SolutionDir)SDL2_net-2.0.1\lib\$(Platform)\*.dll" "$(TargetDir)"</Comman
     <ClInclude Include="ActionableWeapon.h" />
     <ClInclude Include="ClientState.h" />
     <ClInclude Include="MultiplayerHost.h" />
+    <ClInclude Include="OnlineMenuState.h" />
     <ClInclude Include="StaplerPool.h" />
     <ClInclude Include="TimedDespawn.h" />
     <ClInclude Include="WeaponFactory.h" />
@@ -294,6 +295,7 @@ copy "$(SolutionDir)SDL2_net-2.0.1\lib\$(Platform)\*.dll" "$(TargetDir)"</Comman
     <ClCompile Include="ActionableWeapon.cpp" />
     <ClCompile Include="ClientState.cpp" />
     <ClCompile Include="MultiplayerHost.cpp" />
+    <ClCompile Include="OnlineMenuState.cpp" />
     <ClCompile Include="StaplerPool.cpp" />
     <ClCompile Include="TimedDespawn.cpp" />
     <ClCompile Include="WeaponFactory.cpp" />

@@ -120,6 +120,11 @@ public:
 		SoundText,
 		ExitText,
 
+		//online menu
+		Local,
+		Host,
+		Join,
+
 		//modes
 		Capitalism,
 		Controller,
@@ -134,13 +139,6 @@ public:
 		BoilerRoomText,
 		GymRoomText,
 		GardenRoomText,
-
-		//players
-		OnePlayer,
-		TwoPlayers,
-		ThreePlayers,
-		FourPlayers,
-		FivePlayers, //es solo para iterar
 
 		//tutorial
 		Completed,
