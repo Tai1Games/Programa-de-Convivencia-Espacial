@@ -23,7 +23,6 @@
 
 PlayableMenuState::~PlayableMenuState()
 {
-	
 	delete tmap;				tmap = nullptr;
 	delete entityManager_;		entityManager_ = nullptr;
 	delete collisionHandler_;	collisionHandler_ = nullptr;

@@ -15,6 +15,7 @@
 #include "TransitionState.h"
 #include "LobbyState.h"
 #include "PlayableMenuState.h"
+#include "CreditsState.h"
 
 GameStateMachine::GameStateMachine() {
 	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
@@ -105,6 +106,10 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 
 		case States::playableMenu: {
 			states_[state] = new PlayableMenuState();
+		}
+			break;
+		case States::credits: {
+			states_[state] = new CreditsState();
 		}
 			break;
 

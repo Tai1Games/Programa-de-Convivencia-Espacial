@@ -188,6 +188,7 @@ copy "$(SolutionDir)SDL2_net-2.0.1\lib\$(Platform)\*.dll" "$(TargetDir)"</Comman
     <ClInclude Include="AbstractTimedGameMode.h" />
     <ClInclude Include="AbstractViewers.h" />
     <ClInclude Include="ActionableWeapon.h" />
+    <ClInclude Include="CreditsState.h" />
     <ClInclude Include="PlayableMenuState.h" />
     <ClInclude Include="TriggerButton.h" />
     <ClInclude Include="StaplerPool.h" />
@@ -292,13 +293,13 @@ copy "$(SolutionDir)SDL2_net-2.0.1\lib\$(Platform)\*.dll" "$(TargetDir)"</Comman
     <ClCompile Include="AbstractTimedGameMode.cpp" />
     <ClCompile Include="AbstractViewers.cpp" />
     <ClCompile Include="ActionableWeapon.cpp" />
+    <ClCompile Include="CreditsState.cpp" />
     <ClCompile Include="PlayableMenuState.cpp" />
     <ClCompile Include="TriggerButton.cpp" />
     <ClCompile Include="StaplerPool.cpp" />
     <ClCompile Include="TimedDespawn.cpp" />
     <ClCompile Include="WeaponFactory.cpp" />
     <ClCompile Include="WeaponSpawner.cpp" />
-
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="AdvancedAnimatedViewer.cpp" />
     <ClCompile Include="CarnivorousPlantViewer.cpp" />

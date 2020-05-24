@@ -26,6 +26,7 @@ public:
 		TutorialRoom,
 		GardenRoom,
 		MenuRoom,
+		CreditsRoom,
 
 		// UI
 		ActiveHealth,

@@ -22,6 +22,7 @@ void TriggerButton::update()
 
 void TriggerButton::PassState()
 {
+	framesInside = 0;
 	if (stateToChange == "Play") {
 		SDL_Game::instance()->getStateMachine()->transitionToState(States::lobby, 0);
 	}
@@ -30,13 +31,13 @@ void TriggerButton::PassState()
 		//SDL_Game::instance()->getStateMachine()->changeToState(States::pause, 0);
 	}
 	else if (stateToChange == "Credits") {
-		SDL_Game::instance()->getStateMachine()->transitionToState(States::lobby, 0);
+		SDL_Game::instance()->getStateMachine()->transitionToState(States::credits, 0);
 		//SDL_Game::instance()->getStateMachine()->changeToState(States::States::Credits, 0);
 	}
 	else if (stateToChange == "Exit") {
 		SDL_Game::instance()->exitGame();
 	}
-	
+	viewer_->setFrame(0, 0);
 }
 
 void TriggerButton::onCollisionEnter(Collision* c)

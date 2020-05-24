@@ -378,6 +378,9 @@
     <ClInclude Include="ConfettiPool.h">
       <Filter>Header Files\Pools</Filter>
     </ClInclude>
+    <ClInclude Include="CreditsState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -629,11 +632,9 @@
     <ClCompile Include="AbstractViewers.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
-
     <ClCompile Include="Transform.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-
     <ClCompile Include="AdvancedAnimatedViewer.cpp">
       <Filter>Source Files\Components\Viewers</Filter>
     </ClCompile>
@@ -662,6 +663,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StaplerPool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CreditsState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

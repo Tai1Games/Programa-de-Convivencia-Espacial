@@ -39,6 +39,7 @@ enum States
 	transition,
 	lobby,
 	playableMenu,
+	credits,
 	//No toques
 	NUMBER_OF_STATES
 };
