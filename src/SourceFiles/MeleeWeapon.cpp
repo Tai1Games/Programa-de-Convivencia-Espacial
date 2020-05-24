@@ -16,7 +16,7 @@ void MeleeWeapon::action() {
 		std::cout << "ACCION ARMA MELEE ACTIVADA" << endl;
 		mainCollider_->createRectangularFixture(mainCollider_->getW(0) * 4, mainCollider_->getH(0) * 4, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
 		beenActivated_ = true;
-		currentHand_->setFrame(currentHand_->getFrameX() + 1, currentHand_->getFrameY());
+		currentHand_->setFrame(1, currentHand_->getFrameY());
 	}
 	else
 		std::cout << "COOLDING DOWN" << endl;
@@ -25,10 +25,14 @@ void MeleeWeapon::action() {
 void MeleeWeapon::update() {
 	ActionableWeapon::update();
 
-	//>2 para no romper el rango del arma para pickup
-	if (mainCollider_->getNumFixtures() > 2 && beenActivated_ && framesSinceActivation_>=3) {
-		mainCollider_->destroyFixture(mainCollider_->getNumFixtures()-1);
-		currentHand_->setFrame(currentHand_->getFrameX() - 1, currentHand_->getFrameY());
+	if (beenActivated_) {
+		//>2 para no romper el rango del arma para pickup
+		if(mainCollider_->getNumFixtures() > 2 && framesSinceActivation_ >= nHitboxActiveFrames_)
+			mainCollider_->destroyFixture(mainCollider_->getNumFixtures()-1);
+		// desactiva animación
+		if (framesSinceActivation_ >= nAnimActiveFrames_) {
+			currentHand_->setFrame(0, currentHand_->getFrameY());
+		}
 	}
 
 	if (currentHand_ != nullptr) {
