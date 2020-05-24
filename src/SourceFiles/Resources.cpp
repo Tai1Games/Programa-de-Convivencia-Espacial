@@ -108,6 +108,14 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Smoke, resourcesPath + "textures/SmokeParticles-Sheet.png", 4},
 	{ WiFiWave, resourcesPath + "textures/WiFiWave.png" },
 	{ Foam, resourcesPath + "textures/foam_particles.png",4 },
+
+
+	//badges
+	{ badgeCapitalism,resourcesPath + "textures/MonedaUI.png" },
+	{ badgeController,resourcesPath + "textures/Mando.png" },
+	{ badgeStocks,resourcesPath + "textures/skullUI.png" },
+	{ badgeWifi,resourcesPath + "textures/Router.png" },
+	{ badgeTimed,resourcesPath + "textures/TreadmillPanel.png" },
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{

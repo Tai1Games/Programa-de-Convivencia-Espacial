@@ -57,8 +57,9 @@ void EndGameState::init()
 		std::shuffle(chapitas.begin(), chapitas.end(), rng);
 
 		x += iconOffset;
+		Resources::TextureId firstBadge = Resources::badgeCapitalism;
 		for (auto& chapa : chapitas) {
-			auxEntity->addComponent<UIViewer>(Resources::TomatoTree, b2Vec2(x, y), 1);
+			auxEntity->addComponent<UIViewer>((Resources::TextureId)firstBadge + chapa, b2Vec2(x, y), 1);
 			x += iconOffset;
 		}
 	}
