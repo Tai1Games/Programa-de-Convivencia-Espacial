@@ -21,7 +21,7 @@ private:
 	int xOffset_ = CONST(int, "WINDOW_WIDTH") / 3;
 	int yOffset_ = CONST(int, "WINDOW_HEIGHT") / 9;
 
-	int numberOfRounds_ = 3;
+	int numberOfRounds_ = 1;
 
 	UIViewer* menuCursor_ = nullptr;
 	std::vector<Entity*> texts_[3];

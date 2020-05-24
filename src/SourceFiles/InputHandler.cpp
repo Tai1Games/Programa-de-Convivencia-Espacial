@@ -331,7 +331,6 @@ void InputHandler::onJoyButtonChange(SDL_Event& event, ButtonState just) {
 		isButtonUpEvent_ = true;
 
 	int whichOne = event.jaxis.which;
-	cout << "Button down on SYSTEM " << whichOne << endl;
 
 	Uint8 i = 0;
 	bool bindFound = false;

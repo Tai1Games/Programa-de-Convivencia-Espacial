@@ -195,6 +195,12 @@ public:
 		badgeTimed,
 
 		medals,
+
+		//winner msgs
+		winner1,
+		winner2,
+		winner3,
+		winner4,
 	};
 
 	enum AudioId : unsigned char {
