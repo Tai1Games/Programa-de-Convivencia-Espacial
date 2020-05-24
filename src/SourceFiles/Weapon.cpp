@@ -71,24 +71,6 @@ void Weapon::PickObjectBy(int index)
 	}
 }
 
-void Weapon::UnPickObject()
-{
-	double actualMagnitude = currentHand_->getVel().Length();
-	double resultThrowSpeed = minThrowSpeed_ +
-		((actualMagnitude * (maxThrowSpeed_ - minThrowSpeed_)) / 10/*Media de magnitud maxima del jugador*/);
-	/*Hay que tener en cuenta el tamaño de la fixture principal del arma*/
-	float tam =  mainCollider_->getW(0) +  mainCollider_->getH(0);
-	resultThrowSpeed *= tam;
-
-	separateWeapon(resultThrowSpeed);
-	mainCollider_->getBody()->SetAngularVelocity(spinOnThrowSpeed_);
-}
-
-void Weapon::letFallObject()
-{
-	separateWeapon(1.5);
-}
-
 void Weapon::separateWeapon(double resultThrowSpeed) {
 
 	//Si se tira un objeto, se guarda en el objeto lanzado la ID de quien lo lanza.
@@ -111,14 +93,31 @@ void Weapon::separateWeapon(double resultThrowSpeed) {
 	vw_->setDrawable(true);
 	mainCollider_->setLinearVelocity(b2Vec2(0, 0));
 
+	// mueve el arma y la impulsa en función de resultThrowSpeed
 	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x + currentHand_->getDir().x * currentHand_->getArmLengthPhysics(), currentHand_->getPos().y - currentHand_->getDir().y * currentHand_->getArmLengthPhysics()), currentHand_->getAngle());
-
 	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * resultThrowSpeed, -currentHand_->getDir().y * resultThrowSpeed), mainCollider_->getBody()->GetLocalCenter());
-	
+
 	// reinicia arma
 	currentHand_->setFrame(0, 0);
 	currentHand_->stopAnimation();
 	currentHand_ = nullptr;
+}
+
+void Weapon::UnPickObject()
+{
+	double actualMagnitude = currentHand_->getVel().Length();
+	double resultThrowSpeed = minThrowSpeed_ +
+		((actualMagnitude * (maxThrowSpeed_ - minThrowSpeed_)) / 10/*Media de magnitud maxima del jugador*/);
+	/*Hay que tener en cuenta el tamaño de la fixture principal del arma*/
+	float tam =  mainCollider_->getW(0) +  mainCollider_->getH(0);
+	resultThrowSpeed *= tam;
+
+	separateWeapon(resultThrowSpeed);
+	mainCollider_->getBody()->SetAngularVelocity(spinOnThrowSpeed_);
+}
+
+void Weapon::letFallObject() {
+	separateWeapon(1.5);
 }
 
 int Weapon::getPlayerId() {
