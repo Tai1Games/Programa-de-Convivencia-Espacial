@@ -46,9 +46,6 @@ void ColliderViewer::draw() const {
 		int i = 0;
 		// recorre todos los fixtures del objeto
 		while (f != nullptr) {
-			/*if (f->getnext() != nullptr)    // debug
-				std::cout << "collider: " <<((f->getshape()->gettype() == b2shape::e_circle) ? "circle" : "rect") << endl
-				<< ((f->getnext()->getshape()->gettype() == b2shape::e_circle) ? "circle" : "rect") << endl;*/
 
 			uint16 layer = f->GetFilterData().categoryBits;             // obtiene la capa de la fixture
 			int posColor = (layer > 0) ? round(log2(layer)) : 8;        // escoge color de dibujado según la capa
