@@ -27,6 +27,10 @@ private:
 	SDL_RendererFlip Flipped_ = SDL_FLIP_NONE; //si las manos estan o no flipeadas
 	Weapon* currentWeapon_ = nullptr;
 
+	bool canPickWeapon_ = true;
+	int canPickWeaponTimer_ = 0;
+	int canPickWeaponCooldown_ = 10;
+
 public:
 	Hands(int textureId, WeaponID wId = NoWeapon);
 	~Hands() {};
@@ -45,5 +49,7 @@ public:
 	WeaponID getWeaponID() { return currentWeaponID_; }
 	b2Vec2 getPointerPos() { return handPos_; };
 	double getArmLengthPhysics() { return armLengthPhysics_; }
+	bool getCanPickWeapon() { return canPickWeapon_; };
+	void setCanPickWeapon(bool b) { canPickWeapon_ = b; };
 };
 
