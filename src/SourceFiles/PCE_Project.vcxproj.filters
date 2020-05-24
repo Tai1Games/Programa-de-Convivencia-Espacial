@@ -381,7 +381,6 @@
     <ClInclude Include="CreditsState.h">
     </ClInclude>
     <ClInclude Include="EndGameState.h">
-    </ClInclude> 
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -671,7 +670,6 @@
     <ClCompile Include="CreditsState.cpp">
      </ClCompile>
     <ClCompile Include="EndGameState.cpp">
-     </ClCompile>
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

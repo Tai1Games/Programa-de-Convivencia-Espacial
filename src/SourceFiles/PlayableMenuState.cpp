@@ -82,7 +82,6 @@ void PlayableMenuState::init()
 void PlayableMenuState::update()
 {
 	GameState::update();
-	//double d = SDL_Game::instance()->getConstants()->getConstant<double>((std::string)"SECONDS_PER_FRAME");
 	//el que vuelva tocar el step de physicsworld muere
 	physicsWorld_->Step(secondsPerFrame_, 6, 2);
 	
@@ -98,10 +97,6 @@ void PlayableMenuState::render()
 void PlayableMenuState::handleInput()
 {
 	GameState::handleInput();
-	/*if (playerControl->pressPick()) {
-			player->getComponent<Collider>(ComponentType::Collider)->setTransform(b2Vec2(tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y), 0);
-	}*/
-	
 }
 
 void PlayableMenuState::onLoaded()

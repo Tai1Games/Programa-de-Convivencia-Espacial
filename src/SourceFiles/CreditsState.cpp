@@ -1,11 +1,6 @@
 #include "CreditsState.h"
-#include "PlayableMenuState.h"
-#include "Transform.h"
-#include "AttachesToObjects.h"
 #include "Texture.h"
 #include "Viewer.h"
-#include "InputBinder.h"
-#include "ObjectFactory.h"
 #include "PlayerData.h"
 #include "GameStateMachine.h"
 #include "Component.h"
@@ -31,9 +26,9 @@ void CreditsState::init()
 	//MÚSICA
 	//SDL_Game::instance()->getAudioMngr()->playMusic(Resources::MainMenuMusic, -1);
 
-	//Texto para terminar la intermision
+	//Texto para vover al menú
 	continueText = entityManager_->addEntity();
-	continueText->addComponent<UIViewer>(Resources::ContinueText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 600, CONST(int, "WINDOW_HEIGHT") - 130), 1, 0);
+	continueText->addComponent<UIViewer>(Resources::ReturnText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 600, CONST(int, "WINDOW_HEIGHT") - 90), 1, 0);
 }
 
 void CreditsState::update()
@@ -61,5 +56,4 @@ void CreditsState::handleInput()
 
 void CreditsState::onLoaded()
 {
-	//player->getComponent<Collider>(ComponentType::Collider)->setTransform(b2Vec2(tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y), 0);
 }

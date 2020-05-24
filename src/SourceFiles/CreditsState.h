@@ -7,9 +7,6 @@
 
 using namespace std;
 
-// esta clase es equivalente a un nivel del juego
-//se espera que herede de gamestate en un futuro
-//tambien deberia convertirse en un template de modo de juego y mapa
 class CreditsState : public GameState
 {
 private:

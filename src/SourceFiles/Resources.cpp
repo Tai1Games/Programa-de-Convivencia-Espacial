@@ -194,6 +194,9 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{winner2,"GANA EL JUGADOR 2",{COLOR(0xf79617ff)},FontId::NES_Chimera},
 	{winner3,"GANA EL JUGADOR 3",{COLOR(0xf79617ff)},FontId::NES_Chimera},
 	{winner4,"GANA EL JUGADOR 4",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+
+	//Credits
+	{ ReturnText, "Press any key/button to return", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 };
 
 vector<Resources::MusicInfo> Resources::musics_{

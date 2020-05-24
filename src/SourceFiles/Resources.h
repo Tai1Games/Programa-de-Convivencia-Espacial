@@ -207,6 +207,9 @@ public:
 		winner2,
 		winner3,
 		winner4,
+
+		//Credits
+		ReturnText,
 	};
 
 	enum AudioId : unsigned char {
