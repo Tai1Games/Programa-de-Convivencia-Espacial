@@ -32,23 +32,33 @@ void EndGameState::init()
 		sortedPlayerInfo_.push_back(player);
 	}
 	sort(sortedPlayerInfo_.begin(), sortedPlayerInfo_.end(), comparePoints);
+
 	int auxX = CONST(int, "LEADERBOARD_ANCHOR_X");
 	int auxY = CONST(int, "LEADERBOARD_ANCHOR_Y");
 	int iconOffset = CONST(int, "LEADERBOARD_ICON_OFFSET");
+	int medalOffset = CONST(int, "LEADERBOARD_MEDAL_OFFSET");
 	int iconMargin = CONST(int, "LEADERBOARD_ICON_MARGIN");
 	int zeroTex = Resources::NumZero;
+	b2Vec2 medalWH(CONST(int, "LEADERBOARD_MEDAL_W"), CONST(int, "LEADERBOARD_MEDAL_H"));
+	b2Vec2 playerWH(CONST(int, "LEADERBOARD_PLAYER_W"), CONST(int, "LEADERBOARD_PLAYER_H"));
+	b2Vec2 badgeWH(CONST(int, "LEADERBOARD_ICON_SIZE"), CONST(int, "LEADERBOARD_ICON_SIZE"));
+
 	entityManager_ = new EntityManager();
 
 	for (int i = 0; i < sortedPlayerInfo_.size(); i++) {
 		Entity* auxEntity = entityManager_->addEntity();
 		int y = auxY + (i * CONST(int, "LEADERBOARD_PLAYER_MARGIN"));
 		int x = auxX;
-		auxEntity->addComponent<UIViewer>(Resources::DeadBody, b2Vec2(auxX, y), 1);
-		x += iconOffset;
+		UIViewer* playerV = auxEntity->addComponent<UIViewer>(Resources::DeadBody, b2Vec2(auxX, y), 1);
+		playerV->setWHUIElement(playerWH);
+		x += playerWH.x;
+		x += medalOffset;
 		if (i < 3) {//si le toca medallita
 			UIViewer* medalV = auxEntity->addComponent<UIViewer>(Resources::medals, b2Vec2(x, y), 1);
 			medalV->setFrame(i);
+			medalV->setWHUIElement(medalWH);
 		}
+		x += medalWH.x;
 		//lista de chapitas
 		vector<int> chapitas;
 		for (int j = 0; j < sortedPlayerInfo_[i]->matchesWon.size(); j++) {
@@ -62,8 +72,10 @@ void EndGameState::init()
 		x += iconOffset;
 		Resources::TextureId firstBadge = Resources::badgeCapitalism;
 		for (auto& chapa : chapitas) {
-			auxEntity->addComponent<UIViewer>((Resources::TextureId)firstBadge + chapa, b2Vec2(x, y), 1);
-			x += iconOffset;
+			UIViewer* badgeV = auxEntity->addComponent<UIViewer>((Resources::TextureId)firstBadge + chapa, b2Vec2(x, y), 1);
+			badgeV->setWHUIElement(badgeWH);
+			x += iconMargin;
+			x += badgeWH.x;
 		}
 	}
 }
