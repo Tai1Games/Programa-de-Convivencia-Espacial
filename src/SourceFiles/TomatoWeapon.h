@@ -15,18 +15,16 @@ private:
 
 	bool activated_ = false;
 	bool exploded_ = false;
-	int timeActivated_ = 0;
-	int timeExploded_ = 0;
-	int frame = 0;
-	//Constants loaded in Init()
+	int currentFrame_ = 0;
 
-	int timeForExplosion_ = 0;
-	int timeForExplosionExpire_ = 0;
+	//Constants loaded in Init()
+	int framesCharge_ = 0;
+	int framesExplosion_ = 0;
 	int nFramesCharge_ = 0;
 	int explosionSize_ = 0;
 	int nFramesExplosion_ = 0;
-	int timePerFrame_ = 0;
-	int timePerFrameUntilExplosion_ = 0;
+	int timePerFrameCharge_ = 0;
+	int timePerFrameExplosion_ = 0;
 	int damageOnExplosionImpact_ = 0;
 	int explosionForce_ = 0;
 public:

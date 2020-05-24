@@ -35,12 +35,15 @@ protected:
 	int horizontalOffset_ = 0;
 	int horizontalIniPoint_ = 0;
 	int playerIdVerticalOffset_ = 0;
+	int pressReadyOffset_ = 0;
 	int iconHorizontalOffset_ = 0;
 	Texture* playerTexture_ = nullptr;
 	Texture* voidTexture_ = nullptr;
 	Texture* ctrlTexture_ = nullptr;
 	Texture* kbTexture_ = nullptr;
 	Texture* mouseTexture_ = nullptr;
+	Texture* pressReadyTexture_ = nullptr;
+	Texture* readyTexture_ = nullptr;
 
 	InputHandler* ih_ = nullptr;
 	std::vector<PlayerLobbyInfo> joinedPlayers_;

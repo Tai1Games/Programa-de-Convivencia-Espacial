@@ -25,6 +25,6 @@ void Viewer::draw() const {
 		SDL_Rect drawRect = transform_->getRectRender();
 		drawRect.x += renderOffset_.x;
 		drawRect.y += renderOffset_.y;
-		tex_->render(drawRect, transform_->getAngleInDegrees(), frameX_, frameY_, flip_); // getAngle devuelve radianes, hay que pasarlos a angulos
+		tex_->render(drawRect, transform_->getAngleInDegrees(), frameX_, frameY_, flip_); // getAngle devuelve radianes, hay que pasarlos a �ngulos
     }
 }
