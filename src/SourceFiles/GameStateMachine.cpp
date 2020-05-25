@@ -69,6 +69,8 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 	if (states_[state] == nullptr) {
 		//create state
 		//states_[state] = new... se necesita struct? o switch tal cual xd
+		string aux;
+		char* host;
 		switch (state) {
 		case States::menu:
 			states_[state] = new MenuState(); //numberOfPlayers usado como ownerID
@@ -129,10 +131,10 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 			states_[state] = new OnlineMenuState();
 			break;
 		case States::client:
-			string aux = "localhost";
-			char* host = &aux[0];
+			aux = "localhost";
+			host = &aux[0];
 			states_[state] = new ClientState(host);
-		break;
+			break;
 		case States::endGame:
 			states_[state] = new EndGameState();
 			break;
