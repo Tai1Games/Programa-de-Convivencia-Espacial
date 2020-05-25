@@ -24,7 +24,7 @@ private:
 	int numberOfRounds_ = 1;
 
 	UIViewer* menuCursor_ = nullptr;
-	std::vector<Entity*> texts_[3];
+	std::vector<Entity*> texts_ [2];
 	vector<pair<GamemodeID, string>>* roundsVector_ = new vector<pair<GamemodeID, string>>();  //vector de rondas
 
 	std::map<int, string> maps_ = { //a�adir aqu� los mapas que se vayan haciendo, tutorial no
@@ -40,7 +40,7 @@ private:
 	void addRound(GamemodeID gMode, string map);
 
 public:
-	MenuState(int playerID) : GameState(), ownerPlayerID_(playerID) {};
+	MenuState(int playerID = 0) : GameState(), ownerPlayerID_(playerID) {};
 	virtual ~MenuState() {
 		delete roundsVector_;
 	};

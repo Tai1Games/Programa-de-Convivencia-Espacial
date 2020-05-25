@@ -10,6 +10,7 @@ class MatchInfo
 public:
 	struct PlayerInfo {
 		PlayerInfo(const PlayerLobbyInfo& info);
+		PlayerInfo(size_t pId, InputBinder* ib, size_t pSkin) : playerId(pId), inputBinder(ib), playerSkin(pSkin) {};
 		~PlayerInfo() { };
 
 		size_t playerId = 0;
@@ -46,5 +47,6 @@ public:
 	size_t getCurrentRoundNumber() { return currentRoundNumber_; };
 	size_t getNumberOfRounds() { return numberOfRounds_; };
 	size_t getNumberOfPlayers() { return numberOfPlayers_; };
+	void updateNumberOfPlayers() { numberOfPlayers_ = players_.size(); };
 	void AddVictory(size_t toPlayer, GamemodeID gameModeWon);
 };
