@@ -31,8 +31,8 @@ class LobbyState : public GameState
 {
 private:
 protected:
-	bool holdingButtons_[MAX_PLAYERS] = { false, false, false, false };
-	bool isSkinPicked_[MAX_SKINS_PLACEHOLDER] = { false, false, false, false, false, false, false, false, false, false };
+	std::vector<bool>holdingButtons_;
+	std::vector<bool>isSkinPicked_;
 
 	int verticalIniPoint_ = 0;
 	int horizontalOffset_ = 0;

@@ -21,6 +21,9 @@ LobbyState::~LobbyState()
 
 void LobbyState::init()
 {
+	for (int num = 0; num < MAX_SKINS_PLACEHOLDER; num++) isSkinPicked_.push_back(false);
+	for (int num = 0; num < MAX_PLAYERS; num++) holdingButtons_.push_back(false);
+
 	ih_ = SDL_Game::instance()->getInputHandler();
 	for (int i = 0; i < MAX_PLAYERS; i++) {
 		joinedGamepads_[i] = false;
