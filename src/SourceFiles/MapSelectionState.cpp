@@ -114,13 +114,13 @@ void MapSelectionState::addRound(GamemodeID gMode, string map) {
 
 	iconsMaps_[indexMap].push_back(std::pair(entityManager_->addEntity(), (GamemodeID)gMode));
 
-	imagesMaps_.back()->addComponent<UIViewer>(texturesIcons_[gMode], pos, 2, 0);
+	iconsMaps_[indexMap].back().first->addComponent<UIViewer>(texturesIcons_[gMode], pos, 2, 0);
 
 }
 
 void MapSelectionState::removeRound(string map)
 {
-	/*int indexMap = 0;
+	int indexMap = 0;
 
 	if (map == maps_[0]) {
 		indexMap = 0;
@@ -142,20 +142,23 @@ void MapSelectionState::removeRound(string map)
 
 		auto a = --roundsVector_->end();
 
-		int i = iconsMaps_->size();
+		int i = iconsMaps_[indexMap].size()-1;
 
 		while (!found && a >= roundsVector_->begin()) {
 			auto b = *a;
 
 			if (*a == std::pair{ gamemode, map }) {
 				roundsVector_->erase(a);
-				iconsMaps_[indexMap][i-1].first->setActive(false);
-				iconsMaps_[indexMap].erase(iconsMaps_->begin() + i-1);
+				(iconsMaps_[indexMap].begin() + i)->first->setActive(false);
+				iconsMaps_[indexMap].erase(iconsMaps_[indexMap].begin() + i );
 				found = true;
 			}
-			else a--; i--;
+			else {
+				if (a->second == map) i--;
+				a--;
+			}
 		}
-	}*/
+	}
 }
 
 void MapSelectionState::onLoaded() { //poner el men� al principio
@@ -190,9 +193,7 @@ void MapSelectionState::updatePointer(int n, int coor) {
 		pointers_[gamemodeScreen] %= size;
 
 		iconsGamemodes_[pointers_[gamemodeScreen]]->setActive(true);
-
 	}
-
 
 }
 
@@ -206,6 +207,12 @@ void MapSelectionState::updateMenu() {
 
 	for (auto e : imagesMaps_) {
 		e->setActive(menuPointer_ != 1);
+	}
+
+	for (auto i : iconsMaps_) {
+		for (auto j : i) {
+			j.first->setActive(menuPointer_ != 1);
+		}
 	}
 
 	mapSelCursor_->setDrawable(menuPointer_ != 1);
