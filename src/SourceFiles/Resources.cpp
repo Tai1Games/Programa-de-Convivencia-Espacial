@@ -19,6 +19,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ GardenRoom,resourcesPath + "textures/Background_garden.png"},
 	{ MenuRoom, resourcesPath + "textures/Background_Menu.png"},
 	{ CreditsRoom, resourcesPath + "textures/CreditsRoom.png"},
+	{ SpaceBackground, resourcesPath + "textures/Background_SpaceMenus.png"},
 
 	// UI
 	{ ActiveHealth, resourcesPath + "textures/VidaActiva.png" },
@@ -242,6 +243,7 @@ vector<Resources::SoundInfo> Resources::sounds_{
 	{ ExtinguisherSound, resourcesPath + "sound/effects/extinguisherSound.wav" },
 	{ PickSound, resourcesPath + "sound/effects/pick.wav"},
 	{ TomatoExplosionSound, resourcesPath + "sound/effects/tomatoExplosionSound.wav"},
+	{ ConfettiSound, resourcesPath + "sound/effects/confettiSound.wav"},
 
 	//Player
 	{ RespawnSound, resourcesPath + "sound/effects/RespawnSound.wav"},

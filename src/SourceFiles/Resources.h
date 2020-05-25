@@ -27,6 +27,7 @@ public:
 		GardenRoom,
 		MenuRoom,
 		CreditsRoom,
+		SpaceBackground,
 
 		// UI
 		ActiveHealth,
@@ -240,6 +241,7 @@ public:
 		BananaShootSound,
 		ExtinguisherSound,
 		TomatoExplosionSound,
+		ConfettiSound,
 
 		//Player
 		DeathSound,

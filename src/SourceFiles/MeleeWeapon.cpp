@@ -14,7 +14,7 @@ MeleeWeapon::MeleeWeapon(ComponentType::CmpId compType, WeaponID wId, int dmg, i
 void MeleeWeapon::action() {
 	if (!beenActivated_) {
 		std::cout << "ACCION ARMA MELEE ACTIVADA" << endl;
-		mainCollider_->createRectangularFixture(mainCollider_->getW(0) * 4, mainCollider_->getH(0) * 4, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
+		mainCollider_->createRectangularFixture(mainCollider_->getW(0) * 4, mainCollider_->getW(0) * 4, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
 		beenActivated_ = true;
 		currentHand_->setFrame(1, currentHand_->getFrameY());
 		activeAnim_ = true;

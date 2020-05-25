@@ -33,6 +33,7 @@ void ConfettiWeapon::action() {
 		viewer_->setFrame(1);
 		timedDespawn_->startTimer(this);
 		currentHand_->setFrame(1, weaponType_);
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::AudioId::ConfettiSound, 0);
 
 		MeleeWeapon::action();
 	}
