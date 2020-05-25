@@ -1,11 +1,9 @@
-# Documento de diseño
+﻿# Programa de Conviencia Espacial: Documento de Diseño
 
 ---
 ## 1. Introducción:
-Programa de Convivencia Espacial es un party-game en el que los jugadores controlarán astronautas para pelearse por el control de diversas estaciones espaciales
-hasta el espacio profundo.
-El juego se desarrollará en rápidas rondas, valiéndose de sus habilidades para disparar armas y lanzar objetos del mobiliario además de moverse en entornos
-sin gravedad, impulsándose desde paredes, objetos y los cuerpos de sus enemigos.
+Programa de Convivencia Espacial es un party-game en el que los jugadores controlarán a distintos astronautas para pelearse por las distintas estancias de una estación espacial.
+El juego se desarrollará en rápidas rondas en las que los jugadores se valdrán de sus habilidades para disparar armas y lanzar objetos del mobiliario además de moverse en entornos sin gravedad, impulsándose desde paredes, objetos e incluso los cuerpos de sus enemigos.
 
 ---
 ## 2. Historia:
@@ -16,37 +14,53 @@ choques (culturales y físicos) que eso conlleva. ¿Lograrás volver a la tierra
 
 ---
 ## 3. Personajes:
-Los jugadores encarnan a un astronauta participante en el PCE. Cada astronauta pertenece a una nación diferente. 
+Cada jugador encarna a un astronauta participante del PCE
 Esto se verá reflejado en su aspecto físico, ya que su traje llevará bordada la bandera de su nación correspondiente.
 
 ---
 ## 4. Gameplay:
 
 ### 4.1 Controles:
+El juego se puede controlar de distintas maneras:
+
+**Controles con mando**
+
 ![Controles](assets/web/Controles.png)
-*El juego está pensado para jugarlo con mando pero implementaremos controles de teclado durante el desarrollo*
 
-### 4.2 Formatos de partida: 
-*Programa de Convivencia Espacial tiene 3 formatos de partida que buscan ofrecer una experiencia de juego personalizada.*
-- **Clásico:** Es el modo de juego principal. En él, los jugadores escogen una estación espacial compuesta por varios módulos/niveles. Tanto el orden de los módulos como el formato de juego de cada módulo será fijo.
+**Controles con teclado (hasta 2 jugadores)**
 
-&#x200C; 
+![ControlesTeclado](assets/web/PCEKeys.png)
 
-- **Libre:** Los jugadores pueden escoger el módulo de la estación que prefieran, además del módulo que prefieran.
+**Controles con teclado y ratón**
 
-&#x200C;
+![ControlesTecladoYRaton](assets/web/tecladoyraton.png)
 
-- **Aleatorio:** Los jugadores eligen el número de rondas a las que quieren jugar. A continuación, saldrán 3 módulos con un formato distinto. Los jugadores tendrán que votar para decidir el nivel al que jugarán.
+### 4.2 Menú principal
 
-![ConceptFormatoRandom](assets/web/conceptFormatoRandom.png)
+Al principio del juego, al jugador se le presenta un menú principal jugable. Es una sala con 4 salientes que representan distintas puertas. Al ponerse encima de cada una, llevarán al jugador a la sección correspondiente (créditos, salir del juego, opciones o jugar).
 
-*En este ejemplo de cómo funcionaría el modo aleatorio, vemos a los 4 jugadores votando por el siguiente mapa al terminar la ronda.*
+![MenuJugable](assets/web/menujugable.png)
 
-### 4.3 Modos de juego:
+Al comenzar a jugar, antes de seleccionar los parámetros de la partida los jugadores elegirán su número de jugador y su método de control en un lobby. Después de eso, los jugadores podrán empezar la partida.
+
+![Lobby](assets/web/lobby.png)
+
+### 4.3 Formato de partida: 
+
+- **Clásico:** Al comenzar la partida, el jugador 1 elegirá el número de rondas que se van a jugar. A continuación, se elegirá para cada ronda un modo de juego y un escenario. 
+
+Las rondas se jugarán seguidas, con una pequeña intermisión entre ellas en la que se informará del número de rondas que ha ganado cada participante.
+
+### 4.4 Modos de juego:
 
 *Cada módulo se podrá jugar de varias maneras distintas. Estos cambian el objetivo de la partida y la dinámica de juego.*
 
 *En cada apartado se muestra una captura de lo que sería un momento cualquiera en cada modo.*
+
+#### Tutorial
+Este modo de juego se compone de una arena simple en la que van apareciendo mensajes que le dicen a los jugadores cómo realizar las acciones básicas del juego.
+
+![enter image description here](assets/web/tutorial.png)
 
 #### Por tiempo:
 Al matar a un enemigo, los jugadores obtendrán un punto. Al terminar este tiempo, quien tenga más puntos ganará la ronda.
@@ -69,7 +83,7 @@ Cuando un jugador llegue al tiempo objetivo, acabará la ronda en el módulo.
 #### Wi-Fight:
 
 En el módulo habrá un router wi-fi que se moverá por el escenario rebotando por las paredes.
-El objetivo de los jugadores será descargar sus archivos, para lo que tendrán que acercarse al router. Cuantos más jugadores haya en el área del router, más lentamente descargarán los datos.
+El objetivo de los jugadores será descargar sus archivos, para lo que tendrán que acercarse al router. Cuantos más jugadores haya en el área del router, más lentamente descargarán los datos. Cuanto más cerca estén del router, más rápido progresará su descarga.
 
 Cuando un jugador consiga descargar todos sus archivos, acabará la ronda en el módulo.
 
@@ -77,33 +91,31 @@ Cuando un jugador consiga descargar todos sus archivos, acabará la ronda en el 
 
 #### Capitalismo:
 
-En el escenario aparecen monedas que los jugadores deberán recoger. Al golpear a los enemigos, soltarán monedas. En este modo de juego los jugadores son invulnerables y cuando son golpeados pierden dinero y son empujados. Al acabarse el tiempo, el jugador con más dinero gana.
+En el escenario aparecen roombas que irán soltando monedas que los jugadores deberán recoger. En este modo de juego los jugadores son invulnerables y cuando son golpeados pierden dinero y son empujados. Al acabarse el tiempo, el jugador con más dinero gana.
 
 ![conceptModoCapitalismo](assets/web/conceptModoCapitalismo.png)
 
 
-### 4.4 Mecánicas:
+### 4.5 Mecánicas:
 
 *En este apartado se exploran las acciones que el jugador puede ejercer*
 
-#### 4.4.1 Vida:
-Los jugadores dispondrán de 3 puntos de vida. Irán perdiendo estos puntos conforme vayan siendo impactados por fuego enemigo. Cuando pierdan todos los puntos de vida, quedarán inconscientes y al cabo de un breve tiempo de respawn, otro personaje de su facción saldrá de su base.
+#### 4.5.1 Vida:
+Los jugadores dispondrán de 3 puntos de vida (excepto en el modo Capitalismo). Irán perdiendo estos puntos conforme vayan siendo impactados por fuego enemigo. Cuando pierdan todos los puntos de vida, quedarán inconscientes (dejando su cadáver en el lugar donde murieron) y al cabo de un breve tiempo, volverán a aparecer en su punto de respawn.
 
-#### 4.4.2 Desplazamiento por el escenario:
+#### 4.5.2 Desplazamiento por el escenario:
 
 
 #### Impulsos:
-Al mantener un botón, el jugador cargará una flecha de impulso. Su dirección se podrá controlar con el joystick. La flecha está dividida en 3 segmentos de potencia. Si el jugador está volando por el aire, solo podrá cargarla hasta el segundo segmento. Si se agarra a una plataforma, podrá cargar hasta el tercer segmento.
-
-A medida que el jugador cargue el impulso, se llenarán los segmentos de la flecha. Para calcular la fuerza del impulso, se contarán los segmentos que el jugador haya cargado. De este modo, si el jugador ha cargado un segmento y medio, el impulso resultante será de un segmento de potencia.
+Al mantener un botón, el jugador cargará una flecha de impulso. Su dirección se podrá controlar con el joystick. La flecha está dividida en 3 segmentos de potencia. Si el jugador está volando por el aire, solo podrá cargarla hasta la mitad. Si está agarrado a algo, podrá cargarla entera, pudiendo aprovecharse de un impulso más fuerte.
 
 ![ConceptImpulso](assets/web/conceptImpulso.png)
 
 *Ejemplo de un jugador cargando su salto*
 
-Si el jugador libera el impulso en una plataforma, saldrá disparado en la dirección de la flecha. La potencia del impulso desde una plataforma incrementa exponencialmente con el número de segmentos cargados.
+Si el jugador libera el impulso en una plataforma, saldrá disparado en la dirección de la flecha.
 
-Si el jugador libera el impulso en el aire, soltará una flatulencia para conseguir redirigirse hacia una dirección. Sin embargo, si el jugador está en el aire pero libera el salto junto a un objeto suficientemente grande como un cadáver, se impulsará desde el mismo, con la potencia de un salto desde una plataforma.
+Si el jugador libera el impulso en el aire, soltará una flatulencia para conseguir redirigirse hacia una dirección. Sin embargo, si el jugador está en el aire pero libera el salto junto a un objeto suficientemente grande como un cadáver, se impulsará desde el mismo, con la potencia de un salto desde una plataforma. El objeto móvil desde el que se impulse saldrá disparado en dirección contraria.
 
 ![GraficaPotenciaImpulsos](assets/web/GraficaPotenciaImpulsos.png)
 
@@ -116,23 +128,19 @@ Al agarrarse, sus fuerzas se suman y se modificará la trayectoria de ambos.
 
 #### Basura espacial:
 
-Objetos que se mueven con velocidad uniforme por el mapa. Si son suficientemente grandes, los jugadores se podrán agarrar a ellos.
+Objetos que se mueven por el mapa. Si son suficientemente grandes, los jugadores se podrán agarrar a ellos.
 Cuando impactan con un jugador, si este no se agarra, se comportan como en una colisión normal.
 Si el objeto va a mucha velocidad y el jugador no se agarra, muere instantáneamente debido al impacto.
 
 #### Cadáveres:
 
-Cuando un jugador es derrotado, su avatar se queda inconsciente volando a la deriva con el arma que llevaba. Pasado un breve tiempo de respawn, saldrá otro avatar de su facción desde su base.
-Los cadáveres flotan por el escenario rebotando con las paredes. Estos actuarán como un objeto sólido, permitiendo impulsarse desde los mismos. Además, al pasar al lado de un cadáver, el jugador podrá recoger su arma.
-Por último, si un jugador se impulsa desde un cadáver hacia una dirección, el cadáver saldrá impulsado hacia la dirección contraria, convirtiéndose en un proyectil para el enemigo. Si un cadáver con alta velocidad impacta con un jugador, le dejará inconsciente por unos segundos y le desarmará. Si el impacto se produce al lado de una pared, el jugador será aplastado y morirá. Si el cadáver lleva una velocidad muy alta, el jugador morirá directamente.
+Cuando un jugador es derrotado, su cadáver se queda en su lugar volando a la deriva, soltando el arma que llevaba. Pasado un breve tiempo de respawn, reaparecerá desde su punto de spawn.
+Los cadáveres actuarán como un objeto sólido, permitiendo impulsarse desde los mismos.
+Por último, si un jugador se impulsa desde un cadáver hacia una dirección, el cadáver saldrá impulsado hacia la dirección contraria, convirtiéndose en un proyectil para el enemigo. Si un cadáver con alta velocidad impacta con un jugador, le hará una determinada cantidad de daño dependiendo de su velocidad y le desarmará.
 
-#### 4.4.3 Armas y combate:
+#### 4.5.3 Armas y combate:
 
-*Los jugadores podrán recoger armas que aparecen por el escenario para usarlas para ganar las rondas. Al pasar de una ronda a otra los jugadores no conservarán las armas obtenidas.*
-
-- **Disparar:** El jugador utilizará sus armas para derrotar a los otros jugadores. Si el arma tiene retroceso, modificará la trayectoria del jugador.
-
-&#x200C; 
+*Los jugadores podrán recoger armas que aparecen por el escenario. Al pasar de una ronda a otra los jugadores no conservarán las armas obtenidas.*
 
 - **Lanzar armas:** El jugador puede lanzar un arma para desarmar a los enemigos con el impacto, hacer daño (según el arma) y así poder coger armas nuevas. Al cabo de un tiempo, si el arma no tiene munición restante, desaparecerá para limpiar el escenario.
 
@@ -147,7 +155,7 @@ Cuando un jugador recoge un arma, empezará el tiempo de respawn del lugar donde
 
 &#x200C;
 
-- **Tipos de armas:** *Actualmente las armas se dividen en 3 subclases*
+**Tipos de armas:** *Actualmente las armas se dividen en 3 subclases*
 
 
 **● Armas cuerpo a cuerpo:**
@@ -165,7 +173,7 @@ Cuando un jugador recoge un arma, empezará el tiempo de respawn del lugar donde
 
 **- Mancuernas:** Arma de un solo uso que al impactar contra el enemigo ejerce 2 puntos de daño. Su velocidad es menor que la de los objetos contundentes.
 
-**-Plátanos pistola:** Arma de un solo uso que dispara una bala (plátano) que es mortal al impacto (3 puntos de daño). El proyectil avanza muy léntamente.
+**-Plátanos pistola:** Arma de un solo uso que dispara una bala (plátano) que es mortal al impacto (3 puntos de daño). El proyectil avanza muy lentamente.
 
 **-Rayo láser:** Al pulsar el botón de disparo genera un rayo láser que si contacta con un enemigo durante 2 segundos seguidos, le ejercerá 2 puntos de daño.
 
@@ -178,7 +186,7 @@ Cuando un jugador recoge un arma, empezará el tiempo de respawn del lugar donde
 
 **-Tomate granada:** Funcionan como una granada normal y al estallar crea un pequeño radio que además de aplicar 2 puntos de daño hace un impulso (onda expansiva).
 
-### 4.5 Interfaz de usuario:
+### 4.6 Interfaz de usuario:
 
 *La UI durante las partidas se mantendrá al mínimo para que se entrometa lo mínimo en la experiencia de juego.*
 
@@ -216,42 +224,40 @@ Al igual que en el modo de juego anterior, en este modo de juego nos interesa sa
 En este modo de juego nos interesa saber el número de monedas que ha ganado cada jugador y el número necesario de monedas para ganar. 
 Como en este modo los jugadores no pueden morir, no será necesario representar el número de vidas.
 
-### 4.6 Escenarios:
+### 4.7 Escenarios:
 
 *En este apartado enumeramos todos los módulos diseñados con los elementos y peligros que contienen, además de un pequeño dibujo conceptual.*
 
 
 - **Gimnasio:**
 
-	- **Bancos de mancuernas:** Estarán repartidas por el escenario y el jugador podrá recoger mancuernas de ellas para lanzar a sus enemigos.
+	- **Mancuernas:** Estarán repartidas por el escenario y el jugador podrá recogerlas para lanzar a sus enemigos.
 	
-	- **Cintas de correr:** El jugador se puede agarrar a ellas. Al soltarse, saldrá disparado en una dirección. A lo largo de la partida, ganarán velocidad.
+	- **Cintas de correr:** Al pasar por encima de ellas, los jugadores serán lanzados hacia la dirección a la que estén apuntando las cintas. Van girando sobre sí mismas.
 	
-	- **Paredes acolchadas:** Permiten el rebote del jugador.
+	- **Colchonetas:** Permiten el rebote del jugador.
 	
 ![conceptGimnasio](assets/web/conceptGimnasio.png)
 
 - **Sala de máquinas:**
 
-	- **Horno:** En el centro de la arena hay un horno que expulsa bolas de fuego periódicamente.
+	- **Caldera:** En el centro de la arena hay una caldera que expulsa bolas de fuego periódicamente.
+	- 
+- **Botones:** Se pueden activar con un disparo o con un golpe. Permiten la aceleración o la deceleración del horno, depende del tipo de botón que sean.
 	
-	- **Bolas de fuego:** Al tocarlas, el jugador arderá y morirá (hacen 3 puntos de daño). Cuando toquen una pared, desaparecerán.
+	- **Bolas de fuego:** Al tocarlas, el jugador arderá recibirá daño. Cuando toquen una pared, desaparecerán.
 	
 	- **Tuberías:** Plataformas estáticas repartidas por el escenario a las que el jugador se puede agarrar.
-	
-	- **Botones:** Se pueden activar con un disparo o con un golpe. Permiten la aceleración o la deceleración del horno.
 	
 ![conceptSalaDeMaquinas](assets/web/conceptSalaDeMaquinas.png)
 
 - **Jardin botánico:**
-
-	- **Plantas sospechosas:** Expulsan polen periódicamente que al tocarlo invierte los controles.
 	
 	- **Plataneros:** Generan plátanos pistola.
 	
 	- **Tomateras:** Generan tomates granada.
 	
-	- **Plantas carnívoras:** Devoran a los jugadores que se acerquen a ellas.
+	- **Plantas carnívoras:** Devoran a los jugadores que se acerquen a ellas. Cada vez que un jugador esté colisionando con una, se irán poniendo cada vez más nerviosas hasta que finalmente muerdan a quien esté dentro en ese momento, matando instantáneamente.
 
 ![conceptJardinBotanico](assets/web/conceptJardinBotanico.png)
 
@@ -277,23 +283,34 @@ Como en este modo los jugadores no pueden morir, no será necesario representar 
 	
 ![conceptEntradaEstacion](assets/web/conceptEntradaEstacion.png)
 
-*Disponibilidad de modos de juego en cada mapa (0 no está disponible, 1 si lo está):*
+## 5. Banda Sonora Original
 
-|   | cocina | gimnasio | s. de máquinas | s. de estar | entrada estación |
-| --- | --- | --- | --- | --- | --- |
-| Por vidas | 1 | 1 | 1 | 1 | 1 |
-| Por tiempo | 1 | 1 | 1 | 1 | 1 |
-| Pelea mando | 1 | 1 | 1 | 1 | 1 |
-| Wi-Fight | 1 | 1 | 1 | 1 | 1 |
-| Capitalismo | 1 | 1 | 1 | 1 | 1 |
+El juego cuenta con música compuesta por gente del grupo. De momento hay planeadas 7 pistas:
 
----
+ 1. **Main Menu**
+	 La pista que sonará en el menú principal.
+ 2. **Entrance to the Spacial Station (sonará en el mapa de la entrada a la estación)**
+	 Sonará en el mapa de la entrada en la estación (a fecha de la release inicial esta pista no se utiliza en el juego).
+ 3. **Living Room Chaos Theme (sonará en el mapa del salón)**
+	 Suena en el mapa del salón.
+ 4. **Gym Fight**
+     Suena en el mapa del gimnasio. Inspirada en la música de los vídeos de ejercicios de televisión del siglo pasado.
+ 5. **Explosion inside the Boiler Room**
+	 Suena en la sala de calderas.  Para muchos considerada como una pista de culto, recuerda a la música de algún jefe final.
+ 6. **Learning to Play**
+	 Suena en el tutorial. Puede que haya sido utilizada con anterioridad en alguna presentación en Minecraft.
+ 7. **Take Care of your veggies**
+	 Suena en el jardín botánico. Simboliza el veganismo del Programa de Convivencia Espacial.
+
+## 6. Juego Online
+
+El Programa de Convivencia Espacial cuenta con juego online. De momento, funcionará en red local (para jugar a distancia hay que abrir puertos). El host es el que tiene el juego como tal funcionando, y cada cliente le envía su input y recibe las imágenes y sus posiciones correspondientes (sin llevar nada del peso de la lógica del juego).
+
 ## 5. Carta a los reyes magos:
 
 *En este apartado exploramos nuevas mecánicas o contenido que querríamos añadir al juego, pero dado al nivel de incertidumbre que existe ahora mismo en el desarrollo no estamos cómodos en añadirlos al GDD.*
 
 - Modos de juego configurables
-- Online
 - Otras estaciones (Meteosat…)
 - Modo ‘historia’
 - Al ser derrotados, los astronautas salen disparados de su traje y vuelven a la base para ponerse otro.
