@@ -4,6 +4,7 @@
 #include "Hands.h"
 #include "TimedDespawn.h"
 #include "AnimatedViewer.h"
+#include "Constants.h"
 
 ConfettiWeapon::ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames, int impctForce) : MeleeWeapon(wId, dmg, impactDmg, cooldownFrames, impctForce) {}
 
@@ -13,7 +14,7 @@ void ConfettiWeapon::init() {
 	particleEmitter_ = GETCMP1_(ParticleEmitter);
 	viewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
 	timedDespawn_ = GETCMP1_(TimedDespawn);
-
+	animationDuration_ = CONST(int, "CONFETTI_ANIMATION_DURATION") * FRAMES_PER_SECOND;
 	viewer_->stopAnimation();
 	viewer_->setFrame(0);
 }
@@ -31,6 +32,8 @@ void ConfettiWeapon::action() {
 		used = true;
 		viewer_->setFrame(1);
 		timedDespawn_->startTimer(this);
+		currentHand_->setFrame(1, weaponType_);
+
 		MeleeWeapon::action();
 	}
 }
@@ -41,12 +44,32 @@ void ConfettiWeapon::setActive(bool a, b2Vec2 pos)
 		if (currentHand_ != nullptr) UnPickObject();
 		viewer_->setFrame(0);
 		used = false;
-		cout << "tesst";
 		colWeapon_->setLinearVelocity(b2Vec2(0, 0));
 		colWeapon_->setAngularVelocity(0);
+		currentFrame_ = 0;
 	}
 	entity_->setActive(a);
 	viewer_->setDrawable(a);
 	colWeapon_->getBody()->SetEnabled(a);
 	colWeapon_->getBody()->SetTransform(pos, 0);
+}
+
+void ConfettiWeapon::update()
+{
+	MeleeWeapon::update();
+	if (used) {
+		currentFrame_++;
+		if (currentFrame_ == animationDuration_) {
+			if (currentHand_ != nullptr) currentHand_->setFrame(2, weaponType_);
+		}
+	}
+}
+
+void ConfettiWeapon::PickObjectBy(int index)
+{
+	MeleeWeapon::PickObjectBy(index);
+	if (currentHand_) {
+		if (used) currentHand_->setFrame(2, weaponType_);
+		else currentHand_->setFrame(0, weaponType_);
+	}
 }

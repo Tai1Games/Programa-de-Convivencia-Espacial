@@ -2,7 +2,7 @@
 #include "Collider.h"
 #include "Entity.h"
 #include "EntityManager.h"
-#include "Viewer.h"
+#include "AnimatedViewer.h"
 #include "Resources.h"
 #include "ParticleEmitter.h"
 #include <math.h>
@@ -10,7 +10,7 @@
 void FireBallGenerator::init() {
 	col_ = GETCMP1_(Collider);
 	particleEmitter_ = GETCMP1_(ParticleEmitter);
-	boilerViewer_ = GETCMP1_(Viewer);
+	boilerViewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
 	pos_ = col_->getPos();
 	radius = sqrt(pow(col_->getH(0), 2) + pow(col_->getW(0), 2))/*+0.5*/; //JAJA he hecho una hipotenusa despues del instiuto
 	//cout << "radius " << radius << endl;
@@ -32,6 +32,8 @@ void FireBallGenerator::init() {
 	minFramesShake = CONST(double, "FBGEN_MAX_SHAKE_FREQ") * FRAMES_PER_SECOND;
 	maxFramesShake = CONST(double, "FBGEN_MIN_SHAKE_FREQ") * FRAMES_PER_SECOND;
 	cdVariability = maxCd_ - minCd_;
+	animationSpeed_ = CONST(int, "BOILER_ANIMATION_SPEED");
+	animationSpeedModifier_ = CONST(int, "BOILER_ANIMATION_SPEED_MODIFIER");
 	manager_ = entity_->getEntityManager();
 	fbPool_.init(manager_, physicsWorld_);
 	nextShot_ = SDL_Game::instance()->getTime() + CONST(int, "FBGEN_INITIAL_OFFSET")
@@ -84,13 +86,19 @@ void FireBallGenerator::onButtonAction(bool inc_dec) {
 
 	if (inc_dec) {
 		particleEmitter_->modifyGenerationOdds(-particleGenOddsModifier_);
-		framesBetweenShakes_ -= incrementFramesShakeFreq_;
-		if (framesBetweenShakes_ < minFramesShake) framesBetweenShakes_ = minFramesShake;
+		if (framesBetweenShakes_ > minFramesShake) {
+			framesBetweenShakes_ -= incrementFramesShakeFreq_;
+			animationSpeed_ -= animationSpeedModifier_;
+			boilerViewer_->setAnimSpeed(animationSpeed_);
+		}
 	}
 	else {
 		particleEmitter_->modifyGenerationOdds(particleGenOddsModifier_);
-		framesBetweenShakes_ += incrementFramesShakeFreq_;
-		if (framesBetweenShakes_ > maxFramesShake) framesBetweenShakes_ = maxFramesShake;
+		if (framesBetweenShakes_ < maxFramesShake) {
+			framesBetweenShakes_ += incrementFramesShakeFreq_;
+			animationSpeed_ += animationSpeedModifier_;
+			boilerViewer_->setAnimSpeed(animationSpeed_);
+		}
 	}
 
 	if (inc_dec && minCd_ >= limitMinCd_) {

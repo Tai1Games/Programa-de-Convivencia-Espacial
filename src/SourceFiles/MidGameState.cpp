@@ -161,7 +161,7 @@ void MidGameState::update()
 			if (gsMachine->getMatchInfo()->getCurrentRoundNumber() < gsMachine->getMatchInfo()->getNumberOfRounds())
 				gsMachine->transitionToState(States::play);
 			else
-				gsMachine->transitionToState(States::menu);
+				gsMachine->transitionToState(States::endGame);
 		}
 
 		//Altamente provisional hasta que sepamos hacer mates
