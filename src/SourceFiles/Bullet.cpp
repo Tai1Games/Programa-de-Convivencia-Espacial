@@ -61,6 +61,7 @@ void Bullet::onCollisionEnter(Collision* c)
 				if (objThrown->getOwnerId() != pData->getPlayerNumber())
 					objThrown->addPointsToOwner();
 			}
+			needToDelete = true;
 		}
 		else {
 			Wallet* wallet = GETCMP2(cEntity, Wallet);
@@ -74,7 +75,8 @@ void Bullet::onCollisionEnter(Collision* c)
 		Collider* col = GETCMP2(cEntity, Collider);
 		if (col != nullptr) {
 			if (col->getFixture(0)->GetFilterData().categoryBits == Collider::CollisionLayer::Wall ||
-				col->getFixture(0)->GetFilterData().categoryBits == Collider::CollisionLayer::NonGrababbleWall) needToDelete = true;
+				col->getFixture(0)->GetFilterData().categoryBits == Collider::CollisionLayer::NonGrababbleWall)
+				needToDelete = true;
 		}
 	}
 }
