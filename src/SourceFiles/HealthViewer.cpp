@@ -2,11 +2,11 @@
 #include "Entity.h"
 #include "PlayerData.h"
 
-HealthViewer::HealthViewer(int texActiveId, int texDisabledId) : Component(ComponentType::HealthViewer)
+HealthViewer::HealthViewer(int texActiveId, int texDisabledId,int skin) : Component(ComponentType::HealthViewer)
 {
 	activeTextureId_ = texActiveId;
 	disableTextureId_ = texDisabledId;
-	
+	playerSkin_ = skin;
 }
 
 void HealthViewer::init()
@@ -23,6 +23,8 @@ void HealthViewer::init()
 	lifeWidth_ = CONST(int, "LIFE_WIDTH");
 	lifeHeight_ = CONST(int, "LIFE_HEIGTH");
 	lifeDrawOffset_ = CONST(double, "LIFE_DRAW_OFFSET");
+	
+	setColorBySkin();
 
 }
 void HealthViewer::update()
@@ -32,7 +34,6 @@ void HealthViewer::update()
 void HealthViewer::draw() const
 {
 	int player = playerData_->getPlayerNumber();
-	setColorByID(player);
 
 	SDL_Rect dest = {pos_.x,pos_.y, lifeWidth_, lifeHeight_};
 	for (int i = 0; i < he->getHealthMax(); i++) {
@@ -62,21 +63,29 @@ void HealthViewer::setPos(int player){
 	pos_.y = (player < 2) ? (CONST(double,"LIFE_MARGIN_V")) : (CONST(int,"WINDOW_HEIGHT") - CONST(double,"LIFE_MARGIN_V") - CONST(int,"LIFE_HEIGTH"));
 }
 
-void HealthViewer::setColorByID(int playerID) const
+void HealthViewer::setColorBySkin()
 {
-	switch (playerID)
+	switch (playerSkin_)
 	{
 	case 0:
-		full->setColor(232, 59, 59);
-		break;
 	case 1:
-		full->setColor(77, 155, 230);
+		full->setColor(SDL_Color{ 199, 220, 208 });
 		break;
 	case 2:
-		full->setColor(145, 219, 105);
-		break;
 	case 3:
-		full->setColor(249, 194, 43);
+		full->setColor(SDL_Color{ 232, 59, 59 });
+		break;
+	case 4:
+	case 5:
+		full->setColor(SDL_Color{ 77, 155, 230 });
+		break;
+	case 6:
+	case 7:
+		full->setColor(SDL_Color{ 145, 219, 105 });
+		break;
+	case 8:
+	case 9:
+		full->setColor(SDL_Color{ 249, 194, 43 });
 		break;
 	default:
 		break;

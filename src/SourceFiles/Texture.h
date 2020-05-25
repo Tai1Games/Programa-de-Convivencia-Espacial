@@ -70,7 +70,7 @@ public:
 	void render(const SDL_Rect &dest, double angle) const;
 
 	//Set color modulation
-	void setColor(Uint8 red, Uint8 green, Uint8 blue);
+	void setColor(const SDL_Color& color);
 
 	void close();
 
