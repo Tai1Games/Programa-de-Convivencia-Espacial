@@ -366,6 +366,9 @@
     <ClInclude Include="CarnivorousPlantViewer.h">
       <Filter>Header Files\Components\Viewers</Filter>
     </ClInclude>
+    <ClInclude Include="BodyPool.h">
+      <Filter>Header Files\Pools</Filter>
+    </ClInclude>
     <ClInclude Include="PlayableMenuState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
@@ -667,6 +670,9 @@
     </ClCompile>
     <ClCompile Include="StaplerPool.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BodyPool.cpp">
+      <Filter>Source Files\Pools</Filter>
     </ClCompile>
     <ClCompile Include="CreditsState.cpp">
       <Filter>Source Files\Gamestates</Filter>

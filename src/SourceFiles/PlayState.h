@@ -11,6 +11,7 @@
 #include "BulletPool.h"
 #include "ConfettiPool.h"
 #include "StaplerPool.h"
+#include "BodyPool.h"
 
 using namespace std;
 
@@ -46,8 +47,8 @@ protected:
 	BulletPool bulletPool_;
 	ConfettiPool confettiPool_;
 	StaplerPool staplerPool_;
+	BodyPool bodyPool_;
 	
-	int maxCorpses_ = CONST(int, "MAX_CORPSES");
 	double playerHeight_ = CONST(double, "PLAYER_H_PHYSICS");
 	double playerWidth_ = CONST(double, "PLAYER_W_PHYSICS");
 	double playerDensity_ = CONST(double, "PLAYER_DENSITY");
