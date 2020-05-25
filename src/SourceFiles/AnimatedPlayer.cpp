@@ -11,7 +11,7 @@ AnimatedPlayer::~AnimatedPlayer()
 
 void AnimatedPlayer::init()
 {
-	Viewer::init(); 
+	Viewer::init();
 
 	animationsInfo_ = vector<AnimationInfo>(CONST(int, "NUM_ANIMS"));
 
