@@ -117,10 +117,10 @@ M -> Musica
 struct SpritePacket {
 	char packetId = 'S'; //Sprite
 	unsigned char textureId;
-	unsigned short posX;
-	unsigned short posY;
-	unsigned short width;
-	unsigned short height;
+	short posX;
+	short posY;
+	short width;
+	short height;
 	short rotationDegrees = 0;
 	unsigned char frameNumberX = 0;
 	unsigned char frameNumberY = 0;
