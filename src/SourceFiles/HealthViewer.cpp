@@ -35,16 +35,16 @@ void HealthViewer::draw() const
 	switch (player)
 	{
 	case 0:
-		full->setColor(255, 0, 0);
+		full->setColor(232, 59, 59);
 		break;
 	case 1:
-		full->setColor(0, 255, 0);
+		full->setColor(77, 155, 230);
 		break;
 	case 2:
-		full->setColor(0, 0, 255);
+		full->setColor(145, 219, 105);
 		break;
 	case 3:
-		full->setColor(100, 100, 100);
+		full->setColor(249, 194, 43);
 		break;
 	default:
 		break;
