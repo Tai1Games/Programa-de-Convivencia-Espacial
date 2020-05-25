@@ -25,6 +25,8 @@ public:
 		RocketRoom,
 		TutorialRoom,
 		GardenRoom,
+		MenuRoom,
+		CreditsRoom,
 
 		// UI
 		ActiveHealth,
@@ -105,6 +107,10 @@ public:
 		TomatoTree,
 		BananaTree,
 		DeadBody,
+		TriggerButtonPlay,
+		TriggerButtonExit,
+		TriggerButtonCredits,
+		TriggerButtonOptions,
 
 		// Gamemode specific elements
 		Coin,
@@ -183,6 +189,24 @@ public:
 		NumSeven,
 		NumEight,
 		NumNine,
+
+		//badges ordenadas como GameModeId
+		badgeCapitalism,
+		badgeController,
+		badgeStocks,
+		badgeWifi,
+		badgeTimed,
+
+		medals,
+
+		//winner msgs
+		winner1,
+		winner2,
+		winner3,
+		winner4,
+
+		//Credits
+		ReturnText,
 	};
 
 	enum AudioId : unsigned char {
@@ -193,9 +217,38 @@ public:
 		BoilerRoomMusic = TextureId::BoilerRoom,
 		TutorialMusic = TextureId::TutorialRoom,
 		GardenMusic = TextureId::GardenRoom,
-		EntranceMusic
+		EntranceMusic,
 
 		// sound effects
+		StartGame,
+		ThreeTwoOneSound,
+		GoSound,
+		PadSound,
+		PickSound,
+		CoinSound,
+		// boiler
+		BoilerShootSound,
+		BoilerButtonSlowSound,
+		BoilerButtonFastSound,
+
+		CarnivorousPlantSound,
+
+		// Weapons
+		BananaShootSound,
+		ExtinguisherSound,
+		TomatoExplosionSound,
+
+		//Player
+		DeathSound,
+		RespawnSound,
+		EliminatedSound,
+		ImpulseFromAirSound,
+		ImpulseAttachedSound,
+
+    //menu
+		MenuMove,
+		MenuForward,
+		MenuBackward
 	};
 
 	enum FontId : std::size_t {

@@ -29,5 +29,12 @@ public:
 		frameX_ = frameX;
 		frameY_ = frameY;
 	};
+
+	unsigned short int getFrameX() const {
+		return frameX_;
+	};
+	unsigned short int getFrameY() const {
+		return frameY_;
+	};
 };
 

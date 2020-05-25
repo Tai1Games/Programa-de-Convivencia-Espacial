@@ -42,6 +42,7 @@ void PlayState::init() {
 
 	confettiPool_.init(entityManager_, physicsWorld_);
 	staplerPool_.init(entityManager_, physicsWorld_, &bulletPool_);
+	bodyPool_.init(entityManager_, physicsWorld_, collDeadBodies, deadBodies);
 	/*bulletPool_.init(entityManager_, physicsWorld_);
 	bananaPool_.init(entityManager_, physicsWorld_, &bulletPool_);*/
 
@@ -116,18 +117,14 @@ void PlayState::handleInput()
 
 void PlayState::createDeadBodies() {
 	auto bodies = collisionHandler_->getBodyData();
-	if (deadBodies.size() < maxCorpses_) {
-		for (int i = 0; i < bodies.size(); i++) {
-			deadBodies.push_back(entityManager_->addEntity());
-			collDeadBodies.push_back(deadBodies.back()->addComponent<Collider>(physicsWorld_, b2_dynamicBody, bodies[i].pos.x, bodies[i].pos.y, playerWidth_, playerHeight_,
-				playerDensity_, playerFriction_, playerRestitution_, playerLinearDrag_, playerAngularDrag_, Collider::CollisionLayer::NormalAttachableObject, false));
-			deadBodies.back()->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "CORPSE_W_SPRITE"),CONST(int, "CORPSE_H_SPRITE") }, collDeadBodies.back());
-			deadBodies.back()->addComponent<Viewer>(Resources::DeadBody);
-			deadBodies.back()->addComponent<ColliderViewer>();
-			collDeadBodies.back()->setTransform(b2Vec2(bodies[i].pos.x, bodies[i].pos.y), bodies[i].angle);
-			collDeadBodies.back()->setLinearVelocity(bodies[i].linearVelocity);
-			collDeadBodies.back()->setAngularVelocity(bodies[i].angularVelocity);
-		}
+	for (int i = 0; i < bodies.size(); i++) {
+		bodyPool_.addBody(bodies[i].pos, bodies[i].angle, bodies[i].linearVelocity, bodies[i].angularVelocity);
 	}
+	/*if (deadBodies.size() < maxCorpses_) {
+		for (int i = 0; i < bodies.size(); i++) {
+			ObjectFactory::makeDeadBody(entityManager_, physicsWorld_, collDeadBodies, deadBodies, 
+				bodies[i].pos, bodies[i].angle, bodies[i].linearVelocity, bodies[i].angularVelocity);
+		}
+	}*/
 	collisionHandler_->clearBodyData();
 }

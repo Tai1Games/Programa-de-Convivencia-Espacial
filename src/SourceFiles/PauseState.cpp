@@ -67,6 +67,7 @@ void PauseState::handleInput()
 		break;
 	case Buttons::Exit:
 		if (ownerBinder_->menuForward()) {
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
 			cout << "Pause ended for " << ownerPlayerID_ << endl;
 			SDL_Game::instance()->getStateMachine()->changeToState(States::menu, ownerPlayerID_);
 		}
@@ -83,11 +84,13 @@ void PauseState::handleInput()
 	if (!holdingY_)
 	{
 		if (ownerBinder_->menuMove(Dir::Down)) {
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuMove, 0);
 			selectedBtn_++;
 			updateSelectedButton();
 			holdingY_ = true;
 		}
 		else if (ownerBinder_->menuMove(Dir::Up)) {
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuMove, 0);
 			selectedBtn_--;
 			updateSelectedButton();
 			holdingY_ = true;

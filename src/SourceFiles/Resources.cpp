@@ -17,6 +17,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ RocketRoom ,resourcesPath + "textures/Background_RocketRoom.png"},
 	{ TutorialRoom,resourcesPath + "textures/Background_TutorialRoom.png"},
 	{ GardenRoom,resourcesPath + "textures/Background_garden.png"},
+	{ MenuRoom, resourcesPath + "textures/Background_Menu.png"},
+	{ CreditsRoom, resourcesPath + "textures/CreditsRoom.png"},
 
 	// UI
 	{ ActiveHealth, resourcesPath + "textures/VidaActiva.png" },
@@ -79,7 +81,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SpaceSuit, resourcesPath + "textures/PinkTinky.png"},	// dead body
 
 	// Map elements
-	{ Boiler,resourcesPath + "textures/CalderaPro.png"},
+	{ Boiler,resourcesPath + "textures/Caldera.png", 16, 1},
 	{ IncreasingFreqButton,resourcesPath + "textures/IncBoilerButtonDown.png", 3, 1},
 	{ DecreasingFreqButton,resourcesPath + "textures/DecBoilerButtonDown.png", 3, 1},
 	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png", 4},
@@ -91,6 +93,10 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ CarnivorousPlant , resourcesPath + "textures/PlantaCarnivora.png", 7, 1},
 	{ TomatoTree, resourcesPath + "textures/TomatoTree.png"},
 	{ BananaTree, resourcesPath + "textures/BananaTree.png"},
+	{ TriggerButtonPlay , resourcesPath + "textures/PuertasMenu_Play.png", 13, 1},
+	{ TriggerButtonExit , resourcesPath + "textures/PuertasMenu_Exit.png", 13, 1},
+	{ TriggerButtonCredits , resourcesPath + "textures/PuertasMenu_Credits.png", 13, 1},
+	{ TriggerButtonOptions , resourcesPath + "textures/PuertasMenu_Options.png", 13, 1},
 
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/Moneda.png" },
@@ -108,6 +114,16 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Smoke, resourcesPath + "textures/SmokeParticles-Sheet.png", 4},
 	{ WiFiWave, resourcesPath + "textures/WiFiWave.png" },
 	{ Foam, resourcesPath + "textures/foam_particles.png",4 },
+
+
+	//badges
+	{ badgeCapitalism,resourcesPath + "textures/MonedaUI.png" },
+	{ badgeController,resourcesPath + "textures/Mando.png" },
+	{ badgeStocks,resourcesPath + "textures/skullUI.png" },
+	{ badgeWifi,resourcesPath + "textures/Router.png" },
+	{ badgeTimed,resourcesPath + "textures/TreadmillPanel.png" },
+
+	{medals,resourcesPath + "textures/medals.png",3}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{
@@ -172,6 +188,15 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{NumSeven,"7",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
 	{NumEight,"8",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
 	{NumNine,"9",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+
+	//winner msgs
+	{winner1,"GANA EL JUGADOR 1",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+	{winner2,"GANA EL JUGADOR 2",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+	{winner3,"GANA EL JUGADOR 3",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+	{winner4,"GANA EL JUGADOR 4",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+
+	//Credits
+	{ ReturnText, "Press any key/button to return", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 };
 
 vector<Resources::MusicInfo> Resources::musics_{
@@ -188,6 +213,42 @@ vector<Resources::MusicInfo> Resources::musics_{
 vector<Resources::SoundInfo> Resources::sounds_{
 	//Efectos de sonido {nombre_en_enum, ruta}. Ejemplo abajo
 	//{ Shoot, "../assets/game/sound/shoot.mp3" },
+
+	// UI
+	{ StartGame, resourcesPath + "sound/effects/UI/enterGame.mp3" },
+	{ ThreeTwoOneSound, resourcesPath + "sound/effects/UI/321.wav" },
+	{ GoSound, resourcesPath + "sound/effects/UI/go.wav" },
+
+	//Menu
+	{MenuMove, resourcesPath + "sound/effects/UI/menuMove.wav"},
+	{MenuForward, resourcesPath + "sound/effects/UI/menuSelection.wav"},
+	{MenuBackward, resourcesPath + "sound/effects/UI/menuBack.wav"},
+
+	// specific to a map sounds
+	{ PadSound, resourcesPath + "sound/effects/padSound.wav" },
+
+	// specific to a mode sounds
+	{ CoinSound, resourcesPath + "sound/effects/coinSound.wav" },
+
+	// boiler
+	{ BoilerShootSound, resourcesPath + "sound/effects/boilerShoot.wav" },
+	{ BoilerButtonSlowSound, resourcesPath + "sound/effects/boilerSlow.wav" },
+	{ BoilerButtonFastSound, resourcesPath + "sound/effects/boilerFast.wav" },
+
+	{ CarnivorousPlantSound, resourcesPath + "sound/effects/carnivorousPlant.wav" },
+
+	// Weapons
+	{ BananaShootSound, resourcesPath + "sound/effects/bananaShoot.wav"},
+	{ ExtinguisherSound, resourcesPath + "sound/effects/extinguisherSound.wav" },
+	{ PickSound, resourcesPath + "sound/effects/pick.wav"},
+	{ TomatoExplosionSound, resourcesPath + "sound/effects/tomatoExplosionSound.wav"},
+
+	//Player
+	{ RespawnSound, resourcesPath + "sound/effects/RespawnSound.wav"},
+	{ DeathSound, resourcesPath + "sound/effects/DeathSound.wav" },
+	{ EliminatedSound, resourcesPath + "sound/effects/EliminatedSound.wav" },
+	{ ImpulseFromAirSound, resourcesPath + "sound/effects/impulsoAire.wav" },
+	{ ImpulseAttachedSound, resourcesPath + "sound/effects/impulsoPared.wav" }
 };
 
 map<std::string, Resources::TextureId> Resources::tilesetTag_{

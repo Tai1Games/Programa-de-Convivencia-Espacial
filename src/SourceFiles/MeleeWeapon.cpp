@@ -16,6 +16,8 @@ void MeleeWeapon::action() {
 		std::cout << "ACCION ARMA MELEE ACTIVADA" << endl;
 		mainCollider_->createRectangularFixture(mainCollider_->getW(0) * 4, mainCollider_->getH(0) * 4, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
 		beenActivated_ = true;
+		currentHand_->setFrame(1, currentHand_->getFrameY());
+		activeAnim_ = true;
 	}
 	else
 		std::cout << "COOLDING DOWN" << endl;
@@ -24,9 +26,15 @@ void MeleeWeapon::action() {
 void MeleeWeapon::update() {
 	ActionableWeapon::update();
 
-	//>2 para no romper el rango del arma para pickup
-	if (mainCollider_->getNumFixtures() > 2 && beenActivated_ && framesSinceActivation_>=3) {
-		mainCollider_->destroyFixture(mainCollider_->getNumFixtures()-1);
+	if (beenActivated_) {
+		//>2 para no romper el rango del arma para pickup
+		if(mainCollider_->getNumFixtures() > 2 && framesSinceActivation_ >= nHitboxActiveFrames_)
+			mainCollider_->destroyFixture(mainCollider_->getNumFixtures()-1);
+		// desactiva animación
+		if (activeAnim_ && framesSinceActivation_ >= nAnimActiveFrames_) {
+			if (currentHand_ != nullptr) currentHand_->setFrame(0, currentHand_->getFrameY());
+			activeAnim_ = false;
+		}
 	}
 
 	if (currentHand_ != nullptr) {
@@ -49,6 +57,8 @@ void MeleeWeapon::PickObjectBy(int index) {
     
 		ThrownByPlayer* throwData = GETCMP1_(ThrownByPlayer);
 		throwData->SetOwner(index);
+
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::PickSound, 0);
 	}
 }
 

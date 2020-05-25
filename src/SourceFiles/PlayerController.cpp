@@ -67,6 +67,7 @@ void PlayerController::handleInput()
 		if (attachedTo != nullptr) {
 			if (isImpulseValid(dirImpulse_))
 			{
+				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::ImpulseAttachedSound, 0);
 				dirImpulse_ *= -1;
 				attachedTo->applyLinearImpulse(dirImpulse_, b2Vec2(0, 0));
 				attachesToObj_->deAttachFromObject();
@@ -82,6 +83,7 @@ void PlayerController::handleInput()
 				if (abs(velAfterImpulse.getX()) > maxSpeedAfterImpulse_) dirImpulse_.x = 0;
 				if (abs(velAfterImpulse.getY()) > maxSpeedAfterImpulse_) dirImpulse_.y = 0;
 			}
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::ImpulseFromAirSound, 0);
 			coll_->applyLinearImpulse(dirImpulse_, b2Vec2(0, 0)); //aplica la fuerza
 		}
 

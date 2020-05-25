@@ -26,6 +26,7 @@
 #include "Weapon.h"
 #include "WeaponPool.h"
 #include "WiFiBullet.h"
+#include "TriggerButton.h"
 #include "WeaponSpawner.h"
 #include "ConfettiPool.h"
 #include "RouterLogic.h"
@@ -123,6 +124,15 @@ Entity* ObjectFactory::makePipe(EntityManager* entityManager, b2World* physicsWo
 
 	return e;
 }
+Entity* ObjectFactory::makeTrasparentWall(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, float rotation) {
+
+	Entity* e = entityManager->addEntity();								 // x, y,width, height, density,friction, restitution, linearDrag, angularDrag,	Layer, sensor
+	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::Wall, false);
+	//e->addComponent<Transform>(SDL_Rect{ 0,0,(int)size.x, (int)size.y }, aux);
+	//e->addComponent<ColliderViewer>();
+
+	return e;
+}
 
 Entity* ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size)
 {
@@ -204,7 +214,7 @@ Entity* ObjectFactory::makeBoiler(EntityManager* entityManager, b2World* physics
 	int nFrames = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Smoke)->getWidth() / SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Smoke)->getHeight();
 	e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Smoke, CONST(int, "FBGEN_PARTICLE_SPEED"), nFrames, CONST(int, "FBGEN_PARTICLE_GEN_ODDS"), CONST(int, "FBGEN_PARTICLE_LIFETIME"), CONST(int, "FBGEN_PARTICLE_SIZE"), 0, CONST(int, "FBGEN_PARTICLE_SPEED_VARIATION"), 180);
 	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "BOILER_W_SPRITE"), CONST(int, "BOILER_H_SPRITE") }, collBoiler);
-	e->addComponent<Viewer>(Resources::Boiler);
+	e->addComponent<AnimatedViewer>(Resources::Boiler, CONST(int, "BOILER_ANIMATION_SPEED"));
 	e->addComponent<FireBallGenerator>(physicsWorld);
 	e->addComponent<ColliderViewer>();
 
@@ -265,7 +275,7 @@ Entity* ObjectFactory::makeCarnivorousPlant(EntityManager* entityManager, b2Worl
 	Collider* collPlant = plant->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y * diff, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
 	plant->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int,"CARNIVOROUSPLANT_W_SPRITE")*(int)size.x, CONST(int,"CARNIVOROUSPLANT_H_SPRITE")*(int)size.y }, collPlant);
 	plant->addComponent<CarnivorousPlantViewer>(Resources::CarnivorousPlant, CONST(int, "CARNIVOROUSPLANT_MIN_SPEED"));
-	plant->addComponent<CarnivorousPlant>(); 
+	plant->addComponent<CarnivorousPlant>();
 	plant->addComponent<ColliderViewer>();
 
 	return plant;
@@ -356,10 +366,40 @@ Entity* ObjectFactory::makeWifiWave(Entity* e, EntityManager* entityManager, b2W
 	return e;
 }
 
+Entity* ObjectFactory::makeTriggerButton(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, string state) {
+	Entity* trButton = entityManager->addEntity();
+	Collider* trigger = trButton->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
+	//trButton->addComponent<Transform>(SDL_Rect{ 0,0,(int)size.x, (int)size.y }, trigger);
+	trButton->addComponent<Transform>(SDL_Rect{ 0,0,	CONST(int, "WALLS_BASE_W_SPRITE") + (int)(size.x * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "WALLS_SCALE_W_SPRITE")),
+												CONST(int, "WALLS_BASE_H_SPRITE") + (int)(size.y * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "WALLS_SCALE_W_SPRITE")) }, trigger);
+
+	Resources::TextureId texId;
+	if (state == "Play") texId = Resources::TriggerButtonPlay;
+	else if (state == "Options") texId = Resources::TriggerButtonOptions;
+	else if (state == "Credits") texId = Resources::TriggerButtonCredits;
+	else if (state == "Exit") texId = Resources::TriggerButtonExit;
+	trButton->addComponent<AnimatedViewer>(texId, CONST(int, "TRIGGER_BUTTON_ANIM_SPEED"));
+
+	trButton->addComponent<TriggerButton>(state);
+	trButton->addComponent<ColliderViewer>();
+
+	return trButton;
+}
+
 Entity* ObjectFactory::makeWeaponSpawner(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 position, ConfettiPool* confettiPool, StaplerPool* staplerPool, BulletPool* bulletPool)
 {
 	Entity* e = entityManager->addEntity();
 	e->addComponent<WeaponSpawner>(position, entityManager, physicsWorld, confettiPool, staplerPool, bulletPool);
 
 	return e;
+}
+
+void ObjectFactory::makeDeadBody(Entity* e,EntityManager* entityManager, b2World* physicsWorld, vector<Collider*>& collDeadBodies, vector<Entity*>& deadBodies, b2Vec2 pos, float angle, b2Vec2 linearVelocity, float angularVelocity) {
+	entityManager->addExistingEntity(e);
+	deadBodies.push_back(e);
+	collDeadBodies.push_back(deadBodies.back()->addComponent<Collider>(physicsWorld, b2_dynamicBody, pos.x, pos.y, CONST(double, "PLAYER_W_PHYSICS"), CONST(double, "PLAYER_H_PHYSICS"),
+		CONST(double, "PLAYER_DENSITY"), CONST(double, "PLAYER_FRICTION"), CONST(double, "PLAYER_RESTITUTION"), CONST(double, "PLAYER_LINEAR_DRAG"), CONST(double, "PLAYER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false));
+	deadBodies.back()->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "CORPSE_W_SPRITE"),CONST(int, "CORPSE_H_SPRITE") }, collDeadBodies.back());
+	deadBodies.back()->addComponent<Viewer>(Resources::DeadBody);
+	deadBodies.back()->addComponent<ColliderViewer>();
 }

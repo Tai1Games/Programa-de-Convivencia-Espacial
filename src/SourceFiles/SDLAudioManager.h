@@ -20,7 +20,7 @@ public:
 
 	// sound effects
 	bool loadSound(int tag, const string &fileName);
-	int playChannel(int tag, int loops, int channel);
+	int playChannel(int tag, int loops, int channel = -1);
 	void pauseChannel(int channel);
 	void resumeChannel(int channel);
 	void haltChannel(int channel);
