@@ -110,13 +110,9 @@ void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
 		playerTexture_->getHeight()
 	};
 
-	int skinAct = 0;
-	Texture* aux = voidTexture_;
-	if (playerInfo != nullptr) {
-		aux = playerTexture_;
-		skinAct = playerInfo->playerSkin;
-	} 
-	aux->render(destRect, 0, 0, skinAct);
+	if (playerInfo != nullptr)
+		playerTexture_->render(destRect, 0, 0, playerInfo->playerSkin);
+	else voidTexture_->render(destRect);
 	
 	if (playerInfo != nullptr) {
 		destRect.y += playerTexture_->getHeight() + playerIdVerticalOffset_;
