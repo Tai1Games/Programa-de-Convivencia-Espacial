@@ -23,6 +23,8 @@ private:
 	int lifeHeight_ = 0;
 	double lifeDrawOffset_ = 0;
 
+	void setColorByID(int playerID) const;
+
 public:
 	//Punteros a las 2 texturas de la vida y la posición de origen
 	HealthViewer(int texActiveId , int texDisabledId);

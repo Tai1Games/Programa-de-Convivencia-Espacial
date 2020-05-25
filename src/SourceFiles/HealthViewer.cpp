@@ -32,23 +32,8 @@ void HealthViewer::update()
 void HealthViewer::draw() const
 {
 	int player = playerData_->getPlayerNumber();
-	switch (player)
-	{
-	case 0:
-		full->setColor(232, 59, 59);
-		break;
-	case 1:
-		full->setColor(77, 155, 230);
-		break;
-	case 2:
-		full->setColor(145, 219, 105);
-		break;
-	case 3:
-		full->setColor(249, 194, 43);
-		break;
-	default:
-		break;
-	}
+	setColorByID(player);
+
 	SDL_Rect dest = {pos_.x,pos_.y, lifeWidth_, lifeHeight_};
 	for (int i = 0; i < he->getHealthMax(); i++) {
 		if (player % 2 == 0){
@@ -75,4 +60,25 @@ void HealthViewer::handleInput() {
 void HealthViewer::setPos(int player){
 	pos_.x = (player % 2 == 0) ? (CONST(int,"LIFE_MARGIN_H")) : (CONST(int,"WINDOW_WIDTH") - CONST(int,"LIFE_MARGIN_H")- CONST(int,"LIFE_WIDTH"));
 	pos_.y = (player < 2) ? (CONST(double,"LIFE_MARGIN_V")) : (CONST(int,"WINDOW_HEIGHT") - CONST(double,"LIFE_MARGIN_V") - CONST(int,"LIFE_HEIGTH"));
+}
+
+void HealthViewer::setColorByID(int playerID) const
+{
+	switch (playerID)
+	{
+	case 0:
+		full->setColor(232, 59, 59);
+		break;
+	case 1:
+		full->setColor(77, 155, 230);
+		break;
+	case 2:
+		full->setColor(145, 219, 105);
+		break;
+	case 3:
+		full->setColor(249, 194, 43);
+		break;
+	default:
+		break;
+	}
 }
