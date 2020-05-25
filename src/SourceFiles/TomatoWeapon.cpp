@@ -15,7 +15,7 @@
 
 void TomatoWeapon::init() {
 	ActionableWeapon::init();
-	colTomato_ = GETCMP1_(Collider); 
+	colTomato_ = GETCMP1_(Collider);
 	tomatoViewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
 	tomatoViewer_->stopAnimation();
 	particleEmitterTomato_ = GETCMP1_(ParticleEmitter);
@@ -46,6 +46,7 @@ void TomatoWeapon::update() {
 			tomatoViewer_->startAnimation(0, nFramesCharge_ - 1, tomatoViewer_->getTexture()->getNumFramesX());
 			tomatoViewer_->setAnimSpeed(timePerFrameExplosion_);
 			colTomato_->setLinearVelocity({ 0,0 });
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::TomatoExplosionSound, 0);
 			currentFrame_ = 0;
 		}
 	}
@@ -121,6 +122,8 @@ void TomatoWeapon::PickObjectBy(Hands* playerHands)
 		pickUpCollider.categoryBits = 0;
 		pickUpCollider.maskBits = 0;
 		mainCollider_->getFixture(0)->SetFilterData(pickUpCollider);
+
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::PickSound, 0);
 	}
 }
 

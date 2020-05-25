@@ -28,10 +28,12 @@ void MenuState::handleInput()
 	if (!holdingY_)
 	{
 		if (ownerPlayerBinder_->menuMove(Dir::Down)) {
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuMove, 0);
 			updatePointer(1);
 			holdingY_ = true;
 		}
 		else if (ownerPlayerBinder_->menuMove(Dir::Up)) {
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuMove, 0);
 			updatePointer(-1);
 			holdingY_ = true;
 		}
@@ -41,6 +43,7 @@ void MenuState::handleInput()
 	}
 
 	if (ownerPlayerBinder_->menuForward()) {
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
 		if (menuPointer_ == 0) { //Seleccionando gamemode
 			if (pointers_[0] < GamemodeID::Tutorial) {
 				menuPointer_++;
@@ -70,6 +73,7 @@ void MenuState::handleInput()
 	//ir para atr�s
 	else if (ownerPlayerBinder_->menuBack() && (menuPointer_ > 0))
 	{
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuBackward, 0);
 		menuPointer_--;
 		updateText();
 	}

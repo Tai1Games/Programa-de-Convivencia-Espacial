@@ -68,6 +68,8 @@ void Weapon::PickObjectBy(int index)
 
 		ThrownByPlayer* throwData = GETCMP1_(ThrownByPlayer);
 		throwData->SetOwner(index);
+
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::PickSound, 0);
 	}
 }
 

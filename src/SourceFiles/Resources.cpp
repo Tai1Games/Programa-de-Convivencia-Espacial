@@ -213,6 +213,42 @@ vector<Resources::MusicInfo> Resources::musics_{
 vector<Resources::SoundInfo> Resources::sounds_{
 	//Efectos de sonido {nombre_en_enum, ruta}. Ejemplo abajo
 	//{ Shoot, "../assets/game/sound/shoot.mp3" },
+
+	// UI
+	{ StartGame, resourcesPath + "sound/effects/UI/enterGame.mp3" },
+	{ ThreeTwoOneSound, resourcesPath + "sound/effects/UI/321.wav" },
+	{ GoSound, resourcesPath + "sound/effects/UI/go.wav" },
+
+	//Menu
+	{MenuMove, resourcesPath + "sound/effects/UI/menuMove.wav"},
+	{MenuForward, resourcesPath + "sound/effects/UI/menuSelection.wav"},
+	{MenuBackward, resourcesPath + "sound/effects/UI/menuBack.wav"},
+
+	// specific to a map sounds
+	{ PadSound, resourcesPath + "sound/effects/padSound.wav" },
+
+	// specific to a mode sounds
+	{ CoinSound, resourcesPath + "sound/effects/coinSound.wav" },
+
+	// boiler
+	{ BoilerShootSound, resourcesPath + "sound/effects/boilerShoot.wav" },
+	{ BoilerButtonSlowSound, resourcesPath + "sound/effects/boilerSlow.wav" },
+	{ BoilerButtonFastSound, resourcesPath + "sound/effects/boilerFast.wav" },
+
+	{ CarnivorousPlantSound, resourcesPath + "sound/effects/carnivorousPlant.wav" },
+
+	// Weapons
+	{ BananaShootSound, resourcesPath + "sound/effects/bananaShoot.wav"},
+	{ ExtinguisherSound, resourcesPath + "sound/effects/extinguisherSound.wav" },
+	{ PickSound, resourcesPath + "sound/effects/pick.wav"},
+	{ TomatoExplosionSound, resourcesPath + "sound/effects/tomatoExplosionSound.wav"},
+
+	//Player
+	{ RespawnSound, resourcesPath + "sound/effects/RespawnSound.wav"},
+	{ DeathSound, resourcesPath + "sound/effects/DeathSound.wav" },
+	{ EliminatedSound, resourcesPath + "sound/effects/EliminatedSound.wav" },
+	{ ImpulseFromAirSound, resourcesPath + "sound/effects/impulsoAire.wav" },
+	{ ImpulseAttachedSound, resourcesPath + "sound/effects/impulsoPared.wav" }
 };
 
 map<std::string, Resources::TextureId> Resources::tilesetTag_{

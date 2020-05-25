@@ -220,9 +220,38 @@ public:
 		BoilerRoomMusic = TextureId::BoilerRoom,
 		TutorialMusic = TextureId::TutorialRoom,
 		GardenMusic = TextureId::GardenRoom,
-		EntranceMusic
+		EntranceMusic,
 
 		// sound effects
+		StartGame,
+		ThreeTwoOneSound,
+		GoSound,
+		PadSound,
+		PickSound,
+		CoinSound,
+		// boiler
+		BoilerShootSound,
+		BoilerButtonSlowSound,
+		BoilerButtonFastSound,
+
+		CarnivorousPlantSound,
+
+		// Weapons
+		BananaShootSound,
+		ExtinguisherSound,
+		TomatoExplosionSound,
+
+		//Player
+		DeathSound,
+		RespawnSound,
+		EliminatedSound,
+		ImpulseFromAirSound,
+		ImpulseAttachedSound,
+
+    //menu
+		MenuMove,
+		MenuForward,
+		MenuBackward
 	};
 
 	enum FontId : std::size_t {

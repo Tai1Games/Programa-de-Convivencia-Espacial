@@ -130,7 +130,7 @@ Entity* ObjectFactory::makeTrasparentWall(EntityManager* entityManager, b2World*
 	Collider* aux = e->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y, 10, 1, 0.2, 0, 0, Collider::CollisionLayer::Wall, false);
 	//e->addComponent<Transform>(SDL_Rect{ 0,0,(int)size.x, (int)size.y }, aux);
 	//e->addComponent<ColliderViewer>();
-	
+
 	return e;
 }
 
@@ -275,7 +275,7 @@ Entity* ObjectFactory::makeCarnivorousPlant(EntityManager* entityManager, b2Worl
 	Collider* collPlant = plant->addComponent<Collider>(physicsWorld, b2_staticBody, pos.x, pos.y, size.x, size.y * diff, 0, 0, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
 	plant->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int,"CARNIVOROUSPLANT_W_SPRITE")*(int)size.x, CONST(int,"CARNIVOROUSPLANT_H_SPRITE")*(int)size.y }, collPlant);
 	plant->addComponent<CarnivorousPlantViewer>(Resources::CarnivorousPlant, CONST(int, "CARNIVOROUSPLANT_MIN_SPEED"));
-	plant->addComponent<CarnivorousPlant>(); 
+	plant->addComponent<CarnivorousPlant>();
 	plant->addComponent<ColliderViewer>();
 
 	return plant;

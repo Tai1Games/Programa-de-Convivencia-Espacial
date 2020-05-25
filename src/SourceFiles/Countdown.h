@@ -9,11 +9,14 @@ class Countdown : public Component
 private:
 	int currentFrame_ = 0;
 	int maxFrames_ = CONST(int, "MAX_COUNTDOWN_FRAMES");
+	int framesPerNum_ = maxFrames_ / 4;
+
+	int numAct_ = 0;
 
 	int minSize_ = CONST(int, "MIN_COUNTDOWN_SIZE");
 	int maxSize_ = CONST(int, "MAX_COUNTDOWN_SIZE");
 	int currentSize_ = 0;
-	int sizeChangeRate_ = (maxSize_ - minSize_) / (maxFrames_ / 4); //ratio de crecimiento teniendo en cuenta que hay 4 texturas
+	int sizeChangeRate_ = (maxSize_ - minSize_) / framesPerNum_; //ratio de crecimiento teniendo en cuenta que hay 4 texturas
 
 	int posX_ = CONST(int, "WINDOW_WIDTH") / 2;
 	int posY_ = CONST(int, "WINDOW_HEIGHT") / 2;
@@ -23,6 +26,9 @@ private:
 	SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Two),
 	SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::One),
 	SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Go) };
+
+	Texture* currentNumTexture_ = textures_[0];
+
 	GameMode* gMode_;
 	FireBallGenerator* fGen_;
 
