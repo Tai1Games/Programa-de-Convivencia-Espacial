@@ -40,6 +40,7 @@ public:
 		limitFrame_ = limitFrame;
 		activeAnimation_ = true;
 		loops_ = loops;
+		currentLoop_ = 0;
 	}
 
 	// Pauses the current animation in the current frame

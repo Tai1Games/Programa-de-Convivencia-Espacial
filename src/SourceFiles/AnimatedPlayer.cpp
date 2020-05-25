@@ -29,8 +29,3 @@ void AnimatedPlayer::init()
 	frameX_ = animationsInfo_[anim_].animOrigin_;
 	frameY_ = skin_;
 }
-
-void AnimatedPlayer::resetAnimation()
-{
-	startAnimation(-1, 0, -1, 0);
-}
