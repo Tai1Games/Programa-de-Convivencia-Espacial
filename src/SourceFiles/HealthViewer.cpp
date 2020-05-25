@@ -23,6 +23,7 @@ void HealthViewer::init()
 	lifeWidth_ = CONST(int, "LIFE_WIDTH");
 	lifeHeight_ = CONST(int, "LIFE_HEIGTH");
 	lifeDrawOffset_ = CONST(double, "LIFE_DRAW_OFFSET");
+
 }
 void HealthViewer::update()
 {
@@ -31,6 +32,23 @@ void HealthViewer::update()
 void HealthViewer::draw() const
 {
 	int player = playerData_->getPlayerNumber();
+	switch (player)
+	{
+	case 0:
+		full->setColor(255, 0, 0);
+		break;
+	case 1:
+		full->setColor(0, 255, 0);
+		break;
+	case 2:
+		full->setColor(0, 0, 255);
+		break;
+	case 3:
+		full->setColor(100, 100, 100);
+		break;
+	default:
+		break;
+	}
 	SDL_Rect dest = {pos_.x,pos_.y, lifeWidth_, lifeHeight_};
 	for (int i = 0; i < he->getHealthMax(); i++) {
 		if (player % 2 == 0){

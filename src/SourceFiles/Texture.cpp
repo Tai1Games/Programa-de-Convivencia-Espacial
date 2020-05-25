@@ -24,6 +24,13 @@ Texture::~Texture() {
 	close();
 }
 
+void Texture::setColor(Uint8 red, Uint8 green, Uint8 blue)
+{
+	//Modulate texture
+	if(texture_!=nullptr)
+	SDL_SetTextureColorMod(texture_, red, green, blue);
+}
+
 void Texture::close() {
 	if (texture_ != nullptr) {
 		SDL_DestroyTexture(texture_); // delete current texture
