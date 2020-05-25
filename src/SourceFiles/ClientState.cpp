@@ -37,11 +37,13 @@ void ClientState::update()
 {
 	doneReceiving_ = false;
 	while (!doneReceiving_) {
-		if (SDLNet_CheckSockets(socketSet_, 0) > 0) {
+		//Como mucho espera un frame a recibir informacion, si no prosigue con el juego
+		if (SDLNet_CheckSockets(socketSet_, 17) > 0) {
 			if (SDLNet_SocketReady(hostConnection_)) {
 				if (SDLNet_TCP_Recv(hostConnection_, buffer, 1) <= 0) {
 					std::cout << "error al recibir datos" << std::endl;
-					throw;
+					SDLNet_TCP_Close(hostConnection_);
+					SDLNet_TCP_DelSocket(hostConnection_);
 				}
 				switch (buffer[0]) {
 				case 'A':
@@ -66,6 +68,8 @@ void ClientState::update()
 				}
 			}
 		}
+		else
+			doneReceiving_ = true;
 	}
 }
 
@@ -99,6 +103,7 @@ void ClientState::receiveSprite() {
 
 void ClientState::handleInput()
 {
+	SDL_Game::instance()->getInputHandler()->update();
 	int schar = sizeof(char);
 	int sbool = sizeof(bool);
 	int sfloat = sizeof(float);
