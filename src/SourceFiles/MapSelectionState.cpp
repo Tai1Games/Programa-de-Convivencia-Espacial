@@ -90,6 +90,11 @@ void MapSelectionState::handleInput()
 			removeRound(maps_[pointers_[x] + pointers_[y] * 2]);
 		}
 	}
+
+	if (ownerPlayerBinder_->pressPause() && menuPointer_ == 0 && roundsVector_->size() != 0) {
+		SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVector_);
+		SDL_Game::instance()->getStateMachine()->transitionToState(States::play, roundsVector_->front().first, roundsVector_->front().second);
+	}
 }
 
 void MapSelectionState::addRound(GamemodeID gMode, string map) {
