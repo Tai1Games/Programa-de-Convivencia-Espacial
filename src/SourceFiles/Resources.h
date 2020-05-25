@@ -66,6 +66,7 @@ public:
 
 		// Players
 		PlayerAnimSheet,
+		PlayerAnimSheetLobby,
 
 
 		// Map elements

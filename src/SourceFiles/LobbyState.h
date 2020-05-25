@@ -9,6 +9,9 @@ class InputHandler;
 
 // todav�a falta darle un owner a este State, para que s�lo lo maneje el server
 const int MAX_SKINS_PLACEHOLDER = 10;
+const int MAX_PLAYERS = 4;
+const int MAX_KBPLAYERS = 2;
+
 enum BinderType { ControllerB = 0, KeyboardB, MouseB, UNKNOWN };
 struct PlayerLobbyInfo {
 	int id;
@@ -29,8 +32,8 @@ class LobbyState : public GameState
 {
 private:
 protected:
-	int maxPlayers_ = 4;
-	const int maxKbPlayers_ = 2;
+	std::vector<bool>holdingButtons_;
+	std::vector<bool>isSkinPicked_;
 
 	int verticalIniPoint_ = 0;
 	int horizontalOffset_ = 0;
@@ -68,6 +71,7 @@ protected:
 	void handleJoinLeave();
 	void handleJoinedPlayers();
 	void outDebug();
+	void setSkin(PlayerLobbyInfo& player);
 public:
 	LobbyState() {};
 	~LobbyState();
