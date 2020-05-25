@@ -190,6 +190,9 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{NumEight,"8",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
 	{NumNine,"9",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
 
+	//timers
+	{Colon,":",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+
 	//winner msgs
 	{winner1,"GANA EL JUGADOR 1",{COLOR(0xf79617ff)},FontId::NES_Chimera},
 	{winner2,"GANA EL JUGADOR 2",{COLOR(0xf79617ff)},FontId::NES_Chimera},

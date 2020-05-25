@@ -5,12 +5,11 @@
 void CapitalismGameMode::init(PlayState* game)
 {
 	AbstractTimedGameMode::init(game);
-
 	coinPool_.init(game->getEntityManager(), game->getPhysicsWorld());
 	//Load of constants
 	timeToEnd_ = CONST(double, "CAPITALISM_TIME_TO_END");
 	suddenDeathTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SuddenDeathCapitalismModeText);
-	
+
 	spawnTime_ = CONST(double, "TIME_TO_SPAWN_COIN");
 	minimumSpawnTime_ = CONST(double, "MINIMUM_SPAWN_COIN_TIME");
 	maxCoins_ = CONST(int, "TOTAL_COIN_NUMBER");
@@ -19,7 +18,7 @@ void CapitalismGameMode::init(PlayState* game)
 	coinUIMarginY_ = CONST(int, "COIN_UI_MARGIN_Y");
 	coinUISpriteScale_ = CONST(double, "COIN_UI_SPRITE_SCALE");
 	fontCharacterWidth_ = CONST(double, "NES_WIDTH_PER_CHARACTER");
-	
+
 	currentSpawnTime_ = spawnTime_;
 	coinSpawnersPositions_ = tilemap_->getCoinsSpawnPoints();
 
@@ -29,7 +28,7 @@ void CapitalismGameMode::init(PlayState* game)
 	}
 
 	createPlayers(game);
-	
+
 
 	//UI Elements.
 	coinTextureUI_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::CoinUI);
@@ -52,8 +51,8 @@ void CapitalismGameMode::createPlayers(PlayState* game) {
 }
 
 void CapitalismGameMode::update() {
-	
-	for (int i = 0; i < playerCoins_.size();i++) { playerCoins_[i] = playerWallets_[i]->getCoins(); }
+
+	for (int i = 0; i < playerCoins_.size(); i++) { playerCoins_[i] = playerWallets_[i]->getCoins(); }
 	updateTime(playerCoins_);
 
 	if (coinsSpawned_ < maxCoins_) {
@@ -74,29 +73,36 @@ void CapitalismGameMode::renderCoinsMarker()
 {
 	for (int k = 0; k < playerWallets_.size(); k++) {
 
-		string coinNumb = to_string(playerCoins_[k]);
-		Texture coinNumbTexture(SDL_Game::instance()->getRenderer(), coinNumb,
-			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
-		
+		int coinNumb = playerCoins_[k];
+		vector<Texture*> coinNumbTextures;
+		int l = (coinNumb > 0) ? log10(coinNumb) : log(1); //no hagais el log de 0 xd
+
+		for (int i = 0; i <= l; i++) { //sacamos los dígitos y los metemos en un vector
+			coinNumbTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::NumZero + coinNumb / pow(10, l - i)));
+			coinNumb %= 10;
+		}
+
 		SDL_Rect coinImageRect;
 		coinImageRect.x = (k % 2 == 0) ? coinUIMarginX_ : winWidth_ - coinUIMarginX_ - coinUIRadius_;
 		coinImageRect.y = (k < 2) ? coinUIMarginY_ : winHeigth_ - coinUIMarginY_ - coinUIRadius_;
 		coinImageRect.w = coinUIRadius_;
 		coinImageRect.h = coinUIRadius_;
 
-		SDL_Rect coinTextRect;
-		coinTextRect.x = (k % 2 == 0) ? (coinImageRect.x + coinImageRect.w/3) + coinUIRadius_:
-			(coinImageRect.x + coinImageRect.w/3) - coinUIRadius_ - ((fontCharacterWidth_+17) * (coinNumb.size()-1));
-		coinTextRect.y = coinImageRect.y + coinUIRadius_ * 0.3;
-		coinTextRect.w = coinNumbTexture.getWidth() * coinUISpriteScale_;
-		coinTextRect.h = coinNumbTexture.getHeight() * coinUISpriteScale_;
-
-		coinNumbTexture.render(coinTextRect);
 		coinTextureUI_->render(coinImageRect);
 
+		for (int i = 0; i < coinNumbTextures.size(); i++) {
+			SDL_Rect coinTextRect;
+			coinTextRect.w = coinNumbTextures[i]->getWidth() * coinUISpriteScale_;
+			coinTextRect.h = coinNumbTextures[i]->getHeight() * coinUISpriteScale_;
+			coinTextRect.x = (k % 2 == 0) ? (coinImageRect.x + coinImageRect.w / 3 + i * coinTextRect.w) + coinUIRadius_ :
+				(coinImageRect.x + coinImageRect.w / 3 + i * coinTextRect.w) - coinUIRadius_ * coinNumbTextures.size()/1.5;
+			coinTextRect.y = coinImageRect.y + coinUIRadius_ * 0.3;
+
+			coinNumbTextures[i]->render(coinTextRect);
+		}
 	}
 }
 
-void CapitalismGameMode::createCoin(b2Vec2 spawnPos, int player,int val) {
+void CapitalismGameMode::createCoin(b2Vec2 spawnPos, int player, int val) {
 	coinPool_.addCoin(spawnPos, player, val);
 }

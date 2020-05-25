@@ -191,6 +191,9 @@ public:
 		NumEight,
 		NumNine,
 
+		//timers
+		Colon,
+
 		//badges ordenadas como GameModeId
 		badgeCapitalism,
 		badgeController,
