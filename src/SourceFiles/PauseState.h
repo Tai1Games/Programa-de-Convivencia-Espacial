@@ -38,6 +38,8 @@ private:
 
 	int offsetBetweenButtons_;
 
+	Texture* fondo_ = nullptr;
+
 	/*Actualiza la posici�n de la selecci�n y el bot�n seleccionado*/
 	void updateSelectedButton();
 	/*Actualiza la posici�n del slider y el volumen del sonido*/
@@ -51,6 +53,7 @@ public:
 	~PauseState() {};
 
 	virtual void init();
+	virtual void render() override;
 	virtual void handleInput();
 
 	void setOwner(int ownerID);
