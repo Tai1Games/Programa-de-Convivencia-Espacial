@@ -21,9 +21,6 @@ LobbyState::~LobbyState()
 
 void LobbyState::init()
 {
-	for (int num = 0; num < MAX_SKINS_PLACEHOLDER; num++) isSkinPicked_.push_back(false);
-	for (int num = 0; num < MAX_PLAYERS; num++) holdingButtons_.push_back(false);
-
 	ih_ = SDL_Game::instance()->getInputHandler();
 	for (int i = 0; i < MAX_PLAYERS; i++) {
 		joinedGamepads_[i] = false;
@@ -32,6 +29,7 @@ void LobbyState::init()
 	joinedMouse_ = false;
 
 	playerTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::PlayerAnimSheetLobby);
+	maxSkins_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::PlayerAnimSheet)->getNumFramesY();
 	voidTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::PlayerPlaceholder);
 	ctrlTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::ControllerIcon);
 	kbTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::KeyboardIcon);
@@ -39,6 +37,8 @@ void LobbyState::init()
 	pressReadyTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::PressReady);
 	readyTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::Ready);
 
+	for (int num = 0; num < maxSkins_; num++) isSkinPicked_.push_back(false);
+	for (int num = 0; num < MAX_PLAYERS; num++) holdingButtons_.push_back(false);
 
 	verticalIniPoint_ = CONST(int, "WINDOW_HEIGHT") / 2 - playerTexture_->getFrameHeight();
 	horizontalIniPoint_ = CONST(int, "WINDOW_WIDTH") / 2 - (MAX_PLAYERS * (playerTexture_->getFrameWidth() + CONST(int, "LOBBY_OFFSET_X")) / 2);
@@ -113,7 +113,7 @@ void LobbyState::outDebug()
 void LobbyState::setSkin(PlayerLobbyInfo& player) {
 	player.playerSkin = 0;
 	while (isSkinPicked_[player.playerSkin]) {
-		player.playerSkin = (++player.playerSkin) % (MAX_SKINS_PLACEHOLDER);
+		player.playerSkin = (++player.playerSkin) % (maxSkins_);
 	}
 	isSkinPicked_[player.playerSkin] = true;
 }
@@ -325,7 +325,7 @@ void LobbyState::handleJoinedPlayers() {
 			if (player.inputBinder->menuMove(Dir::Left)) {
 				isSkinPicked_[player.playerSkin] = false;
 				do {
-					if ((--player.playerSkin) < 0) player.playerSkin = MAX_SKINS_PLACEHOLDER - 1;
+					if ((--player.playerSkin) < 0) player.playerSkin = maxSkins_ - 1;
 				} while (isSkinPicked_[player.playerSkin]);
 				isSkinPicked_[player.playerSkin] = true;
 				holdingButtons_[player.id] = true;
@@ -333,7 +333,7 @@ void LobbyState::handleJoinedPlayers() {
 			else if (player.inputBinder->menuMove(Dir::Right)) {
 				isSkinPicked_[player.playerSkin] = false;
 				do {
-					player.playerSkin = (++player.playerSkin) % (MAX_SKINS_PLACEHOLDER);
+					player.playerSkin = (++player.playerSkin) % (maxSkins_);
 				} while (isSkinPicked_[player.playerSkin]);
 				isSkinPicked_[player.playerSkin] = true;
 				holdingButtons_[player.id] = true;
