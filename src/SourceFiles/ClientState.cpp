@@ -43,7 +43,7 @@ void ClientState::update()
 				if (SDLNet_TCP_Recv(hostConnection_, buffer, 1) <= 0) {
 					std::cout << "error al recibir datos" << std::endl;
 					SDLNet_TCP_Close(hostConnection_);
-					SDLNet_TCP_DelSocket(hostConnection_);
+					SDLNet_TCP_DelSocket(socketSet_, hostConnection_);
 				}
 				switch (buffer[0]) {
 				case 'A':
