@@ -19,7 +19,7 @@ private:
 
 	//tutorial
 	vector<Entity*> weapons_;
-	Entity* piranhaPlant_;
+	vector<Entity*> carnivorousPlants_;
 	int tutorialPointer_ = 0;
 	vector<bool> tutorials_ [Resources::TutorialEnd - Resources::MoveTutorial]; //move, hold, grab, action, throw, death
 	vector<Entity*> numberTexts_;

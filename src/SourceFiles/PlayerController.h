@@ -6,6 +6,7 @@
 #include "PlayerData.h"
 #include "checkML.h"
 #include "InputBinder.h"
+#include "ParticleEmitter.h"
 
 class AnimatedPlayer;
 
@@ -21,6 +22,9 @@ private:
 	float maxSpeedAfterImpulse_;
 	float impulseRadError_; //el angulo de impulso permitio es PI + 2*impulseRadError
 
+	/*int playerWidth_;
+	int playerHeight_;*/
+
 	int playerNumber_;
 	b2Vec2 dirImpulse_;
 
@@ -29,6 +33,7 @@ private:
 	PlayerData* playerData_ = nullptr;
 	InputBinder* ib = nullptr;
 	AnimatedPlayer* viewer_ = nullptr;
+	ParticleEmitter* emitter_ = nullptr;
 
 	KeyboardBinder* kBinder_ = nullptr;
 
