@@ -58,7 +58,7 @@ void ParticleEmitter::update() {
 
 void ParticleEmitter::draw() const {
 	for (Particle part : particles_) {
-		texture_->render({ (int)part.position.getX() - size_ / 2,(int)part.position.getY() - size_ / 2,size_,size_ }, 0, { part.numTexture * textureSize_, 0, textureSize_, textureSize_ });
+		texture_->render({ (int)part.position.getX() - size_ / 2,(int)part.position.getY() - size_ / 2,size_,size_ }, 0, part.numTexture); //part numTexture es el frame
 	}
 }
 

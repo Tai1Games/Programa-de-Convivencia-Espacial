@@ -33,7 +33,7 @@ public:
 	// times (-1 = loop until stopped) from the frame
 	// 'frame' until the frame 'limitFrame'.
 	// Ignore the 'animation' field, it is used for inheritance.
-	virtual void startAnimation(int loops = -1, int initialFrame = 0, int limitFrame = -1, int animation = 0) {	// animation aquí sólo sirve para el override
+	virtual void startAnimation(int loops = -1, int initialFrame = 0, int limitFrame = -1, int animation = 0) {	// animation aquï¿½ sï¿½lo sirve para el override
 		stopAnimation();
 		timeElapsed_ = 0;
 		frame_ = initialFrame;
