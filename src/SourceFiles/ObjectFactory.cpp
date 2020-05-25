@@ -325,9 +325,6 @@ Entity* ObjectFactory::makeBananaTree(EntityManager* entityManager, b2World* phy
 		CONST(double, "SPAWN_TREE_RESTITUTION"), CONST(double, "SPAWN_TREE_LINEAR_DRAG"), CONST(double, "SPAWN_TREE_ANGULAR_DRAG"),
 		Collider::CollisionLayer::UnInteractableObject, false);
 	e->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "SPAWN_TREE_W_SPRITE") , CONST(int, "SPAWN_TREE_H_SPRITE") }, col);
-	SDL_Rect clip;
-	clip.h = bananaTex->getHeight(); clip.w = bananaTex->getWidth() / 17;
-	clip.x = 0; clip.y = 0;
 	e->addComponent<Viewer>(Resources::BananaTree);
 	e->addComponent<SpawnTree>(bananaTex, CONST(double, "BANANA_W_PHYSICS"),
 		CONST(double, "BANANA_H_PHYSICS"), pool, entityManager, physicsWorld);

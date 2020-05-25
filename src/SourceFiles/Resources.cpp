@@ -136,6 +136,11 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{ EffectsText, "Effects", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ MainMenuText, "Main Menu", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 
+	//OnlineMenu
+	{ Local, "Local", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Host, "Host", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Join, "Join", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+
 	//Menu Provisional
 	//gamemodes
 	{ Capitalism, "Capitalism", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
@@ -151,11 +156,6 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{ BoilerRoomText, "Boiler Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ GymRoomText, "Gym Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ GardenRoomText, "Garden Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	//players
-	{ OnePlayer, "1 Player", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ TwoPlayers, "2 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ ThreePlayers, "3 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ FourPlayers, "4 Players", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 
 	//Tutorial
 	{ Completed, "Completed: ", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
