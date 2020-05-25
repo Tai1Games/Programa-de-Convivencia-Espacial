@@ -1,0 +1,277 @@
+﻿#include "MapSelectionState.h"
+#include "InputHandler.h"
+#include "SDL_Game.h"
+#include "GameStateMachine.h"
+#include "Texture.h"
+#include "UIViewer.h"
+#include "Constants.h"
+#include "checkML.h"
+#include "InputBinder.h"
+#include "MatchInfo.h"
+
+void MapSelectionState::init() {
+	entityManager_ = new EntityManager();
+	ownerPlayerBinder_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo()->at(ownerPlayerID_)->inputBinder;
+
+	createImages();
+	createTexts();
+	createIcons();
+	cout << "init map select";
+
+	Entity* miniTinky = entityManager_->addEntity();
+	mapSelCursor_ = miniTinky->addComponent<UIViewer>(Resources::CursorUiSelectMap, coordsImages_[0] + b2Vec2{ -10,-10 }, 0.35, 0);
+
+	//MUSICA
+	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::AudioId::MainMenuMusic, -1);
+}
+
+void MapSelectionState::handleInput()
+{
+	GameState::handleInput();
+	//mover arriba y abajo
+	if (!holdingY_)
+	{
+		if (ownerPlayerBinder_->menuMove(Dir::Down)) {
+			updatePointer(-1, y);
+			holdingY_ = true;
+		}
+		else if (ownerPlayerBinder_->menuMove(Dir::Up)) {
+			updatePointer(1, y);
+			holdingY_ = true;
+		}
+	}
+	else if (!ownerPlayerBinder_->menuMove(Dir::Up) && !ownerPlayerBinder_->menuMove(Dir::Down)) {
+		holdingY_ = false;
+	}
+
+	if (!holdingX_)
+	{
+		if (ownerPlayerBinder_->menuMove(Dir::Right)) {
+			updatePointer(1, x);
+			holdingX_ = true;
+		}
+		else if (ownerPlayerBinder_->menuMove(Dir::Left)) {
+			updatePointer(-1, x);
+			holdingX_ = true;
+		}
+	}
+	else if (!ownerPlayerBinder_->menuMove(Dir::Right) && !ownerPlayerBinder_->menuMove(Dir::Left)) {
+		holdingX_ = false;
+	}
+
+
+	if (ownerPlayerBinder_->menuForward()) {
+		if (menuPointer_ == 0) { //Seleccionando mapa
+			menuPointer_++;
+			updateMenu();
+		}
+		else { //Elegimos el modo de juego
+			addRound((GamemodeID)(pointers_[gamemodeScreen]), maps_[pointers_[x] + pointers_[y] * 2]);
+			if (roundsVector_->size() == numberOfRounds_) {
+				SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVector_);
+				SDL_Game::instance()->getStateMachine()->transitionToState(States::play, roundsVector_->front().first, roundsVector_->front().second);
+			}
+			else { //como onLoaded pero sin resetear la m�sica 
+				menuPointer_ = 0;
+				pointers_[0] = 0;
+				pointers_[1] = 0;
+				updateMenu();
+			}
+		}
+	}
+	//ir para atr�s
+	else if (ownerPlayerBinder_->menuBack())
+	{
+		if (menuPointer_ == 1) {
+			menuPointer_--;
+			updateMenu();
+		}
+		else if (menuPointer_ == 0) {
+			removeRound(maps_[pointers_[x] + pointers_[y] * 2]);
+		}
+	}
+}
+
+void MapSelectionState::addRound(GamemodeID gMode, string map) {
+	roundsVector_->push_back(std::make_pair(gMode, map));
+
+	int indexMap;
+
+	if (map == maps_[0]) {
+		indexMap = 0;
+	}
+	else if (map == maps_[1]) {
+		indexMap = 1;
+	}
+	else if (map == maps_[2]) {
+		indexMap = 2;
+	}
+	else if (map == maps_[3]) {
+		indexMap = 3;
+	}
+
+	b2Vec2 pos = coordsImages_[indexMap] + b2Vec2{ iconsMaps_[indexMap].size() * 60.0f + 20, 20 };
+
+	iconsMaps_[indexMap].push_back(std::pair(entityManager_->addEntity(), (GamemodeID)gMode));
+
+	imagesMaps_.back()->addComponent<UIViewer>(texturesIcons_[gMode], pos, 2, 0);
+
+}
+
+void MapSelectionState::removeRound(string map)
+{
+	/*int indexMap = 0;
+
+	if (map == maps_[0]) {
+		indexMap = 0;
+	}
+	else if (map == maps_[1]) {
+		indexMap = 1;
+	}
+	else if (map == maps_[2]) {
+		indexMap = 2;
+	}
+	else if (map == maps_[3]) {
+		indexMap = 3;
+	}
+
+	if (!iconsMaps_[indexMap].empty()) {
+		GamemodeID gamemode = iconsMaps_[indexMap].back().second;
+
+		bool found = false;
+
+		auto a = --roundsVector_->end();
+
+		int i = iconsMaps_->size();
+
+		while (!found && a >= roundsVector_->begin()) {
+			auto b = *a;
+
+			if (*a == std::pair{ gamemode, map }) {
+				roundsVector_->erase(a);
+				iconsMaps_[indexMap][i-1].first->setActive(false);
+				iconsMaps_[indexMap].erase(iconsMaps_->begin() + i-1);
+				found = true;
+			}
+			else a--; i--;
+		}
+	}*/
+}
+
+void MapSelectionState::onLoaded() { //poner el men� al principio
+	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::AudioId::MainMenuMusic, -1);
+	menuPointer_ = 0;
+	pointers_[x] = 0;
+	pointers_[y] = 0;
+	pointers_[gamemodeScreen] = 0;
+	roundsVector_->clear();
+	updateMenu();
+}
+
+void MapSelectionState::updatePointer(int n, int coor) {
+	int size = 0;
+
+	if (menuPointer_ == 0) {
+		size = 2;	 //Mapas por columna / fila
+
+		pointers_[x] += (n * (coor + 1) + size);	//para evitar numeros negativos sumamos size
+		pointers_[x] %= size;
+		pointers_[y] += (n * (coor)+size);
+		pointers_[y] %= size;
+
+		mapSelCursor_->setPosUIElement(coordsImages_[pointers_[x] + pointers_[y] * 2] + b2Vec2{ -10,-10 });
+	}
+	else {
+		size = GamemodeID::NUMBER_OF_GAMEMODES - 1; //sin tutorial
+
+		iconsGamemodes_[pointers_[gamemodeScreen]]->setActive(false);
+
+		pointers_[gamemodeScreen] += size - n; // -n porque en la segunda pantalla usamos un sistema de coordenadas distinto
+		pointers_[gamemodeScreen] %= size;
+
+		iconsGamemodes_[pointers_[gamemodeScreen]]->setActive(true);
+
+	}
+
+
+}
+
+void MapSelectionState::updateMenu() {
+
+	for (auto e : textsGamemodes_) {
+		e->setActive(menuPointer_ == 1);
+	}
+
+	iconsGamemodes_[pointers_[gamemodeScreen]]->setActive(menuPointer_ == 1);
+
+	for (auto e : imagesMaps_) {
+		e->setActive(menuPointer_ != 1);
+	}
+
+	mapSelCursor_->setDrawable(menuPointer_ != 1);
+	mapSelCursor_->setPosUIElement(coordsImages_[pointers_[x] + pointers_[y] * 2] + b2Vec2{ -10,-10 });
+};
+
+
+void MapSelectionState::createImages() { //preparar los textos	
+
+	float scaleImg = 0.35;
+
+	int margin = 100;
+
+	b2Vec2 sizeImg{ 672, 378 };
+	b2Vec2 sizeScreen{ 1920, 1080 };
+
+
+	coordsImages_.push_back(b2Vec2((sizeScreen.x - (sizeImg.x * 2 + margin)) / 2,
+		(sizeScreen.y - (sizeImg.y * 2 + margin)) / 2));
+
+	coordsImages_.push_back(b2Vec2((sizeScreen.x - (sizeImg.x * 2 + margin)) / 2 + margin + sizeImg.x,
+		(sizeScreen.y - (sizeImg.y * 2 + margin)) / 2));
+
+	coordsImages_.push_back(b2Vec2((sizeScreen.x - (sizeImg.x * 2 + margin)) / 2,
+		(sizeScreen.y - (sizeImg.y * 2 + margin)) / 2 + margin + sizeImg.y));
+
+	coordsImages_.push_back(b2Vec2((sizeScreen.x - (sizeImg.x * 2 + margin)) / 2 + margin + sizeImg.x,
+		(sizeScreen.y - (sizeImg.y * 2 + margin)) / 2 + margin + sizeImg.y));
+
+	for (int i = 0; i < 4; i++) {
+		imagesMaps_.push_back(entityManager_->addEntity());
+		imagesMaps_.back()->addComponent<UIViewer>(texturesMaps_[i], coordsImages_[i], scaleImg, 0);
+	}
+
+}
+
+void MapSelectionState::createTexts()
+{
+	int i = 0;
+
+	for (auto e : texturesTexts_) {
+
+		b2Vec2 a = { gmOffset.x + gmMargin,(float)(i * 200 + gmOffset.y) };
+
+		textsGamemodes_.push_back(entityManager_->addEntity());
+		textsGamemodes_.back()->addComponent<UIViewer>(texturesTexts_[i], a, 1.1, 0);
+		textsGamemodes_.back()->setActive(false);
+		i++;
+	}
+
+
+
+}
+
+void MapSelectionState::createIcons() {
+
+	int i = 0;
+
+	for (auto e : texturesIcons_) {
+
+		b2Vec2 a = { gmOffset.x,(i * 200 + gmOffset.y) };
+
+		iconsGamemodes_.push_back(entityManager_->addEntity());
+		iconsGamemodes_.back()->addComponent<UIViewer>(texturesIcons_[i], a, 2, 0);
+		iconsGamemodes_.back()->setActive(false);
+		i++;
+	}
+}
+

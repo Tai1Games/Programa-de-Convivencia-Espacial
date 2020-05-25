@@ -44,6 +44,13 @@ public:
 		ProgressBar,
 		ProgressBar2,
 
+		CursorUiSelectMap,
+		CapitalismIcon,
+		ControllerModeIcon,
+		StocksIcon,
+		WiFightIcon,
+		TimedIcon,
+
 		//Lobby
 		KeyboardIcon,
 		MouseIcon,
@@ -54,7 +61,7 @@ public:
 		SpaceStation,
 		Token,
 		RocketSpriteSheet,
-		
+
 
 		// Weapons and map items
 
@@ -161,7 +168,7 @@ public:
 
 		//Countdown
 		Go,
-      
+
 		// particles
 		Smoke,
 		WiFiWave

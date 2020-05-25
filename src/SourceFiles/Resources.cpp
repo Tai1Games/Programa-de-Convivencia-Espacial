@@ -44,6 +44,13 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Token, resourcesPath + "textures/Marcador.png"},
 	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png", 8, 1},
 
+	{CursorUiSelectMap, resourcesPath + "textures/cursorSelMap.png"},
+	{CapitalismIcon, resourcesPath + "textures/Moneda.png"},
+	{StocksIcon, resourcesPath + "textures/StocksIcon.png"},
+	{ControllerModeIcon, resourcesPath + "textures/ControlerIcon.png"},
+	{WiFightIcon, resourcesPath + "textures/wifiIIcon.png"},
+	{TimedIcon, resourcesPath + "textures/timedIcon.png"},
+
 	// Weapons and map items
 	{ Ball, resourcesPath + "textures/PelotaSaltarina.png" },
 	{ Extinguisher, resourcesPath + "textures/Extintor.png" },

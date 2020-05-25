@@ -190,6 +190,7 @@ copy "$(SolutionDir)SDL2_net-2.0.1\lib\$(Platform)\*.dll" "$(TargetDir)"</Comman
     <ClInclude Include="ActionableWeapon.h" />
     <ClInclude Include="AdvancedAnimatedViewer.h" />
     <ClInclude Include="CarnivorousPlantViewer.h" />
+    <ClInclude Include="MapSelectionState.h" />
     <ClInclude Include="WeaponFactory.h" />
     <ClInclude Include="WiFiWavePool.h" />
     <ClInclude Include="WiFiBullet.h" />
@@ -289,6 +290,7 @@ copy "$(SolutionDir)SDL2_net-2.0.1\lib\$(Platform)\*.dll" "$(TargetDir)"</Comman
     <ClCompile Include="ActionableWeapon.cpp" />
     <ClCompile Include="AdvancedAnimatedViewer.cpp" />
     <ClCompile Include="CarnivorousPlantViewer.cpp" />
+    <ClCompile Include="MapSelectionState.cpp" />
     <ClCompile Include="WeaponFactory.cpp" />
     <ClCompile Include="WiFiWavePool.cpp" />
     <ClCompile Include="WiFiBullet.cpp" />

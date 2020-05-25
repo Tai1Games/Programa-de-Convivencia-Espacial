@@ -357,6 +357,9 @@
     <ClInclude Include="WeaponFactory.h">
       <Filter>Header Files\Factories</Filter>
     </ClInclude>
+    <ClInclude Include="MapSelectionState.h">
+      <Filter>Header Files\Gamestates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -622,6 +625,9 @@
     </ClCompile>
     <ClCompile Include="WeaponFactory.cpp">
       <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="MapSelectionState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

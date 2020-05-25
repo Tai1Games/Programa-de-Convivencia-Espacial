@@ -11,6 +11,7 @@
 #include "PlayState.h"
 #include "PauseState.h"
 #include "MenuState.h"
+#include "MapSelectionState.h"
 #include "MidGameState.h"
 #include "TransitionState.h"
 #include "LobbyState.h"
@@ -65,7 +66,8 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 		//states_[state] = new... se necesita struct? o switch tal cual xd
 		switch (state) {
 		case States::menu:
-			states_[state] = new MenuState(0); //numberOfPlayers usado como ownerID
+			//states_[state] = new MenuState(0); //numberOfPlayers usado como ownerID
+			states_[state] = new MapSelectionState(0);
 			break;
 		case States::play:
 		{
