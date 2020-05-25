@@ -22,7 +22,7 @@ LobbyState::~LobbyState()
 void LobbyState::init()
 {
 	ih_ = SDL_Game::instance()->getInputHandler();
-	for (int i = 0; i < maxPlayers_; i++) {
+	for (int i = 0; i < MAX_PLAYERS; i++) {
 		joinedGamepads_[i] = false;
 	}
 	joinedKb_[0] = false;  joinedKb_[1] = false;
@@ -38,7 +38,7 @@ void LobbyState::init()
 
 
 	verticalIniPoint_ = CONST(int, "WINDOW_HEIGHT") / 2 - playerTexture_->getFrameHeight();
-	horizontalIniPoint_ = CONST(int, "WINDOW_WIDTH") / 2 - (maxPlayers_ * (playerTexture_->getFrameWidth() + CONST(int, "LOBBY_OFFSET_X")) / 2);
+	horizontalIniPoint_ = CONST(int, "WINDOW_WIDTH") / 2 - (MAX_PLAYERS * (playerTexture_->getFrameWidth() + CONST(int, "LOBBY_OFFSET_X")) / 2);
 	horizontalOffset_ = playerTexture_->getFrameWidth() + CONST(int, "LOBBY_OFFSET_X");
 	playerIdVerticalOffset_ = playerTexture_->getFrameHeight() + CONST(int, "LOBBY_PLAYERID_OFFSET_Y");
 	iconHorizontalOffset_ = CONST(int, "LOBBY_ICON_OFFSET");
@@ -60,9 +60,10 @@ void LobbyState::render() {
 		renderPlayerLobbyInfo(&player, i);
 		i++;
 	}
-	for (; i < maxPlayers_; i++)
+	for (; i < MAX_PLAYERS; i++)
 		renderPlayerLobbyInfo(nullptr, i);
 }
+
 bool LobbyState::ready()
 {
 	if (joinedPlayers_.size() > 0) {
@@ -99,6 +100,14 @@ void LobbyState::outDebug()
 	}
 	if (ready())
 		cout << "LETS A GOOOOOOO" << endl;
+}
+
+void LobbyState::setSkin(PlayerLobbyInfo& player) {
+	player.playerSkin = 0;
+	while (isSkinPicked_[player.playerSkin]) {
+		player.playerSkin = (++player.playerSkin) % (MAX_SKINS_PLACEHOLDER);
+	}
+	isSkinPicked_[player.playerSkin] = true;
 }
 
 
@@ -155,6 +164,7 @@ void LobbyState::playerOut(std::vector<PlayerLobbyInfo>::iterator it)
 	std::cout << "un jugador ha salido" << endl;
 	if (it != joinedPlayers_.end())
 	{
+		isSkinPicked_[(*it).playerSkin] = false;
 		//it es el jugador que se quiere salir
 		delete it->inputBinder;
 		it = joinedPlayers_.erase(it);
@@ -218,7 +228,7 @@ void LobbyState::ctrlPlayerOut(int index) {
 void LobbyState::handleJoinLeave() {
 	//comprueba si alguno de los mandos conectados
 	//sin asignar se quiere unir o salir
-	for (int i = 0; ih_->getNumControllers() && i < maxPlayers_; i++)
+	for (int i = 0; ih_->getNumControllers() && i < MAX_PLAYERS; i++)
 	{
 		//Si se quiere unir
 		if (!joinedGamepads_[i]) {
@@ -228,6 +238,7 @@ void LobbyState::handleJoinLeave() {
 				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new ControllerBinder(i)));
 				joinedPlayers_[newId].ctrlId = i;
 				joinedPlayers_[newId].binderType = BinderType::ControllerB;
+				setSkin(joinedPlayers_[newId]);
 				// crea un nuevo jugador con id newId
 				// lo mete en joinedPlayers
 				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
@@ -238,7 +249,7 @@ void LobbyState::handleJoinLeave() {
 	//comprueba si se puede unir un pureKeyboardPeasant
 	if (!joinedMouse_)
 	{
-		for (int kb = 0; kb < maxKbPlayers_; kb++)
+		for (int kb = 0; kb < MAX_KBPLAYERS; kb++)
 		{
 			if (!joinedKb_[kb]) {
 				// comprueba si se quiere unir un pureKeyboardPeasant (tonto)
@@ -250,6 +261,7 @@ void LobbyState::handleJoinLeave() {
 					joinedPlayers_[newId].kbId = kb;
 					joinedPlayers_[newId].binderType = KeyboardB;
 					SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
+					setSkin(joinedPlayers_[newId]);
 				}
 			}
 		}
@@ -271,6 +283,7 @@ void LobbyState::handleJoinLeave() {
 				joinedPlayers_[newId].kbmId = 0;
 				joinedPlayers_[newId].binderType = MouseB;
 				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
+				setSkin(joinedPlayers_[newId]);
 			}
 		}
 	}
@@ -291,6 +304,7 @@ void LobbyState::handleJoinLeave() {
 				joinedPlayers_[newId].kbId = 1;
 				joinedPlayers_[newId].binderType = BinderType::KeyboardB;
 				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
+				setSkin(joinedPlayers_[newId]);
 			}
 		}
 	}
@@ -299,18 +313,30 @@ void LobbyState::handleJoinLeave() {
 void LobbyState::handleJoinedPlayers() {
 	for (auto& player : joinedPlayers_) {
 		//cambiamos de skin
-		if (player.inputBinder->menuMove(Dir::Left)) {
-			player.playerSkin -= 1;
-			if (player.playerSkin < 0) {
-				player.playerSkin = MAX_SKINS_PLACEHOLDER - 1;
+		if (!holdingButtons_[player.id]) {
+			if (player.inputBinder->menuMove(Dir::Left)) {
+				isSkinPicked_[player.playerSkin] = false;
+				do {
+					if ((--player.playerSkin) < 0) player.playerSkin = MAX_SKINS_PLACEHOLDER - 1;
+				} while (isSkinPicked_[player.playerSkin]);
+				isSkinPicked_[player.playerSkin] = true;
+				holdingButtons_[player.id] = true;
+			}
+			else if (player.inputBinder->menuMove(Dir::Right)) {
+				isSkinPicked_[player.playerSkin] = false;
+				do {
+					player.playerSkin = (++player.playerSkin) % (MAX_SKINS_PLACEHOLDER);
+				} while (isSkinPicked_[player.playerSkin]);
+				isSkinPicked_[player.playerSkin] = true;
+				holdingButtons_[player.id] = true;
 			}
 		}
-		else if (player.inputBinder->menuMove(Dir::Right)) {
-			player.playerSkin = (++player.playerSkin) % (MAX_SKINS_PLACEHOLDER);
+		else if (!player.inputBinder->menuMove(Dir::Left) && !player.inputBinder->menuMove(Dir::Right)) {
+			holdingButtons_[player.id] = false;
 		}
-		else if (player.inputBinder->menuForward()) {
+		if (player.inputBinder->menuForward()) {
 			player.ready = true;
-		std:cout << "Jufador listisimo" << endl;
+			std:cout << "Jufador listisimo" << endl;
 		}
 		else if (player.inputBinder->menuBack()) {
 			if (player.ready)
