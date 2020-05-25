@@ -5,7 +5,8 @@
 class AnimatedViewer : public Viewer, public AbstractAnimatedViewers
 {
 public:
-	AnimatedViewer(int textureId, int timeperframe) : Viewer(textureId) {
+	AnimatedViewer(int textureId, int timeperframe, ComponentType::CmpId componentId = ComponentType::Viewer) :
+		Viewer(textureId, componentId) {
 		timePerFrame_ = timeperframe;
 	}
 

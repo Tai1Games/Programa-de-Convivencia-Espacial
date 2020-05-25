@@ -12,12 +12,15 @@ private:
 	AnimatedViewer* buttonViewer_ = nullptr;
 
 	bool inc_dec_ = false;
-	bool activated = true;
-	int timeForReactivation_ = 0;
+	bool activated = false;
+	int currentFrame_ = 0;
+	int reactivationFrame_ = 0;
+	int animationEndedFrame_ = 0;
 
 	//Initialized at init()
-	int reactivationCd_ = 0;
 	int minForceForAcivation_ = 0;
+	int framesForReactivation_ = 0;
+	int animationDuration_ = 0;
 
 public:
 	BoilerButtonLogic(bool inc_dec);

@@ -25,6 +25,9 @@ public:
 		RocketRoom,
 		TutorialRoom,
 		GardenRoom,
+		MenuRoom,
+		CreditsRoom,
+		SpaceBackground,
 
 		// UI
 		ActiveHealth,
@@ -44,6 +47,7 @@ public:
 		ProgressBar,
 		ProgressBar2,
 
+
 		CursorUiSelectMap,
 		CapitalismIcon,
 		ControllerModeIcon,
@@ -51,17 +55,21 @@ public:
 		WiFightIcon,
 		TimedIcon,
 
+		Ready,
+		PressReady,
+
+
 		//Lobby
 		KeyboardIcon,
 		MouseIcon,
 		ControllerIcon,
+		PlayerPlaceholder,
 
 		//midGameState
 		Rocket,
 		SpaceStation,
 		Token,
 		RocketSpriteSheet,
-
 
 		// Weapons and map items
 
@@ -106,6 +114,13 @@ public:
 		Lamp,
 		Table,
 		Sofa,
+		TomatoTree,
+		BananaTree,
+		DeadBody,
+		TriggerButtonPlay,
+		TriggerButtonExit,
+		TriggerButtonCredits,
+		TriggerButtonOptions,
 
 		// Gamemode specific elements
 		Coin,
@@ -122,8 +137,14 @@ public:
 		// text
 		PauseText,
 		ResumeText,
-		SoundText,
-		ExitText,
+		MusicText,
+		EffectsText,
+		MainMenuText,
+
+		//online menu
+		Local,
+		Host,
+		Join,
 
 		//modes
 		Capitalism,
@@ -140,14 +161,7 @@ public:
 		GymRoomText,
 		GardenRoomText,
 
-		//players
-		OnePlayer,
-		TwoPlayers,
-		ThreePlayers,
-		FourPlayers,
-		FivePlayers, //es solo para iterar
-
-		//tutorial	
+		//tutorial
 		Completed,
 		Slash,
 		Zero,
@@ -163,7 +177,7 @@ public:
 		DeathTutorial,
 		TutorialEnd,
 
-		//MidGame 
+		//MidGame
 		ContinueText,
 
 		//Countdown
@@ -171,7 +185,38 @@ public:
 
 		// particles
 		Smoke,
-		WiFiWave
+		WiFiWave,
+		Foam,
+
+		// numbers
+		NumZero,
+		NumOne,
+		NumTwo,
+		NumThree,
+		NumFour,
+		NumFive,
+		NumSix,
+		NumSeven,
+		NumEight,
+		NumNine,
+
+		//badges ordenadas como GameModeId
+		badgeCapitalism,
+		badgeController,
+		badgeStocks,
+		badgeWifi,
+		badgeTimed,
+
+		medals,
+
+		//winner msgs
+		winner1,
+		winner2,
+		winner3,
+		winner4,
+
+		//Credits
+		ReturnText,
 	};
 
 	enum AudioId : unsigned char {
@@ -181,10 +226,40 @@ public:
 		GymMusic = TextureId::GymRoom,
 		BoilerRoomMusic = TextureId::BoilerRoom,
 		TutorialMusic = TextureId::TutorialRoom,
-		EntranceMusic
+		GardenMusic = TextureId::GardenRoom,
+		EntranceMusic,
 
 		// sound effects
+		StartGame,
+		ThreeTwoOneSound,
+		GoSound,
+		PadSound,
+		PickSound,
+		CoinSound,
+		// boiler
+		BoilerShootSound,
+		BoilerButtonSlowSound,
+		BoilerButtonFastSound,
 
+		CarnivorousPlantSound,
+
+		// Weapons
+		BananaShootSound,
+		ExtinguisherSound,
+		TomatoExplosionSound,
+		ConfettiSound,
+
+		//Player
+		DeathSound,
+		RespawnSound,
+		EliminatedSound,
+		ImpulseFromAirSound,
+		ImpulseAttachedSound,
+
+    //menu
+		MenuMove,
+		MenuForward,
+		MenuBackward
 	};
 
 	enum FontId : std::size_t {
@@ -220,7 +295,6 @@ public:
 	struct SoundInfo {
 		AudioId id;
 		string fileName;
-
 	};
 
 	static vector<FontInfo> fonts_; // initialized in .cpp
@@ -229,5 +303,4 @@ public:
 	static vector<MusicInfo> musics_; // initialized in .cpp
 	static vector<SoundInfo> sounds_; // initialized in .cpp
 	static map<std::string, Resources::TextureId> tilesetTag_; // initialized in .cpp
-
 };

@@ -13,7 +13,7 @@ void MenuState::init() {
 	entityManager_ = new EntityManager();
 	ownerPlayerBinder_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo()->at(ownerPlayerID_)->inputBinder;
 	Entity* miniTinky = entityManager_->addEntity();
-	menuCursor_ = miniTinky->addComponent<UIViewer>(Resources::Tinky, b2Vec2(0, 0), 0.5, 0);
+	menuCursor_ = miniTinky->addComponent<UIViewer>(Resources::Rocket, b2Vec2(0, 0), 0.8, 90);
 	createText();
 	updateText();
 
@@ -28,10 +28,12 @@ void MenuState::handleInput()
 	if (!holdingY_)
 	{
 		if (ownerPlayerBinder_->menuMove(Dir::Down)) {
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuMove, 0);
 			updatePointer(1);
 			holdingY_ = true;
 		}
 		else if (ownerPlayerBinder_->menuMove(Dir::Up)) {
+			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuMove, 0);
 			updatePointer(-1);
 			holdingY_ = true;
 		}
@@ -41,6 +43,7 @@ void MenuState::handleInput()
 	}
 
 	if (ownerPlayerBinder_->menuForward()) {
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
 		if (menuPointer_ == 0) { //Seleccionando gamemode
 			if (pointers_[0] < GamemodeID::Tutorial) {
 				menuPointer_++;
@@ -70,6 +73,7 @@ void MenuState::handleInput()
 	//ir para atr�s
 	else if (ownerPlayerBinder_->menuBack() && (menuPointer_ > 0))
 	{
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuBackward, 0);
 		menuPointer_--;
 		updateText();
 	}
@@ -98,11 +102,11 @@ void MenuState::updatePointer(int n) {
 	pointers_[menuPointer_] += size + n;
 	pointers_[menuPointer_] %= size;
 
-	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (pointers_[menuPointer_] + 1)));
+	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, (yOffset_ * (pointers_[menuPointer_] + 1)) - 35));
 }
 
 void MenuState::updateText() { //activar la pantalla actual y desactivar la otra, si solo hay dos no necesita m�s informaci�n
-	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (pointers_[menuPointer_] + 1)));
+	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, (yOffset_ * (pointers_[menuPointer_] + 1)) - 35));
 
 	for (Entity* e : texts_[menuPointer_]) e->setActive(true); //activar actual
 	for (Entity* e : texts_[1 - menuPointer_]) e->setActive(false); //desactivar otra
@@ -114,13 +118,13 @@ void MenuState::createText() { //preparar los textos
 	for (int i = 0; i < 2; i++) {
 		if (i == 0) {
 			start = Resources::Capitalism;
-			end = Resources::LivingRoomText;
+			end = Resources::Exit;
 		}
-		else end = Resources::OnePlayer;
+		else end = Resources::GardenRoomText;
 
 		offset = start - 1;
 
-		while (start < end) {
+		while (start <= end) {
 			texts_[i].push_back(entityManager_->addEntity());
 			texts_[i].back()->addComponent<UIViewer>(start, b2Vec2(xOffset_, (start - offset) * yOffset_), 1.5, 0);
 			texts_[i].back()->setActive(false);

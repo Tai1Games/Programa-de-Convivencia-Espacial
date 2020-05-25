@@ -12,7 +12,7 @@ bool AbstractAnimatedViewers::updateTime(int nFrames)
 			if ((++frame_) >= nFrames) {
 				frame_ %= nFrames;
 				++currentLoop_;
-				if (loops_ != -1 && currentLoop_ >= loops_)
+				if (loops_ != -1 && currentLoop_ > loops_)
 					stopAnimation();
 			}
 			if(limitFrame_ != -1) frame_ %= limitFrame_;

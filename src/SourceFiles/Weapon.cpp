@@ -38,8 +38,8 @@ void Weapon::handleInput()
 {
 	if (currentHand_ == nullptr) {
 		for (int i = 0; i < playerInfo_.size(); i++) {
-			if (!IsPicked() && playerInfo_[i].isNear &&
-				playerInfo_[i].playerBinder->pressPick()) {
+			if (!IsPicked() && playerInfo_[i].isNear && 
+				playerInfo_[i].playerHands->getCanPickWeapon() && playerInfo_[i].playerBinder->pressPick()) {
 				PickObjectBy(i);
 			}
 		}
@@ -68,11 +68,13 @@ void Weapon::PickObjectBy(int index)
 
 		ThrownByPlayer* throwData = GETCMP1_(ThrownByPlayer);
 		throwData->SetOwner(index);
+
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::PickSound, 0);
 	}
 }
 
-void Weapon::UnPickObject()
-{
+void Weapon::separateWeapon(double resultThrowSpeed) {
+
 	//Si se tira un objeto, se guarda en el objeto lanzado la ID de quien lo lanza.
 	GETCMP1_(ThrownByPlayer)->throwObject(pickedIndex_);
 
@@ -83,47 +85,41 @@ void Weapon::UnPickObject()
 	mainCollider_->getFixture(0)->SetFilterData(f);
 	hasBeenThrownRecently_ = true;
 	//
-	
+
+	// pone la mano sin ningún arma
 	currentHand_->setWeapon(NoWeapon, nullptr);
+	currentHand_->setCanPickWeapon(false);
 	picked_ = false;
 	pickedIndex_ = -1;
 	mainCollider_->getBody()->SetEnabled(true);
 	vw_->setDrawable(true);
-
-	cout << "dirHand: " << currentHand_->getDir().x << ", " << currentHand_->getDir().y << "\n";
-	cout << "dirplayer: " << currentHand_->getVel().x << ", " << currentHand_->getVel().y << "\n";
-
 	mainCollider_->setLinearVelocity(b2Vec2(0, 0));
+
+	// mueve el arma y la impulsa en función de resultThrowSpeed
 	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x + currentHand_->getDir().x * currentHand_->getArmLengthPhysics(), currentHand_->getPos().y - currentHand_->getDir().y * currentHand_->getArmLengthPhysics()), currentHand_->getAngle());
-	
-	double actualMagnitude = currentHand_->getVel().Length();
-	double resultThrowSpeed = minThrowSpeed_ + 
-		((actualMagnitude*(maxThrowSpeed_ - minThrowSpeed_))/10/*Media de magnitud maxima del jugador*/);
-	/*Hay que tener en cuenta el tamaño de la fixture principal del arma*/
-	float tam =  mainCollider_->getW(0) +  mainCollider_->getH(0);
-	resultThrowSpeed *= tam;
 	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * resultThrowSpeed, -currentHand_->getDir().y * resultThrowSpeed), mainCollider_->getBody()->GetLocalCenter());
-	mainCollider_->getBody()->SetAngularVelocity(spinOnThrowSpeed_);
+
+	// reinicia arma
+	currentHand_->setFrame(0, 0);
+	currentHand_->stopAnimation();
 	currentHand_ = nullptr;
 }
 
-void Weapon::letFallObject()
+void Weapon::UnPickObject()
 {
-	//Si se tira un objeto, se guarda en el objeto lanzado la ID de quien lo lanza.
-	GETCMP1_(ThrownByPlayer)->throwObject(pickedIndex_);
+	double actualMagnitude = currentHand_->getVel().Length();
+	double resultThrowSpeed = minThrowSpeed_ +
+		((actualMagnitude * (maxThrowSpeed_ - minThrowSpeed_)) / 10/*Media de magnitud maxima del jugador*/);
+	/*Hay que tener en cuenta el tamaño de la fixture principal del arma*/
+	float tam =  mainCollider_->getW(0) +  mainCollider_->getH(0);
+	resultThrowSpeed *= tam;
 
-	currentHand_->setWeapon(NoWeapon, nullptr);
-	picked_ = false;
-	pickedIndex_ = -1;
-	mainCollider_->getBody()->SetEnabled(true);
-	vw_->setDrawable(true);
+	separateWeapon(resultThrowSpeed);
+	mainCollider_->getBody()->SetAngularVelocity(spinOnThrowSpeed_);
+}
 
-	mainCollider_->setLinearVelocity(b2Vec2(0, 0));
-	mainCollider_->setTransform(b2Vec2(currentHand_->getPos().x + currentHand_->getDir().x * currentHand_->getArmLengthPhysics(), currentHand_->getPos().y - currentHand_->getDir().y * currentHand_->getArmLengthPhysics()), currentHand_->getAngle());
-	double resultThrowSpeed = 1.5;
-	mainCollider_->applyLinearImpulse(b2Vec2(currentHand_->getDir().x * resultThrowSpeed, -currentHand_->getDir().y * resultThrowSpeed), mainCollider_->getBody()->GetLocalCenter());
-	//mainCollider_->getBody()->SetAngularVelocity(spinOnThrowSpeed_);
-	currentHand_ = nullptr;
+void Weapon::letFallObject() {
+	if(picked_) separateWeapon(1.5);
 }
 
 int Weapon::getPlayerId() {
@@ -135,7 +131,7 @@ void Weapon::onCollisionEnter(Collision* c)
 	Entity* other = c->entity;
 	Hands* otherHand = GETCMP2(other, Hands);
 	Collider* coll = GETCMP1_(Collider);
-	b2Fixture* auxF = coll->getFixture(1);
+	b2Fixture* auxF = c->myFixture ;
 
 	if (otherHand != nullptr &&
 		auxF->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
@@ -146,8 +142,10 @@ void Weapon::onCollisionEnter(Collision* c)
 void Weapon::onCollisionExit(Collision* c)
 {
 	Hands* otherHand = GETCMP2(c->entity, Hands);
+	b2Fixture* auxF = c->myFixture;
 
-	if (otherHand != nullptr) {
+	if (otherHand != nullptr &&
+		auxF->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
 		DeletePlayerInfo(otherHand->getPlayerId());
 	}
 }
@@ -177,7 +175,10 @@ void Weapon::update() {
 		if (framesUntilRecoveringCollisionTimer_ >= framesUntilRecoveringCollision_) {
 			hasBeenThrownRecently_ = false;
 			framesUntilRecoveringCollisionTimer_ = 0;
-			mainCollider_->getFixture(0)->SetFilterData(mainCollider_->getFilterFromLayer(Collider::CollisionLayer::NormalObject));
+			if (currentHand_ == nullptr) {
+				mainCollider_->getFixture(0)->SetFilterData(mainCollider_->getFilterFromLayer(Collider::CollisionLayer::NormalObject));
+				mainCollider_->getFixture(1)->SetFilterData(mainCollider_->getFilterFromLayer(Collider::CollisionLayer::Trigger));
+			}
 		}
 	}
 }

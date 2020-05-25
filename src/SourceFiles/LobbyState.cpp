@@ -29,10 +29,12 @@ void LobbyState::init()
 	joinedMouse_ = false;
 
 	playerTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::Body);
-	voidTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::SpaceSuit);
+	voidTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::PlayerPlaceholder);
 	ctrlTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::ControllerIcon);
 	kbTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::KeyboardIcon);
 	mouseTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::MouseIcon);
+	pressReadyTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::PressReady);
+	readyTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::Ready);
 
 
 	verticalIniPoint_ = CONST(int, "WINDOW_HEIGHT") / 2 - playerTexture_->getHeight() / 2;
@@ -40,18 +42,24 @@ void LobbyState::init()
 	horizontalOffset_ = playerTexture_->getWidth() + CONST(int, "LOBBY_OFFSET_X");
 	playerIdVerticalOffset_ = playerTexture_->getWidth() + CONST(int, "LOBBY_PLAYERID_OFFSET_Y");
 	iconHorizontalOffset_ = CONST(int, "LOBBY_ICON_OFFSET");
+	pressReadyOffset_ = CONST(int, "LOBBY_READY_OFFSET");
+
+
+	//FONDO
+	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SpaceBackground);
 }
 
 void LobbyState::update()
 {
-	outDebug();
+	//outDebug();
 	if (ready()) {
 		SDL_Game::instance()->getStateMachine()->setMatchInfo(new MatchInfo(joinedPlayers_));
-		SDL_Game::instance()->getStateMachine()->changeToState(States::menu);
+		SDL_Game::instance()->getStateMachine()->changeToState(States::onlineMenu);
 	}
 }
 
 void LobbyState::render() {
+	fondo_->render(0, 0);
 	int i = 0;
 	for (PlayerLobbyInfo& const player : joinedPlayers_) {
 		renderPlayerLobbyInfo(&player, i);
@@ -126,16 +134,34 @@ void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
 		else if (playerInfo->kbmId != -1) {
 			mouseTexture_->render(destRect);
 		}
+
+		if (playerInfo->ready) {
+			destRect.w = readyTexture_->getWidth();
+			destRect.h = readyTexture_->getHeight();
+			destRect.x = horizontalIniPoint_ + index * horizontalOffset_;
+			destRect.y = playerTexture_->getHeight() + pressReadyOffset_ + verticalIniPoint_;
+			readyTexture_->render(destRect);
+		}
+		else {
+			destRect.w = pressReadyTexture_->getWidth();
+			destRect.h = pressReadyTexture_->getHeight();
+			destRect.x = horizontalIniPoint_ + index * horizontalOffset_;
+			destRect.y = playerTexture_->getHeight() + pressReadyOffset_ + verticalIniPoint_;
+			pressReadyTexture_->render(destRect);
+		}
 	}
+
 }
 
 void LobbyState::playerOut(std::vector<PlayerLobbyInfo>::iterator it)
 {
+	std::cout << "un jugador ha salido" << endl;
 	if (it != joinedPlayers_.end())
 	{
 		//it es el jugador que se quiere salir
 		delete it->inputBinder;
 		it = joinedPlayers_.erase(it);
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuBackward, 0);
 		//it ahora apunta al siguiente elemento
 		//ajustamos el resto de ids en funcion
 		while (it != joinedPlayers_.end()) {
@@ -207,6 +233,7 @@ void LobbyState::handleJoinLeave() {
 				joinedPlayers_[newId].binderType = BinderType::ControllerB;
 				// crea un nuevo jugador con id newId
 				// lo mete en joinedPlayers
+				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
 			}
 		}
 	}
@@ -225,6 +252,7 @@ void LobbyState::handleJoinLeave() {
 					joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(kb + 1)));
 					joinedPlayers_[newId].kbId = kb;
 					joinedPlayers_[newId].binderType = KeyboardB;
+					SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
 				}
 			}
 		}
@@ -245,6 +273,7 @@ void LobbyState::handleJoinLeave() {
 				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new MouseKeyboardBinder(nullptr, 1)));
 				joinedPlayers_[newId].kbmId = 0;
 				joinedPlayers_[newId].binderType = MouseB;
+				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
 			}
 		}
 	}
@@ -264,6 +293,7 @@ void LobbyState::handleJoinLeave() {
 				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(2)));
 				joinedPlayers_[newId].kbId = 1;
 				joinedPlayers_[newId].binderType = BinderType::KeyboardB;
+				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
 			}
 		}
 	}
@@ -283,6 +313,7 @@ void LobbyState::handleJoinedPlayers() {
 		}
 		else if (player.inputBinder->menuForward()) {
 			player.ready = true;
+		std:cout << "Jufador listisimo" << endl;
 		}
 		else if (player.inputBinder->menuBack()) {
 			if (player.ready)

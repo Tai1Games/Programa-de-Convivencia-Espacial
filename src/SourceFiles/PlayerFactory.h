@@ -15,9 +15,9 @@ class CapitalismGameMode;
 class InputBinder;
 
 class PlayerFactory {
-private:
-	static Entity* createBasePlayer(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY, InputBinder* ib);
 public:
+	static Entity* createBasePlayer(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY, InputBinder* ib);
+
 	PlayerFactory() {}
 	~PlayerFactory() {}
 

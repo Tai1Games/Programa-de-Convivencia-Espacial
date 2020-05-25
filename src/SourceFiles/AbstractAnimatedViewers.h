@@ -10,6 +10,7 @@ protected:
 	int currentLoop_ = 0;			// current repetition
 	bool activeAnimation_ = true;	// does it have to animate?
 	bool isPlaying_ = true;			// is it paused?
+	int baseSpeed_ = 10;			// initial speed
 
 	// Calculates if time passed for the next frame
 	// and advances the frame if that's the case.
@@ -33,12 +34,14 @@ public:
 	// times (-1 = loop until stopped) from the frame
 	// 'frame' until the frame 'limitFrame'.
 	// Ignore the 'animation' field, it is used for inheritance.
-	virtual void startAnimation(int loops = -1, int initialFrame = 0, int limitFrame = -1, int animation = 0) {	// animation aquí sólo sirve para el override
+	virtual void startAnimation(int loops = -1, int initialFrame = 0, int limitFrame = -1, int animation = 0) {	// animation aquï¿½ sï¿½lo sirve para el override
 		stopAnimation();
+		timeElapsed_ = 0;
 		frame_ = initialFrame;
 		limitFrame_ = limitFrame;
 		activeAnimation_ = true;
 		loops_ = loops;
+		currentLoop_ = 0;
 	}
 
 	// Pauses the current animation in the current frame
