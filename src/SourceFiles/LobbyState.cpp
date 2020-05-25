@@ -37,7 +37,7 @@ void LobbyState::init()
 	readyTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::Ready);
 
 
-	verticalIniPoint_ = CONST(int, "WINDOW_HEIGHT") / 2 - playerTexture_->getFrameHeight() / 2;
+	verticalIniPoint_ = CONST(int, "WINDOW_HEIGHT") / 2 - playerTexture_->getFrameHeight();
 	horizontalIniPoint_ = CONST(int, "WINDOW_WIDTH") / 2 - (maxPlayers_ * (playerTexture_->getFrameWidth() + CONST(int, "LOBBY_OFFSET_X")) / 2);
 	horizontalOffset_ = playerTexture_->getFrameWidth() + CONST(int, "LOBBY_OFFSET_X");
 	playerIdVerticalOffset_ = playerTexture_->getFrameHeight() + CONST(int, "LOBBY_PLAYERID_OFFSET_Y");
@@ -115,7 +115,7 @@ void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
 	else voidTexture_->render(destRect);
 	
 	if (playerInfo != nullptr) {
-		destRect.y += playerTexture_->getFrameHeight() + playerIdVerticalOffset_;
+		destRect.y += playerTexture_->getFrameHeight() / 2 + playerIdVerticalOffset_;
 		destRect.w /= 3; destRect.h /= 3;
 		string playerNum = to_string(playerInfo->id);
 		Texture playerNumTexture(SDL_Game::instance()->getRenderer(), playerNum,
