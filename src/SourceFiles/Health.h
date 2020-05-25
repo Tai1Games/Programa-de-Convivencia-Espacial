@@ -19,6 +19,7 @@ private:
 	int INV_FRAMES_RESPAWN_;
 	int invFrames_;		//frames de invulnerabilidad restantes
 	int loopsInv_;
+	int animSpeed_;
 
 public:
 	Health(int l);

@@ -16,5 +16,6 @@ public:
 	virtual void init() override;
 
 	void setSkin(int skin) { skin_ = skin; };
+	void resetAnimation() override;
 };
 

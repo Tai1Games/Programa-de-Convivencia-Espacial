@@ -11,6 +11,7 @@ AnimatedPlayer::~AnimatedPlayer()
 
 void AnimatedPlayer::init()
 {
+	baseSpeed_ = CONST(int, "PLAYER_TIME_PER_FRAME");
 	Viewer::init();
 
 	animationsInfo_ = vector<AnimationInfo>(CONST(int, "NUM_ANIMS"));
@@ -28,4 +29,10 @@ void AnimatedPlayer::init()
 
 	frameX_ = animationsInfo_[anim_].animOrigin_;
 	frameY_ = skin_;
+}
+
+void AnimatedPlayer::resetAnimation()
+{
+	setAnimSpeed(baseSpeed_);
+	AdvancedAnimatedViewer::resetAnimation();
 }

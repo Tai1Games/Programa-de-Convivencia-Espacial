@@ -22,6 +22,7 @@ void Health::init() {
 	INV_FRAMES_HIT_ = CONST(int, "INVULNERABILITY_FRAMES_HIT");
 	INV_FRAMES_RESPAWN_ = CONST(int, "INVULNERABILITY_FRAMES_RESPAWN");
 	invFrames_ = 0;
+	animSpeed_ = CONST(int, "INVULNERABILITY_ANIM_SPEED");
 
 	loopsInv_ = (INV_FRAMES_RESPAWN_ / CONST(int, "NFRAMES_ANIM3"))/10; //el numero de loops que tiene que hacer la animacion
 	anim_ = entity_->getComponent<AnimatedPlayer>(ComponentType::AdvancedAnimatedViewer);
@@ -46,6 +47,8 @@ bool Health::subtractLife(int damage)
 			invFrames_ = INV_FRAMES_HIT_;
 			//darle a la animacion
 			anim_->startAnimation(loopsInv_, 0, -1, 3);
+			anim_->setAnimSpeed(animSpeed_);
+
 			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::DeathSound, 0);
 
 			if (lives_ <= 0) {
