@@ -63,12 +63,12 @@ void PlayableMenuState::init()
 	if (SDL_Game::instance()->getInputHandler()->getNumControllers() > 0) {
 		playerControl = new ControllerBinder(0);
 		player = PlayerFactory::createBasePlayer(entityManager_, physicsWorld_, 0,
-			Resources::Body, tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y, playerControl);
+			Resources::Body, tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y, playerControl, 0);
 	}
 	else {
 		playerControl = new MouseKeyboardBinder(nullptr, 1);
 		player = PlayerFactory::createBasePlayer(entityManager_, physicsWorld_, 0,
-			Resources::Body, tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y, playerControl);
+			Resources::Body, tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y, playerControl, 0);
 
 		playerControl->setPlayerCol(player->getComponent<Collider>(ComponentType::Collider));
 	}
