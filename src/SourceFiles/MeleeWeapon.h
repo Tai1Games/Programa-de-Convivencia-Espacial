@@ -9,6 +9,7 @@ protected:
 	int damage_ = 0;
 	int nHitboxActiveFrames_ = CONST(int, "WEAPON_MELEE_HIT_FRAMES");
 	int nAnimActiveFrames_ = CONST(int, "WEAPON_MELEE_HIT_VISIBLE_FRAMES");
+	bool activeAnim_ = false;
 public:
 	MeleeWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames, int impctForce);
 	MeleeWeapon(ComponentType::CmpId compType, WeaponID wId, int dmg, int impactDmg, int cooldownFrames, int impctForce);
