@@ -11,7 +11,7 @@ SDL_Game::SDL_Game() {
 	constants_ = Constants("./config/constants.json");
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window_ = SDL_CreateWindow(constants_.getConstant<string>("WINDOW_NAME").c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, constants_.getConstant<int>("WINDOW_WIDTH"),
-		constants_.getConstant<int>("WINDOW_HEIGHT"), SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP);
+		constants_.getConstant<int>("WINDOW_HEIGHT"), SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 
 	initializeResources();
