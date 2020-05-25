@@ -27,6 +27,7 @@ public:
 		GardenRoom,
 		MenuRoom,
 		CreditsRoom,
+		SpaceBackground,
 
 		// UI
 		ActiveHealth,

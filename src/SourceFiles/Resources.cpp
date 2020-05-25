@@ -19,6 +19,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ GardenRoom,resourcesPath + "textures/Background_garden.png"},
 	{ MenuRoom, resourcesPath + "textures/Background_Menu.png"},
 	{ CreditsRoom, resourcesPath + "textures/CreditsRoom.png"},
+	{ SpaceBackground, resourcesPath + "textures/Background_SpaceMenus.png"},
 
 	// UI
 	{ ActiveHealth, resourcesPath + "textures/VidaActiva.png" },
