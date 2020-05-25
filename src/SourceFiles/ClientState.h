@@ -27,7 +27,6 @@ private:
 
 	void receiveSprite();
 	void receiveAudio();
-	void receiveMusic();
 	void connectToServer();
 	void receivePlayerInfo();
 public:
