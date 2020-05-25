@@ -19,7 +19,7 @@ private:
 	Weapon* weaponOnGame_ = nullptr;
 	int currentFrame_ = 0;
 	int frameToSpawn_ = 0; //Frame in which a weapon will spawn
-	bool activated_ = true;
+	bool activated_ = false;
 
 	int framesBetweenSpawns_ = 0; //initiated at init();
 public:

@@ -14,6 +14,9 @@
 #include "MidGameState.h"
 #include "TransitionState.h"
 #include "LobbyState.h"
+#include "PlayableMenuState.h"
+#include "CreditsState.h"
+#include "EndGameState.h"
 
 GameStateMachine::GameStateMachine() {
 	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
@@ -100,7 +103,17 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 		case States::lobby: {
 			states_[state] = new LobbyState();
 		}
-						  break;
+		break;
+
+		case States::playableMenu: {
+			states_[state] = new PlayableMenuState();
+		}
+			break;
+		case States::credits: {
+			states_[state] = new CreditsState();
+		}
+			break;
+
 		case States::pause:
 			//if (states_[state] != nullptr)	delete states_[state];
 			states_[state] = new PauseState();
@@ -109,7 +122,11 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 			//Se usa el parametro gamemode como indicador de quien gana la ronda
 			states_[state] = new MidGameState(matchInfo_->getNumberOfPlayers(), gameMode);
 			break;
+		case States::endGame:
+			states_[state] = new EndGameState();
+			break;
 		}
+
 		//inicializar la nueva escena
 		states_[state]->init();
 	}

@@ -7,7 +7,7 @@
 #include "Constants.h"
 #include "checkML.h"
 
-class Hands : public Component
+class Hands : public AnimatedViewer
 {
 private:
 	b2Vec2 handPos_ = b2Vec2(0, 0);
@@ -17,7 +17,6 @@ private:
 	double armLengthPhysics_ = 0;
 	double handSize_ = 0;
 
-	Texture* tex_ = nullptr;
 	Collider* collider_ = nullptr;
 	int textureId_ = 0;
 	PlayerData* playerData_ = nullptr;
@@ -26,6 +25,10 @@ private:
 	float angle_ = 0;
 	SDL_RendererFlip Flipped_ = SDL_FLIP_NONE; //si las manos estan o no flipeadas
 	Weapon* currentWeapon_ = nullptr;
+
+	bool canPickWeapon_ = true;
+	int canPickWeaponTimer_ = 0;
+	int canPickWeaponCooldown_ = 10;
 
 public:
 	Hands(int textureId, WeaponID wId = NoWeapon);
@@ -45,5 +48,7 @@ public:
 	WeaponID getWeaponID() { return currentWeaponID_; }
 	b2Vec2 getPointerPos() { return handPos_; };
 	double getArmLengthPhysics() { return armLengthPhysics_; }
+	bool getCanPickWeapon() { return canPickWeapon_; };
+	void setCanPickWeapon(bool b) { canPickWeapon_ = b; };
 };
 

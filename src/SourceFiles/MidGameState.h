@@ -46,6 +46,10 @@ private:
 	AnimatedUIViewer* spaceStationViewer_ = nullptr;
 	float spaceStationScaleFactor_ = 1;
 
+	int ZeroTex;
+	double markerScale_ = 1;
+	double markerNumberScale_ = 1;
+
 
 public:
 	MidGameState(int numPlayers, int roundWinner) : numPlayers_(numPlayers), roundWinner_(roundWinner) {

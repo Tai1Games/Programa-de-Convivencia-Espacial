@@ -20,6 +20,7 @@ void WeaponSpawner::onWeaponDespawned()
 
 void WeaponSpawner::init() {
 	framesBetweenSpawns_ = CONST(int, "WEAPON_SPAWN_TIME_TO_SPAWN") * FRAMES_PER_SECOND;
+	spawnWeapon();
 }
 
 void WeaponSpawner::update() {

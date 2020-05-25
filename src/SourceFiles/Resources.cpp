@@ -17,6 +17,8 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ RocketRoom ,resourcesPath + "textures/Background_RocketRoom.png"},
 	{ TutorialRoom,resourcesPath + "textures/Background_TutorialRoom.png"},
 	{ GardenRoom,resourcesPath + "textures/Background_garden.png"},
+	{ MenuRoom, resourcesPath + "textures/Background_Menu.png"},
+	{ CreditsRoom, resourcesPath + "textures/CreditsRoom.png"},
 
 	// UI
 	{ ActiveHealth, resourcesPath + "textures/VidaActiva.png" },
@@ -41,9 +43,12 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	{ Rocket, resourcesPath + "textures/Rocket.png"},
 	{ SpaceStation, resourcesPath + "textures/SpaceStation.png"},
-	{ Token, resourcesPath + "textures/Marcador.png"},
+	{ Token, resourcesPath + "textures/Marker.png"},
 	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png", 8, 1},
 	{ PlayerPlaceholder,resourcesPath + "textures/playerPlaceholder.png"},
+
+	{Ready , resourcesPath + "textures/ready.png"},
+	{PressReady , resourcesPath + "textures/pressready.png"},
 
 	// Weapons and map items
 	{ Ball, resourcesPath + "textures/PelotaSaltarina.png" },
@@ -53,7 +58,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Slipper, resourcesPath + "textures/Chancla.png" },
 	{ Stapler, resourcesPath + "textures/Grapadora.png" },
 	{ Stone, resourcesPath + "textures/Piedra.png" },
-	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png", 17},
+	{ Tomato, resourcesPath + "textures/Tomato-Sheet.png", 15},
 	{ TomatoRing, resourcesPath + "textures/TomatoRing.png"},
 	{ TreeTomato, resourcesPath + "textures/TreeTomato.png"},
 	{ Banana, resourcesPath + "textures/Banana.png"},
@@ -70,13 +75,13 @@ vector<Resources::ImageInfo> Resources::images_{
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },
 	{ PlayerAnimSheet, resourcesPath + "textures/playerAnim.png",23,4},
-	{ Hands, resourcesPath + "textures/hands.png", 11},
+	{ Hands, resourcesPath + "textures/hands.png", 7, 11},
 	{ ImpulseArrow, resourcesPath + "textures/FlechaImpulso.png"},
 	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png", 13},
 	{ SpaceSuit, resourcesPath + "textures/PinkTinky.png"},	// dead body
 
 	// Map elements
-	{ Boiler,resourcesPath + "textures/CalderaPro.png"},
+	{ Boiler,resourcesPath + "textures/Caldera.png", 16, 1},
 	{ IncreasingFreqButton,resourcesPath + "textures/IncBoilerButtonDown.png", 3, 1},
 	{ DecreasingFreqButton,resourcesPath + "textures/DecBoilerButtonDown.png", 3, 1},
 	{ PadSpriteSheet,resourcesPath + "textures/ColchonetaSpriteSheet.png", 4},
@@ -88,6 +93,10 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ CarnivorousPlant , resourcesPath + "textures/PlantaCarnivora.png", 7, 1},
 	{ TomatoTree, resourcesPath + "textures/TomatoTree.png"},
 	{ BananaTree, resourcesPath + "textures/BananaTree.png"},
+	{ TriggerButtonPlay , resourcesPath + "textures/PuertasMenu_Play.png", 13, 1},
+	{ TriggerButtonExit , resourcesPath + "textures/PuertasMenu_Exit.png", 13, 1},
+	{ TriggerButtonCredits , resourcesPath + "textures/PuertasMenu_Credits.png", 13, 1},
+	{ TriggerButtonOptions , resourcesPath + "textures/PuertasMenu_Options.png", 13, 1},
 
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/Moneda.png" },
@@ -105,6 +114,16 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Smoke, resourcesPath + "textures/SmokeParticles-Sheet.png", 4},
 	{ WiFiWave, resourcesPath + "textures/WiFiWave.png" },
 	{ Foam, resourcesPath + "textures/foam_particles.png",4 },
+
+
+	//badges
+	{ badgeCapitalism,resourcesPath + "textures/MonedaUI.png" },
+	{ badgeController,resourcesPath + "textures/Mando.png" },
+	{ badgeStocks,resourcesPath + "textures/skullUI.png" },
+	{ badgeWifi,resourcesPath + "textures/Router.png" },
+	{ badgeTimed,resourcesPath + "textures/TreadmillPanel.png" },
+
+	{medals,resourcesPath + "textures/medals.png",3}
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_{
@@ -158,6 +177,26 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 
 	//Countdown
 	{ Go, "GO!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+
+	{NumZero,"0",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumOne,"1",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumTwo,"2",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumThree,"3",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumFour,"4",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumFive,"5",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumSix,"6",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumSeven,"7",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumEight,"8",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{NumNine,"9",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+
+	//winner msgs
+	{winner1,"GANA EL JUGADOR 1",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+	{winner2,"GANA EL JUGADOR 2",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+	{winner3,"GANA EL JUGADOR 3",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+	{winner4,"GANA EL JUGADOR 4",{COLOR(0xf79617ff)},FontId::NES_Chimera},
+
+	//Credits
+	{ ReturnText, "Press any key/button to return", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 };
 
 vector<Resources::MusicInfo> Resources::musics_{

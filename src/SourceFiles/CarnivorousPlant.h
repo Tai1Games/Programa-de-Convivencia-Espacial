@@ -13,7 +13,7 @@ class CarnivorousPlant : public Component
 private:
 	CarnivorousPlantViewer* viewer_;
 	int minAnimationSpeed_, maxAnimationSpeed_, playersInside_ = 0, marginUntilBite_ = 5,
-		idleFrames_, eatingFrames_, coinDamage_, damage_, maxFrames_, frameCount_ = 0;
+		coinDamage_, damage_, maxFrames_, frameCount_ = 0;
 	float increase_, actualSpeed_;
 	bool playerDetected_ = false;
 	Entity* player_ = nullptr;
