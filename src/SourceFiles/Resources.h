@@ -234,6 +234,8 @@ public:
 		BoilerButtonSlowSound,
 		BoilerButtonFastSound,
 
+		CarnivorousPlantSound,
+
 		// Weapons
 		BananaShootSound,
 		ExtinguisherSound,

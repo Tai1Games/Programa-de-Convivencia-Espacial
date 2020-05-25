@@ -35,6 +35,7 @@ void CarnivorousPlant::update()
 
 void CarnivorousPlant::bite()
 {
+	SDL_Game::instance()->getAudioMngr()->playChannel(Resources::AudioId::CarnivorousPlantSound, 0);
 	Health* healthPlayer = player_->getComponent<Health>(ComponentType::Health);
 	if (healthPlayer != nullptr && !healthPlayer->subtractLife(damage_)) healthPlayer->playerDead(playerCollHandler_);
 	else if (walletPlayer_ != nullptr) playerCollHandler_->addCoinDrop(std::make_tuple(walletPlayer_, GETCMP2(player_, PlayerData), coinDamage_));

@@ -235,6 +235,8 @@ vector<Resources::SoundInfo> Resources::sounds_{
 	{ BoilerButtonSlowSound, resourcesPath + "sound/effects/boilerSlow.wav" },
 	{ BoilerButtonFastSound, resourcesPath + "sound/effects/boilerFast.wav" },
 
+	{ CarnivorousPlantSound, resourcesPath + "sound/effects/carnivorousPlant.wav" },
+
 	// Weapons
 	{ BananaShootSound, resourcesPath + "sound/effects/bananaShoot.wav"},
 	{ ExtinguisherSound, resourcesPath + "sound/effects/extinguisherSound.wav" },
