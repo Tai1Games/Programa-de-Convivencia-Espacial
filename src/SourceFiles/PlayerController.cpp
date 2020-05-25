@@ -49,8 +49,8 @@ void PlayerController::init()
 
 	impulseRadError_ = CONST(float, "IMPULSE_ANGLE_ERROR") * PI / 180.0;
 
-	/*playerWidth_ = CONST(int, "PLAYER_W_SPRITE");
-	playerHeight_ = CONST(int, "PLAYER_H_SPRITE");*/
+	playerWidth_ = CONST(int, "PLAYER_W_SPRITE");
+	playerHeight_ = CONST(int, "PLAYER_H_SPRITE");
 }
 
 void PlayerController::handleInput()
@@ -89,8 +89,8 @@ void PlayerController::handleInput()
 			}
 			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::ImpulseFromAirSound, 0);
 			coll_->applyLinearImpulse(dirImpulse_, b2Vec2(0, 0)); //aplica la fuerza
-			//emitter_->setOffset(Vector2D(-dirImpulse_.NormalizedVector().x * (float)playerWidth_/2, dirImpulse_.NormalizedVector().y * playerHeight_/2));
-			b2Vec2 dir = dirImpulse_.NormalizedVector(); 
+			b2Vec2 dir = dirImpulse_.NormalizedVector();
+			emitter_->setOffset(Vector2D(-dir.x * playerHeight_/2, dir.y * playerHeight_/2 ));
 			emitter_->setDirection(Vector2D(-dir.x, dir.y));
 			emitter_->PlayStop();
 		}
