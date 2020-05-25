@@ -240,6 +240,7 @@ public:
 		BananaShootSound,
 		ExtinguisherSound,
 		TomatoExplosionSound,
+		ConfettiSound,
 
 		//Player
 		DeathSound,

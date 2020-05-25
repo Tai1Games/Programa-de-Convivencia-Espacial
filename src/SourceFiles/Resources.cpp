@@ -242,6 +242,7 @@ vector<Resources::SoundInfo> Resources::sounds_{
 	{ ExtinguisherSound, resourcesPath + "sound/effects/extinguisherSound.wav" },
 	{ PickSound, resourcesPath + "sound/effects/pick.wav"},
 	{ TomatoExplosionSound, resourcesPath + "sound/effects/tomatoExplosionSound.wav"},
+	{ ConfettiSound, resourcesPath + "sound/effects/confettiSound.wav"},
 
 	//Player
 	{ RespawnSound, resourcesPath + "sound/effects/RespawnSound.wav"},
