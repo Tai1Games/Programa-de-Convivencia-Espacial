@@ -28,7 +28,7 @@ void LobbyState::init()
 	joinedKb_[0] = false;  joinedKb_[1] = false;
 	joinedMouse_ = false;
 
-	playerTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::Body);
+	playerTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::PlayerAnimSheetLobby);
 	voidTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::PlayerPlaceholder);
 	ctrlTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::ControllerIcon);
 	kbTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::KeyboardIcon);
@@ -37,10 +37,10 @@ void LobbyState::init()
 	readyTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::Ready);
 
 
-	verticalIniPoint_ = CONST(int, "WINDOW_HEIGHT") / 2 - playerTexture_->getHeight() / 2;
-	horizontalIniPoint_ = CONST(int, "WINDOW_WIDTH") / 2 - (maxPlayers_ * (playerTexture_->getWidth() + CONST(int, "LOBBY_OFFSET_X")) / 2);
-	horizontalOffset_ = playerTexture_->getWidth() + CONST(int, "LOBBY_OFFSET_X");
-	playerIdVerticalOffset_ = playerTexture_->getWidth() + CONST(int, "LOBBY_PLAYERID_OFFSET_Y");
+	verticalIniPoint_ = CONST(int, "WINDOW_HEIGHT") / 2 - playerTexture_->getFrameHeight() / 2;
+	horizontalIniPoint_ = CONST(int, "WINDOW_WIDTH") / 2 - (maxPlayers_ * (playerTexture_->getFrameWidth() + CONST(int, "LOBBY_OFFSET_X")) / 2);
+	horizontalOffset_ = playerTexture_->getFrameWidth() + CONST(int, "LOBBY_OFFSET_X");
+	playerIdVerticalOffset_ = playerTexture_->getFrameHeight() + CONST(int, "LOBBY_PLAYERID_OFFSET_Y");
 	iconHorizontalOffset_ = CONST(int, "LOBBY_ICON_OFFSET");
 	pressReadyOffset_ = CONST(int, "LOBBY_READY_OFFSET");
 }
@@ -106,8 +106,8 @@ void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
 	SDL_Rect destRect = {
 		horizontalIniPoint_ + index * horizontalOffset_,
 		verticalIniPoint_,
-		playerTexture_->getWidth(),
-		playerTexture_->getHeight()
+		playerTexture_->getFrameWidth(),
+		playerTexture_->getFrameHeight()
 	};
 
 	if (playerInfo != nullptr)
@@ -115,7 +115,7 @@ void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
 	else voidTexture_->render(destRect);
 	
 	if (playerInfo != nullptr) {
-		destRect.y += playerTexture_->getHeight() + playerIdVerticalOffset_;
+		destRect.y += playerTexture_->getFrameHeight() + playerIdVerticalOffset_;
 		destRect.w /= 3; destRect.h /= 3;
 		string playerNum = to_string(playerInfo->id);
 		Texture playerNumTexture(SDL_Game::instance()->getRenderer(), playerNum,
@@ -136,14 +136,14 @@ void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
 			destRect.w = readyTexture_->getWidth();
 			destRect.h = readyTexture_->getHeight();
 			destRect.x = horizontalIniPoint_ + index * horizontalOffset_;
-			destRect.y = playerTexture_->getHeight() + pressReadyOffset_ + verticalIniPoint_;
+			destRect.y = playerTexture_->getFrameHeight() + pressReadyOffset_ + verticalIniPoint_;
 			readyTexture_->render(destRect);
 		}
 		else {
 			destRect.w = pressReadyTexture_->getWidth();
 			destRect.h = pressReadyTexture_->getHeight();
 			destRect.x = horizontalIniPoint_ + index * horizontalOffset_;
-			destRect.y = playerTexture_->getHeight() + pressReadyOffset_ + verticalIniPoint_;
+			destRect.y = playerTexture_->getFrameHeight() + pressReadyOffset_ + verticalIniPoint_;
 			pressReadyTexture_->render(destRect);
 		}
 	}

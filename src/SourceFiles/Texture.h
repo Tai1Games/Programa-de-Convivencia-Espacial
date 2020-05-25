@@ -20,8 +20,17 @@ public:
 		return width_;
 	}
 
+	inline int getFrameWidth() const {
+		return width_ / nHorizontalFrames_;
+	}
+
 	inline int getHeight() const {
 		return height_;
+	}
+	
+
+	inline int getFrameHeight() const {
+		return height_ / nVerticalFrames_;
 	}
 
 	inline bool isReady() const {
