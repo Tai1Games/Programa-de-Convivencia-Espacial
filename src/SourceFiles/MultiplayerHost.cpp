@@ -11,7 +11,7 @@ MultiplayerHost::MultiplayerHost() {
 	}
 
 	hostIPAddress_ = getHostIpAddress();
-
+	std::cout << "IP del host es: " << hostIPAddress_ << std::endl;
 	if (SDLNet_ResolveHost(&hostIp_, nullptr, 2000) < 0)
 		throw;
 

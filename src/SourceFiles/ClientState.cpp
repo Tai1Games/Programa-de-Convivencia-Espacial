@@ -9,18 +9,18 @@
 ClientState::ClientState(char* host) {
 	if (SDLNet_Init() < 0) {
 		std::cout << "Algo salió mal :c" << std::endl;
-		throw;
+		SDL_Game::instance()->exitGame();
 	}
 
 	if (SDLNet_ResolveHost(&hostIp_, host, 2000) < 0) {
 		std::cout << "Error al resolver host" << std::endl;
-		throw;
+		SDL_Game::instance()->exitGame();
 	}
 
 	hostConnection_ = SDLNet_TCP_Open(&hostIp_);
 	if (!hostConnection_) {
 		std::cout << "Error al conectar con host" << std::endl;
-		throw;
+		SDL_Game::instance()->exitGame();
 	}
 
 	//revisar si nos hemos conectado
