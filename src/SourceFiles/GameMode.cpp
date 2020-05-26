@@ -40,13 +40,18 @@ void GameMode::renderProgressBars(const std::vector<double>& progressValues, con
 		//Barra de progreso vac�a
 		SDL_Rect dest = { healthViewerPos_[i].x, healthViewerPos_[i].y ,
 		emptyProgressBars_[i % 2]->getWidth() * barsScale, emptyProgressBars_[i % 2]->getHeight() * barsScale };
-		emptyProgressBars_[i % 2]->render(dest, angle, flip);
+		emptyProgressBars_[i % 2]->render(dest, angle, 0, 0, flip);
 
 		//Barra de progreso rellena
 		float progresV = progressValues[i] / goalScore;
 		float value = (i % 2 == 0) ? progresV : 1 - progresV;
-		dest = { int(healthViewerPos_[i].x), int(healthViewerPos_[i].y),
-		int(progressBars_[i % 2]->getWidth() * barsScale * value), int(progressBars_[i % 2]->getHeight() * barsScale) };
+		dest = {
+			int(healthViewerPos_[i].x),
+			int(healthViewerPos_[i].y),
+			int(progressBars_[i % 2]->getWidth() * barsScale * value),
+			int(progressBars_[i % 2]->getHeight() * barsScale)
+		};
+		// * value para recortar una parte de la imagen
 		SDL_Rect clip = { 0, 0, int(progressBars_[i % 2]->getWidth() * value), int(progressBars_[i % 2]->getHeight()) };
 		progressBars_[i % 2]->render(dest, angle, clip, flip);
 	}

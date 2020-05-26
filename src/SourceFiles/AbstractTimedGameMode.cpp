@@ -26,7 +26,13 @@ void AbstractTimedGameMode::render()
 	if (timeToEnd_ < timeSinceStart_) {
 		if (roundFinished_ && winnerId_ != -1) {
 			Texture* ganador = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::winner1 + winnerId_);
-			ganador->render(halfWinWidth_ - ganador->getWidth() * 0.5, halfWinHeight_);
+			SDL_Rect destRect {
+				halfWinWidth_ - ganador->getWidth() * 0.5,
+				halfWinHeight_,
+				ganador->getWidth(),
+				ganador->getHeight()
+			};
+			ganador->render(destRect, 0, 0);
 		}
 		else {
 			suddenDeathRenderTimer_ += sPerFrame_;
@@ -40,7 +46,7 @@ void AbstractTimedGameMode::render()
 				suddenDeathRect.y = halfWinHeight_ - suddenDeathTexture_->getHeight() * 1.5;
 				suddenDeathRect.w = suddenDeathTexture_->getWidth() * 3;
 				suddenDeathRect.h = suddenDeathTexture_->getHeight() * 3;
-				suddenDeathTexture_->render(suddenDeathRect);
+				suddenDeathTexture_->render(suddenDeathRect, 0, 0);
 			}
 		}
 	}
@@ -54,16 +60,16 @@ void AbstractTimedGameMode::render()
 
 void AbstractTimedGameMode::renderTimer(int seconds, int minutes)
 {
-	canvasTimerTexture_->render(canvasTimerRect_);
+	canvasTimerTexture_->render(canvasTimerRect_, 0, 0);
 
 	string timeString = to_string(minutes);
 	vector<Texture*> timeTextTextures;
 
-	for (int i = 0; i < timeString.length(); i++) { //sacamos los dígitos y los metemos en un vector
+	for (int i = 0; i < timeString.length(); i++) { //sacamos los dï¿½gitos y los metemos en un vector
 		timeTextTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Zero + timeString[i] - '0'));
 	}
 	timeTextTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Colon));
-	timeString = to_string(seconds);	
+	timeString = to_string(seconds);
 	if(timeString.length() < 2) timeTextTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Zero)); //forzamos 2 digitos
 	for (int i = 0; i < timeString.length(); i++) {
 		timeTextTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Zero + timeString[i] - '0'));
@@ -76,7 +82,7 @@ void AbstractTimedGameMode::renderTimer(int seconds, int minutes)
 		timeTextRect.w = timeTextTextures[i]->getWidth() * 0.7;
 		timeTextRect.h = timeTextTextures[i]->getHeight() * 0.7;
 
-		timeTextTextures[i]->render(timeTextRect);
+		timeTextTextures[i]->render(timeTextRect, 0, 0);
 	}
 }
 
