@@ -101,4 +101,6 @@ void PlayableMenuState::render()
 void PlayableMenuState::onLoaded()
 {
 	player->getComponent<Collider>(ComponentType::Collider)->setTransform(b2Vec2(tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y), 0);
+	player->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects)->deAttachFromObject();
+	player->getComponent<PlayerController>(ComponentType::PlayerController)->resetImpulseForce();
 }
