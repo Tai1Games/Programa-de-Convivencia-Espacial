@@ -11,6 +11,8 @@
 #include "BulletPool.h"
 #include "ConfettiPool.h"
 
+class AnimatedViewer;
+
 using namespace std;
 
 // esta clase es equivalente a un nivel del juego
@@ -26,7 +28,7 @@ private:
 	CollisionHandler* collisionHandler_ = nullptr;
 	Texture* fondo_ = nullptr;
 	Entity* player = nullptr;
-
+	std::vector <AnimatedViewer*> doors_;
 	InputBinder* playerControl;
 public:
 	PlayableMenuState() {};
