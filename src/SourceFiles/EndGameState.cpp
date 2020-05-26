@@ -56,6 +56,7 @@ void EndGameState::init()
 		playerV->setFrame(0, sortedPlayerInfo_[i]->playerSkin);
 
 		x = medalOffset - actMedalWH.x / 2;
+		y += actMedalWH.y / 2;
 
 		if (i < 3) {//si le toca medallita
 			UIViewer* medalV = auxEntity->addComponent<UIViewer>(Resources::medals, b2Vec2(x, y), 1);
@@ -63,6 +64,8 @@ void EndGameState::init()
 			medalV->setWHUIElement(actMedalWH);
 		}
 		x += actMedalWH.x;
+		y += actBadgeWH.y / 2;
+
 		//lista de chapitas
 		vector<int> chapitas;
 		for (int j = 0; j < sortedPlayerInfo_[i]->matchesWon.size(); j++) {
@@ -82,7 +85,7 @@ void EndGameState::init()
 			x += actBadgeWH.x;
 		}
 
-		y += actPlayerWH.y;
+		y += actPlayerWH.y - actMedalWH.y/2 - actBadgeWH.y/2;
 	}
 
 	b2Vec2 textWH(CONST(int, "LEADERBOARD_TEXT_W"), CONST(int, "LEADERBOARD_TEXT_H"));
