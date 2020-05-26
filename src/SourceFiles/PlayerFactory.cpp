@@ -27,6 +27,7 @@ Entity* PlayerFactory::createBasePlayer(EntityManager* eMan, b2World* physicsWor
 Entity* PlayerFactory::createPlayerWithHealth(EntityManager* eMan, b2World* physicsWorld, int playerID, int playerTextureID, int posX, int posY, InputBinder* ib, int healthPoints, int skin) {
 	Entity* p = createBasePlayer(eMan, physicsWorld, playerID, playerTextureID, posX, posY, ib, skin);
 	p->addComponent<Health>(healthPoints);
+
 	p->addComponent<HealthViewer>(Resources::ActiveHealth, Resources::DisableHealth, skin);
 	return p;
 }

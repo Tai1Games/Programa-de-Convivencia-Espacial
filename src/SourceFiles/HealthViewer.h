@@ -24,7 +24,7 @@ private:
 	double lifeDrawOffset_ = 0;
 	int playerSkin_;
 
-	void setColorBySkin();
+	void setColorBySkin() const;
 
 public:
 	//Punteros a las 2 texturas de la vida y la posición de origen

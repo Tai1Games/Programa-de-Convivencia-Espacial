@@ -105,6 +105,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Router,resourcesPath + "textures/Router2.png" },
 	{ RoombaSpriteSheet, resourcesPath + "textures/Roomba.png", 5},
 	{ Remote, resourcesPath + "textures/Mando.png"},
+	{ PlayerStocks, resourcesPath + "textures/playerStocks.png",1,10},
 
 	// miscelánea
 	{ Debug, resourcesPath + "textures/debug.png" },

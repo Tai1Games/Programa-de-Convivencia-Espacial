@@ -119,6 +119,7 @@ public:
 		Router,
 		RoombaSpriteSheet,
 		Remote,
+		PlayerStocks,
 
 		// miscel�nea
 		Debug,
