@@ -35,7 +35,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SuddenDeathTimeModeText, resourcesPath + "textures/suddenDeathTimeModeText.png"},
 
 	{ EmptyProgressBar, resourcesPath + "textures/EmptyProgressBar.png"},
-	{ EmptyProgressBar2, resourcesPath + "textures/EmptyProgressBar2.png"},
+	{ EmptyProgressBar2, resourcesPath + "textures/EmptyProgressBar2.png", 16, 1},
 	{ ProgressBar, resourcesPath + "textures/ProgressBar.png"},
 	{ ProgressBar2, resourcesPath + "textures/ProgressBar2.png"},
 	{ MouseIcon, resourcesPath + "textures/mouse_icon.png"},
