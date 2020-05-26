@@ -166,6 +166,11 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{ Two, "2", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ Three, "3", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ Four, "4", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Five, "5", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Six, "6", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Seven, "7", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Eight, "8", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Nine, "9", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ MoveTutorial, "Bienvenido a PCE! Para moverte, manten pulsado y luego suelta el boton A / clic derecho / Tab / F / Enter mientras apuntas con el joystick izquierdo / raton / WASD / IJKL. Cuanto mas tiempo mantengas, mayor sera el impulso! Que todo el mundo se impulse para continuar!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ HoldTutorial, "Es dificil impulsarse en el aire, asi que pulsa el trigger izquierdo / Shift para agarrarse a un objeto, como una pared. Esto te parara y te permitira cargar un mayor impulso. Para soltarte, suelta el boton en mando, o presiona otra vez en teclado. Que todo el mundo se agarre a algo para continuar!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ GrabTutorial, "Las armas te permitiran lesionar a tus oponentes. Coge armas con el boton Y / Q / E / , / O. Que todo el mundo coja un arma para continuar!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
@@ -192,7 +197,7 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{NumNine,"9",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
 
 	//timers
-	{Colon,":",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
+	{Colon,":",{ COLOR(0xc7f2edff) },FontId::NES_Chimera},
 
 	//winner msgs
 	{winner1,"GANA EL JUGADOR 1",{COLOR(0xf79617ff)},FontId::NES_Chimera},

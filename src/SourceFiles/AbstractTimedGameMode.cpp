@@ -56,18 +56,17 @@ void AbstractTimedGameMode::renderTimer(int seconds, int minutes)
 {
 	canvasTimerTexture_->render(canvasTimerRect_);
 
+	string timeString = to_string(minutes);
 	vector<Texture*> timeTextTextures;
-	int l = (minutes > 0) ? log10(minutes) : log(1);
 
-	for (int i = 0; i <= l; i++) { //sacamos los dígitos y los metemos en un vector
-		timeTextTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::NumZero + minutes / pow(10, l - i)));
-		minutes %= 10;
+	for (int i = 0; i < timeString.length(); i++) { //sacamos los dígitos y los metemos en un vector
+		timeTextTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Zero + timeString[i] - '0'));
 	}
 	timeTextTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Colon));
-
-	for (int i = 0; i <= 1; i++) { //sacamos los dígitos y los metemos en un vector
-		timeTextTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::NumZero + seconds / pow(10, 1 - i)));
-		seconds %= 10;
+	timeString = to_string(seconds);	
+	if(timeString.length() < 2) timeTextTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Zero)); //forzamos 2 digitos
+	for (int i = 0; i < timeString.length(); i++) {
+		timeTextTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Zero + timeString[i] - '0'));
 	}
 
 	for (int i = 0; i < timeTextTextures.size(); i++) {

@@ -80,13 +80,11 @@ void TimeGameMode::renderKillMarker() {
 
 	for (int k = 0; k < playerKills_.size(); k++) {
 
-		int killsNumb = playerKills_[k];
+		string killsNumb = to_string(playerKills_[k]);
 		vector<Texture*> killsNumbTextures;
-		int l = (killsNumb > 0) ? log10(killsNumb) : log(1); //no hagais el log de 0 xd
 
-		for (int i = 0; i <= l; i++) { //sacamos los digitos y los metemos en un vector
-			killsNumbTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::NumZero + killsNumb / pow(10, l - i)));
-			killsNumb %= 10;
+		for (int i = 0; i < killsNumb.length(); i++) { //sacamos los dígitos y los metemos en un vector
+			killsNumbTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Zero + killsNumb[i] - '0'));
 		}
 		
 		SDL_Rect killsTextTexture;

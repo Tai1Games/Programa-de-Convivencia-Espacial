@@ -73,13 +73,11 @@ void CapitalismGameMode::renderCoinsMarker()
 {
 	for (int k = 0; k < playerWallets_.size(); k++) {
 
-		int coinNumb = playerCoins_[k];
+		string coinNumb = to_string(playerCoins_[k]);
 		vector<Texture*> coinNumbTextures;
-		int l = (coinNumb > 0) ? log10(coinNumb) : log(1); //no hagais el log de 0 xd
 
-		for (int i = 0; i <= l; i++) { //sacamos los dígitos y los metemos en un vector
-			coinNumbTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::NumZero + coinNumb / pow(10, l - i)));
-			coinNumb %= 10;
+		for (int i = 0; i < coinNumb.length(); i++) { //sacamos los dígitos y los metemos en un vector
+			coinNumbTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Zero + coinNumb[i] - '0'));
 		}
 
 		SDL_Rect coinImageRect;
