@@ -48,6 +48,7 @@ private:
 	Texture* backgroundTex_ = nullptr;
 	Entity* choseMapText_;
 	Entity* choseModeText_;
+	Entity* pressEnterText_;
 
 #pragma region constantes de tamanos 
 
