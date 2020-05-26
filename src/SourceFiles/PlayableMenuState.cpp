@@ -45,7 +45,7 @@ void PlayableMenuState::init()
 		"assets/game/tilemaps/MenuRoom.json",
 		entityManager_, physicsWorld_, &bulletPool_, &confettiPool_, &staplerPool_, nullptr);
 	tmap->init();
-	doors_ = tmap->getDoorViewers();
+	doors_ = *tmap->getDoorViewers();
 	collisionHandler_ = new CollisionHandler(nullptr, tmap);
 	physicsWorld_->SetContactListener(collisionHandler_);
 

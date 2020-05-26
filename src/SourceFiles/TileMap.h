@@ -68,7 +68,7 @@ public:
 	b2Vec2 getPlayerSpawnPoint(int id);
 	b2Vec2 getObjSpecialSpawnPos() { return specialObjectsSpawnPoint_; };
 	std::vector<b2Vec2> getCoinsSpawnPoints() { return coinsSpawnPoints_; }
-	std::vector<AnimatedViewer*>getDoorViewers() { return doors_; }
+	std::vector<AnimatedViewer*>*getDoorViewers() { return &doors_; }
 	FireBallGenerator* getFireballGen() { return boilerAux_; }
 };
 
