@@ -32,6 +32,14 @@ void UIViewer::draw() const
 	}
 }
 
+
+
+
+
+
+
+
+
 int UIViewer::getW()
 {
 	if (tex_ == nullptr)	return 0;
