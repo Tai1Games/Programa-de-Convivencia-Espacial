@@ -47,6 +47,7 @@ private:
 
 	Texture* backgroundTex_ = nullptr;
 	Entity* choseMapText_;
+	Entity* choseModeText_;
 
 #pragma region constantes de tamanos 
 

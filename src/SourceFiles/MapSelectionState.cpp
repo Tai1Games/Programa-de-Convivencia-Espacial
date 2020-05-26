@@ -32,6 +32,11 @@ void MapSelectionState::init() {
 	choseMapText_ = entityManager_->addEntity();
 	UIViewer*  uiV = choseMapText_->addComponent<UIViewer>(Resources::ChoseMap,b2Vec2(0,0),1);
 	uiV->setPosUIElement(b2Vec2((CONST(int, "WINDOW_WIDTH") - uiV->getW()) / 2, CONST(int, "CHOSE_MAP_TEXT_Y_OFFSET")));
+
+	choseModeText_ = entityManager_->addEntity();
+	uiV = choseModeText_->addComponent<UIViewer>(Resources::ChoseMode, b2Vec2(0, 0), 1);
+	uiV->setPosUIElement(b2Vec2((CONST(int, "WINDOW_WIDTH") - uiV->getW()) / 2, CONST(int, "CHOSE_MAP_TEXT_Y_OFFSET")));
+	choseModeText_->setActive(false);
 }
 
 void MapSelectionState::handleInput()
@@ -254,6 +259,9 @@ void MapSelectionState::updateMenu() {
 	for (auto& e : imagesMaps_) {
 		e->setActive(menuPointer_ != 1);
 	}
+
+	choseMapText_->setActive(menuPointer_ != 1);
+	choseModeText_->setActive(menuPointer_ == 1);
 
 	for (auto& i : iconsMaps_) {
 		for (auto& j : i) {

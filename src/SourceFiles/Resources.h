@@ -164,6 +164,8 @@ public:
 		GardenRoomText,
 		//Menu eleccion de mapas
 		ChoseMap,
+		ChoseMode,
+
 
 		//tutorial
 		Completed,
@@ -268,7 +270,7 @@ public:
 		ImpulseFromAirSound,
 		ImpulseAttachedSound,
 
-    //menu
+		//menu
 		MenuMove,
 		MenuForward,
 		MenuBackward
