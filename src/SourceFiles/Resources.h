@@ -42,10 +42,7 @@ public:
 		SuddenDeathCapitalismModeText,
 		SuddenDeathTimeModeText,
 
-		EmptyProgressBar,
-		EmptyProgressBar2,
 		ProgressBar,
-		ProgressBar2,
 
 
 		CursorUiSelectMap,
@@ -231,6 +228,10 @@ public:
 
 		//Credits
 		ReturnText,
+
+		//Options menu
+		OptionsText,
+		GoBackText,
 	};
 
 	enum AudioId : unsigned char {
