@@ -23,7 +23,7 @@ Entity* WeaponFactory::makeSlipper(EntityManager* entityManager, b2World* physic
 	e->addComponent<Viewer>(Resources::Slipper);
 	e->addComponent<SlipperWeapon>(WeaponID::Slipper, CONST(int, "FLIPFLOP_DAMAGE"), CONST(int, "FLIPFLOP_IMPACT_DAMAGE"),
 		CONST(int, "FLIPFLOP_COOLDOWN_FRAMES"), CONST(int, "FLIPFLOP_IMPACT_FORCE"));
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -40,7 +40,7 @@ Entity* WeaponFactory::makeConfetti(Entity* e, EntityManager* entityManager, b2W
 	pE->setOffset({ CONST(double, "CONFETTI_PARTICLE_OFFSET_X"), CONST(double, "CONFETTI_PARTICLE_OFFSET_Y") });
 	e->addComponent<TimedDespawn>(CONST(double, "CONFETTI_TIME_FOR_DESPAWN") * FRAMES_PER_SECOND);
 	e->addComponent<ConfettiWeapon>(WeaponID::Confetti, CONST(int, "CONFETTI_DAMAGE"), CONST(int, "CONFETTI_IMPACT_DAMAGE"), CONST(int, "CONFETTI_COOLDOWN_FRAMES"), CONST(int, "CONFETTI_IMPACT_FORCE"));
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -55,7 +55,7 @@ Entity* WeaponFactory::makeBall(EntityManager* entityManager, b2World* physicsWo
 	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "BALL_W_SPRITE"), CONST(int, "BALL_H_SPRITE") }, aux);
 	e->addComponent <Viewer>(Resources::Ball);
 	e->addComponent<Weapon>(WeaponID::Pelota, CONST(int, "BOUNCINGBALL_IMPACT_DAMAGE"), CONST(int, "BOUNCINGBALL_IMPACT_FORCE"));
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -69,7 +69,7 @@ Entity* WeaponFactory::makeStapler(Entity* e, EntityManager* entityManager, b2Wo
 	e->addComponent <Viewer>(Resources::Stapler);
 	e->addComponent<TimedDespawn>(CONST(double, "CONFETTI_TIME_FOR_DESPAWN") * FRAMES_PER_SECOND);
 	e->addComponent<StaplerWeapon>(CONST(int, "STAPLER_IMPACT_DAMAGE"), bp, CONST(int, "STAPLER_IMPACT_FORCE"));
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -84,7 +84,7 @@ Entity* WeaponFactory::makeExtinguisher(EntityManager* entityManager, b2World* p
 	ParticleEmitter* emitter = entity->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Foam, 6, 4, 10, 200, 80, 1000, 0.5, 20);
 	entity->addComponent<ExtinguisherWeapon>(WeaponID::Extinguisher, CONST(int, "EXTINGUISHER_IMPACT_DAMAGE"),
 		CONST(int, "EXTINGUISHER_COOLDOWN_FRAMES"), CONST(int, "EXTINGUISHER_IMPACT_FORCE"));
-	entity->addComponent<ColliderViewer>();
+	//entity->addComponent<ColliderViewer>();
 
 	return entity;
 }
@@ -101,7 +101,7 @@ Entity* WeaponFactory::makeTomato(Entity* e, EntityManager* entityManager, b2Wor
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::TomatoRing, 5, 1, 5, 1000, 20, 100, 0, 360);
 	pE->setMaxParticles(1);
 	e->addComponent<TomatoWeapon>();
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -116,7 +116,7 @@ Entity* WeaponFactory::makeDumbbell(EntityManager* entityManager, b2World* physi
 	e->addComponent <Viewer>(Resources::Dumbbell);
 	e->addComponent<MeleeWeapon>(WeaponID::Mancuerna, CONST(int, "DUMBBELL_DAMAGE"), CONST(int, "DUMBBELL_IMPACT_DAMAGE"),
 		CONST(int, "DUMBBELL_COOLDOWN_FRAMES"), CONST(int, "DUMBBELL_IMPACT_FORCE"));
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -133,7 +133,7 @@ Entity* WeaponFactory::makeBanana(Entity* e, EntityManager* entityManager, b2Wor
 	ParticleEmitter* pE = e->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::BananaSkin, 100, 1, 5, 1000, 50, 100, 0, 360);
 	pE->setMaxParticles(1);
 	e->addComponent<BananaWeapon>(pb, CONST(double, "BANANA_DAMAGE"), CONST(double, "BANANA_IMPACT_FORCE"));
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }

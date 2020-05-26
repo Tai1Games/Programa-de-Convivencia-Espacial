@@ -12,6 +12,7 @@
 #include "PlayState.h"
 #include "PauseState.h"
 #include "MenuState.h"
+#include "MapSelectionState.h"
 #include "MidGameState.h"
 #include "TransitionState.h"
 #include "LobbyState.h"
@@ -73,7 +74,7 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 		char* host;
 		switch (state) {
 		case States::menu:
-			states_[state] = new MenuState(); //numberOfPlayers usado como ownerID
+			states_[state] = new MapSelectionState(0);
 			break;
 		case States::play:
 		{

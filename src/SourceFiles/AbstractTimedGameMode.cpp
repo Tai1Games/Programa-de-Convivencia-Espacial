@@ -6,7 +6,7 @@ void AbstractTimedGameMode::init(PlayState* game)
 	GameMode::init(game);
 	sPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 	suddenDeathRenderTime_ = CONST(double, "SUDDEN_DEATH_RENDER_TIME");
-	
+
 	winWidth_ = CONST(int, "WINDOW_WIDTH");
 	winHeigth_ = CONST(int, "WINDOW_HEIGHT");
 
@@ -17,7 +17,6 @@ void AbstractTimedGameMode::init(PlayState* game)
 	canvasTimerRect_.y = 0;
 	canvasTimerRect_.w = CONST(int, "COUNTDOWN_UI_WIDTH");
 	canvasTimerRect_.h = CONST(int, "COUNTDOWN_UI_HEIGTH");
-
 }
 
 void AbstractTimedGameMode::render()
@@ -26,16 +25,14 @@ void AbstractTimedGameMode::render()
 
 	if (timeToEnd_ < timeSinceStart_) {
 		if (roundFinished_ && winnerId_ != -1) {
-			string winMsg = "Gana el jugador " + (winnerId_ + 1);
-			Texture ganador(SDL_Game::instance()->getRenderer(), winMsg,
-				SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
+			Texture* ganador = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::winner1 + winnerId_);
 			SDL_Rect destRect {
-				halfWinWidth_ - ganador.getWidth() * 0.5,
+				halfWinWidth_ - ganador->getWidth() * 0.5,
 				halfWinHeight_,
-				ganador.getWidth(),
-				ganador.getHeight()
+				ganador->getWidth(),
+				ganador->getHeight()
 			};
-			ganador.render(destRect, 0, 0);
+			ganador->render(destRect, 0, 0);
 		}
 		else {
 			suddenDeathRenderTimer_ += sPerFrame_;
@@ -64,19 +61,29 @@ void AbstractTimedGameMode::render()
 void AbstractTimedGameMode::renderTimer(int seconds, int minutes)
 {
 	canvasTimerTexture_->render(canvasTimerRect_, 0, 0);
-	string timeText;
-	if (seconds < 10) timeText = to_string(minutes) + ":0" + to_string(seconds);
-	else timeText = to_string(minutes) + ":" + to_string(seconds);
-	Texture timeTextTexture(SDL_Game::instance()->getRenderer(), timeText,
-		SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
 
-	SDL_Rect timeTextRect;
-	timeTextRect.x = halfWinWidth_ - timeTextTexture.getWidth() * 0.7 * 0.5;
-	timeTextRect.y = 7;
-	timeTextRect.w = timeTextTexture.getWidth() * 0.7;
-	timeTextRect.h = timeTextTexture.getHeight() * 0.7;
+	string timeString = to_string(minutes);
+	vector<Texture*> timeTextTextures;
 
-	timeTextTexture.render(timeTextRect, 0, 0);
+	for (int i = 0; i < timeString.length(); i++) { //sacamos los d�gitos y los metemos en un vector
+		timeTextTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Zero + timeString[i] - '0'));
+	}
+	timeTextTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Colon));
+	timeString = to_string(seconds);
+	if(timeString.length() < 2) timeTextTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Zero)); //forzamos 2 digitos
+	for (int i = 0; i < timeString.length(); i++) {
+		timeTextTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Zero + timeString[i] - '0'));
+	}
+
+	for (int i = 0; i < timeTextTextures.size(); i++) {
+		SDL_Rect timeTextRect;
+		timeTextRect.x = halfWinWidth_ - timeTextTextures[i]->getWidth()/3 * timeTextTextures.size() + timeTextTextures[i]->getWidth()/1.5 * i;
+		timeTextRect.y = 7;
+		timeTextRect.w = timeTextTextures[i]->getWidth() * 0.7;
+		timeTextRect.h = timeTextTextures[i]->getHeight() * 0.7;
+
+		timeTextTextures[i]->render(timeTextRect, 0, 0);
+	}
 }
 
 void AbstractTimedGameMode::update()

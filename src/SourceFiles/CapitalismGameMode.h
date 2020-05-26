@@ -41,6 +41,5 @@ public:
 	virtual void update() override;
 	virtual void createPlayers(PlayState* game);
 
-
 	void createCoin(b2Vec2 spawnPos, int player = -1, int val = 1);
 };

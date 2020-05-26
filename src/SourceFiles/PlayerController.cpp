@@ -71,6 +71,7 @@ void PlayerController::handleInput()
 		if (attachedTo != nullptr) {
 			if (isImpulseValid(dirImpulse_))
 			{
+				attachesToObj_->setCantAttach();
 				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::ImpulseAttachedSound, 0);
 				dirImpulse_ *= -1;
 				attachedTo->applyLinearImpulse(dirImpulse_, b2Vec2(0, 0));

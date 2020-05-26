@@ -38,7 +38,7 @@ void ClientState::update()
 	doneReceiving_ = false;
 	while (!doneReceiving_) {
 		//Como mucho espera un frame a recibir informacion, si no prosigue con el juego
-		if (SDLNet_CheckSockets(socketSet_, 17) > 0) {
+		if (SDLNet_CheckSockets(socketSet_, 16) > 0) {
 			if (SDLNet_SocketReady(hostConnection_)) {
 				if (SDLNet_TCP_Recv(hostConnection_, buffer, 1) <= 0) {
 					std::cout << "error al recibir datos" << std::endl;
