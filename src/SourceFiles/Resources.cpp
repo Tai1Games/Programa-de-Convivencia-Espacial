@@ -22,7 +22,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SpaceBackground, resourcesPath + "textures/Background_SpaceMenus.png"},
 
 	// UI
-	{ ActiveHealth, resourcesPath + "textures/VidaActiva.png" },
+	{ ActiveHealth, resourcesPath + "textures/VidaActiva.png", 1, 10 },
 	{ DisableHealth, resourcesPath + "textures/VidaInactiva.png" },
 
 	{ Slider, resourcesPath + "textures/Slider.png"},

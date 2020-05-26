@@ -32,22 +32,15 @@ void HealthViewer::update()
 void HealthViewer::draw() const
 {
 	int player = playerData_->getPlayerNumber();
-	setColorBySkin();
 	SDL_Rect dest = {pos_.x,pos_.y, lifeWidth_, lifeHeight_};
 	for (int i = 0; i < he->getHealthMax(); i++) {
-		if (player % 2 == 0){
-			dest.x = pos_.x + i*(lifeWidth_ + lifeDrawOffset_);
-		}
-		else{
-			dest.x = pos_.x -(i*(lifeWidth_ + lifeDrawOffset_));
-		}
+		// +- offset dependiendo de la posicion del jugador
+		dest.x = pos_.x + ((player % 2 == 0) ? 1 : -1) * i * (lifeWidth_ + lifeDrawOffset_);
 
-		if ((i+1) <= he->getHealth()) {		//Si tiene esas X vidas las muertra como llenas
-			full->render(dest, 0, SDL_Rect{ 0, 0, 613,667 },flip_);
-		}
-		else {		//Si no las tiene, se dibujarán como vacias
-			empty->render(dest, 0, SDL_Rect{ 0, 0, 613,667 },flip_);
-		}
+		if ((i+1) <= he->getHealth())	//Si tiene esas X vidas las muertra como llenas
+			full->render(dest, 0, 0, playerSkin_, flip_);
+		else		//Si no las tiene, se dibujarán como vacias
+			empty->render(dest, 0, 0);
 	}
 
 }
@@ -59,33 +52,4 @@ void HealthViewer::handleInput() {
 void HealthViewer::setPos(int player){
 	pos_.x = (player % 2 == 0) ? (CONST(int,"LIFE_MARGIN_H")) : (CONST(int,"WINDOW_WIDTH") - CONST(int,"LIFE_MARGIN_H")- CONST(int,"LIFE_WIDTH"));
 	pos_.y = (player < 2) ? (CONST(double,"LIFE_MARGIN_V")) : (CONST(int,"WINDOW_HEIGHT") - CONST(double,"LIFE_MARGIN_V") - CONST(int,"LIFE_HEIGTH"));
-}
-
-void HealthViewer::setColorBySkin() const
-{
-	switch (playerSkin_)
-	{
-	case 0:
-	case 1:
-		full->setColor(SDL_Color{ 199, 220, 208 });
-		break;
-	case 2:
-	case 3:
-		full->setColor(SDL_Color{ 232, 59, 59 });
-		break;
-	case 4:
-	case 5:
-		full->setColor(SDL_Color{ 77, 155, 230 });
-		break;
-	case 6:
-	case 7:
-		full->setColor(SDL_Color{ 145, 219, 105 });
-		break;
-	case 8:
-	case 9:
-		full->setColor(SDL_Color{ 249, 194, 43 });
-		break;
-	default:
-		break;
-	}
 }
