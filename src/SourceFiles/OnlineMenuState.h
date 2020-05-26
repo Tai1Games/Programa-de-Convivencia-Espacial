@@ -17,15 +17,19 @@ private:
 
 	int tinkyOffset_ = CONST(int, "WINDOW_WIDTH") / 4;
 
-	int xOffset_ = CONST(int, "WINDOW_WIDTH") / 3;
+	int xOffset_ = CONST(int, "WINDOW_WIDTH") / 2;
 	int yOffset_ = CONST(int, "WINDOW_HEIGHT") / 7;
 
 	int numberOfRounds_ = 3;
 
 	Texture* fondo_ = nullptr;
 
+	Texture* cursorTexture_ = nullptr;
+
 	UIViewer* menuCursor_ = nullptr;
+	UIViewer* menuCursor2_ = nullptr;
 	std::vector<Entity*> texts_;
+	std::vector<Texture*> textures_;
 
 	void updatePointer(int n);
 	void createText();

@@ -14,8 +14,11 @@ void OnlineMenuState::init() {
 	ownerPlayerBinder_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo()->at(ownerPlayerID_)->inputBinder;
 	Entity* miniTinky = entityManager_->addEntity();
 	menuCursor_ = miniTinky->addComponent<UIViewer>(Resources::Rocket, b2Vec2(0, 0), 1, 90);
-	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (pointer_ + 1) - 50));
+	menuCursor2_ = miniTinky->addComponent<UIViewer>(Resources::Rocket, b2Vec2(0, 0), 1, 270);
+	cursorTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Rocket);
+
 	createText();
+	updatePointer(0);
 
 	//FONDO
 	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SpaceBackground);
@@ -73,7 +76,8 @@ void OnlineMenuState::updatePointer(int n) {
 	pointer_ += size + n;
 	pointer_ %= size;
 
-	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (pointer_ + 1) - 50));
+	menuCursor_->setPosUIElement(b2Vec2(xOffset_ - textures_[pointer_]->getWidth()*1.5 / 2 - cursorTexture_->getWidth() * 2, yOffset_ * (pointer_ + 1) - 50));
+	menuCursor2_->setPosUIElement(b2Vec2(xOffset_ + textures_[pointer_]->getWidth()*1.5 / 2 + cursorTexture_->getWidth(), yOffset_ * (pointer_ + 1) - 50));
 }
 
 void OnlineMenuState::createText() { //preparar los textos
@@ -86,12 +90,13 @@ void OnlineMenuState::createText() { //preparar los textos
 
 	while (start <= end) {
 		texts_.push_back(entityManager_->addEntity());
-		texts_.back()->addComponent<UIViewer>(start, b2Vec2(xOffset_, (start - offset) * yOffset_), 1.5, 0);
+		textures_.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(start));
+		texts_.back()->addComponent<UIViewer>(start, b2Vec2(xOffset_ - textures_.back()->getWidth()*1.5 / 2, (start - offset) * yOffset_), 1.5, 0);
 		start++;
 	}
 }
 
-void OnlineMenuState::render(){
+void OnlineMenuState::render() {
 	fondo_->render(0, 0);
 	GameState::render();
 }
