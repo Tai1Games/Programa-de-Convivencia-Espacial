@@ -19,6 +19,8 @@ void CapitalismGameMode::init(PlayState* game)
 	coinUIMarginY_ = CONST(int, "COIN_UI_MARGIN_Y");
 	coinUISpriteScale_ = CONST(double, "COIN_UI_SPRITE_SCALE");
 	fontCharacterWidth_ = CONST(double, "NES_WIDTH_PER_CHARACTER");
+	headUIWidth_ = CONST(int, "CAPITALISM_HEAD_UI_WIDTH");
+	headUIHeight_ = CONST(int, "CAPITALISM_HEAD_UI_HEIGHT");
 	
 	currentSpawnTime_ = spawnTime_;
 	coinSpawnersPositions_ = tilemap_->getCoinsSpawnPoints();
@@ -87,7 +89,7 @@ void CapitalismGameMode::renderCoinsMarker()
 		SDL_Rect coinTextRect;
 		coinTextRect.x = (k % 2 == 0) ? (coinImageRect.x + coinImageRect.w/3) + coinUIRadius_:
 			(coinImageRect.x + coinImageRect.w/3) - coinUIRadius_ - ((fontCharacterWidth_+17) * (coinNumb.size()-1));
-		coinTextRect.y = coinImageRect.y + coinUIRadius_ * 0.3;
+		coinTextRect.y = coinImageRect.y + coinUIRadius_ * 0.04;
 		coinTextRect.w = coinNumbTexture.getWidth() * coinUISpriteScale_;
 		coinTextRect.h = coinNumbTexture.getHeight() * coinUISpriteScale_;
 
@@ -95,12 +97,12 @@ void CapitalismGameMode::renderCoinsMarker()
 		
 		coinTextureUI_->render(coinImageRect);
 		SDL_Rect headIcon;
-		headIcon.x = coinTextRect.x;
-		headIcon.y = coinTextRect.y;
-		headIcon.w = 75;
-		headIcon.h = 100;
-		SDL_RendererFlip f = (k % 2 == 0) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
-		SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::PlayerHeads)->render(headIcon, 0, 0, (*matchInfo_->getPlayersInfo())[k]->playerSkin,f);
+		headIcon.w = headUIWidth_;
+		headIcon.h = headUIHeight_;
+		headIcon.x = (k % 2 == 0) ? coinTextRect.x - headIcon.w / 3 : coinImageRect.x - headIcon.w * 1.05;
+		headIcon.y = coinTextRect.y + headIcon.h / 5;
+		SDL_RendererFlip flip = (k % 2 == 0) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+		SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::PlayerHeads)->render(headIcon, 0, 0, (*matchInfo_->getPlayersInfo())[k]->playerSkin,flip);
 
 	}
 }
