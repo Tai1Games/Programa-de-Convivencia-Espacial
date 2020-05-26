@@ -27,10 +27,6 @@ void GameMode::renderProgressBars(const std::vector<double>& progressValues, con
 {
 	float barsScale = 0.1;
 	for (int i = 0; i < players_.size(); i++) {
-		//float angle = (i % 2 == 0) ? 0 : 180;
-		SDL_RendererFlip flip = (i % 2 == 0) ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL;
-
-		//Barra de progreso vac�a
 		SDL_Rect dest = {
 			healthViewerPos_[i].x,
 			healthViewerPos_[i].y,
@@ -38,7 +34,12 @@ void GameMode::renderProgressBars(const std::vector<double>& progressValues, con
 			progressBar_->getFrameHeight() * barsScale
 		};
 		double value = (progressValues[i] * (double)progressBar_->getNumFramesX()) / goalScore;
-		progressBar_->render(dest, 0, (int)value, 0, flip);
+
+		progressBar_->render(
+			dest,
+			(i % 2 == 0) ? 0 : 180,
+			(int)value, 0,
+			(i % 2 == 0) ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL);
 	}
 }
 
