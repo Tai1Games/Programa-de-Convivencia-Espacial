@@ -22,10 +22,13 @@ private:
 	int lifeWidth_ = 0;
 	int lifeHeight_ = 0;
 	double lifeDrawOffset_ = 0;
+	int playerSkin_;
+
+	void setColorBySkin() const;
 
 public:
 	//Punteros a las 2 texturas de la vida y la posición de origen
-	HealthViewer(int texActiveId , int texDisabledId);
+	HealthViewer(int texActiveId , int texDisabledId,int skin);
 
 	virtual ~HealthViewer() { full = nullptr; empty = nullptr; };
 
