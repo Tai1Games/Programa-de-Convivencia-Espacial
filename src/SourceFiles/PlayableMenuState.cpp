@@ -45,17 +45,17 @@ void PlayableMenuState::init()
 		"assets/game/tilemaps/MenuRoom.json",
 		entityManager_, physicsWorld_, &bulletPool_, &confettiPool_, &staplerPool_, nullptr);
 	tmap->init();
-
+	doors_ = *tmap->getDoorViewers();
 	collisionHandler_ = new CollisionHandler(nullptr, tmap);
 	physicsWorld_->SetContactListener(collisionHandler_);
 
 	//FONDO
 	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::MenuRoom);
 
-	//MÚSICA
+	//Mï¿½SICA
 	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::MainMenuMusic, -1);
 
-	//Version estática de la factoria
+	//Version estï¿½tica de la factoria
 	tmap->executeMapFactory();
 	tmap->createWeapons();
 
@@ -88,7 +88,7 @@ void PlayableMenuState::update()
 	GameState::update();
 	//el que vuelva tocar el step de physicsworld muere
 	physicsWorld_->Step(secondsPerFrame_, 6, 2);
-	
+
 	collisionHandler_->SolveInteractions();
 }
 
@@ -106,4 +106,8 @@ void PlayableMenuState::onLoaded()
 
 	//Volvemos a poner el musicote
 	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::MainMenuMusic, -1);
+	for (AnimatedViewer* d : doors_)
+	{
+		d->setFrame(0, 0);
+	}
 }
