@@ -34,7 +34,10 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SuddenDeathCapitalismModeText, resourcesPath + "textures/suddenDeathCapitalismModeText.png"},
 	{ SuddenDeathTimeModeText, resourcesPath + "textures/suddenDeathTimeModeText.png"},
 
-	{ ProgressBar, resourcesPath + "textures/ProgressBar.png", 17, 1},
+	{ EmptyProgressBar, resourcesPath + "textures/EmptyProgressBar.png"},
+	{ EmptyProgressBar2, resourcesPath + "textures/EmptyProgressBar2.png"},
+	{ ProgressBar, resourcesPath + "textures/ProgressBar.png"},
+	{ ProgressBar2, resourcesPath + "textures/ProgressBar2.png"},
 	{ MouseIcon, resourcesPath + "textures/mouse_icon.png"},
 	{ KeyboardIcon, resourcesPath + "textures/keyboard_icon.png"},
 	{ ControllerIcon, resourcesPath + "textures/controller_icon.png"},
@@ -107,7 +110,7 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/Moneda.png" },
-	{ Router,resourcesPath + "textures/Router.png" },
+	{ Router,resourcesPath + "textures/Router2.png" },
 	{ RoombaSpriteSheet, resourcesPath + "textures/Roomba.png", 5},
 	{ Remote, resourcesPath + "textures/Mando.png"},
 
@@ -215,10 +218,6 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 
 	//Credits
 	{ ReturnText, "Pulsa cualquier tecla para volver", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-
-	//Options Menu
-	{ OptionsText, "Opciones", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ GoBackText, "Volver", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 };
 
 vector<Resources::MusicInfo> Resources::musics_{

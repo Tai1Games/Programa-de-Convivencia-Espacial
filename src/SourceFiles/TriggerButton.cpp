@@ -30,7 +30,7 @@ void TriggerButton::PassState()
 
 	}
 	else if (stateToChange == "Options") {
-		SDL_Game::instance()->getStateMachine()->transitionToState(States::options, 0);
+		SDL_Game::instance()->getStateMachine()->transitionToState(States::lobby, 0);
 		//SDL_Game::instance()->getStateMachine()->changeToState(States::pause, 0);
 	}
 	else if (stateToChange == "Credits") {
