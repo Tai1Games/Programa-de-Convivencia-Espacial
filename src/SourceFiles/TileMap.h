@@ -16,6 +16,7 @@ class TomatoPool;
 class BananaPool;
 class StaplerPool;
 class GameMode;
+class AnimatedViewer;
 
 class TileMap : public Component
 {
@@ -43,6 +44,7 @@ private:
 	std::vector<b2Vec2> lowTierWeaponSpawnPoints_;
 	std::vector<b2Vec2> midTierWeaponSpawnPoints_;
 	std::vector<b2Vec2> highTierWeaponSpawnPoints_;
+	std::vector<AnimatedViewer*> doors_;
 
 	ConfettiPool* confettiPool_;
 	StaplerPool* staplerPool_;
@@ -66,6 +68,7 @@ public:
 	b2Vec2 getPlayerSpawnPoint(int id);
 	b2Vec2 getObjSpecialSpawnPos() { return specialObjectsSpawnPoint_; };
 	std::vector<b2Vec2> getCoinsSpawnPoints() { return coinsSpawnPoints_; }
+	std::vector<AnimatedViewer*>getDoorViewers() { return doors_; }
 	FireBallGenerator* getFireballGen() { return boilerAux_; }
 };
 

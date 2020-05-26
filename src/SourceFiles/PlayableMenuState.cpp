@@ -45,7 +45,7 @@ void PlayableMenuState::init()
 		"assets/game/tilemaps/MenuRoom.json",
 		entityManager_, physicsWorld_, &bulletPool_, &confettiPool_, &staplerPool_, nullptr);
 	tmap->init();
-
+	doors_ = tmap->getDoorViewers();
 	collisionHandler_ = new CollisionHandler(nullptr, tmap);
 	physicsWorld_->SetContactListener(collisionHandler_);
 
@@ -97,4 +97,8 @@ void PlayableMenuState::render()
 void PlayableMenuState::onLoaded()
 {
 	player->getComponent<Collider>(ComponentType::Collider)->setTransform(b2Vec2(tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y), 0);
+	for (AnimatedViewer* d : doors_)
+	{
+		d->setFrame(0, 0);
+	}
 }
