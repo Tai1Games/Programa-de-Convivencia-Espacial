@@ -8,6 +8,10 @@ void WiFightGameMode::init(PlayState* game)
 {
 	GameMode::init(game);
 
+	halfWinWidth_ = CONST(int, "WINDOW_WIDTH") / 2;
+	halfWinHeight_ = CONST(int, "WINDOW_HEIGHT") / 2;
+	pointsToWin_ = CONST(double, "POINTS_TO_WIN");
+
 	GameMode::createPlayers(game);
 	playerProgress_.reserve(nPlayers_);
 	for (int k = 0; k < nPlayers_; k++) {
@@ -24,11 +28,17 @@ void WiFightGameMode::init(PlayState* game)
 
 void WiFightGameMode::render()
 {
-	GameMode::renderProgressBars(playerProgress_, CONST(double, "POINTS_TO_WIN"));
+	GameMode::renderProgressBars(playerProgress_, pointsToWin_);
 
 	if (roundFinished_) {
 		Texture* ganador = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::winner1 + winnerId_);
-		ganador->render(CONST(int, "WINDOW_WIDTH")/2 - ganador->getWidth() * 0.5, CONST(int, "WINDOW_HEIGHT")/2);
+		SDL_Rect destRect {
+			halfWinWidth_ - ganador->getWidth() / 2,
+			halfWinHeight_,
+			ganador->getWidth(),
+			ganador->getHeight()
+		};
+		ganador->render(destRect, 0, 0);
 	}
 }
 
@@ -37,7 +47,7 @@ void WiFightGameMode::addPoints(int player, double sumPoints)
 	if (!roundFinished_) {
 		playerProgress_[player] += sumPoints;
 		//cout << "Player " << player << " progress: " << playerProgress_[player] << endl;
-		if (playerProgress_[player] >= CONST(int, "POINTS_TO_WIN")) {
+		if (playerProgress_[player] >= pointsToWin_) {
 			cout << "Player " << player << " won!" << endl;
 			winnerId_ = player;
 			roundFinished_ = true;
