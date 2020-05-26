@@ -44,6 +44,7 @@ enum States
 	playableMenu,
 	credits,
 	endGame,
+	options,
 	//No toques
 	NUMBER_OF_STATES
 };

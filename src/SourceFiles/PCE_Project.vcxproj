@@ -193,6 +193,7 @@ copy "$(SolutionDir)SDL2_net-2.0.1\lib\$(Platform)\*.dll" "$(TargetDir)"</Comman
     <ClInclude Include="OnlineMenuState.h" />
     <ClInclude Include="BodyPool.h" />
     <ClInclude Include="CreditsState.h" />
+    <ClInclude Include="OptionsMenuState.h" />
     <ClInclude Include="PlayableMenuState.h" />
     <ClInclude Include="TriggerButton.h" />
     <ClInclude Include="EndGameState.h" />
@@ -303,6 +304,7 @@ copy "$(SolutionDir)SDL2_net-2.0.1\lib\$(Platform)\*.dll" "$(TargetDir)"</Comman
     <ClCompile Include="OnlineMenuState.cpp" />
     <ClCompile Include="BodyPool.cpp" />
     <ClCompile Include="CreditsState.cpp" />
+    <ClCompile Include="OptionsMenuState.cpp" />
     <ClCompile Include="PlayableMenuState.cpp" />
     <ClCompile Include="TriggerButton.cpp" />
     <ClCompile Include="EndGameState.cpp" />
