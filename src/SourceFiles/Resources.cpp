@@ -84,6 +84,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },
 	{ PlayerAnimSheet, resourcesPath + "textures/playerAnim.png",19,10},
 	{ PlayerAnimSheetLobby, resourcesPath + "textures/playerAnimLobby.png",1,10},
+	{ PlayerHeads, resourcesPath + "textures/playerHeads.png",1,10},
 	{ Hands, resourcesPath + "textures/hands.png", 7, 11},
 	{ ImpulseArrow, resourcesPath + "textures/FlechaImpulso.png"},
 	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png", 13},

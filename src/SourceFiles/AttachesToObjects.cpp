@@ -64,7 +64,7 @@ void AttachesToObjects::deAttachFromObject() {
 }
 
 bool AttachesToObjects::canAttachToObject() { //Se agarra si est� pretando una tecla v�lida y si no est� agarrado a otra cosa.
-	return (attachedObject_ == nullptr && ib->holdGrab());
+	return (attachedObject_ == nullptr && ib->holdGrab() && canAttachRN_);
 }
 
 bool AttachesToObjects::isAttached()
@@ -73,7 +73,13 @@ bool AttachesToObjects::isAttached()
 	else return true;
 }
 
-void AttachesToObjects::handleInput() { //Si el jugador suelta la tecla de agarre, se suelta.
+void AttachesToObjects::update() {
+	if (!canAttachRN_) {
+		if ((++actFrame_) >= framesUntilRecoveringAttach_) {
+			canAttachRN_ = true;
+			actFrame_ = 0;
+		}
+	}
 }
 
 void AttachesToObjects::onCollisionEnter(Collision* c) {

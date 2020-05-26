@@ -24,6 +24,8 @@ private:
 	double coinUISpriteScale_ = 0;
 	int maxCoins_ = 0;
 	int fontCharacterWidth_ = 0;
+	int headUIWidth_ = 0;
+	int headUIHeight_ = 0;
 
 	std::vector<b2Vec2> coinSpawnersPositions_;
 	std::vector<Collider*> roombaColliders_;
