@@ -80,17 +80,22 @@ void TimeGameMode::renderKillMarker() {
 
 	for (int k = 0; k < playerKills_.size(); k++) {
 
-		string killsNumb = "x" + to_string(playerKills_[k]);
-		Texture killsNumbTexture(SDL_Game::instance()->getRenderer(), killsNumb,
-			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
+		string killsNumb = to_string(playerKills_[k]);
+		vector<Texture*> killsNumbTextures;
+
+		for (int i = 0; i < killsNumb.length(); i++) { //sacamos los dígitos y los metemos en un vector
+			killsNumbTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Zero + killsNumb[i] - '0'));
+		}
 		
 		SDL_Rect killsTextTexture;
-		killsTextTexture.x = (int)playersPointsPos_[k].x;
-		killsTextTexture.y = (int)playersPointsPos_[k].y;
-		killsTextTexture.w = killsMarkerWidth_ * killsNumb.size()-2;
-		killsTextTexture.h = killsMarkerHeight_;
+		for (int i = 0; i < killsNumbTextures.size(); i++) {			
+			killsTextTexture.x = (int)playersPointsPos_[k].x + killsNumbTextures[i]->getWidth()/1.35 * (i+1);
+			killsTextTexture.y = (int)playersPointsPos_[k].y;
+			killsTextTexture.w = killsMarkerWidth_;
+			killsTextTexture.h = killsMarkerHeight_;
 
-		killsNumbTexture.render(killsTextTexture);
+			killsNumbTextures[i]->render(killsTextTexture);
+		}
 
 		SDL_Rect skullImageRect;
 		skullImageRect.x = killsTextTexture.x + killsTextTexture.w + skullUIMarginX_;

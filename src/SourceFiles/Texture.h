@@ -69,6 +69,9 @@ public:
 	void render(const SDL_Rect& dest, double angle, const SDL_RendererFlip& flip) const;
 	void render(const SDL_Rect &dest, double angle) const;
 
+	//Set color modulation
+	void setColor(const SDL_Color& color);
+
 	void close();
 
 private:

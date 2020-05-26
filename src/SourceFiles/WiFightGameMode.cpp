@@ -27,10 +27,8 @@ void WiFightGameMode::render()
 	GameMode::renderProgressBars(playerProgress_, CONST(double, "POINTS_TO_WIN"));
 
 	if (roundFinished_) {
-		string winMsg = "Gana el jugador " + (winnerId_ + 1);
-		Texture ganador(SDL_Game::instance()->getRenderer(), winMsg,
-			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
-		ganador.render(CONST(int, "WINDOW_WIDTH") / 2 - ganador.getWidth() / 2, CONST(int, "WINDOW_HEIGHT") / 2);
+		Texture* ganador = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::winner1 + winnerId_);
+		ganador->render(CONST(int, "WINDOW_WIDTH")/2 - ganador->getWidth() * 0.5, CONST(int, "WINDOW_HEIGHT")/2);
 	}
 }
 

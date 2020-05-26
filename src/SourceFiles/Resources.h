@@ -67,6 +67,7 @@ public:
 		// Players
 		PlayerAnimSheet,
 		PlayerAnimSheetLobby,
+		PlayerHeads,
 
 
 		// Map elements
@@ -161,6 +162,11 @@ public:
 		Two,
 		Three,
 		Four,
+		Five,
+		Six,
+		Seven,
+		Eight,
+		Nine,
 		MoveTutorial,
 		HoldTutorial,
 		GrabTutorial,
@@ -191,6 +197,9 @@ public:
 		NumSeven,
 		NumEight,
 		NumNine,
+
+		//timers
+		Colon,
 
 		//badges ordenadas como GameModeId
 		badgeCapitalism,
