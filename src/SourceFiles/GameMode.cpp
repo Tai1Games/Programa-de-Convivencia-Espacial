@@ -60,6 +60,10 @@ void GameMode::activateControl() {
 	for (Entity* p : players_) {
 		p->addComponent<Hands>(Resources::Hands);
 		p->addComponent<AttachesToObjects>();
+		p->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Foam, CONST(float, "IMPULSE_PARTICLE_SPEED"),
+			CONST(int, "IMPULSE_PARTICLE_NTEXTURES"), CONST(int, "IMPULSE_PARTICLE_GEN_ODDS"), CONST(int, "IMPULSE_PARTICLE_LIFETIME"),
+			CONST(int, "IMPULSE_PARTICLE_SIZE"), CONST(int, "IMPULSE_PARTICLE_EMIT_TIME"), CONST(int, "IMPULSE_PARTICLE_SPEED_VAR"),
+			CONST(int, "IMPULSE_PARTICLE_CONE_ANGLE"));
 		p->addComponent<PlayerController>();
 		p->addComponent<ImpulseViewer>(Resources::ImpulseArrow, Resources::ImpulseBackground);
 	}
@@ -68,7 +72,7 @@ void GameMode::activateControl() {
 void GameMode::createPlayers(PlayState* game) {
 	for (int i = 0; i < nPlayers_; i++) {
 		players_.push_back(PlayerFactory::createPlayerWithHealth(game->getEntityManager(), game->getPhysicsWorld(), i,
-			Resources::Body, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, (*matchInfo_->getPlayersInfo())[i]->inputBinder, 3));
+			Resources::Body, tilemap_->getPlayerSpawnPoint(i).x, tilemap_->getPlayerSpawnPoint(i).y, (*matchInfo_->getPlayersInfo())[i]->inputBinder, 3, (*matchInfo_->getPlayersInfo())[i]->playerSkin));
 	}
 }
 

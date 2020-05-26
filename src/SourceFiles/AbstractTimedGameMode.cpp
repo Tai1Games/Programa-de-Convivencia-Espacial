@@ -36,10 +36,10 @@ void AbstractTimedGameMode::render()
 			}
 			if (suddenDeathRendering_) {
 				SDL_Rect suddenDeathRect;
-				suddenDeathRect.x = halfWinWidth_ - suddenDeathTexture_->getWidth() * 0.5;
-				suddenDeathRect.y = halfWinHeight_ - suddenDeathTexture_->getHeight() * 0.5;
-				suddenDeathRect.w = suddenDeathTexture_->getWidth();
-				suddenDeathRect.h = suddenDeathTexture_->getHeight();
+				suddenDeathRect.x = halfWinWidth_ - suddenDeathTexture_->getWidth() * 1.5;
+				suddenDeathRect.y = halfWinHeight_ - suddenDeathTexture_->getHeight() * 1.5;
+				suddenDeathRect.w = suddenDeathTexture_->getWidth() * 3;
+				suddenDeathRect.h = suddenDeathTexture_->getHeight() * 3;
 				suddenDeathTexture_->render(suddenDeathRect);
 			}
 		}
