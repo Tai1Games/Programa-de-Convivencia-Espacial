@@ -163,6 +163,7 @@ public:
 		//Menu eleccion de mapas
 		ChoseMap,
 		ChoseMode,
+		PressEnter,
 
 
 		//tutorial

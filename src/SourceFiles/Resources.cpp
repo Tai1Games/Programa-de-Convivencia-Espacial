@@ -166,6 +166,7 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	//eleccion de mapas
 	{ ChoseMap, "Elige un mapa", { COLOR(0xc7f2edff) }, FontId::NES_Chimera},
 	{ ChoseMode, "Elige un modo de juego", { COLOR(0xc7f2edff) }, FontId::NES_Chimera},
+	{ PressEnter, "Pulsa enter/esc para jugar", { COLOR(0xc7f2edff) }, FontId::NES_Chimera},
 
 
 	//Tutorial
