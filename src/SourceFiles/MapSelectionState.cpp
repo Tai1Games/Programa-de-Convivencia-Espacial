@@ -69,14 +69,14 @@ void MapSelectionState::handleInput()
 		}
 		else { //Elegimos el modo de juego
 			addRound((GamemodeID)(pointers_[gamemodeScreen]), maps_[pointers_[x] + pointers_[y] * 2]);
-			if (roundsVector_->size() == numberOfRounds_) {
+			if (roundsVector_->size() == maxNumberOfRounds_) {
 				SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVector_);
-				SDL_Game::instance()->getStateMachine()->transitionToState(States::play, roundsVector_->front().first, roundsVector_->front().second);
+				SDL_Game::instance()->getStateMachine()->transitionToState(States::play);
 			}
 			else { //como onLoaded pero sin resetear la m�sica 
 				menuPointer_ = 0;
-				pointers_[0] = 0;
-				pointers_[1] = 0;
+				pointers_[x] = 0;
+				pointers_[y] = 0;
 				updateMenu();
 			}
 		}
@@ -175,7 +175,15 @@ void MapSelectionState::onLoaded() { //poner el men� al principio
 	pointers_[y] = 0;
 	pointers_[gamemodeScreen] = 0;
 	roundsVector_->clear();
+	for (auto& item : iconsMaps_) {
+		for (auto& pairs : item) {
+			delete pairs.first;
+		}
+		item.clear();
+	}
 	updateMenu();
+
+	SDL_Game::instance()->getStateMachine()->deleteState(States::endGame);
 }
 
 void MapSelectionState::updatePointer(int n, int coor) {
@@ -230,18 +238,18 @@ void MapSelectionState::loadConst()
 
 void MapSelectionState::updateMenu() {
 
-	for (auto e : textsGamemodes_) {
+	for (auto& e : textsGamemodes_) {
 		e->setActive(menuPointer_ == 1);
 	}
 
 	iconsGamemodes_[pointers_[gamemodeScreen]]->setActive(menuPointer_ == 1);
 
-	for (auto e : imagesMaps_) {
+	for (auto& e : imagesMaps_) {
 		e->setActive(menuPointer_ != 1);
 	}
 
-	for (auto i : iconsMaps_) {
-		for (auto j : i) {
+	for (auto& i : iconsMaps_) {
+		for (auto& j : i) {
 			j.first->setActive(menuPointer_ != 1);
 		}
 	}

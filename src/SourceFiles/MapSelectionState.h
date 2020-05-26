@@ -36,7 +36,7 @@ private:
 	UIViewer* mapSelCursor_ = nullptr;
 	UIViewer* gamemodeCursor_ = nullptr;
 
-	int numberOfRounds_ = 5;
+	int maxNumberOfRounds_ = 5;
 
 	std::vector<Entity*> imagesMaps_;
 	std::vector<b2Vec2> coordsImages_;
