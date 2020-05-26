@@ -107,7 +107,7 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/Moneda.png" },
-	{ Router,resourcesPath + "textures/Router2.png" },
+	{ Router,resourcesPath + "textures/Router.png" },
 	{ RoombaSpriteSheet, resourcesPath + "textures/Roomba.png", 5},
 	{ Remote, resourcesPath + "textures/Mando.png"},
 
@@ -212,6 +212,10 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 
 	//Credits
 	{ ReturnText, "Pulsa cualquier tecla para volver", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+
+	//Options Menu
+	{ OptionsText, "Opciones", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ GoBackText, "Volver", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 };
 
 vector<Resources::MusicInfo> Resources::musics_{

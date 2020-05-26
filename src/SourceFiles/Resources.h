@@ -224,6 +224,10 @@ public:
 
 		//Credits
 		ReturnText,
+
+		//Options menu
+		OptionsText,
+		GoBackText,
 	};
 
 	enum AudioId : unsigned char {

@@ -52,10 +52,10 @@ void PlayableMenuState::init()
 	//FONDO
 	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::MenuRoom);
 
-	//MÚSICA
+	//Mï¿½SICA
 	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::MainMenuMusic, -1);
 
-	//Version estática de la factoria
+	//Version estï¿½tica de la factoria
 	tmap->executeMapFactory();
 	tmap->createWeapons();
 
@@ -88,7 +88,7 @@ void PlayableMenuState::update()
 	GameState::update();
 	//el que vuelva tocar el step de physicsworld muere
 	physicsWorld_->Step(secondsPerFrame_, 6, 2);
-	
+
 	collisionHandler_->SolveInteractions();
 }
 
@@ -101,6 +101,11 @@ void PlayableMenuState::render()
 void PlayableMenuState::onLoaded()
 {
 	player->getComponent<Collider>(ComponentType::Collider)->setTransform(b2Vec2(tmap->getPlayerSpawnPoint(0).x, tmap->getPlayerSpawnPoint(0).y), 0);
+	player->getComponent<AttachesToObjects>(ComponentType::AttachesToObjects)->deAttachFromObject();
+	player->getComponent<PlayerController>(ComponentType::PlayerController)->resetImpulseForce();
+
+	//Volvemos a poner el musicote
+	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::MainMenuMusic, -1);
 	for (AnimatedViewer* d : doors_)
 	{
 		d->setFrame(0, 0);
