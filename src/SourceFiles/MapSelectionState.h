@@ -46,6 +46,8 @@ private:
 	std::vector<Entity*> textsGamemodes_;
 
 	Texture* backgroundTex_ = nullptr;
+	Entity* choseMapText_;
+	Entity* choseModeText_;
 
 #pragma region constantes de tamanos 
 
@@ -95,12 +97,13 @@ private:
 	{ 4, Resources::Timed}
 	};
 
+	//hay dos por que va uno a cada lado
 	std::map<int, int> texturesIcons_ = {
 	{ 0, Resources::CapitalismIcon},
 	{ 1, Resources::ControllerModeIcon},
 	{ 2, Resources::StocksIcon},
 	{ 3, Resources::WiFightIcon},
-	{ 4, Resources::TimedIcon}
+	{ 4, Resources::TimedIcon},
 	};
 
 	void updatePointer(int n, int coor);

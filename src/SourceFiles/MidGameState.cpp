@@ -58,14 +58,14 @@ void MidGameState::init()
 
 	SDL_Rect rocketRect;
 	rocketRect.x = rocketRect.y = 0;
-	rocketRect.w = 160;
-	rocketRect.h = 76;
+	rocketRect.w = CONST(int, "ROCKET_W");
+	rocketRect.h = CONST(int, "ROCKET_H");
 
 	SDL_Rect stationRect;
 	stationRect.x = 0;
 	stationRect.y = 0;
-	stationRect.w = 300;
-	stationRect.h = 150;
+	stationRect.w = CONST(int, "STATION_W");
+	stationRect.h = CONST(int, "STATION_H");
 
 	Entity* spaceStation = entityManager_->addEntity();
 	spaceStationViewer_ = spaceStation->addComponent<AnimatedUIViewer>(Resources::SpaceStation, 3, b2Vec2(CONST(int, "WINDOW_WIDTH") / 2 - CONST(int, "SPACE_STATION_WIDTH") / 2, CONST(int, "WINDOW_HEIGHT") / 2 - CONST(int, "SPACE_STATION_HEIGHT") / 2), 1, 0);
@@ -74,15 +74,17 @@ void MidGameState::init()
 		Entity* newRocket = entityManager_->addEntity();
 		//We could move the rockets using only the Viewer, but this will make
 		//the logic much much easier.
-
-		AnimatedUIViewer* viewer = newRocket->addComponent<AnimatedUIViewer>(Resources::RocketSpriteSheet, 10, b2Vec2(CONST(int, "START_ROCKET_POSITION"), (initPosY - 76) + (distanceBetweenRockets_ * k) + rocketRect.h / 2), 1, 0);
+		
+		AnimatedUIViewer* viewer = newRocket->addComponent<AnimatedUIViewer>(Resources::RocketSpriteSheet, 10, b2Vec2(CONST(int, "START_ROCKET_POSITION"), (initPosY - CONST(int, "ROCKET_H")) + (distanceBetweenRockets_ * k) + rocketRect.h / 2), 1, 0);
 		playerRockets_.push_back(viewer);
-		//viewer->setFrame(0, k);	// cuando haya skins, descomentar esta línea y quitar startAnimation
+
+		viewer->setFrame(0, k);	// cuando haya skins, descomentar esta línea y quitar startAnimation
 		viewer->startAnimation();
 	}
 	//Texto para terminar la intermision
 	continueText = entityManager_->addEntity();
-	continueText->addComponent<UIViewer>(Resources::ContinueText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 600, CONST(int, "WINDOW_HEIGHT") - 130), 1, 0);
+	UIViewer* uiV = continueText->addComponent<UIViewer>(Resources::ContinueText, b2Vec2(0,0), 1, 0);
+	uiV->setPosUIElement(b2Vec2(((CONST(int, "WINDOW_WIDTH") - uiV->getW()) / 2), CONST(int, "WINDOW_HEIGHT") - CONST(int, "UI_PRESS_KEY_OFFSET_Y"))); 
 	continueText->setActive(false);
 }
 

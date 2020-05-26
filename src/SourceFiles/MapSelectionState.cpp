@@ -21,12 +21,22 @@ void MapSelectionState::init() {
 	cout << "init map select";
 
 	Entity* temp = entityManager_->addEntity();
-	mapSelCursor_ = temp->addComponent<UIViewer>(Resources::CursorUiSelectMap, coordsImages_[0] + mapCursorOffset_, mapScale_, 0);
+	mapSelCursor_ = temp->addComponent<UIViewer>(Resources::CursorUiSelectMap, coordsImages_[0] + mapCursorOffset_, mapScale_ * 3, 0);
 
 	backgroundTex_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::RocketRoom);
 
 	//MUSICA
 	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::AudioId::MainMenuMusic, -1);
+
+	//Textos
+	choseMapText_ = entityManager_->addEntity();
+	UIViewer*  uiV = choseMapText_->addComponent<UIViewer>(Resources::ChoseMap,b2Vec2(0,0),1);
+	uiV->setPosUIElement(b2Vec2((CONST(int, "WINDOW_WIDTH") - uiV->getW()) / 2, CONST(int, "CHOSE_MAP_TEXT_Y_OFFSET")));
+
+	choseModeText_ = entityManager_->addEntity();
+	uiV = choseModeText_->addComponent<UIViewer>(Resources::ChoseMode, b2Vec2(0, 0), 1);
+	uiV->setPosUIElement(b2Vec2((CONST(int, "WINDOW_WIDTH") - uiV->getW()) / 2, CONST(int, "CHOSE_MAP_TEXT_Y_OFFSET")));
+	choseModeText_->setActive(false);
 }
 
 void MapSelectionState::handleInput()
@@ -73,7 +83,8 @@ void MapSelectionState::handleInput()
 			addRound((GamemodeID)(pointers_[gamemodeScreen]), maps_[pointers_[x] + pointers_[y] * 2]);
 			if (roundsVector_->size() == maxNumberOfRounds_) {
 				SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVector_);
-				SDL_Game::instance()->getStateMachine()->transitionToState(States::play);
+				SDL_Game::instance()->getStateMachine()->transitionToState(States::play); 
+				iconsGamemodes_[pointers_[gamemodeScreen]]->setActive(false);
 			}
 			else { //como onLoaded pero sin resetear la m�sica 
 				menuPointer_ = 0;
@@ -97,7 +108,8 @@ void MapSelectionState::handleInput()
 
 	if (ownerPlayerBinder_->pressPause() && menuPointer_ == 0 && roundsVector_->size() != 0) {
 		SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVector_);
-		SDL_Game::instance()->getStateMachine()->transitionToState(States::play, roundsVector_->front().first, roundsVector_->front().second);
+		SDL_Game::instance()->getStateMachine()->transitionToState(States::play, roundsVector_->front().first, roundsVector_->front().second); 
+		iconsGamemodes_[pointers_[gamemodeScreen]]->setActive(false);
 	}
 }
 
@@ -250,6 +262,9 @@ void MapSelectionState::updateMenu() {
 		e->setActive(menuPointer_ != 1);
 	}
 
+	choseMapText_->setActive(menuPointer_ != 1);
+	choseModeText_->setActive(menuPointer_ == 1);
+
 	for (auto& i : iconsMaps_) {
 		for (auto& j : i) {
 			j.first->setActive(menuPointer_ != 1);
@@ -259,7 +274,6 @@ void MapSelectionState::updateMenu() {
 	mapSelCursor_->setDrawable(menuPointer_ != 1);
 	mapSelCursor_->setPosUIElement(coordsImages_[pointers_[x] + pointers_[y] * 2] + mapCursorOffset_);
 };
-
 
 void MapSelectionState::createImages() { //preparar los textos	
 
@@ -279,19 +293,19 @@ void MapSelectionState::createImages() { //preparar los textos
 		imagesMaps_.push_back(entityManager_->addEntity());
 		imagesMaps_.back()->addComponent<UIViewer>(texturesMaps_[i], coordsImages_[i], mapScale_, 0);
 	}
-
+	
 }
 
 void MapSelectionState::createTexts()
 {
 	int i = 0;
 
+	int winWidth = CONST(float, "WINDOW_WIDTH");
 	for (auto e : texturesTexts_) {
 
-		b2Vec2 a = { gmOffsetText_.x + i * gmMarginText_.x,(float)(i * gmMarginText_.y + gmOffsetText_.y) };
-
 		textsGamemodes_.push_back(entityManager_->addEntity());
-		textsGamemodes_.back()->addComponent<UIViewer>(texturesTexts_[i], a, gmTextScale_, 0);
+		UIViewer* uiV = textsGamemodes_.back()->addComponent<UIViewer>(texturesTexts_[i], b2Vec2(0,0), gmTextScale_, 0);
+		uiV->setPosUIElement(b2Vec2((winWidth - uiV->getW())/2, (float)(i * gmMarginText_.y + gmOffsetText_.y)));
 		textsGamemodes_.back()->setActive(false);
 		i++;
 	}
@@ -301,12 +315,14 @@ void MapSelectionState::createIcons() {
 
 	int i = 0;
 
+	int winWidth = CONST(float, "WINDOW_WIDTH");
+	int margin = CONST(float, "GM_ICON_OFFSET");
+
 	for (auto e : texturesIcons_) {
-
-		b2Vec2 a = { gmOffsetIcons_.x + i * gmMarginText_.x,(i * gmMarginText_.y + gmOffsetIcons_.y) };
-
 		iconsGamemodes_.push_back(entityManager_->addEntity());
-		iconsGamemodes_.back()->addComponent<UIViewer>(texturesIcons_[i], a, 2, 0);
+		UIViewer* uiV = iconsGamemodes_.back()->addComponent<UIViewer>(texturesIcons_[i], b2Vec2(0,0), 3, 0);
+		UIViewer* uiVText = GETCMP2(textsGamemodes_[i], UIViewer);
+		uiV->setPosUIElement(b2Vec2((winWidth - uiVText->getW()) / 2 - margin, (float)(i * gmMarginText_.y + gmOffsetIcons_.y)));
 		iconsGamemodes_.back()->setActive(false);
 		i++;
 	}

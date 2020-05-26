@@ -42,7 +42,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Rocket, resourcesPath + "textures/Rocket.png"},
 	{ SpaceStation, resourcesPath + "textures/SpaceStation.png"},
 	{ Token, resourcesPath + "textures/Marker.png"},
-	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png", 8, 1},
+	{ RocketSpriteSheet,resourcesPath + "textures/rocketSpriteSheet.png", 8, 4},
 	{ PlayerPlaceholder,resourcesPath + "textures/playerPlaceholder.png"},
 
 	{Ready , resourcesPath + "textures/ready.png"},
@@ -158,11 +158,15 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	
 	//exit
 	{ Exit, "Exit Game", { COLOR(0xff0000ff) }, FontId::NES_Chimera },
-	/*//maps
+	//maps
 	{ LivingRoomText, "Living Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ BoilerRoomText, "Boiler Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ GymRoomText, "Gym Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ GardenRoomText, "Garden Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },*/
+	{ GardenRoomText, "Garden Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	//eleccion de mapas
+	{ ChoseMap, "Elige un mapa", { COLOR(0xc7f2edff) }, FontId::NES_Chimera},
+	{ ChoseMode, "Elige un modo de juego", { COLOR(0xc7f2edff) }, FontId::NES_Chimera},
+
 
 	//Tutorial
 	{ Completed, "Completado: ", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
