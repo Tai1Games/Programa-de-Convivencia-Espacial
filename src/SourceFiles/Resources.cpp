@@ -22,7 +22,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SpaceBackground, resourcesPath + "textures/Background_SpaceMenus.png"},
 
 	// UI
-	{ ActiveHealth, resourcesPath + "textures/VidaActiva.png" },
+	{ ActiveHealth, resourcesPath + "textures/VidaActiva.png", 1, 10 },
 	{ DisableHealth, resourcesPath + "textures/VidaInactiva.png" },
 
 	{ Slider, resourcesPath + "textures/Slider.png"},
@@ -146,6 +146,7 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{ Local, "Local", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ Host, "Host", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ Join, "Join", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Tutorial, "Tutorial", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 
 	//Menu Provisional
 	//gamemodes
@@ -154,10 +155,10 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{ Stocks, "Stocks", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ WiFight, "WiFight", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ Timed, "Timed", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ Tutorial, "Tutorial", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	
 	//exit
 	{ Exit, "Exit Game", { COLOR(0xff0000ff) }, FontId::NES_Chimera },
-	//maps
+	/*//maps
 	{ LivingRoomText, "Living Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ BoilerRoomText, "Boiler Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ GymRoomText, "Gym Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
@@ -165,6 +166,7 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	//eleccion de mapas
 	{ ChoseMap, "Elige un mapa", { COLOR(0xc7f2edff) }, FontId::NES_Chimera},
 	{ ChoseMode, "Elige un modo de juego", { COLOR(0xc7f2edff) }, FontId::NES_Chimera},
+
 
 	//Tutorial
 	{ Completed, "Completado: ", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
