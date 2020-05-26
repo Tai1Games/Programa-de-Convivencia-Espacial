@@ -19,6 +19,8 @@ protected:
 	bool roundFinished_ = false;
 	TileMap* tilemap_ = nullptr;
 
+	float barsScale = CONST(double, "PROGRESSBAR_SIZE");
+
 	MatchInfo* matchInfo_ = nullptr;
 	int nPlayers_ = 0;
 	GamemodeID gamemodeId_ = GamemodeID::NUMBER_OF_GAMEMODES;
@@ -28,7 +30,6 @@ protected:
 
 	Texture* progressBar_;
 
-private:
 public:
 	GameMode(MatchInfo* matchinfo, GamemodeID id) : matchInfo_(matchinfo),nPlayers_(matchInfo_->getNumberOfPlayers()),gamemodeId_(id) {};
 	virtual ~GameMode() {};

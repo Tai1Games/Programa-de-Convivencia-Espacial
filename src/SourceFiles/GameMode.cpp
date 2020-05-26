@@ -11,7 +11,7 @@ void GameMode::initProgressBars()
 	healthViewerPos_.push_back(b2Vec2(healthPos.x - 12, healthPos.y + 60));
 	if (players_.size() > 1) {
 		healthPos = players_[1]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
-		healthViewerPos_.push_back(b2Vec2(healthPos.x - 60, healthPos.y + 60));
+		healthViewerPos_.push_back(b2Vec2(healthPos.x - 80, healthPos.y + 60));
 	}
 	if (players_.size() > 2) {
 		healthPos = players_[2]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
@@ -19,13 +19,12 @@ void GameMode::initProgressBars()
 	}
 	if (players_.size() > 3) {
 		healthPos = players_[3]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
-		healthViewerPos_.push_back(b2Vec2(healthPos.x - 92, healthPos.y - 28));
+		healthViewerPos_.push_back(b2Vec2(healthPos.x - 102, healthPos.y - 28));
 	}
 }
 
 void GameMode::renderProgressBars(const std::vector<double>& progressValues, const double& goalScore)
 {
-	float barsScale = 0.1;
 	for (int i = 0; i < players_.size(); i++) {
 		SDL_Rect dest = {
 			healthViewerPos_[i].x,
@@ -33,13 +32,11 @@ void GameMode::renderProgressBars(const std::vector<double>& progressValues, con
 			progressBar_->getFrameWidth() * barsScale,
 			progressBar_->getFrameHeight() * barsScale
 		};
-		double value = (progressValues[i] * (double)progressBar_->getNumFramesX()) / goalScore;
-
-		progressBar_->render(
-			dest,
-			(i % 2 == 0) ? 0 : 180,
-			(int)value, 0,
-			(i % 2 == 0) ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL);
+		int value = min((progressValues[i] * progressBar_->getNumFramesX()) / goalScore, (double)progressBar_->getNumFramesX() - 1);
+		SDL_RendererFlip flip = SDL_FLIP_NONE;
+		double angle = 0;
+		if(i % 2 != 0) (i == 1) ? flip = SDL_FLIP_HORIZONTAL : angle = 180;		// gira cosas en los elementos de la derecha
+		progressBar_->render(dest, angle, value, 0, flip);
 	}
 }
 
