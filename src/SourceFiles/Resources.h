@@ -44,8 +44,17 @@ public:
 
 		ProgressBar,
 
+
+		CursorUiSelectMap,
+		CapitalismIcon,
+		ControllerModeIcon,
+		StocksIcon,
+		WiFightIcon,
+		TimedIcon,
+
 		Ready,
 		PressReady,
+
 
 		//Lobby
 		KeyboardIcon,
@@ -159,6 +168,11 @@ public:
 		Two,
 		Three,
 		Four,
+		Five,
+		Six,
+		Seven,
+		Eight,
+		Nine,
 		MoveTutorial,
 		HoldTutorial,
 		GrabTutorial,
@@ -189,6 +203,9 @@ public:
 		NumSeven,
 		NumEight,
 		NumNine,
+
+		//timers
+		Colon,
 
 		//badges ordenadas como GameModeId
 		badgeCapitalism,

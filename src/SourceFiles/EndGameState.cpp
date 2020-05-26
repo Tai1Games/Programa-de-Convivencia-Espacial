@@ -102,7 +102,7 @@ void EndGameState::update()
 {
 	if (anyButtonPush) {
 		GameStateMachine* gsMachine = SDL_Game::instance()->getStateMachine();
-		gsMachine->transitionToState(States::menu);
+		gsMachine->transitionToState(States::playableMenu);
 	}
 }
 

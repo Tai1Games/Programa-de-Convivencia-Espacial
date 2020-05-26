@@ -78,7 +78,7 @@ void PauseState::handleInput()
 		if (ownerBinder_->menuForward()) {
 			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
 			cout << "Pause ended for " << ownerPlayerID_ << endl;
-			SDL_Game::instance()->getStateMachine()->changeToState(States::menu, ownerPlayerID_);
+			SDL_Game::instance()->getStateMachine()->changeToState(States::playableMenu);
 		}
 		break;
 	}
