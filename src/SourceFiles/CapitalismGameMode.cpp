@@ -92,7 +92,14 @@ void CapitalismGameMode::renderCoinsMarker()
 		coinTextRect.h = coinNumbTexture.getHeight() * coinUISpriteScale_;
 
 		coinNumbTexture.render(coinTextRect);
+		
 		coinTextureUI_->render(coinImageRect);
+		SDL_Rect headIcon;
+		headIcon.x = coinTextRect.x;
+		headIcon.y = coinTextRect.y;
+		headIcon.w = coinImageRect.w *= 1.1;
+		headIcon.h = coinImageRect.h *= 1.6;
+		SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::PlayerStocks)->render(headIcon, 0, 0, (*matchInfo_->getPlayersInfo())[k]->playerSkin);
 
 	}
 }
