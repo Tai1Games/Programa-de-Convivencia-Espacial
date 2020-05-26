@@ -74,7 +74,6 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 		char* host;
 		switch (state) {
 		case States::menu:
-			//states_[state] = new MenuState(0); //numberOfPlayers usado como ownerID
 			states_[state] = new MapSelectionState(0);
 			break;
 		case States::play:

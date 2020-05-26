@@ -10,16 +10,18 @@
 #include "MatchInfo.h"
 
 void MapSelectionState::init() {
+	if (entityManager_ != nullptr) entityManager_->~EntityManager();
 	entityManager_ = new EntityManager();
 	ownerPlayerBinder_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo()->at(ownerPlayerID_)->inputBinder;
 
+	loadConst();
 	createImages();
 	createTexts();
 	createIcons();
 	cout << "init map select";
 
-	Entity* miniTinky = entityManager_->addEntity();
-	mapSelCursor_ = miniTinky->addComponent<UIViewer>(Resources::CursorUiSelectMap, coordsImages_[0] + b2Vec2{ -10,-10 }, 0.35, 0);
+	Entity* temp = entityManager_->addEntity();
+	mapSelCursor_ = temp->addComponent<UIViewer>(Resources::CursorUiSelectMap, coordsImages_[0] + mapCursorOffset_, mapScale_, 0);
 
 	//MUSICA
 	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::AudioId::MainMenuMusic, -1);
@@ -115,11 +117,11 @@ void MapSelectionState::addRound(GamemodeID gMode, string map) {
 		indexMap = 3;
 	}
 
-	b2Vec2 pos = coordsImages_[indexMap] + b2Vec2{ iconsMaps_[indexMap].size() * 60.0f + 20, 20 };
+	b2Vec2 pos = coordsImages_[indexMap] + b2Vec2{ iconsMaps_[indexMap].size() * mapIconMargin_ + mapIconsOffset_.x, mapIconsOffset_.y };
 
 	iconsMaps_[indexMap].push_back(std::pair(entityManager_->addEntity(), (GamemodeID)gMode));
 
-	iconsMaps_[indexMap].back().first->addComponent<UIViewer>(texturesIcons_[gMode], pos, 2, 0);
+	iconsMaps_[indexMap].back().first->addComponent<UIViewer>(texturesIcons_[gMode], pos, mapIconsScale_, 0);
 
 }
 
@@ -147,7 +149,7 @@ void MapSelectionState::removeRound(string map)
 
 		auto a = --roundsVector_->end();
 
-		int i = iconsMaps_[indexMap].size()-1;
+		int i = iconsMaps_[indexMap].size() - 1;
 
 		while (!found && a >= roundsVector_->begin()) {
 			auto b = *a;
@@ -155,7 +157,7 @@ void MapSelectionState::removeRound(string map)
 			if (*a == std::pair{ gamemode, map }) {
 				roundsVector_->erase(a);
 				(iconsMaps_[indexMap].begin() + i)->first->setActive(false);
-				iconsMaps_[indexMap].erase(iconsMaps_[indexMap].begin() + i );
+				iconsMaps_[indexMap].erase(iconsMaps_[indexMap].begin() + i);
 				found = true;
 			}
 			else {
@@ -187,7 +189,7 @@ void MapSelectionState::updatePointer(int n, int coor) {
 		pointers_[y] += (n * (coor)+size);
 		pointers_[y] %= size;
 
-		mapSelCursor_->setPosUIElement(coordsImages_[pointers_[x] + pointers_[y] * 2] + b2Vec2{ -10,-10 });
+		mapSelCursor_->setPosUIElement(coordsImages_[pointers_[x] + pointers_[y] * 2] + mapCursorOffset_);
 	}
 	else {
 		size = GamemodeID::NUMBER_OF_GAMEMODES - 1; //sin tutorial
@@ -199,6 +201,30 @@ void MapSelectionState::updatePointer(int n, int coor) {
 
 		iconsGamemodes_[pointers_[gamemodeScreen]]->setActive(true);
 	}
+
+}
+
+void MapSelectionState::loadConst()
+{
+	gmOffsetText_ = { CONST(float, "GM_OFFSET_TEXT_X"),  CONST(float, "GM_OFFSET_TEXT_Y") };
+	gmOffsetIcons_ = { CONST(float, "GM_OFFSET_ICONS_X"),  CONST(float, "GM_OFFSET_ICONS_Y") };
+	gmMarginText_ = { CONST(float, "GM_MARGIN_TEXT_X"),  CONST(float, "GM_MARGIN_TEXT_Y") };
+
+	gmIconsSize_ = CONST(int, "GM_ICONS_SIZE");
+
+	gmTextSize_ = CONST(int, "GM_TEXT_SIZE");
+	gmTextScale_ = CONST(float, "GM_TEXT_SCALE");
+
+	mapCursorOffset_ = { CONST(float, "MAP_CURSOR_OFFSET_X"),CONST(float, "MAP_CURSOR_OFFSET_Y") };
+	mapScale_ = CONST(float, "MAP_SCALE");
+	mapMargin_ = CONST(int, "MAP_MARGIN");
+
+	mapIconMargin_ = CONST(int, "MAP_ICON_MARGIN");
+	mapIconsOffset_ = { CONST(float, "MAP_ICON_OFFSET_X"),CONST(float, "MAP_ICON_OFFSET_Y") };
+
+	mapIconsScale_ = CONST(int, "MAP_ICON_SCALE"); 
+	sizeImg = { CONST(float, "MAP_SIZE_IMAGE_X"), CONST(float, "MAP_SIZE_IMAGE_Y") };
+	sizeScreen = { CONST(float, "WINDOW_WIDTH"), CONST(float, "WINDOW_HEIGHT") };
 
 }
 
@@ -221,35 +247,27 @@ void MapSelectionState::updateMenu() {
 	}
 
 	mapSelCursor_->setDrawable(menuPointer_ != 1);
-	mapSelCursor_->setPosUIElement(coordsImages_[pointers_[x] + pointers_[y] * 2] + b2Vec2{ -10,-10 });
+	mapSelCursor_->setPosUIElement(coordsImages_[pointers_[x] + pointers_[y] * 2] + mapCursorOffset_);
 };
 
 
 void MapSelectionState::createImages() { //preparar los textos	
 
-	float scaleImg = 0.35;
+	coordsImages_.push_back(b2Vec2((sizeScreen.x - (sizeImg.x * 2 + mapMargin_)) / 2,
+		(sizeScreen.y - (sizeImg.y * 2 + mapMargin_)) / 2));
 
-	int margin = 100;
+	coordsImages_.push_back(b2Vec2((sizeScreen.x - (sizeImg.x * 2 + mapMargin_)) / 2 + mapMargin_ + sizeImg.x,
+		(sizeScreen.y - (sizeImg.y * 2 + mapMargin_)) / 2));
 
-	b2Vec2 sizeImg{ 672, 378 };
-	b2Vec2 sizeScreen{ 1920, 1080 };
+	coordsImages_.push_back(b2Vec2((sizeScreen.x - (sizeImg.x * 2 + mapMargin_)) / 2,
+		(sizeScreen.y - (sizeImg.y * 2 + mapMargin_)) / 2 + mapMargin_ + sizeImg.y));
 
-
-	coordsImages_.push_back(b2Vec2((sizeScreen.x - (sizeImg.x * 2 + margin)) / 2,
-		(sizeScreen.y - (sizeImg.y * 2 + margin)) / 2));
-
-	coordsImages_.push_back(b2Vec2((sizeScreen.x - (sizeImg.x * 2 + margin)) / 2 + margin + sizeImg.x,
-		(sizeScreen.y - (sizeImg.y * 2 + margin)) / 2));
-
-	coordsImages_.push_back(b2Vec2((sizeScreen.x - (sizeImg.x * 2 + margin)) / 2,
-		(sizeScreen.y - (sizeImg.y * 2 + margin)) / 2 + margin + sizeImg.y));
-
-	coordsImages_.push_back(b2Vec2((sizeScreen.x - (sizeImg.x * 2 + margin)) / 2 + margin + sizeImg.x,
-		(sizeScreen.y - (sizeImg.y * 2 + margin)) / 2 + margin + sizeImg.y));
+	coordsImages_.push_back(b2Vec2((sizeScreen.x - (sizeImg.x * 2 + mapMargin_)) / 2 + mapMargin_ + sizeImg.x,
+		(sizeScreen.y - (sizeImg.y * 2 + mapMargin_)) / 2 + mapMargin_ + sizeImg.y));
 
 	for (int i = 0; i < 4; i++) {
 		imagesMaps_.push_back(entityManager_->addEntity());
-		imagesMaps_.back()->addComponent<UIViewer>(texturesMaps_[i], coordsImages_[i], scaleImg, 0);
+		imagesMaps_.back()->addComponent<UIViewer>(texturesMaps_[i], coordsImages_[i], mapScale_, 0);
 	}
 
 }
@@ -260,16 +278,13 @@ void MapSelectionState::createTexts()
 
 	for (auto e : texturesTexts_) {
 
-		b2Vec2 a = { gmOffset.x + gmMargin,(float)(i * 200 + gmOffset.y) };
+		b2Vec2 a = { gmOffsetText_.x + i * gmMarginText_.x,(float)(i * gmMarginText_.y + gmOffsetText_.y) };
 
 		textsGamemodes_.push_back(entityManager_->addEntity());
-		textsGamemodes_.back()->addComponent<UIViewer>(texturesTexts_[i], a, 1.1, 0);
+		textsGamemodes_.back()->addComponent<UIViewer>(texturesTexts_[i], a, gmTextScale_, 0);
 		textsGamemodes_.back()->setActive(false);
 		i++;
 	}
-
-
-
 }
 
 void MapSelectionState::createIcons() {
@@ -278,12 +293,17 @@ void MapSelectionState::createIcons() {
 
 	for (auto e : texturesIcons_) {
 
-		b2Vec2 a = { gmOffset.x,(i * 200 + gmOffset.y) };
+		b2Vec2 a = { gmOffsetIcons_.x + i * gmMarginText_.x,(i * gmMarginText_.y + gmOffsetIcons_.y) };
 
 		iconsGamemodes_.push_back(entityManager_->addEntity());
 		iconsGamemodes_.back()->addComponent<UIViewer>(texturesIcons_[i], a, 2, 0);
 		iconsGamemodes_.back()->setActive(false);
 		i++;
 	}
+
+	for (auto e : iconsMaps_) {
+		e.erase(e.begin(), e.end());
+	}
+
 }
 

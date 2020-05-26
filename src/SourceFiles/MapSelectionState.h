@@ -49,19 +49,28 @@ private:
 #pragma region constantes de tamanos 
 
 
-	b2Vec2 gmOffset = { float(100) , float(100) };
+	b2Vec2 gmOffsetText_;
+	b2Vec2 gmOffsetIcons_;
+	b2Vec2 gmMarginText_;
 
-	float gmIconsSize_ = 2;
+	float gmIconsSize_;
 
-	int gmTextSize_ = 35;
-	float gmTextScale_ = 1.1;
-	int gmMargin = 100;
+	int gmTextSize_;
+	float gmTextScale_;
 
+	b2Vec2 mapCursorOffset_;
+	float mapScale_ ;
+	int mapMargin_;
+	int mapIconMargin_ ;
+	b2Vec2 mapIconsOffset_ ;
+	int mapIconsScale_;
 
+	b2Vec2 sizeImg;
+	b2Vec2 sizeScreen;
 
 #pragma endregion constantes de tamanos
 
-	
+
 
 	std::map<int, string> maps_ = { //anadir aqui los mapas que se vayan haciendo, tutorial no
 		{ 0, "LivingRoom"},
@@ -94,6 +103,7 @@ private:
 	};
 
 	void updatePointer(int n, int coor);
+	void loadConst();
 	void createImages();
 	void createTexts();
 	void createIcons();
