@@ -78,7 +78,6 @@ void ClientState::render()
 	SpritePacket sprite;
 	while (!spritesToRender_.empty()) {
 		sprite = spritesToRender_.front();
-		//SDL_Game::instance()->getTexturesMngr()->getTexture(sprite.textureId)->render({sprite.posX,sprite.posY,sprite.width,sprite.height},sprite.rotationDegrees,sprite.frameNumberX,sprite.frameNumberY,sprite.flip);
 		SDL_Game::instance()->getTexturesMngr()->getTexture(sprite.textureId)->render({ sprite.posX, sprite.posY, sprite.width, sprite.height }, (double)sprite.rotationDegrees, (us)sprite.frameNumberX, (us)sprite.frameNumberY, (SDL_RendererFlip)sprite.flip);
 		spritesToRender_.pop();
 	}

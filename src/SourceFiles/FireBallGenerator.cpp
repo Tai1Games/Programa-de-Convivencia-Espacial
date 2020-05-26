@@ -12,8 +12,7 @@ void FireBallGenerator::init() {
 	particleEmitter_ = GETCMP1_(ParticleEmitter);
 	boilerViewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
 	pos_ = col_->getPos();
-	radius = sqrt(pow(col_->getH(0), 2) + pow(col_->getW(0), 2))/*+0.5*/; //JAJA he hecho una hipotenusa despues del instiuto
-	//cout << "radius " << radius << endl;
+	radius = sqrt(pow(col_->getH(0), 2) + pow(col_->getW(0), 2)); //JAJA he hecho una hipotenusa despues del instiuto
 
 	//initialize constants
 	minCd_ = CONST(int, "FBGEN_MIN_COOLDOWN");
