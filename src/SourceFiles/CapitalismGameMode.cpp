@@ -97,9 +97,10 @@ void CapitalismGameMode::renderCoinsMarker()
 		SDL_Rect headIcon;
 		headIcon.x = coinTextRect.x;
 		headIcon.y = coinTextRect.y;
-		headIcon.w = coinImageRect.w *= 1.1;
-		headIcon.h = coinImageRect.h *= 1.6;
-		SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::PlayerStocks)->render(headIcon, 0, 0, (*matchInfo_->getPlayersInfo())[k]->playerSkin);
+		headIcon.w = 75;
+		headIcon.h = 100;
+		SDL_RendererFlip f = (k % 2 == 0) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+		SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::PlayerHeads)->render(headIcon, 0, 0, (*matchInfo_->getPlayersInfo())[k]->playerSkin,f);
 
 	}
 }

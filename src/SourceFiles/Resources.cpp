@@ -77,6 +77,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },
 	{ PlayerAnimSheet, resourcesPath + "textures/playerAnim.png",19,10},
 	{ PlayerAnimSheetLobby, resourcesPath + "textures/playerAnimLobby.png",1,10},
+	{ PlayerHeads, resourcesPath + "textures/playerStocks.png",1,10},
 	{ Hands, resourcesPath + "textures/hands.png", 7, 11},
 	{ ImpulseArrow, resourcesPath + "textures/FlechaImpulso.png"},
 	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png", 13},
@@ -105,7 +106,6 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ Router,resourcesPath + "textures/Router2.png" },
 	{ RoombaSpriteSheet, resourcesPath + "textures/Roomba.png", 5},
 	{ Remote, resourcesPath + "textures/Mando.png"},
-	{ PlayerStocks, resourcesPath + "textures/playerStocks.png",1,10},
 
 	// miscelánea
 	{ Debug, resourcesPath + "textures/debug.png" },

@@ -67,6 +67,7 @@ public:
 		// Players
 		PlayerAnimSheet,
 		PlayerAnimSheetLobby,
+		PlayerHeads,
 
 
 		// Map elements
@@ -119,7 +120,6 @@ public:
 		Router,
 		RoombaSpriteSheet,
 		Remote,
-		PlayerStocks,
 
 		// miscel�nea
 		Debug,

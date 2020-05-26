@@ -142,11 +142,14 @@ void TutorialGameMode::render() {
 	for (int i = 0; i < playerStocks_.size(); ++i) { //i = player number, j = individual stock to be drawn
 		drawPos.y = playersStocksPos_[i].y; //Stocks and Health are drawn on the same Y coordinate.
 		for (int j = 0; j < playerStocks_[i]; j++) {
-			if (i % 2 == 0) //X coordinate depends on whether the stocks are drawn on the left or the right. 
+			if (i % 2 == 0) { //X coordinate depends on whether the stocks are drawn on the left or the right. 
 				drawPos.x = playersStocksPos_[i].x + j * (stockWidth_ + stockOffset_);
-			else
+				SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::PlayerHeads)->render(drawPos, 0, 0, (*matchInfo_->getPlayersInfo())[i]->playerSkin, SDL_FLIP_HORIZONTAL);
+			}
+			else {
 				drawPos.x = playersStocksPos_[i].x - j * (stockWidth_ + stockOffset_);
-			SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Tinky)->render(drawPos);
+				SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::PlayerHeads)->render(drawPos, 0, 0, (*matchInfo_->getPlayersInfo())[i]->playerSkin);
+			}
 		}
 	}
 }

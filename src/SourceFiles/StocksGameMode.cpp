@@ -47,11 +47,11 @@ void StocksGameMode::render(){
 		for(int j = 0;j < playerStocks_[i];j++){ 
 			if (i % 2 == 0) { //X coordinate depends on whether the stocks are drawn on the left or the right. 
 				drawPos.x = playersStocksPos_[i].x + j* (stockWidth_ + stockOffset_);
-				SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::PlayerStocks)->render(drawPos, 0, 0, (*matchInfo_->getPlayersInfo())[i]->playerSkin, SDL_FLIP_HORIZONTAL);
+				SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::PlayerHeads)->render(drawPos, 0, 0, (*matchInfo_->getPlayersInfo())[i]->playerSkin, SDL_FLIP_HORIZONTAL);
 			}
 			else {
 				drawPos.x = playersStocksPos_[i].x - j * (stockWidth_ + stockOffset_);
-				SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::PlayerStocks)->render(drawPos, 0, 0, (*matchInfo_->getPlayersInfo())[i]->playerSkin);
+				SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::PlayerHeads)->render(drawPos, 0, 0, (*matchInfo_->getPlayersInfo())[i]->playerSkin);
 			}
 		}
 	}
