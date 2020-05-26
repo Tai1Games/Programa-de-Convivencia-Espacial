@@ -45,6 +45,7 @@ private:
 	std::vector<Entity*> iconsGamemodes_;
 	std::vector<Entity*> textsGamemodes_;
 
+	Texture* backgroundTex_ = nullptr;
 
 #pragma region constantes de tamanos 
 
@@ -119,6 +120,7 @@ public:
 
 	virtual void init() override;
 	virtual void onLoaded() override;
+	virtual void render() override;
 	virtual void handleInput() override;
 };
 

@@ -23,6 +23,8 @@ void MapSelectionState::init() {
 	Entity* temp = entityManager_->addEntity();
 	mapSelCursor_ = temp->addComponent<UIViewer>(Resources::CursorUiSelectMap, coordsImages_[0] + mapCursorOffset_, mapScale_, 0);
 
+	backgroundTex_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::RocketRoom);
+
 	//MUSICA
 	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::AudioId::MainMenuMusic, -1);
 }
@@ -315,3 +317,7 @@ void MapSelectionState::createIcons() {
 
 }
 
+void MapSelectionState::render() {
+	backgroundTex_->render(0,0);
+	GameState::render();
+}
