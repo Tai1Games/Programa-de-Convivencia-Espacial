@@ -84,11 +84,6 @@ void InputHandler::clearJoysticks()
 		for (auto& ctrl : m_gameControllers) {
 			SDL_GameControllerClose(ctrl);
 		}
-		//for (unsigned int i = 0; i < SDL_NumJoysticks();
-		//	i++)
-		//{
-		//	SDL_GameControllerClose(m_gameControllers[i]);
-		//}
 	}
 }
 
@@ -258,10 +253,6 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		{
 			*m_triggerValues[whichOne].first = abs(event.jaxis.value);
 		}
-		//else if (event.jaxis.value < -m_joystickDeadZone)
-		//{
-		//	m_joystickValues[whichOne].first->setY(-1);
-		//}
 		else
 		{
 			*m_triggerValues[whichOne].first = 0;
@@ -305,10 +296,6 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		{
 			*m_triggerValues[whichOne].second = abs(event.jaxis.value);
 		}
-		//else if (event.jaxis.value < -m_joystickDeadZone)
-		//{
-		//	m_joystickValues[whichOne].first->setY(-1);
-		//}
 		else
 		{
 			*m_triggerValues[whichOne].second = 0;
@@ -356,14 +343,9 @@ bool InputHandler::mapJoystick(SDL_GameController* ctrl, json mapData) {
 	SDL_Joystick* joy = SDL_GameControllerGetJoystick(ctrl);
 	SDL_JoystickGetGUIDString(SDL_JoystickGetGUID(joy), guid, bits);
 
-	cout << "looking for " << guid << " mapString" << endl;
 	if (!(mapData[guid]).is_null()) {
-		cout << "found " << guid << " mapString" << endl;
 		string mapString = mapData[guid];
-		cout << SDL_GameControllerMappingForGUID(SDL_JoystickGetGUID(joy)) << endl;
 		int res = SDL_GameControllerAddMapping(mapString.c_str());
-		cout << "-----------------------------" << endl;
-		cout << SDL_GameControllerMappingForGUID(SDL_JoystickGetGUID(joy)) << endl;
 
 		return res == 1;
 	}
@@ -380,7 +362,6 @@ inline void InputHandler::onControllerAddedEvent(const SDL_Event& event)
 		int idOnExit = m_gameControllers.size();//su id fisica sera el lugar en el que lo inicialice SDL
 		int gameId; //Su id del juego sera el id que lea de la id fisica
 		if (disconnectedGameControllers_.empty()) {
-			//cout << "Nueva conexion de mando " << m_gameControllers.size() << endl;
 			initialiseNewController(event.cdevice.which);
 
 			//si es un mando nuevo, se corresponden
@@ -389,7 +370,6 @@ inline void InputHandler::onControllerAddedEvent(const SDL_Event& event)
 		else {
 			debugFlag_ReconectedController = true;
 			int id = disconnectedGameControllers_.front();
-			//cout << "Reconectado mando " << id << " en sistema" << m_gameControllers.size() << endl;
 			initialiseNewController(event.cdevice.which);
 			disconnectedGameControllers_.pop();
 
@@ -400,8 +380,6 @@ inline void InputHandler::onControllerAddedEvent(const SDL_Event& event)
 		systemToGameCtrlId.emplace(idOnExit, gameId);
 		gameToSystemCtrlId[gameId] = idOnExit;
 	}
-	else
-		cout << "No puede haber mas de 4 jugadores, desconecta un mando si quieres conectar este" << endl;
 }
 
 inline void InputHandler::onControllerRemovedEvent(const SDL_Event& event)
@@ -413,7 +391,10 @@ inline void InputHandler::onControllerRemovedEvent(const SDL_Event& event)
 		disconnectedGameControllers_.push(it->second);
 		systemToGameCtrlId.erase(it);
 	}
-	else throw "Se ha desconectado un mando no inicializado";
+	else {
+		//se ha desconectado un mando no inicializado
+		//eso es malo.
+	}
 }
 
 inline void InputHandler::initialiseNewController(int idOnEnter)

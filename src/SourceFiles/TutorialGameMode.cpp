@@ -166,8 +166,7 @@ bool TutorialGameMode::onPlayerDead(int id) { //Returns false when player runs o
 		playerStocks_[id]--;
 		if (playerStocks_[id] <= 0) {
 			roundResults_.push_back(players_[id]);
-			/*if (roundResults_.size() == playerStocks_.size() - 1) {
-			}*/
+
 			return false;
 		}
 		else return true;

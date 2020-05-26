@@ -103,10 +103,6 @@ void PlayerController::handleInput()
 		impulseForce_ = 0;
 		if (kBinder_ != nullptr) kBinder_->grabbed = false;
 		impulseCooldownTimer_ = 0;
-
-		//HAY QUE BORRAR-----------------------------------------------------------
-		//viewer_->startAnimation(0, 0, -1, 1);
-		//HAY QUE BORRAR-----------------------------------------------------------
 	}
 
 	if (ib->releaseGrab()) {

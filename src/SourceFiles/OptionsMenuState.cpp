@@ -38,7 +38,6 @@ void OptionsMenuState::init()
 
 	OptionsText->addComponent<UIViewer>(Resources::OptionsText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 340, (CONST(int, "WINDOW_HEIGHT") / 2) - 310), 2.5, 0);
 
-	//btns_.push_back(resumeText->addComponent<UIViewer>(Resources::ResumeText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 260, (CONST(int, "WINDOW_HEIGHT") / 2) + offsetBetweenButtons_ * -1), 1.5, 0));
 	btns_.push_back(musicText->addComponent<UIViewer>(Resources::MusicText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2 - SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::MusicText)->getFrameWidth() * 1.5),
 		(CONST(int, "WINDOW_HEIGHT") / 2) + offsetBetweenButtons_ * 0), 1.5, 0));
 	btns_.push_back(effectsText->addComponent<UIViewer>(Resources::EffectsText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2 - SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::EffectsText)->getFrameWidth() * 1.5),

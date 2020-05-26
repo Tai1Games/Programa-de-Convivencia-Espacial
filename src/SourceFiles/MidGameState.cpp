@@ -135,7 +135,6 @@ void MidGameState::update()
 		if (playerRockets_[roundWinner_]->getPosUIElement().x > rocketXPositionObjective_) {
 			currentState = waitingButton;
 			continueText->setActive(true);
-			//frameZoomStateEnds_ = currentFrame + zoomStateDuration_;
 		}
 		break;
 
