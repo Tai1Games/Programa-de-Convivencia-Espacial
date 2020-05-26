@@ -47,8 +47,17 @@ public:
 		ProgressBar,
 		ProgressBar2,
 
+
+		CursorUiSelectMap,
+		CapitalismIcon,
+		ControllerModeIcon,
+		StocksIcon,
+		WiFightIcon,
+		TimedIcon,
+
 		Ready,
 		PressReady,
+
 
 		//Lobby
 		KeyboardIcon,
