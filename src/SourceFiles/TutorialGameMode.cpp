@@ -6,7 +6,7 @@
 #include "WeaponFactory.h"
 
 
-TutorialGameMode::TutorialGameMode(MatchInfo* mInfo, int stocks) : GameMode(mInfo,GamemodeID::Tutorial)
+TutorialGameMode::TutorialGameMode(MatchInfo* mInfo, int stocks) : GameMode(mInfo, GamemodeID::Tutorial)
 {
 	maxStocks_ = stocks;
 }
@@ -17,22 +17,27 @@ TutorialGameMode::~TutorialGameMode()
 
 void TutorialGameMode::init(PlayState* game) {
 	GameMode::init(game);
-
-	//tutorial plant
-	piranhaPlant_ = ObjectFactory::makeCarnivorousPlant(game->getEntityManager(), game->getPhysicsWorld(),
-		b2Vec2(22.5, 5), b2Vec2(2, 2));
-	piranhaPlant_->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, -Collider::CollisionLayer::Player);
-	piranhaPlant_->setActive(false);
 	//------------------
-	GameMode::createPlayers(game);
+	float roomCenterX = 23.5; //numeros magicos
+	float roomCenterY = 13.5;
+	float offsetX = 28;
+	float offsetY = 15;
 	for (int i = 0; i < nPlayers_; i++) {
 		playerStocks_.push_back(maxStocks_); //Initializes maxStocks vector with 3 on all positions.
+		double angle = 135 - 90 * i; //viva la trigonometria
+		angle = angle * PI / 180;
+		//tutorial plants
+		carnivorousPlants_.push_back(ObjectFactory::makeCarnivorousPlant(game->getEntityManager(), game->getPhysicsWorld(),
+			b2Vec2(roomCenterX + offsetX * cos(angle), roomCenterY + offsetY * sin(angle)), b2Vec2(1, 1)));
+		carnivorousPlants_.back()->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, -Collider::CollisionLayer::Player);
+		carnivorousPlants_.back()->setActive(false);
 		//tutorial weapons
 		weapons_.push_back(WeaponFactory::makeExtinguisher(game->getEntityManager(), game->getPhysicsWorld(),
-			b2Vec2(10 + i, 10 + i), b2Vec2(CONST(double, "EXTINGUISHER_W_PHYSICS"), CONST(double, "EXTINGUISHER_H_PHYSICS"))));
+			b2Vec2(roomCenterX + offsetX * cos(angle), roomCenterY + offsetY * sin(angle)), b2Vec2(CONST(double, "EXTINGUISHER_W_PHYSICS"), CONST(double, "EXTINGUISHER_H_PHYSICS"))));
 		weapons_.back()->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, -Collider::CollisionLayer::Player);
 		weapons_.back()->setActive(false);
-	}	
+	}
+	GameMode::createPlayers(game); //para que se vean por encima de las plantas
 	for (int i = 0; i < players_.size(); i++) {
 		Entity* e = players_[i];
 		playersHealth_.push_back(e->getComponent<Health>(ComponentType::Health)); //Initializes playersHealth vector catching a reference to Health on entity e.
@@ -90,12 +95,14 @@ void TutorialGameMode::update() {
 			numberTexts_[previousProgress_]->setActive(false);
 			numberTexts_[0]->setActive(true);					//reset progress
 			if (tutorialPointer_ == 2) for (Entity* e : weapons_) { //activate weapons
-				e->setActive(true); 
+				e->setActive(true);
 				e->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, Collider::CollisionLayer::Player);
 			}
-			else if (tutorialPointer_ == 5) { //activate plant
-				piranhaPlant_->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, Collider::CollisionLayer::Player);
-				piranhaPlant_->setActive(true);
+			else if (tutorialPointer_ == 5) { //activate plants
+				for (Entity* e : carnivorousPlants_) {
+					e->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, Collider::CollisionLayer::Player);
+					e->setActive(true);
+				}
 			}
 		}
 		else if (progress != previousProgress_) {	//update progress if changed
@@ -127,7 +134,7 @@ void TutorialGameMode::update() {
 			break;
 		}
 	}
-	else if(startedTutorial_){
+	else if (startedTutorial_) {
 		completed_->setActive(false);
 		slash_->setActive(false);
 		numPlayers_->setActive(false);
