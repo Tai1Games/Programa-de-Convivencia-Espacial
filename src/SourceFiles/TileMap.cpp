@@ -247,7 +247,7 @@ void TileMap::executeMapFactory()
 			size *= 0.5f;
 			string buttonType= o.getType();;	//Por defecto
 
-			ObjectFactory::makeTriggerButton(entityManager_, physicsWorld_, pos, size, buttonType);
+			doors_.push_back(ObjectFactory::makeTriggerButton(entityManager_, physicsWorld_, pos, size, buttonType)->getComponent<AnimatedViewer>(ComponentType::Viewer));
 		}
 
 		else if (name == "TWall") {
