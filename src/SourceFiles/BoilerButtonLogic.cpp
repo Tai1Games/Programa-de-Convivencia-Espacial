@@ -36,7 +36,6 @@ void BoilerButtonLogic::onCollisionEnter(Collision* c) {
 	Entity* other = c->entity;
 	if (c->hitFixture->GetFilterData().categoryBits & Collider::CollisionLayer::Player ||
 		c->hitFixture->GetBody()->GetLinearVelocity().Length() > minForceForAcivation_ && !activated) {
-
 		fbGen_->onButtonAction(inc_dec_);
 		buttonViewer_->startAnimation(0);
 		reactivationFrame_ = currentFrame_ + framesForReactivation_;

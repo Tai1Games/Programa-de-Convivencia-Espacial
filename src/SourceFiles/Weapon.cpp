@@ -23,10 +23,10 @@ void Weapon::init()
 
 	mainCollider_ = GETCMP1_(Collider);
 	vw_ = GETCMP1_(Viewer);
-	mainCollider_->createCircularFixture(2, 0, 0, 0, Collider::CollisionLayer::Trigger , true);
+	mainCollider_->createCircularFixture(2, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
 	//Tamaño del vector segun el numero de jugadores
 	playerInfo_.resize(4);
-	
+
 	entity_->getEntityManager()->getWeaponVector()->push_back(this);
 
 	throwCooldown_ = CONST(int, "THROW_COOLDOWN");
@@ -38,7 +38,7 @@ void Weapon::handleInput()
 {
 	if (currentHand_ == nullptr) {
 		for (int i = 0; i < playerInfo_.size(); i++) {
-			if (!IsPicked() && playerInfo_[i].isNear && 
+			if (!IsPicked() && playerInfo_[i].isNear &&
 				playerInfo_[i].playerHands->getCanPickWeapon() && playerInfo_[i].playerBinder->pressPick()) {
 				PickObjectBy(i);
 			}
@@ -74,7 +74,6 @@ void Weapon::PickObjectBy(int index)
 }
 
 void Weapon::separateWeapon(double resultThrowSpeed) {
-
 	//Si se tira un objeto, se guarda en el objeto lanzado la ID de quien lo lanza.
 	GETCMP1_(ThrownByPlayer)->throwObject(pickedIndex_);
 
@@ -111,7 +110,7 @@ void Weapon::UnPickObject()
 	double resultThrowSpeed = minThrowSpeed_ +
 		((actualMagnitude * (maxThrowSpeed_ - minThrowSpeed_)) / 10/*Media de magnitud maxima del jugador*/);
 	/*Hay que tener en cuenta el tamaño de la fixture principal del arma*/
-	float tam =  mainCollider_->getW(0) +  mainCollider_->getH(0);
+	float tam = mainCollider_->getW(0) + mainCollider_->getH(0);
 	resultThrowSpeed *= tam;
 
 	separateWeapon(resultThrowSpeed);
@@ -119,7 +118,7 @@ void Weapon::UnPickObject()
 }
 
 void Weapon::letFallObject() {
-	if(picked_) separateWeapon(1.5);
+	if (picked_) separateWeapon(1.5);
 }
 
 int Weapon::getPlayerId() {
@@ -131,7 +130,7 @@ void Weapon::onCollisionEnter(Collision* c)
 	Entity* other = c->entity;
 	Hands* otherHand = GETCMP2(other, Hands);
 	Collider* coll = GETCMP1_(Collider);
-	b2Fixture* auxF = c->myFixture ;
+	b2Fixture* auxF = c->myFixture;
 
 	if (otherHand != nullptr &&
 		auxF->GetFilterData().categoryBits == Collider::CollisionLayer::Trigger) {
@@ -150,7 +149,7 @@ void Weapon::onCollisionExit(Collision* c)
 	}
 }
 
-void Weapon::SavePlayerInfo(int index, Hands* playerH, Health* healthAux, Wallet* walletAux,InputBinder* binderAux)
+void Weapon::SavePlayerInfo(int index, Hands* playerH, Health* healthAux, Wallet* walletAux, InputBinder* binderAux)
 {
 	playerInfo_[index].isNear = true;
 	playerInfo_[index].playerHands = playerH;
@@ -166,7 +165,7 @@ void Weapon::DeletePlayerInfo(int index)
 }
 
 void Weapon::update() {
-	if(picked_)
+	if (picked_)
 		throwCooldownTimer_++;
 
 	// recupera colisiones con todos los jugadores tras cierto tiempo

@@ -18,4 +18,3 @@ public:
 
 	void addFireBall(b2Vec2 pos, b2Vec2 impulse);
 };
-

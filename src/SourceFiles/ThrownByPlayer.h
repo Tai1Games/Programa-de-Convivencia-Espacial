@@ -14,7 +14,7 @@ private:
 
 public:
 	ThrownByPlayer(GameMode* gameMode) :
-		Component(ComponentType::ThrownByPlayer),gameMode_(gameMode) {
+		Component(ComponentType::ThrownByPlayer), gameMode_(gameMode) {
 		lastOwner_ = -1;
 	}
 

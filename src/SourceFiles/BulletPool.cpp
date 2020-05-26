@@ -3,7 +3,6 @@
 
 BulletPool::BulletPool() :bulletsPool_([](Entity* e) {return e->isActive(); })
 {
-
 }
 
 void BulletPool::init(EntityManager* eMan, b2World* physicsWorld, GameMode* gM)
@@ -15,11 +14,11 @@ void BulletPool::init(EntityManager* eMan, b2World* physicsWorld, GameMode* gM)
 	}
 }
 
-void BulletPool::addBullet(b2Vec2 pos, b2Vec2 size, b2Vec2 vel,int texture, int damage, int player)
+void BulletPool::addBullet(b2Vec2 pos, b2Vec2 size, b2Vec2 vel, int texture, int damage, int player)
 {
 	Entity* e = bulletsPool_.getObj();
 	if (e != nullptr) {
 		e->getComponent<ThrownByPlayer>(ComponentType::ThrownByPlayer)->SetOwner(player);
-		e->getComponent<Bullet>(ComponentType::Bullet)->setActive(true, pos, size, vel,texture, damage, player);
+		e->getComponent<Bullet>(ComponentType::Bullet)->setActive(true, pos, size, vel, texture, damage, player);
 	}
 }

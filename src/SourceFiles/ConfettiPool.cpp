@@ -5,9 +5,9 @@
 ConfettiPool::ConfettiPool() : confettiPool_([](Entity* e) {return e->isActive(); }) {};
 
 void ConfettiPool::init(EntityManager* eMan, b2World* physicsWorld)
-{	
+{
 	b2Vec2 confettiSize = b2Vec2(CONST(float, "CONFETTI_W_PHYSICS"), CONST(float, "CONFETTI_H_PHYSICS"));
-	vector<Entity*> confettiPoolVector= confettiPool_.getPool();
+	vector<Entity*> confettiPoolVector = confettiPool_.getPool();
 	for (Entity* e : confettiPoolVector) {
 		e = WeaponFactory::makeConfetti(e, eMan, physicsWorld, b2Vec2(0, 0), confettiSize);
 		e->getComponent<ConfettiWeapon>(ComponentType::Weapon)->setActive(false);

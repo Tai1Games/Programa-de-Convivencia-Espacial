@@ -73,8 +73,8 @@ void TileMap::init() {
 			}
 		}
 	}
-	if(gameMode_!=nullptr)
-	bulletPool_->init(entityManager_, physicsWorld_, gameMode_);
+	if (gameMode_ != nullptr)
+		bulletPool_->init(entityManager_, physicsWorld_, gameMode_);
 }
 
 void TileMap::update() {
@@ -245,7 +245,7 @@ void TileMap::executeMapFactory()
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
 			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
 			size *= 0.5f;
-			string buttonType= o.getType();;	//Por defecto
+			string buttonType = o.getType();;	//Por defecto
 
 			doors_.push_back(ObjectFactory::makeTriggerButton(entityManager_, physicsWorld_, pos, size, buttonType)->getComponent<AnimatedViewer>(ComponentType::Viewer));
 		}
@@ -289,7 +289,6 @@ void TileMap::createWeapons()
 	}
 
 	for (b2Vec2 spawnPoint : lowTierWeaponSpawnPoints_) {
-
 		ObjectFactory::makeWeaponSpawner(entityManager_, physicsWorld_, spawnPoint, confettiPool_, staplerPool_, bulletPool_);
 	}
 }

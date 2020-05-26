@@ -5,7 +5,6 @@ Entity::Entity(EntityManager* mngr) :
 }
 
 Entity::~Entity() {
-	//cout << "Entity destroyed" << endl;
 }
 
 void Entity::update()
@@ -44,4 +43,3 @@ void Entity::onCollisionExit(Collision* c)
 	for (auto& cmp : components_)
 		cmp->onCollisionExit(c);
 }
-

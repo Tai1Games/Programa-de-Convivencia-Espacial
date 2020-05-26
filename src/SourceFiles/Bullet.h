@@ -8,22 +8,21 @@
 #include "Wallet.h"
 #include "CollisionHandler.h"
 
-class Bullet: public Component
+class Bullet : public Component
 {
 protected:
 	Collider* col_;
 	Viewer* viewer_;
 	int player_, damage_ = 0, winWidth_, winHeight_;
 	bool needToDelete = false;
-	double limitTime_=0;
+	double limitTime_ = 0;
 
 public:
-	Bullet():Component(ComponentType::Bullet){}
-	~Bullet(){}
+	Bullet() :Component(ComponentType::Bullet) {}
+	~Bullet() {}
 
 	virtual void init();
 	virtual void update() override;
-	virtual void setActive(bool a, b2Vec2 pos = { 0,0 }, b2Vec2 size = { 0,0 }, b2Vec2 vel = {0,0}, int texture = 0, int damage = 0, int player = -1);
+	virtual void setActive(bool a, b2Vec2 pos = { 0,0 }, b2Vec2 size = { 0,0 }, b2Vec2 vel = { 0,0 }, int texture = 0, int damage = 0, int player = -1);
 	virtual void onCollisionEnter(Collision* c);
 };
-

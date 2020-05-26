@@ -7,7 +7,7 @@
 class CollisionHandler;
 class AnimatedPlayer;
 
-class Health: public Component
+class Health : public Component
 {
 private:
 	int lives_;
@@ -36,4 +36,3 @@ public:
 
 	virtual void onCollisionEnter(Collision* c);
 };
-

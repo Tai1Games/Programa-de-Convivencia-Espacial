@@ -16,4 +16,3 @@ public:
 	virtual void onCollisionEnter(Collision* c) override;
 	virtual void onCollisionExit(Collision* c) override;
 };
-

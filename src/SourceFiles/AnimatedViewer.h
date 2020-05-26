@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 #include "Viewer.h"
 #include "AbstractAnimatedViewers.h"
 
@@ -15,4 +15,3 @@ public:
 	virtual void init() override;
 	virtual void update() override;
 };
-

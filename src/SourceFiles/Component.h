@@ -26,7 +26,7 @@ public:
 	}
 
 	void setGame(SDL_Game* game) {
-		game_ = game;		
+		game_ = game;
 	}
 
 	void setId(ComponentType::CmpId id) {
@@ -48,5 +48,3 @@ public:
 
 	Entity* getEntity() { return entity_; };
 };
-
-

@@ -34,8 +34,8 @@ Texture::~Texture() {
 void Texture::setColor(const SDL_Color& color)
 {
 	//Modulate texture
-	if(texture_!=nullptr)
-	SDL_SetTextureColorMod(texture_, color.r, color.g, color.b);
+	if (texture_ != nullptr)
+		SDL_SetTextureColorMod(texture_, color.r, color.g, color.b);
 }
 
 void Texture::close() {

@@ -20,7 +20,7 @@ private:
 
 	int posX_ = CONST(int, "WINDOW_WIDTH") / 2;
 	int posY_ = CONST(int, "WINDOW_HEIGHT") / 2;
-	
+
 	Texture* textures_[4] = { //3 2 1 go
 	SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Three),
 	SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Two),

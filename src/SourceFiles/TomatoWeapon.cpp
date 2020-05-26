@@ -73,7 +73,6 @@ void TomatoWeapon::onCollisionEnter(Collision* c) {
 
 		if (healthPlayer && collPlayer) {
 			if (!healthPlayer->subtractLife(damageOnExplosionImpact_)) {
-
 				// add points to owner
 				if (objThrown->getOwnerId() != playerData->getPlayerNumber())
 					objThrown->addPointsToOwner();

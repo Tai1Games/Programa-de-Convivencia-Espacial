@@ -24,4 +24,3 @@ public:
 	virtual void render();
 	void addPoints(int player, double sumPoints);
 };
-

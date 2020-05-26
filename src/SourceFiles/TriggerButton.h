@@ -27,6 +27,3 @@ public:
 	virtual void onCollisionExit(Collision* c);
 	void PassState();
 };
-
-
-

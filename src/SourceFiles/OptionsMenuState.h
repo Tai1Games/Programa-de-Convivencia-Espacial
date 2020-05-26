@@ -11,7 +11,7 @@ class OptionsMenuState : public GameState
 {
 private:
 	enum Button {
-		Music=0,
+		Music = 0,
 		Effects,
 		Exit
 	};
@@ -57,5 +57,3 @@ public:
 	virtual void render() override;
 	virtual void handleInput();
 };
-
-

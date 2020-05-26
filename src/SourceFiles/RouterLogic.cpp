@@ -32,7 +32,6 @@ void RouterLogic::update()
 	for (int k = 0; k < numJug; k++) {
 		// puntos añadidos = 1 / (numJugadores * (distancia + 1) para no dividir entre 0)
 		double points = CONST(int, "POINTS_WHEN_INSIDE_ROUTER") / (numJug * ((playersInsideRange_[k].posPlayer->getPos() - posRouter_->getPos()).Length() + 1));
-		//std::cout << "Player " << playersInsideRange_[k].id << " won " << points << " points	   (at RouterLogic.cpp, method update(), line 32)" << endl;
 		wifightGameMode_->addPoints(playersInsideRange_[k].id, min(points, CONST(double, "MAX_POINTS_PER_TICK")));
 
 		if (actFrame_ >= frameWhenUpdate_) {

@@ -62,7 +62,7 @@ public:
 	static Entity* makeRouter(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, WiFightGameMode* gMode, WiFiWavePool* wavePool);
 
 	static Entity* makeWifiWave(Entity* e, EntityManager* entityManager, b2World* physicsWorld, Collider* colRouter);
-	
+
 	static Entity* makeTriggerButton(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos, b2Vec2 size, string state);
 
 	static Entity* makeWeaponSpawner(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 position, ConfettiPool* confettiPool, StaplerPool* staplerPool, BulletPool* bulletPool);

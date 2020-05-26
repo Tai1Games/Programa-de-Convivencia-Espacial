@@ -48,7 +48,7 @@ protected:
 	ConfettiPool confettiPool_;
 	StaplerPool staplerPool_;
 	BodyPool bodyPool_;
-	
+
 	double playerHeight_ = CONST(double, "PLAYER_H_PHYSICS");
 	double playerWidth_ = CONST(double, "PLAYER_W_PHYSICS");
 	double playerDensity_ = CONST(double, "PLAYER_DENSITY");

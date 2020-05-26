@@ -21,7 +21,7 @@ private:
 	vector<Entity*> weapons_;
 	vector<Entity*> carnivorousPlants_;
 	int tutorialPointer_ = 0;
-	vector<bool> tutorials_ [Resources::TutorialEnd - Resources::MoveTutorial]; //move, hold, grab, action, throw, death
+	vector<bool> tutorials_[Resources::TutorialEnd - Resources::MoveTutorial]; //move, hold, grab, action, throw, death
 	vector<Entity*> numberTexts_;
 	vector<Entity*> tutorialTexts_;
 	Entity* completed_;
@@ -31,7 +31,7 @@ private:
 	double yOffset_ = CONST(int, "WINDOW_HEIGHT") / 2.5;
 	double xOffsetProgressText_ = CONST(int, "WINDOW_WIDTH") / 3.5 + CONST(int, "WINDOW_WIDTH") / 12.0;
 	double xOffsetProgressCount_ = CONST(int, "WINDOW_WIDTH") / 2.45 + CONST(int, "WINDOW_WIDTH") / 8.0;
-	double xOffsetProgressSlash_ = CONST(int, "WINDOW_WIDTH") / 2.35 +CONST(int, "WINDOW_WIDTH") / 8.0;
+	double xOffsetProgressSlash_ = CONST(int, "WINDOW_WIDTH") / 2.35 + CONST(int, "WINDOW_WIDTH") / 8.0;
 	double xOffsetProgressMax_ = CONST(int, "WINDOW_WIDTH") / 2.25 + CONST(int, "WINDOW_WIDTH") / 8.0;
 	double yOffsetProgress_ = CONST(int, "WINDOW_HEIGHT") / 1.5;
 	int stockWidth_ = CONST(int, "STOCK_WIDTH");

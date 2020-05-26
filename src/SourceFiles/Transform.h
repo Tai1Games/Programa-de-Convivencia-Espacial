@@ -37,4 +37,3 @@ private:
 	SDL_Rect renderRect_;
 	Collider* coll_;
 };
-

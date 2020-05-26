@@ -22,4 +22,3 @@ private:
 	map<int, Font*> fonts_;
 	bool initialized_;
 };
-

@@ -44,8 +44,8 @@ public:
 		b2Vec2 collPoint;
 		b2Vec2 collNormal;
 		weldData() {};
-		weldData(AttachesToObjects* attach,b2Body* body,b2Vec2 colPt,b2Vec2 colNor):
-		player(attach),bodyToBeAttached(body),collPoint(colPt), collNormal(colNor){}
+		weldData(AttachesToObjects* attach, b2Body* body, b2Vec2 colPt, b2Vec2 colNor) :
+			player(attach), bodyToBeAttached(body), collPoint(colPt), collNormal(colNor) {}
 	};
 	struct moveData { //Struct donde guardamos los datos necesarios para respawnear a los jugadores
 		b2Body* body;
@@ -57,22 +57,22 @@ public:
 		b2Vec2 linearVelocity;
 		float angularVelocity;
 	};
-    CollisionHandler(GameMode* g, TileMap* tm): gMode_(g), tilemap_(tm) {};
+	CollisionHandler(GameMode* g, TileMap* tm) : gMode_(g), tilemap_(tm) {};
 	~CollisionHandler() {};
 
-    void BeginContact(b2Contact* contact);
+	void BeginContact(b2Contact* contact);
 
-    void EndContact(b2Contact* contact);
+	void EndContact(b2Contact* contact);
 
-    void PreSolve(b2Contact* contact, const b2Manifold* oldManifold);
+	void PreSolve(b2Contact* contact, const b2Manifold* oldManifold);
 
-    void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
+	void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
 
 	void SolveInteractions();
 
 	vector<bodyData> getBodyData() { return vecBody; }
 
-	void clearBodyData(){ vecBody.clear(); }
+	void clearBodyData() { vecBody.clear(); }
 
 	void createWeld(weldData w) { vecWeld.push_back(w); }
 

@@ -85,7 +85,7 @@ void EndGameState::init()
 			x += actBadgeWH.x;
 		}
 
-		y += actPlayerWH.y - actMedalWH.y/2 - actBadgeWH.y/2;
+		y += actPlayerWH.y - actMedalWH.y / 2 - actBadgeWH.y / 2;
 	}
 
 	b2Vec2 textWH(CONST(int, "LEADERBOARD_TEXT_W"), CONST(int, "LEADERBOARD_TEXT_H"));

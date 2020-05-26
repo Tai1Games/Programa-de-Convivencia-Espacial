@@ -17,4 +17,3 @@ public:
 	virtual void handleInput() override;
 	virtual void action() = 0;
 };
-

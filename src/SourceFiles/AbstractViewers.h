@@ -37,4 +37,3 @@ public:
 		return frameY_;
 	};
 };
-

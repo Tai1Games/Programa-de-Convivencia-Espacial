@@ -31,7 +31,7 @@ protected:
 	Texture* progressBar_;
 
 public:
-	GameMode(MatchInfo* matchinfo, GamemodeID id) : matchInfo_(matchinfo),nPlayers_(matchInfo_->getNumberOfPlayers()),gamemodeId_(id) {};
+	GameMode(MatchInfo* matchinfo, GamemodeID id) : matchInfo_(matchinfo), nPlayers_(matchInfo_->getNumberOfPlayers()), gamemodeId_(id) {};
 	virtual ~GameMode() {};
 	virtual void init(PlayState* state);
 	virtual void render() {};

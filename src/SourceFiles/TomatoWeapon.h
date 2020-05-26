@@ -28,7 +28,7 @@ private:
 	int damageOnExplosionImpact_ = 0;
 	int explosionForce_ = 0;
 public:
-	TomatoWeapon() : ActionableWeapon(WeaponID::Tomato, 0, 0, CONST(double, "TOMATO_IMPACT_FORCE")){};
+	TomatoWeapon() : ActionableWeapon(WeaponID::Tomato, 0, 0, CONST(double, "TOMATO_IMPACT_FORCE")) {};
 	~TomatoWeapon() {};
 
 	virtual void init();
@@ -39,4 +39,3 @@ public:
 	virtual void onCollisionEnter(Collision* c);
 	virtual void setActive(bool a, b2Vec2 pos = { 0,0 });
 };
-

@@ -30,4 +30,3 @@ public:
 	void sendAudio(const AudioPacket& aPacket);
 	void finishSending();
 };
-

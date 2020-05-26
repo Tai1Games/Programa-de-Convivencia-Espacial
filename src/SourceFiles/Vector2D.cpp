@@ -48,11 +48,9 @@ Vector2D Vector2D::rotate(double degrees) const {
 	r.y_ = matrix[1][0] * x + matrix[1][1] * y;
 
 	return r;
-
 }
 
 double Vector2D::angle(const Vector2D& v) const {
-
 	double a2 = atan2(v.getX(), v.getY());
 	double a1 = atan2(x_, y_);
 	double sign = a1 > a2 ? 1 : -1;

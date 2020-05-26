@@ -21,7 +21,7 @@ public:
 	void setPosUIElement(b2Vec2 pos) { pos_ = pos; }
 	void setWHUIElement(b2Vec2 wH) { wH_ = wH; }
 	void setScale(float scale) { scale_ = scale; }
-	
+
 	int getW();
 	int getH();
 

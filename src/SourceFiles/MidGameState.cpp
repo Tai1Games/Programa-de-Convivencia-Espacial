@@ -74,7 +74,7 @@ void MidGameState::init()
 		Entity* newRocket = entityManager_->addEntity();
 		//We could move the rockets using only the Viewer, but this will make
 		//the logic much much easier.
-		
+
 		AnimatedUIViewer* viewer = newRocket->addComponent<AnimatedUIViewer>(Resources::RocketSpriteSheet, 10, b2Vec2(CONST(int, "START_ROCKET_POSITION"), (initPosY - CONST(int, "ROCKET_H")) + (distanceBetweenRockets_ * k) + rocketRect.h / 2), 1, 0);
 		playerRockets_.push_back(viewer);
 
@@ -83,8 +83,8 @@ void MidGameState::init()
 	}
 	//Texto para terminar la intermision
 	continueText = entityManager_->addEntity();
-	UIViewer* uiV = continueText->addComponent<UIViewer>(Resources::ContinueText, b2Vec2(0,0), 1, 0);
-	uiV->setPosUIElement(b2Vec2(((CONST(int, "WINDOW_WIDTH") - uiV->getW()) / 2), CONST(int, "WINDOW_HEIGHT") - CONST(int, "UI_PRESS_KEY_OFFSET_Y"))); 
+	UIViewer* uiV = continueText->addComponent<UIViewer>(Resources::ContinueText, b2Vec2(0, 0), 1, 0);
+	uiV->setPosUIElement(b2Vec2(((CONST(int, "WINDOW_WIDTH") - uiV->getW()) / 2), CONST(int, "WINDOW_HEIGHT") - CONST(int, "UI_PRESS_KEY_OFFSET_Y")));
 	continueText->setActive(false);
 }
 
@@ -135,7 +135,6 @@ void MidGameState::update()
 		if (playerRockets_[roundWinner_]->getPosUIElement().x > rocketXPositionObjective_) {
 			currentState = waitingButton;
 			continueText->setActive(true);
-			//frameZoomStateEnds_ = currentFrame + zoomStateDuration_;
 		}
 		break;
 

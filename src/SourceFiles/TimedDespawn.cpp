@@ -14,7 +14,7 @@ void TimedDespawn::update()
 		currentFrame_++;
 		if (currentFrame_ >= framesToDespawn_) {
 			weapon_->setActive(false);
-			
+
 			//Security measures.
 			activated = false;
 			currentFrame_ = 0;

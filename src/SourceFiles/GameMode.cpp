@@ -35,7 +35,7 @@ void GameMode::renderProgressBars(const std::vector<double>& progressValues, con
 		int value = min((progressValues[i] * progressBar_->getNumFramesX()) / goalScore, (double)progressBar_->getNumFramesX() - 1);
 		SDL_RendererFlip flip = SDL_FLIP_NONE;
 		double angle = 0;
-		if(i % 2 != 0) (i == 1) ? flip = SDL_FLIP_HORIZONTAL : angle = 180;		// gira cosas en los elementos de la derecha
+		if (i % 2 != 0) (i == 1) ? flip = SDL_FLIP_HORIZONTAL : angle = 180;		// gira cosas en los elementos de la derecha
 		progressBar_->render(dest, angle, value, 0, flip);
 	}
 }

@@ -7,7 +7,7 @@
 
 class BodyPool {
 public:
-	BodyPool(): bodyPool_([](Entity* e) { return e->isActive(); }) {};
+	BodyPool() : bodyPool_([](Entity* e) { return e->isActive(); }) {};
 	~BodyPool() {};
 	void init(EntityManager* eMan, b2World* physicsWorld, vector<Collider*>& collDeadBodies, vector<Entity*>& deadBodies);
 	void addBody(b2Vec2 pos, float angle, b2Vec2 linearVelocity, float angularVelocity);
