@@ -33,7 +33,7 @@ void TutorialGameMode::init(PlayState* game) {
 		carnivorousPlants_.back()->setActive(false);
 		//tutorial weapons
 		weapons_.push_back(WeaponFactory::makeExtinguisher(game->getEntityManager(), game->getPhysicsWorld(),
-			b2Vec2(roomCenterX + offsetX * cos(angle), roomCenterY + offsetY * sin(angle)), b2Vec2(1, 1)));
+			b2Vec2(roomCenterX + offsetX * cos(angle), roomCenterY + offsetY * sin(angle)), b2Vec2(CONST(double, "EXTINGUISHER_W_PHYSICS"), CONST(double, "EXTINGUISHER_H_PHYSICS"))));
 		weapons_.back()->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, -Collider::CollisionLayer::Player);
 		weapons_.back()->setActive(false);
 	}

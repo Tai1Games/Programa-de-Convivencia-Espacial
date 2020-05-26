@@ -7,6 +7,7 @@
 #include "TutorialGameMode.h"
 #include "Constants.h"
 #include "MatchInfo.h"
+#include "MultiplayerHost.h"
 
 #include "PlayState.h"
 #include "PauseState.h"
@@ -14,6 +15,8 @@
 #include "MidGameState.h"
 #include "TransitionState.h"
 #include "LobbyState.h"
+#include "OnlineMenuState.h"
+#include "ClientState.h"
 #include "PlayableMenuState.h"
 #include "CreditsState.h"
 #include "EndGameState.h"
@@ -66,9 +69,11 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 	if (states_[state] == nullptr) {
 		//create state
 		//states_[state] = new... se necesita struct? o switch tal cual xd
+		string aux;
+		char* host;
 		switch (state) {
 		case States::menu:
-			states_[state] = new MenuState(0); //numberOfPlayers usado como ownerID
+			states_[state] = new MenuState(); //numberOfPlayers usado como ownerID
 			break;
 		case States::play:
 		{
@@ -122,6 +127,14 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 			//Se usa el parametro gamemode como indicador de quien gana la ronda
 			states_[state] = new MidGameState(matchInfo_->getNumberOfPlayers(), gameMode);
 			break;
+		case States::onlineMenu:
+			states_[state] = new OnlineMenuState();
+			break;
+		case States::client:
+			aux = "localhost";
+			host = &aux[0];
+			states_[state] = new ClientState(host);
+			break;
 		case States::endGame:
 			states_[state] = new EndGameState();
 			break;
@@ -162,6 +175,15 @@ void GameStateMachine::handleInput() {
 
 void GameStateMachine::gameCycle() {
 	handleInput();
+	if (mpHost_ != nullptr)
+		mpHost_->checkActivity();
 	update();
 	render();
+	if (mpHost_ != nullptr)
+		mpHost_->finishSending();
+}
+
+void GameStateMachine::setMpHost(MultiplayerHost* host)
+{
+	mpHost_ = host;
 }

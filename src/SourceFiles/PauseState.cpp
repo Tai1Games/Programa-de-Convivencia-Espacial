@@ -46,6 +46,15 @@ void PauseState::init()
 
 	cout << "Pause initialized to " << ownerPlayerID_ << endl;
 	ownerBinder_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo()->at(ownerPlayerID_)->inputBinder;
+
+	//FONDO
+	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SpaceBackground);
+}
+
+void PauseState::render()
+{
+	fondo_->render(0, 0);
+	GameState::render();
 }
 
 void PauseState::handleInput()

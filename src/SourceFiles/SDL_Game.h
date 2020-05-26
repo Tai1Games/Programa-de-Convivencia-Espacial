@@ -9,6 +9,7 @@
 #include "SDLAudioManager.h"
 #include "SDLFontsManager.h"
 #include "GameStateMachine.h"
+#include "MultiplayerHost.h"
 
 #include "SDL_macros.h"
 #include "iostream"
@@ -30,12 +31,15 @@ protected:
 	GameStateMachine* gamestateMachine_ = nullptr;
 	SDL_Window* window_ = nullptr;
 	SDL_Renderer* renderer_ = nullptr;
-	InputHandler* inputHandler_ =  nullptr;
+	InputHandler* inputHandler_ = nullptr;
+	MultiplayerHost* mpHost_ = nullptr;
 	Constants constants_;
 
 	double MS_PER_FRAME_;
 
 	static unique_ptr<SDL_Game> instance_;
+
+	bool isHosting_ = false;
 private:
 	bool exit_;
 	void initializeResources();
@@ -77,4 +81,13 @@ public:
 	GameStateMachine* getStateMachine() { return gamestateMachine_; }
 	SDL_Renderer* getRenderer() { return  renderer_; }
 	const Constants* getConstants() { return &constants_; }
+
+	bool isHosting() const { return isHosting_; };
+	MultiplayerHost* getHost() {
+		if (mpHost_ == nullptr) {
+			mpHost_ = new MultiplayerHost();
+			isHosting_ = true;
+			gamestateMachine_->setMpHost(mpHost_);
+		} return mpHost_;
+	}
 };

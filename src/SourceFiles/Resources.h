@@ -27,6 +27,7 @@ public:
 		GardenRoom,
 		MenuRoom,
 		CreditsRoom,
+		SpaceBackground,
 
 		// UI
 		ActiveHealth,
@@ -61,11 +62,11 @@ public:
 		Token,
 		RocketSpriteSheet,
 
-
 		// Weapons and map items
 
 		// Players
 		PlayerAnimSheet,
+		PlayerAnimSheetLobby,
 
 
 		// Map elements
@@ -132,6 +133,11 @@ public:
 		EffectsText,
 		MainMenuText,
 
+		//online menu
+		Local,
+		Host,
+		Join,
+
 		//modes
 		Capitalism,
 		Controller,
@@ -146,13 +152,6 @@ public:
 		BoilerRoomText,
 		GymRoomText,
 		GardenRoomText,
-
-		//players
-		OnePlayer,
-		TwoPlayers,
-		ThreePlayers,
-		FourPlayers,
-		FivePlayers, //es solo para iterar
 
 		//tutorial
 		Completed,
@@ -240,6 +239,7 @@ public:
 		BananaShootSound,
 		ExtinguisherSound,
 		TomatoExplosionSound,
+		ConfettiSound,
 
 		//Player
 		DeathSound,

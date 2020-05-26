@@ -11,17 +11,29 @@ using namespace std;
 class Texture {
 public:
 	Texture();
-	Texture(SDL_Renderer *renderer, const string& fileName, unsigned short nHorFrames, unsigned short nVerFrames);
+	Texture(SDL_Renderer *renderer, const string& fileName, unsigned short nHorFrames, unsigned short nVerFrames, unsigned char texId);
 	Texture(SDL_Renderer *renderer, const string& text, const Font *font,
-			const SDL_Color& color);
+			const SDL_Color& color, unsigned char tag);
+	Texture(SDL_Renderer* renderer, const string& text, const Font* font,
+		const SDL_Color& color);
+
 	virtual ~Texture();
 
 	inline int getWidth() const {
 		return width_;
 	}
 
+	inline int getFrameWidth() const {
+		return width_ / nHorizontalFrames_;
+	}
+
 	inline int getHeight() const {
 		return height_;
+	}
+	
+
+	inline int getFrameHeight() const {
+		return height_ / nVerticalFrames_;
 	}
 
 	inline bool isReady() const {
@@ -68,4 +80,5 @@ private:
 	unsigned short nVerticalFrames_ = 1;
 	int frameWidth_;
 	int frameHeight_;
+	unsigned char texId_;
 };

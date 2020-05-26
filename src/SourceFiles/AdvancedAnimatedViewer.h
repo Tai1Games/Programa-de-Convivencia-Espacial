@@ -21,12 +21,12 @@ public:
 	int getCurrentAnim() const { return anim_; }
 
 	virtual void startAnimation(int loops = -1, int initialFrame = 0, int limitFrame = -1, int animation = 0) override {
-		stopAnimation();
-		anim_ = animation;
-		activeAnimation_ = true;
 		loops_ = loops;
+		currentLoop_ = 0;
 		frame_ = initialFrame;
 		limitFrame_ = limitFrame;
+		anim_ = animation;
+		activeAnimation_ = true;
 	}
 
 	virtual void resetAnimation();

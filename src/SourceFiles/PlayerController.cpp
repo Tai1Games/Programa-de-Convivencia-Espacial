@@ -104,7 +104,7 @@ void PlayerController::handleInput()
 		impulseCooldownTimer_ = 0;
 
 		//HAY QUE BORRAR-----------------------------------------------------------
-		viewer_->startAnimation(1, 0, -1, 1);
+		viewer_->startAnimation(0, 0, -1, 1);
 		//HAY QUE BORRAR-----------------------------------------------------------
 	}
 
