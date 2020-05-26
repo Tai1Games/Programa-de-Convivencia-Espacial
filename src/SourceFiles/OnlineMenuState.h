@@ -30,17 +30,19 @@ private:
 	UIViewer* menuCursor2_ = nullptr;
 	std::vector<Entity*> texts_;
 	std::vector<Texture*> textures_;
+	std::vector<pair<GamemodeID, string>>* roundsVector_;
 
 	void updatePointer(int n);
 	void createText();
 
 public:
 	OnlineMenuState(int playerID = 0) : GameState(), ownerPlayerID_(playerID) {};
-	virtual ~OnlineMenuState() {};
+	virtual ~OnlineMenuState() {
+		delete roundsVector_;
+	};
 
 	virtual void init() override;
 	virtual void render() override;
 	virtual void onLoaded() override;
 	virtual void handleInput() override;
 };
-

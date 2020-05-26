@@ -56,7 +56,7 @@ void OnlineMenuState::handleInput()
 			SDL_Game::instance()->getStateMachine()->changeToState(States::client);
 			break;
 		case 3: //tutorial
-			vector<pair<GamemodeID, string>> * roundsVector_ = new vector<pair<GamemodeID, string>>();
+			roundsVector_ = new vector<pair<GamemodeID, string>>();
 			roundsVector_->push_back(std::make_pair(GamemodeID::Tutorial, "TutorialRoom"));
 			SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVector_);
 			SDL_Game::instance()->getStateMachine()->transitionToState(States::play, roundsVector_->front().first, roundsVector_->front().second);
