@@ -27,6 +27,11 @@ void MapSelectionState::init() {
 
 	//MUSICA
 	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::AudioId::MainMenuMusic, -1);
+
+	//Textos
+	choseMapText_ = entityManager_->addEntity();
+	UIViewer*  uiV = choseMapText_->addComponent<UIViewer>(Resources::ChoseMap,b2Vec2(0,0),1);
+	uiV->setPosUIElement(b2Vec2((CONST(int, "WINDOW_WIDTH") - uiV->getW()) / 2, CONST(int, "CHOSE_MAP_TEXT_Y_OFFSET")));
 }
 
 void MapSelectionState::handleInput()

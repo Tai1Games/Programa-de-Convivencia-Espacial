@@ -165,6 +165,8 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{ BoilerRoomText, "Boiler Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ GymRoomText, "Gym Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ GardenRoomText, "Garden Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	//eleccion de mapas
+	{ ChoseMap, "Elige un mapa", { COLOR(0xc7f2edff) }, FontId::NES_Chimera},
 
 	//Tutorial
 	{ Completed, "Completado: ", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },

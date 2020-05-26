@@ -31,3 +31,15 @@ void UIViewer::draw() const
 		tex_->render(dest, angle_, frameX_, frameY_, flip_);
 	}
 }
+
+int UIViewer::getW()
+{
+	if (tex_ == nullptr)	return 0;
+	else return tex_->getWidth();
+}
+
+int UIViewer::getH()
+{
+	if (tex_ == nullptr)	return 0;
+	else return tex_->getHeight();
+}

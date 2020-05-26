@@ -399,6 +399,9 @@
     <ClInclude Include="CreditsState.h">
       <Filter>Header Files\Gamestates</Filter>
     </ClInclude>
+    <ClInclude Include="WeaponFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -680,9 +683,6 @@
     <ClCompile Include="WeaponFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
-<ClCompile Include="MapSelectionState.cpp">
-  <Filter>Source Files</Filter>
-</ClCompile>
     <ClCompile Include="TimedDespawn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -702,6 +702,12 @@
       <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
     <ClCompile Include="EndGameState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MapSelectionState.cpp">
       <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
   </ItemGroup>

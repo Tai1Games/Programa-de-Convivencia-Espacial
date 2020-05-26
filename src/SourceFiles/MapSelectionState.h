@@ -46,6 +46,7 @@ private:
 	std::vector<Entity*> textsGamemodes_;
 
 	Texture* backgroundTex_ = nullptr;
+	Entity* choseMapText_;
 
 #pragma region constantes de tamanos 
 

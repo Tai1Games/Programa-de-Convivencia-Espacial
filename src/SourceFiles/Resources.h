@@ -162,6 +162,8 @@ public:
 		BoilerRoomText,
 		GymRoomText,
 		GardenRoomText,
+		//Menu eleccion de mapas
+		ChoseMap,
 
 		//tutorial
 		Completed,
