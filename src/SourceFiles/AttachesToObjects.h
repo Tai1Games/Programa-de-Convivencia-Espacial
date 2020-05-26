@@ -10,12 +10,16 @@ class AttachesToObjects : public Component
 private:
 	int playerNumber_;
 
+	bool canAttachRN_ = true;
+	int framesUntilRecoveringAttach_ = CONST(int, "FRAMES_UNTIL_RECOVERING_ATTACH");
+	int actFrame_ = 0;
+
 	Collider* mainCollider_ = nullptr; //Collider del objeto principal (el Tinky)
 	Collider* attachedCollider_ = nullptr; //Collider del objeto agarrado
 	b2Body* attachedObject_ = nullptr; //Este ser� el collider con el que colisionara y se agarrara
 	b2WeldJoint* joint_ = nullptr; //Joint entre el jugador y otro objeto
 	PlayerData* playerData_ = nullptr;
-	InputBinder* ib;
+	InputBinder* ib = nullptr;
 	KeyboardBinder* kBinder_ = nullptr;
 
 	b2Vec2 normalOnAttach_ = b2Vec2(0, 0);
@@ -31,8 +35,10 @@ public:
 	Collider* getAttachedObject() { return attachedCollider_; }
 
 	virtual void init() override;
-	virtual void handleInput();
-	virtual void onCollisionEnter(Collision* c);
+	virtual void update() override;
+	virtual void onCollisionEnter(Collision* c) override;
 	b2Vec2 getAttachmentNormal();
 	float getRotationDifference(); //returns the rotation of the attached body since start
+
+	void setCantAttach() { canAttachRN_ = false; }
 };
