@@ -17,23 +17,32 @@ private:
 
 	int tinkyOffset_ = CONST(int, "WINDOW_WIDTH") / 4;
 
-	int xOffset_ = CONST(int, "WINDOW_WIDTH") / 3;
-	int yOffset_ = CONST(int, "WINDOW_HEIGHT") / 9;
+	int xOffset_ = CONST(int, "WINDOW_WIDTH") / 2;
+	int yOffset_ = CONST(int, "WINDOW_HEIGHT") / 7;
 
 	int numberOfRounds_ = 3;
 
+	Texture* fondo_ = nullptr;
+
+	Texture* cursorTexture_ = nullptr;
+
 	UIViewer* menuCursor_ = nullptr;
+	UIViewer* menuCursor2_ = nullptr;
 	std::vector<Entity*> texts_;
+	std::vector<Texture*> textures_;
+	std::vector<pair<GamemodeID, string>>* roundsVector_;
 
 	void updatePointer(int n);
 	void createText();
 
 public:
 	OnlineMenuState(int playerID = 0) : GameState(), ownerPlayerID_(playerID) {};
-	virtual ~OnlineMenuState() {};
+	virtual ~OnlineMenuState() {
+		delete roundsVector_;
+	};
 
 	virtual void init() override;
+	virtual void render() override;
 	virtual void onLoaded() override;
 	virtual void handleInput() override;
 };
-
