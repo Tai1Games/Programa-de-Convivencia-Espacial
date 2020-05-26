@@ -10,7 +10,7 @@ class MatchInfo
 public:
 	struct PlayerInfo {
 		PlayerInfo(const PlayerLobbyInfo& info);
-		PlayerInfo(size_t pId, InputBinder* ib, size_t pSkin) : playerId(pId), inputBinder(ib), playerSkin(pSkin) {};
+		PlayerInfo(size_t pId, InputBinder* ib, size_t pSkin);
 		~PlayerInfo() { };
 
 		size_t playerId = 0;

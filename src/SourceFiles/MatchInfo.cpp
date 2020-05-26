@@ -26,6 +26,15 @@ MatchInfo::PlayerInfo::PlayerInfo(const PlayerLobbyInfo& info) :
 		matchesWon.push_back(0);
 }
 
+MatchInfo::PlayerInfo::PlayerInfo(size_t pId, InputBinder* ib, size_t pSkin) :
+	playerId(pId),
+	inputBinder(ib),
+	playerSkin(pSkin) {
+	matchesWon.reserve(GamemodeID::NUMBER_OF_GAMEMODES);
+	for (int i = 0; i < GamemodeID::NUMBER_OF_GAMEMODES; i++)
+		matchesWon.push_back(0);
+};
+
 void MatchInfo::AddVictory(size_t toPlayer, GamemodeID gameModeWon) {
 	players_[toPlayer]->matchesWon[gameModeWon]++;
 	currentRoundNumber_++;
