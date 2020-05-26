@@ -40,7 +40,7 @@ Entity* ObjectFactory::makeTable(EntityManager* entityManager, b2World* physicsW
 	e->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "TABLE_W_SPRITE"),CONST(int, "TABLE_H_SPRITE") }, aux);
 	e->addComponent<Viewer>(Resources::Table);
 
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -54,7 +54,7 @@ Entity* ObjectFactory::makeLamp(EntityManager* entityManager, b2World* physicsWo
 	e->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "LAMP_W_SPRITE"),CONST(int, "LAMP_H_SPRITE") }, aux);
 	e->addComponent<Viewer>(Resources::Lamp);
 
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -68,7 +68,7 @@ Entity* ObjectFactory::makeSofa(EntityManager* entityManager, b2World* physicsWo
 	e->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "SOFA_W_SPRITE"),CONST(int, "SOFA_H_SPRITE") }, aux);
 	e->addComponent<Viewer>(Resources::Sofa);
 
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -80,7 +80,7 @@ Weapon* ObjectFactory::makeController(EntityManager* entityManager, b2World* phy
 	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "CONTROLLER_W_SPRITE"),CONST(int, "CONTROLLER_H_SPRITE") }, aux);
 	e->addComponent<Viewer>(Resources::Remote);
 	Weapon* controller = e->addComponent<Weapon>(WeaponID::Mando, CONST(int, "CONTROLLER_IMPACT_DAMAGE"));
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return controller;
 }
@@ -92,7 +92,7 @@ Entity* ObjectFactory::makeWall(EntityManager* entityManager, b2World* physicsWo
 	e->addComponent<Transform>(SDL_Rect{ 0,0,	CONST(int, "WALLS_BASE_W_SPRITE") + (int)(size.x * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "WALLS_SCALE_W_SPRITE")),
 												CONST(int, "WALLS_BASE_H_SPRITE") + (int)(size.y * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "WALLS_SCALE_W_SPRITE")) }, aux);
 	e->addComponent<Viewer>(Resources::Negro);
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -120,7 +120,7 @@ Entity* ObjectFactory::makePipe(EntityManager* entityManager, b2World* physicsWo
 	//Si la tuberia tiene una rotacion especial se la aplicamos
 	if (rotation != 0) { aux->getBody()->SetTransform(pos, rotation * (-PI) / 180); }
 
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -142,7 +142,7 @@ Entity* ObjectFactory::makeSpaceJunk(EntityManager* entityManager, b2World* phys
 	e->addComponent<Viewer>(Resources::Stone);
 
 	aux->applyLinearImpulse(b2Vec2(rand() % 4, rand() % 4), b2Vec2(0, 0));
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -155,7 +155,7 @@ Entity* ObjectFactory::makePad(EntityManager* entityManager, b2World* physicsWor
 												CONST(int, "PAD_BASE_H_SPRITE") + (int)(size.y * (int)CONST(double, "PIXELS_PER_METER") * CONST(float, "PAD_SCALE_W_SPRITE")) }, aux);
 	e->addComponent<AnimatedViewer>(Resources::PadSpriteSheet, CONST(int, "PAD_ANIMATION_SPEED"))->stopAnimation();
 	e->addComponent<Pad>();
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -167,7 +167,7 @@ Entity* ObjectFactory::makeCoin(Entity* e, EntityManager* entityManager, b2World
 	e->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "COIN_RADIUS_SPRITE"),CONST(int, "COIN_RADIUS_SPRITE") }, aux);
 	e->addComponent<Viewer>(Resources::Coin);
 	e->addComponent<Coin>();
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -180,7 +180,7 @@ Entity* ObjectFactory::makeFireball(Entity* e, EntityManager* entityManager, b2W
 	e->addComponent<AnimatedViewer>(Resources::Fireball, CONST(int, "FIREBALL_TIME_PER_FRAME"));
 	e->addComponent<Fireball>();
 	e->addComponent<Weapon>(WeaponID::Piedra, 999);//Si, el fuego es una piedra muy caliente. Mucho m�s que el magma, esta caldera echa bolas de PLASMA, el cuarto estado de la materia
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -201,7 +201,7 @@ Entity* ObjectFactory::makeRoomba(EntityManager* entityManager, b2World* physics
 	if (rand() % 2 == 1) velocityY *= -1;
 
 	collRoomba->applyLinearImpulse(b2Vec2(velocityX, velocityY), b2Vec2(0, 0));
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -216,7 +216,7 @@ Entity* ObjectFactory::makeBoiler(EntityManager* entityManager, b2World* physics
 	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "BOILER_W_SPRITE"), CONST(int, "BOILER_H_SPRITE") }, collBoiler);
 	e->addComponent<AnimatedViewer>(Resources::Boiler, CONST(int, "BOILER_ANIMATION_SPEED"));
 	e->addComponent<FireBallGenerator>(physicsWorld);
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -228,7 +228,7 @@ Entity* ObjectFactory::makeBoilerButton(EntityManager* entityManager, b2World* p
 	e->addComponent<Transform>(SDL_Rect{ 0,0, CONST(int, "BOILER_BUTTON_RADIUS_SPRITE"),CONST(int, "BOILER_BUTTON_RADIUS_SPRITE") }, collBoilerButton);
 	e->addComponent<AnimatedViewer>((inc_dec) ? Resources::IncreasingFreqButton : Resources::DecreasingFreqButton, 0)->stopAnimation();
 	e->addComponent<BoilerButtonLogic>(inc_dec);
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -262,8 +262,8 @@ Entity* ObjectFactory::makeTreadmill(EntityManager* entityManager, b2World* phys
 	jointDef.referenceAngle = jointDef.bodyB->GetAngle() - jointDef.bodyA->GetAngle(); //Ángulo conjunto del cuerpo
 	b2World* world = collMill->getWorld(); //Obtenemos el mundo físico para crear el joint
 	world->CreateJoint(&jointDef); //Crea el joint con la definición que hemos definido previamente
-	h->addComponent<ColliderViewer>();
-	m->addComponent<ColliderViewer>();
+	//h->addComponent<ColliderViewer>();
+	//m->addComponent<ColliderViewer>();
 
 	return m;
 }
@@ -276,7 +276,7 @@ Entity* ObjectFactory::makeCarnivorousPlant(EntityManager* entityManager, b2Worl
 	plant->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int,"CARNIVOROUSPLANT_W_SPRITE")*(int)size.x, CONST(int,"CARNIVOROUSPLANT_H_SPRITE")*(int)size.y }, collPlant);
 	plant->addComponent<CarnivorousPlantViewer>(Resources::CarnivorousPlant, CONST(int, "CARNIVOROUSPLANT_MIN_SPEED"));
 	plant->addComponent<CarnivorousPlant>();
-	plant->addComponent<ColliderViewer>();
+	//plant->addComponent<ColliderViewer>();
 
 	return plant;
 }
@@ -292,7 +292,7 @@ Entity* ObjectFactory::makeBullet(Entity* e, EntityManager* entityManager, b2Wor
 	e->addComponent<Viewer>(Resources::Negro);
 
 	e->addComponent<Bullet>();
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 	e->addComponent<ThrownByPlayer>(gameMode);
 
 	return e;
@@ -340,7 +340,7 @@ Entity* ObjectFactory::makeRouter(EntityManager* entityManager, b2World* physics
 	router->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "ROUTER_W_SPRITE"), CONST(int, "ROUTER_H_SPRITE") }, collRouter);
 	router->addComponent<Viewer>(Resources::Router);
 	router->addComponent<RouterLogic>(gMode, wavePool);
-	router->addComponent<ColliderViewer>();
+	//router->addComponent<ColliderViewer>();
 
 	collRouter->applyLinearImpulse(b2Vec2(100, 100), b2Vec2(0, 0));
 
@@ -361,7 +361,7 @@ Entity* ObjectFactory::makeWifiWave(Entity* e, EntityManager* entityManager, b2W
 	e->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "WIFI_W_SPRITE"), CONST(int, "WIFI_H_SPRITE") }, aux);
 	e->addComponent<AnimatedViewer>(Resources::WiFiWave, 100);
 	e->addComponent<WiFiBullet>(colRouter);
-	e->addComponent<ColliderViewer>();
+	//e->addComponent<ColliderViewer>();
 
 	return e;
 }
@@ -381,7 +381,7 @@ Entity* ObjectFactory::makeTriggerButton(EntityManager* entityManager, b2World* 
 	trButton->addComponent<AnimatedViewer>(texId, CONST(int, "TRIGGER_BUTTON_ANIM_SPEED"));
 
 	trButton->addComponent<TriggerButton>(state);
-	trButton->addComponent<ColliderViewer>();
+	//trButton->addComponent<ColliderViewer>();
 
 	return trButton;
 }
@@ -401,5 +401,5 @@ void ObjectFactory::makeDeadBody(Entity* e,EntityManager* entityManager, b2World
 		CONST(double, "PLAYER_DENSITY"), CONST(double, "PLAYER_FRICTION"), CONST(double, "PLAYER_RESTITUTION"), CONST(double, "PLAYER_LINEAR_DRAG"), CONST(double, "PLAYER_ANGULAR_DRAG"), Collider::CollisionLayer::NormalAttachableObject, false));
 	deadBodies.back()->addComponent<Transform>(SDL_Rect{ 0,0,CONST(int, "CORPSE_W_SPRITE"),CONST(int, "CORPSE_H_SPRITE") }, collDeadBodies.back());
 	deadBodies.back()->addComponent<Viewer>(Resources::DeadBody);
-	deadBodies.back()->addComponent<ColliderViewer>();
+	//deadBodies.back()->addComponent<ColliderViewer>();
 }

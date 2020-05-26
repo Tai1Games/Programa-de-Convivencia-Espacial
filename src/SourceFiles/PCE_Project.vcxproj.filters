@@ -387,6 +387,9 @@
     <ClInclude Include="WeaponFactory.h">
       <Filter>Header Files\Factories</Filter>
     </ClInclude>
+    <ClInclude Include="MapSelectionState.h">
+      <Filter>Header Files\Gamestates</Filter>
+    </ClInclude>
     <ClInclude Include="ConfettiPool.h">
       <Filter>Header Files\Pools</Filter>
     </ClInclude>
@@ -680,6 +683,9 @@
     <ClCompile Include="WeaponFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
+<ClCompile Include="MapSelectionState.cpp">
+  <Filter>Source Files</Filter>
+</ClCompile>
     <ClCompile Include="TimedDespawn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

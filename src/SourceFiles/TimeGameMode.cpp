@@ -94,7 +94,7 @@ void TimeGameMode::renderKillMarker() {
 			killsTextTexture.w = killsMarkerWidth_;
 			killsTextTexture.h = killsMarkerHeight_;
 
-			killsNumbTextures[i]->render(killsTextTexture);
+			killsNumbTextures[i]->render(killsTextTexture, 0, 0);
 		}
 
 		SDL_Rect skullImageRect;
@@ -103,6 +103,6 @@ void TimeGameMode::renderKillMarker() {
 		skullImageRect.w = skullUISize_;
 		skullImageRect.h = skullUISize_;
 
-		skullTextureUI_->render(skullImageRect);
+		skullTextureUI_->render(skullImageRect, 0, 0);
 	}
 }

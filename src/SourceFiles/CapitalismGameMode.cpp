@@ -98,7 +98,7 @@ void CapitalismGameMode::renderCoinsMarker()
 				(coinImageRect.x + coinImageRect.w / 3 + i * coinTextRect.w) - coinUIRadius_ * coinNumbTextures.size()/1.5;
 			coinTextRect.y = coinImageRect.y + coinUIRadius_ * 0.04;
 
-			coinNumbTextures[i]->render(coinTextRect);
+			coinNumbTextures[i]->render(coinTextRect, 0, 0);
 		}
 
 		SDL_Rect headIcon;

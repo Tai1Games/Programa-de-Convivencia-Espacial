@@ -51,6 +51,13 @@ vector<Resources::ImageInfo> Resources::images_{
 	{Ready , resourcesPath + "textures/ready.png"},
 	{PressReady , resourcesPath + "textures/pressready.png"},
 
+	{CursorUiSelectMap, resourcesPath + "textures/cursorSelMap.png"},
+	{CapitalismIcon, resourcesPath + "textures/Moneda.png"},
+	{StocksIcon, resourcesPath + "textures/StocksIcon.png"},
+	{ControllerModeIcon, resourcesPath + "textures/ControlerIcon.png"},
+	{WiFightIcon, resourcesPath + "textures/wifiIIcon.png"},
+	{TimedIcon, resourcesPath + "textures/timedIcon.png"},
+
 	// Weapons and map items
 	{ Ball, resourcesPath + "textures/PelotaSaltarina.png" },
 	{ Extinguisher, resourcesPath + "textures/Extintor.png" },

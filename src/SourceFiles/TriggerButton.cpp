@@ -12,7 +12,7 @@ void TriggerButton::update()
 {
 	if (playerDetected_) {
 		framesInside++;
-		
+
 		if (framesInside >= timeToActivate) {
 			//Pasas al modo correspondiente según que valga tu atributo state
 			PassState();
@@ -24,7 +24,10 @@ void TriggerButton::PassState()
 {
 	framesInside = 0;
 	if (stateToChange == "Play") {
-		SDL_Game::instance()->getStateMachine()->transitionToState(States::lobby, 0);
+		if (SDL_Game::instance()->getStateMachine()->getStateById(States::lobby) == nullptr) {
+			SDL_Game::instance()->getStateMachine()->transitionToState(States::lobby, 0);
+		}else SDL_Game::instance()->getStateMachine()->transitionToState(States::menu, 0);
+
 	}
 	else if (stateToChange == "Options") {
 		SDL_Game::instance()->getStateMachine()->transitionToState(States::options, 0);
@@ -51,7 +54,7 @@ void TriggerButton::onCollisionEnter(Collision* c)
 void TriggerButton::onCollisionExit(Collision* c)
 {
 	if (c->hitFixture->GetFilterData().categoryBits & Collider::CollisionLayer::Player) {
-		
+
 		playerDetected_ = false;
 		viewer_->setFrame(0, 0);
 		viewer_->stopAnimation();
