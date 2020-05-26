@@ -158,7 +158,7 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	
 	//exit
 	{ Exit, "Exit Game", { COLOR(0xff0000ff) }, FontId::NES_Chimera },
-	/*//maps
+	//maps
 	{ LivingRoomText, "Living Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ BoilerRoomText, "Boiler Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ GymRoomText, "Gym Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
