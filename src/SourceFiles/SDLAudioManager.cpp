@@ -147,4 +147,3 @@ void SDLAudioManager::pauseMusic() {
 void SDLAudioManager::resumeMusic() {
 	Mix_ResumeMusic();
 }
-

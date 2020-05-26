@@ -28,8 +28,8 @@ void MeleeWeapon::update() {
 
 	if (beenActivated_) {
 		//>2 para no romper el rango del arma para pickup
-		if(mainCollider_->getNumFixtures() > 2 && framesSinceActivation_ >= nHitboxActiveFrames_)
-			mainCollider_->destroyFixture(mainCollider_->getNumFixtures()-1);
+		if (mainCollider_->getNumFixtures() > 2 && framesSinceActivation_ >= nHitboxActiveFrames_)
+			mainCollider_->destroyFixture(mainCollider_->getNumFixtures() - 1);
 		// desactiva animación
 		if (activeAnim_ && framesSinceActivation_ >= nAnimActiveFrames_) {
 			if (currentHand_ != nullptr) currentHand_->setFrame(0, currentHand_->getFrameY());
@@ -54,7 +54,7 @@ void MeleeWeapon::PickObjectBy(int index) {
 
 		mainCollider_->disableFixtureCollisions(0);
 		mainCollider_->disableFixtureCollisions(1);
-    
+
 		ThrownByPlayer* throwData = GETCMP1_(ThrownByPlayer);
 		throwData->SetOwner(index);
 
@@ -89,10 +89,9 @@ void MeleeWeapon::onCollisionEnter(Collision* c) {
 			}
 		}
 		else
-			c->collisionHandler->addCoinDrop(std::make_tuple(auxWa, GETCMP2(c->entity,PlayerData), damage_));
+			c->collisionHandler->addCoinDrop(std::make_tuple(auxWa, GETCMP2(c->entity, PlayerData), damage_));
 		std::cout << "Golpeado jugador" << endl;
 	}
-	
 }
 
 void MeleeWeapon::UnPickObject() {

@@ -18,4 +18,3 @@ public:
 	void setSkin(int skin) { skin_ = skin; };
 	void resetAnimation() override;
 };
-

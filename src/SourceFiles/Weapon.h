@@ -43,7 +43,7 @@ protected:
 
 	int pickedIndex_ = -1; //player que tiene el arma, -1 si no la tiene nadie
 
-	int impactDamage_ = 0;	
+	int impactDamage_ = 0;
 	int impactForce_ = 0;
 
 	int calculateCoinsDropped(int coinsPlayer);
@@ -63,9 +63,9 @@ private:
 	void separateWeapon(double resultThrowSpeed);
 
 public:
-	Weapon(WeaponID wId, int impctDmg, int impctForce=0) : Component(ComponentType::Weapon), weaponType_(wId), impactDamage_(impctDmg), impactForce_(impctForce){}
-	Weapon(ComponentType::CmpId compType, WeaponID wId, int impactDmg, int impctForce=0) : Component(compType), weaponType_(wId), impactDamage_(impactDmg), impactForce_(impctForce) {}
-	virtual ~Weapon(){};
+	Weapon(WeaponID wId, int impctDmg, int impctForce = 0) : Component(ComponentType::Weapon), weaponType_(wId), impactDamage_(impctDmg), impactForce_(impctForce) {}
+	Weapon(ComponentType::CmpId compType, WeaponID wId, int impactDmg, int impctForce = 0) : Component(compType), weaponType_(wId), impactDamage_(impactDmg), impactForce_(impctForce) {}
+	virtual ~Weapon() {};
 	virtual void init() override;
 	virtual void update() override;
 	virtual void setActive(bool a, b2Vec2 pos = { 0,0 }) {};
@@ -95,4 +95,3 @@ public:
 	/*Borra la informacion del jugador que sale del trigger*/
 	void DeletePlayerInfo(int index);
 };
-

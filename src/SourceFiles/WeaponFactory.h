@@ -38,6 +38,4 @@ public:
 	static Entity* makeMidTierWeapon(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
 
 	static Entity* makeHighTierWeapon(EntityManager* entityManager, b2World* physicsWorld, b2Vec2 pos);
-
 };
-

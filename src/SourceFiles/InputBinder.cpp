@@ -21,7 +21,7 @@ InputPacket InputBinder::getInputPacket()
 	pkg.menuForward = menuForward();
 	pkg.menuBack = menuBack();
 	pkg.pressPause = pressPause();
-	
+
 	if (menuMove(Up))
 		pkg.menuMove = pkg.menuMove | Up;
 	if (menuMove(Down))

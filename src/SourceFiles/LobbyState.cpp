@@ -42,8 +42,8 @@ void LobbyState::init()
 
 	verticalIniPoint_ = CONST(int, "WINDOW_HEIGHT") / 2 - playerTexture_->getFrameHeight();
 
-	horizontalIniPoint_ = (CONST(int, "WINDOW_WIDTH")-(MAX_PLAYERS * playerTexture_->getFrameWidth() + 
-		(CONST(int, "LOBBY_OFFSET_X") * (MAX_PLAYERS - 1))))/2;
+	horizontalIniPoint_ = (CONST(int, "WINDOW_WIDTH") - (MAX_PLAYERS * playerTexture_->getFrameWidth() +
+		(CONST(int, "LOBBY_OFFSET_X") * (MAX_PLAYERS - 1)))) / 2;
 
 	horizontalOffset_ = playerTexture_->getFrameWidth() + CONST(int, "LOBBY_OFFSET_X");
 	playerIdVerticalOffset_ = playerTexture_->getFrameHeight() + CONST(int, "LOBBY_PLAYERID_OFFSET_Y");
@@ -167,7 +167,6 @@ void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
 			pressReadyTexture_->render(destRect);
 		}
 	}
-
 }
 
 void LobbyState::playerOut(std::vector<PlayerLobbyInfo>::iterator it)

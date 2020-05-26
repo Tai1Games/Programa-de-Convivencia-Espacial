@@ -48,7 +48,7 @@ public:
 	void pauseAnimation() {
 		isPlaying_ = false;
 	}
-	
+
 	// Resumes the animation at the current frame.
 	// Does nothing if animation was not paused.
 	void resumeAnimation()

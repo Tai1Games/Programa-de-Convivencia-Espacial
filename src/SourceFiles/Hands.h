@@ -51,4 +51,3 @@ public:
 	bool getCanPickWeapon() { return canPickWeapon_; };
 	void setCanPickWeapon(bool b) { canPickWeapon_ = b; };
 };
-

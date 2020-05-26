@@ -13,7 +13,7 @@ void Hands::init()
 {
 	AnimatedViewer::init();
 	stopAnimation();
-	
+
 	playerData_ = GETCMP1_(PlayerData);
 	collider_ = GETCMP1_(Collider);
 	armLengthPhysics_ = CONST(double, "ARM_LENGTH_PHYSICS");
@@ -65,7 +65,7 @@ void Hands::update()
 			canPickWeapon_ = true;
 			canPickWeaponTimer_ = 0;
 		}
-	} 
+	}
 }
 
 void Hands::setWeapon(WeaponID wId, Weapon* w)

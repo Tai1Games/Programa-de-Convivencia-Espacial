@@ -30,7 +30,7 @@ void MapSelectionState::init() {
 
 	//Textos
 	choseMapText_ = entityManager_->addEntity();
-	UIViewer*  uiV = choseMapText_->addComponent<UIViewer>(Resources::ChoseMap,b2Vec2(0,0),1);
+	UIViewer* uiV = choseMapText_->addComponent<UIViewer>(Resources::ChoseMap, b2Vec2(0, 0), 1);
 	uiV->setPosUIElement(b2Vec2((CONST(int, "WINDOW_WIDTH") - uiV->getW()) / 2, CONST(int, "CHOSE_MAP_TEXT_Y_OFFSET")));
 
 	choseModeText_ = entityManager_->addEntity();
@@ -40,7 +40,7 @@ void MapSelectionState::init() {
 
 	pressEnterText_ = entityManager_->addEntity();
 	uiV = pressEnterText_->addComponent<UIViewer>(Resources::PressEnter, b2Vec2(0, 0), 1);
-	uiV->setPosUIElement(b2Vec2((CONST(int, "WINDOW_WIDTH") - uiV->getW()) / 2, (CONST(int, "WINDOW_HEIGHT") - CONST(int, "CHOSE_MAP_TEXT_Y_OFFSET")*2)));
+	uiV->setPosUIElement(b2Vec2((CONST(int, "WINDOW_WIDTH") - uiV->getW()) / 2, (CONST(int, "WINDOW_HEIGHT") - CONST(int, "CHOSE_MAP_TEXT_Y_OFFSET") * 2)));
 	pressEnterText_->setActive(false);
 }
 
@@ -88,10 +88,10 @@ void MapSelectionState::handleInput()
 			addRound((GamemodeID)(pointers_[gamemodeScreen]), maps_[pointers_[x] + pointers_[y] * 2]);
 			if (roundsVector_->size() == maxNumberOfRounds_) {
 				SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVector_);
-				SDL_Game::instance()->getStateMachine()->transitionToState(States::play); 
+				SDL_Game::instance()->getStateMachine()->transitionToState(States::play);
 				iconsGamemodes_[pointers_[gamemodeScreen]]->setActive(false);
 			}
-			else { //como onLoaded pero sin resetear la m�sica 
+			else { //como onLoaded pero sin resetear la m�sica
 				menuPointer_ = 0;
 				pointers_[x] = 0;
 				pointers_[y] = 0;
@@ -113,7 +113,7 @@ void MapSelectionState::handleInput()
 
 	if (ownerPlayerBinder_->pressPause() && menuPointer_ == 0 && roundsVector_->size() != 0) {
 		SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVector_);
-		SDL_Game::instance()->getStateMachine()->transitionToState(States::play, roundsVector_->front().first, roundsVector_->front().second); 
+		SDL_Game::instance()->getStateMachine()->transitionToState(States::play, roundsVector_->front().first, roundsVector_->front().second);
 		iconsGamemodes_[pointers_[gamemodeScreen]]->setActive(false);
 	}
 }
@@ -141,7 +141,6 @@ void MapSelectionState::addRound(GamemodeID gMode, string map) {
 	iconsMaps_[indexMap].push_back(std::pair(entityManager_->addEntity(), (GamemodeID)gMode));
 
 	iconsMaps_[indexMap].back().first->addComponent<UIViewer>(texturesIcons_[gMode], pos, mapIconsScale_, 0);
-
 }
 
 void MapSelectionState::removeRound(string map)
@@ -229,7 +228,6 @@ void MapSelectionState::updatePointer(int n, int coor) {
 
 		iconsGamemodes_[pointers_[gamemodeScreen]]->setActive(true);
 	}
-
 }
 
 void MapSelectionState::loadConst()
@@ -250,14 +248,12 @@ void MapSelectionState::loadConst()
 	mapIconMargin_ = CONST(int, "MAP_ICON_MARGIN");
 	mapIconsOffset_ = { CONST(float, "MAP_ICON_OFFSET_X"),CONST(float, "MAP_ICON_OFFSET_Y") };
 
-	mapIconsScale_ = CONST(int, "MAP_ICON_SCALE"); 
+	mapIconsScale_ = CONST(int, "MAP_ICON_SCALE");
 	sizeImg = { CONST(float, "MAP_SIZE_IMAGE_X"), CONST(float, "MAP_SIZE_IMAGE_Y") };
 	sizeScreen = { CONST(float, "WINDOW_WIDTH"), CONST(float, "WINDOW_HEIGHT") };
-
 }
 
 void MapSelectionState::updateMenu() {
-
 	for (auto& e : textsGamemodes_) {
 		e->setActive(menuPointer_ == 1);
 	}
@@ -268,7 +264,7 @@ void MapSelectionState::updateMenu() {
 		e->setActive(menuPointer_ != 1);
 	}
 
-	choseMapText_->setActive(menuPointer_ != 1);	
+	choseMapText_->setActive(menuPointer_ != 1);
 	pressEnterText_->setActive(menuPointer_ != 1);
 	choseModeText_->setActive(menuPointer_ == 1);
 
@@ -282,8 +278,7 @@ void MapSelectionState::updateMenu() {
 	mapSelCursor_->setPosUIElement(coordsImages_[pointers_[x] + pointers_[y] * 2] + mapCursorOffset_);
 };
 
-void MapSelectionState::createImages() { //preparar los textos	
-
+void MapSelectionState::createImages() { //preparar los textos
 	coordsImages_.push_back(b2Vec2((sizeScreen.x - (sizeImg.x * 2 + mapMargin_)) / 2,
 		(sizeScreen.y - (sizeImg.y * 2 + mapMargin_)) / 2));
 
@@ -300,7 +295,6 @@ void MapSelectionState::createImages() { //preparar los textos
 		imagesMaps_.push_back(entityManager_->addEntity());
 		imagesMaps_.back()->addComponent<UIViewer>(texturesMaps_[i], coordsImages_[i], mapScale_, 0);
 	}
-	
 }
 
 void MapSelectionState::createTexts()
@@ -309,17 +303,15 @@ void MapSelectionState::createTexts()
 
 	int winWidth = CONST(float, "WINDOW_WIDTH");
 	for (auto e : texturesTexts_) {
-
 		textsGamemodes_.push_back(entityManager_->addEntity());
-		UIViewer* uiV = textsGamemodes_.back()->addComponent<UIViewer>(texturesTexts_[i], b2Vec2(0,0), gmTextScale_, 0);
-		uiV->setPosUIElement(b2Vec2((winWidth - uiV->getW())/2, (float)(i * gmMarginText_.y + gmOffsetText_.y)));
+		UIViewer* uiV = textsGamemodes_.back()->addComponent<UIViewer>(texturesTexts_[i], b2Vec2(0, 0), gmTextScale_, 0);
+		uiV->setPosUIElement(b2Vec2((winWidth - uiV->getW()) / 2, (float)(i * gmMarginText_.y + gmOffsetText_.y)));
 		textsGamemodes_.back()->setActive(false);
 		i++;
 	}
 }
 
 void MapSelectionState::createIcons() {
-
 	int i = 0;
 
 	int winWidth = CONST(float, "WINDOW_WIDTH");
@@ -327,7 +319,7 @@ void MapSelectionState::createIcons() {
 
 	for (auto e : texturesIcons_) {
 		iconsGamemodes_.push_back(entityManager_->addEntity());
-		UIViewer* uiV = iconsGamemodes_.back()->addComponent<UIViewer>(texturesIcons_[i], b2Vec2(0,0), 3, 0);
+		UIViewer* uiV = iconsGamemodes_.back()->addComponent<UIViewer>(texturesIcons_[i], b2Vec2(0, 0), 3, 0);
 		UIViewer* uiVText = GETCMP2(textsGamemodes_[i], UIViewer);
 		uiV->setPosUIElement(b2Vec2((winWidth - uiVText->getW()) / 2 - margin, (float)(i * gmMarginText_.y + gmOffsetIcons_.y)));
 		iconsGamemodes_.back()->setActive(false);
@@ -337,10 +329,9 @@ void MapSelectionState::createIcons() {
 	for (auto e : iconsMaps_) {
 		e.erase(e.begin(), e.end());
 	}
-
 }
 
 void MapSelectionState::render() {
-	backgroundTex_->render(0,0);
+	backgroundTex_->render(0, 0);
 	GameState::render();
 }

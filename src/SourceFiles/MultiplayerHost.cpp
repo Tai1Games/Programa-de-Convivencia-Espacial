@@ -76,7 +76,6 @@ std::string MultiplayerHost::getHostIpAddress() {
 
 void MultiplayerHost::checkActivity() {
 	if (SDLNet_CheckSockets(socketSet_, 0) > 0) {
-
 		//Alguien se une
 		if (SDLNet_SocketReady(masterSocket_)) {
 			TCPsocket client = SDLNet_TCP_Accept(masterSocket_);

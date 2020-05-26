@@ -23,8 +23,10 @@ private:
 
 	int framesBetweenSpawns_ = 0; //initiated at init();
 public:
-	WeaponSpawner(b2Vec2 pos, EntityManager* eMan, b2World* b2World, ConfettiPool* confettiPool, StaplerPool* staplerPool, BulletPool* bulletPool) : 
-		Component(ComponentType::WeaponSpawner) { pos_ = pos; eMan_ = eMan; b2world_ = b2World; confettiPool_ = confettiPool; staplerPool_ = staplerPool; bulletPool_ = bulletPool; }
+	WeaponSpawner(b2Vec2 pos, EntityManager* eMan, b2World* b2World, ConfettiPool* confettiPool, StaplerPool* staplerPool, BulletPool* bulletPool) :
+		Component(ComponentType::WeaponSpawner) {
+		pos_ = pos; eMan_ = eMan; b2world_ = b2World; confettiPool_ = confettiPool; staplerPool_ = staplerPool; bulletPool_ = bulletPool;
+	}
 	~WeaponSpawner() {};
 
 	void spawnWeapon();
@@ -32,4 +34,3 @@ public:
 	virtual void update();
 	virtual void init();
 };
-

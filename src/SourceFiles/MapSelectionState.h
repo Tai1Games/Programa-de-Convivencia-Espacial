@@ -50,7 +50,7 @@ private:
 	Entity* choseModeText_;
 	Entity* pressEnterText_;
 
-#pragma region constantes de tamanos 
+#pragma region constantes de tamanos
 
 
 	b2Vec2 gmOffsetText_;
@@ -63,10 +63,10 @@ private:
 	float gmTextScale_;
 
 	b2Vec2 mapCursorOffset_;
-	float mapScale_ ;
+	float mapScale_;
 	int mapMargin_;
-	int mapIconMargin_ ;
-	b2Vec2 mapIconsOffset_ ;
+	int mapIconMargin_;
+	b2Vec2 mapIconsOffset_;
 	int mapIconsScale_;
 
 	b2Vec2 sizeImg;
@@ -127,4 +127,3 @@ public:
 	virtual void render() override;
 	virtual void handleInput() override;
 };
-

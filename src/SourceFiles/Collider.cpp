@@ -16,10 +16,9 @@ Collider::Collider(b2World* world, b2BodyType type, float x, float y, float widt
 }
 
 Collider::Collider(b2World* world, b2BodyType type, float x, float y, float radius,
-	float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor):
+	float density, float friction, float restitution, float linearDrag, float angDrag, CollisionLayer c, bool sensor) :
 	world_(world),
 	Component(ComponentType::Collider) {
-
 	bodyDef_.type = type;
 	bodyDef_.position.Set(x, y);
 	bodyDef_.linearDamping = linearDrag;
@@ -135,5 +134,4 @@ void Collider::destroyFixture(int i) {
 	fixtures_.erase(fixtures_.begin() + i);
 	fixtureDefs_.erase(fixtureDefs_.begin() + i);
 	//shape_.erase(shape_.begin() + i);
-
 }

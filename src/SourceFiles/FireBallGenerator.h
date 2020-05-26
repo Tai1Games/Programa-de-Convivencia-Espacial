@@ -36,7 +36,7 @@ private:
 
 	//Smoke particle generation
 	int particleGenOddsModifier_;
-	
+
 	//Boiler shake
 	int currentFrame = 0;
 	int framesForNextShake = 0;
@@ -58,11 +58,10 @@ private:
 public:
 	FireBallGenerator(b2World* w) :
 		Component(ComponentType::FireBallGenerator),
-		physicsWorld_(w){}
+		physicsWorld_(w) {}
 	~FireBallGenerator() {};
 	void init() override;
 	void update() override;
 	void onButtonAction(bool inc_dec);
 	void activate(bool active) { activated_ = active; }
 };
-

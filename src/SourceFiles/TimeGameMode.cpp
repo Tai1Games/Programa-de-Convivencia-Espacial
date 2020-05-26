@@ -4,7 +4,7 @@
 #include "TomatoPool.h"
 
 TimeGameMode::TimeGameMode(MatchInfo* mInfo) :
-	AbstractTimedGameMode(mInfo,GamemodeID::Timed) {
+	AbstractTimedGameMode(mInfo, GamemodeID::Timed) {
 }
 
 TimeGameMode::~TimeGameMode() {
@@ -26,7 +26,6 @@ void TimeGameMode::init(PlayState* game)
 	}
 
 	for (int i = 0; i < players_.size(); i++) {
-
 		Entity* e = players_[i];
 		playersHealth_.push_back(e->getComponent<Health>(ComponentType::Health)); //Initializes playersHealth vector catching a reference to Health on entity e.
 		HealthViewer* hV = (e->getComponent<HealthViewer>(ComponentType::HealthViewer)); //Obtains a reference to the HealthViewer component of entity e. This is used to calculate where the kills will be drawn
@@ -38,9 +37,9 @@ void TimeGameMode::init(PlayState* game)
 		}
 
 		// draws P1 and P2 kill marker below health viewer, P3 and P4 kill marker above health viewer
-		if (i < 2)	
+		if (i < 2)
 			p.y += (CONST(int, "KILLS_VERTICAL_OFFSET") + CONST(int, "LIFE_HEIGTH"));
-		else		
+		else
 			p.y -= (CONST(int, "LIFE_HEIGTH") - CONST(int, "KILLS_VERTICAL_OFFSET"));
 
 		playersPointsPos_.push_back(p);
@@ -77,19 +76,17 @@ void TimeGameMode::playerKillsPlayer(int killerId, int deadId)
 
 
 void TimeGameMode::renderKillMarker() {
-
 	for (int k = 0; k < playerKills_.size(); k++) {
-
 		string killsNumb = to_string(playerKills_[k]);
 		vector<Texture*> killsNumbTextures;
 
 		for (int i = 0; i < killsNumb.length(); i++) { //sacamos los dígitos y los metemos en un vector
 			killsNumbTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Zero + killsNumb[i] - '0'));
 		}
-		
+
 		SDL_Rect killsTextTexture;
-		for (int i = 0; i < killsNumbTextures.size(); i++) {			
-			killsTextTexture.x = (int)playersPointsPos_[k].x + killsNumbTextures[i]->getWidth()/1.35 * (i+1);
+		for (int i = 0; i < killsNumbTextures.size(); i++) {
+			killsTextTexture.x = (int)playersPointsPos_[k].x + killsNumbTextures[i]->getWidth() / 1.35 * (i + 1);
 			killsTextTexture.y = (int)playersPointsPos_[k].y;
 			killsTextTexture.w = killsMarkerWidth_;
 			killsTextTexture.h = killsMarkerHeight_;

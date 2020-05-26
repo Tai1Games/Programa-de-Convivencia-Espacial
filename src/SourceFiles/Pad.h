@@ -3,7 +3,7 @@
 #include "checkML.h"
 #include "AnimatedViewer.h"
 
-class Pad:public Component
+class Pad :public Component
 {
 private:
 	AnimatedViewer* viewer_;
@@ -14,4 +14,3 @@ public:
 	virtual void init() override;
 	virtual void onCollisionExit(Collision* c);
 };
-

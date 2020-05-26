@@ -4,7 +4,6 @@
 
 
 namespace ComponentType {
-
 	using CmpIdType = std::size_t;
 
 	enum CmpId : CmpIdType {
@@ -62,5 +61,4 @@ namespace ComponentType {
 // entity e provided as a parameter
 #define GETCMP2(e,type) GETCMP3(e,ComponentType::type,type)
 #define GETCMP3(e,id,type) e->getComponent<type>(id)
-
 }

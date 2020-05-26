@@ -154,7 +154,6 @@ void ClientState::receiveAudio()
 	else {
 		SDL_Game::instance()->getAudioMngr()->playChannel(buffer[1], buffer[2], 0);
 	}
-
 }
 
 void ClientState::connectToServer() {

@@ -15,7 +15,7 @@ private:
 	TimedDespawn* timedDespawn_ = nullptr;
 	bool used = false;
 	int frameSize_ = 0;
-	
+
 	int currentFrame_ = 0;
 	int animationDuration_ = 0; //Loaded at init();
 public:

@@ -15,10 +15,9 @@ protected:
 	float speedUp_ = 0;
 
 public:
-	Treadmill(Collider* c) :Component(ComponentType::Treadmill), myCol_(c){}
+	Treadmill(Collider* c) :Component(ComponentType::Treadmill), myCol_(c) {}
 	void onCollisionEnter(Collision* c);
 	void onCollisionExit(Collision* c);
 	void update() override;
 	void init() override;
 };
-

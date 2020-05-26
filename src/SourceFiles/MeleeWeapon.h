@@ -27,4 +27,3 @@ public:
 	//virtual void detectPlayer(Entity* playerDetected, int id) override;
 	//virtual void loseContactPlayer(Entity* playerDetected, int id) override;
 };
-

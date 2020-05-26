@@ -110,20 +110,20 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 		case States::lobby: {
 			states_[state] = new LobbyState();
 		}
-		break;
+						  break;
 
 		case States::playableMenu: {
 			states_[state] = new PlayableMenuState();
 		}
-			break;
+								 break;
 		case States::options: {
 			states_[state] = new OptionsMenuState();
 		}
-								 break;
+							break;
 		case States::credits: {
 			states_[state] = new CreditsState();
 		}
-			break;
+							break;
 
 		case States::pause:
 			//if (states_[state] != nullptr)	delete states_[state];

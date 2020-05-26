@@ -23,7 +23,6 @@ void WiFightGameMode::init(PlayState* game)
 	wifiWavesPool_.init(state_->getEntityManager(), state_->getPhysicsWorld(), router->getComponent<Collider>(ComponentType::Collider));
 
 	GameMode::initProgressBars();
-
 }
 
 void WiFightGameMode::render()
@@ -32,7 +31,7 @@ void WiFightGameMode::render()
 
 	if (roundFinished_) {
 		Texture* ganador = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::winner1 + winnerId_);
-		SDL_Rect destRect {
+		SDL_Rect destRect{
 			halfWinWidth_ - ganador->getWidth() / 2,
 			halfWinHeight_,
 			ganador->getWidth(),

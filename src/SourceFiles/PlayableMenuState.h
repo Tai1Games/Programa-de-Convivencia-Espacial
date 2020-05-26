@@ -33,10 +33,9 @@ private:
 public:
 	PlayableMenuState() {};
 	virtual ~PlayableMenuState();
-	
+
 	virtual void init() override;
 	virtual void update() override;
 	virtual void render() override;
 	virtual void onLoaded();
 };
-

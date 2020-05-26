@@ -20,4 +20,3 @@ public:
 	void setSpawner(WeaponSpawner* weaponSpawner) { weaponSpawner_ = weaponSpawner; }
 	virtual void update();
 };
-

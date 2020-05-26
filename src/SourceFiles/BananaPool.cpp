@@ -24,7 +24,7 @@ void BananaPool::addWeapon(b2Vec2 pos) {
 		int randDirY = -1;
 		if (rand() % 2 == 1) randDirX = 1;
 		if (rand() % 2 == 1) randDirY = 1;
-		e->getComponent<Collider>(ComponentType::Collider)->applyForce(b2Vec2((rand() % bananaMaxSpeed_ * randDirX) + bananaMinSpeed_, 
+		e->getComponent<Collider>(ComponentType::Collider)->applyForce(b2Vec2((rand() % bananaMaxSpeed_ * randDirX) + bananaMinSpeed_,
 			(rand() % bananaMaxSpeed_ * randDirY) + bananaMinSpeed_), b2Vec2(0, 0));
 	}
 }

@@ -39,4 +39,3 @@ public:
 	virtual void playerKillsPlayer(int killerId, int deadId = -1) {};
 	virtual void activateControl();
 };
-
