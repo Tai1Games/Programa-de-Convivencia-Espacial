@@ -77,12 +77,13 @@ void MidGameState::init()
 
 		AnimatedUIViewer* viewer = newRocket->addComponent<AnimatedUIViewer>(Resources::RocketSpriteSheet, 10, b2Vec2(CONST(int, "START_ROCKET_POSITION"), (initPosY - 76) + (distanceBetweenRockets_ * k) + rocketRect.h / 2), 1, 0);
 		playerRockets_.push_back(viewer);
-		//viewer->setFrame(0, k);	// cuando haya skins, descomentar esta línea y quitar startAnimation
-		viewer->startAnimation();
+		viewer->setFrame(0, k);	// cuando haya skins, descomentar esta línea y quitar startAnimation
+		//viewer->startAnimation();
 	}
 	//Texto para terminar la intermision
 	continueText = entityManager_->addEntity();
-	continueText->addComponent<UIViewer>(Resources::ContinueText, b2Vec2((CONST(int, "WINDOW_WIDTH") / 2) - 600, CONST(int, "WINDOW_HEIGHT") - 130), 1, 0);
+	UIViewer* uiV = continueText->addComponent<UIViewer>(Resources::ContinueText, b2Vec2(0,0), 1, 0);
+	uiV->setPosUIElement(b2Vec2(((CONST(int, "WINDOW_WIDTH") - uiV->getW()) / 2), CONST(int, "WINDOW_HEIGHT") - CONST(int, "UI_PRESS_KEY_OFFSET_Y"))); 
 	continueText->setActive(false);
 }
 

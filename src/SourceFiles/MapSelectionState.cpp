@@ -273,7 +273,6 @@ void MapSelectionState::updateMenu() {
 	mapSelCursor_->setPosUIElement(coordsImages_[pointers_[x] + pointers_[y] * 2] + mapCursorOffset_);
 };
 
-
 void MapSelectionState::createImages() { //preparar los textos	
 
 	coordsImages_.push_back(b2Vec2((sizeScreen.x - (sizeImg.x * 2 + mapMargin_)) / 2,
@@ -292,19 +291,19 @@ void MapSelectionState::createImages() { //preparar los textos
 		imagesMaps_.push_back(entityManager_->addEntity());
 		imagesMaps_.back()->addComponent<UIViewer>(texturesMaps_[i], coordsImages_[i], mapScale_, 0);
 	}
-
+	
 }
 
 void MapSelectionState::createTexts()
 {
 	int i = 0;
 
+	int winWidth = CONST(float, "WINDOW_WIDTH");
 	for (auto e : texturesTexts_) {
 
-		b2Vec2 a = { gmOffsetText_.x + i * gmMarginText_.x,(float)(i * gmMarginText_.y + gmOffsetText_.y) };
-
 		textsGamemodes_.push_back(entityManager_->addEntity());
-		textsGamemodes_.back()->addComponent<UIViewer>(texturesTexts_[i], a, gmTextScale_, 0);
+		UIViewer* uiV = textsGamemodes_.back()->addComponent<UIViewer>(texturesTexts_[i], b2Vec2(0,0), gmTextScale_, 0);
+		uiV->setPosUIElement(b2Vec2((winWidth - uiV->getW())/2, (float)(i * gmMarginText_.y + gmOffsetText_.y)));
 		textsGamemodes_.back()->setActive(false);
 		i++;
 	}
@@ -314,12 +313,14 @@ void MapSelectionState::createIcons() {
 
 	int i = 0;
 
+	int winWidth = CONST(float, "WINDOW_WIDTH");
+	int margin = CONST(float, "GM_ICON_OFFSET");
+
 	for (auto e : texturesIcons_) {
-
-		b2Vec2 a = { gmOffsetIcons_.x + i * gmMarginText_.x,(i * gmMarginText_.y + gmOffsetIcons_.y) };
-
 		iconsGamemodes_.push_back(entityManager_->addEntity());
-		iconsGamemodes_.back()->addComponent<UIViewer>(texturesIcons_[i], a, 2, 0);
+		UIViewer* uiV = iconsGamemodes_.back()->addComponent<UIViewer>(texturesIcons_[i], b2Vec2(0,0), 2, 0);
+		UIViewer* uiVText = GETCMP2(textsGamemodes_[i], UIViewer);
+		uiV->setPosUIElement(b2Vec2((winWidth - uiVText->getW()) / 2 - margin, (float)(i * gmMarginText_.y + gmOffsetIcons_.y)));
 		iconsGamemodes_.back()->setActive(false);
 		i++;
 	}
