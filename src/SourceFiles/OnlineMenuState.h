@@ -30,7 +30,7 @@ private:
 	UIViewer* menuCursor2_ = nullptr;
 	std::vector<Entity*> texts_;
 	std::vector<Texture*> textures_;
-	std::vector<pair<GamemodeID, string>>* roundsVector_;
+	std::vector<pair<GamemodeID, string>>* roundsVector_ = nullptr;
 
 	void updatePointer(int n);
 	void createText();
