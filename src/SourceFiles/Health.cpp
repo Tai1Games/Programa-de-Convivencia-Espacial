@@ -24,7 +24,7 @@ void Health::init() {
 	invFrames_ = 0;
 	animSpeed_ = CONST(int, "INVULNERABILITY_ANIM_SPEED");
 
-	loopsInv_ = (INV_FRAMES_RESPAWN_ / CONST(int, "NFRAMES_ANIM3"))/10; //el numero de loops que tiene que hacer la animacion
+	loopsInv_ = (INV_FRAMES_RESPAWN_ / CONST(int, "NFRAMES_ANIM3")) / 10; //el numero de loops que tiene que hacer la animacion
 	anim_ = entity_->getComponent<AnimatedPlayer>(ComponentType::AdvancedAnimatedViewer);
 }
 

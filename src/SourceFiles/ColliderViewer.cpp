@@ -46,7 +46,6 @@ void ColliderViewer::draw() const {
 		int i = 0;
 		// recorre todos los fixtures del objeto
 		while (f != nullptr) {
-
 			uint16 layer = f->GetFilterData().categoryBits;             // obtiene la capa de la fixture
 			int posColor = (layer > 0) ? round(log2(layer)) : numlayers - 1;        // escoge color de dibujado según la capa
 			if (layer < 0) cout << "ups algo malo pasó en las capas de colisión" << "			MSG at ColliderViewer.cpp line 52" << endl;

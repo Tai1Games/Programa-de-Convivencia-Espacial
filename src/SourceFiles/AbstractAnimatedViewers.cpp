@@ -3,7 +3,6 @@
 bool AbstractAnimatedViewers::updateTime(int nFrames)
 {
 	if (activeAnimation_) {
-
 		timeElapsed_++;		//Aumentamos en uno el número de ciclos
 
 		if (timeElapsed_ >= timePerFrame_) {
@@ -15,7 +14,7 @@ bool AbstractAnimatedViewers::updateTime(int nFrames)
 				if (loops_ != -1 && currentLoop_ > loops_)
 					stopAnimation();
 			}
-			if(limitFrame_ != -1) frame_ %= limitFrame_;
+			if (limitFrame_ != -1) frame_ %= limitFrame_;
 			return true;
 		}
 	}

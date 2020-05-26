@@ -27,4 +27,3 @@ private:
 	std::vector<Entity*> externalEntities_;
 	std::vector<Weapon*> weapons_;
 };
-

@@ -19,11 +19,11 @@ void CollisionHandler::BeginContact(b2Contact* contact)
 	Entity* aEnt = static_cast<Entity*>(fixA->GetBody()->GetUserData());
 	Entity* bEnt = static_cast<Entity*>(fixB->GetBody()->GetUserData());
 
-	if (aEnt != nullptr && bEnt != nullptr) 
+	if (aEnt != nullptr && bEnt != nullptr)
 	{
-		Collision col = Collision(fixB, contact, bEnt,this,fixA);
+		Collision col = Collision(fixB, contact, bEnt, this, fixA);
 		aEnt->onCollisionEnter(&col);
-		col =Collision(fixA, contact, aEnt,this, fixB);
+		col = Collision(fixA, contact, aEnt, this, fixB);
 		bEnt->onCollisionEnter(&col);
 	}
 }
@@ -40,9 +40,9 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 
 	if (aEnt != nullptr && bEnt != nullptr)
 	{
-		Collision col = Collision(fixB, contact, bEnt,this,fixA);
+		Collision col = Collision(fixB, contact, bEnt, this, fixA);
 		aEnt->onCollisionExit(&col);
-		col = Collision(fixA, contact, aEnt,this,fixB);
+		col = Collision(fixA, contact, aEnt, this, fixB);
 		bEnt->onCollisionExit(&col);
 	}
 }
@@ -50,7 +50,6 @@ void CollisionHandler::EndContact(b2Contact* contact) {
 //If you want to disable a collision after it's detected
 void CollisionHandler::PreSolve(b2Contact* contact, const b2Manifold* oldManifold)
 {
-
 }
 
 //Gather info about impulses
@@ -58,7 +57,7 @@ void CollisionHandler::PostSolve(b2Contact* contact, const b2ContactImpulse* imp
 
 void CollisionHandler::SolveInteractions() {
 	for (auto data : vecWeld) { //Recorre el vector resolviendo todos los joint y lo limpia al final.
-		data.player->attachToObject(data.bodyToBeAttached, data.collPoint,data.collNormal);
+		data.player->attachToObject(data.bodyToBeAttached, data.collPoint, data.collNormal);
 	}
 	vecWeld.clear();
 	for (auto weapon : vecWeapon) { //Recorre el vector soltando los weapon y lo limpia al final.

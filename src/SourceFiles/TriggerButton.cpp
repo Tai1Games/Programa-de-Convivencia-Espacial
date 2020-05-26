@@ -2,7 +2,6 @@
 
 void TriggerButton::init()
 {
-
 	viewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer); //pilla referencia al viewer
 	timeToActivate = CONST(int, "TRIGGER_BUTTON_TIME");
 	viewer_->stopAnimation();
@@ -26,8 +25,8 @@ void TriggerButton::PassState()
 	if (stateToChange == "Play") {
 		if (SDL_Game::instance()->getStateMachine()->getStateById(States::lobby) == nullptr) {
 			SDL_Game::instance()->getStateMachine()->transitionToState(States::lobby, 0);
-		}else SDL_Game::instance()->getStateMachine()->transitionToState(States::onlineMenu, 0);
-
+		}
+		else SDL_Game::instance()->getStateMachine()->transitionToState(States::onlineMenu, 0);
 	}
 	else if (stateToChange == "Options") {
 		SDL_Game::instance()->getStateMachine()->transitionToState(States::options, 0);
@@ -54,7 +53,6 @@ void TriggerButton::onCollisionEnter(Collision* c)
 void TriggerButton::onCollisionExit(Collision* c)
 {
 	if (c->hitFixture->GetFilterData().categoryBits & Collider::CollisionLayer::Player) {
-
 		playerDetected_ = false;
 		viewer_->setFrame(0, 0);
 		viewer_->stopAnimation();

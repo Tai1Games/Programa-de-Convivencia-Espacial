@@ -44,4 +44,3 @@ void Entity::onCollisionExit(Collision* c)
 	for (auto& cmp : components_)
 		cmp->onCollisionExit(c);
 }
-

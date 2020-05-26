@@ -2,7 +2,7 @@
 
 CarnivorousPlantViewer::CarnivorousPlantViewer(int textureId, int timePerFrame) :
 	AdvancedAnimatedViewer(textureId, timePerFrame),
-	minFramesSpeed_(timePerFrame) { 
+	minFramesSpeed_(timePerFrame) {
 }
 
 CarnivorousPlantViewer::~CarnivorousPlantViewer()
@@ -43,7 +43,7 @@ void CarnivorousPlantViewer::update()
 				else if (frameX_ == frameClosedMouth_ + 1 + animationsInfo_[anim_].animOrigin_) {
 					setAnimSpeed(minFramesSpeed_);
 				}
-				else if(frame_ == animationsInfo_[anim_].numFrames_ - 1){
+				else if (frame_ == animationsInfo_[anim_].numFrames_ - 1) {
 					resetAnimation();
 				}
 			}

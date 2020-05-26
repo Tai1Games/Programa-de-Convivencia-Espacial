@@ -42,8 +42,7 @@ void Wallet::dropCoins(int damage, int player)
 
 void Wallet::onCollisionEnter(Collision* c)
 {
-	if(invFrames_ <=0) {
-
+	if (invFrames_ <= 0) {
 		b2Fixture* fix = c->hitFixture;
 		if (!fix->IsSensor())
 		{

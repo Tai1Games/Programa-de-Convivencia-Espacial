@@ -11,14 +11,13 @@ private:
 	Viewer* viewer_ = nullptr;
 	BulletPool* bulletPool_;
 public:
-	BananaWeapon(BulletPool* p, int damage, int impctForce) :ActionableWeapon( WeaponID::Banana, 0, 0, impctForce) {
+	BananaWeapon(BulletPool* p, int damage, int impctForce) :ActionableWeapon(WeaponID::Banana, 0, 0, impctForce) {
 		bulletPool_ = p;
-		impactDamage_ = damage;		
+		impactDamage_ = damage;
 	} //provisional
-	~BananaWeapon(){}
+	~BananaWeapon() {}
 
 	virtual void init();
 	virtual void action() override;
 	virtual void setActive(bool a, b2Vec2 pos = { 0,0 });
 };
-

@@ -25,10 +25,9 @@ private:
 public:
 	BoilerButtonLogic(bool inc_dec);
 	~BoilerButtonLogic() {};
-	
+
 	virtual void init();
 	virtual void update();
 	virtual void onCollisionEnter(Collision* c);
 	void assignBoiler(FireBallGenerator* fbGen) { fbGen_ = fbGen; }
 };
-

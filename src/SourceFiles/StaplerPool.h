@@ -16,4 +16,3 @@ public:
 
 	Entity* addStapler(b2Vec2 pos);
 };
-

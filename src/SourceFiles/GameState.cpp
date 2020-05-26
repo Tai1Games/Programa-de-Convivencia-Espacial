@@ -5,7 +5,7 @@
 #include "InputHandler.h"
 
 GameState::GameState() :
-	entityManager_(nullptr){
+	entityManager_(nullptr) {
 }
 
 GameState::~GameState() {
@@ -24,16 +24,14 @@ void GameState::update() {
 }
 
 void GameState::render() {
-
-	if(entityManager_!=nullptr)
+	if (entityManager_ != nullptr)
 		entityManager_->render();
-
 }
 
 void GameState::handleInput() {
 	SDL_Game::instance()->getInputHandler()->update();
 	//DebugInput();
-	if(entityManager_!=nullptr)
+	if (entityManager_ != nullptr)
 		entityManager_->handleInput();
 }
 

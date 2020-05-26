@@ -24,7 +24,6 @@ struct PlayerLobbyInfo {
 	};
 	int playerSkin = 0; //no hace nada pero ira cambiando
 	bool ready = false;
-
 };
 
 class LobbyState : public GameState

@@ -8,7 +8,7 @@ Viewer::Viewer() :
 
 Viewer::Viewer(int textureId, ComponentType::CmpId ct) :
 	Component(ct), //
-	transform_(nullptr){	//
+	transform_(nullptr) {	//
 	tex_ = nullptr;
 	textureId_ = textureId;
 }
@@ -26,5 +26,5 @@ void Viewer::draw() const {
 		drawRect.x += renderOffset_.x;
 		drawRect.y += renderOffset_.y;
 		tex_->render(drawRect, transform_->getAngleInDegrees(), frameX_, frameY_, flip_); // getAngle devuelve radianes, hay que pasarlos a �ngulos
-    }
+	}
 }

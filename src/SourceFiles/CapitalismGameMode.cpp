@@ -20,7 +20,7 @@ void CapitalismGameMode::init(PlayState* game)
 	fontCharacterWidth_ = CONST(double, "NES_WIDTH_PER_CHARACTER");
 	headUIWidth_ = CONST(int, "CAPITALISM_HEAD_UI_WIDTH");
 	headUIHeight_ = CONST(int, "CAPITALISM_HEAD_UI_HEIGHT");
-	
+
 	currentSpawnTime_ = spawnTime_;
 	coinSpawnersPositions_ = tilemap_->getCoinsSpawnPoints();
 
@@ -37,7 +37,6 @@ void CapitalismGameMode::init(PlayState* game)
 }
 
 void CapitalismGameMode::render() {
-
 	AbstractTimedGameMode::render();
 
 	renderCoinsMarker();
@@ -53,7 +52,6 @@ void CapitalismGameMode::createPlayers(PlayState* game) {
 }
 
 void CapitalismGameMode::update() {
-
 	for (int i = 0; i < playerCoins_.size(); i++) { playerCoins_[i] = playerWallets_[i]->getCoins(); }
 	updateTime(playerCoins_);
 
@@ -74,7 +72,6 @@ void CapitalismGameMode::update() {
 void CapitalismGameMode::renderCoinsMarker()
 {
 	for (int k = 0; k < playerWallets_.size(); k++) {
-
 		string coinNumb = to_string(playerCoins_[k]);
 		vector<Texture*> coinNumbTextures;
 
@@ -91,11 +88,11 @@ void CapitalismGameMode::renderCoinsMarker()
 		coinTextureUI_->render(coinImageRect);
 
 		SDL_Rect coinTextRect;
-		for (int i = 0; i < coinNumbTextures.size(); i++) {			
+		for (int i = 0; i < coinNumbTextures.size(); i++) {
 			coinTextRect.w = coinNumbTextures[i]->getWidth() * coinUISpriteScale_;
 			coinTextRect.h = coinNumbTextures[i]->getHeight() * coinUISpriteScale_;
 			coinTextRect.x = (k % 2 == 0) ? (coinImageRect.x + coinImageRect.w / 3 + i * coinTextRect.w) + coinUIRadius_ :
-				(coinImageRect.x + coinImageRect.w / 3 + i * coinTextRect.w) - coinUIRadius_ * coinNumbTextures.size()/1.5;
+				(coinImageRect.x + coinImageRect.w / 3 + i * coinTextRect.w) - coinUIRadius_ * coinNumbTextures.size() / 1.5;
 			coinTextRect.y = coinImageRect.y + coinUIRadius_ * 0.04;
 
 			coinNumbTextures[i]->render(coinTextRect, 0, 0);

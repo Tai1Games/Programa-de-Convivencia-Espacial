@@ -5,7 +5,6 @@ SDLTexturesManager::SDLTexturesManager() :
 }
 
 SDLTexturesManager::~SDLTexturesManager() {
-
 	if (!initialized_)
 		return;
 
@@ -16,7 +15,6 @@ SDLTexturesManager::~SDLTexturesManager() {
 	}
 
 	IMG_Quit();
-
 }
 
 bool SDLTexturesManager::init() {
@@ -35,7 +33,6 @@ bool SDLTexturesManager::init() {
 
 bool SDLTexturesManager::loadFromImg(unsigned char tag,
 	SDL_Renderer* renderer, const string& fileName, unsigned short nHorFrames, unsigned short nVerFrames) {
-
 	if (!initialized_)
 		return false;
 
@@ -52,7 +49,6 @@ bool SDLTexturesManager::loadFromImg(unsigned char tag,
 bool SDLTexturesManager::loadFromText(unsigned char tag,
 	SDL_Renderer* renderer, const string& text, const Font* font,
 	const SDL_Color& color) {
-
 	if (!initialized_)
 		return false;
 
@@ -64,7 +60,6 @@ bool SDLTexturesManager::loadFromText(unsigned char tag,
 
 	// if we get here something went wrong
 	return false;
-
 }
 
 void SDLTexturesManager::storeTexture(unsigned char tag, Texture* texture) {

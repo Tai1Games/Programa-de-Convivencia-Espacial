@@ -14,7 +14,6 @@ struct Collision;
 
 class Entity
 {
-
 private:
 	EntityManager* entityManager_ = nullptr;
 
@@ -47,7 +46,7 @@ public:
 		return static_cast<T*>(componentsArray_[id]);
 	}
 
-	bool hasComponent(ComponentType::CmpIdType id) const{
+	bool hasComponent(ComponentType::CmpIdType id) const {
 		return componentsArray_[id] != nullptr;
 	}
 
@@ -64,4 +63,3 @@ public:
 	virtual void onCollisionStay(Collision* c);
 	virtual void onCollisionExit(Collision* c);
 };
-

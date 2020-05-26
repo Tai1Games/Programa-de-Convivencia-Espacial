@@ -22,4 +22,3 @@ public:
 	virtual void onLoaded() {};
 	EntityManager* getEntityManager() { return entityManager_; }
 };
-

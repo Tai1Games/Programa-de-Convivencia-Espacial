@@ -19,10 +19,9 @@ private:
 
 public:
 	StaplerWeapon(int damage, BulletPool* pb, int impctForce);
-	~StaplerWeapon(){}
+	~StaplerWeapon() {}
 
 	virtual void init() override;
 	virtual void action() override;
 	virtual void setActive(bool a, b2Vec2 pos = { 0,0 });
 };
-

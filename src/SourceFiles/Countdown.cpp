@@ -22,7 +22,7 @@ void Countdown::draw() const {
 		rect.w = currentSize_ * currentNumTexture_->getWidth() / currentNumTexture_->getHeight(); //ajustar tamaño que si no GO! se ve achatado
 		rect.h = currentSize_;
 		rect.x = posX_ - rect.w / 2; //centro de la pantalla
-		rect.y = posY_ - rect.h / 2; 
+		rect.y = posY_ - rect.h / 2;
 		currentNumTexture_->render(rect);
 	}
 }

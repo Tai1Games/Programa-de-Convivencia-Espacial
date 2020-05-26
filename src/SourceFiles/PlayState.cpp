@@ -49,7 +49,7 @@ void PlayState::init() {
 	secondsPerFrame_ = CONST(double, "SECONDS_PER_FRAME");
 
 	tilemap_ = new TileMap(CONST(double, "WINDOW_WIDTH"), CONST(double, "WINDOW_HEIGHT"),
-		"assets/game/tilemaps/"+tilemapName_+".json",
+		"assets/game/tilemaps/" + tilemapName_ + ".json",
 		entityManager_, physicsWorld_, &bulletPool_, &confettiPool_, &staplerPool_, gameMode_);
 	tilemap_->init();
 	gameMode_->setTileMap(tilemap_);
@@ -122,7 +122,7 @@ void PlayState::createDeadBodies() {
 	}
 	/*if (deadBodies.size() < maxCorpses_) {
 		for (int i = 0; i < bodies.size(); i++) {
-			ObjectFactory::makeDeadBody(entityManager_, physicsWorld_, collDeadBodies, deadBodies, 
+			ObjectFactory::makeDeadBody(entityManager_, physicsWorld_, collDeadBodies, deadBodies,
 				bodies[i].pos, bodies[i].angle, bodies[i].linearVelocity, bodies[i].angularVelocity);
 		}
 	}*/

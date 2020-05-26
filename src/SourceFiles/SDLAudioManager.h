@@ -19,7 +19,7 @@ public:
 	bool init();
 
 	// sound effects
-	bool loadSound(int tag, const string &fileName);
+	bool loadSound(int tag, const string& fileName);
 	int playChannel(int tag, int loops, int channel = -1);
 	void pauseChannel(int channel);
 	void resumeChannel(int channel);
@@ -28,7 +28,7 @@ public:
 	int channels();
 
 	// music
-	bool loadMusic(int tag, const string &fileName);
+	bool loadMusic(int tag, const string& fileName);
 	void playMusic(int tag, int loops);
 	int setMusicVolume(int volume);
 	void haltMusic();
@@ -41,4 +41,3 @@ private:
 	map<int, Mix_Chunk*> chunks_;
 	map<int, Mix_Music*> music_;
 };
-

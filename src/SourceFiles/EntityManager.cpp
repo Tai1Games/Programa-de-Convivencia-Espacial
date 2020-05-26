@@ -13,14 +13,14 @@ EntityManager::~EntityManager() {
 
 void EntityManager::update() {
 	for (auto& e : entities_)
-			if(e->isActive()) e->update();
+		if (e->isActive()) e->update();
 	for (auto& e : externalEntities_)
-			if(e->isActive()) e->update();
+		if (e->isActive()) e->update();
 }
 
 void EntityManager::render() {
 	for (auto& e : entities_)
-		if(e->isActive()) e->render();
+		if (e->isActive()) e->render();
 	for (auto& e : externalEntities_)
 		if (e->isActive()) e->render();
 }
