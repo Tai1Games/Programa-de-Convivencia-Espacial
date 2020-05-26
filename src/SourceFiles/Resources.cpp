@@ -103,7 +103,7 @@ vector<Resources::ImageInfo> Resources::images_{
 
 	// Gamemode specific elements
 	{ Coin, resourcesPath + "textures/Moneda.png" },
-	{ Router,resourcesPath + "textures/Router2.png" },
+	{ Router,resourcesPath + "textures/Router.png" },
 	{ RoombaSpriteSheet, resourcesPath + "textures/Roomba.png", 5},
 	{ Remote, resourcesPath + "textures/Mando.png"},
 
