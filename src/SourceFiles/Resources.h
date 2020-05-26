@@ -144,6 +144,7 @@ public:
 		Local,
 		Host,
 		Join,
+		Tutorial,
 
 		//modes
 		Capitalism,
@@ -151,14 +152,13 @@ public:
 		Stocks,
 		WiFight,
 		Timed,
-		Tutorial,
 		//exit
 		Exit,
 		//maps
-		LivingRoomText,
+		/*LivingRoomText,
 		BoilerRoomText,
 		GymRoomText,
-		GardenRoomText,
+		GardenRoomText,*/
 
 		//tutorial
 		Completed,

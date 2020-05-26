@@ -1,4 +1,4 @@
-#include "MenuState.h"
+/*#include "MenuState.h"
 #include "InputHandler.h"
 #include "SDL_Game.h"
 #include "GameStateMachine.h"
@@ -131,4 +131,4 @@ void MenuState::createText() { //preparar los textos
 			start++;
 		}
 	}
-}
+}*/

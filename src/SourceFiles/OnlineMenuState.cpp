@@ -13,12 +13,15 @@ void OnlineMenuState::init() {
 	entityManager_ = new EntityManager();
 	ownerPlayerBinder_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo()->at(ownerPlayerID_)->inputBinder;
 	Entity* miniTinky = entityManager_->addEntity();
-	menuCursor_ = miniTinky->addComponent<UIViewer>(Resources::Tinky, b2Vec2(0, 0), 0.5, 0);
-	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (pointer_ + 1)));
-	createText();
+	menuCursor_ = miniTinky->addComponent<UIViewer>(Resources::Rocket, b2Vec2(0, 0), 1, 90);
+	menuCursor2_ = miniTinky->addComponent<UIViewer>(Resources::Rocket, b2Vec2(0, 0), 1, 270);
+	cursorTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Rocket);
 
-	//MUSICA
-	//SDL_Game::instance()->getAudioMngr()->playMusic(Resources::AudioId::MainMenuMusic, -1);
+	createText();
+	updatePointer(0);
+
+	//FONDO
+	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SpaceBackground);
 }
 
 void OnlineMenuState::handleInput()
@@ -52,6 +55,11 @@ void OnlineMenuState::handleInput()
 		case 2: //join
 			SDL_Game::instance()->getStateMachine()->changeToState(States::client);
 			break;
+		case 3: //tutorial
+			vector<pair<GamemodeID, string>> * roundsVector_ = new vector<pair<GamemodeID, string>>();
+			roundsVector_->push_back(std::make_pair(GamemodeID::Tutorial, "TutorialRoom"));
+			SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVector_);
+			SDL_Game::instance()->getStateMachine()->transitionToState(States::play, roundsVector_->front().first, roundsVector_->front().second);
 		}
 	}
 }
@@ -62,26 +70,33 @@ void OnlineMenuState::onLoaded() { //poner el menu al principio
 }
 
 void OnlineMenuState::updatePointer(int n) {
-	int size = 3;
+	int size = Resources::Tutorial - Resources::Local + 1;
 
 	//moverse en el menu de manera modular
 	pointer_ += size + n;
 	pointer_ %= size;
 
-	menuCursor_->setPosUIElement(b2Vec2(tinkyOffset_, yOffset_ * (pointer_ + 1)));
+	menuCursor_->setPosUIElement(b2Vec2(xOffset_ - textures_[pointer_]->getWidth()*1.5 / 2 - cursorTexture_->getWidth() * 2, yOffset_ * (pointer_ + 1) - 50));
+	menuCursor2_->setPosUIElement(b2Vec2(xOffset_ + textures_[pointer_]->getWidth()*1.5 / 2 + cursorTexture_->getWidth(), yOffset_ * (pointer_ + 1) - 50));
 }
 
 void OnlineMenuState::createText() { //preparar los textos
 	int start, end, offset;
 
 	start = Resources::Local;
-	end = Resources::Join;
+	end = Resources::Tutorial;
 
 	offset = start - 1;
 
 	while (start <= end) {
 		texts_.push_back(entityManager_->addEntity());
-		texts_.back()->addComponent<UIViewer>(start, b2Vec2(xOffset_, (start - offset) * yOffset_), 1.5, 0);
+		textures_.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(start));
+		texts_.back()->addComponent<UIViewer>(start, b2Vec2(xOffset_ - textures_.back()->getWidth()*1.5 / 2, (start - offset) * yOffset_), 1.5, 0);
 		start++;
 	}
+}
+
+void OnlineMenuState::render() {
+	fondo_->render(0, 0);
+	GameState::render();
 }
