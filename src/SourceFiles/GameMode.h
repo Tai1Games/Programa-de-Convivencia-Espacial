@@ -22,12 +22,11 @@ protected:
 	MatchInfo* matchInfo_ = nullptr;
 	int nPlayers_ = 0;
 	GamemodeID gamemodeId_ = GamemodeID::NUMBER_OF_GAMEMODES;
-	//Barras de progreso usadas por WiFightGameMode y ControllerGameMode(subidas a GameMode por herencia para no copiar y pegar dos veces)
-	vector<Texture*> emptyProgressBars_;
-	vector<Texture*> progressBars_;
 	vector<b2Vec2> healthViewerPos_;
 	void initProgressBars();
 	void renderProgressBars(const std::vector<double>& progressValues, const double& goalScore);
+
+	Texture* progressBar_;
 
 private:
 public:

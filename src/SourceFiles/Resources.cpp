@@ -34,10 +34,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	{ SuddenDeathCapitalismModeText, resourcesPath + "textures/suddenDeathCapitalismModeText.png"},
 	{ SuddenDeathTimeModeText, resourcesPath + "textures/suddenDeathTimeModeText.png"},
 
-	{ EmptyProgressBar, resourcesPath + "textures/EmptyProgressBar.png"},
-	{ EmptyProgressBar2, resourcesPath + "textures/EmptyProgressBar2.png", 16, 1},
-	{ ProgressBar, resourcesPath + "textures/ProgressBar.png"},
-	{ ProgressBar2, resourcesPath + "textures/ProgressBar2.png"},
+	{ ProgressBar, resourcesPath + "textures/ProgressBar.png", 17, 1},
 	{ MouseIcon, resourcesPath + "textures/mouse_icon.png"},
 	{ KeyboardIcon, resourcesPath + "textures/keyboard_icon.png"},
 	{ ControllerIcon, resourcesPath + "textures/controller_icon.png"},

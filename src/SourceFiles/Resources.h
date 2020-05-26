@@ -42,10 +42,7 @@ public:
 		SuddenDeathCapitalismModeText,
 		SuddenDeathTimeModeText,
 
-		EmptyProgressBar,
-		EmptyProgressBar2,
 		ProgressBar,
-		ProgressBar2,
 
 		Ready,
 		PressReady,
