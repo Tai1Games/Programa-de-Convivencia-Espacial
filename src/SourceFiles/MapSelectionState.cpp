@@ -184,6 +184,7 @@ void MapSelectionState::removeRound(string map)
 
 void MapSelectionState::onLoaded() { //poner el men� al principio
 	SDL_Game::instance()->getAudioMngr()->playMusic(Resources::AudioId::MainMenuMusic, -1);
+	SDL_Game::instance()->getStateMachine()->deleteState(States::play);
 	menuPointer_ = 0;
 	pointers_[x] = 0;
 	pointers_[y] = 0;

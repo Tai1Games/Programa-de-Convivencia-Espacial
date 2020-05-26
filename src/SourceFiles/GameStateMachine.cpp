@@ -137,7 +137,7 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 			states_[state] = new OnlineMenuState();
 			break;
 		case States::client:
-			aux = "localhost";
+			aux = "83.53.60.120";
 			host = &aux[0];
 			states_[state] = new ClientState(host);
 			break;

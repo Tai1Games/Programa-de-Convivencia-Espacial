@@ -5,7 +5,7 @@
 
 StocksGameMode::StocksGameMode(MatchInfo* mInfo, int stocks) : GameMode(mInfo,GamemodeID::Stocks)
 {
-	maxStocks_ = stocks;
+	maxStocks_ = 1;
 }
 
 StocksGameMode::~StocksGameMode()
@@ -66,7 +66,8 @@ bool StocksGameMode::onPlayerDead(int id) { //Returns false when player runs out
 			roundResults_.push_back(players_[id]);
 			if (roundResults_.size() == playerStocks_.size() - 1) {
 				int k = 0;
-				while (playerStocks_[k] == 0) { k++; }
+				while (k < players_.size() && playerStocks_[k] == 0) { k++; }
+				if (k == players_.size()) k == 0;
 				roundResults_.push_back(players_[k]);
 				winnerId_ = k;
 				roundFinished_ = true; //Round finishes when only 1 player remains
