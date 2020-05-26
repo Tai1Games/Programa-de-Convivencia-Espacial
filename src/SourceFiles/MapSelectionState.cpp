@@ -21,7 +21,7 @@ void MapSelectionState::init() {
 	cout << "init map select";
 
 	Entity* temp = entityManager_->addEntity();
-	mapSelCursor_ = temp->addComponent<UIViewer>(Resources::CursorUiSelectMap, coordsImages_[0] + mapCursorOffset_, mapScale_, 0);
+	mapSelCursor_ = temp->addComponent<UIViewer>(Resources::CursorUiSelectMap, coordsImages_[0] + mapCursorOffset_, mapScale_ * 3, 0);
 
 	backgroundTex_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::RocketRoom);
 
@@ -83,7 +83,8 @@ void MapSelectionState::handleInput()
 			addRound((GamemodeID)(pointers_[gamemodeScreen]), maps_[pointers_[x] + pointers_[y] * 2]);
 			if (roundsVector_->size() == maxNumberOfRounds_) {
 				SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVector_);
-				SDL_Game::instance()->getStateMachine()->transitionToState(States::play);
+				SDL_Game::instance()->getStateMachine()->transitionToState(States::play); 
+				iconsGamemodes_[pointers_[gamemodeScreen]]->setActive(false);
 			}
 			else { //como onLoaded pero sin resetear la m�sica 
 				menuPointer_ = 0;
@@ -107,7 +108,8 @@ void MapSelectionState::handleInput()
 
 	if (ownerPlayerBinder_->pressPause() && menuPointer_ == 0 && roundsVector_->size() != 0) {
 		SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVector_);
-		SDL_Game::instance()->getStateMachine()->transitionToState(States::play, roundsVector_->front().first, roundsVector_->front().second);
+		SDL_Game::instance()->getStateMachine()->transitionToState(States::play, roundsVector_->front().first, roundsVector_->front().second); 
+		iconsGamemodes_[pointers_[gamemodeScreen]]->setActive(false);
 	}
 }
 
@@ -318,7 +320,7 @@ void MapSelectionState::createIcons() {
 
 	for (auto e : texturesIcons_) {
 		iconsGamemodes_.push_back(entityManager_->addEntity());
-		UIViewer* uiV = iconsGamemodes_.back()->addComponent<UIViewer>(texturesIcons_[i], b2Vec2(0,0), 2, 0);
+		UIViewer* uiV = iconsGamemodes_.back()->addComponent<UIViewer>(texturesIcons_[i], b2Vec2(0,0), 3, 0);
 		UIViewer* uiVText = GETCMP2(textsGamemodes_[i], UIViewer);
 		uiV->setPosUIElement(b2Vec2((winWidth - uiVText->getW()) / 2 - margin, (float)(i * gmMarginText_.y + gmOffsetIcons_.y)));
 		iconsGamemodes_.back()->setActive(false);
