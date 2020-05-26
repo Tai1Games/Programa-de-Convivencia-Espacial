@@ -27,6 +27,7 @@ public:
 		GardenRoom,
 		MenuRoom,
 		CreditsRoom,
+		SpaceBackground,
 
 		// UI
 		ActiveHealth,
@@ -60,7 +61,6 @@ public:
 		SpaceStation,
 		Token,
 		RocketSpriteSheet,
-
 
 		// Weapons and map items
 
@@ -133,6 +133,11 @@ public:
 		EffectsText,
 		MainMenuText,
 
+		//online menu
+		Local,
+		Host,
+		Join,
+
 		//modes
 		Capitalism,
 		Controller,
@@ -147,13 +152,6 @@ public:
 		BoilerRoomText,
 		GymRoomText,
 		GardenRoomText,
-
-		//players
-		OnePlayer,
-		TwoPlayers,
-		ThreePlayers,
-		FourPlayers,
-		FivePlayers, //es solo para iterar
 
 		//tutorial
 		Completed,

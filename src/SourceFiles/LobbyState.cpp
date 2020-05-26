@@ -46,6 +46,10 @@ void LobbyState::init()
 	playerIdVerticalOffset_ = playerTexture_->getFrameHeight() + CONST(int, "LOBBY_PLAYERID_OFFSET_Y");
 	iconHorizontalOffset_ = CONST(int, "LOBBY_ICON_OFFSET");
 	pressReadyOffset_ = CONST(int, "LOBBY_READY_OFFSET");
+
+
+	//FONDO
+	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SpaceBackground);
 }
 
 void LobbyState::update()
@@ -53,11 +57,12 @@ void LobbyState::update()
 	//outDebug();
 	if (ready()) {
 		SDL_Game::instance()->getStateMachine()->setMatchInfo(new MatchInfo(joinedPlayers_));
-		SDL_Game::instance()->getStateMachine()->changeToState(States::menu);
+		SDL_Game::instance()->getStateMachine()->changeToState(States::onlineMenu);
 	}
 }
 
 void LobbyState::render() {
+	fondo_->render(0, 0);
 	int i = 0;
 	for (PlayerLobbyInfo& const player : joinedPlayers_) {
 		renderPlayerLobbyInfo(&player, i);

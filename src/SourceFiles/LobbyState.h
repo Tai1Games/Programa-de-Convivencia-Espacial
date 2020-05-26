@@ -24,6 +24,7 @@ struct PlayerLobbyInfo {
 	};
 	int playerSkin = 0; //no hace nada pero ira cambiando
 	bool ready = false;
+
 };
 
 class LobbyState : public GameState
@@ -47,6 +48,8 @@ protected:
 	Texture* mouseTexture_ = nullptr;
 	Texture* pressReadyTexture_ = nullptr;
 	Texture* readyTexture_ = nullptr;
+
+	Texture* fondo_ = nullptr;
 
 	InputHandler* ih_ = nullptr;
 	std::vector<PlayerLobbyInfo> joinedPlayers_;

@@ -18,8 +18,8 @@ private:
 	AnimatedViewer* boilerViewer_;
 	b2World* physicsWorld_ = nullptr;
 	FireBallPool fbPool_;
-	b2Vec2 pos_; //centro de la caldera, se cachea porque se supone estático
-	b2Vec2 size_;//tamaño de la caldera, se cachea porque se supone estático
+	b2Vec2 pos_; //centro de la caldera, se cachea porque se supone estï¿½tico
+	b2Vec2 size_;//tamaï¿½o de la caldera, se cachea porque se supone estï¿½tico
 
 	//Fireballs spawn
 	uint nextShot_;
