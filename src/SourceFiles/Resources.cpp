@@ -83,6 +83,7 @@ vector<Resources::ImageInfo> Resources::images_{
 	// Players
 	{ Body, resourcesPath + "textures/bodyNeutral.png" },
 	{ PlayerAnimSheet, resourcesPath + "textures/playerAnim.png",19,10},
+	{ PlayerAnimSheetLobby, resourcesPath + "textures/playerAnimLobby.png",1,10},
 	{ Hands, resourcesPath + "textures/hands.png", 7, 11},
 	{ ImpulseArrow, resourcesPath + "textures/FlechaImpulso.png"},
 	{ ImpulseBackground, resourcesPath + "textures/ImpulsoBackground.png", 13},
@@ -137,11 +138,11 @@ vector<Resources::ImageInfo> Resources::images_{
 vector<Resources::TextMsgInfo> Resources::messages_{
 	//Mensajes predeterminados {nombre_en_enum, texto, color, fuente}. Ejemplo abajo
 	//{ HelloWorld, "Hello World", { COLOR(0xaaffffff) }, ARIAL16 }
-	{ PauseText, "PAUSE", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ ResumeText, "Resume", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ MusicText, "Music", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ EffectsText, "Effects", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ MainMenuText, "Main Menu", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ PauseText, "PAUSA", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ ResumeText, "Continuar", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ MusicText, "Musica", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ EffectsText, "Efectos", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ MainMenuText, "Menu Principal", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 
 	//OnlineMenu
 	{ Local, "Local", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
@@ -165,26 +166,26 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{ GardenRoomText, "Garden Room", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 
 	//Tutorial
-	{ Completed, "Completed: ", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Completed, "Completado: ", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ Slash, "/", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ Zero, "0", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ One, "1", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ Two, "2", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ Three, "3", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 	{ Four, "4", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ MoveTutorial, "Welcome to PCE! To move, hold and release the A button / Tab / F / Enter while pointing anywhere with the left joystick / WASD / IJKL. The longer you hold, the greater the impulse! Everyone boost once to continue!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ HoldTutorial, "It's hard to give yourself a good boost out of thin air, so press the left trigger / Shift to hold on a object, like a wall. This will stop you and let you build a greater impulse. To let loose, simply release the button on controller, or press again on keyboard. Everyone hold on to something to continue!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ GrabTutorial, "Weapons will allow you to harm your oponents and sometimes even improve your mobility. Pick up weapons with the Y button / Q / E / , / O. Everyone pick a weapon to continue!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ ActionTutorial, "Some weapons can be activated with the X button / R / Z / . / P, which will make them shoot, attack at melee range or something else entirely. Everyone use a weapon to continue!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ ThrowTutorial, "All weapons can be thrown with the same button as picking them up, which can be used to cover great distances quickly. Everyone throw a weapon to continue!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ DeathTutorial, "In many Game Modes enough damage will kill you, which will disarm you and make you respawn. You'll leave a body behind which can be held on to. You can stand in this dangerous plant to take damage. Everyone die once to finish the tutorial!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
-	{ TutorialEnd, "Congratulations! You know all the basics of PCE. Play around if you want or press Start to go to the menu and choose Salir to exit.", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ MoveTutorial, "Bienvenido a PCE! Para moverte, manten pulsado y luego suelta el boton A / clic derecho / Tab / F / Enter mientras apuntas con el joystick izquierdo / raton / WASD / IJKL. Cuanto mas tiempo mantengas, mayor sera el impulso! Que todo el mundo se impulse para continuar!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ HoldTutorial, "Es dificil impulsarse en el aire, asi que pulsa el trigger izquierdo / Shift para agarrarse a un objeto, como una pared. Esto te parara y te permitira cargar un mayor impulso. Para soltarte, suelta el boton en mando, o presiona otra vez en teclado. Que todo el mundo se agarre a algo para continuar!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ GrabTutorial, "Las armas te permitiran lesionar a tus oponentes. Coge armas con el boton Y / Q / E / , / O. Que todo el mundo coja un arma para continuar!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ ActionTutorial, "Algunas armas se pueden activar con el boton X / R / Z / . / P / clic izquierdo, lo que las hara disparar, atacar a mele, etc. Que todo el mundo use un arma para continuar!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ ThrowTutorial, "Todas las armas se pueden lanzar con el mismo boton con el que se recogen, con lo que puedes cubrir grandes distancias rapidamente. Que todo el mundo lance un arma para continuar!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ DeathTutorial, "En muchos modos de juego suficiente dolor te matara, lo que te quitara el arma y te hara reaparecer. Dejaras tu traje detras al morir, al que te puedes agarrar. Por ejemplo, las plantas carnivoras te mataran. Que todo el mundo muera una vez para terminar el tutorial!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ TutorialEnd, "Enhorabuena! Sabes todo lo esencial de PCE. Ahora puedes pulsar Esc / Start para ir al menu y salir.", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 
 	//MidGame
-	{ ContinueText, "Press any key/button to continue", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ ContinueText, "Pulsa cualquier tecla para continuar", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 
 	//Countdown
-	{ Go, "GO!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ Go, "VAMOS!", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 
 	{NumZero,"0",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
 	{NumOne,"1",{ COLOR(0xc32454ff) },FontId::NES_Chimera},
@@ -204,7 +205,7 @@ vector<Resources::TextMsgInfo> Resources::messages_{
 	{winner4,"GANA EL JUGADOR 4",{COLOR(0xf79617ff)},FontId::NES_Chimera},
 
 	//Credits
-	{ ReturnText, "Press any key/button to return", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
+	{ ReturnText, "Pulsa cualquier tecla para volver", { COLOR(0xc7f2edff) }, FontId::NES_Chimera },
 };
 
 vector<Resources::MusicInfo> Resources::musics_{
