@@ -9,7 +9,6 @@
 OptionsMenuState::~OptionsMenuState()
 {
 	delete(ownerBinder_);     ownerBinder_ = nullptr;
-	GameState::~GameState();
 }
 
 void OptionsMenuState::init()

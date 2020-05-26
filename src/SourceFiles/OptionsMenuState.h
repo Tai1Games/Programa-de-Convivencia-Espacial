@@ -51,7 +51,7 @@ private:
 
 public:
 	OptionsMenuState() : GameState() {};
-	~OptionsMenuState();
+	virtual ~OptionsMenuState();
 
 	virtual void init();
 	virtual void render() override;
