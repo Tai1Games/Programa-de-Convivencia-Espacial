@@ -13,6 +13,9 @@ private:
 	std::vector<double> playerProgress_;
 	Entity* router = nullptr;
 	WiFiWavePool wifiWavesPool_;
+	int halfWinWidth_;
+	int halfWinHeight_;
+	double pointsToWin_;
 
 public:
 	WiFightGameMode(MatchInfo* mInfo) : GameMode(mInfo, GamemodeID::WiFight) {};
