@@ -18,9 +18,11 @@ private:
 	int tinkyOffset_ = CONST(int, "WINDOW_WIDTH") / 4;
 
 	int xOffset_ = CONST(int, "WINDOW_WIDTH") / 3;
-	int yOffset_ = CONST(int, "WINDOW_HEIGHT") / 9;
+	int yOffset_ = CONST(int, "WINDOW_HEIGHT") / 7;
 
 	int numberOfRounds_ = 3;
+
+	Texture* fondo_ = nullptr;
 
 	UIViewer* menuCursor_ = nullptr;
 	std::vector<Entity*> texts_;
@@ -33,6 +35,7 @@ public:
 	virtual ~OnlineMenuState() {};
 
 	virtual void init() override;
+	virtual void render() override;
 	virtual void onLoaded() override;
 	virtual void handleInput() override;
 };

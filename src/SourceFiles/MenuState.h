@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "GameState.h"
 #include "checkML.h"
 #include "Entity.h"
@@ -48,4 +48,4 @@ public:
 	virtual void init() override;
 	virtual void onLoaded() override;
 	virtual void handleInput() override;
-};
+};*/
