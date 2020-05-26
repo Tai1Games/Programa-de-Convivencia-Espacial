@@ -40,7 +40,7 @@ void HealthViewer::draw() const
 		if ((i+1) <= he->getHealth())	//Si tiene esas X vidas las muertra como llenas
 			full->render(dest, 0, 0, playerSkin_, flip_);
 		else		//Si no las tiene, se dibujarán como vacias
-			empty->render(dest, 0, 0);
+			empty->render(dest, 0, 0, 0, flip_);
 	}
 
 }
