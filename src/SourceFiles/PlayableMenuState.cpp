@@ -75,6 +75,10 @@ void PlayableMenuState::init()
 
 	player->addComponent<Hands>(Resources::Hands);
 	player->addComponent<AttachesToObjects>();
+	player->addComponent<ParticleEmitter>(Vector2D(0, -1), Resources::Foam, CONST(float, "IMPULSE_PARTICLE_SPEED"),
+		CONST(int, "IMPULSE_PARTICLE_NTEXTURES"), CONST(int, "IMPULSE_PARTICLE_GEN_ODDS"), CONST(int, "IMPULSE_PARTICLE_LIFETIME"),
+		CONST(int, "IMPULSE_PARTICLE_SIZE"), CONST(int, "IMPULSE_PARTICLE_EMIT_TIME"), CONST(int, "IMPULSE_PARTICLE_SPEED_VAR"),
+		CONST(int, "IMPULSE_PARTICLE_CONE_ANGLE"));
 	player->addComponent<PlayerController>();
 	player->addComponent<ImpulseViewer>(Resources::ImpulseArrow, Resources::ImpulseBackground);
 }
