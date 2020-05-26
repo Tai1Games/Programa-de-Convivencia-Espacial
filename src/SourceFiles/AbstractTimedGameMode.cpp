@@ -29,7 +29,13 @@ void AbstractTimedGameMode::render()
 			string winMsg = "Gana el jugador " + (winnerId_ + 1);
 			Texture ganador(SDL_Game::instance()->getRenderer(), winMsg,
 				SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
-			ganador.render(halfWinWidth_ - ganador.getWidth() * 0.5, halfWinHeight_);
+			SDL_Rect destRect {
+				halfWinWidth_ - ganador.getWidth() * 0.5,
+				halfWinHeight_,
+				ganador.getWidth(),
+				ganador.getHeight()
+			};
+			ganador.render(destRect, 0, 0);
 		}
 		else {
 			suddenDeathRenderTimer_ += sPerFrame_;
@@ -43,7 +49,7 @@ void AbstractTimedGameMode::render()
 				suddenDeathRect.y = halfWinHeight_ - suddenDeathTexture_->getHeight() * 1.5;
 				suddenDeathRect.w = suddenDeathTexture_->getWidth() * 3;
 				suddenDeathRect.h = suddenDeathTexture_->getHeight() * 3;
-				suddenDeathTexture_->render(suddenDeathRect);
+				suddenDeathTexture_->render(suddenDeathRect, 0, 0);
 			}
 		}
 	}
@@ -57,7 +63,7 @@ void AbstractTimedGameMode::render()
 
 void AbstractTimedGameMode::renderTimer(int seconds, int minutes)
 {
-	canvasTimerTexture_->render(canvasTimerRect_);
+	canvasTimerTexture_->render(canvasTimerRect_, 0, 0);
 	string timeText;
 	if (seconds < 10) timeText = to_string(minutes) + ":0" + to_string(seconds);
 	else timeText = to_string(minutes) + ":" + to_string(seconds);
@@ -70,7 +76,7 @@ void AbstractTimedGameMode::renderTimer(int seconds, int minutes)
 	timeTextRect.w = timeTextTexture.getWidth() * 0.7;
 	timeTextRect.h = timeTextTexture.getHeight() * 0.7;
 
-	timeTextTexture.render(timeTextRect);
+	timeTextTexture.render(timeTextRect, 0, 0);
 }
 
 void AbstractTimedGameMode::update()

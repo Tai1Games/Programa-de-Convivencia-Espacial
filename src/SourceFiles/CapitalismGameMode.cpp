@@ -93,9 +93,9 @@ void CapitalismGameMode::renderCoinsMarker()
 		coinTextRect.w = coinNumbTexture.getWidth() * coinUISpriteScale_;
 		coinTextRect.h = coinNumbTexture.getHeight() * coinUISpriteScale_;
 
-		coinNumbTexture.render(coinTextRect);
+		coinNumbTexture.render(coinTextRect, 0, 0);
 		
-		coinTextureUI_->render(coinImageRect);
+		coinTextureUI_->render(coinImageRect, 0, 0);
 		SDL_Rect headIcon;
 		headIcon.w = headUIWidth_;
 		headIcon.h = headUIHeight_;
