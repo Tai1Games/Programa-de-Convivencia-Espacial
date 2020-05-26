@@ -10,6 +10,7 @@ protected:
 	int currentLoop_ = 0;			// current repetition
 	bool activeAnimation_ = true;	// does it have to animate?
 	bool isPlaying_ = true;			// is it paused?
+	int baseSpeed_ = 10;			// initial speed
 
 	// Calculates if time passed for the next frame
 	// and advances the frame if that's the case.
@@ -40,6 +41,7 @@ public:
 		limitFrame_ = limitFrame;
 		activeAnimation_ = true;
 		loops_ = loops;
+		currentLoop_ = 0;
 	}
 
 	// Pauses the current animation in the current frame
