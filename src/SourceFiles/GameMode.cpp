@@ -6,19 +6,12 @@
 
 void GameMode::initProgressBars()
 {
-
-	emptyProgressBars_.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::EmptyProgressBar));
-	progressBars_.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::ProgressBar));
-
-	emptyProgressBars_.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::EmptyProgressBar2));
-	progressBars_.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::ProgressBar2));
-
 	b2Vec2 healthPos;
 	healthPos = players_[0]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
 	healthViewerPos_.push_back(b2Vec2(healthPos.x - 12, healthPos.y + 60));
 	if (players_.size() > 1) {
 		healthPos = players_[1]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
-		healthViewerPos_.push_back(b2Vec2(healthPos.x - 60, healthPos.y + 60));
+		healthViewerPos_.push_back(b2Vec2(healthPos.x - 80, healthPos.y + 60));
 	}
 	if (players_.size() > 2) {
 		healthPos = players_[2]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
@@ -26,39 +19,30 @@ void GameMode::initProgressBars()
 	}
 	if (players_.size() > 3) {
 		healthPos = players_[3]->getComponent<HealthViewer>(ComponentType::HealthViewer)->getPos();
-		healthViewerPos_.push_back(b2Vec2(healthPos.x - 92, healthPos.y - 28));
+		healthViewerPos_.push_back(b2Vec2(healthPos.x - 102, healthPos.y - 28));
 	}
 }
 
 void GameMode::renderProgressBars(const std::vector<double>& progressValues, const double& goalScore)
 {
-	float barsScale = 0.07;
 	for (int i = 0; i < players_.size(); i++) {
-		float angle = (i % 2 == 0) ? 0 : 180;
-		SDL_RendererFlip flip = (i % 2 == 0) ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL;
-
-		//Barra de progreso vac�a
-		SDL_Rect dest = { healthViewerPos_[i].x, healthViewerPos_[i].y ,
-		emptyProgressBars_[i % 2]->getWidth() * barsScale, emptyProgressBars_[i % 2]->getHeight() * barsScale };
-		emptyProgressBars_[i % 2]->render(dest, angle, 0, 0, flip);
-
-		//Barra de progreso rellena
-		float progresV = progressValues[i] / goalScore;
-		float value = (i % 2 == 0) ? progresV : 1 - progresV;
-		dest = {
-			int(healthViewerPos_[i].x),
-			int(healthViewerPos_[i].y),
-			int(progressBars_[i % 2]->getWidth() * barsScale * value),
-			int(progressBars_[i % 2]->getHeight() * barsScale)
+		SDL_Rect dest = {
+			healthViewerPos_[i].x,
+			healthViewerPos_[i].y,
+			progressBar_->getFrameWidth() * barsScale,
+			progressBar_->getFrameHeight() * barsScale
 		};
-		// * value para recortar una parte de la imagen
-		SDL_Rect clip = { 0, 0, int(progressBars_[i % 2]->getWidth() * value), int(progressBars_[i % 2]->getHeight()) };
-		progressBars_[i % 2]->render(dest, angle, clip, flip);
+		int value = min((progressValues[i] * progressBar_->getNumFramesX()) / goalScore, (double)progressBar_->getNumFramesX() - 1);
+		SDL_RendererFlip flip = SDL_FLIP_NONE;
+		double angle = 0;
+		if(i % 2 != 0) (i == 1) ? flip = SDL_FLIP_HORIZONTAL : angle = 180;		// gira cosas en los elementos de la derecha
+		progressBar_->render(dest, angle, value, 0, flip);
 	}
 }
 
 void GameMode::init(PlayState* game) {
 	state_ = game;
+	progressBar_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::ProgressBar);
 }
 
 void GameMode::activateControl() {

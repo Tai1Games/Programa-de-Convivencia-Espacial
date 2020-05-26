@@ -46,4 +46,3 @@ public:
 	virtual void onLoaded() override;
 	virtual void handleInput() override;
 };
-
