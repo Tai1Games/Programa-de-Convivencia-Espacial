@@ -40,7 +40,7 @@ void TriggerButton::PassState()
 	else if (stateToChange == "Exit") {
 		SDL_Game::instance()->exitGame();
 	}
-	viewer_->setFrame(0, 0);
+	viewer_->setFrame(viewer_->getTexture()->getNumFramesX() - 1, 0);
 }
 
 void TriggerButton::onCollisionEnter(Collision* c)
