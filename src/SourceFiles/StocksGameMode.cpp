@@ -5,7 +5,7 @@
 
 StocksGameMode::StocksGameMode(MatchInfo* mInfo, int stocks) : GameMode(mInfo,GamemodeID::Stocks)
 {
-	maxStocks_ = 1;
+	maxStocks_ = stocks;
 }
 
 StocksGameMode::~StocksGameMode()
