@@ -9,6 +9,8 @@ El avance de nuestro proyecto seguido a través de Pivotal.
 Puedes encontrar nuestro pivotal [aqui](https://www.pivotaltracker.com/projects/2431723).
 
 ## Pagina Web
+Consulta la [web del proyecto](https://tai1games.github.io/Programa-de-Convivencia-Espacial/)
+ o descarga nuestros juegos en [Itch.io](https://tai1games.itch.io/programa-de-convivencia-espacial)
 
 ## Miembros
 Tai1 Games está compuesto actualmente por diez miembros:
