@@ -306,7 +306,14 @@ El juego cuenta con música compuesta por gente del grupo. De momento hay planea
 
 El Programa de Convivencia Espacial cuenta con juego online. De momento, funcionará en red local (para jugar a distancia hay que abrir puertos). El host es el que tiene el juego como tal funcionando, y cada cliente le envía su input y recibe las imágenes y sus posiciones correspondientes (sin llevar nada del peso de la lógica del juego).
 
-## 5. Carta a los reyes magos:
+
+## 7. Referencias:
+Para hacer el PCE, se ha intentado seguir el ejemplo de algunos juegos, entre los que contamos:
+
+ - **Duck Game (2014, Landon Podbielski)**, por su sistema de partidas frenéticas y relativamente rápidas, hechas para que sea fácil y divertido de jugar.
+ - **Gang Beasts (2014, Boneloaf)**, por su multijugador caótico que, a pesar de no ser increíblemente claro y preciso de controlar, logra crear dinámicas de partida interesantes.
+
+## 8. Carta a los reyes magos:
 
 *En este apartado exploramos nuevas mecánicas o contenido que querríamos añadir al juego, pero dado al nivel de incertidumbre que existe ahora mismo en el desarrollo no estamos cómodos en añadirlos al GDD.*
 
