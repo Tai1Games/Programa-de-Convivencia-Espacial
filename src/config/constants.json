@@ -596,5 +596,5 @@
 
   "CHOSE_MAP_TEXT_Y_OFFSET": 40,
   "UI_PRESS_KEY_OFFSET_Y": 130,
-	"HOST_IP":  "localhost"
+  "HOST_IP":  "localhost"
 }
