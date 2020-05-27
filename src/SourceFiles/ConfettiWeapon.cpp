@@ -2,17 +2,21 @@
 #include "Collider.h"
 #include "ParticleEmitter.h"
 #include "Hands.h"
+#include "TimedDespawn.h"
+#include "AnimatedViewer.h"
+#include "Constants.h"
 
-ConfettiWeapon:: ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : MeleeWeapon(ComponentType::ConfettiWeapon, wId, dmg, impactDmg, cooldownFrames) {}
+ConfettiWeapon::ConfettiWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames, int impctForce) : MeleeWeapon(wId, dmg, impactDmg, cooldownFrames, impctForce) {}
 
 void ConfettiWeapon::init() {
 	MeleeWeapon::init();
 	colWeapon_ = GETCMP1_(Collider);
 	particleEmitter_ = GETCMP1_(ParticleEmitter);
-	viewer_ = GETCMP1_(Viewer);
-	frameSize_ = viewer_->getTexture()->getHeight();
-
-	viewer_->setClip(SDL_Rect{ 0, 0, frameSize_, frameSize_ });
+	viewer_ = entity_->getComponent<AnimatedViewer>(ComponentType::Viewer);
+	timedDespawn_ = GETCMP1_(TimedDespawn);
+	animationDuration_ = CONST(int, "CONFETTI_ANIMATION_DURATION") * FRAMES_PER_SECOND;
+	viewer_->stopAnimation();
+	viewer_->setFrame(0);
 }
 
 void ConfettiWeapon::action() {
@@ -26,19 +30,47 @@ void ConfettiWeapon::action() {
 		particleEmitter_->setDirection({ handDirection.x, handDirection.y });
 		particleEmitter_->PlayStop();
 		used = true;
-		viewer_->setClip(SDL_Rect{ frameSize_, 0, frameSize_, frameSize_ });
+		viewer_->setFrame(1);
+		timedDespawn_->startTimer(this);
+		currentHand_->setFrame(1, weaponType_);
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::AudioId::ConfettiSound, 0);
+
 		MeleeWeapon::action();
 	}
 }
 
 void ConfettiWeapon::setActive(bool a, b2Vec2 pos)
 {
+	if (used) {
+		if (currentHand_ != nullptr) UnPickObject();
+		viewer_->setFrame(0);
+		used = false;
+		colWeapon_->setLinearVelocity(b2Vec2(0, 0));
+		colWeapon_->setAngularVelocity(0);
+		currentFrame_ = 0;
+	}
 	entity_->setActive(a);
 	viewer_->setDrawable(a);
 	colWeapon_->getBody()->SetEnabled(a);
 	colWeapon_->getBody()->SetTransform(pos, 0);
+}
+
+void ConfettiWeapon::update()
+{
+	MeleeWeapon::update();
 	if (used) {
-		viewer_->setClip(SDL_Rect{ 0, 0, frameSize_, frameSize_ });
-		used = false;
+		currentFrame_++;
+		if (currentFrame_ == animationDuration_) {
+			if (currentHand_ != nullptr) currentHand_->setFrame(2, weaponType_);
+		}
+	}
+}
+
+void ConfettiWeapon::PickObjectBy(int index)
+{
+	MeleeWeapon::PickObjectBy(index);
+	if (currentHand_) {
+		if (used) currentHand_->setFrame(2, weaponType_);
+		else currentHand_->setFrame(0, weaponType_);
 	}
 }

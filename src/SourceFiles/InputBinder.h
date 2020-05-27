@@ -1,10 +1,11 @@
+#pragma once
 #include <utility>
 #include "InputHandler.h"
 #include "SDL_Game.h"
 #include "Collider.h"
 #include "box2d.h"
+#include "Constants.h"
 
-#pragma once
 class b2Vec2;
 enum ActionKey { Grab = 0, Throw, Pick, Attack, Impulse };
 struct KeyCursor {
@@ -121,6 +122,8 @@ public:
 	virtual bool menuBack() = 0;
 	virtual bool pressPause() = 0;
 	virtual bool secretWinButton() { return false; }
+	virtual InputPacket getInputPacket();
+	virtual void syncInput(InputPacket p) {};
 };
 
 //Abstracta pura para modos con teclado
@@ -243,7 +246,7 @@ protected:
 	int id_ = -1;
 public:
 	ControllerBinder(int id) : InputBinder(), id_(id) {}
-	virtual ~ControllerBinder() { ih->returnGamePad(id_); }
+	virtual ~ControllerBinder() {}
 	virtual bool holdGrab() {
 		return ih->getTrigger(id_, InputHandler::GAMEPADTRIGGER::LEFTTRIGGER);
 	}
@@ -290,7 +293,29 @@ public:
 		return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_START)
 			|| ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_GUIDE);
 	}
-	virtual bool secretWinButton() {return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_LEFTSHOULDER); }
+	virtual bool secretWinButton() { return ih->isButtonJustDown(id_, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_LEFTSHOULDER); }
+};
+
+class ClientBinder :public InputBinder {
+protected:
+	InputPacket state;
+public:
+	ClientBinder() :InputBinder() {};
+	virtual void syncInput(InputPacket p) { state = p; }
+
+	virtual bool holdGrab() { return state.holdGrab; }
+	virtual bool releaseGrab() { return state.releaseGrab; }
+	virtual bool pressThrow() { return state.pressThrow; }
+	virtual bool pressPick() { return state.pressPick; }
+	virtual b2Vec2 getAimDir() { return b2Vec2(state.aimDirX, state.aimDirY); }
+	virtual bool pressImpulse() { return state.pressImpulse; }
+	virtual bool holdImpulse() { return state.holdImpulse; }
+	virtual bool releaseImpulse() { return state.releaseImpulse; }
+	virtual bool pressAttack() { return state.pressAttack; }
+	virtual bool menuMove(Dir d) { return (d & state.menuMove) != 0; }
+	virtual bool menuForward() { return state.menuForward; }
+	virtual bool menuBack() { return state.menuBack; }
+	virtual bool pressPause() { return state.pressPause; }
 };
 
 //pero seguid con los meme xfa

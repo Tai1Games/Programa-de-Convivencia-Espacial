@@ -13,21 +13,21 @@ EntityManager::~EntityManager() {
 
 void EntityManager::update() {
 	for (auto& e : entities_)
-			if(e->isActive()) e->update();
-	for (auto e : externalEntities_)
-			if(e->isActive()) e->update();
+		if (e->isActive()) e->update();
+	for (auto& e : externalEntities_)
+		if (e->isActive()) e->update();
 }
 
 void EntityManager::render() {
 	for (auto& e : entities_)
-		if(e->isActive()) e->render();
-	for (auto e : externalEntities_)
+		if (e->isActive()) e->render();
+	for (auto& e : externalEntities_)
 		if (e->isActive()) e->render();
 }
 void EntityManager::handleInput() {
 	for (auto& e : entities_)
 		if (e->isActive()) e->handleInput();
-	for (auto e : externalEntities_)
+	for (auto& e : externalEntities_)
 		if (e->isActive()) e->handleInput();
 }
 

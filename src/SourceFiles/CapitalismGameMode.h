@@ -24,6 +24,8 @@ private:
 	double coinUISpriteScale_ = 0;
 	int maxCoins_ = 0;
 	int fontCharacterWidth_ = 0;
+	int headUIWidth_ = 0;
+	int headUIHeight_ = 0;
 
 	std::vector<b2Vec2> coinSpawnersPositions_;
 	std::vector<Collider*> roombaColliders_;
@@ -32,13 +34,12 @@ private:
 
 	void renderCoinsMarker();
 public:
-	CapitalismGameMode(MatchInfo* mInfo) : AbstractTimedGameMode(mInfo, GamemodeID::Capitalism){};
+	CapitalismGameMode(MatchInfo* mInfo) : AbstractTimedGameMode(mInfo, GamemodeID::Capitalism) {};
 	virtual ~CapitalismGameMode() {};
 	virtual void init(PlayState* game) override;
 	virtual void render() override;
 	virtual void update() override;
 	virtual void createPlayers(PlayState* game);
-
 
 	void createCoin(b2Vec2 spawnPos, int player = -1, int val = 1);
 };

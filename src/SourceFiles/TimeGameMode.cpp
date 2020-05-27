@@ -4,7 +4,7 @@
 #include "TomatoPool.h"
 
 TimeGameMode::TimeGameMode(MatchInfo* mInfo) :
-	AbstractTimedGameMode(mInfo,GamemodeID::Timed) {
+	AbstractTimedGameMode(mInfo, GamemodeID::Timed) {
 }
 
 TimeGameMode::~TimeGameMode() {
@@ -26,7 +26,6 @@ void TimeGameMode::init(PlayState* game)
 	}
 
 	for (int i = 0; i < players_.size(); i++) {
-
 		Entity* e = players_[i];
 		playersHealth_.push_back(e->getComponent<Health>(ComponentType::Health)); //Initializes playersHealth vector catching a reference to Health on entity e.
 		HealthViewer* hV = (e->getComponent<HealthViewer>(ComponentType::HealthViewer)); //Obtains a reference to the HealthViewer component of entity e. This is used to calculate where the kills will be drawn
@@ -38,9 +37,9 @@ void TimeGameMode::init(PlayState* game)
 		}
 
 		// draws P1 and P2 kill marker below health viewer, P3 and P4 kill marker above health viewer
-		if (i < 2)	
+		if (i < 2)
 			p.y += (CONST(int, "KILLS_VERTICAL_OFFSET") + CONST(int, "LIFE_HEIGTH"));
-		else		
+		else
 			p.y -= (CONST(int, "LIFE_HEIGTH") - CONST(int, "KILLS_VERTICAL_OFFSET"));
 
 		playersPointsPos_.push_back(p);
@@ -62,7 +61,7 @@ void TimeGameMode::render()
 void TimeGameMode::update()
 {
 	updateTime(playerKills_);
-	GameMode::update();
+	AbstractTimedGameMode::update();
 }
 
 void TimeGameMode::addPoints(int playerID)
@@ -77,27 +76,30 @@ void TimeGameMode::playerKillsPlayer(int killerId, int deadId)
 
 
 void TimeGameMode::renderKillMarker() {
-
 	for (int k = 0; k < playerKills_.size(); k++) {
+		string killsNumb = to_string(playerKills_[k]);
+		vector<Texture*> killsNumbTextures;
 
-		string killsNumb = "x" + to_string(playerKills_[k]);
-		Texture killsNumbTexture(SDL_Game::instance()->getRenderer(), killsNumb,
-			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
-		
+		for (int i = 0; i < killsNumb.length(); i++) { //sacamos los dígitos y los metemos en un vector
+			killsNumbTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Zero + killsNumb[i] - '0'));
+		}
+
 		SDL_Rect killsTextTexture;
-		killsTextTexture.x = (int)playersPointsPos_[k].x;
-		killsTextTexture.y = (int)playersPointsPos_[k].y;
-		killsTextTexture.w = killsMarkerWidth_ * killsNumb.size()-2;
-		killsTextTexture.h = killsMarkerHeight_;
+		for (int i = 0; i < killsNumbTextures.size(); i++) {
+			killsTextTexture.x = (int)playersPointsPos_[k].x + killsNumbTextures[i]->getWidth() / 1.35 * (i + 1);
+			killsTextTexture.y = (int)playersPointsPos_[k].y;
+			killsTextTexture.w = killsMarkerWidth_;
+			killsTextTexture.h = killsMarkerHeight_;
 
-		killsNumbTexture.render(killsTextTexture);
+			killsNumbTextures[i]->render(killsTextTexture, 0, 0);
+		}
 
 		SDL_Rect skullImageRect;
 		skullImageRect.x = killsTextTexture.x + killsTextTexture.w + skullUIMarginX_;
-		skullImageRect.y = killsTextTexture.y - killsTextTexture.h/2;
+		skullImageRect.y = killsTextTexture.y - killsTextTexture.h * 0.5;
 		skullImageRect.w = skullUISize_;
 		skullImageRect.h = skullUISize_;
 
-		skullTextureUI_->render(skullImageRect);
+		skullTextureUI_->render(skullImageRect, 0, 0);
 	}
 }

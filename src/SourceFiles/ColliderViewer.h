@@ -1,6 +1,7 @@
 #pragma once
 #include "Viewer.h"
 #include "checkML.h"
+#include "Collider.h"
 
 struct DebugColor {
 	DebugColor(Uint8 r, Uint8 g, Uint8 b) :
@@ -16,18 +17,23 @@ private:
 	SDL_Renderer* renderer_ = nullptr;
 	SDL_Point* points_ = nullptr;
 	b2Body* body_ = nullptr;
+	Collider* collider_ = nullptr;
 
+	const static int numlayers = 12;
 	// SE PUEDEN CAMBIAR ESTOS COLORES COMO QUER�IS
-	DebugColor colors[9] = {
-		{0, 255, 255},
-		{255, 0, 255},
-		{255, 255, 0},
-		{255, 0, 0},
-		{0, 255, 0},
-		{0, 0, 255},
-		{128, 255, 0},
-		{255, 255, 255},
-		{0, 0, 0}
+	DebugColor colors[numlayers] = {
+		{0, 255, 255},		// NormalObject
+		{255, 0, 255},		// NormalAttachableObject
+		{255, 255, 0},		// UnInteractableObject
+		{255, 0, 0},		// Wall
+		{0, 255, 0},		// Trigger
+		{0, 0, 255},		// PickableObject
+		{128, 255, 0},		// NonGrababbleWall
+		{255, 128, 0},		// Player1
+		{255, 0, 128},		// Player2
+		{0, 255, 128},		// Player3
+		{255, 255, 255},	// Player4
+		{0, 0, 0}			// NULL
 	};
 	double PIXELS_PER_METER = 1.0;
 

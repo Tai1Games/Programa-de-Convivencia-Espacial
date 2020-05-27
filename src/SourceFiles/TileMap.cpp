@@ -9,16 +9,18 @@
 #include "TomatoPool.h"
 #include "BananaPool.h"
 #include "GameMode.h"
+#include "WeaponFactory.h"
 
 
-TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW, BulletPool* bp, ConfettiPool* cP, GameMode* gameMode) :Component(ComponentType::Tilemap),  //w y h son de la ventana
+TileMap::TileMap(int w, int h, string map, EntityManager* eM, b2World* pW, BulletPool* bp, ConfettiPool* cP, StaplerPool* staplerPool, GameMode* gameMode) :Component(ComponentType::Tilemap),  //w y h son de la ventana
 width_(w),
 height_(h),
 entityManager_(eM),
 physicsWorld_(pW),
 bulletPool_(bp),
 confettiPool_(cP),
-gameMode_(gameMode){
+staplerPool_(staplerPool),
+gameMode_(gameMode) {
 	loadTileson(map);
 	playerSpawns_.reserve(4);
 	for (int i = 0; i < 4; i++) { //inicializa el vector
@@ -56,8 +58,14 @@ void TileMap::init() {
 				else if (tileLayer.getName() == "MapObjects") { //muebles
 					factoryItems_.push_back(obj);
 				}
-				else if (tileLayer.getName() == "Weapons") {
-					weaponSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
+				else if (tileLayer.getName() == "LowTierWeapons") {
+					lowTierWeaponSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
+				}
+				else if (tileLayer.getName() == "MidTierWeapons") {
+					midTierWeaponSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
+				}
+				else if (tileLayer.getName() == "HighTierWeapons") {
+					highTierWeaponSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
 				}
 				else if (tileLayer.getName() == "CoinSpawners") {
 					coinsSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
@@ -65,7 +73,8 @@ void TileMap::init() {
 			}
 		}
 	}
-	bulletPool_->init(entityManager_, physicsWorld_, gameMode_);
+	if (gameMode_ != nullptr)
+		bulletPool_->init(entityManager_, physicsWorld_, gameMode_);
 }
 
 void TileMap::update() {
@@ -177,6 +186,15 @@ void TileMap::executeMapFactory()
 		else if (name == "SpaceJunk") {
 			ObjectFactory::makeSpaceJunk(entityManager_, physicsWorld_, pos, b2Vec2(0.5, 0.5));
 		}
+		else if (name == "Table") {
+			ObjectFactory::makeTable(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "TABLE_W_PHYSICS"), CONST(float, "TABLE_H_PHYSICS")));
+		}
+		else if (name == "Lamp") {
+			ObjectFactory::makeLamp(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "LAMP_W_PHYSICS"), CONST(float, "LAMP_H_PHYSICS")));
+		}
+		else if (name == "Sofa") {
+			ObjectFactory::makeSofa(entityManager_, physicsWorld_, pos, b2Vec2(CONST(float, "SOFA_W_PHYSICS"), CONST(float, "SOFA_H_PHYSICS")));
+		}
 		else if (name == "Pad") {
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
 			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
@@ -207,10 +225,10 @@ void TileMap::executeMapFactory()
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
 			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
 			size *= 0.5f;
-			ObjectFactory::makeCarnivorousePlant(entityManager_, physicsWorld_, pos, size);
+			ObjectFactory::makeCarnivorousPlant(entityManager_, physicsWorld_, pos, size);
 		}
 		else if (name == "TomatoTree") {
-			if (tomatoPool_ == nullptr) { 
+			if (tomatoPool_ == nullptr) {
 				tomatoPool_ = make_unique<TomatoPool>();
 				tomatoPool_->init(entityManager_, physicsWorld_);
 			}
@@ -222,6 +240,23 @@ void TileMap::executeMapFactory()
 				bananaPool_->init(entityManager_, physicsWorld_);
 			}
 			ObjectFactory::makeBananaTree(entityManager_, physicsWorld_, pos, bananaPool_.get());
+		}
+		else if (name == "TriggerButton") {
+			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
+			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
+			size *= 0.5f;
+			string buttonType = o.getType();;	//Por defecto
+
+			doors_.push_back(ObjectFactory::makeTriggerButton(entityManager_, physicsWorld_, pos, size, buttonType)->getComponent<AnimatedViewer>(ComponentType::Viewer));
+		}
+
+		else if (name == "TWall") {
+			float rotation = o.getRotation();
+			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), s.y / CONST(double, "PIXELS_PER_METER"));
+			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
+			size *= 0.5f;
+
+			ObjectFactory::makeTrasparentWall(entityManager_, physicsWorld_, pos, size, rotation);
 		}
 	}
 	solvePostCreationProblems();
@@ -245,37 +280,15 @@ b2Vec2 TileMap::getPlayerSpawnPoint(int id)
 
 void TileMap::createWeapons()
 {
-	for (b2Vec2 spawnPoint : weaponSpawnPoints_) { //recorre todos los spawn
-		int weapon = rand() % 9;
-		Entity* e = nullptr;
-		switch (weapon)
-		{
-		case 0: //slipper
-			e = ObjectFactory::makeSlipper(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "SLIPPER_X"), CONST(float, "SLIPPER_Y")));
-			break;
-		case 1: //ball
-			e = ObjectFactory::makeBall(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "BALL_X"), CONST(float, "BALL_Y")));
-			break;
-		case 2: //stapler
-			e = ObjectFactory::makeStapler(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "STAPLER_X"), CONST(float, "STAPLER_Y")), bulletPool_);
-			break;
-		case 3: //extinguisher
-			e = ObjectFactory::makeExtinguisher(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "EXTINGUISHER_X"), CONST(float, "EXTINGUISHER_Y")));
-			break;
-		case 4: //rock
-			break;
-		case 5: //dumbbell
-			e = ObjectFactory::makeDumbbell(entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "DUMBBELL_X"), CONST(float, "DUMBBELL_Y")));
-			break;
-		case 6: //bananGun
-			break;
-		case 7: //TomatoGranade
-			break;
-		case 8: //Confeti
-			//e = ObjectFactory::makeConfetti(e, entityManager_, physicsWorld_, spawnPoint, b2Vec2(CONST(float, "CONFETTI_X"), CONST(float, "CONFETTI_Y")));
-			confettiPool_->addConfetti(spawnPoint);
-			break;
-		}
+	for (b2Vec2 spawnPoint : midTierWeaponSpawnPoints_) { //recorre todos los spawn
+		WeaponFactory::makeMidTierWeapon(entityManager_, physicsWorld_, spawnPoint);
+	}
+
+	for (b2Vec2 spawnPoint : highTierWeaponSpawnPoints_) {
+		WeaponFactory::makeHighTierWeapon(entityManager_, physicsWorld_, spawnPoint);
+	}
+
+	for (b2Vec2 spawnPoint : lowTierWeaponSpawnPoints_) {
+		ObjectFactory::makeWeaponSpawner(entityManager_, physicsWorld_, spawnPoint, confettiPool_, staplerPool_, bulletPool_);
 	}
 }
-

@@ -4,7 +4,6 @@
 
 TransitionState::TransitionState(int fromState, int toState, vector<GameState*>* gameStatesVector) :
 	GameState(), currentState_(fromState), toState_(toState), gameStatesVector_(gameStatesVector) {
-
 	SDL_SetRenderDrawBlendMode(SDL_Game::instance()->getRenderer(), SDL_BLENDMODE_BLEND);
 
 	transitionFrames_ = CONST(int, "SCENE_TRANSITION_FRAMES");
@@ -33,11 +32,12 @@ void TransitionState::render() {
 			SDL_SetRenderDrawColor(SDL_Game::instance()->getRenderer(), 0, 0, 0, 255 - (currentTransitionFrame_ - transitionFrames_) * frameToAlphaRatio_);
 		}
 
-		
+
 		SDL_RenderFillRect(SDL_Game::instance()->getRenderer(), &blackScreen_);
 	}
 	else
 	{
+		(*gameStatesVector_)[currentState_]->render();
 		SDL_SetRenderDrawColor(SDL_Game::instance()->getRenderer(), 0, 0, 0, SDL_ALPHA_OPAQUE);
 		SDL_SetRenderDrawBlendMode(SDL_Game::instance()->getRenderer(), SDL_BLENDMODE_NONE);
 		SDL_Game::instance()->getStateMachine()->changeToState(currentState_);

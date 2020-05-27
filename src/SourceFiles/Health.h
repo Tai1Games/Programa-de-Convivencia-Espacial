@@ -5,17 +5,21 @@
 #include "Entity.h"
 
 class CollisionHandler;
+class AnimatedPlayer;
 
-class Health: public Component
+class Health : public Component
 {
 private:
 	int lives_;
 	int livesMax_;
+	AnimatedPlayer* anim_ = nullptr;
 	Collider* col_ = nullptr;
 
 	int INV_FRAMES_HIT_;
 	int INV_FRAMES_RESPAWN_;
 	int invFrames_;		//frames de invulnerabilidad restantes
+	int loopsInv_;
+	int animSpeed_;
 
 public:
 	Health(int l);
@@ -32,4 +36,3 @@ public:
 
 	virtual void onCollisionEnter(Collision* c);
 };
-

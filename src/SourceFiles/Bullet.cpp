@@ -12,7 +12,7 @@ void Bullet::init()
 void Bullet::update()
 {
 	if (SDL_Game::instance()->getTime() > limitTime_ ||					//se elimina si se acaba su tiempo de vida
-			(col_->getPos().x < 0 || col_->getPos().y > winWidth_ ||	//se elimina si se sale de la pantalla
+		(col_->getPos().x < 0 || col_->getPos().y > winWidth_ ||	//se elimina si se sale de la pantalla
 			col_->getPos().y < 0 || col_->getPos().y > winHeight_)) {
 		needToDelete = true;
 	}
@@ -30,7 +30,7 @@ void Bullet::setActive(bool a, b2Vec2 pos, b2Vec2 size, b2Vec2 vel, int texture,
 	col_->getBody()->SetEnabled(a);
 
 	if (a) { //hacer movidas
-		float attachAngle = std::atanf(vel.y / vel.x) - (PI/2);
+		float attachAngle = std::atanf(vel.y / vel.x) - (PI / 2);
 		if (vel.x < 0)attachAngle += PI; //se invierte
 		col_->getBody()->SetTransform(pos, attachAngle);
 		col_->applyLinearImpulse(vel, { 0,0 });
@@ -41,7 +41,7 @@ void Bullet::setActive(bool a, b2Vec2 pos, b2Vec2 size, b2Vec2 vel, int texture,
 		limitTime_ = SDL_Game::instance()->getTime() + CONST(double, "BULLET_DESTROY_TIME");
 	}
 	else {
-		col_->setLinearVelocity(b2Vec2(0,0));//resetea su velocidad
+		col_->setLinearVelocity(b2Vec2(0, 0));//resetea su velocidad
 		col_->getBody()->SetTransform(b2Vec2(0, 0), 0); //resetea su rotacion y posicion
 	}
 }
@@ -57,10 +57,11 @@ void Bullet::onCollisionEnter(Collision* c)
 			if (!pHealth_->subtractLife(damage_)) {
 				pHealth_->playerDead(c->collisionHandler);
 				needToDelete = true;
-				ThrownByPlayer* objThrown = GETCMP1_(ThrownByPlayer);			
+				ThrownByPlayer* objThrown = GETCMP1_(ThrownByPlayer);
 				if (objThrown->getOwnerId() != pData->getPlayerNumber())
 					objThrown->addPointsToOwner();
 			}
+			needToDelete = true;
 		}
 		else {
 			Wallet* wallet = GETCMP2(cEntity, Wallet);
@@ -74,7 +75,8 @@ void Bullet::onCollisionEnter(Collision* c)
 		Collider* col = GETCMP2(cEntity, Collider);
 		if (col != nullptr) {
 			if (col->getFixture(0)->GetFilterData().categoryBits == Collider::CollisionLayer::Wall ||
-				col->getFixture(0)->GetFilterData().categoryBits == Collider::CollisionLayer::NonGrababbleWall) needToDelete = true;
+				col->getFixture(0)->GetFilterData().categoryBits == Collider::CollisionLayer::NonGrababbleWall)
+				needToDelete = true;
 		}
 	}
 }

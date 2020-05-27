@@ -5,26 +5,36 @@
 #include "CollisionHandler.h"
 #include "ThrownByPlayer.h"
 
-MeleeWeapon::MeleeWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : MeleeWeapon(ComponentType::MeleeWeapon, wId, dmg, impactDmg, cooldownFrames) {};
+MeleeWeapon::MeleeWeapon(WeaponID wId, int dmg, int impactDmg, int cooldownFrames, int impctForce) :
+	MeleeWeapon(ComponentType::Weapon, wId, dmg, impactDmg, cooldownFrames, impctForce) {};
 
-MeleeWeapon::MeleeWeapon(ComponentType::CmpId compType, WeaponID wId, int dmg, int impactDmg, int cooldownFrames) : ActionableWeapon(compType, wId, impactDmg, cooldownFrames), damage_(dmg) {}
+MeleeWeapon::MeleeWeapon(ComponentType::CmpId compType, WeaponID wId, int dmg, int impactDmg, int cooldownFrames, int impctForce) :
+	ActionableWeapon(compType, wId, impactDmg, cooldownFrames, impctForce), damage_(dmg) {}
 
 void MeleeWeapon::action() {
 	if (!beenActivated_) {
-		cout << "ACCION ARMA MELEE ACTIVADA" << endl;
-		mainCollider_->createRectangularFixture(mainCollider_->getW(0) * 4, mainCollider_->getH(0) * 4, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
+		std::cout << "ACCION ARMA MELEE ACTIVADA" << endl;
+		mainCollider_->createRectangularFixture(mainCollider_->getW(0) * 4, mainCollider_->getW(0) * 4, 0, 0, 0, Collider::CollisionLayer::Trigger, true);
 		beenActivated_ = true;
+		currentHand_->setFrame(1, currentHand_->getFrameY());
+		activeAnim_ = true;
 	}
 	else
-		cout << "COOLDING DOWN" << endl;
+		std::cout << "COOLDING DOWN" << endl;
 }
 
 void MeleeWeapon::update() {
 	ActionableWeapon::update();
 
-	//>2 para no romper el rango del arma para pickup
-	if (mainCollider_->getNumFixtures() > 2 && beenActivated_ && framesSinceActivation_>=3) {
-		mainCollider_->destroyFixture(mainCollider_->getNumFixtures()-1);
+	if (beenActivated_) {
+		//>2 para no romper el rango del arma para pickup
+		if (mainCollider_->getNumFixtures() > 2 && framesSinceActivation_ >= nHitboxActiveFrames_)
+			mainCollider_->destroyFixture(mainCollider_->getNumFixtures() - 1);
+		// desactiva animación
+		if (activeAnim_ && framesSinceActivation_ >= nAnimActiveFrames_) {
+			if (currentHand_ != nullptr) currentHand_->setFrame(0, currentHand_->getFrameY());
+			activeAnim_ = false;
+		}
 	}
 
 	if (currentHand_ != nullptr) {
@@ -44,16 +54,18 @@ void MeleeWeapon::PickObjectBy(int index) {
 
 		mainCollider_->disableFixtureCollisions(0);
 		mainCollider_->disableFixtureCollisions(1);
-    
+
 		ThrownByPlayer* throwData = GETCMP1_(ThrownByPlayer);
 		throwData->SetOwner(index);
+
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::PickSound, 0);
 	}
 }
 
 void MeleeWeapon::onCollisionEnter(Collision* c) {
 	ActionableWeapon::onCollisionEnter(c);
 
-	if (picked_ && c->hitFixture->GetFilterData().categoryBits == Collider::CollisionLayer::Player && c->entity != currentHand_->getEntity()) {
+	if (picked_ && c->hitFixture->GetFilterData().categoryBits & Collider::CollisionLayer::Player && c->entity != currentHand_->getEntity()) {
 		//Restar vida
 		Health* auxHe = GETCMP2(c->entity, Health);
 		Wallet* auxWa = GETCMP2(c->entity, Wallet);
@@ -77,16 +89,15 @@ void MeleeWeapon::onCollisionEnter(Collision* c) {
 			}
 		}
 		else
-			c->collisionHandler->addCoinDrop(std::make_tuple(auxWa, GETCMP2(c->entity,PlayerData), damage_));
-		cout << "Golpeado jugador" << endl;
+			c->collisionHandler->addCoinDrop(std::make_tuple(auxWa, GETCMP2(c->entity, PlayerData), damage_));
+		std::cout << "Golpeado jugador" << endl;
 	}
-	
 }
 
 void MeleeWeapon::UnPickObject() {
 	//Reactivamos el trigger de pickUp
-	mainCollider_->getFixture(0)->SetFilterData(mainCollider_->setCollisionLayer(Collider::CollisionLayer::NormalObject));
-	mainCollider_->getFixture(1)->SetFilterData(mainCollider_->setCollisionLayer(Collider::CollisionLayer::Trigger));
+	mainCollider_->getFixture(0)->SetFilterData(mainCollider_->getFilterFromLayer(Collider::CollisionLayer::NormalObject));
+	mainCollider_->getFixture(1)->SetFilterData(mainCollider_->getFilterFromLayer(Collider::CollisionLayer::Trigger));
 
 	ActionableWeapon::UnPickObject();
 }

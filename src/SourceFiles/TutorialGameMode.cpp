@@ -3,9 +3,10 @@
 #include "PlayState.h"
 #include "ActionableWeapon.h"
 #include "UIViewer.h"
+#include "WeaponFactory.h"
 
 
-TutorialGameMode::TutorialGameMode(MatchInfo* mInfo, int stocks) : GameMode(mInfo,GamemodeID::Tutorial)
+TutorialGameMode::TutorialGameMode(MatchInfo* mInfo, int stocks) : GameMode(mInfo, GamemodeID::Tutorial)
 {
 	maxStocks_ = stocks;
 }
@@ -16,22 +17,27 @@ TutorialGameMode::~TutorialGameMode()
 
 void TutorialGameMode::init(PlayState* game) {
 	GameMode::init(game);
-
-	//tutorial plant
-	piranhaPlant_ = ObjectFactory::makeCarnivorousePlant(game->getEntityManager(), game->getPhysicsWorld(),
-		b2Vec2(10, 7), b2Vec2(5, 5));
-	piranhaPlant_->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, -Collider::CollisionLayer::Player);
-	piranhaPlant_->setActive(false);
 	//------------------
-	GameMode::createPlayers(game);
+	float roomCenterX = 23.5; //numeros magicos
+	float roomCenterY = 13.5;
+	float offsetX = 28;
+	float offsetY = 15;
 	for (int i = 0; i < nPlayers_; i++) {
 		playerStocks_.push_back(maxStocks_); //Initializes maxStocks vector with 3 on all positions.
+		double angle = 135 - 90 * i; //viva la trigonometria
+		angle = angle * PI / 180;
+		//tutorial plants
+		carnivorousPlants_.push_back(ObjectFactory::makeCarnivorousPlant(game->getEntityManager(), game->getPhysicsWorld(),
+			b2Vec2(roomCenterX + offsetX * cos(angle), roomCenterY + offsetY * sin(angle)), b2Vec2(1, 1)));
+		carnivorousPlants_.back()->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, -Collider::CollisionLayer::Player);
+		carnivorousPlants_.back()->setActive(false);
 		//tutorial weapons
-		weapons_.push_back(ObjectFactory::makeExtinguisher(game->getEntityManager(), game->getPhysicsWorld(),
-			b2Vec2(10 + i, 10 + i), b2Vec2(1, 1)));
+		weapons_.push_back(WeaponFactory::makeExtinguisher(game->getEntityManager(), game->getPhysicsWorld(),
+			b2Vec2(roomCenterX + offsetX * cos(angle), roomCenterY + offsetY * sin(angle)), b2Vec2(CONST(double, "EXTINGUISHER_W_PHYSICS"), CONST(double, "EXTINGUISHER_H_PHYSICS"))));
 		weapons_.back()->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, -Collider::CollisionLayer::Player);
 		weapons_.back()->setActive(false);
-	}	
+	}
+	GameMode::createPlayers(game); //para que se vean por encima de las plantas
 	for (int i = 0; i < players_.size(); i++) {
 		Entity* e = players_[i];
 		playersHealth_.push_back(e->getComponent<Health>(ComponentType::Health)); //Initializes playersHealth vector catching a reference to Health on entity e.
@@ -42,7 +48,7 @@ void TutorialGameMode::init(PlayState* game) {
 			p.x += hV->getWidth() + CONST(int, "STOCK_INITIAL_OFFSET");
 		}
 		else {
-			p.x -= ((hV->getWidth() - CONST(int, "LIFE_WIDTH")) + CONST(int, "STOCK_INITIAL_OFFSET") + CONST(int, "STOCK_WIDTH"));
+			p.x -= ((hV->getWidth() - CONST(int, "LIFE_WIDTH")) + CONST(int, "STOCK_INITIAL_OFFSET") + stockWidth_);
 		}
 		playersStocksPos_.push_back(p);
 		for (int j = 0; j < Resources::TutorialEnd - Resources::MoveTutorial; j++) tutorials_[j].push_back(false);
@@ -89,12 +95,14 @@ void TutorialGameMode::update() {
 			numberTexts_[previousProgress_]->setActive(false);
 			numberTexts_[0]->setActive(true);					//reset progress
 			if (tutorialPointer_ == 2) for (Entity* e : weapons_) { //activate weapons
-				e->setActive(true); 
+				e->setActive(true);
 				e->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, Collider::CollisionLayer::Player);
 			}
-			else if (tutorialPointer_ == 5) { //activate plant
-				piranhaPlant_->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, Collider::CollisionLayer::Player);
-				piranhaPlant_->setActive(true);
+			else if (tutorialPointer_ == 5) { //activate plants
+				for (Entity* e : carnivorousPlants_) {
+					e->getComponent<Collider>(ComponentType::Collider)->changeLayerCollision(0, Collider::CollisionLayer::Player);
+					e->setActive(true);
+				}
 			}
 		}
 		else if (progress != previousProgress_) {	//update progress if changed
@@ -126,7 +134,7 @@ void TutorialGameMode::update() {
 			break;
 		}
 	}
-	else if(startedTutorial_){
+	else if (startedTutorial_) {
 		completed_->setActive(false);
 		slash_->setActive(false);
 		numPlayers_->setActive(false);
@@ -136,16 +144,19 @@ void TutorialGameMode::update() {
 
 void TutorialGameMode::render() {
 	SDL_Rect drawPos; //Position where the stocks will be drawn
-	drawPos.w = CONST(int, "STOCK_WIDTH");
-	drawPos.h = CONST(int, "STOCK_HEIGTH");
+	drawPos.w = stockWidth_;
+	drawPos.h = stockHeight_;
 	for (int i = 0; i < playerStocks_.size(); ++i) { //i = player number, j = individual stock to be drawn
 		drawPos.y = playersStocksPos_[i].y; //Stocks and Health are drawn on the same Y coordinate.
 		for (int j = 0; j < playerStocks_[i]; j++) {
-			if (i % 2 == 0) //X coordinate depends on whether the stocks are drawn on the left or the right. 
-				drawPos.x = playersStocksPos_[i].x + j * (CONST(int, "STOCK_WIDTH") + CONST(int, "STOCK_OFFSET"));
-			else
-				drawPos.x = playersStocksPos_[i].x - j * (CONST(int, "STOCK_WIDTH") + CONST(int, "STOCK_OFFSET"));
-			SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Tinky)->render(drawPos);
+			if (i % 2 == 0) { //X coordinate depends on whether the stocks are drawn on the left or the right.
+				drawPos.x = playersStocksPos_[i].x + j * (stockWidth_ + stockOffset_);
+				SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::PlayerHeads)->render(drawPos, 0, 0, (*matchInfo_->getPlayersInfo())[i]->playerSkin, SDL_FLIP_HORIZONTAL);
+			}
+			else {
+				drawPos.x = playersStocksPos_[i].x - j * (stockWidth_ + stockOffset_);
+				SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::PlayerHeads)->render(drawPos, 0, 0, (*matchInfo_->getPlayersInfo())[i]->playerSkin);
+			}
 		}
 	}
 }
@@ -155,13 +166,7 @@ bool TutorialGameMode::onPlayerDead(int id) { //Returns false when player runs o
 		playerStocks_[id]--;
 		if (playerStocks_[id] <= 0) {
 			roundResults_.push_back(players_[id]);
-			if (roundResults_.size() == playerStocks_.size() - 1) {
-				//int k = 0;
-				//while (playerStocks_[k] == 0) { k++; }
-				//roundResults_.push_back(players_[k]);
-				//winner_ = players_[k];
-				//roundFinished_ = true; //Round finishes when only 1 player remains
-			}
+
 			return false;
 		}
 		else return true;

@@ -28,7 +28,7 @@ private:
 
 	vector<moveData> vecMove; //Vector donde almacenamos los moves que realizaremos al final del step.
 	vector<bodyData> vecBody; //Vector donde almacenamos los cuerpos muertos que crearemos al final del step.
-	vector<Weapon*> vecWeapon; //Vector donde almacenamos las weapons que soltaremos al final del step
+	vector<Weapon*> vecWeapon; //Vector donde almacenamos las weapons que soltaremos al final del step.
 	vector<AttachesToObjects*> vecAttach; //Vector donde almacenamos los agarres que soltaremos al final del step.
 	vector<tuple<Wallet*, PlayerData*, int>> vecCoinsToDrop; //Vector donde almacenamos los impactos entre objetos y wallets.
 	vector<Fireball*> fireballsToClear; //Bolas de fuego que se eliminaran al final del step
@@ -44,8 +44,8 @@ public:
 		b2Vec2 collPoint;
 		b2Vec2 collNormal;
 		weldData() {};
-		weldData(AttachesToObjects* attach,b2Body* body,b2Vec2 colPt,b2Vec2 colNor):
-		player(attach),bodyToBeAttached(body),collPoint(colPt), collNormal(colNor){}
+		weldData(AttachesToObjects* attach, b2Body* body, b2Vec2 colPt, b2Vec2 colNor) :
+			player(attach), bodyToBeAttached(body), collPoint(colPt), collNormal(colNor) {}
 	};
 	struct moveData { //Struct donde guardamos los datos necesarios para respawnear a los jugadores
 		b2Body* body;
@@ -54,23 +54,25 @@ public:
 	struct bodyData {  //Struct donde guardamos los datos necesarios para hacer un cuerpo muerto.
 		b2Vec2 pos;
 		float angle;
+		b2Vec2 linearVelocity;
+		float angularVelocity;
 	};
-    CollisionHandler(GameMode* g, TileMap* tm): gMode_(g), tilemap_(tm) {};
+	CollisionHandler(GameMode* g, TileMap* tm) : gMode_(g), tilemap_(tm) {};
 	~CollisionHandler() {};
 
-    void BeginContact(b2Contact* contact);
+	void BeginContact(b2Contact* contact);
 
-    void EndContact(b2Contact* contact);
+	void EndContact(b2Contact* contact);
 
-    void PreSolve(b2Contact* contact, const b2Manifold* oldManifold);
+	void PreSolve(b2Contact* contact, const b2Manifold* oldManifold);
 
-    void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
+	void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
 
 	void SolveInteractions();
 
 	vector<bodyData> getBodyData() { return vecBody; }
 
-	void clearBodyData(){ vecBody.clear(); }
+	void clearBodyData() { vecBody.clear(); }
 
 	void createWeld(weldData w) { vecWeld.push_back(w); }
 

@@ -32,4 +32,3 @@ public:
 	void setActive(bool b, int droppedByPlayerNum = -1, b2Vec2 pos = { 0,0 }, int value = 1);
 	virtual void onCollisionEnter(Collision* c);
 };
-

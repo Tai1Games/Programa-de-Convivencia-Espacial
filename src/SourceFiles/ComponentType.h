@@ -4,7 +4,6 @@
 
 
 namespace ComponentType {
-
 	using CmpIdType = std::size_t;
 
 	enum CmpId : CmpIdType {
@@ -28,25 +27,21 @@ namespace ComponentType {
 		FireBallGenerator,
 		Fireball,
 		BoilerButtonLogic,
-		ExtinguisherWeapon,
 		Pad,
 		ThrownByPlayer,
 		Treadmill,
 		CarnivorousPlant,
-		TomatoLogic,
-		MeleeWeapon,
-		SlipperWeapon,
 		AnimatedViewer,
 		AnimatedUIViewer,
 		UIViewer,
-		AnimatedPlayer,
-		Banana,
+		AdvancedAnimatedViewer,
 		Bullet,
 		RocketLogic,
 		Countdown,
-		StaplerWeapon,
-		ConfettiWeapon,
 		SpawnTree,
+		TriggerButton,
+		TimedDespawn,
+		WeaponSpawner,
 
 		// don't touch the rest of this enum, it is to identify the max
 		// number of components
@@ -66,5 +61,4 @@ namespace ComponentType {
 // entity e provided as a parameter
 #define GETCMP2(e,type) GETCMP3(e,ComponentType::type,type)
 #define GETCMP3(e,id,type) e->getComponent<type>(id)
-
 }

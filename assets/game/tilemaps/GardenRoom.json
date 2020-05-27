@@ -3,8 +3,7 @@
     {
      "export":
         {
-         "format":"json",
-         "target":"GardenRoom.json"
+         "target":"."
         }
     },
  "height":135,
@@ -95,17 +94,6 @@
                  "y":154
                 }, 
                 {
-                 "height":200,
-                 "id":87,
-                 "name":"CarnivorousePlant",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":200,
-                 "x":80,
-                 "y":416
-                }, 
-                {
                  "height":0,
                  "id":88,
                  "name":"TomatoTree",
@@ -114,8 +102,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":203.0722739864,
-                 "y":797.783933518006
+                 "x":428.648031562158,
+                 "y":111.965751699824
                 }, 
                 {
                  "height":0,
@@ -126,8 +114,54 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1665.67615210274,
-                 "y":563.283807605137
+                 "x":1486.10039452698,
+                 "y":104.950474271804
+                }, 
+                {
+                 "height":200,
+                 "id":108,
+                 "name":"CarnivorousePlant",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":200,
+                 "x":1200,
+                 "y":406
+                }, 
+                {
+                 "height":200,
+                 "id":109,
+                 "name":"CarnivorousePlant",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":200,
+                 "x":500,
+                 "y":406
+                }, 
+                {
+                 "height":0,
+                 "id":118,
+                 "name":"BananaTree",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":440.787878787879,
+                 "y":829.575757575758
+                }, 
+                {
+                 "height":0,
+                 "id":120,
+                 "name":"TomatoTree",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1497.51515151515,
+                 "y":823.545454545455
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -172,8 +206,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1644,
-                 "y":291
+                 "x":1666.81818181818,
+                 "y":256.181818181818
                 }, 
                 {
                  "height":0,
@@ -184,8 +218,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":359,
-                 "y":248
+                 "x":281.545454545455,
+                 "y":273.393939393939
                 }, 
                 {
                  "height":0,
@@ -196,8 +230,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1589,
-                 "y":806
+                 "x":1665.06060606061,
+                 "y":868.909090909091
                 }, 
                 {
                  "height":0,
@@ -208,82 +242,11 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":506,
-                 "y":829
+                 "x":288.424242424242,
+                 "y":889.484848484848
                 }],
          "offsetx":2,
          "offsety":-2,
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "id":7,
-         "name":"Weapons",
-         "objects":[
-                {
-                 "height":0,
-                 "id":20,
-                 "name":"Weapon",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":502,
-                 "y":262
-                }, 
-                {
-                 "height":0,
-                 "id":21,
-                 "name":"Weapon",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1078,
-                 "y":242
-                }, 
-                {
-                 "height":0,
-                 "id":22,
-                 "name":"Weapon",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1480,
-                 "y":236
-                }, 
-                {
-                 "height":0,
-                 "id":23,
-                 "name":"Weapon",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1480,
-                 "y":968
-                }, 
-                {
-                 "height":0,
-                 "id":24,
-                 "name":"Weapon",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":236,
-                 "y":1024
-                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -348,12 +311,165 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":10,
+         "name":"MidTierWeapons",
+         "objects":[
+                {
+                 "height":0,
+                 "id":104,
+                 "name":"Weapon",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1824,
+                 "y":988
+                }, 
+                {
+                 "height":0,
+                 "id":105,
+                 "name":"Weapon",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1834,
+                 "y":104
+                }, 
+                {
+                 "height":0,
+                 "id":106,
+                 "name":"Weapon",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":100,
+                 "y":104
+                }, 
+                {
+                 "height":0,
+                 "id":107,
+                 "name":"Weapon",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":86,
+                 "y":1004
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":9,
+         "name":"LowTierWeapons",
+         "objects":[
+                {
+                 "height":0,
+                 "id":102,
+                 "name":"Weapon",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":962,
+                 "y":652
+                }, 
+                {
+                 "height":0,
+                 "id":103,
+                 "name":"Weapon",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":958,
+                 "y":396
+                }, 
+                {
+                 "height":0,
+                 "id":116,
+                 "name":"Weapon",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":120,
+                 "y":532
+                }, 
+                {
+                 "height":0,
+                 "id":117,
+                 "name":"Weapon",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1746,
+                 "y":522
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":12,
+         "name":"HighTierWeapons",
+         "objects":[
+                {
+                 "height":0,
+                 "id":113,
+                 "name":"Weapon",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1292,
+                 "y":514
+                }, 
+                {
+                 "height":0,
+                 "id":115,
+                 "name":"Weapon",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":590.666666666667,
+                 "y":512.333333333333
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":9,
- "nextobjectid":92,
+ "nextlayerid":13,
+ "nextobjectid":121,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.3.1",
+ "tiledversion":"1.3.3",
  "tileheight":8,
  "tilesets":[],
  "tilewidth":8,

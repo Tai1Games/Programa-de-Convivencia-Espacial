@@ -21,4 +21,3 @@ public:
 	~TileSet();
 	void loadSet(Texture* set, int w, int h, int mH = 0, int mV = 0);
 };
-

@@ -14,7 +14,7 @@ static string resourcesPath = "assets/game/";
 class Resources {
 public:
 
-	enum TextureId : std::size_t {
+	enum TextureId : unsigned char {
 		// images
 
 		// room backgrounds
@@ -25,6 +25,9 @@ public:
 		RocketRoom,
 		TutorialRoom,
 		GardenRoom,
+		MenuRoom,
+		CreditsRoom,
+		SpaceBackground,
 
 		// UI
 		ActiveHealth,
@@ -39,23 +42,38 @@ public:
 		SuddenDeathCapitalismModeText,
 		SuddenDeathTimeModeText,
 
-		EmptyProgressBar,
-		EmptyProgressBar2,
 		ProgressBar,
-		ProgressBar2,
+
+
+		CursorUiSelectMap,
+		CapitalismIcon,
+		ControllerModeIcon,
+		StocksIcon,
+		WiFightIcon,
+		TimedIcon,
+
+		Ready,
+		PressReady,
+
+
+		//Lobby
+		KeyboardIcon,
+		MouseIcon,
+		ControllerIcon,
+		PlayerPlaceholder,
 
 		//midGameState
 		Rocket,
 		SpaceStation,
 		Token,
-		KeyboardIcon,
-		MouseIcon,
-		ControllerIcon,
+		RocketSpriteSheet,
 
 		// Weapons and map items
 
 		// Players
 		PlayerAnimSheet,
+		PlayerAnimSheetLobby,
+		PlayerHeads,
 
 
 		// Map elements
@@ -92,13 +110,22 @@ public:
 		Staple,
 		Confetti,
 		ConfettiParticles,
+		Lamp,
+		Table,
+		Sofa,
+		TomatoTree,
+		BananaTree,
+		DeadBody,
+		TriggerButtonPlay,
+		TriggerButtonExit,
+		TriggerButtonCredits,
+		TriggerButtonOptions,
 
 		// Gamemode specific elements
 		Coin,
 		Router,
 		RoombaSpriteSheet,
 		Remote,
-		RocketSpriteSheet,
 
 		// miscel�nea
 		Debug,
@@ -109,8 +136,15 @@ public:
 		// text
 		PauseText,
 		ResumeText,
-		SoundText,
-		ExitText,
+		MusicText,
+		EffectsText,
+		MainMenuText,
+
+		//online menu
+		Local,
+		Host,
+		Join,
+		Tutorial,
 
 		//modes
 		Capitalism,
@@ -118,23 +152,21 @@ public:
 		Stocks,
 		WiFight,
 		Timed,
-		Tutorial,
 		//exit
 		Exit,
 		//maps
 		LivingRoomText,
 		BoilerRoomText,
 		GymRoomText,
+
 		GardenRoomText,
+		//Menu eleccion de mapas
+		ChoseMap,
+		ChoseMode,
+		PressEnter,
 
-		//players
-		OnePlayer,
-		TwoPlayers,
-		ThreePlayers,
-		FourPlayers,
-		FivePlayers, //es solo para iterar
 
-		//tutorial	
+		//tutorial
 		Completed,
 		Slash,
 		Zero,
@@ -142,6 +174,11 @@ public:
 		Two,
 		Three,
 		Four,
+		Five,
+		Six,
+		Seven,
+		Eight,
+		Nine,
 		MoveTutorial,
 		HoldTutorial,
 		GrabTutorial,
@@ -150,28 +187,96 @@ public:
 		DeathTutorial,
 		TutorialEnd,
 
-		//MidGame 
+		//MidGame
 		ContinueText,
 
 		//Countdown
 		Go,
-      
+
 		// particles
 		Smoke,
-		WiFiWave
+		WiFiWave,
+		Foam,
+
+		// numbers
+		NumZero,
+		NumOne,
+		NumTwo,
+		NumThree,
+		NumFour,
+		NumFive,
+		NumSix,
+		NumSeven,
+		NumEight,
+		NumNine,
+
+		//timers
+		Colon,
+
+		//badges ordenadas como GameModeId
+		badgeCapitalism,
+		badgeController,
+		badgeStocks,
+		badgeWifi,
+		badgeTimed,
+
+		medals,
+
+		//winner msgs
+		winner1,
+		winner2,
+		winner3,
+		winner4,
+
+		//Credits
+		ReturnText,
+
+		//Options menu
+		OptionsText,
+		GoBackText,
 	};
 
-	enum AudioId : std::size_t {
+	enum AudioId : unsigned char {
 		// music
 		MainMenuMusic = TextureId::MainMenuRoom,
 		LivingRoomMusic = TextureId::LivingRoom,
 		GymMusic = TextureId::GymRoom,
 		BoilerRoomMusic = TextureId::BoilerRoom,
 		TutorialMusic = TextureId::TutorialRoom,
-		EntranceMusic
+		GardenMusic = TextureId::GardenRoom,
+		EntranceMusic,
 
 		// sound effects
+		StartGame,
+		ThreeTwoOneSound,
+		GoSound,
+		PadSound,
+		PickSound,
+		CoinSound,
+		// boiler
+		BoilerShootSound,
+		BoilerButtonSlowSound,
+		BoilerButtonFastSound,
 
+		CarnivorousPlantSound,
+
+		// Weapons
+		BananaShootSound,
+		ExtinguisherSound,
+		TomatoExplosionSound,
+		ConfettiSound,
+
+		//Player
+		DeathSound,
+		RespawnSound,
+		EliminatedSound,
+		ImpulseFromAirSound,
+		ImpulseAttachedSound,
+
+		//menu
+		MenuMove,
+		MenuForward,
+		MenuBackward
 	};
 
 	enum FontId : std::size_t {
@@ -188,6 +293,8 @@ public:
 	struct ImageInfo {
 		TextureId id;
 		string fileName;
+		unsigned short nHorizontalFrames = 1;
+		unsigned short nVerticalFrames = 1;
 	};
 
 	struct TextMsgInfo {
@@ -205,7 +312,6 @@ public:
 	struct SoundInfo {
 		AudioId id;
 		string fileName;
-
 	};
 
 	static vector<FontInfo> fonts_; // initialized in .cpp
@@ -214,5 +320,4 @@ public:
 	static vector<MusicInfo> musics_; // initialized in .cpp
 	static vector<SoundInfo> sounds_; // initialized in .cpp
 	static map<std::string, Resources::TextureId> tilesetTag_; // initialized in .cpp
-
 };

@@ -7,7 +7,6 @@
 using namespace std;
 InputHandler::InputHandler() {
 	clearState();
-	//kbState_ = SDL_GetKeyboardState(0);
 	numControllers_ = 0;
 	for (int i = 0; i < kbSize; i++) {
 		kbState_.push_back(ButtonState::Up);
@@ -26,8 +25,6 @@ InputHandler::~InputHandler() {
 }
 
 void InputHandler::update() {
-	//cout << "A" << endl;
-
 	SDL_Event event;
 
 	clearState();
@@ -58,6 +55,12 @@ void InputHandler::update() {
 		case SDL_JOYBUTTONUP:
 			onJoyButtonChange(event, JustUp);
 			break;
+		case SDL_CONTROLLERDEVICEADDED:
+			onControllerAddedEvent(event);
+			break;
+		case SDL_CONTROLLERDEVICEREMOVED:
+			onControllerRemovedEvent(event);
+			break;
 		case SDL_QUIT:
 			SDL_Game::instance()->exitGame();
 			break;
@@ -72,54 +75,14 @@ void InputHandler::initialiseGamepads() {
 		SDL_InitSubSystem(SDL_INIT_JOYSTICK);
 	}
 	numControllers_ = SDL_NumJoysticks();
-	if (SDL_NumJoysticks() > 0) {
-
-		for (int i = 0; i < SDL_NumJoysticks(); i++) {
-			SDL_GameController* gameCtrl = SDL_GameControllerOpen(i);
-			if (gameCtrl)
-			{
-				cout << "--------------" << endl;
-				cout << SDL_GameControllerName(gameCtrl) << endl;
-				cout << SDL_GameControllerMapping(gameCtrl)<<endl;
-				m_gameControllers.push_back(gameCtrl);
-				m_joystickValues.push_back(std::make_pair(new
-					Vector2D(0, 0), new Vector2D(0, 0))); // add our pair
-				m_triggerValues.push_back(std::make_pair
-				(new double(0.0), new double(0.0)));
-
-				lastLStickValue_.push_back(b2Vec2(0, 0));
-
-				std::vector<ButtonState> tempButtons;
-				for (int j = 0; j < SDL_CONTROLLER_BUTTON_MAX; j++)
-				{
-					tempButtons.push_back(Up);
-				}
-				m_buttonStates.push_back(tempButtons);
-				m_freeGameControllers.push(i);
-			}
-			else
-			{
-				std::cout << SDL_GetError();
-			}
-			SDL_JoystickEventState(SDL_ENABLE);
-			m_bJoysticksInitialised = true;
-			std::cout << "Initialised " << m_gameControllers.size() << " joystick(s)";
-		}
-	}
-	else
-	{
-		m_bJoysticksInitialised = false;
-	}
 }
 
 void InputHandler::clearJoysticks()
 {
 	if (m_bJoysticksInitialised)
 	{
-		for (unsigned int i = 0; i < SDL_NumJoysticks();
-			i++)
-		{
-			SDL_GameControllerClose(m_gameControllers[i]);
+		for (auto& ctrl : m_gameControllers) {
+			SDL_GameControllerClose(ctrl);
 		}
 	}
 }
@@ -156,7 +119,7 @@ void InputHandler::clearState() {
 		justUpKeys.pop();
 	}
 
-	for (int controller = 0; controller < m_gameControllers.size();controller++) {
+	for (int controller = 0; controller < m_gameControllers.size(); controller++) {
 		for (int j = 0; j < SDL_CONTROLLER_BUTTON_MAX; j++) {
 			switch (m_buttonStates[controller][j])
 			{
@@ -173,8 +136,9 @@ void InputHandler::clearState() {
 	}
 }
 
-double InputHandler::getStickX(int joy, GAMEPADSTICK stick)
+double InputHandler::getStickX(int gameJoy, GAMEPADSTICK stick)
 {
+	int joy = gameToSystemCtrlId[gameJoy];
 	if (joy >= m_gameControllers.size())
 		return 0.0;
 	if (m_joystickValues.size() > 0)
@@ -192,8 +156,9 @@ double InputHandler::getStickX(int joy, GAMEPADSTICK stick)
 	return 0;
 }
 
-double InputHandler::getStickY(int joy, GAMEPADSTICK stick)
+double InputHandler::getStickY(int gameJoy, GAMEPADSTICK stick)
 {
+	int joy = gameToSystemCtrlId[gameJoy];
 	if (joy >= m_gameControllers.size())
 		return 0.0;
 	if (m_joystickValues.size() > joy)
@@ -210,7 +175,8 @@ double InputHandler::getStickY(int joy, GAMEPADSTICK stick)
 	return 0;
 }
 
-double InputHandler::getTrigger(int joy, GAMEPADTRIGGER trigger) {
+double InputHandler::getTrigger(int gameJoy, GAMEPADTRIGGER trigger) {
+	int joy = gameToSystemCtrlId[gameJoy];
 	if (m_joystickValues.size() > joy)
 	{
 		if (trigger == LEFTTRIGGER)
@@ -228,7 +194,7 @@ double InputHandler::getTrigger(int joy, GAMEPADTRIGGER trigger) {
 void InputHandler::onJoyAxisChange(SDL_Event& event) {
 	isAxisMovementEvent_ = true;
 	int whichOne = event.jaxis.which;
-	const double normalize= 1.0/32768.0;
+	const double normalize = 1.0 / 32768.0;
 	double val = event.jaxis.value;
 	// left stick move left or right
 
@@ -250,7 +216,7 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 	{
 		if (val > m_joystickDeadZone)
 		{
-			m_joystickValues[whichOne].first->setX(val*normalize);
+			m_joystickValues[whichOne].first->setX(val * normalize);
 			lastLStickValue_[whichOne].x = (float)m_joystickValues[whichOne].first->getX();
 		}
 		else if (event.jaxis.value < -m_joystickDeadZone)
@@ -262,7 +228,6 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		{
 			m_joystickValues[whichOne].first->setX(0);
 		}
-		
 	}
 	// left stick move up or down
 	if (bindedAxis == 1)
@@ -276,24 +241,18 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		{
 			m_joystickValues[whichOne].first->setY(val * normalize);
 			lastLStickValue_[whichOne].y = (float)m_joystickValues[whichOne].first->getY();
-
 		}
 		else
 		{
 			m_joystickValues[whichOne].first->setY(0);
 		}
-		
 	}
 	//left trigger move up or down
 	if (bindedAxis == 4) {
 		if (event.jaxis.value > m_triggerDeadZone)
 		{
-			*m_triggerValues[whichOne].first=abs(event.jaxis.value);
+			*m_triggerValues[whichOne].first = abs(event.jaxis.value);
 		}
-		//else if (event.jaxis.value < -m_joystickDeadZone)
-		//{
-		//	m_joystickValues[whichOne].first->setY(-1);
-		//}
 		else
 		{
 			*m_triggerValues[whichOne].first = 0;
@@ -330,7 +289,6 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		{
 			m_joystickValues[whichOne].second->setY(0);
 		}
-		
 	}
 	//right trigger move up or down
 	if (bindedAxis == 5) {
@@ -338,10 +296,6 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 		{
 			*m_triggerValues[whichOne].second = abs(event.jaxis.value);
 		}
-		//else if (event.jaxis.value < -m_joystickDeadZone)
-		//{
-		//	m_joystickValues[whichOne].first->setY(-1);
-		//}
 		else
 		{
 			*m_triggerValues[whichOne].second = 0;
@@ -357,20 +311,21 @@ void InputHandler::onJoyAxisChange(SDL_Event& event) {
 	}
 }
 
-void InputHandler::onJoyButtonChange(SDL_Event& event,ButtonState just) {
+void InputHandler::onJoyButtonChange(SDL_Event& event, ButtonState just) {
 	if (just == JustDown)
 		isButtonDownEvent_ = true;
 	else
 		isButtonUpEvent_ = true;
-	
+
 	int whichOne = event.jaxis.which;
+	cout << "Button down on SYSTEM " << whichOne << endl;
 
 	Uint8 i = 0;
-	bool bindFound=false;
+	bool bindFound = false;
 	int bindedButton;
 	//hay que buscar el botón al que se corresponde
 	//porque SDL es una librería maravillosa y super intuitiva
-	while (!bindFound &&i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX){
+	while (!bindFound && i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX) {
 		SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(m_gameControllers[whichOne], (SDL_GameControllerButton)i);
 		if (b.value.button == event.cbutton.button) {
 			bindedButton = i;
@@ -381,24 +336,18 @@ void InputHandler::onJoyButtonChange(SDL_Event& event,ButtonState just) {
 	m_buttonStates[whichOne][bindedButton] = just;
 }
 
-bool InputHandler::mapJoystick(SDL_GameController* ctrl,json mapData) {
+bool InputHandler::mapJoystick(SDL_GameController* ctrl, json mapData) {
 	const int bytes = 33;
 	const int bits = bytes * 8;
 	char guid[bits] = {};
 	SDL_Joystick* joy = SDL_GameControllerGetJoystick(ctrl);
 	SDL_JoystickGetGUIDString(SDL_JoystickGetGUID(joy), guid, bits);
 
-	cout << "looking for " << guid << " mapString" << endl;
 	if (!(mapData[guid]).is_null()) {
-		cout << "found " << guid << " mapString" << endl;
 		string mapString = mapData[guid];
-		cout << SDL_GameControllerMappingForGUID(SDL_JoystickGetGUID(joy)) << endl;
 		int res = SDL_GameControllerAddMapping(mapString.c_str());
-		cout << "-----------------------------" << endl;
-		cout << SDL_GameControllerMappingForGUID(SDL_JoystickGetGUID(joy)) << endl;
 
-		return res== 1;
-		
+		return res == 1;
 	}
 	else {
 		return false;
@@ -406,40 +355,134 @@ bool InputHandler::mapJoystick(SDL_GameController* ctrl,json mapData) {
 	return false;
 }
 
-b2Vec2 InputHandler::getStickDir(int ctrl, GAMEPADSTICK stick) {
+inline void InputHandler::onControllerAddedEvent(const SDL_Event& event)
+{
+	if (numControllers_ < 4)
+	{
+		int idOnExit = m_gameControllers.size();//su id fisica sera el lugar en el que lo inicialice SDL
+		int gameId; //Su id del juego sera el id que lea de la id fisica
+		if (disconnectedGameControllers_.empty()) {
+			initialiseNewController(event.cdevice.which);
+
+			//si es un mando nuevo, se corresponden
+			gameId = idOnExit;
+		}
+		else {
+			debugFlag_ReconectedController = true;
+			int id = disconnectedGameControllers_.front();
+			initialiseNewController(event.cdevice.which);
+			disconnectedGameControllers_.pop();
+
+			//si es un mando reconectado, el mando de sistema que habia perdido su input fisico leera del nuevo mando fisico
+			gameId = id;
+		}
+		numControllers_++;
+		systemToGameCtrlId.emplace(idOnExit, gameId);
+		gameToSystemCtrlId[gameId] = idOnExit;
+	}
+}
+
+inline void InputHandler::onControllerRemovedEvent(const SDL_Event& event)
+{
+	numControllers_--;
+	int gameId;
+	auto it = systemToGameCtrlId.find(event.cdevice.which);
+	if (it != systemToGameCtrlId.end()) {
+		disconnectedGameControllers_.push(it->second);
+		systemToGameCtrlId.erase(it);
+	}
+	else {
+		//se ha desconectado un mando no inicializado
+		//eso es malo.
+	}
+}
+
+inline void InputHandler::initialiseNewController(int idOnEnter)
+{
+	SDL_GameController* gameCtrl = SDL_GameControllerOpen(idOnEnter);
+	if (gameCtrl)
+	{
+		//cout << "--------------" << endl;
+		//cout << SDL_GameControllerName(gameCtrl) << endl;
+		//cout << SDL_GameControllerMapping(gameCtrl) << endl;
+		m_gameControllers.push_back(gameCtrl);
+		m_joystickValues.push_back(std::make_pair(new
+			Vector2D(0, 0), new Vector2D(0, 0))); // add our pair
+		m_triggerValues.push_back(std::make_pair
+		(new double(0.0), new double(0.0)));
+
+		lastLStickValue_.push_back(b2Vec2(0, 0));
+
+		std::vector<ButtonState> tempButtons;
+		for (int j = 0; j < SDL_CONTROLLER_BUTTON_MAX; j++)
+		{
+			tempButtons.push_back(Up);
+		}
+		m_buttonStates.push_back(tempButtons);
+	}
+	else
+	{
+		std::cout << SDL_GetError();
+	}
+	SDL_JoystickEventState(SDL_ENABLE);
+	m_bJoysticksInitialised = true;
+
+	//std::cout << "Initialised " << m_gameControllers.size() << " joystick(s)";
+}
+
+bool InputHandler::isButtonJustUp(int gameCtrl, SDL_GameControllerButton b)
+{
+	int ctrl = gameToSystemCtrlId[gameCtrl];
 	if (ctrl >= m_gameControllers.size())
-		return b2Vec2(0,0);
+		return false;
+	return(isButtonUpEvent_ && m_buttonStates[ctrl][b] == JustUp);
+}
+
+bool InputHandler::isButtonJustDown(int gameCtrl, SDL_GameControllerButton b)
+{
+	int ctrl = gameToSystemCtrlId[gameCtrl];
+	if (ctrl >= m_gameControllers.size())
+		return false;
+	return(isButtonDownEvent_ && m_buttonStates[ctrl][b] == JustDown);
+}
+
+bool InputHandler::isButtonDown(int gameCtrl, SDL_GameControllerButton b)
+{
+	int ctrl = gameToSystemCtrlId[gameCtrl];
+
+	if (ctrl >= m_gameControllers.size())
+		return false;
+	return(m_buttonStates[ctrl][b] == Down);
+}
+
+bool InputHandler::isButtonUp(int gameCtrl, SDL_GameControllerButton b)
+{
+	int ctrl = gameToSystemCtrlId[gameCtrl];
+	if (ctrl >= m_gameControllers.size())
+		return false;
+	return(m_buttonStates[ctrl][b] == Up);
+}
+
+b2Vec2 InputHandler::getStickDir(int gameCtrl, GAMEPADSTICK stick) {
+	int ctrl = gameToSystemCtrlId[gameCtrl];
+	if (ctrl >= m_gameControllers.size())
+		return b2Vec2(0, 0);
 	Vector2D aux;
 	if (stick == LEFTSTICK)
 		aux = *m_joystickValues[ctrl].first;
 	else
 		aux = *m_joystickValues[ctrl].second;
 
-	aux = aux.normalize(); //vaya, menos mal que tenemos una clase Vector2D 
-	//porque si de b2Vec dependiera...
+	aux = aux.normalize();
 	return b2Vec2(aux.getX(), aux.getY());
 }
 
-b2Vec2 InputHandler::getLastStickDir(int ctrl, GAMEPADSTICK stick) {
+b2Vec2 InputHandler::getLastStickDir(int gameCtrl, GAMEPADSTICK stick) {
+	int ctrl = gameToSystemCtrlId[gameCtrl];
 	if (ctrl >= m_gameControllers.size())
 		return b2Vec2(0, 0);
 	if (stick == LEFTSTICK)
 		return lastLStickValue_[ctrl];
 	else
 		return b2Vec2(0, 0);
-
-	//return b2Vec2(aux.getX(), aux.getY());
-}
-
-int InputHandler::getFreeGamePad() {
-	int r = -1;
-	if (!m_freeGameControllers.empty()) {
-		r = m_freeGameControllers.front();
-			m_freeGameControllers.pop();
-	}
-	return r;
-}
-
-void InputHandler::returnGamePad(int g) {
-	m_freeGameControllers.push(g);
 }

@@ -22,44 +22,59 @@ LobbyState::~LobbyState()
 void LobbyState::init()
 {
 	ih_ = SDL_Game::instance()->getInputHandler();
-	for (int i = 0; i < maxPlayers_; i++) {
+	for (int i = 0; i < MAX_PLAYERS; i++) {
 		joinedGamepads_[i] = false;
 	}
 	joinedKb_[0] = false;  joinedKb_[1] = false;
 	joinedMouse_ = false;
 
-	playerTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::Body);
-	voidTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::SpaceSuit);
+	playerTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::PlayerAnimSheetLobby);
+	maxSkins_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::PlayerAnimSheet)->getNumFramesY();
+	voidTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::PlayerPlaceholder);
 	ctrlTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::ControllerIcon);
 	kbTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::KeyboardIcon);
 	mouseTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::MouseIcon);
+	pressReadyTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::PressReady);
+	readyTexture_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::TextureId::Ready);
 
+	for (int num = 0; num < maxSkins_; num++) isSkinPicked_.push_back(false);
+	for (int num = 0; num < MAX_PLAYERS; num++) holdingButtons_.push_back(false);
 
-	verticalIniPoint_ = CONST(int, "WINDOW_HEIGHT") / 2 - playerTexture_->getHeight() / 2;
-	horizontalIniPoint_ = CONST(int, "WINDOW_WIDTH") / 2 - (maxPlayers_ * (playerTexture_->getWidth() + CONST(int, "LOBBY_OFFSET_X")) / 2);
-	horizontalOffset_ = playerTexture_->getWidth() + CONST(int, "LOBBY_OFFSET_X");
-	playerIdVerticalOffset_ = playerTexture_->getWidth() + CONST(int, "LOBBY_PLAYERID_OFFSET_Y");
+	verticalIniPoint_ = CONST(int, "WINDOW_HEIGHT") / 2 - playerTexture_->getFrameHeight();
+
+	horizontalIniPoint_ = (CONST(int, "WINDOW_WIDTH") - (MAX_PLAYERS * playerTexture_->getFrameWidth() +
+		(CONST(int, "LOBBY_OFFSET_X") * (MAX_PLAYERS - 1)))) / 2;
+
+	horizontalOffset_ = playerTexture_->getFrameWidth() + CONST(int, "LOBBY_OFFSET_X");
+	playerIdVerticalOffset_ = playerTexture_->getFrameHeight() + CONST(int, "LOBBY_PLAYERID_OFFSET_Y");
 	iconHorizontalOffset_ = CONST(int, "LOBBY_ICON_OFFSET");
+	pressReadyOffset_ = CONST(int, "LOBBY_READY_OFFSET");
+
+
+	//FONDO
+	fondo_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::SpaceBackground);
 }
 
 void LobbyState::update()
 {
-	outDebug();
+	//outDebug();
 	if (ready()) {
 		SDL_Game::instance()->getStateMachine()->setMatchInfo(new MatchInfo(joinedPlayers_));
-		SDL_Game::instance()->getStateMachine()->changeToState(States::menu);
+		SDL_Game::instance()->getStateMachine()->changeToState(States::onlineMenu);
 	}
 }
 
 void LobbyState::render() {
+	fondo_->render(0, 0);
 	int i = 0;
 	for (PlayerLobbyInfo& const player : joinedPlayers_) {
 		renderPlayerLobbyInfo(&player, i);
 		i++;
 	}
-	for (; i < maxPlayers_; i++)
+	for (; i < MAX_PLAYERS; i++)
 		renderPlayerLobbyInfo(nullptr, i);
 }
+
 bool LobbyState::ready()
 {
 	if (joinedPlayers_.size() > 0) {
@@ -98,19 +113,29 @@ void LobbyState::outDebug()
 		cout << "LETS A GOOOOOOO" << endl;
 }
 
+void LobbyState::setSkin(PlayerLobbyInfo& player) {
+	player.playerSkin = 0;
+	while (isSkinPicked_[player.playerSkin]) {
+		player.playerSkin = (++player.playerSkin) % (maxSkins_);
+	}
+	isSkinPicked_[player.playerSkin] = true;
+}
+
 
 void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
 	SDL_Rect destRect = {
 		horizontalIniPoint_ + index * horizontalOffset_,
 		verticalIniPoint_,
-		playerTexture_->getWidth(),
-		playerTexture_->getHeight()
+		playerTexture_->getFrameWidth(),
+		playerTexture_->getFrameHeight()
 	};
 
-	Texture* aux = ((playerInfo != nullptr) ? playerTexture_ : voidTexture_);
-	aux->render(destRect);
+	if (playerInfo != nullptr)
+		playerTexture_->render(destRect, 0, 0, playerInfo->playerSkin);
+	else voidTexture_->render(destRect);
+
 	if (playerInfo != nullptr) {
-		destRect.y += playerTexture_->getHeight() + playerIdVerticalOffset_;
+		destRect.y += playerTexture_->getFrameHeight() / 2 + playerIdVerticalOffset_;
 		destRect.w /= 3; destRect.h /= 3;
 		string playerNum = to_string(playerInfo->id);
 		Texture playerNumTexture(SDL_Game::instance()->getRenderer(), playerNum,
@@ -126,16 +151,34 @@ void LobbyState::renderPlayerLobbyInfo(PlayerLobbyInfo* playerInfo, int index) {
 		else if (playerInfo->kbmId != -1) {
 			mouseTexture_->render(destRect);
 		}
+
+		if (playerInfo->ready) {
+			destRect.w = readyTexture_->getWidth();
+			destRect.h = readyTexture_->getHeight();
+			destRect.x = horizontalIniPoint_ + index * horizontalOffset_;
+			destRect.y = playerTexture_->getFrameHeight() + pressReadyOffset_ + verticalIniPoint_;
+			readyTexture_->render(destRect);
+		}
+		else {
+			destRect.w = pressReadyTexture_->getWidth();
+			destRect.h = pressReadyTexture_->getHeight();
+			destRect.x = horizontalIniPoint_ + index * horizontalOffset_;
+			destRect.y = playerTexture_->getFrameHeight() + pressReadyOffset_ + verticalIniPoint_;
+			pressReadyTexture_->render(destRect);
+		}
 	}
 }
 
 void LobbyState::playerOut(std::vector<PlayerLobbyInfo>::iterator it)
 {
+	std::cout << "un jugador ha salido" << endl;
 	if (it != joinedPlayers_.end())
 	{
+		isSkinPicked_[(*it).playerSkin] = false;
 		//it es el jugador que se quiere salir
 		delete it->inputBinder;
 		it = joinedPlayers_.erase(it);
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuBackward, 0);
 		//it ahora apunta al siguiente elemento
 		//ajustamos el resto de ids en funcion
 		while (it != joinedPlayers_.end()) {
@@ -195,7 +238,7 @@ void LobbyState::ctrlPlayerOut(int index) {
 void LobbyState::handleJoinLeave() {
 	//comprueba si alguno de los mandos conectados
 	//sin asignar se quiere unir o salir
-	for (int i = 0; ih_->getNumControllers() && i < maxPlayers_; i++)
+	for (int i = 0; ih_->getNumControllers() && i < MAX_PLAYERS; i++)
 	{
 		//Si se quiere unir
 		if (!joinedGamepads_[i]) {
@@ -205,8 +248,10 @@ void LobbyState::handleJoinLeave() {
 				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new ControllerBinder(i)));
 				joinedPlayers_[newId].ctrlId = i;
 				joinedPlayers_[newId].binderType = BinderType::ControllerB;
+				setSkin(joinedPlayers_[newId]);
 				// crea un nuevo jugador con id newId
 				// lo mete en joinedPlayers
+				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
 			}
 		}
 	}
@@ -214,7 +259,7 @@ void LobbyState::handleJoinLeave() {
 	//comprueba si se puede unir un pureKeyboardPeasant
 	if (!joinedMouse_)
 	{
-		for (int kb = 0; kb < maxKbPlayers_; kb++)
+		for (int kb = 0; kb < MAX_KBPLAYERS; kb++)
 		{
 			if (!joinedKb_[kb]) {
 				// comprueba si se quiere unir un pureKeyboardPeasant (tonto)
@@ -225,6 +270,8 @@ void LobbyState::handleJoinLeave() {
 					joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(kb + 1)));
 					joinedPlayers_[newId].kbId = kb;
 					joinedPlayers_[newId].binderType = KeyboardB;
+					SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
+					setSkin(joinedPlayers_[newId]);
 				}
 			}
 		}
@@ -245,6 +292,8 @@ void LobbyState::handleJoinLeave() {
 				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new MouseKeyboardBinder(nullptr, 1)));
 				joinedPlayers_[newId].kbmId = 0;
 				joinedPlayers_[newId].binderType = MouseB;
+				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
+				setSkin(joinedPlayers_[newId]);
 			}
 		}
 	}
@@ -264,6 +313,8 @@ void LobbyState::handleJoinLeave() {
 				joinedPlayers_.push_back(PlayerLobbyInfo(newId, new PureKeyboardBinder(2)));
 				joinedPlayers_[newId].kbId = 1;
 				joinedPlayers_[newId].binderType = BinderType::KeyboardB;
+				SDL_Game::instance()->getAudioMngr()->playChannel(Resources::MenuForward, 0);
+				setSkin(joinedPlayers_[newId]);
 			}
 		}
 	}
@@ -272,17 +323,30 @@ void LobbyState::handleJoinLeave() {
 void LobbyState::handleJoinedPlayers() {
 	for (auto& player : joinedPlayers_) {
 		//cambiamos de skin
-		if (player.inputBinder->menuMove(Dir::Left)) {
-			player.playerSkin -= 1;
-			if (player.playerSkin < 0) {
-				player.playerSkin = MAX_SKINS_PLACEHOLDER - 1;
+		if (!holdingButtons_[player.id]) {
+			if (player.inputBinder->menuMove(Dir::Left)) {
+				isSkinPicked_[player.playerSkin] = false;
+				do {
+					if ((--player.playerSkin) < 0) player.playerSkin = maxSkins_ - 1;
+				} while (isSkinPicked_[player.playerSkin]);
+				isSkinPicked_[player.playerSkin] = true;
+				holdingButtons_[player.id] = true;
+			}
+			else if (player.inputBinder->menuMove(Dir::Right)) {
+				isSkinPicked_[player.playerSkin] = false;
+				do {
+					player.playerSkin = (++player.playerSkin) % (maxSkins_);
+				} while (isSkinPicked_[player.playerSkin]);
+				isSkinPicked_[player.playerSkin] = true;
+				holdingButtons_[player.id] = true;
 			}
 		}
-		else if (player.inputBinder->menuMove(Dir::Right)) {
-			player.playerSkin = (++player.playerSkin) % (MAX_SKINS_PLACEHOLDER);
+		else if (!player.inputBinder->menuMove(Dir::Left) && !player.inputBinder->menuMove(Dir::Right)) {
+			holdingButtons_[player.id] = false;
 		}
-		else if (player.inputBinder->menuForward()) {
+		if (player.inputBinder->menuForward()) {
 			player.ready = true;
+		std:cout << "Jufador listisimo" << endl;
 		}
 		else if (player.inputBinder->menuBack()) {
 			if (player.ready)

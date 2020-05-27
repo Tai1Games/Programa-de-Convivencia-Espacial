@@ -15,14 +15,14 @@ void Coin::init() {
 
 void Coin::update()
 {
-	if (col_->getPos().x < 0 || col_->getPos().x > (winWidth_ / pixelsPerMeter_) || col_->getPos().y > (winHeigth_/pixelsPerMeter_) || col_->getPos().y < 0) setActive(false);
+	if (col_->getPos().x < 0 || col_->getPos().x >(winWidth_ / pixelsPerMeter_) || col_->getPos().y > (winHeigth_ / pixelsPerMeter_) || col_->getPos().y < 0) setActive(false);
 
 	if (justDroppedByPlayer_ != -1) {
 		timeSinceDropped_ += sPerFrame_;
 		if (timeSinceDropped_ >= repickeableTime_) {
 			justDroppedByPlayer_ = -1;
 			timeSinceDropped_ = 0;
-			col_->setLinearVelocity(b2Vec2(0,0));
+			col_->setLinearVelocity(b2Vec2(0, 0));
 			col_->destroyFixture(1);
 		}
 	}
@@ -43,8 +43,9 @@ void Coin::onCollisionEnter(Collision* c)
 {
 	Wallet* wallet = GETCMP2(c->entity, Wallet);
 
-	if (wallet != nullptr && justDroppedByPlayer_ != GETCMP2(c->entity,PlayerData)->getPlayerNumber()) {
+	if (wallet != nullptr && justDroppedByPlayer_ != GETCMP2(c->entity, PlayerData)->getPlayerNumber()) {
 		wallet->addCoins(value_);
 		c->collisionHandler->addCoinPick(this);
+		SDL_Game::instance()->getAudioMngr()->playChannel(Resources::CoinSound, 0);
 	}
 }

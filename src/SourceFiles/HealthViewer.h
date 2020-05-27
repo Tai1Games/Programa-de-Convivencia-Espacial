@@ -19,10 +19,14 @@ private:
 
 	int activeTextureId_;
 	int disableTextureId_;
+	int lifeWidth_ = 0;
+	int lifeHeight_ = 0;
+	double lifeDrawOffset_ = 0;
+	int playerSkin_;
 
 public:
 	//Punteros a las 2 texturas de la vida y la posición de origen
-	HealthViewer(int texActiveId , int texDisabledId);
+	HealthViewer(int texActiveId, int texDisabledId, int skin);
 
 	virtual ~HealthViewer() { full = nullptr; empty = nullptr; };
 
@@ -30,7 +34,7 @@ public:
 	void update()override;
 	void draw() const override;
 	void handleInput()override;
-	b2Vec2 getPos(){return pos_;};
-	int getWidth() { return (he->getHealthMax() * (CONST(double, "LIFE_DRAW_OFFSET") + CONST(int,"LIFE_WIDTH"))); }
+	b2Vec2 getPos() { return pos_; };
+	int getWidth() { return (he->getHealthMax() * (CONST(double, "LIFE_DRAW_OFFSET") + CONST(int, "LIFE_WIDTH"))); }
 	void setPos(int player);
 };

@@ -5,6 +5,7 @@
 #include "ComponentType.h"
 #include "SDL_Game.h"
 #include "checkML.h"
+#include "Resources.h"
 
 class Entity;
 struct Collision;
@@ -25,7 +26,7 @@ public:
 	}
 
 	void setGame(SDL_Game* game) {
-		game_ = game;		
+		game_ = game;
 	}
 
 	void setId(ComponentType::CmpId id) {
@@ -47,5 +48,3 @@ public:
 
 	Entity* getEntity() { return entity_; };
 };
-
-

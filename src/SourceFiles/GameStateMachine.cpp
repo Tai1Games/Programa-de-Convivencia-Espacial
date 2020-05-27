@@ -7,13 +7,21 @@
 #include "TutorialGameMode.h"
 #include "Constants.h"
 #include "MatchInfo.h"
+#include "MultiplayerHost.h"
 
 #include "PlayState.h"
 #include "PauseState.h"
 #include "MenuState.h"
+#include "MapSelectionState.h"
 #include "MidGameState.h"
 #include "TransitionState.h"
 #include "LobbyState.h"
+#include "OnlineMenuState.h"
+#include "ClientState.h"
+#include "PlayableMenuState.h"
+#include "CreditsState.h"
+#include "EndGameState.h"
+#include "OptionsMenuState.h"
 
 GameStateMachine::GameStateMachine() {
 	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
@@ -63,9 +71,11 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 	if (states_[state] == nullptr) {
 		//create state
 		//states_[state] = new... se necesita struct? o switch tal cual xd
+		string aux;
+		char* host;
 		switch (state) {
 		case States::menu:
-			states_[state] = new MenuState(0); //numberOfPlayers usado como ownerID
+			states_[state] = new MapSelectionState(0);
 			break;
 		case States::play:
 		{
@@ -101,6 +111,20 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 			states_[state] = new LobbyState();
 		}
 						  break;
+
+		case States::playableMenu: {
+			states_[state] = new PlayableMenuState();
+		}
+								 break;
+		case States::options: {
+			states_[state] = new OptionsMenuState();
+		}
+							break;
+		case States::credits: {
+			states_[state] = new CreditsState();
+		}
+							break;
+
 		case States::pause:
 			//if (states_[state] != nullptr)	delete states_[state];
 			states_[state] = new PauseState();
@@ -109,7 +133,19 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 			//Se usa el parametro gamemode como indicador de quien gana la ronda
 			states_[state] = new MidGameState(matchInfo_->getNumberOfPlayers(), gameMode);
 			break;
+		case States::onlineMenu:
+			states_[state] = new OnlineMenuState();
+			break;
+		case States::client:
+			aux = CONST(string, "HOST_IP");
+			host = &aux[0];
+			states_[state] = new ClientState(host);
+			break;
+		case States::endGame:
+			states_[state] = new EndGameState();
+			break;
 		}
+
 		//inicializar la nueva escena
 		states_[state]->init();
 	}
@@ -145,6 +181,15 @@ void GameStateMachine::handleInput() {
 
 void GameStateMachine::gameCycle() {
 	handleInput();
+	if (mpHost_ != nullptr)
+		mpHost_->checkActivity();
 	update();
 	render();
+	if (mpHost_ != nullptr)
+		mpHost_->finishSending();
+}
+
+void GameStateMachine::setMpHost(MultiplayerHost* host)
+{
+	mpHost_ = host;
 }

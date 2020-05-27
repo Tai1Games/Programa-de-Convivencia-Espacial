@@ -8,16 +8,18 @@ void BananaWeapon::init()
 }
 
 void BananaWeapon::action()
-{	
+{
 	setActive(false);
 	b2Vec2 dir = currentHand_->getDir();
 	int speed = CONST(double, "BANANA_BULLER_SPEED");
-	   
-	bulletPool_->addBullet(currentHand_->getPos(), { 1,1 }, {dir.x * speed + currentHand_->getVel().x,
+
+	bulletPool_->addBullet(currentHand_->getPos(), { 1,1 }, { dir.x * speed + currentHand_->getVel().x,
 		-dir.y * speed + currentHand_->getVel().y }, Resources::BananaNonSkin,
-		CONST(double, "BANANA_BULLET_DAMAGE"), currentHand_->getPlayerId()); 
+		CONST(double, "BANANA_BULLET_DAMAGE"), currentHand_->getPlayerId());
 	bulletPool_->addBullet(currentHand_->getPos(), { 1,1 }, { -dir.x, dir.y }, Resources::BananaSkin,
 		0, currentHand_->getPlayerId());
+
+	SDL_Game::instance()->getAudioMngr()->playChannel(Resources::BananaShootSound, 0);
 
 	currentHand_->setWeapon(NoWeapon, nullptr);
 	picked_ = false;
@@ -25,7 +27,6 @@ void BananaWeapon::action()
 	mainCollider_->getBody()->SetEnabled(true);
 	vw_->setDrawable(true);
 	currentHand_ = nullptr;
-	
 }
 
 void BananaWeapon::setActive(bool a, b2Vec2 pos)
@@ -34,6 +35,6 @@ void BananaWeapon::setActive(bool a, b2Vec2 pos)
 	viewer_->setDrawable(a);
 	colBanana_->getBody()->SetEnabled(a);
 	if (a) {
-		colBanana_->getBody()->SetTransform(pos, 0);		
+		colBanana_->getBody()->SetTransform(pos, 0);
 	}
 }

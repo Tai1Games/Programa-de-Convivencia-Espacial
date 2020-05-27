@@ -19,21 +19,25 @@ private:
 
 	//tutorial
 	vector<Entity*> weapons_;
-	Entity* piranhaPlant_;
+	vector<Entity*> carnivorousPlants_;
 	int tutorialPointer_ = 0;
-	vector<bool> tutorials_ [Resources::TutorialEnd - Resources::MoveTutorial]; //move, hold, grab, action, throw, death
+	vector<bool> tutorials_[Resources::TutorialEnd - Resources::MoveTutorial]; //move, hold, grab, action, throw, death
 	vector<Entity*> numberTexts_;
 	vector<Entity*> tutorialTexts_;
 	Entity* completed_;
 	Entity* slash_;
 	Entity* numPlayers_;
-	int xOffset_ = CONST(int, "WINDOW_WIDTH") / 7.5;
-	int yOffset_ = CONST(double, "WINDOW_HEIGHT") / 2.5;
-	int xOffsetProgressText_ = CONST(double, "WINDOW_WIDTH") / 3.5 + CONST(double, "WINDOW_WIDTH") / 12;
-	int xOffsetProgressCount_ = CONST(double, "WINDOW_WIDTH") / 2.45 + CONST(double, "WINDOW_WIDTH") / 8;
-	int xOffsetProgressSlash_ = CONST(double, "WINDOW_WIDTH") / 2.35 +CONST(double, "WINDOW_WIDTH") / 8;
-	int xOffsetProgressMax_ = CONST(double, "WINDOW_WIDTH") / 2.25 + CONST(double, "WINDOW_WIDTH") / 8;
-	int yOffsetProgress_ = CONST(double, "WINDOW_HEIGHT") / 1.5;
+	double xOffset_ = CONST(int, "WINDOW_WIDTH") / 7.5;
+	double yOffset_ = CONST(int, "WINDOW_HEIGHT") / 2.5;
+	double xOffsetProgressText_ = CONST(int, "WINDOW_WIDTH") / 3.5 + CONST(int, "WINDOW_WIDTH") / 12.0;
+	double xOffsetProgressCount_ = CONST(int, "WINDOW_WIDTH") / 2.45 + CONST(int, "WINDOW_WIDTH") / 8.0;
+	double xOffsetProgressSlash_ = CONST(int, "WINDOW_WIDTH") / 2.35 + CONST(int, "WINDOW_WIDTH") / 8.0;
+	double xOffsetProgressMax_ = CONST(int, "WINDOW_WIDTH") / 2.25 + CONST(int, "WINDOW_WIDTH") / 8.0;
+	double yOffsetProgress_ = CONST(int, "WINDOW_HEIGHT") / 1.5;
+	int stockWidth_ = CONST(int, "STOCK_WIDTH");
+	int stockHeight_ = CONST(int, "STOCK_HEIGHT");
+	int stockOffset_ = CONST(int, "STOCK_OFFSET");
+
 	double scale_ = 0.75;
 	int previousProgress_ = 0;
 	bool startedTutorial_ = false;

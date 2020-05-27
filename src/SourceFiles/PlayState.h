@@ -10,6 +10,8 @@
 #include "BananaPool.h"
 #include "BulletPool.h"
 #include "ConfettiPool.h"
+#include "StaplerPool.h"
+#include "BodyPool.h"
 
 using namespace std;
 
@@ -18,7 +20,7 @@ using namespace std;
 //tambien deberia convertirse en un template de modo de juego y mapa
 class PlayState : public GameState
 {
-private:
+protected:
 	b2World* physicsWorld_;
 	vector<b2Body*> physicalEntities_; //almacena los punteros a los colliders de b2
 	//puede que no sea necesario si cogemos la referencia en cuanto los creamos con addPhysicalEntity
@@ -37,12 +39,23 @@ private:
 		{"BoilerRoom",Resources::BoilerRoom},
 		{"GymRoom",Resources::GymRoom},
 		{"TutorialRoom", Resources::TutorialRoom},
-		{"GardenRoom",Resources::GardenRoom}
+		{"GardenRoom",Resources::GardenRoom},
+		{"MenuRoom",Resources::MenuRoom}
 	};
 	TileMap* tilemap_;
 	vector<MatchInfo::PlayerInfo*>* playerInfo;
 	BulletPool bulletPool_;
 	ConfettiPool confettiPool_;
+	StaplerPool staplerPool_;
+	BodyPool bodyPool_;
+
+	double playerHeight_ = CONST(double, "PLAYER_H_PHYSICS");
+	double playerWidth_ = CONST(double, "PLAYER_W_PHYSICS");
+	double playerDensity_ = CONST(double, "PLAYER_DENSITY");
+	double playerFriction_ = CONST(double, "PLAYER_FRICTION");
+	double playerRestitution_ = CONST(double, "PLAYER_RESTITUTION");
+	double playerLinearDrag_ = CONST(double, "PLAYER_LINEAR_DRAG");
+	double playerAngularDrag_ = CONST(double, "PLAYER_ANGULAR_DRAG");
 	//BananaPool bananaPool_;
 
 public:

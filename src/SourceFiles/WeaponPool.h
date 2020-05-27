@@ -5,8 +5,9 @@
 
 class WeaponPool {
 public:
-	WeaponPool(){}
-	~WeaponPool(){}
+	WeaponPool() {}
+	~WeaponPool() {}
 	virtual void init(EntityManager* eMan, b2World* physicsWorld) = 0;
 	virtual void addWeapon(b2Vec2 pos) = 0;
+	virtual bool isRendering() = 0;
 };

@@ -5,7 +5,7 @@
 class Collider;
 class EntityManager;
 class ParticleEmitter;
-class Viewer;
+class AnimatedViewer;
 
 using uint = unsigned int;
 class FireBallGenerator :
@@ -15,11 +15,11 @@ private:
 	EntityManager* manager_ = nullptr;
 	Collider* col_ = nullptr;
 	ParticleEmitter* particleEmitter_ = nullptr;
-	Viewer* boilerViewer_;
+	AnimatedViewer* boilerViewer_;
 	b2World* physicsWorld_ = nullptr;
 	FireBallPool fbPool_;
-	b2Vec2 pos_; //centro de la caldera, se cachea porque se supone estático
-	b2Vec2 size_;//tamaño de la caldera, se cachea porque se supone estático
+	b2Vec2 pos_; //centro de la caldera, se cachea porque se supone estï¿½tico
+	b2Vec2 size_;//tamaï¿½o de la caldera, se cachea porque se supone estï¿½tico
 
 	//Fireballs spawn
 	uint nextShot_;
@@ -36,7 +36,7 @@ private:
 
 	//Smoke particle generation
 	int particleGenOddsModifier_;
-	
+
 	//Boiler shake
 	int currentFrame = 0;
 	int framesForNextShake = 0;
@@ -47,15 +47,21 @@ private:
 	int shakeOffsetX_ = 0;
 	int shakeOffsetY_ = 0;
 
+	//Boiler animation
+	int animationSpeed_ = 0;
+	int animationSpeedModifier_ = 0;
+
+	bool activated_ = false;
+
 	void addFireball(int num = 1);
 
 public:
 	FireBallGenerator(b2World* w) :
 		Component(ComponentType::FireBallGenerator),
-		physicsWorld_(w){}
+		physicsWorld_(w) {}
 	~FireBallGenerator() {};
 	void init() override;
 	void update() override;
 	void onButtonAction(bool inc_dec);
+	void activate(bool active) { activated_ = active; }
 };
-

@@ -8,37 +8,36 @@ void WiFightGameMode::init(PlayState* game)
 {
 	GameMode::init(game);
 
+	halfWinWidth_ = CONST(int, "WINDOW_WIDTH") / 2;
+	halfWinHeight_ = CONST(int, "WINDOW_HEIGHT") / 2;
+	pointsToWin_ = CONST(double, "POINTS_TO_WIN");
+
 	GameMode::createPlayers(game);
 	playerProgress_.reserve(nPlayers_);
 	for (int k = 0; k < nPlayers_; k++) {
 		playerProgress_.push_back(0);
 	}
 
-	router = state_->getEntityManager()->addEntity();
-	//				x,								y,						width, height, density,	friction, restitution, linearDrag, angularDrag,	 Laye,  sensor,  canBeAttached
-	Collider* collRouter = router->addComponent<Collider>(state_->getPhysicsWorld(), b2_dynamicBody, tilemap_->getObjSpecialSpawnPos().x, tilemap_->getObjSpecialSpawnPos().y, 1, 0.7, 1, 0, 1, 0, 0, Collider::CollisionLayer::UnInteractableObject, false);
-	collRouter->createCircularFixture(5, 1, 0, 0, Collider::CollisionLayer::Trigger, true);
-	router->addComponent<Viewer>(Resources::Router);
-	router->addComponent<RouterLogic>(this, &wifiWavesPool_);
-	router->addComponent<ColliderViewer>();
+	Entity* router = ObjectFactory::makeRouter(state_->getEntityManager(), state_->getPhysicsWorld(), tilemap_->getObjSpecialSpawnPos(), this, &wifiWavesPool_);
 
-	collRouter->applyLinearImpulse(b2Vec2(100, 100), b2Vec2(0, 0));
-
-	wifiWavesPool_.init(state_->getEntityManager(), state_->getPhysicsWorld(), collRouter);
+	wifiWavesPool_.init(state_->getEntityManager(), state_->getPhysicsWorld(), router->getComponent<Collider>(ComponentType::Collider));
 
 	GameMode::initProgressBars();
-
 }
 
 void WiFightGameMode::render()
 {
-	GameMode::renderProgressBars(playerProgress_, CONST(double, "POINTS_TO_WIN"));
+	GameMode::renderProgressBars(playerProgress_, pointsToWin_);
 
 	if (roundFinished_) {
-		string winMsg = "Gana el jugador " + (winnerId_ + 1);
-		Texture ganador(SDL_Game::instance()->getRenderer(), winMsg,
-			SDL_Game::instance()->getFontMngr()->getFont(Resources::NES_Chimera), { COLOR(0xffffffff) });
-		ganador.render(CONST(int, "WINDOW_WIDTH") / 2 - ganador.getWidth() / 2, CONST(int, "WINDOW_HEIGHT") / 2);
+		Texture* ganador = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::winner1 + winnerId_);
+		SDL_Rect destRect{
+			halfWinWidth_ - ganador->getWidth() / 2,
+			halfWinHeight_,
+			ganador->getWidth(),
+			ganador->getHeight()
+		};
+		ganador->render(destRect, 0, 0);
 	}
 }
 
@@ -46,8 +45,7 @@ void WiFightGameMode::addPoints(int player, double sumPoints)
 {
 	if (!roundFinished_) {
 		playerProgress_[player] += sumPoints;
-		//cout << "Player " << player << " progress: " << playerProgress_[player] << endl;
-		if (playerProgress_[player] >= CONST(int, "POINTS_TO_WIN")) {
+		if (playerProgress_[player] >= pointsToWin_) {
 			cout << "Player " << player << " won!" << endl;
 			winnerId_ = player;
 			roundFinished_ = true;

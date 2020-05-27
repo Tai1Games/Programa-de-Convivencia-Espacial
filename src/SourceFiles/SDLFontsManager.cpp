@@ -2,7 +2,7 @@
 #include <assert.h>
 
 SDLFontsManager::SDLFontsManager() :
-		initialized_(false) {
+	initialized_(false) {
 }
 
 SDLFontsManager::~SDLFontsManager() {
@@ -10,7 +10,7 @@ SDLFontsManager::~SDLFontsManager() {
 		return;
 
 	// free all sound effect chucks
-	for (const auto &font : fonts_) {
+	for (const auto& font : fonts_) {
 		if (font.second != nullptr)
 			delete font.second;
 	}
@@ -42,14 +42,15 @@ bool SDLFontsManager::loadFont(std::size_t tag, const string& fileName, int size
 	if (!initialized_)
 		return false;
 
-	Font *font = new Font();
+	Font* font = new Font();
 	if (font->load(fileName, size)) {
-		Font *curr = fonts_[tag];
+		Font* curr = fonts_[tag];
 		if (curr != nullptr)
 			delete curr;
 		fonts_[tag] = font;
 		return true;
-	} else {
+	}
+	else {
 		delete font;
 		return false;
 	}

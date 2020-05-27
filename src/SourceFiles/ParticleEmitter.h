@@ -14,7 +14,7 @@ protected:
 
 	Vector2D position_;
 	Vector2D direction_;
-	Vector2D offset_ = Vector2D(0,0);
+	Vector2D offset_ = Vector2D(0, 0);
 
 	bool emitting_ = false;
 
@@ -84,4 +84,3 @@ public:
 	void modifyGenerationOdds(int var);
 	void setGenerationOddsClamp(int min, int max) { minGenerationOdds_ = min; maxGenerationOdds_ = max; }
 };
-

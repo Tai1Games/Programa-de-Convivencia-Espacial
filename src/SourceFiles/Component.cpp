@@ -7,4 +7,3 @@ Component::Component(ComponentType::CmpId id) : entity_(nullptr), game_(nullptr)
 
 Component::~Component() {
 }
-

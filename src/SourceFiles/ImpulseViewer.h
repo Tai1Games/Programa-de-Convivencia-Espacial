@@ -1,5 +1,5 @@
 #pragma once
-#include "Component.h"
+#include "AnimatedViewer.h"
 #include "Resources.h"
 #include "checkML.h"
 
@@ -8,7 +8,7 @@ class Collider;
 class PlayerData;
 class InputBinder;
 
-class ImpulseViewer : public Component
+class ImpulseViewer : public AnimatedViewer
 {
 protected:
 	PlayerData* playerData_;
@@ -20,17 +20,20 @@ protected:
 	float maxImpulseGrabbed_;
 	int impulseSize_;
 
-	int playerNumber_;
 	int emptyTextureId_;
 	int chargeTextureId_;
+
+	int numFramesCharge_ = 0;
+
+	float angle_ = 0;
 
 	Texture* emptyTexture_;
 	Texture* chargeTexture_;
 public:
 	ImpulseViewer(int emptyTexId, int chargeTexId);
-	virtual ~ImpulseViewer() { Component::~Component(); };
+	virtual ~ImpulseViewer() { };
 
 	void init() override;
+	void update() override;
 	void draw() const override;
 };
-

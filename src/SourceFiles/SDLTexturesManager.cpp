@@ -5,7 +5,6 @@ SDLTexturesManager::SDLTexturesManager() :
 }
 
 SDLTexturesManager::~SDLTexturesManager() {
-
 	if (!initialized_)
 		return;
 
@@ -16,7 +15,6 @@ SDLTexturesManager::~SDLTexturesManager() {
 	}
 
 	IMG_Quit();
-
 }
 
 bool SDLTexturesManager::init() {
@@ -33,13 +31,12 @@ bool SDLTexturesManager::init() {
 	return true;
 }
 
-bool SDLTexturesManager::loadFromImg(std::size_t tag,
-	SDL_Renderer* renderer, const string& fileName) {
-
+bool SDLTexturesManager::loadFromImg(unsigned char tag,
+	SDL_Renderer* renderer, const string& fileName, unsigned short nHorFrames, unsigned short nVerFrames) {
 	if (!initialized_)
 		return false;
 
-	Texture* texture = new Texture(renderer, fileName);
+	Texture* texture = new Texture(renderer, fileName, nHorFrames, nVerFrames, tag);
 	if (texture->isReady()) {
 		storeTexture(tag, texture);
 		return true;
@@ -49,14 +46,13 @@ bool SDLTexturesManager::loadFromImg(std::size_t tag,
 	return false;
 }
 
-bool SDLTexturesManager::loadFromText(std::size_t tag,
+bool SDLTexturesManager::loadFromText(unsigned char tag,
 	SDL_Renderer* renderer, const string& text, const Font* font,
 	const SDL_Color& color) {
-
 	if (!initialized_)
 		return false;
 
-	Texture* texture = new Texture(renderer, text, font, color);
+	Texture* texture = new Texture(renderer, text, font, color, tag);
 	if (texture->isReady()) {
 		storeTexture(tag, texture);
 		return true;
@@ -64,10 +60,9 @@ bool SDLTexturesManager::loadFromText(std::size_t tag,
 
 	// if we get here something went wrong
 	return false;
-
 }
 
-void SDLTexturesManager::storeTexture(std::size_t tag, Texture* texture) {
+void SDLTexturesManager::storeTexture(unsigned char tag, Texture* texture) {
 	Texture* curr = textures_[tag];
 	if (curr != nullptr)
 		delete curr;

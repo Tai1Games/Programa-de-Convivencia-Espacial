@@ -2,20 +2,27 @@
 
 void Countdown::update() {
 	if (currentFrame_ < maxFrames_) {
+		if (currentFrame_ >= numAct_ * framesPerNum_) {		// si se pasa de número, cambia la textura
+			currentNumTexture_ = textures_[numAct_];
+			SDL_Game::instance()->getAudioMngr()->playChannel((numAct_ == 3) ? Resources::GoSound : Resources::ThreeTwoOneSound, 0);
+			numAct_++;
+		}
 		currentFrame_++;
 		currentSize_ = minSize_ + sizeChangeRate_ * (4 * currentFrame_ % maxFrames_); //tamaño actual teniendo en cuenta que hay 4 texturas
-		if (currentFrame_ == maxFrames_) gMode_->activateControl();
+		if (currentFrame_ == maxFrames_) {
+			gMode_->activateControl();
+			if (fGen_ != nullptr) fGen_->activate(true);
+		}
 	}
 }
 
 void Countdown::draw() const {
 	if (currentFrame_ < maxFrames_) {
 		SDL_Rect rect;
-		Texture* t = textures_[4 * currentFrame_ / maxFrames_]; //textura actual
-		rect.w = currentSize_ * t->getWidth() / t->getHeight(); //ajustar tamaño que si no GO! se ve achatado
+		rect.w = currentSize_ * currentNumTexture_->getWidth() / currentNumTexture_->getHeight(); //ajustar tamaño que si no GO! se ve achatado
 		rect.h = currentSize_;
 		rect.x = posX_ - rect.w / 2; //centro de la pantalla
-		rect.y = posY_ - rect.h / 2; 
-		t->render(rect);
+		rect.y = posY_ - rect.h / 2;
+		currentNumTexture_->render(rect);
 	}
 }
