@@ -17,13 +17,13 @@ public:
 	void update();
 	void render();
 	void handleInput();
-	Entity* addEntity();
+	Entity* addEntity(uint8_t z = 0);
 	void addExistingEntity(Entity* e);
 
 	std::vector<Weapon*>* getWeaponVector();
 
 private:
-	std::vector<std::unique_ptr<Entity>> entities_;
+	std::vector<std::vector<std::unique_ptr<Entity>>> entities_;
 	std::vector<Entity*> externalEntities_;
 	std::vector<Weapon*> weapons_;
 };
