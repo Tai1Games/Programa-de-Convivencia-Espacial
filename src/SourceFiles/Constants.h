@@ -45,6 +45,7 @@ enum States
 	credits,
 	endGame,
 	options,
+	intro,
 	//No toques
 	NUMBER_OF_STATES
 };

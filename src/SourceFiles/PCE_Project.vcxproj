@@ -189,6 +189,7 @@ copy "$(SolutionDir)SDL2_net-2.0.1\lib\$(Platform)\*.dll" "$(TargetDir)"</Comman
     <ClInclude Include="AbstractViewers.h" />
     <ClInclude Include="ActionableWeapon.h" />
     <ClInclude Include="ClientState.h" />
+    <ClInclude Include="IntroState.h" />
     <ClInclude Include="MultiplayerHost.h" />
     <ClInclude Include="OnlineMenuState.h" />
     <ClInclude Include="BodyPool.h" />
@@ -302,6 +303,7 @@ copy "$(SolutionDir)SDL2_net-2.0.1\lib\$(Platform)\*.dll" "$(TargetDir)"</Comman
     <ClCompile Include="AbstractViewers.cpp" />
     <ClCompile Include="ActionableWeapon.cpp" />
     <ClCompile Include="ClientState.cpp" />
+    <ClCompile Include="IntroState.cpp" />
     <ClCompile Include="MultiplayerHost.cpp" />
     <ClCompile Include="OnlineMenuState.cpp" />
     <ClCompile Include="BodyPool.cpp" />

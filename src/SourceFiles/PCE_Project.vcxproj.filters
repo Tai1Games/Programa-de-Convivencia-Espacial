@@ -408,6 +408,12 @@
     <ClInclude Include="WeaponSpawner.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="WeaponFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroState.h">
+      <Filter>Header Files\Gamestates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCE_Project.cpp">
@@ -721,6 +727,12 @@
     </ClCompile>
     <ClCompile Include="WeaponSpawner.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroState.cpp">
+      <Filter>Source Files\Gamestates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

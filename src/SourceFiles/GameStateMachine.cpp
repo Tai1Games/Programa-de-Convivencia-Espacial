@@ -22,6 +22,7 @@
 #include "CreditsState.h"
 #include "EndGameState.h"
 #include "OptionsMenuState.h"
+#include "IntroState.h"
 
 GameStateMachine::GameStateMachine() {
 	for (short i = 0; i < States::NUMBER_OF_STATES; i++)
@@ -143,6 +144,9 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap) {
 			break;
 		case States::endGame:
 			states_[state] = new EndGameState();
+			break;
+		case States::intro:
+			states_[state] = new IntroState();
 			break;
 		}
 
