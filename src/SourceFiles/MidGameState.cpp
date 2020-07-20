@@ -39,7 +39,7 @@ void MidGameState::init()
 
 	//Marcadores de las rondas
 	for (int i = 0; i < totalRounds_; i++) {
-		Entity* marker = entityManager_->addEntity();
+		Entity* marker = entityManager_->addEntity(4);
 		b2Vec2 markerPos = b2Vec2((CONST(int, "START_POSITION") + distanceGainedByPoint_ * i) - CONST(int, "MARKER_WIDTH"), CONST(int, "MARKER_Y_POSITION"));
 		UIViewer* markerViewer = marker->addComponent<UIViewer>(Resources::Token, markerPos, markerScale_, 0);
 		//hay que calcular el centro del marcador y luego buscar donde quedaria la esquina superior izquierda de la textura socorro
@@ -67,7 +67,7 @@ void MidGameState::init()
 	stationRect.w = CONST(int, "STATION_W");
 	stationRect.h = CONST(int, "STATION_H");
 
-	Entity* spaceStation = entityManager_->addEntity();
+	Entity* spaceStation = entityManager_->addEntity(2);
 	spaceStationViewer_ = spaceStation->addComponent<AnimatedUIViewer>(Resources::SpaceStation, 3, b2Vec2(CONST(int, "WINDOW_WIDTH") / 2 - CONST(int, "SPACE_STATION_WIDTH") / 2, CONST(int, "WINDOW_HEIGHT") / 2 - CONST(int, "SPACE_STATION_HEIGHT") / 2), 1, 0);
 
 	for (int k = 0; k < numPlayers_; k++) {

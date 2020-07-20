@@ -65,6 +65,6 @@ public:
 	virtual void onCollisionStay(Collision* c);
 	virtual void onCollisionExit(Collision* c);
 
-	void setZIndex(uint8_t z){zIndex_=z;}
-	uint8_t getZIndex() {return zIndex_;}
+	void setZIndex(uint8_t z);
+	uint8_t getZIndex() const {return zIndex_;}
 };

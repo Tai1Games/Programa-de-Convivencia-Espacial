@@ -17,8 +17,9 @@ public:
 	void update();
 	void render();
 	void handleInput();
-	Entity* addEntity(uint8_t z = 0);
+	Entity* addEntity(uint8_t z = 4);
 	void addExistingEntity(Entity* e);
+	void moveEntitieZ(Entity* e, const uint8_t& z);
 
 	std::vector<Weapon*>* getWeaponVector();
 

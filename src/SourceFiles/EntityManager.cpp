@@ -57,4 +57,18 @@ void EntityManager::addExistingEntity(Entity* e) {
 	externalEntities_.push_back(e);
 }
 
+void EntityManager::moveEntitieZ(Entity* e, const uint8_t& newZ)
+{
+	const uint8_t originZ = e->getZIndex();
+	auto it = std::find_if(entities_[originZ].begin(), entities_[originZ].end(), [&](std::unique_ptr<Entity>& p)
+    {
+        return p.get() == e;
+    });
+    if (it != entities_[originZ].end())
+    {
+        entities_[originZ].erase(it);
+		//entities_[newZ].emplace_back(*moveEnt);
+    }
+}
+
 std::vector<Weapon*>* EntityManager::getWeaponVector() { return &weapons_; }
