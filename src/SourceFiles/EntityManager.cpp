@@ -66,8 +66,8 @@ void EntityManager::moveEntitieZ(Entity* e, const uint8_t& newZ)
     });
     if (it != entities_[originZ].end())
     {
+    	entities_[originZ].push_back( std::move(*it) );
         entities_[originZ].erase(it);
-		//entities_[newZ].emplace_back(*moveEnt);
     }
 }
 
