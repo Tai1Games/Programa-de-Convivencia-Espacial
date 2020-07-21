@@ -40,6 +40,10 @@ protected:
 	static unique_ptr<SDL_Game> instance_;
 
 	bool isHosting_ = false;
+	bool isFullscreen_ = false;
+	int displayW_=1920;
+	int displayH_=1080;
+	float windowScale_ = 0.75;
 private:
 	bool exit_;
 	void initializeResources();
@@ -72,6 +76,8 @@ public:
 	}
 
 	inline void exitGame() { exit_ = true; }
+
+	inline void switchFullscreen();
 
 	InputHandler* getInputHandler() { return inputHandler_; }
 

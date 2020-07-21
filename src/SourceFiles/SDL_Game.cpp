@@ -10,11 +10,22 @@ unique_ptr<SDL_Game> SDL_Game::instance_;
 SDL_Game::SDL_Game() {
 	constants_ = Constants("./config/constants.json");
 	SDL_Init(SDL_INIT_EVERYTHING);
-	window_ = SDL_CreateWindow(constants_.getConstant<string>("WINDOW_NAME").c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, constants_.getConstant<int>("WINDOW_WIDTH"),
-		constants_.getConstant<int>("WINDOW_HEIGHT"), SDL_WINDOW_SHOWN);
+	SDL_DisplayMode display;
+	SDL_GetCurrentDisplayMode(0, &display);
+	displayW_ = display.w;
+	displayH_ = display.h;
+
+
+	window_ = SDL_CreateWindow(constants_.getConstant<string>("WINDOW_NAME").c_str(), SDL_WINDOWPOS_CENTERED,
+	                           SDL_WINDOWPOS_CENTERED, displayW_,
+	                           displayH_, SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
+	SDL_RenderSetLogicalSize(renderer_, constants_.getConstant<int>("WINDOW_WIDTH"),
+	                         constants_.getConstant<int>("WINDOW_HEIGHT")); //renderer size independent from display
 
 	initializeResources();
+	switchFullscreen();
+	switchFullscreen();
 
 	MS_PER_FRAME_ = constants_.getConstant<double>("MS_PER_FRAME");
 
@@ -37,6 +48,23 @@ SDL_Game::~SDL_Game() {
 	window_ = nullptr;
 
 	SDL_Quit();
+}
+
+void SDL_Game::switchFullscreen()
+{
+	if(!isFullscreen_)
+	{
+			SDL_SetWindowSize(window_, displayW_, displayH_);
+			SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN);
+			isFullscreen_ = true;
+	}
+	else
+	{
+			SDL_SetWindowSize(window_, displayW_*windowScale_, displayH_*windowScale_);
+			SDL_SetWindowFullscreen(window_, 0);
+			SDL_SetWindowPosition(window_, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);	
+			isFullscreen_ = false;
+	}
 }
 
 void SDL_Game::initializeResources() {
