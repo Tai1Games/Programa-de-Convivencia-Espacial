@@ -25,7 +25,6 @@ SDL_Game::SDL_Game() {
 
 	initializeResources();
 	switchFullscreen();
-	switchFullscreen();
 
 	MS_PER_FRAME_ = constants_.getConstant<double>("MS_PER_FRAME");
 
