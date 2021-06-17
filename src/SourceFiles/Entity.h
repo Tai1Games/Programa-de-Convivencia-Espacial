@@ -21,6 +21,8 @@ private:
 	std::array<Component*, ComponentType::maxComponents> componentsArray_ = {};
 
 	bool active_ = true;
+
+	uint8_t zIndex_ = 0;
 public:
 	Entity() {};
 	Entity(EntityManager* mngr);
@@ -62,4 +64,7 @@ public:
 	virtual void onCollisionEnter(Collision* c);
 	virtual void onCollisionStay(Collision* c);
 	virtual void onCollisionExit(Collision* c);
+
+	void setZIndex(uint8_t z);
+	uint8_t getZIndex() const {return zIndex_;}
 };

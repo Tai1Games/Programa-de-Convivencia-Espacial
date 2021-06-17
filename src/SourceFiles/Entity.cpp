@@ -43,3 +43,9 @@ void Entity::onCollisionExit(Collision* c)
 	for (auto& cmp : components_)
 		cmp->onCollisionExit(c);
 }
+
+void Entity::setZIndex(uint8_t z)
+{
+	zIndex_ = z;
+	entityManager_->moveEntitieZ(this,z);
+}

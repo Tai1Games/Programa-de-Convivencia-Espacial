@@ -4,6 +4,12 @@
 
 Constants::Constants(const std::string& path) {
 	std::ifstream read(path);
+#ifdef _DEBUG
+	char fullPath[_MAX_PATH];
+	_fullpath(fullPath,path.c_str(),_MAX_PATH);
+	std::cout << "looking for constants in:"<< fullPath << std::endl;
+#endif
+
 	assert(read.is_open());  //hehe
 	read >> data;
 	initialized_ = true;
