@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.cpp
+AbstractAnimatedViewers.h
+/home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
+
+/home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
+

@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "iomanip": "cpp",
+        "memory": "cpp",
+        "string": "cpp"
+    },
+    "C_Cpp.dimInactiveRegions": true
+}
