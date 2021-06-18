@@ -13,6 +13,7 @@ find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_net REQUIRED)
 find_package(SDL2_ttf REQUIRED)
+find_package(BOX2D REQUIRED)
 
 include_directories(${PROJECT_NAME} 
                                 ${SDL2_INCLUDE_DIRS} 
@@ -20,6 +21,7 @@ include_directories(${PROJECT_NAME}
                                 ${SDL2_TTF_INCLUDE_DIRS} 
                                 ${SDL2_NET_INCLUDE_DIRS} 
                                 ${SDL2_MIXER_INCLUDE_DIRS}
+                                "./Box2D/include/box2d/"
                                 "./json/single_include/nlohmann/"
                                 )
 
@@ -30,4 +32,6 @@ target_link_libraries(${PROJECT_NAME}
                                 ${SDL2_IMAGE_LIBRARIES}
                                 ${SDL2_TTF_LIBRARIES} 
                                 ${SDL2_NET_LIBRARIES} 
-                                ${SDL2_MIXER_LIBRARIES}) 
+                                ${SDL2_MIXER_LIBRARIES}
+                                "./Box2D/lib/Debug/"
+                                )
