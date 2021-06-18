@@ -67,7 +67,7 @@ void LobbyState::update()
 void LobbyState::render() {
 	fondo_->render(0, 0);
 	int i = 0;
-	for (PlayerLobbyInfo& const player : joinedPlayers_) {
+	for (PlayerLobbyInfo& player : joinedPlayers_) {
 		renderPlayerLobbyInfo(&player, i);
 		i++;
 	}

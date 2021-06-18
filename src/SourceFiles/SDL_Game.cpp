@@ -8,7 +8,7 @@
 unique_ptr<SDL_Game> SDL_Game::instance_;
 
 SDL_Game::SDL_Game() {
-	constants_ = Constants("./config/constants.json");
+	constants_ = Constants("../config/constants.json");
 	SDL_Init(SDL_INIT_EVERYTHING);
 	SDL_DisplayMode display;
 	SDL_GetCurrentDisplayMode(0, &display);
@@ -127,8 +127,7 @@ void SDL_Game::start() {
 		Uint32 frameTime = getTime() - startTime;
 		if (frameTime < MS_PER_FRAME_)
 			SDL_Delay(MS_PER_FRAME_ - frameTime);
-		else
-			cout << "LAGGING BEHIND! " << frameTime << endl << endl;
+		//else cout << "LAGGING BEHIND! " << frameTime << endl << endl;
 	}
 	//}
 	//else std::cout << "No hay mando conectado.\nAt SDL_Game.cpp line 113\n\n";

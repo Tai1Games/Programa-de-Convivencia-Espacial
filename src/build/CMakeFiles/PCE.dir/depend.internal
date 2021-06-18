@@ -5,6 +5,45 @@ CMakeFiles/PCE.dir/SourceFiles/AbstractAnimatedViewers.cpp.o
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.cpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/AbstractTimedGameMode.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractTimedGameMode.cpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractTimedGameMode.h
@@ -113,6 +152,44 @@ CMakeFiles/PCE.dir/SourceFiles/AbstractTimedGameMode.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/AbstractViewers.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.cpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Constants.h
@@ -178,6 +255,44 @@ CMakeFiles/PCE.dir/SourceFiles/AbstractViewers.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/ActionableWeapon.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ActionableWeapon.cpp
@@ -262,6 +377,44 @@ CMakeFiles/PCE.dir/SourceFiles/ActionableWeapon.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/AdvancedAnimatedViewer.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AdvancedAnimatedViewer.cpp
@@ -336,6 +489,44 @@ CMakeFiles/PCE.dir/SourceFiles/AdvancedAnimatedViewer.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/AnimatedPlayer.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AdvancedAnimatedViewer.h
@@ -411,6 +602,44 @@ CMakeFiles/PCE.dir/SourceFiles/AnimatedPlayer.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/AnimatedUIViewer.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedUIViewer.cpp
@@ -482,6 +711,44 @@ CMakeFiles/PCE.dir/SourceFiles/AnimatedUIViewer.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/AnimatedViewer.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.cpp
@@ -556,6 +823,45 @@ CMakeFiles/PCE.dir/SourceFiles/AnimatedViewer.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/AttachesToObjects.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -655,6 +961,45 @@ CMakeFiles/PCE.dir/SourceFiles/AttachesToObjects.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/BananaPool.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ActionableWeapon.h
@@ -760,6 +1105,45 @@ CMakeFiles/PCE.dir/SourceFiles/BananaPool.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/BananaWeapon.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ActionableWeapon.h
@@ -863,6 +1247,44 @@ CMakeFiles/PCE.dir/SourceFiles/BananaWeapon.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/BodyPool.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/BodyPool.cpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/BodyPool.h
@@ -939,6 +1361,44 @@ CMakeFiles/PCE.dir/SourceFiles/BodyPool.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/BoilerButtonLogic.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -1019,6 +1479,45 @@ CMakeFiles/PCE.dir/SourceFiles/BoilerButtonLogic.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Bullet.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -1120,6 +1619,45 @@ CMakeFiles/PCE.dir/SourceFiles/Bullet.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/BulletPool.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -1222,6 +1760,45 @@ CMakeFiles/PCE.dir/SourceFiles/BulletPool.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/CapitalismGameMode.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractTimedGameMode.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
@@ -1334,6 +1911,45 @@ CMakeFiles/PCE.dir/SourceFiles/CapitalismGameMode.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/CarnivorousPlant.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AdvancedAnimatedViewer.h
@@ -1436,6 +2052,44 @@ CMakeFiles/PCE.dir/SourceFiles/CarnivorousPlant.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/CarnivorousPlantViewer.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AdvancedAnimatedViewer.h
@@ -1511,6 +2165,44 @@ CMakeFiles/PCE.dir/SourceFiles/CarnivorousPlantViewer.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/ClientState.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ClientState.cpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ClientState.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
@@ -1585,6 +2277,45 @@ CMakeFiles/PCE.dir/SourceFiles/ClientState.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Coin.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -1684,6 +2415,44 @@ CMakeFiles/PCE.dir/SourceFiles/Coin.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/CoinsPool.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Coin.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/CoinsPool.cpp
@@ -1761,6 +2530,44 @@ CMakeFiles/PCE.dir/SourceFiles/CoinsPool.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Collider.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.cpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
@@ -1829,6 +2636,44 @@ CMakeFiles/PCE.dir/SourceFiles/Collider.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/ColliderViewer.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ColliderViewer.cpp
@@ -1902,6 +2747,45 @@ CMakeFiles/PCE.dir/SourceFiles/ColliderViewer.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/CollisionHandler.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -2011,6 +2895,44 @@ CMakeFiles/PCE.dir/SourceFiles/CollisionHandler.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Component.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.cpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ComponentType.h
@@ -2079,6 +3001,44 @@ CMakeFiles/PCE.dir/SourceFiles/Component.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/ConfettiPool.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ActionableWeapon.h
@@ -2163,6 +3123,44 @@ CMakeFiles/PCE.dir/SourceFiles/ConfettiPool.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/ConfettiWeapon.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ActionableWeapon.h
@@ -2251,10 +3249,50 @@ CMakeFiles/PCE.dir/SourceFiles/ConfettiWeapon.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Constants.cpp.o
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Constants.cpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Constants.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/checkML.h
 CMakeFiles/PCE.dir/SourceFiles/ControllerGameMode.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -2364,6 +3402,45 @@ CMakeFiles/PCE.dir/SourceFiles/ControllerGameMode.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Countdown.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -2461,6 +3538,45 @@ CMakeFiles/PCE.dir/SourceFiles/Countdown.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/CreditsState.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -2558,6 +3674,44 @@ CMakeFiles/PCE.dir/SourceFiles/CreditsState.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/EndGameState.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedUIViewer.h
@@ -2640,6 +3794,44 @@ CMakeFiles/PCE.dir/SourceFiles/EndGameState.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Entity.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ComponentType.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Constants.h
@@ -2708,6 +3900,44 @@ CMakeFiles/PCE.dir/SourceFiles/Entity.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/EntityManager.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -2786,6 +4016,44 @@ CMakeFiles/PCE.dir/SourceFiles/EntityManager.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/ExtinguisherWeapon.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ActionableWeapon.h
@@ -2872,6 +4140,44 @@ CMakeFiles/PCE.dir/SourceFiles/ExtinguisherWeapon.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/FireBallGenerator.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -2951,6 +4257,44 @@ CMakeFiles/PCE.dir/SourceFiles/FireBallGenerator.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/FireBallPool.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
@@ -3028,6 +4372,45 @@ CMakeFiles/PCE.dir/SourceFiles/FireBallPool.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Fireball.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -3178,6 +4561,45 @@ CMakeFiles/PCE.dir/SourceFiles/Font.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/GameMode.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -3287,6 +4709,44 @@ CMakeFiles/PCE.dir/SourceFiles/GameMode.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/GameState.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Constants.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/EntityManager.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Font.h
@@ -3354,6 +4814,45 @@ CMakeFiles/PCE.dir/SourceFiles/GameState.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/GameStateMachine.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractTimedGameMode.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
@@ -3484,6 +4983,44 @@ CMakeFiles/PCE.dir/SourceFiles/GameStateMachine.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Hands.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -3567,6 +5104,45 @@ CMakeFiles/PCE.dir/SourceFiles/Hands.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Health.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ActionableWeapon.h
@@ -3672,6 +5248,44 @@ CMakeFiles/PCE.dir/SourceFiles/Health.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/HealthViewer.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ComponentType.h
@@ -3748,6 +5362,44 @@ CMakeFiles/PCE.dir/SourceFiles/HealthViewer.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/ImpulseViewer.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -3831,6 +5483,44 @@ CMakeFiles/PCE.dir/SourceFiles/ImpulseViewer.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/InputBinder.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ComponentType.h
@@ -3903,6 +5593,44 @@ CMakeFiles/PCE.dir/SourceFiles/InputBinder.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/InputHandler.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Constants.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/EntityManager.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Font.h
@@ -3970,6 +5698,44 @@ CMakeFiles/PCE.dir/SourceFiles/InputHandler.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/LobbyState.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ComponentType.h
@@ -4044,6 +5810,44 @@ CMakeFiles/PCE.dir/SourceFiles/LobbyState.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/MapSelectionState.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
@@ -4121,6 +5925,44 @@ CMakeFiles/PCE.dir/SourceFiles/MapSelectionState.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/MatchInfo.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ComponentType.h
@@ -4195,6 +6037,45 @@ CMakeFiles/PCE.dir/SourceFiles/MatchInfo.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/MeleeWeapon.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ActionableWeapon.h
@@ -4297,6 +6178,44 @@ CMakeFiles/PCE.dir/SourceFiles/MeleeWeapon.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/MenuState.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
@@ -4372,6 +6291,44 @@ CMakeFiles/PCE.dir/SourceFiles/MenuState.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/MidGameState.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedUIViewer.h
@@ -4454,6 +6411,44 @@ CMakeFiles/PCE.dir/SourceFiles/MidGameState.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/MultiplayerHost.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ComponentType.h
@@ -4527,6 +6522,45 @@ CMakeFiles/PCE.dir/SourceFiles/MultiplayerHost.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/ObjectFactory.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AdvancedAnimatedViewer.h
@@ -4646,6 +6680,44 @@ CMakeFiles/PCE.dir/SourceFiles/ObjectFactory.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/OnlineMenuState.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
@@ -4723,6 +6795,44 @@ CMakeFiles/PCE.dir/SourceFiles/OnlineMenuState.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/OptionsMenuState.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
@@ -4799,6 +6909,44 @@ CMakeFiles/PCE.dir/SourceFiles/OptionsMenuState.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/PCE_Project.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Constants.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/EntityManager.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Font.h
@@ -4863,6 +7011,44 @@ CMakeFiles/PCE.dir/SourceFiles/PCE_Project.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Pad.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -4940,6 +7126,44 @@ CMakeFiles/PCE.dir/SourceFiles/Pad.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/ParticleEmitter.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ComponentType.h
@@ -5011,6 +7235,44 @@ CMakeFiles/PCE.dir/SourceFiles/ParticleEmitter.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/PauseState.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
@@ -5088,6 +7350,45 @@ CMakeFiles/PCE.dir/SourceFiles/PauseState.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/PlayState.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -5201,6 +7502,45 @@ CMakeFiles/PCE.dir/SourceFiles/PlayState.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/PlayableMenuState.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -5311,6 +7651,44 @@ CMakeFiles/PCE.dir/SourceFiles/PlayableMenuState.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/PlayerController.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AdvancedAnimatedViewer.h
@@ -5394,6 +7772,44 @@ CMakeFiles/PCE.dir/SourceFiles/PlayerController.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/PlayerData.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ComponentType.h
@@ -5468,6 +7884,45 @@ CMakeFiles/PCE.dir/SourceFiles/PlayerData.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/PlayerFactory.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractTimedGameMode.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
@@ -5584,8 +8039,47 @@ CMakeFiles/PCE.dir/SourceFiles/PlayerFactory.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Resources.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Resources.cpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Resources.h
+ /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/SDL_macros.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/checkML.h
  /usr/include/SDL2/SDL.h
  /usr/include/SDL2/SDL_assert.h
@@ -5633,6 +8127,45 @@ CMakeFiles/PCE.dir/SourceFiles/Resources.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/RouterLogic.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -5743,6 +8276,44 @@ CMakeFiles/PCE.dir/SourceFiles/RouterLogic.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/SDLAudioManager.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Constants.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/EntityManager.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Font.h
@@ -5911,6 +8482,45 @@ CMakeFiles/PCE.dir/SourceFiles/SDLTexturesManager.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/SDL_Game.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -6018,6 +8628,44 @@ CMakeFiles/PCE.dir/SourceFiles/SDL_Game.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/SlipperWeapon.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ActionableWeapon.h
@@ -6104,6 +8752,44 @@ CMakeFiles/PCE.dir/SourceFiles/SlipperWeapon.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/SpawnTree.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ComponentType.h
@@ -6175,6 +8861,45 @@ CMakeFiles/PCE.dir/SourceFiles/SpawnTree.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/StaplerPool.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ActionableWeapon.h
@@ -6279,6 +9004,45 @@ CMakeFiles/PCE.dir/SourceFiles/StaplerPool.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/StaplerWeapon.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ActionableWeapon.h
@@ -6383,6 +9147,45 @@ CMakeFiles/PCE.dir/SourceFiles/StaplerWeapon.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/StocksGameMode.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -6493,6 +9296,44 @@ CMakeFiles/PCE.dir/SourceFiles/StocksGameMode.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Texture.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Constants.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/EntityManager.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Font.h
@@ -6557,6 +9398,45 @@ CMakeFiles/PCE.dir/SourceFiles/Texture.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/ThrownByPlayer.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -6654,6 +9534,45 @@ CMakeFiles/PCE.dir/SourceFiles/ThrownByPlayer.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/TileMap.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -6814,6 +9733,45 @@ CMakeFiles/PCE.dir/SourceFiles/TileSet.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/TimeGameMode.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractTimedGameMode.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
@@ -6926,6 +9884,44 @@ CMakeFiles/PCE.dir/SourceFiles/TimeGameMode.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/TimedDespawn.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -7006,6 +10002,44 @@ CMakeFiles/PCE.dir/SourceFiles/TimedDespawn.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/TomatoPool.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ActionableWeapon.h
@@ -7090,6 +10124,45 @@ CMakeFiles/PCE.dir/SourceFiles/TomatoPool.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/TomatoWeapon.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ActionableWeapon.h
@@ -7192,6 +10265,44 @@ CMakeFiles/PCE.dir/SourceFiles/TomatoWeapon.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Transform.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ComponentType.h
@@ -7262,6 +10373,44 @@ CMakeFiles/PCE.dir/SourceFiles/Transform.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/TransitionState.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Constants.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/EntityManager.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Font.h
@@ -7328,6 +10477,44 @@ CMakeFiles/PCE.dir/SourceFiles/TransitionState.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Treadmill.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collision.h
@@ -7403,6 +10590,45 @@ CMakeFiles/PCE.dir/SourceFiles/Treadmill.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/TriggerButton.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AdvancedAnimatedViewer.h
@@ -7504,6 +10730,45 @@ CMakeFiles/PCE.dir/SourceFiles/TriggerButton.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/TutorialGameMode.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ActionableWeapon.h
@@ -7615,6 +10880,44 @@ CMakeFiles/PCE.dir/SourceFiles/TutorialGameMode.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/UIViewer.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ComponentType.h
@@ -7688,6 +10991,44 @@ CMakeFiles/PCE.dir/SourceFiles/Vector2D.cpp.o
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Vector2D.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/checkML.h
 CMakeFiles/PCE.dir/SourceFiles/Viewer.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Collider.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
@@ -7761,6 +11102,45 @@ CMakeFiles/PCE.dir/SourceFiles/Viewer.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Wallet.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractTimedGameMode.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
@@ -7872,6 +11252,45 @@ CMakeFiles/PCE.dir/SourceFiles/Wallet.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/Weapon.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -7969,6 +11388,45 @@ CMakeFiles/PCE.dir/SourceFiles/Weapon.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/WeaponFactory.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ActionableWeapon.h
@@ -8083,6 +11541,44 @@ CMakeFiles/PCE.dir/SourceFiles/WeaponFactory.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/WeaponSpawner.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Component.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/ComponentType.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/Constants.h
@@ -8155,6 +11651,45 @@ CMakeFiles/PCE.dir/SourceFiles/WeaponSpawner.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/WiFiBullet.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -8256,6 +11791,45 @@ CMakeFiles/PCE.dir/SourceFiles/WiFiBullet.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/WiFiWavePool.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h
@@ -8358,6 +11932,45 @@ CMakeFiles/PCE.dir/SourceFiles/WiFiWavePool.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/PCE.dir/SourceFiles/WiFightGameMode.cpp.o
+ ../Box2D/include/box2d/b2_api.h
+ ../Box2D/include/box2d/b2_block_allocator.h
+ ../Box2D/include/box2d/b2_body.h
+ ../Box2D/include/box2d/b2_broad_phase.h
+ ../Box2D/include/box2d/b2_chain_shape.h
+ ../Box2D/include/box2d/b2_circle_shape.h
+ ../Box2D/include/box2d/b2_collision.h
+ ../Box2D/include/box2d/b2_common.h
+ ../Box2D/include/box2d/b2_contact.h
+ ../Box2D/include/box2d/b2_contact_manager.h
+ ../Box2D/include/box2d/b2_distance_joint.h
+ ../Box2D/include/box2d/b2_draw.h
+ ../Box2D/include/box2d/b2_dynamic_tree.h
+ ../Box2D/include/box2d/b2_edge_shape.h
+ ../Box2D/include/box2d/b2_fixture.h
+ ../Box2D/include/box2d/b2_friction_joint.h
+ ../Box2D/include/box2d/b2_gear_joint.h
+ ../Box2D/include/box2d/b2_growable_stack.h
+ ../Box2D/include/box2d/b2_joint.h
+ ../Box2D/include/box2d/b2_math.h
+ ../Box2D/include/box2d/b2_motor_joint.h
+ ../Box2D/include/box2d/b2_mouse_joint.h
+ ../Box2D/include/box2d/b2_polygon_shape.h
+ ../Box2D/include/box2d/b2_prismatic_joint.h
+ ../Box2D/include/box2d/b2_pulley_joint.h
+ ../Box2D/include/box2d/b2_revolute_joint.h
+ ../Box2D/include/box2d/b2_settings.h
+ ../Box2D/include/box2d/b2_shape.h
+ ../Box2D/include/box2d/b2_stack_allocator.h
+ ../Box2D/include/box2d/b2_time_step.h
+ ../Box2D/include/box2d/b2_timer.h
+ ../Box2D/include/box2d/b2_types.h
+ ../Box2D/include/box2d/b2_weld_joint.h
+ ../Box2D/include/box2d/b2_wheel_joint.h
+ ../Box2D/include/box2d/b2_world.h
+ ../Box2D/include/box2d/b2_world_callbacks.h
+ ../Box2D/include/box2d/box2d.h
+ ../json/single_include/nlohmann/json.hpp
+ ../tileson/include/tileson.hpp
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractAnimatedViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AbstractViewers.h
  /home/jorgemo/Desktop/PCE_Online/src/SourceFiles/AnimatedViewer.h

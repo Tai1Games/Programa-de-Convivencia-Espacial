@@ -37,7 +37,7 @@ void TileMap::init() {
 	for (auto& tileLayer : layers_)
 	{
 		//podemos distinguir entre capas de tiles, objetos, imagenes m�s adelante
-		if (tileLayer.getType() == tson::Layer::Type::ObjectGroup)
+		if (tileLayer.getType() == tson::LayerType::ObjectGroup)
 		{
 			//pos = position in tile units
 			vector<tson::Object> objetos = tileLayer.getObjects();
@@ -95,7 +95,7 @@ void TileMap::draw() const {
 	for (auto& tileLayer : layers_)
 	{
 		//podemos distinguir entre capas de tiles, objetos, imagenes m�s adelante
-		if (tileLayer.getType() == tson::Layer::Type::TileLayer)
+		if (tileLayer.getType() == tson::LayerType::TileLayer)
 		{
 			//pos = position in tile units
 			for (auto& [pos, tile] : tileLayer.getTileData()) //Loops through absolutely all existing tiles
@@ -113,7 +113,9 @@ void TileMap::draw() const {
 					}
 					if (i < tileSets_.size())
 						tSet = &tileSets_[i];
-					else throw exception("No se encontr� el tileset");
+					else {
+						throw std::runtime_error("No se encontr� el tileset");
+					}
 
 					//variables auxiliares para el dibujado del tile
 					int firstId = tSet->getFirstgid(); //First tile id of the tileset
@@ -152,8 +154,10 @@ void TileMap::draw() const {
 
 bool TileMap::loadTileson(string path) {
 	tson::Tileson parser;
-	tMap_ = parser.parse(fs::path(path));
-	if (tMap_.getStatus() == tson::Map::ParseStatus::OK) {
+	std::string auxPath = fs::path(path);
+	auto t = parser.parse(auxPath).get();
+	tMap_ = *t;
+	if (tMap_.getStatus() == tson::ParseStatus::OK) {
 		//variables de escala
 		mapCols_ = tMap_.getSize().x;
 		mapRows_ = tMap_.getSize().y;

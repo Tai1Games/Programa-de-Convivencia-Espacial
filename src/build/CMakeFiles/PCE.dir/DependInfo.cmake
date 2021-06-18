@@ -113,7 +113,9 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../PCE"
   "/usr/include/SDL2"
+  ".././Box2D/include/box2d"
   ".././json/single_include/nlohmann"
+  ".././tileson/include"
   )
 
 # Targets to which this target links.

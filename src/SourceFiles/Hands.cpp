@@ -35,7 +35,8 @@ void Hands::draw() const
 
 void Hands::handleInput()
 {
-	b2Vec2 vI = (ib_->getAimDir()).NormalizedVector();
+	b2Vec2 vI = ib_->getAimDir();
+	vI.Normalize();
 	if (vI.Length() != 0) dir_.Set(vI.x, vI.y);
 }
 

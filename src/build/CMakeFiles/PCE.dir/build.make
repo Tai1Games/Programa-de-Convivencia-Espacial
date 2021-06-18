@@ -1598,6 +1598,7 @@ PCE: /usr/lib/x86_64-linux-gnu/libSDL2_image.so
 PCE: /usr/lib/x86_64-linux-gnu/libSDL2_ttf.so
 PCE: /usr/lib/x86_64-linux-gnu/libSDL2_net.so
 PCE: /usr/lib/x86_64-linux-gnu/libSDL2_mixer.so
+PCE: ../Box2D/lib/libbox2d.a
 PCE: CMakeFiles/PCE.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/jorgemo/Desktop/PCE_Online/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_103) "Linking CXX executable PCE"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/PCE.dir/link.txt --verbose=$(VERBOSE)

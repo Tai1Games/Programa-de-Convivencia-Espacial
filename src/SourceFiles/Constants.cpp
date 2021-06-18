@@ -7,15 +7,16 @@ Constants::Constants(const std::string& path) {
 #ifdef _DEBUG
 	char fullPath[_MAX_PATH];
 	_fullpath(fullPath,path.c_str(),_MAX_PATH);
-	std::cout << "looking for constants in:"<< fullPath << std::endl;
 #endif
+	std::cout << "looking for constants in:"<< path << std::endl;
 
-	assert(read.is_open());  //hehe
+	if(!read.is_open())
+		throw std::runtime_error("No se ha abierto el archivo de constantes");  //hehe
 	read >> data;
 	initialized_ = true;
 }
 
-//La plantilla genérica no hace comprobaciones de tipo
+//La plantilla genï¿½rica no hace comprobaciones de tipo
 template<typename T>
 T Constants::getConstant(const std::string& key) const {
 	T d;

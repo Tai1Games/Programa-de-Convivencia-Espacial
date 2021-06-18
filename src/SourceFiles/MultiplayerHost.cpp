@@ -7,16 +7,16 @@
 
 MultiplayerHost::MultiplayerHost() {
 	if (SDLNet_Init() < 0) {
-		throw;
+		throw std::runtime_error("Couldn't start SDLNet");
 	}
 
 	hostIPAddress_ = getHostIpAddress();
 	std::cout << "IP del host es: " << hostIPAddress_ << std::endl;
 	if (SDLNet_ResolveHost(&hostIp_, nullptr, 2000) < 0)
-		throw;
+		throw std::runtime_error("Couldn't resolve host");
 
 	masterSocket_ = SDLNet_TCP_Open(&hostIp_);
-	if (!masterSocket_) throw;
+	if (!masterSocket_) throw ("Couldn't open TCP port");
 
 	socketSet_ = SDLNet_AllocSocketSet(4);
 	SDLNet_TCP_AddSocket(socketSet_, masterSocket_);
@@ -33,9 +33,9 @@ std::string MultiplayerHost::getHostIpAddress() {
 	//Thanks Samir for all you've done for us
 	IPaddress ip;
 	if (SDLNet_ResolveHost(&ip, "ipinfo.io", 80) < 0)
-		throw;
+		throw std::runtime_error("Couldn't resolve host");
 	TCPsocket conn = SDLNet_TCP_Open(&ip);
-	if (!conn) throw;
+	if (!conn) throw std::runtime_error("Couldn't open TCP conn");
 
 	// envia peticion para conseguir la ip
 	const char* getter = "GET /ip HTTP/1.0\nHost: ipinfo.io\n\n";

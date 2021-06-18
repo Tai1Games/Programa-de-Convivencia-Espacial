@@ -15,10 +15,26 @@ void createWindow() {
 
 int main(int argc, char* argv[]) {
 	//Colocar antes del constructor de SDL_Game
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-
-	SDL_Game::instance()->start();
+	try{
+		SDL_Game::instance()->start();
+	}
+	catch(std::runtime_error& e) {
+		std::cout << e.what() << "\n";
+	}
+	catch(std::exception& e) {
+		std::cout << e.what() << "\n";
+	}
+	catch(std::string& s){
+		std::cout << s << "\n";
+	}
+	catch(const char* s){
+		std::cout << s << "\n";
+	}
+	catch(...) {
+		std::cout << "unknown error\n";
+	}
 
 	//descomentar para depurar
 	//cuando todo era simple

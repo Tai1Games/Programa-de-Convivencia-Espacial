@@ -3,8 +3,7 @@ project(PCE)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/CMake/)
 
-
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 file(GLOB SOURCE "SourceFiles/*.cpp" "SourceFiles/*.h")
 
@@ -13,7 +12,6 @@ find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_net REQUIRED)
 find_package(SDL2_ttf REQUIRED)
-find_package(BOX2D REQUIRED)
 
 include_directories(${PROJECT_NAME} 
                                 ${SDL2_INCLUDE_DIRS} 
@@ -23,6 +21,7 @@ include_directories(${PROJECT_NAME}
                                 ${SDL2_MIXER_INCLUDE_DIRS}
                                 "./Box2D/include/box2d/"
                                 "./json/single_include/nlohmann/"
+                                "./tileson/include/"
                                 )
 
 add_executable(${PROJECT_NAME} ${SOURCE})
@@ -33,5 +32,7 @@ target_link_libraries(${PROJECT_NAME}
                                 ${SDL2_TTF_LIBRARIES} 
                                 ${SDL2_NET_LIBRARIES} 
                                 ${SDL2_MIXER_LIBRARIES}
-                                "./Box2D/lib/Debug/"
+                                ${CMAKE_SOURCE_DIR}/Box2D/lib/libbox2d.a
+                                #${CMAKE_SOURCE_DIR}/tileson/lib/tileson.lib
+                                
                                 )
