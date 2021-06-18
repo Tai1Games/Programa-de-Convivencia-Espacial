@@ -41,7 +41,8 @@ void TileMap::init() {
 		{
 			//pos = position in tile units
 			vector<tson::Object> objetos = tileLayer.getObjects();
-			for (auto obj : objetos)
+			std::cout << "NumItems capa " << tileLayer.getName() << ": " << objetos.size() << "\n";
+			for (auto& obj : objetos)
 			{
 				if (tileLayer.getName() == "Walls") { //muros
 					factoryItems_.push_back(obj);
@@ -70,6 +71,7 @@ void TileMap::init() {
 				else if (tileLayer.getName() == "CoinSpawners") {
 					coinsSpawnPoints_.push_back(b2Vec2(obj.getPosition().x / CONST(double, "PIXELS_PER_METER"), (CONST(int, "WINDOW_HEIGHT") - obj.getPosition().y) / CONST(double, "PIXELS_PER_METER")));
 				}
+				else std::cout << "Not recognized " << tileLayer.getName() << "\n";
 			}
 		}
 	}
@@ -114,7 +116,7 @@ void TileMap::draw() const {
 					if (i < tileSets_.size())
 						tSet = &tileSets_[i];
 					else {
-						throw std::runtime_error("No se encontr� el tileset");
+						throw std::runtime_error("No se encontro el tileset");
 					}
 
 					//variables auxiliares para el dibujado del tile
@@ -165,8 +167,10 @@ bool TileMap::loadTileson(string path) {
 		tileSets_ = tMap_.getTilesets();
 		return true;
 	}
-	else
+	else {
+		std::cout << "No se pudo cargar el mapa\n";
 		return false;
+	}
 }
 
 void TileMap::executeMapFactory()
@@ -262,6 +266,8 @@ void TileMap::executeMapFactory()
 
 			ObjectFactory::makeTrasparentWall(entityManager_, physicsWorld_, pos, size, rotation);
 		}
+
+		else std::cout << "Objeto no reconocido\n";
 	}
 	solvePostCreationProblems();
 }

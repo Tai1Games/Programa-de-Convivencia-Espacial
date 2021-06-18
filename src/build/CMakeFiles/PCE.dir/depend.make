@@ -42,7 +42,6 @@ CMakeFiles/PCE.dir/SourceFiles/AbstractTimedGameMode.cpp.o: ../Box2D/include/box
 CMakeFiles/PCE.dir/SourceFiles/AbstractTimedGameMode.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/AbstractTimedGameMode.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/AbstractTimedGameMode.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/AbstractTimedGameMode.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/AbstractTimedGameMode.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/AbstractTimedGameMode.cpp.o: ../SourceFiles/AbstractTimedGameMode.cpp
 CMakeFiles/PCE.dir/SourceFiles/AbstractTimedGameMode.cpp.o: ../SourceFiles/AbstractTimedGameMode.h
@@ -860,7 +859,6 @@ CMakeFiles/PCE.dir/SourceFiles/AttachesToObjects.cpp.o: ../Box2D/include/box2d/b
 CMakeFiles/PCE.dir/SourceFiles/AttachesToObjects.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/AttachesToObjects.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/AttachesToObjects.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/AttachesToObjects.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/AttachesToObjects.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/AttachesToObjects.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/AttachesToObjects.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -998,7 +996,6 @@ CMakeFiles/PCE.dir/SourceFiles/BananaPool.cpp.o: ../Box2D/include/box2d/b2_world
 CMakeFiles/PCE.dir/SourceFiles/BananaPool.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/BananaPool.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/BananaPool.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/BananaPool.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/BananaPool.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/BananaPool.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/BananaPool.cpp.o: ../SourceFiles/ActionableWeapon.h
@@ -1142,7 +1139,6 @@ CMakeFiles/PCE.dir/SourceFiles/BananaWeapon.cpp.o: ../Box2D/include/box2d/b2_wor
 CMakeFiles/PCE.dir/SourceFiles/BananaWeapon.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/BananaWeapon.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/BananaWeapon.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/BananaWeapon.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/BananaWeapon.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/BananaWeapon.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/BananaWeapon.cpp.o: ../SourceFiles/ActionableWeapon.h
@@ -1516,7 +1512,6 @@ CMakeFiles/PCE.dir/SourceFiles/Bullet.cpp.o: ../Box2D/include/box2d/b2_world.h
 CMakeFiles/PCE.dir/SourceFiles/Bullet.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/Bullet.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/Bullet.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/Bullet.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/Bullet.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/Bullet.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/Bullet.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -1656,7 +1651,6 @@ CMakeFiles/PCE.dir/SourceFiles/BulletPool.cpp.o: ../Box2D/include/box2d/b2_world
 CMakeFiles/PCE.dir/SourceFiles/BulletPool.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/BulletPool.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/BulletPool.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/BulletPool.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/BulletPool.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/BulletPool.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/BulletPool.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -1797,7 +1791,6 @@ CMakeFiles/PCE.dir/SourceFiles/CapitalismGameMode.cpp.o: ../Box2D/include/box2d/
 CMakeFiles/PCE.dir/SourceFiles/CapitalismGameMode.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/CapitalismGameMode.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/CapitalismGameMode.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/CapitalismGameMode.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/CapitalismGameMode.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/CapitalismGameMode.cpp.o: ../SourceFiles/AbstractTimedGameMode.h
 CMakeFiles/PCE.dir/SourceFiles/CapitalismGameMode.cpp.o: ../SourceFiles/AbstractViewers.h
@@ -1948,7 +1941,6 @@ CMakeFiles/PCE.dir/SourceFiles/CarnivorousPlant.cpp.o: ../Box2D/include/box2d/b2
 CMakeFiles/PCE.dir/SourceFiles/CarnivorousPlant.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/CarnivorousPlant.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/CarnivorousPlant.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/CarnivorousPlant.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/CarnivorousPlant.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/CarnivorousPlant.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/CarnivorousPlant.cpp.o: ../SourceFiles/AdvancedAnimatedViewer.h
@@ -2314,7 +2306,6 @@ CMakeFiles/PCE.dir/SourceFiles/Coin.cpp.o: ../Box2D/include/box2d/b2_world.h
 CMakeFiles/PCE.dir/SourceFiles/Coin.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/Coin.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/Coin.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/Coin.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/Coin.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/Coin.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/Coin.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -2784,7 +2775,6 @@ CMakeFiles/PCE.dir/SourceFiles/CollisionHandler.cpp.o: ../Box2D/include/box2d/b2
 CMakeFiles/PCE.dir/SourceFiles/CollisionHandler.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/CollisionHandler.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/CollisionHandler.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/CollisionHandler.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/CollisionHandler.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/CollisionHandler.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/CollisionHandler.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -3291,7 +3281,6 @@ CMakeFiles/PCE.dir/SourceFiles/ControllerGameMode.cpp.o: ../Box2D/include/box2d/
 CMakeFiles/PCE.dir/SourceFiles/ControllerGameMode.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/ControllerGameMode.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/ControllerGameMode.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/ControllerGameMode.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/ControllerGameMode.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/ControllerGameMode.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/ControllerGameMode.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -3439,7 +3428,6 @@ CMakeFiles/PCE.dir/SourceFiles/Countdown.cpp.o: ../Box2D/include/box2d/b2_world.
 CMakeFiles/PCE.dir/SourceFiles/Countdown.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/Countdown.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/Countdown.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/Countdown.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/Countdown.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/Countdown.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/Countdown.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -3575,7 +3563,6 @@ CMakeFiles/PCE.dir/SourceFiles/CreditsState.cpp.o: ../Box2D/include/box2d/b2_wor
 CMakeFiles/PCE.dir/SourceFiles/CreditsState.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/CreditsState.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/CreditsState.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/CreditsState.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/CreditsState.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/CreditsState.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/CreditsState.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -4409,7 +4396,6 @@ CMakeFiles/PCE.dir/SourceFiles/Fireball.cpp.o: ../Box2D/include/box2d/b2_world.h
 CMakeFiles/PCE.dir/SourceFiles/Fireball.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/Fireball.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/Fireball.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/Fireball.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/Fireball.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/Fireball.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/Fireball.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -4598,7 +4584,6 @@ CMakeFiles/PCE.dir/SourceFiles/GameMode.cpp.o: ../Box2D/include/box2d/b2_world.h
 CMakeFiles/PCE.dir/SourceFiles/GameMode.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/GameMode.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/GameMode.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/GameMode.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/GameMode.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/GameMode.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/GameMode.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -4851,7 +4836,6 @@ CMakeFiles/PCE.dir/SourceFiles/GameStateMachine.cpp.o: ../Box2D/include/box2d/b2
 CMakeFiles/PCE.dir/SourceFiles/GameStateMachine.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/GameStateMachine.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/GameStateMachine.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/GameStateMachine.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/GameStateMachine.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/GameStateMachine.cpp.o: ../SourceFiles/AbstractTimedGameMode.h
 CMakeFiles/PCE.dir/SourceFiles/GameStateMachine.cpp.o: ../SourceFiles/AbstractViewers.h
@@ -5141,7 +5125,6 @@ CMakeFiles/PCE.dir/SourceFiles/Health.cpp.o: ../Box2D/include/box2d/b2_world.h
 CMakeFiles/PCE.dir/SourceFiles/Health.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/Health.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/Health.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/Health.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/Health.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/Health.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/Health.cpp.o: ../SourceFiles/ActionableWeapon.h
@@ -6074,7 +6057,6 @@ CMakeFiles/PCE.dir/SourceFiles/MeleeWeapon.cpp.o: ../Box2D/include/box2d/b2_worl
 CMakeFiles/PCE.dir/SourceFiles/MeleeWeapon.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/MeleeWeapon.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/MeleeWeapon.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/MeleeWeapon.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/MeleeWeapon.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/MeleeWeapon.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/MeleeWeapon.cpp.o: ../SourceFiles/ActionableWeapon.h
@@ -6559,7 +6541,6 @@ CMakeFiles/PCE.dir/SourceFiles/ObjectFactory.cpp.o: ../Box2D/include/box2d/b2_wo
 CMakeFiles/PCE.dir/SourceFiles/ObjectFactory.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/ObjectFactory.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/ObjectFactory.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/ObjectFactory.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/ObjectFactory.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/ObjectFactory.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/ObjectFactory.cpp.o: ../SourceFiles/AdvancedAnimatedViewer.h
@@ -7387,7 +7368,6 @@ CMakeFiles/PCE.dir/SourceFiles/PlayState.cpp.o: ../Box2D/include/box2d/b2_world.
 CMakeFiles/PCE.dir/SourceFiles/PlayState.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/PlayState.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/PlayState.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/PlayState.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/PlayState.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/PlayState.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/PlayState.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -7921,7 +7901,6 @@ CMakeFiles/PCE.dir/SourceFiles/PlayerFactory.cpp.o: ../Box2D/include/box2d/b2_wo
 CMakeFiles/PCE.dir/SourceFiles/PlayerFactory.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/PlayerFactory.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/PlayerFactory.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/PlayerFactory.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/PlayerFactory.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/PlayerFactory.cpp.o: ../SourceFiles/AbstractTimedGameMode.h
 CMakeFiles/PCE.dir/SourceFiles/PlayerFactory.cpp.o: ../SourceFiles/AbstractViewers.h
@@ -8164,7 +8143,6 @@ CMakeFiles/PCE.dir/SourceFiles/RouterLogic.cpp.o: ../Box2D/include/box2d/b2_worl
 CMakeFiles/PCE.dir/SourceFiles/RouterLogic.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/RouterLogic.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/RouterLogic.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/RouterLogic.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/RouterLogic.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/RouterLogic.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/RouterLogic.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -8519,7 +8497,6 @@ CMakeFiles/PCE.dir/SourceFiles/SDL_Game.cpp.o: ../Box2D/include/box2d/b2_world.h
 CMakeFiles/PCE.dir/SourceFiles/SDL_Game.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/SDL_Game.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/SDL_Game.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/SDL_Game.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/SDL_Game.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/SDL_Game.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/SDL_Game.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -8898,7 +8875,6 @@ CMakeFiles/PCE.dir/SourceFiles/StaplerPool.cpp.o: ../Box2D/include/box2d/b2_worl
 CMakeFiles/PCE.dir/SourceFiles/StaplerPool.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/StaplerPool.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/StaplerPool.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/StaplerPool.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/StaplerPool.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/StaplerPool.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/StaplerPool.cpp.o: ../SourceFiles/ActionableWeapon.h
@@ -9041,7 +9017,6 @@ CMakeFiles/PCE.dir/SourceFiles/StaplerWeapon.cpp.o: ../Box2D/include/box2d/b2_wo
 CMakeFiles/PCE.dir/SourceFiles/StaplerWeapon.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/StaplerWeapon.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/StaplerWeapon.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/StaplerWeapon.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/StaplerWeapon.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/StaplerWeapon.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/StaplerWeapon.cpp.o: ../SourceFiles/ActionableWeapon.h
@@ -9184,7 +9159,6 @@ CMakeFiles/PCE.dir/SourceFiles/StocksGameMode.cpp.o: ../Box2D/include/box2d/b2_w
 CMakeFiles/PCE.dir/SourceFiles/StocksGameMode.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/StocksGameMode.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/StocksGameMode.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/StocksGameMode.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/StocksGameMode.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/StocksGameMode.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/StocksGameMode.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -9435,7 +9409,6 @@ CMakeFiles/PCE.dir/SourceFiles/ThrownByPlayer.cpp.o: ../Box2D/include/box2d/b2_w
 CMakeFiles/PCE.dir/SourceFiles/ThrownByPlayer.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/ThrownByPlayer.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/ThrownByPlayer.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/ThrownByPlayer.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/ThrownByPlayer.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/ThrownByPlayer.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/ThrownByPlayer.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -9770,7 +9743,6 @@ CMakeFiles/PCE.dir/SourceFiles/TimeGameMode.cpp.o: ../Box2D/include/box2d/b2_wor
 CMakeFiles/PCE.dir/SourceFiles/TimeGameMode.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/TimeGameMode.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/TimeGameMode.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/TimeGameMode.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/TimeGameMode.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/TimeGameMode.cpp.o: ../SourceFiles/AbstractTimedGameMode.h
 CMakeFiles/PCE.dir/SourceFiles/TimeGameMode.cpp.o: ../SourceFiles/AbstractViewers.h
@@ -10161,7 +10133,6 @@ CMakeFiles/PCE.dir/SourceFiles/TomatoWeapon.cpp.o: ../Box2D/include/box2d/b2_wor
 CMakeFiles/PCE.dir/SourceFiles/TomatoWeapon.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/TomatoWeapon.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/TomatoWeapon.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/TomatoWeapon.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/TomatoWeapon.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/TomatoWeapon.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/TomatoWeapon.cpp.o: ../SourceFiles/ActionableWeapon.h
@@ -10627,7 +10598,6 @@ CMakeFiles/PCE.dir/SourceFiles/TriggerButton.cpp.o: ../Box2D/include/box2d/b2_wo
 CMakeFiles/PCE.dir/SourceFiles/TriggerButton.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/TriggerButton.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/TriggerButton.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/TriggerButton.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/TriggerButton.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/TriggerButton.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/TriggerButton.cpp.o: ../SourceFiles/AdvancedAnimatedViewer.h
@@ -10767,7 +10737,6 @@ CMakeFiles/PCE.dir/SourceFiles/TutorialGameMode.cpp.o: ../Box2D/include/box2d/b2
 CMakeFiles/PCE.dir/SourceFiles/TutorialGameMode.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/TutorialGameMode.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/TutorialGameMode.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/TutorialGameMode.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/TutorialGameMode.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/TutorialGameMode.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/TutorialGameMode.cpp.o: ../SourceFiles/ActionableWeapon.h
@@ -11139,7 +11108,6 @@ CMakeFiles/PCE.dir/SourceFiles/Wallet.cpp.o: ../Box2D/include/box2d/b2_world.h
 CMakeFiles/PCE.dir/SourceFiles/Wallet.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/Wallet.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/Wallet.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/Wallet.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/Wallet.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/Wallet.cpp.o: ../SourceFiles/AbstractTimedGameMode.h
 CMakeFiles/PCE.dir/SourceFiles/Wallet.cpp.o: ../SourceFiles/AbstractViewers.h
@@ -11289,7 +11257,6 @@ CMakeFiles/PCE.dir/SourceFiles/Weapon.cpp.o: ../Box2D/include/box2d/b2_world.h
 CMakeFiles/PCE.dir/SourceFiles/Weapon.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/Weapon.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/Weapon.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/Weapon.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/Weapon.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/Weapon.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/Weapon.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -11425,7 +11392,6 @@ CMakeFiles/PCE.dir/SourceFiles/WeaponFactory.cpp.o: ../Box2D/include/box2d/b2_wo
 CMakeFiles/PCE.dir/SourceFiles/WeaponFactory.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/WeaponFactory.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/WeaponFactory.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/WeaponFactory.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/WeaponFactory.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/WeaponFactory.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/WeaponFactory.cpp.o: ../SourceFiles/ActionableWeapon.h
@@ -11688,7 +11654,6 @@ CMakeFiles/PCE.dir/SourceFiles/WiFiBullet.cpp.o: ../Box2D/include/box2d/b2_world
 CMakeFiles/PCE.dir/SourceFiles/WiFiBullet.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/WiFiBullet.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/WiFiBullet.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/WiFiBullet.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/WiFiBullet.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/WiFiBullet.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/WiFiBullet.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -11828,7 +11793,6 @@ CMakeFiles/PCE.dir/SourceFiles/WiFiWavePool.cpp.o: ../Box2D/include/box2d/b2_wor
 CMakeFiles/PCE.dir/SourceFiles/WiFiWavePool.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/WiFiWavePool.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/WiFiWavePool.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/WiFiWavePool.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/WiFiWavePool.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/WiFiWavePool.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/WiFiWavePool.cpp.o: ../SourceFiles/AnimatedViewer.h
@@ -11969,7 +11933,6 @@ CMakeFiles/PCE.dir/SourceFiles/WiFightGameMode.cpp.o: ../Box2D/include/box2d/b2_
 CMakeFiles/PCE.dir/SourceFiles/WiFightGameMode.cpp.o: ../Box2D/include/box2d/b2_world_callbacks.h
 CMakeFiles/PCE.dir/SourceFiles/WiFightGameMode.cpp.o: ../Box2D/include/box2d/box2d.h
 CMakeFiles/PCE.dir/SourceFiles/WiFightGameMode.cpp.o: ../json/single_include/nlohmann/json.hpp
-CMakeFiles/PCE.dir/SourceFiles/WiFightGameMode.cpp.o: ../tileson/include/tileson.hpp
 CMakeFiles/PCE.dir/SourceFiles/WiFightGameMode.cpp.o: ../SourceFiles/AbstractAnimatedViewers.h
 CMakeFiles/PCE.dir/SourceFiles/WiFightGameMode.cpp.o: ../SourceFiles/AbstractViewers.h
 CMakeFiles/PCE.dir/SourceFiles/WiFightGameMode.cpp.o: ../SourceFiles/AnimatedViewer.h
