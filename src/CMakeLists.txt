@@ -35,5 +35,5 @@ target_link_libraries(${PROJECT_NAME}
                                 ${SDL2_NET_LIBRARIES} 
                                 ${SDL2_MIXER_LIBRARIES}
                                 ${CMAKE_SOURCE_DIR}/Box2D/lib/libbox2d.a
-                                Tileson
+                                tileson
                                 )
