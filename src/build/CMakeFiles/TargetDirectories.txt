@@ -1,3 +1,0 @@
-/home/jorgemo/Desktop/PCE_Online/src/build/CMakeFiles/rebuild_cache.dir
-/home/jorgemo/Desktop/PCE_Online/src/build/CMakeFiles/edit_cache.dir
-/home/jorgemo/Desktop/PCE_Online/src/build/CMakeFiles/PCE.dir

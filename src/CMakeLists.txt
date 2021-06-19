@@ -23,6 +23,8 @@ include_directories(${PROJECT_NAME}
                                 "./json/single_include/nlohmann/"
                                 "./tileson/include/"
                                 )
+                                
+add_subdirectory(tileson)
 
 add_executable(${PROJECT_NAME} ${SOURCE})
 
@@ -33,6 +35,5 @@ target_link_libraries(${PROJECT_NAME}
                                 ${SDL2_NET_LIBRARIES} 
                                 ${SDL2_MIXER_LIBRARIES}
                                 ${CMAKE_SOURCE_DIR}/Box2D/lib/libbox2d.a
-                                #${CMAKE_SOURCE_DIR}/tileson/lib/tileson.lib
-                                
+                                Tileson
                                 )

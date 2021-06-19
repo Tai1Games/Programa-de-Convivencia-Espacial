@@ -3,7 +3,8 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "../../json/single_include/nlohmann/"
             ],
             "defines": [
                 "_DEBUG",

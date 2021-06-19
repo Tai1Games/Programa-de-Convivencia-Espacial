@@ -37,7 +37,7 @@ void TileMap::init() {
 	for (auto& tileLayer : layers_)
 	{
 		//podemos distinguir entre capas de tiles, objetos, imagenes m�s adelante
-		if (tileLayer.getType() == tson::LayerType::ObjectGroup)
+		if (tileLayer.getType() == tson::Layer::Type::ObjectGroup)
 		{
 			//pos = position in tile units
 			vector<tson::Object> objetos = tileLayer.getObjects();
@@ -97,7 +97,7 @@ void TileMap::draw() const {
 	for (auto& tileLayer : layers_)
 	{
 		//podemos distinguir entre capas de tiles, objetos, imagenes m�s adelante
-		if (tileLayer.getType() == tson::LayerType::TileLayer)
+		if (tileLayer.getType() == tson::Layer::Type::TileLayer)
 		{
 			//pos = position in tile units
 			for (auto& [pos, tile] : tileLayer.getTileData()) //Loops through absolutely all existing tiles
@@ -149,28 +149,27 @@ void TileMap::draw() const {
 					SDL_Rect tilesetClip = { offsetX,offsetY,tileWidth ,tileWidth };
 					tilesetT_->render(drawPos, tilesetClip);
 				}
+				std::cout << "Tile ";
 			}
 		}
+		else std::cout << "No es el tipo que querias\n";
 	}
 }
 
 bool TileMap::loadTileson(string path) {
 	tson::Tileson parser;
-	std::string auxPath = fs::path(path);
-	auto t = parser.parse(auxPath).get();
-	tMap_ = *t;
-	if (tMap_.getStatus() == tson::ParseStatus::OK) {
+	tMap_ = parser.parse(fs::path(path));
+	if (tMap_.getStatus() == tson::Map::ParseStatus::OK) {
 		//variables de escala
 		mapCols_ = tMap_.getSize().x;
 		mapRows_ = tMap_.getSize().y;
 		//guardamos los datos de los tilesets que se usan
 		tileSets_ = tMap_.getTilesets();
+		std::cout << tMap_.getSize().x << " " << tMap_.getSize().y << " " << tMap_.getTilesets().size() << "\n";
 		return true;
 	}
-	else {
-		std::cout << "No se pudo cargar el mapa\n";
-		return false;
-	}
+	std::cout << "No se pudo cargar el mapa\n";
+	return false;
 }
 
 void TileMap::executeMapFactory()
