@@ -18,6 +18,8 @@ protected:
 	char buffer[2048];
 	int receivedBytes_ = 0;
 
+	std::vector<SpritePacket> spritePackets;
+
 	std::string getHostIpAddress();
 public:
 	MultiplayerHost();

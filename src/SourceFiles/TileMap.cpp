@@ -11,15 +11,16 @@
 #include "GameMode.h"
 #include "WeaponFactory.h"
 
-TileMap::TileMap(int w, int h, string map, EntityManager *eM, b2World *pW, BulletPool *bp, ConfettiPool *cP, StaplerPool *staplerPool, GameMode *gameMode) : Component(ComponentType::Tilemap), //w y h son de la ventana
-																																							 width_(w),
-																																							 height_(h),
-																																							 entityManager_(eM),
-																																							 physicsWorld_(pW),
-																																							 bulletPool_(bp),
-																																							 confettiPool_(cP),
-																																							 staplerPool_(staplerPool),
-																																							 gameMode_(gameMode)
+TileMap::TileMap(int w, int h, string map, EntityManager *eM, b2World *pW, BulletPool *bp, ConfettiPool *cP, StaplerPool *staplerPool, GameMode *gameMode) :
+	Component(ComponentType::Tilemap), //w y h son de la ventana
+	width_(w),
+	height_(h),
+	entityManager_(eM),
+	physicsWorld_(pW),
+	bulletPool_(bp),
+	confettiPool_(cP),
+	staplerPool_(staplerPool),
+	gameMode_(gameMode)
 {
 	loadTileson(map);
 	playerSpawns_.reserve(4);

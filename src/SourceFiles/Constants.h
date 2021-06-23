@@ -4,6 +4,7 @@
 #include "checkML.h"
 #include "json.hpp"
 #include "checkML.h"
+#include "Serializable.h"
 
 using json = nlohmann::json;
 
@@ -119,38 +120,80 @@ M -> Musica
 	|  short  |
 */
 
-
-struct SpritePacket {
+class SpritePacket : public Serializable
+{
+private:
 	char packetId = 'S'; //Sprite
 	unsigned char textureId;
-	short posX;
-	short posY;
-	short width;
-	short height;
+	short posX, posY;
+	short velX, velY;
+	short width, height;
 	short rotationDegrees = 0;
 	unsigned char frameNumberX = 0;
 	unsigned char frameNumberY = 0;
 	unsigned char flip = 0;
+
+public:
+	SpritePacket(unsigned char tId, short posx, short posy, short w, short h,
+	unsigned char flip = 0,
+	short velx = 0, short vely = 0, short rotDeg = 0,
+	unsigned char fX = 0, unsigned char fY = 0) :
+	packetId('S'),
+	textureId(tId),
+	posX(posx),
+	posY(posy),
+	velX(velx),
+	velY(vely),
+	width(w),
+	height(h),
+	rotationDegrees(rotDeg),
+	frameNumberX(fX),
+	frameNumberY(fY) {
+
+	}
 };
 
-struct AudioPacket {
+class AudioPacket : public Serializable
+{
+private:
 	char packetId = 'A'; //Audio
 	bool isMusic;
 	char soundId;
 	char nLoops = 0; //cambiar en cliente
+
+public:
+	AudioPacket(bool ismsic, char id, char loops = 0) :
+	packetId('A'),
+	isMusic(ismsic),
+	soundId(id),
+	nLoops(loops) {
+
+	}
 };
 
-struct PlayerInfoPacket {
+class PlayerInfoPacket : public Serializable
+{
+private:
 	char packetId = 'P';
 	char numberOfPlayers;
 	char player1Info;
 	char player2Info;
 	char player3Info;
+
+public:
+	PlayerInfoPacket(char num, char p1, char p2, char p3) : 
+	packetId('P'),
+	numberOfPlayers(num),
+	player1Info(p1),
+	player2Info(p2),
+	player3Info(p3)
 };
 
 #pragma pack(pop)
 
-struct InputPacket {
+class InputPacket : public Serializable
+{
+private:
 	char packetId = 'I'; //Input
 	char playerId;
 	bool holdGrab = false;
@@ -167,4 +210,32 @@ struct InputPacket {
 	bool menuBack = false;
 	bool pressPause = false;
 	char menuMove = false;
+
+public:
+	InputPacket(char id,
+	bool hG = false, bool rG = false,
+	bool pT = false, bool pP = false,
+	bool hI = false, bool pI = false,
+	float dirX = 0, float dirY = 0,
+	bool rI = false, bool pA = false,
+	bool mF = false, bool mB = false,
+	bool pPause = false, bool mM = false
+	) :
+	packetId('I'),
+	playerId(id),
+	holdGrab(hG),
+	releaseGrab(rG),
+	pressThrow(pT),
+	pressPick(pP),
+	holdImpulse(hI),
+	pressImpulse(pI),
+	aimDirX(dirX), aimDirY(dirY),
+	releaseImpulse(rI),
+	pressAttack(pA),
+	menuForward(mF),
+	menuBack(mB),
+	pressPause(pPause),
+	menuMove(mM)
+	{}
+
 };

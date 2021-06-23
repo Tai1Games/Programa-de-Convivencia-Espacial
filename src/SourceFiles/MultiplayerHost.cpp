@@ -168,7 +168,7 @@ void MultiplayerHost::handlePlayerInput(int clientNumber) {
 	(*playersVector)[buffer[0]]->inputBinder->syncInput(inputPacket);
 }
 
-void MultiplayerHost::sendTexture(const SpritePacket& sPacket)
+void MultiplayerHost::addTexture(const SpritePacket& sPacket)
 {
 	memset(buffer, 0, sizeof(SpritePacket));
 	buffer[0] = 'S';
@@ -182,11 +182,11 @@ void MultiplayerHost::sendTexture(const SpritePacket& sPacket)
 	*((unsigned char*)(buffer + 13)) = sPacket.frameNumberY;
 	*((unsigned char*)(buffer + 14)) = sPacket.flip;
 
-	for (int i = 0; i < 3; i++) {
-		if (clients_[i] != nullptr) {
-			SDLNet_TCP_Send(clients_[i], buffer, sizeof(SpritePacket));
-		}
-	}
+	// for (int i = 0; i < 3; i++) {
+	// 	if (clients_[i] != nullptr) {
+	// 		SDLNet_TCP_Send(clients_[i], buffer, sizeof(SpritePacket));
+	// 	}
+	// }
 }
 
 void MultiplayerHost::sendAudio(const AudioPacket& aPacket)

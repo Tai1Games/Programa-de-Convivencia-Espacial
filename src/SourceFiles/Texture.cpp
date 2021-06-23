@@ -106,15 +106,14 @@ void Texture::render(const SDL_Rect& dest, const SDL_Rect& clip) const {
 	if (texture_) {
 		SDL_RenderCopy(renderer_, texture_, &clip, &dest);
 		if (SDL_Game::instance()->isHosting())
-			SDL_Game::instance()->getHost()->sendTexture({ 'S',texId_, (short)dest.x,(short)dest.y, (short)dest.w, (short)dest.h });
+			SDL_Game::instance()->getHost()->addTexture({ texId_, (short)dest.x,(short)dest.y, (short)dest.w, (short)dest.h });
 	}
 }
 
 void Texture::render(const SDL_Rect& dest, double angle, const SDL_Rect& clip, SDL_RendererFlip flip) const
 {
 	if (texture_) {
-		SDL_RenderCopyEx(renderer_, texture_, &clip, &dest, angle, nullptr,
-			flip);
+		SDL_RenderCopyEx(renderer_, texture_, &clip, &dest, angle, nullptr, flip);
 	}
 }
 
@@ -133,13 +132,13 @@ void Texture::render(const SDL_Rect& dest, double angle,
 void Texture::render(const SDL_Rect& dest, double angle, unsigned short frameX, unsigned short frameY, SDL_RendererFlip flip) const {
 	SDL_Rect clip = { frameWidth_ * frameX, frameHeight_ * frameY, frameWidth_, frameHeight_ };
 	if (SDL_Game::instance()->isHosting())
-		SDL_Game::instance()->getHost()->sendTexture({ 'S',texId_,(short)dest.x,(short)dest.y, (short)dest.w, (short)dest.h, (short)angle, (unsigned char)frameX, (unsigned char)frameY, (unsigned char)flip });
+		SDL_Game::instance()->getHost()->addTexture({ 'S',texId_,(short)dest.x,(short)dest.y, (short)dest.w, (short)dest.h, (short)angle, (unsigned char)frameX, (unsigned char)frameY, (unsigned char)flip });
 	render(dest, angle, clip, flip);
 }
 
 void Texture::render(const SDL_Rect& dest, double angle) const {
 	SDL_Rect clip = { 0, 0, width_, height_ };
 	if (SDL_Game::instance()->isHosting())
-		SDL_Game::instance()->getHost()->sendTexture({ 'S',texId_,(short)dest.x,(short)dest.y, (short)dest.w, (short)dest.h, (short)angle });
+		SDL_Game::instance()->getHost()->addTexture({ 'S',texId_,(short)dest.x,(short)dest.y, (short)dest.w, (short)dest.h, (short)angle });
 	render(dest, angle, clip);
 }
