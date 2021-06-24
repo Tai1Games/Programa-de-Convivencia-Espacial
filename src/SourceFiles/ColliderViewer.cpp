@@ -39,6 +39,7 @@ void ColliderViewer::setPoints(double originX, double originY, double width, dou
 }
 
 void ColliderViewer::draw() const {
+#ifdef DEBUG
 	if (drawable_) {
 		// lista de fixtures del body
 		b2Fixture* f = body_->GetFixtureList();
@@ -62,6 +63,7 @@ void ColliderViewer::draw() const {
 		}
 		SDL_SetRenderDrawColor(renderer_, 0, 0, 0, SDL_ALPHA_OPAQUE);
 	}
+#endif
 }
 
 // este algoritmo es bastante r�pido (~500 microsegundos)

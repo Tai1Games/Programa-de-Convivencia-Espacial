@@ -127,13 +127,13 @@ M -> Musica
 
 class SpritePacket : public Serializable
 {
-	const static int SIZE = (sizeof(char) + sizeof(unsigned char) * 4 + sizeof(short) * 7);
+	const static int SIZE = (sizeof(char) + sizeof(unsigned char) * 4 + sizeof(short) * 5 + sizeof(float) * 3);
 
 public:
 	char packetId = 'S'; //Sprite
 	unsigned char textureId = 0;
 	short posX = 0, posY = 0;
-	short velX = 0, velY = 0;
+	float velX = 0, velY = 0, angVel = 0; 
 	short width = 0, height = 0;
 	short rotationDegrees = 0;
 	unsigned char frameNumberX = 0, frameNumberY = 0;
@@ -143,7 +143,7 @@ public:
 	SpritePacket(){};
 	SpritePacket(unsigned char tId, short posx, short posy, short w, short h,
 	unsigned char flip = 0,
-	short velx = 0, short vely = 0, short rotDeg = 0,
+	float velx = 0, float vely = 0, float rotVel = 0, short rotDeg = 0,
 	unsigned char fX = 0, unsigned char fY = 0);
 
 	void to_bin() override;

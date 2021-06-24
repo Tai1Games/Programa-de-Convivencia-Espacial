@@ -94,10 +94,10 @@ float Constants::getConstant<float>(const std::string &key) const
 //-------------------------------ONLINE PACKETS--------------------------------------------------
 
 SpritePacket::SpritePacket(unsigned char tId, short posx, short posy, short w, short h,
-	unsigned char flip, short velx, short vely, short rotDeg, unsigned char fX, unsigned char fY) :
+	unsigned char flip, float velx, float vely, float rotVel, short rotDeg, unsigned char fX, unsigned char fY) :
 	packetId('S'),
 	textureId(tId),
-	posX(posx), posY(posy),
+	posX(posx), posY(posy), angVel(rotVel),
 	velX(velx), velY(vely),
 	width(w), height(h),
 	rotationDegrees(rotDeg),
@@ -122,10 +122,12 @@ void SpritePacket::to_bin()
 	aux += sizeof(short);
 	memcpy(aux, &posY, sizeof(short));
 	aux += sizeof(short);
-	memcpy(aux, &velX, sizeof(short));
-	aux += sizeof(short);
-	memcpy(aux, &velY, sizeof(short));
-	aux += sizeof(short);
+	memcpy(aux, &velX, sizeof(float));
+	aux += sizeof(float);
+	memcpy(aux, &velY, sizeof(float));
+	aux += sizeof(float);
+	memcpy(aux, &angVel, sizeof(float));
+	aux += sizeof(float);
 	memcpy(aux, &width, sizeof(short));
 	aux += sizeof(short);
 	memcpy(aux, &height, sizeof(short));
@@ -165,10 +167,12 @@ int SpritePacket::from_bin(char* bobj)
 	aux += sizeof(short);
 	memcpy(&posY, aux, sizeof(short));
 	aux += sizeof(short);
-	memcpy(&velX, aux, sizeof(short));
-	aux += sizeof(short);
-	memcpy(&velY, aux, sizeof(short));
-	aux += sizeof(short);
+	memcpy(&velX, aux, sizeof(float));
+	aux += sizeof(float);
+	memcpy(&velY, aux, sizeof(float));
+	aux += sizeof(float);
+	memcpy(&angVel, aux, sizeof(float));
+	aux += sizeof(float);
 	memcpy(&width, aux, sizeof(short));
 	aux += sizeof(short);
 	memcpy(&height, aux, sizeof(short));
@@ -270,14 +274,14 @@ void PlayerInfoPacket::to_bin()
 int PlayerInfoPacket::from_bin(char* bobj)
 {
 	if (bobj == nullptr) {
-	std::cout << "bobj was nullptr in AudioPacket::from_bin\n";
+	std::cout << "bobj was nullptr in PlayerInfoPacket::from_bin\n";
 	return -1;
     }
 
     alloc_data(SIZE);
     if (strlen(bobj) >= _size)
     {
-        std::cout << "Invalid data buffer in AudioPacket::from_bin\n";
+        std::cout << "Invalid data buffer in PlayerInfoPacket::from_bin\n";
         return -1;
     }
 
@@ -365,14 +369,14 @@ void InputPacket::to_bin()
 int InputPacket::from_bin(char* bobj)
 {
 	if (bobj == nullptr) {
-	std::cout << "bobj was nullptr in AudioPacket::from_bin\n";
+	std::cout << "bobj was nullptr in InputPacket::from_bin\n";
 	return -1;
     }
 
     alloc_data(SIZE);
     if (strlen(bobj) >= _size)
     {
-        std::cout << "Invalid data buffer in AudioPacket::from_bin\n";
+        std::cout << "Invalid data buffer in InputPacket::from_bin\n";
         return -1;
     }
 
