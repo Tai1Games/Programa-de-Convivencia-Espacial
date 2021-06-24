@@ -1,5 +1,6 @@
 #pragma once
 #include "GameMode.h"
+
 class AbstractTimedGameMode : public GameMode
 {
 protected:

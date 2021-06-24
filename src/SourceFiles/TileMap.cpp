@@ -45,7 +45,6 @@ void TileMap::init()
 		{
 			//pos = position in tile units
 			vector<tson::Object> objetos = tileLayer.getObjects();
-			std::cout << "NumItems capa " << tileLayer.getName() << ": " << objetos.size() << "\n";
 			for (auto &obj : objetos)
 			{
 				if (tileLayer.getName() == "Walls")
@@ -188,7 +187,6 @@ bool TileMap::loadTileson(string path)
 			mapRows_ = tMap_.getSize().y;
 			//guardamos los datos de los tilesets que se usan
 			tileSets_ = tMap_.getTilesets();
-			std::cout << tMap_.getSize().x << " " << tMap_.getSize().y << " " << tMap_.getTilesets().size() << "\n";
 			return true;
 		}
 		std::cout << "No se pudo cargar el mapa\n";
