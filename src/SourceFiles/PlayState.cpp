@@ -80,6 +80,7 @@ void PlayState::init() {
 	}
 
 	Entity* countdown = entityManager_->addEntity();
+	countdown->addComponent<Viewer>(Resources::Debug);
 	Countdown* count = countdown->addComponent<Countdown>(gameMode_);
 	count->assignBoiler(tilemap_->getFireballGen());
 }

@@ -3,6 +3,7 @@
 #include "Resources.h"
 #include "Texture.h"
 #include "FireBallGenerator.h"
+#include "Viewer.h"
 
 class Countdown : public Component
 {
@@ -21,21 +22,31 @@ private:
 	int posX_ = CONST(int, "WINDOW_WIDTH") / 2;
 	int posY_ = CONST(int, "WINDOW_HEIGHT") / 2;
 
-	Texture* textures_[4] = { //3 2 1 go
-	SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Three),
-	SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Two),
-	SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::One),
-	SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Go) };
+	// Texture* textures_[4] = { //3 2 1 go
+	// 	SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Three),
+	// 	SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Two),
+	// 	SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::One),
+	// 	SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Go)
+	// };
 
-	Texture* currentNumTexture_ = textures_[0];
+	Resources::TextureId texturesId_[4] = {
+		Resources::Three,
+		Resources::Two,
+		Resources::One,
+		Resources::Go
+	};
+
+	Texture* currentNumTexture_ = nullptr;
 
 	GameMode* gMode_;
 	FireBallGenerator* fGen_;
 
+	Viewer* viewer = nullptr;
+
 public:
 	Countdown(GameMode* g) : Component(ComponentType::Countdown), gMode_(g) {}
 	virtual ~Countdown() {}
+	void init() override;
 	virtual void update();
-	virtual void draw() const;
 	void assignBoiler(FireBallGenerator* fGen) { fGen_ = fGen; }
 };

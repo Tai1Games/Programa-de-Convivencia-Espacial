@@ -8,6 +8,10 @@ class Viewer : public Component, public AbstractViewers
 {
 protected:
 	Transform* transform_;
+	SDL_Rect rect {-1,-1,-1,-1};
+	const SDL_Rect comparisonRect {-1,-1,-1,-1};
+	float angle = 0.0f;
+
 public:
 	Viewer();
 	Viewer(int textureId, ComponentType::CmpId id = ComponentType::Viewer);
@@ -15,7 +19,9 @@ public:
 	virtual ~Viewer();
 
 	virtual void init() override;
+	virtual void update() override;
 	virtual void draw() const override;
 
-	void setTexture(int text) { textureId_ = text; tex_ = SDL_Game::instance()->getTexturesMngr()->getTexture(textureId_); } //tiene que resetear la textura como tal
+	Texture* setTexture(int text);
+	void setRenderRectangle(SDL_Rect newRect);
 };

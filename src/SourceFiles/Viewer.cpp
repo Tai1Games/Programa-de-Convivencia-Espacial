@@ -11,6 +11,7 @@ Viewer::Viewer(int textureId, ComponentType::CmpId ct) :
 	transform_(nullptr) {	//
 	tex_ = nullptr;
 	textureId_ = textureId;
+	std::cout << textureId_ << "\n";
 }
 
 Viewer::~Viewer() {
@@ -20,11 +21,41 @@ void Viewer::init() {
 	transform_ = GETCMP1_(Transform);
 	AbstractViewers::init();
 }
-void Viewer::draw() const {
+
+void Viewer::update() {
 	if (drawable_) {
-		SDL_Rect drawRect = transform_->getRectRender();
-		drawRect.x += renderOffset_.x;
-		drawRect.y += renderOffset_.y;
-		tex_->render(drawRect, transform_->getAngleInDegrees(), frameX_, frameY_, flip_); // getAngle devuelve radianes, hay que pasarlos a �ngulos
+		if (transform_ != nullptr) {
+			rect = SDL_Rect(transform_->getRectRender());
+			rect.x += renderOffset_.x;
+			rect.y += renderOffset_.y;
+			angle = transform_->getAngleInDegrees();
+		}
+		else std::cout << "No transform!\n";
 	}
+}
+
+bool operator != (const SDL_Rect& a, const SDL_Rect& b) {
+	return a.x != b.x || a.y != b.y || a.w != b.w || a.h != b.h;
+}
+
+void Viewer::draw() const
+{
+	if (drawable_ && rect != comparisonRect) 	{
+		tex_->render(rect, angle, frameX_, frameY_, flip_);
+	}
+}
+
+Texture* Viewer::setTexture(int text)
+{
+	std::cout << "Set texture\n";
+	textureId_ = text;
+	tex_ = SDL_Game::instance()->getTexturesMngr()->getTexture(textureId_);
+	return tex_;	
+}
+
+void Viewer::setRenderRectangle(SDL_Rect newRect)
+{
+	rect = newRect;
+	rect.x += renderOffset_.x;
+	rect.y += renderOffset_.y;
 }
