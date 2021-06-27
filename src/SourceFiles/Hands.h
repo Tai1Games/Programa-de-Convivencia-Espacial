@@ -30,6 +30,8 @@ private:
 	int canPickWeaponTimer_ = 0;
 	int canPickWeaponCooldown_ = 10;
 
+	void updateRect();
+
 public:
 	Hands(int textureId, WeaponID wId = NoWeapon);
 	~Hands() {};
@@ -50,4 +52,6 @@ public:
 	double getArmLengthPhysics() { return armLengthPhysics_; }
 	bool getCanPickWeapon() { return canPickWeapon_; };
 	void setCanPickWeapon(bool b) { canPickWeapon_ = b; };
+
+	SDL_Rect getRenderRectangle() override {return handsRect;};
 };

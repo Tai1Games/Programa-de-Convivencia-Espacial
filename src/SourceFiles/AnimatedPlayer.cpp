@@ -21,14 +21,23 @@ void AnimatedPlayer::init()
 	for (AnimationInfo& a : animationsInfo_) {
 		a = {
 			nextAnimOrigin_,														// guardamos su origen
-			CONST(int, "NFRAMES_ANIM" + std::to_string(i))		//"cargamos" la duración de cada animacion
+			CONST(int, "NFRAMES_ANIM" + std::to_string(i))		//"cargamos" la duraciï¿½n de cada animacion
 		};
-		nextAnimOrigin_ += a.numFrames_;											//calculamos la posicion de la siguiente animación
+		nextAnimOrigin_ += a.numFrames_;											//calculamos la posicion de la siguiente animaciï¿½n
 		i++;
 	}
 
 	frameX_ = animationsInfo_[anim_].animOrigin_;
 	frameY_ = skin_;
+
+	hands = GETCMP1_(Hands);
+}
+
+void AnimatedPlayer::draw() const 
+{
+	Viewer::draw();
+	
+
 }
 
 void AnimatedPlayer::resetAnimation()
@@ -36,3 +45,4 @@ void AnimatedPlayer::resetAnimation()
 	setAnimSpeed(baseSpeed_);
 	AdvancedAnimatedViewer::resetAnimation();
 }
+

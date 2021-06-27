@@ -52,10 +52,3 @@ Texture* Viewer::setTexture(int text)
 	tex_ = SDL_Game::instance()->getTexturesMngr()->getTexture(textureId_);
 	return tex_;	
 }
-
-void Viewer::setRenderRectangle(SDL_Rect newRect)
-{
-	rect = newRect;
-	rect.x += renderOffset_.x;
-	rect.y += renderOffset_.y;
-}

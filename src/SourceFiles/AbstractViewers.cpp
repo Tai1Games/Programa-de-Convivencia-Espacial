@@ -14,3 +14,10 @@ void AbstractViewers::setNFrames(int nFrames)
 	nFrames_ = nFrames;
 	wH_.x = tex_->getWidth() / nFrames;
 }
+
+void AbstractViewers::setRenderRectangle(SDL_Rect newRect)
+{
+	rect = newRect;
+	rect.x += renderOffset_.x;
+	rect.y += renderOffset_.y;
+}

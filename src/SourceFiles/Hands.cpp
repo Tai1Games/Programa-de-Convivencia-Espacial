@@ -22,17 +22,6 @@ void Hands::init()
 	ib_ = playerData_->getBinder();
 }
 
-void Hands::draw() const
-{
-	b2Vec2 stickDir = dir_;
-	double angle = std::atan2((double)stickDir.x, -(double)stickDir.y) * (180.0 / PI) + 90;
-
-	SDL_Rect playerRect = collider_->getRectRender();
-	SDL_Rect destRect{ playerRect.x + playerRect.w / 2 - handSize_ / 2,playerRect.y + playerRect.h / 2 - handSize_ / 2 , handSize_ , handSize_ };
-
-	tex_->render(destRect, angle, frameX_, frameY_, Flipped_);
-}
-
 void Hands::handleInput()
 {
 	b2Vec2 vI = ib_->getAimDir();
@@ -67,6 +56,21 @@ void Hands::update()
 			canPickWeaponTimer_ = 0;
 		}
 	}
+
+	updateRect();
+}
+
+void Hands::updateRect()
+{
+	b2Vec2 stickDir = dir_;
+	drawAngle = std::atan2((double)stickDir.x, -(double)stickDir.y) * (180.0 / PI) + 90;
+	SDL_Rect playerRect = collider_->getRectRender();
+	rect = {
+		playerRect.x + (int)(playerRect.w * 0.5 - handSize_ * 0.5),
+		playerRect.y + (int)(playerRect.h * 0.5 - handSize_ * 0.5),
+		(int)handSize_ ,
+		(int)handSize_
+	};
 }
 
 void Hands::setWeapon(WeaponID wId, Weapon* w)

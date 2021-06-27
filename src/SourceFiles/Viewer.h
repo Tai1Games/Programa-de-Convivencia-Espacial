@@ -8,8 +8,6 @@ class Viewer : public Component, public AbstractViewers
 {
 protected:
 	Transform* transform_;
-	SDL_Rect rect {-1,-1,-1,-1};
-	const SDL_Rect comparisonRect {-1,-1,-1,-1};
 	float angle = 0.0f;
 
 public:
@@ -23,5 +21,4 @@ public:
 	virtual void draw() const override;
 
 	Texture* setTexture(int text);
-	void setRenderRectangle(SDL_Rect newRect);
 };
