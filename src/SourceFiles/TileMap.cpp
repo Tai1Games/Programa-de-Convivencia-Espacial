@@ -147,7 +147,7 @@ void TileMap::draw() const
 					int margin = tSet->getMargin();
 
 					tilesetT_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::tilesetTag_.find(tSet->getName())->second);
-					;
+
 					//Posicion de dibujado del vector
 					tson::Vector2i position = {std::get<0>(pos) * width_ / mapCols_, std::get<1>(pos) * height_ / mapRows_};
 

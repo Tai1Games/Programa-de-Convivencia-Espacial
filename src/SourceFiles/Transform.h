@@ -24,7 +24,10 @@ public:
 
 	Collider* getCollider() { return coll_; };
 
-	float getAngleInDegrees() const { return coll_->getAngleInDegrees(); }
+	float getAngleInDegrees() const {
+		if(coll_) return coll_->getAngleInDegrees();
+		return 0;
+	}
 
 	void setRenderRectangle(SDL_Rect newRect);
 

@@ -18,7 +18,7 @@ protected:
 
 	SDL_Rect rect {-1,-1,-1,-1};
 	const SDL_Rect comparisonRect {-1,-1,-1,-1};
-	float drawAngle ) 0;
+	float drawAngle_ = 0;
 
 public:
 	void init();
@@ -42,6 +42,9 @@ public:
 		return frameY_;
 	};
 
+	void setFlip(SDL_RendererFlip flip) { flip_ = flip; }
+	void setAngle(float angle) { drawAngle_ = angle; }
+	float getAngle() { return drawAngle_; }
 	void setRenderRectangle(SDL_Rect newRect);
 	virtual SDL_Rect getRenderRectangle() {return rect;};
 };

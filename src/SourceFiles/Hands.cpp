@@ -32,7 +32,7 @@ void Hands::handleInput()
 void Hands::update()
 {
 	AnimatedViewer::update();
-	angle_ = (std::asin(dir_.x) * -180.0 / PI) - 90;
+	angle_ = (std::asin(dir_.x) * -_180entrepi_) - 90;
 
 	//el arcoseno solo nos devuelve angulos en el intervalo 0� - 180�, si apuntamos hacia abajo hay que coger el angulo inverso
 	if (dir_.y < 0) angle_ = (int)(360 - angle_) % 360;
@@ -63,7 +63,7 @@ void Hands::update()
 void Hands::updateRect()
 {
 	b2Vec2 stickDir = dir_;
-	drawAngle = std::atan2((double)stickDir.x, -(double)stickDir.y) * (180.0 / PI) + 90;
+	drawAngle_ = std::atan2((double)stickDir.x, -(double)stickDir.y) * _180entrepi_ + 90;
 	SDL_Rect playerRect = collider_->getRectRender();
 	rect = {
 		playerRect.x + (int)(playerRect.w * 0.5 - handSize_ * 0.5),

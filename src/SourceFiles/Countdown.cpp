@@ -2,7 +2,7 @@
 
 void Countdown::init() {
 	viewer = GETCMP1_(Viewer);
-	viewer->setTexture(texturesId_[0]);
+	if(viewer) viewer->setTexture(texturesId_[0]);
 }
 
 void Countdown::update() {

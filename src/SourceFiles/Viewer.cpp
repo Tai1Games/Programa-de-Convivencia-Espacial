@@ -11,7 +11,6 @@ Viewer::Viewer(int textureId, ComponentType::CmpId ct) :
 	transform_(nullptr) {	//
 	tex_ = nullptr;
 	textureId_ = textureId;
-	std::cout << textureId_ << "\n";
 }
 
 Viewer::~Viewer() {
@@ -28,7 +27,7 @@ void Viewer::update() {
 			rect = SDL_Rect(transform_->getRectRender());
 			rect.x += renderOffset_.x;
 			rect.y += renderOffset_.y;
-			angle = transform_->getAngleInDegrees();
+			drawAngle_ = transform_->getAngleInDegrees();
 		}
 		else std::cout << "No transform!\n";
 	}
@@ -41,7 +40,7 @@ bool operator != (const SDL_Rect& a, const SDL_Rect& b) {
 void Viewer::draw() const
 {
 	if (drawable_ && rect != comparisonRect) 	{
-		tex_->render(rect, angle, frameX_, frameY_, flip_);
+		tex_->render(rect, drawAngle_, frameX_, frameY_, flip_);
 	}
 }
 

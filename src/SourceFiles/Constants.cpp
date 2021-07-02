@@ -139,6 +139,7 @@ void SpritePacket::to_bin()
 	memcpy(aux, &frameNumberY, sizeof(unsigned char));
 	aux += sizeof(unsigned char);
 	memcpy(aux, &flip, sizeof(unsigned char));
+	aux += sizeof(unsigned char);
 }
 
 int SpritePacket::from_bin(char* bobj)
@@ -184,6 +185,7 @@ int SpritePacket::from_bin(char* bobj)
 	memcpy(&frameNumberY, aux, sizeof(unsigned char));
 	aux += sizeof(unsigned char);
 	memcpy(&flip, aux, sizeof(unsigned char));
+	aux += sizeof(unsigned char);
 
     return 0;
 }
@@ -212,6 +214,7 @@ void AudioPacket::to_bin()
 	memcpy(aux, &soundId, sizeof(char));
 	aux += sizeof(char);
 	memcpy(aux, &nLoops, sizeof(char));
+	aux += sizeof(char);
 }
 
 int AudioPacket::from_bin(char* bobj)
@@ -239,6 +242,7 @@ int AudioPacket::from_bin(char* bobj)
 	memcpy(&soundId, aux, sizeof(char));
 	aux += sizeof(char);
 	memcpy(&nLoops, aux, sizeof(char));
+	aux += sizeof(char);
 
     return 0;
 }
@@ -269,6 +273,7 @@ void PlayerInfoPacket::to_bin()
 	memcpy(aux, &player2Info, sizeof(char));
 	aux += sizeof(char);
 	memcpy(aux, &player3Info, sizeof(char));
+	aux += sizeof(char);
 }
 
 int PlayerInfoPacket::from_bin(char* bobj)
@@ -298,6 +303,7 @@ int PlayerInfoPacket::from_bin(char* bobj)
 	memcpy(&player2Info, aux, sizeof(char));
 	aux += sizeof(char);
 	memcpy(&player3Info, aux, sizeof(char));
+	aux += sizeof(char);
 
     return 0;
 }
@@ -364,6 +370,7 @@ void InputPacket::to_bin()
 	memcpy(aux, &pressPause, sizeof(bool));
 	aux += sizeof(bool);
 	memcpy(aux, &menuMove, sizeof(char));
+	aux += sizeof(char);
 }
 
 int InputPacket::from_bin(char* bobj)
@@ -415,6 +422,7 @@ int InputPacket::from_bin(char* bobj)
 	memcpy(&pressPause, aux, sizeof(bool));
 	aux += sizeof(bool);
 	memcpy(&menuMove, aux, sizeof(char));
+	aux += sizeof(char);
 
     return 0;
 }

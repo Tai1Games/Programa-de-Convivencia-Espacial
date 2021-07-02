@@ -8,7 +8,6 @@ class Viewer : public Component, public AbstractViewers
 {
 protected:
 	Transform* transform_;
-	float angle = 0.0f;
 
 public:
 	Viewer();

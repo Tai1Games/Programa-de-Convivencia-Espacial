@@ -17,8 +17,11 @@ public:
 	virtual ~AnimatedPlayer();
 
 	virtual void init() override;
-	virtual void draw() const override;
 
-	void setSkin(int skin) { skin_ = skin; };
+	void setSkin(int skin) {
+		skin_ = skin;
+		frameY_ = skin_;
+	};
+	
 	void resetAnimation() override;
 };

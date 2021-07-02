@@ -28,6 +28,8 @@ protected:
 	void initProgressBars();
 	void renderProgressBars(const std::vector<double>& progressValues, const double& goalScore);
 
+	std::vector<Entity*> progressBars_;
+
 	Texture* progressBar_;
 
 public:

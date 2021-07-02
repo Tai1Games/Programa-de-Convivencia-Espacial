@@ -60,7 +60,12 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "bitset": "cpp",
+        "regex": "cpp",
+        "future": "cpp",
+        "shared_mutex": "cpp",
+        "variant": "cpp"
     },
     "C_Cpp.dimInactiveRegions": true
 }

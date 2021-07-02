@@ -11,11 +11,12 @@
             "program": "${workspaceFolder}/src/build/PCE",
             "args": [
             ],
-            "stopAtEntry": true,
+            "stopAtEntry": false,
             "cwd": "${workspaceFolder}/src/build/",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
+            "preLaunchTask": "build-Linux",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

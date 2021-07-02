@@ -33,16 +33,8 @@ void AnimatedPlayer::init()
 	hands = GETCMP1_(Hands);
 }
 
-void AnimatedPlayer::draw() const 
-{
-	Viewer::draw();
-	
-
-}
-
 void AnimatedPlayer::resetAnimation()
 {
 	setAnimSpeed(baseSpeed_);
 	AdvancedAnimatedViewer::resetAnimation();
 }
-

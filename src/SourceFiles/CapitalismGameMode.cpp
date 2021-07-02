@@ -71,14 +71,9 @@ void CapitalismGameMode::update() {
 
 void CapitalismGameMode::renderCoinsMarker()
 {
-	for (int k = 0; k < playerWallets_.size(); k++) {
-		string coinNumb = to_string(playerCoins_[k]);
-		vector<Texture*> coinNumbTextures;
-
-		for (int i = 0; i < coinNumb.length(); i++) { //sacamos los d�gitos y los metemos en un vector
-			coinNumbTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Zero + coinNumb[i] - '0'));
-		}
-
+	for (int k = 0; k < playerWallets_.size(); k++)
+	{
+		// renderizamos la moneda
 		SDL_Rect coinImageRect;
 		coinImageRect.x = (k % 2 == 0) ? coinUIMarginX_ : winWidth_ - coinUIMarginX_ - coinUIRadius_;
 		coinImageRect.y = (k < 2) ? coinUIMarginY_ : winHeigth_ - coinUIMarginY_ - coinUIRadius_;
@@ -86,6 +81,14 @@ void CapitalismGameMode::renderCoinsMarker()
 		coinImageRect.h = coinUIRadius_;
 
 		coinTextureUI_->render(coinImageRect);
+
+		// renderizamos los digitos
+		string coinNumb = to_string(playerCoins_[k]);
+		vector<Texture*> coinNumbTextures;
+
+		for (int i = 0; i < coinNumb.length(); i++) { //sacamos los d�gitos y los metemos en un vector
+			coinNumbTextures.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::Zero + coinNumb[i] - '0'));
+		}
 
 		SDL_Rect coinTextRect;
 		for (int i = 0; i < coinNumbTextures.size(); i++) {
