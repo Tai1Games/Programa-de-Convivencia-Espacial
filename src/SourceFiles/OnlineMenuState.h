@@ -17,7 +17,7 @@ private:
 
 	int tinkyOffset_ = CONST(int, "WINDOW_WIDTH") / 4;
 
-	int xOffset_ = CONST(int, "WINDOW_WIDTH") / 2;
+	int xOffset_ = CONST(int, "WINDOW_WIDTH") * 0.5f;
 	int yOffset_ = CONST(int, "WINDOW_HEIGHT") / 7;
 
 	int numberOfRounds_ = 3;

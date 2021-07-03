@@ -215,7 +215,7 @@ void TileMap::executeMapFactory()
 		{
 			//calculo de posicion y tama�o para cajas de Tiled
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), s.y / CONST(double, "PIXELS_PER_METER"));
-			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
+			pos = b2Vec2(pos.x + (size.x * 0.5f), pos.y - (size.y * 0.5f));
 			size *= 0.5f;
 			ObjectFactory::makeWall(entityManager_, physicsWorld_, pos, size);
 		}
@@ -238,7 +238,7 @@ void TileMap::executeMapFactory()
 		else if (name == "Pad")
 		{
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
-			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
+			pos = b2Vec2(pos.x + (size.x * 0.5f), pos.y - (size.y * 0.5f));
 			size *= 0.5f;
 			ObjectFactory::makePad(entityManager_, physicsWorld_, pos, size);
 		}
@@ -258,7 +258,7 @@ void TileMap::executeMapFactory()
 		{
 			float rotation = o.getRotation();
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), s.y / CONST(double, "PIXELS_PER_METER"));
-			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
+			pos = b2Vec2(pos.x + (size.x * 0.5f), pos.y - (size.y * 0.5f));
 			size *= 0.5f;
 
 			ObjectFactory::makePipe(entityManager_, physicsWorld_, pos, size, rotation);
@@ -270,7 +270,7 @@ void TileMap::executeMapFactory()
 		else if (name == "CarnivorousePlant")
 		{
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
-			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
+			pos = b2Vec2(pos.x + (size.x * 0.5f), pos.y - (size.y * 0.5f));
 			size *= 0.5f;
 			ObjectFactory::makeCarnivorousPlant(entityManager_, physicsWorld_, pos, size);
 		}
@@ -295,7 +295,7 @@ void TileMap::executeMapFactory()
 		else if (name == "TriggerButton")
 		{
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), (s.y) / CONST(double, "PIXELS_PER_METER"));
-			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
+			pos = b2Vec2(pos.x + (size.x * 0.5f), pos.y - (size.y * 0.5f));
 			size *= 0.5f;
 			string buttonType = o.getType();
 			; //Por defecto
@@ -307,7 +307,7 @@ void TileMap::executeMapFactory()
 		{
 			float rotation = o.getRotation();
 			size = b2Vec2(s.x / CONST(double, "PIXELS_PER_METER"), s.y / CONST(double, "PIXELS_PER_METER"));
-			pos = b2Vec2(pos.x + (size.x / 2), pos.y - (size.y / 2));
+			pos = b2Vec2(pos.x + (size.x * 0.5f), pos.y - (size.y * 0.5f));
 			size *= 0.5f;
 
 			ObjectFactory::makeTrasparentWall(entityManager_, physicsWorld_, pos, size, rotation);

@@ -17,8 +17,8 @@ bool PlayerController::isImpulseValid(const b2Vec2& dir)
 	cout << "angle " << angle << endl;
 	//comop mucho permite impulsos perpendiculares al agarre
 	//sumar radianes a PI/2 para restringir aun mas la direccion de impulso
-	return angle <= ((PI / 2) + impulseRadError_) || angle >= ((1.5 * PI) - impulseRadError_);
-	//return abs(angle) < PI / 2;
+	return angle <= ((PI * 0.5f) + impulseRadError_) || angle >= ((1.5 * PI) - impulseRadError_);
+	//return abs(angle) < PI * 0.5f;
 }
 
 PlayerController::PlayerController() : Component(ComponentType::PlayerController),
@@ -93,7 +93,7 @@ void PlayerController::handleInput()
 			if (dirImpulse_.Normalize() >= minFartForce_) {
 				b2Vec2 dir = dirImpulse_;
 				dir.Normalize();
-				emitter_->setOffset(Vector2D(-dir.x * (float)playerHeight_ / 2, dir.y * (float)playerHeight_ / 2));
+				emitter_->setOffset(Vector2D(-dir.x * (float)playerHeight_ * 0.5f, dir.y * (float)playerHeight_ * 0.5f));
 				emitter_->setDirection(Vector2D(-dir.x, dir.y));
 				emitter_->PlayStop();
 			}

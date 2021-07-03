@@ -34,7 +34,7 @@ void ControllerGameMode::render() {
 	if (roundFinished_) {
 		Texture* ganador = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::winner1 + winnerId_);
 		SDL_Rect destRect{
-			halfWidth_ - ganador->getWidth() / 2,
+			halfWidth_ - ganador->getWidth() * 0.5f,
 			halfHeight_,
 			ganador->getWidth(),
 			ganador->getHeight()

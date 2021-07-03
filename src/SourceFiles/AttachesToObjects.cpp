@@ -6,6 +6,10 @@
 #include <math.h>
 #include <cmath>
 
+#ifndef _USE_MATH_DEFINES
+#define _USE_MATH_DEFINES
+#endif /*_USE_MATH_DEFINES*/
+
 void AttachesToObjects::init() {
 	playerData_ = GETCMP1_(PlayerData);
 	mainCollider_ = GETCMP1_(Collider); //Obtiene el collider del cuerpo principal.
@@ -22,7 +26,7 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 		b2Vec2 perp = perpendicularCounterClockwise(collNormal);
 		float attachAngle = atanf(perp.y / perp.x);
 		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle()) > 0) ? -1 : 1;
-		attachAngle += (PI / 2) * tilt;
+		attachAngle += (M_PI_2) * tilt;
 
 		normalOnAttach_ = collNormal;
 		normalOnAttach_.Normalize();
@@ -36,8 +40,8 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 		}
 
 		else {
-			adjustNormal.x *= mainCollider_->getW(0) / 2;
-			adjustNormal.y *= mainCollider_->getW(0) / 2;
+			adjustNormal.x *= mainCollider_->getW(0) * 0.5;
+			adjustNormal.y *= mainCollider_->getW(0) * 0.5;
 
 			mainCollider_->setTransform(mainCollider_->getPos() + adjustNormal, attachAngle);
 		}

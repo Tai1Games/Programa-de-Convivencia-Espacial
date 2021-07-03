@@ -76,8 +76,8 @@ void OnlineMenuState::updatePointer(int n) {
 	pointer_ += size + n;
 	pointer_ %= size;
 
-	menuCursor_->setPosUIElement(b2Vec2(xOffset_ - textures_[pointer_]->getWidth() * 1.5 / 2 - cursorTexture_->getWidth() * 2, yOffset_ * (pointer_ + 1) - 50));
-	menuCursor2_->setPosUIElement(b2Vec2(xOffset_ + textures_[pointer_]->getWidth() * 1.5 / 2 + cursorTexture_->getWidth(), yOffset_ * (pointer_ + 1) - 50));
+	menuCursor_->setPosUIElement(b2Vec2(xOffset_ - textures_[pointer_]->getWidth() * 1.5 * 0.5f - cursorTexture_->getWidth() * 2, yOffset_ * (pointer_ + 1) - 50));
+	menuCursor2_->setPosUIElement(b2Vec2(xOffset_ + textures_[pointer_]->getWidth() * 1.5 * 0.5f + cursorTexture_->getWidth(), yOffset_ * (pointer_ + 1) - 50));
 }
 
 void OnlineMenuState::createText() { //preparar los textos
@@ -91,7 +91,7 @@ void OnlineMenuState::createText() { //preparar los textos
 	while (start <= end) {
 		texts_.push_back(entityManager_->addEntity());
 		textures_.push_back(SDL_Game::instance()->getTexturesMngr()->getTexture(start));
-		texts_.back()->addComponent<UIViewer>(start, b2Vec2(xOffset_ - textures_.back()->getWidth() * 1.5 / 2, (start - offset) * yOffset_), 1.5, 0);
+		texts_.back()->addComponent<UIViewer>(start, b2Vec2(xOffset_ - textures_.back()->getWidth() * 1.5 * 0.5f, (start - offset) * yOffset_), 1.5, 0);
 		start++;
 	}
 }
