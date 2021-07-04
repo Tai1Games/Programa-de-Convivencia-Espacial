@@ -49,6 +49,9 @@ private:
 	void initializeResources();
 	void closeResources();
 
+	Uint32 lastSendTime = 0;
+	Uint32 MS_PER_SEND_TICK = 100;
+
 public:
 	void start();
 	SDL_Game();
@@ -88,7 +91,10 @@ public:
 	SDL_Renderer* getRenderer() { return  renderer_; }
 	const Constants* getConstants() { return &constants_; }
 
-	bool isHosting() const { return isHosting_; };
+	bool isHosting() const {
+
+		return isHosting_;
+	};
 	MultiplayerHost* getHost() {
 		if (mpHost_ == nullptr) {
 			mpHost_ = new MultiplayerHost();

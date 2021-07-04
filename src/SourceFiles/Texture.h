@@ -66,6 +66,7 @@ public:
 	void render(const SDL_Rect& dest, double angle, const SDL_Rect& clip, SDL_RendererFlip flip) const;
 	void render(const SDL_Rect& dest, double angle, const SDL_Rect& clip) const;
 	void render(const SDL_Rect& dest, double angle, unsigned short frameX, unsigned short frameY = 0, SDL_RendererFlip flip = SDL_FLIP_NONE) const;
+	void render(const SDL_Rect& dest, double velX, double velY, double rotVel, double angle, unsigned short frameX, unsigned short frameY = 0, SDL_RendererFlip flip = SDL_FLIP_NONE) const;
 	void render(const SDL_Rect& dest, double angle, const SDL_RendererFlip& flip) const;
 	void render(const SDL_Rect& dest, double angle) const;
 
