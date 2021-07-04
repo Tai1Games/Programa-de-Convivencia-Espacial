@@ -40,11 +40,15 @@ SDL_Game::~SDL_Game() {
 	if (mpHost_ != nullptr)
 		delete mpHost_;
 
-	SDL_DestroyRenderer(renderer_);
+	if(renderer_ != nullptr) {
+		SDL_DestroyRenderer(renderer_);
 	renderer_ = nullptr;
+	}
 
-	SDL_DestroyWindow(window_);
-	window_ = nullptr;
+	if(window_ != nullptr) {
+		SDL_DestroyWindow(window_);
+		window_ = nullptr;
+	}
 
 	SDL_Quit();
 }

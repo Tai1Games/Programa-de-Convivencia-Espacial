@@ -44,22 +44,26 @@ void OnlineMenuState::handleInput()
 	}
 
 	if (ownerPlayerBinder_->menuForward()) {
+		GameStateMachine* gsM = SDL_Game::instance()->getStateMachine();
 		switch (pointer_) {
 		case 0: //local
-			SDL_Game::instance()->getStateMachine()->changeToState(States::menu);
+			//gsM->deleteState(States::play);
+			gsM->changeToState(States::menu);
 			break;
 		case 1: //host
 			SDL_Game::instance()->getHost();
-			SDL_Game::instance()->getStateMachine()->changeToState(States::menu);
+			gsM->deleteState(States::play);
+			gsM->changeToState(States::menu);
 			break;
 		case 2: //join
-			SDL_Game::instance()->getStateMachine()->changeToState(States::client);
+			gsM->changeToState(States::client);
 			break;
 		case 3: //tutorial
-			roundsVector_ = new vector<pair<GamemodeID, string>>();
-			roundsVector_->push_back(std::make_pair(GamemodeID::Tutorial, "TutorialRoom"));
-			SDL_Game::instance()->getStateMachine()->getMatchInfo()->setRounds(roundsVector_);
-			SDL_Game::instance()->getStateMachine()->transitionToState(States::play, roundsVector_->front().first, roundsVector_->front().second);
+			gsM->deleteState(States::play);
+			roundsVector_ = vector<pair<GamemodeID, string>>();
+			roundsVector_.push_back(std::make_pair(GamemodeID::Tutorial, "TutorialRoom"));
+			gsM->getMatchInfo()->setRounds(&roundsVector_);
+			gsM->transitionToState(States::play, roundsVector_.front().first, roundsVector_.front().second);
 		}
 	}
 }
@@ -67,6 +71,7 @@ void OnlineMenuState::handleInput()
 void OnlineMenuState::onLoaded() { //poner el menu al principio
 	//SDL_Game::instance()->getAudioMngr()->playMusic(Resources::AudioId::MainMenuMusic, -1);
 	pointer_ = 0;
+	updatePointer(0);
 }
 
 void OnlineMenuState::updatePointer(int n) {
