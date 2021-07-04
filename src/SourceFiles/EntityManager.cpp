@@ -14,7 +14,7 @@ EntityManager::EntityManager()
 EntityManager::~EntityManager() {
 	entities_.clear();
 	weapons_.clear();
-	//externalEntities_.clear();
+	externalEntities_.clear();
 }
 
 void EntityManager::update() {
