@@ -9,7 +9,7 @@ class Transform : public Component
 {
 public:
 	//-------------------------------------------------------------------------------------------------------------------
-	// IMPORTANTISIMO: AL REFERIRSE DIRECTAMENTE AL RENDER, LOS OFFSETS Y TAMAÑOS DE renderRect SON EN PIXELES, NO EN S.I.
+	// IMPORTANTISIMO: AL REFERIRSE DIRECTAMENTE AL RENDER, LOS OFFSETS Y TAMAï¿½OS DE renderRect SON EN PIXELES, NO EN S.I.
 	//--------------------------------------------------------------------------------------------------------------------
 	Transform(SDL_Rect renderRect, Collider* coll) : Component(ComponentType::Transform) {
 		coll_ = coll;
@@ -20,20 +20,21 @@ public:
 
 	void init();
 
-	SDL_Rect getRectRender(int index = 0) const {
-		SDL_Rect temp = coll_->getRectRender();
-		return SDL_Rect{
-			temp.x + renderRect_.x, temp.y + renderRect_.y,
-			renderRect_.w, renderRect_.h
-		};
-	}
+	SDL_Rect getRectRender() const;
 
 	Collider* getCollider() { return coll_; };
 
-	float getAngleInDegrees() const { return coll_->getAngleInDegrees(); }
+	float getAngleInDegrees() const {
+		if(coll_) return coll_->getAngleInDegrees();
+		return 0;
+	}
+
+	void setRenderRectangle(SDL_Rect newRect);
 
 private:
 
 	SDL_Rect renderRect_;
+	SDL_Rect overRect_;
+
 	Collider* coll_;
 };

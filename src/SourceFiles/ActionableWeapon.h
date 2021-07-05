@@ -1,7 +1,7 @@
 #pragma once
 #include "Weapon.h"
-class ActionableWeapon :
-	public Weapon
+
+class ActionableWeapon : public Weapon
 {
 protected:
 	//cooldown

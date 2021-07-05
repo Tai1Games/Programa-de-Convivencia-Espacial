@@ -13,6 +13,12 @@ void ControllerGameMode::init(PlayState* game) {
 	for (Entity* player : players_) controllerTimes_.push_back(0);
 
 	GameMode::initProgressBars();
+
+	ganador = state_->getEntityManager()->addEntity();
+
+	ganador->addComponent<Transform>(SDL_Rect(), nullptr);
+	ganador->addComponent<Viewer>();
+	ganador->setActive(false);
 }
 
 void ControllerGameMode::update() {
@@ -32,13 +38,15 @@ void ControllerGameMode::render() {
 	GameMode::renderProgressBars(controllerTimes_, timeToWin_);
 
 	if (roundFinished_) {
-		Texture* ganador = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::winner1 + winnerId_);
-		SDL_Rect destRect{
-			halfWidth_ - ganador->getWidth() / 2,
+		Viewer* v = GETCMP2(ganador, Viewer);
+		v->setTexture(Resources::winner1 + winnerId_);
+		v->setRenderRectangle({
+			halfWidth_ - v->getTexture()->getWidth() / 2,
 			halfHeight_,
-			ganador->getWidth(),
-			ganador->getHeight()
-		};
-		ganador->render(destRect, 0, 0);
+			v->getTexture()->getWidth(),
+			v->getTexture()->getHeight()
+		});
+
+		ganador->setActive(true);
 	}
 }

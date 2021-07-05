@@ -21,6 +21,9 @@ private:
 	int halfHeight_ = CONST(int, "WINDOW_HEIGHT") / 2;
 	double msPerFrame_ = CONST(double, "MS_PER_FRAME");
 	double timeToWin_ = CONST(double, "TIME_TO_WIN");
+	
+	Entity* ganador = nullptr;
+
 public:
 	ControllerGameMode(MatchInfo* mInfo) : GameMode(mInfo, GamemodeID::Controller) {};
 	virtual ~ControllerGameMode();

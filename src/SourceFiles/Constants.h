@@ -1,8 +1,10 @@
 #pragma once
+
 #include <string>
 #include "checkML.h"
 #include "json.hpp"
 #include "checkML.h"
+#include "Serializable.h"
 
 using json = nlohmann::json;
 
@@ -95,6 +97,11 @@ enum MapID {
 	NUMBER_OF_MAPS
 };*/
 
+
+
+// -----------------------ONLINE PACKETS-----------------------------------------
+#include "Serializable.h"
+
 /*
 Identificadores de paquetes
 A -> Audio
@@ -118,40 +125,77 @@ M -> Musica
 	|  short  |
 */
 
+class SpritePacket : public Serializable
+{
+	const static int SIZE = (sizeof(char) + sizeof(unsigned char) * 4 + sizeof(short) * 5 + sizeof(float) * 3);
 
-struct SpritePacket {
+public:
 	char packetId = 'S'; //Sprite
-	unsigned char textureId;
-	short posX;
-	short posY;
-	short width;
-	short height;
+	unsigned char textureId = 0;
+	short posX = 0, posY = 0;
+	float velX = 0, velY = 0, angVel = 0; 
+	short width = 0, height = 0;
 	short rotationDegrees = 0;
-	unsigned char frameNumberX = 0;
-	unsigned char frameNumberY = 0;
+	unsigned char frameNumberX = 0, frameNumberY = 0;
 	unsigned char flip = 0;
+
+public:
+	SpritePacket(){};
+	SpritePacket(unsigned char tId, short posx, short posy, short w, short h,
+	unsigned char flip = 0,
+	float velx = 0, float vely = 0, float rotVel = 0, short rotDeg = 0,
+	unsigned char fX = 0, unsigned char fY = 0);
+
+	void to_bin() override;
+	int from_bin(char* bobj) override;
 };
 
-struct AudioPacket {
+class AudioPacket : public Serializable
+{
+	const static int SIZE = sizeof(char) * 3 + sizeof(bool);
+
+public:
 	char packetId = 'A'; //Audio
-	bool isMusic;
-	char soundId;
+	bool isMusic = false;
+	char soundId = 0;
 	char nLoops = 0; //cambiar en cliente
+
+public:
+	AudioPacket(){};
+	AudioPacket(char pcktid, bool ismsic, char id, char loops = 0);
+	
+	void to_bin() override;
+	int from_bin(char* bobj) override;
 };
 
-struct PlayerInfoPacket {
+class PlayerInfoPacket : public Serializable
+{
+	const static int SIZE = sizeof(char) * 5;
+
+public:
 	char packetId = 'P';
-	char numberOfPlayers;
-	char player1Info;
-	char player2Info;
-	char player3Info;
+	char numberOfPlayers = 0;
+	char player1Info = 0;
+	char player2Info = 1;
+	char player3Info = 2;
+
+public:
+	PlayerInfoPacket(){};
+	PlayerInfoPacket(char num, char p1, char p2, char p3);
+
+	void to_bin() override;
+	int from_bin(char* bobj) override;
 };
 
 #pragma pack(pop)
 
-struct InputPacket {
+class InputPacket : public Serializable
+{
+	const static int SIZE = sizeof(char) * 3 + sizeof(bool) * 11 + sizeof(float) * 2;
+
+public:
 	char packetId = 'I'; //Input
-	char playerId;
+	char playerId = 0;
 	bool holdGrab = false;
 	bool releaseGrab = false;
 	bool pressThrow = false;
@@ -166,4 +210,14 @@ struct InputPacket {
 	bool menuBack = false;
 	bool pressPause = false;
 	char menuMove = false;
+
+public:
+	InputPacket(){};
+	InputPacket(char packtId, char id, bool hG = false, bool rG = false, bool pT = false,
+	bool pP = false, bool hI = false, bool pI = false, float dirX = 0, float dirY = 0,
+	bool rI = false, bool pA = false, bool mF = false, bool mB = false,
+	bool pPause = false, bool mM = false);
+
+	void to_bin() override;
+	int from_bin(char* bobj) override;
 };

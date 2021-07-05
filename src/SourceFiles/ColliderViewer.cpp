@@ -39,6 +39,7 @@ void ColliderViewer::setPoints(double originX, double originY, double width, dou
 }
 
 void ColliderViewer::draw() const {
+#ifdef DEBUG
 	if (drawable_) {
 		// lista de fixtures del body
 		b2Fixture* f = body_->GetFixtureList();
@@ -48,7 +49,7 @@ void ColliderViewer::draw() const {
 		while (f != nullptr) {
 			uint16 layer = f->GetFilterData().categoryBits;             // obtiene la capa de la fixture
 			int posColor = (layer > 0) ? round(log2(layer)) : numlayers - 1;        // escoge color de dibujado según la capa
-			if (layer < 0) cout << "ups algo malo pasó en las capas de colisión" << "			MSG at ColliderViewer.cpp line 52" << endl;
+			//if (layer < 0) cout << "ups algo malo pasó en las capas de colisión" << "			MSG at ColliderViewer.cpp line 52" << endl;
 			SDL_SetRenderDrawColor(renderer_, colors[posColor].r, colors[posColor].g, colors[posColor].b, SDL_ALPHA_OPAQUE);   // cambia color de dibujado
 
 			SDL_Rect renderRect = collider_->getRectRender(maxFixtures - i);
@@ -62,6 +63,7 @@ void ColliderViewer::draw() const {
 		}
 		SDL_SetRenderDrawColor(renderer_, 0, 0, 0, SDL_ALPHA_OPAQUE);
 	}
+#endif
 }
 
 // este algoritmo es bastante r�pido (~500 microsegundos)

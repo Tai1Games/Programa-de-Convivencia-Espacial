@@ -27,7 +27,7 @@ void AbstractTimedGameMode::render()
 		if (roundFinished_ && winnerId_ != -1) {
 			Texture* ganador = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::winner1 + winnerId_);
 			SDL_Rect destRect{
-				halfWinWidth_ - ganador->getWidth() * 0.5,
+				(int)(halfWinWidth_ - ganador->getWidth() * 0.5),
 				halfWinHeight_,
 				ganador->getWidth(),
 				ganador->getHeight()

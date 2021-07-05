@@ -55,7 +55,7 @@ public:
 
 	~Collider() {
 		//world_->DestroyBody(body_); world_ = nullptr;
-		// el body se destruye automáticamente al destruir el world
+		// el body se destruye automï¿½ticamente al destruir el world
 	}
 
 	virtual void init() override;
@@ -100,7 +100,7 @@ public:
 	void setAwake(bool b) { body_->SetAwake(b); }
 	void setEnabled(bool b) { body_->SetEnabled(b); }
 	void setBullet(bool b) { body_->SetBullet(b); }
-	void setUserData(void* data) { body_->SetUserData(data); }
+	void setUserData(void* data) { body_->GetUserData().pointer = (uintptr_t)data; }
 	void setTransform(b2Vec2 pos, float angle) { body_->SetTransform(pos, angle); }
 	void setLinearVelocity(b2Vec2 vel) { body_->SetLinearVelocity(vel); }
 	void setAngularVelocity(float vel) { body_->SetAngularVelocity(vel); }

@@ -7,16 +7,16 @@
 
 MultiplayerHost::MultiplayerHost() {
 	if (SDLNet_Init() < 0) {
-		throw;
+		throw std::runtime_error("Couldn't start SDLNet");
 	}
 
 	hostIPAddress_ = getHostIpAddress();
 	std::cout << "IP del host es: " << hostIPAddress_ << std::endl;
 	if (SDLNet_ResolveHost(&hostIp_, nullptr, 2000) < 0)
-		throw;
+		throw std::runtime_error("Couldn't resolve host");
 
 	masterSocket_ = SDLNet_TCP_Open(&hostIp_);
-	if (!masterSocket_) throw;
+	if (!masterSocket_) throw ("Couldn't open TCP port");
 
 	socketSet_ = SDLNet_AllocSocketSet(4);
 	SDLNet_TCP_AddSocket(socketSet_, masterSocket_);
@@ -33,9 +33,9 @@ std::string MultiplayerHost::getHostIpAddress() {
 	//Thanks Samir for all you've done for us
 	IPaddress ip;
 	if (SDLNet_ResolveHost(&ip, "ipinfo.io", 80) < 0)
-		throw;
+		throw std::runtime_error("Couldn't resolve host");
 	TCPsocket conn = SDLNet_TCP_Open(&ip);
-	if (!conn) throw;
+	if (!conn) throw std::runtime_error("Couldn't open TCP conn");
 
 	// envia peticion para conseguir la ip
 	const char* getter = "GET /ip HTTP/1.0\nHost: ipinfo.io\n\n";
@@ -168,7 +168,7 @@ void MultiplayerHost::handlePlayerInput(int clientNumber) {
 	(*playersVector)[buffer[0]]->inputBinder->syncInput(inputPacket);
 }
 
-void MultiplayerHost::sendTexture(const SpritePacket& sPacket)
+void MultiplayerHost::addTexture(const SpritePacket& sPacket)
 {
 	memset(buffer, 0, sizeof(SpritePacket));
 	buffer[0] = 'S';
@@ -182,11 +182,11 @@ void MultiplayerHost::sendTexture(const SpritePacket& sPacket)
 	*((unsigned char*)(buffer + 13)) = sPacket.frameNumberY;
 	*((unsigned char*)(buffer + 14)) = sPacket.flip;
 
-	for (int i = 0; i < 3; i++) {
-		if (clients_[i] != nullptr) {
-			SDLNet_TCP_Send(clients_[i], buffer, sizeof(SpritePacket));
-		}
-	}
+	// for (int i = 0; i < 3; i++) {
+	// 	if (clients_[i] != nullptr) {
+	// 		SDLNet_TCP_Send(clients_[i], buffer, sizeof(SpritePacket));
+	// 	}
+	// }
 }
 
 void MultiplayerHost::sendAudio(const AudioPacket& aPacket)

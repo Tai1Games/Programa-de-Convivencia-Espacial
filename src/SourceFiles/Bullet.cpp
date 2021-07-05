@@ -30,7 +30,7 @@ void Bullet::setActive(bool a, b2Vec2 pos, b2Vec2 size, b2Vec2 vel, int texture,
 	col_->getBody()->SetEnabled(a);
 
 	if (a) { //hacer movidas
-		float attachAngle = std::atanf(vel.y / vel.x) - (PI / 2);
+		float attachAngle = atanf(vel.y / vel.x) - (PI / 2);
 		if (vel.x < 0)attachAngle += PI; //se invierte
 		col_->getBody()->SetTransform(pos, attachAngle);
 		col_->applyLinearImpulse(vel, { 0,0 });

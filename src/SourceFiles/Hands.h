@@ -10,6 +10,9 @@
 class Hands : public AnimatedViewer
 {
 private:
+
+	float _180entrepi_ = 180.0f / PI;
+
 	b2Vec2 handPos_ = b2Vec2(0, 0);
 	b2Vec2 pos_ = b2Vec2(0, 0);
 	b2Vec2 dir_ = b2Vec2(0, 0);
@@ -30,11 +33,12 @@ private:
 	int canPickWeaponTimer_ = 0;
 	int canPickWeaponCooldown_ = 10;
 
+	void updateRect();
+
 public:
 	Hands(int textureId, WeaponID wId = NoWeapon);
 	~Hands() {};
 	virtual void init() override;
-	virtual void draw() const;
 	virtual void handleInput();
 	virtual void update() override;
 	void setWeapon(WeaponID wId, Weapon* w);

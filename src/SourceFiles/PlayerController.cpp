@@ -91,7 +91,8 @@ void PlayerController::handleInput()
 			SDL_Game::instance()->getAudioMngr()->playChannel(Resources::ImpulseFromAirSound, 0);
 			coll_->applyLinearImpulse(dirImpulse_, b2Vec2(0, 0)); //aplica la fuerza
 			if (dirImpulse_.Normalize() >= minFartForce_) {
-				b2Vec2 dir = dirImpulse_.NormalizedVector();
+				b2Vec2 dir = dirImpulse_;
+				dir.Normalize();
 				emitter_->setOffset(Vector2D(-dir.x * (float)playerHeight_ / 2, dir.y * (float)playerHeight_ / 2));
 				emitter_->setDirection(Vector2D(-dir.x, dir.y));
 				emitter_->PlayStop();

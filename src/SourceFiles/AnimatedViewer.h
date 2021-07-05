@@ -10,7 +10,7 @@ public:
 		timePerFrame_ = timeperframe;
 	}
 
-	~AnimatedViewer() {}
+	virtual ~AnimatedViewer() {}
 
 	virtual void init() override;
 	virtual void update() override;

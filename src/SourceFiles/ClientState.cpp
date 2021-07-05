@@ -92,9 +92,8 @@ void ClientState::receiveSprite() {
 		receivedBytes_ += n;
 	}
 	//*((us*)(buffer+sizeof(char)*7))
-	//id      pos x			pos y		  width	         height		   rot				frameX		     frameY			flip
-	spritesToRender_.push({ 'S', (uc)buffer[0], *((short*)(buffer + 1)), *((short*)(buffer + 3)), *((short*)(buffer + 5)),
-		*((short*)(buffer + 7)),*((short*)(buffer + 9)),(uc)buffer[11],(uc)buffer[12],(uc)buffer[13] });
+	//						id      pos x				pos y		  			width	         			height		   						rot							frameX		     frameY			flip
+	spritesToRender_.push({ 'S', (uc)buffer[0], *((short*)(buffer + 1)), *((short*)(buffer + 3)), *((short*)(buffer + 5)), (unsigned char)*((short*)(buffer + 7)),*((short*)(buffer + 9)),(uc)buffer[11],(uc)buffer[12],(uc)buffer[13] });
 }
 
 

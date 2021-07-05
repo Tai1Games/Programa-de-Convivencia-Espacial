@@ -15,6 +15,11 @@ protected:
 	b2Vec2 wH_;
 	unsigned short int frameX_ = 0, frameY_ = 0;
 	SDL_RendererFlip flip_ = SDL_FLIP_NONE;
+
+	SDL_Rect rect {-1,-1,-1,-1};
+	const SDL_Rect comparisonRect {-1,-1,-1,-1};
+	float drawAngle_ = 0;
+
 public:
 	void init();
 
@@ -36,4 +41,10 @@ public:
 	unsigned short int getFrameY() const {
 		return frameY_;
 	};
+
+	void setFlip(SDL_RendererFlip flip) { flip_ = flip; }
+	void setAngle(float angle) { drawAngle_ = angle; }
+	float getAngle() { return drawAngle_; }
+	void setRenderRectangle(SDL_Rect newRect);
+	virtual SDL_Rect getRenderRectangle() {return rect;};
 };

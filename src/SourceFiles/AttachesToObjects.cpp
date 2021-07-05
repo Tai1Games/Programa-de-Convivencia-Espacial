@@ -4,6 +4,7 @@
 #include "CollisionHandler.h"
 #include "SDL_macros.h"
 #include <math.h>
+#include <cmath>
 
 void AttachesToObjects::init() {
 	playerData_ = GETCMP1_(PlayerData);
@@ -19,7 +20,7 @@ void AttachesToObjects::attachToObject(b2Body* attachedObject, b2Vec2 collPoint,
 	if (joint_ == nullptr) {
 		attachedObject_ = attachedObject;
 		b2Vec2 perp = perpendicularCounterClockwise(collNormal);
-		float attachAngle = std::atanf(perp.y / perp.x);
+		float attachAngle = atanf(perp.y / perp.x);
 		int tilt = ((attachAngle - mainCollider_->getBody()->GetAngle()) > 0) ? -1 : 1;
 		attachAngle += (PI / 2) * tilt;
 
