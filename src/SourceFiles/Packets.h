@@ -2,7 +2,7 @@
 
 // -----------------------ONLINE PACKETS-----------------------------------------
 #include "Serializable.h"
-
+#include <algorithm>
 /*
 Identificadores de paquetes
 A -> Audio
@@ -28,9 +28,9 @@ M -> Musica
 
 class SpritePacket : public Serializable
 {
+public:
 	const static int SIZE = (sizeof(char) + sizeof(unsigned char) * 4 + sizeof(short) * 5 + sizeof(float) * 3);
 
-public:
 	char packetId = 'S'; //Sprite
 	unsigned char textureId = 0;
 	short posX = 0, posY = 0;
@@ -53,9 +53,9 @@ public:
 
 class AudioPacket : public Serializable
 {
+public:
 	const static int SIZE = sizeof(char) * 3 + sizeof(bool);
 
-public:
 	char packetId = 'A'; //Audio
 	bool isMusic = false;
 	char soundId = 0;
@@ -63,7 +63,7 @@ public:
 
 public:
 	AudioPacket(){};
-	AudioPacket(char pcktid, bool ismsic, char id, char loops = 0);
+	AudioPacket(bool ismsic, char id, char loops = 0);
 	
 	void to_bin() override;
 	int from_bin(char* bobj) override;
@@ -71,9 +71,9 @@ public:
 
 class PlayerInfoPacket : public Serializable
 {
-	const static int SIZE = sizeof(char) * 5;
-
 public:
+	const static int SIZE = sizeof(char) * 5;
+	
 	char packetId = 'P';
 	char numberOfPlayers = 0;
 	char player1Info = 0;
@@ -86,15 +86,21 @@ public:
 
 	void to_bin() override;
 	int from_bin(char* bobj) override;
+
+	void updatePlayersId(int amount){
+		player1Info += amount;
+		player2Info += amount;
+		player3Info += amount;
+	}
 };
 
 #pragma pack(pop)
 
 class InputPacket : public Serializable
 {
+public:
 	const static int SIZE = sizeof(char) * 3 + sizeof(bool) * 11 + sizeof(float) * 2;
 
-public:
 	char packetId = 'I'; //Input
 	char playerId = 0;
 	bool holdGrab = false;
@@ -113,7 +119,7 @@ public:
 	char menuMove = false;
 
 public:
-	InputPacket(){};
+	InputPacket() {};
 	InputPacket(char packtId, char id, bool hG = false, bool rG = false, bool pT = false,
 	bool pP = false, bool hI = false, bool pI = false, float dirX = 0, float dirY = 0,
 	bool rI = false, bool pA = false, bool mF = false, bool mB = false,
@@ -122,3 +128,8 @@ public:
 	void to_bin() override;
 	int from_bin(char* bobj) override;
 };
+
+
+using namespace std;
+
+const static int MAX_PACKET_SIZE = max(SpritePacket::SIZE, max(AudioPacket::SIZE, max(PlayerInfoPacket::SIZE, InputPacket::SIZE)));

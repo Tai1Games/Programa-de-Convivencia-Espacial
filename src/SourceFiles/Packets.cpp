@@ -102,8 +102,8 @@ int SpritePacket::from_bin(char* bobj)
 }
 
 
-AudioPacket::AudioPacket(char pcktid, bool ismsic, char id, char loops) :
-	packetId(pcktid),
+AudioPacket::AudioPacket(bool ismsic, char id, char loops) :
+	packetId('A'),
 	isMusic(ismsic),
 	soundId(id),
 	nLoops(loops) {
@@ -190,8 +190,8 @@ void PlayerInfoPacket::to_bin()
 int PlayerInfoPacket::from_bin(char* bobj)
 {
 	if (bobj == nullptr) {
-	std::cout << "bobj was nullptr in PlayerInfoPacket::from_bin\n";
-	return -1;
+		std::cout << "bobj was nullptr in PlayerInfoPacket::from_bin\n";
+		return -1;
     }
 
     alloc_data(SIZE);
