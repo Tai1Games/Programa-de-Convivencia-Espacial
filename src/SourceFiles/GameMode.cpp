@@ -21,10 +21,10 @@ void GameMode::renderProgressBars(const std::vector<double>& progressValues, con
 {
 	for (int i = 0; i < players_.size(); i++) {
 		SDL_Rect dest = {
-			healthViewerPos_[i].x,
-			healthViewerPos_[i].y,
-			(int)progressBar_->getFrameWidth() * barsScale,
-			(int)progressBar_->getFrameHeight() * barsScale
+			(int)healthViewerPos_[i].x,
+			(int)healthViewerPos_[i].y,
+			(int)(progressBar_->getFrameWidth() * barsScale),
+			(int)(progressBar_->getFrameHeight() * barsScale)
 		};
 		int value = min((progressValues[i] * progressBar_->getNumFramesX()) / goalScore, (double)progressBar_->getNumFramesX() - 1);
 		SDL_RendererFlip flip = SDL_FLIP_NONE;

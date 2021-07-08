@@ -119,8 +119,8 @@ void SDL_Game::closeResources() {
 	inputHandler_ = nullptr;
 }
 
-void SDL_Game::start() {
-	exit_ = false;
+void SDL_Game::start(char* addr, char* port) {
+	exit_ = false;º
 	gamestateMachine_->changeToState(States::playableMenu, 0);
 	//gamestateMachine_->changeToState(States::play, 4, GamemodeID::Timed, "BoilerRoom"); //BoilerRoom, LivingRoom, GymRoom
 
@@ -131,7 +131,14 @@ void SDL_Game::start() {
 		Uint32 frameTime = getTime() - startTime;
 		if (frameTime < MS_PER_FRAME_)
 			SDL_Delay(MS_PER_FRAME_ - frameTime);
+		
+		if(startTime - lastSendTime >= MS_PER_SEND_TICK) {
+			sendData_ = true;
+			lastSendTime = startTime;
+		}
+		else sendData_ = false;
 		//else cout << "LAGGING BEHIND! " << frameTime << endl << endl;
+
 	}
 	//}
 	//else std::cout << "No hay mando conectado.\nAt SDL_Game.cpp line 113\n\n";

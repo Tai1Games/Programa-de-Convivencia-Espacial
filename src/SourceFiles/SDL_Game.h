@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SDL_GAME_H
+#define SDL_GAME_H
+
 #include <SDL.h>
 #include "Constants.h"
 #include <memory>
@@ -39,11 +41,12 @@ protected:
 
 	static unique_ptr<SDL_Game> instance_;
 
-	bool isHosting_ = false;
+	bool sendData_ = false;
 	bool isFullscreen_ = false;
 	int displayW_=1920;
 	int displayH_=1080;
 	float windowScale_ = 0.75;
+
 private:
 	bool exit_;
 	void initializeResources();
@@ -52,19 +55,15 @@ private:
 	Uint32 lastSendTime = 0;
 	Uint32 MS_PER_SEND_TICK = 100;
 
+	char* addr_ = nullptr, * port_ = nullptr;
+
 public:
-	void start();
+	void start(char* addr = "localhost", char* port = "2000");
 	SDL_Game();
 	virtual ~SDL_Game();
 
 	SDL_Game(SDL_Game&) = delete;
 	SDL_Game& operator=(SDL_Game&) = delete;
-
-	/*inline static SDL_Game* instance() {
-		assert(instance_.get() != nullptr);
-		return instance_.get();
-		std::cout << "He sido llamado por singleton" << std::endl;
-	}*/
 
 	inline static SDL_Game* instance() {
 		if (instance_.get() == nullptr) {
@@ -72,7 +71,6 @@ public:
 		}
 		return instance_.get();
 	}
-
 
 	inline unsigned int getTime() {
 		return SDL_GetTicks();
@@ -91,15 +89,17 @@ public:
 	SDL_Renderer* getRenderer() { return  renderer_; }
 	const Constants* getConstants() { return &constants_; }
 
-	bool isHosting() const {
+	bool haveToSend() const {
+		return sendData_;
+	}
 
-		return isHosting_;
-	};
 	MultiplayerHost* getHost() {
 		if (mpHost_ == nullptr) {
-			mpHost_ = new MultiplayerHost();
-			isHosting_ = true;
+			mpHost_ = new MultiplayerHost(addr_, port_);
+			sendData_ = true;
 			gamestateMachine_->setMpHost(mpHost_);
 		} return mpHost_;
 	}
 };
+
+#endif //SDL_GAME_H

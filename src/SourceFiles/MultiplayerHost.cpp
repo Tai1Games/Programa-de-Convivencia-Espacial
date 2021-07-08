@@ -98,58 +98,67 @@ std::string MultiplayerHost::getHostIpAddress()
 
 void MultiplayerHost::checkActivity()
 {
-	if (SDLNet_CheckSockets(socketSet_, 0) > 0)
+	Socket* client = nullptr;
+	
+	if(socket->recv(buffer, client) == -1) {
+		return;
+	}
+
+	// else hay actividad
+	
+	// comprobar si ya está conectado
+	bool alreadyConn = false;
+	int i = 0;
+	while(i < 3 && client != clients_[i].get()) i++;
+
+	if(i != 3) // no está conectado ya
 	{
-		//Alguien se une
-		if (SDLNet_SocketReady(masterSocket_)) {
-			TCPsocket client = SDLNet_TCP_Accept(masterSocket_);
+		int clientPlace = 0;
+		while (clientPlace < 3 && clients_[clientPlace] != nullptr)
+			clientPlace++;
+	
+		// cabe el cliente
+		if (clientPlace < 3) {
+			//std::cout << "Jugador conectado, id asignada: " << clientPlace << std::endl;
+			clients_[clientPlace].reset(client);
+			socket->send("C", *clients_[clientPlace].get(), 1);
+		}
+		// tiramos la conexión, no cabe
+		else {
+			socket->send("L", *clients_[clientPlace].get(), 1);
+			client = nullptr;
+		}
+	}
 
-			int clientPlace = 0;
-			while (clientPlace < 3 && clients_[clientPlace] != nullptr)
-				clientPlace++;
+	//Revisar actividad de los demas
+	for (int i = 0; i < 3; i++)
+	{
+		if (clients_[i] != nullptr)
+		{
+			memset(buffer, 0, MAX_PACKET_SIZE);
+			Socket* s = 0;
+			receivedBytes_ = socket->recv(buffer, s, 1);
 
-			if (clientPlace < 3) {
-				//std::cout << "Jugador conectado, id asignada: " << clientPlace << std::endl;
-				clients_[clientPlace] = client;
-				SDLNet_TCP_AddSocket(socketSet_, client);
-				SDLNet_TCP_Send(client, "C", 9);
+			if (receivedBytes_ <= 0)
+			{
+				//Usuario ha desconectado o perdido conexion
+				clients_[i] = nullptr;
 			}
 			else {
-				SDLNet_TCP_Send(client, "L", 1);
-			}
-		}
-
-		//Revisar actividad de los demas
-		for (int i = 0; i < 3; i++)
-		{
-			if (clients_[i] != nullptr && SDLNet_SocketReady(clients_[i]))
-			{
-				memset(buffer, 0, MAX_PACKET_SIZE);
-
-				receivedBytes_ = SDLNet_TCP_Recv(clients_[i], buffer, 1);
-				if (receivedBytes_ <= 0) {
-					//Usuario ha desconectado o perdido conexion
-					SDLNet_TCP_Close(clients_[i]);
-					SDLNet_TCP_DelSocket(socketSet_, clients_[i]);
-					clients_[i] = nullptr;
-				}
-				else {
-					//Tratamiento de mensajes de los jugadores
-					switch (buffer[0]) {
-					case 'P':
-						handlePlayerJoin(i);
-						break;
-					case 'I':
-						//Nos llega input del jugador
-						handlePlayerInput(i);
-						break;
-					}
+				//Tratamiento de mensajes de los jugadores
+				switch (buffer[0]) {
+				case 'P':
+					handlePlayerJoin(i);
+					break;
+				case 'I':
+					//Nos llega input del jugador
+					handlePlayerInput(i);
+					break;
 				}
 			}
 		}
 	}
 }
-
 
 void MultiplayerHost::handlePlayerJoin(int clientNumber) 
 {
@@ -178,13 +187,9 @@ void MultiplayerHost::handlePlayerJoin(int clientNumber)
 
 		//Enviamos de vuelta al cliente la informacion de los jugadores
 		piPacket.updatePlayersId(nStartingPlayers);
-		piPacket.to_bin();
-		char* aux = piPacket.data();
-
-		socket->send("L", *clientSocket, 1);
+		socket->send(piPacket, *clientSocket);
 	}
 	else { //Ya hay demasiados jugadores, avisamos que estamos llenos y tiramos la conexion
-
 		socket->send("L", *clientSocket, 1);
 		clients_[clientNumber] = nullptr;
 	}
@@ -202,10 +207,16 @@ void MultiplayerHost::handlePlayerInput(int clientNumber)
 	(*playersVector)[inputPacket.playerId]->inputBinder->syncInput(inputPacket);
 }
 
-void MultiplayerHost::addFrameId(uint32_t id)
-{	
-	memcpy(messagePtr, id, sizeof(uint32_t));
-	messagePtr++;
+void MultiplayerHost::start()
+{
+	addFrameId();
+	checkActivity();
+}
+
+void MultiplayerHost::addFrameId()
+{
+	memcpy(messagePtr, &frameId, sizeof(uint32_t));
+	messagePtr += sizeof(uint32_t);
 }
 
 void MultiplayerHost::addTexture(SpritePacket& sPacket)
@@ -226,6 +237,7 @@ void MultiplayerHost::finishSending()
 {
 	memcpy(messagePtr, "\0", 1);
 	messagePtr++;
+	++frameId;
 }
 
 void MultiplayerHost::send()
@@ -238,5 +250,3 @@ void MultiplayerHost::send()
 		}
 	}
 }
-
-

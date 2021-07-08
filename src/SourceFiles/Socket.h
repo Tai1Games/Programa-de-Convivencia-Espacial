@@ -71,6 +71,20 @@ public:
     /**
      *  Recibe un mensaje de aplicación
      *
+     *    @param buff que recibirá los datos de la red.
+     *
+     *    @param sock que identificará al extremo que envía los datos si es
+     *    distinto de 0 se creará un objeto Socket con la dirección y puerto.
+     * 
+     *    @param maxLen tamaño del buffer
+     *
+     *    @return 0 en caso de éxito o -1 si error (cerrar conexión)
+     */
+    int recv(char* buff, Socket * &sock, int maxLen = MAX_MESSAGE_SIZE);
+
+    /**
+     *  Recibe un mensaje de aplicación
+     *
      *    @param obj que recibirá los datos de la red. Se usará para la
      *    reconstrucción del objeto mediante Serializable::from_bin del interfaz.
      *

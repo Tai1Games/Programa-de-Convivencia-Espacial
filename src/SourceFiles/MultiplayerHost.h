@@ -21,7 +21,15 @@ protected:
 	char message[MAX_PACKET_SIZE];
 	char* messagePtr = &message[0];
 
+	uint32_t frameId = 0;
+
 	std::string getHostIpAddress();
+
+	void addFrameId();
+	void checkActivity();
+	void handlePlayerJoin(int clientNumber);
+	void handlePlayerInput(int clientNumber);
+	void finishSending();
 
 public:
 	MultiplayerHost();
@@ -30,11 +38,8 @@ public:
 	void init();
 	~MultiplayerHost();
 
-	void checkActivity();
-	void handlePlayerJoin(int clientNumber);
-	void handlePlayerInput(int clientNumber);
+	void start();
 	void addTexture(SpritePacket& sPacket);
 	void addAudio(AudioPacket& aPacket);
 	void send();
-	void finishSending();
 };

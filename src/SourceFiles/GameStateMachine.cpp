@@ -205,12 +205,14 @@ void GameStateMachine::handleInput()
 void GameStateMachine::gameCycle()
 {
 	handleInput();
-	if (mpHost_ != nullptr)
-		mpHost_->checkActivity();
+	if (mpHost_ != nullptr) {
+		mpHost_->start();
+	}
 	update();
 	render();
-	if (mpHost_ != nullptr)
-		mpHost_->finishSending();
+	if (mpHost_ != nullptr) {
+		mpHost_->send();
+	}
 }
 
 void GameStateMachine::setMpHost(MultiplayerHost *host)

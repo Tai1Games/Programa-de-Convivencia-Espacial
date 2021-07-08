@@ -41,6 +41,29 @@ Socket::Socket(struct sockaddr * _sa, socklen_t _sa_len):sd(-1), sa(*_sa), sa_le
     bind();
 }
 
+int Socket::recv(char* buff, Socket * &sock, int maxLen)
+{
+    struct sockaddr sa;
+    socklen_t sa_len = sizeof(struct sockaddr);
+
+    int len = std::min(maxLen, 32768);
+
+    ssize_t bytes = ::recvfrom(sd, buff, len, 0, &sa, &sa_len);
+
+    if ( bytes <= 0 )
+    {
+        //std::cout << "bytes <= 0\n";
+        return -1;
+    }
+
+    if ( sock != 0 )
+    {
+        sock = new Socket(&sa, sa_len);
+    }
+
+    return 0;
+}
+
 int Socket::recv(Serializable &obj, Socket * &sock)
 {
     struct sockaddr sa;

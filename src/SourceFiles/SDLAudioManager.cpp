@@ -77,7 +77,7 @@ int SDLAudioManager::playChannel(int tag, int loops, int channel) {
 	Mix_Chunk* chunk = chunks_[tag];
 	if (chunk != nullptr)
 	{
-		if (SDL_Game::instance()->isHosting()) {
+		if (SDL_Game::instance()->haveToSend()) {
 			AudioPacket aP = { false, (char)tag, (char)loops };
 			SDL_Game::instance()->getHost()->addAudio(aP);
 		}
@@ -131,7 +131,7 @@ void SDLAudioManager::playMusic(int tag, int loops) {
 	if (music != nullptr) {
 		Mix_PlayMusic(music, loops);
 
-		if (SDL_Game::instance()->isHosting()) {
+		if (SDL_Game::instance()->haveToSend()) {
 			AudioPacket aP = { true, (char)tag, (char)loops };
 			SDL_Game::instance()->getHost()->addAudio(aP);
 		}
