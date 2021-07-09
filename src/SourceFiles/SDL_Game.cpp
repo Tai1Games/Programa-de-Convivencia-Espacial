@@ -121,8 +121,8 @@ void SDL_Game::closeResources() {
 
 void SDL_Game::start(char* addr, char* port)
 {
-	if(addr == nullptr) addr = "localhost";
-	if(port == nullptr) port = "2000";
+	if(addr != nullptr) strcpy(addr_, addr);
+	if(port != nullptr) strcpy(port_, port);
 
 	exit_ = false;
 	gamestateMachine_->changeToState(States::playableMenu, 0);
@@ -146,4 +146,12 @@ void SDL_Game::start(char* addr, char* port)
 	}
 	//}
 	//else std::cout << "No hay mando conectado.\nAt SDL_Game.cpp line 113\n\n";
+}
+ 
+MultiplayerHost* SDL_Game::getHost() {
+	if (mpHost_ == nullptr) {
+		mpHost_ = new MultiplayerHost(addr_, port_);
+		sendData_ = true;
+		gamestateMachine_->setMpHost(mpHost_);
+	} return mpHost_;
 }

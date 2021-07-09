@@ -1,6 +1,7 @@
 #include "Packets.h"
 #include <iostream>
 #include <string.h>
+//#include <stdint.h>
 
 //-------------------------------ONLINE PACKETS--------------------------------------------------
 
@@ -17,7 +18,7 @@ SpritePacket::SpritePacket(unsigned char tId, short posx, short posy, short w, s
 }
 
 void SpritePacket::to_bin()
-{	
+{
 	alloc_data(SIZE);
 	memset(_data, 0, SIZE);
 
@@ -218,6 +219,45 @@ int PlayerInfoPacket::from_bin(char* bobj)
 
     return 0;
 }
+
+// void VerificationPacket::to_bin() 
+// {
+// 	alloc_data(SIZE);
+// 	memset(_data, 0, SIZE);
+
+// 	//Serializar los campos
+
+// 	char* aux = _data;
+
+// 	memcpy(aux, &packetId, sizeof(char));
+// 	aux += sizeof(char);
+// 	memcpy(aux, &id_, sizeof(uint32_t));
+// }
+
+// int VerificationPacket::from_bin(char* bobj)
+// {
+// 	if (bobj == nullptr) {
+// 		std::cout << "bobj was nullptr in PlayerInfoPacket::from_bin\n";
+// 		return -1;
+//     }
+
+//     alloc_data(SIZE);
+//     if (strlen(bobj) >= _size)
+//     {
+//         std::cout << "Invalid data buffer in PlayerInfoPacket::from_bin\n";
+//         return -1;
+//     }
+
+//     memcpy(static_cast<void *>(_data), bobj, SIZE);
+
+// 	char* aux = _data;
+
+// 	memcpy(&packetId, aux, sizeof(char));
+// 	aux += sizeof(char);
+// 	memcpy(&id_, aux, sizeof(uint32_t));
+
+//     return 0;
+// }
 
 
 InputPacket::InputPacket(char pcktId, char id, bool hG, bool rG, bool pT, bool pP,

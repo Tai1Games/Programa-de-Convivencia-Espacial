@@ -168,7 +168,6 @@ void ClientState::handleInput()
 	}
 }
 
-
 void ClientState::receiveAudio(char* aux)
 {
 	AudioPacket aP;

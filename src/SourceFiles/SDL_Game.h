@@ -54,9 +54,10 @@ private:
 	void closeResources();
 
 	Uint32 lastSendTime = 0;
-	Uint32 MS_PER_SEND_TICK = 100;
+	Uint32 MS_PER_SEND_TICK = 250;
 
-	char* addr_ = nullptr, * port_ = nullptr;
+	// 6 porque 65535 es el tamaño max de puerto (2^16)
+	char addr_[108] = "localhost", port_[6] = "2000";
 
 public:
 	void start(char* addr = nullptr, char* port = nullptr);
@@ -96,13 +97,7 @@ public:
 		return isHosting_ && sendData_;
 	}
 
-	MultiplayerHost* getHost() {
-		if (mpHost_ == nullptr) {
-			mpHost_ = new MultiplayerHost(addr_, port_);
-			sendData_ = true;
-			gamestateMachine_->setMpHost(mpHost_);
-		} return mpHost_;
-	}
+	MultiplayerHost* getHost();
 };
 
 #endif //SDL_GAME_H

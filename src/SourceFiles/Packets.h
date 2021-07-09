@@ -3,6 +3,7 @@
 // -----------------------ONLINE PACKETS-----------------------------------------
 #include "Serializable.h"
 #include <algorithm>
+
 /*
 Identificadores de paquetes
 A -> Audio
@@ -93,6 +94,23 @@ public:
 		player3Info += amount;
 	}
 };
+
+// class VerificationPacket : public Serializable
+// {
+// public:
+// 	const static int SIZE = sizeof(uint32_t) + sizeof(unsigned int);
+
+// 	char packetId = 'V';
+// 	uint32_t id_ = 0;
+
+// public:
+// 	VerificationPacket(uint32_t id) : 
+// 	packetId('V'),
+// 	id_(id) {};
+
+// 	void to_bin() override;
+// 	int from_bin(char* bobj) override;
+// };
 
 #pragma pack(pop)
 

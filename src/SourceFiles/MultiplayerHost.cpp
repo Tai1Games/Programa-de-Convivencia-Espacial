@@ -18,7 +18,7 @@ MultiplayerHost::MultiplayerHost(int port)
 	init();
 }
 
-MultiplayerHost::MultiplayerHost(char* addr, char* port)
+MultiplayerHost::MultiplayerHost(const char* addr, const char* port)
 {
 	socket = new Socket(addr, port);
 	init();
@@ -35,8 +35,8 @@ void MultiplayerHost::init()
 		clients_[i] = nullptr;
 
 	buffer = (char*)malloc(Socket::MAX_MESSAGE_SIZE);
-	memset(&message, 0, Socket::MAX_MESSAGE_SIZE);
-	messagePtr = &message[0];
+	memset(message, 0, Socket::MAX_MESSAGE_SIZE);
+	messagePtr = message;
 }
 
 MultiplayerHost::~MultiplayerHost() {
@@ -121,13 +121,13 @@ void MultiplayerHost::checkActivity()
 		if (clientPlace < 3) {
 			//std::cout << "Jugador conectado, id asignada: " << clientPlace << std::endl;
 			clients_[clientPlace].reset(client);
-			char* myStr = "C";
-			socket->send(myStr, *clients_[clientPlace].get(), 1);
+			char myStr = 'C';
+			socket->send(&myStr, *clients_[clientPlace].get(), 1);
 		}
 		// tiramos la conexión, no cabe
 		else {
-			char* myStr = "L";
-			socket->send(myStr, *clients_[clientPlace].get(), 1);
+			char myStr = 'L';
+			socket->send(&myStr, *clients_[clientPlace].get(), 1);
 			client = nullptr;
 		}
 	}
@@ -192,8 +192,8 @@ void MultiplayerHost::handlePlayerJoin(int clientNumber)
 		socket->send(piPacket, *clientSocket);
 	}
 	else { //Ya hay demasiados jugadores, avisamos que estamos llenos y tiramos la conexion
-		char* myStr = "L";
-		socket->send(myStr, *clientSocket, 1);
+		char myStr = 'L';
+		socket->send(&myStr, *clientSocket, 1);
 		clients_[clientNumber] = nullptr;
 	}
 }
@@ -212,7 +212,7 @@ void MultiplayerHost::handlePlayerInput(int clientNumber)
 
 void MultiplayerHost::start()
 {
-	messagePtr = &message[0];
+	messagePtr = message;
 	addFrameId();
 	messagePtr += sizeof(uint16_t);// + sizeof(uint8_t);	// reservar espacio para el contador de tamaño de paquete (comentado la secuencia de seguridad)
 	checkActivity();
@@ -241,8 +241,8 @@ void MultiplayerHost::addAudio(AudioPacket& aPacket)
 // colocar el indicador de tamaño en el segundo espacio de la cabecera, despues del indicador de frame
 int MultiplayerHost::finishSending()
 {
-	uint16_t size = (messagePtr - &message[0]) - (sizeof(uint32_t) + sizeof(uint16_t));
-	messagePtr = &message[0];
+	uint16_t size = (messagePtr - message) - (sizeof(uint32_t) + sizeof(uint16_t));
+	messagePtr = message;
 	messagePtr += sizeof(uint32_t);
 	memcpy(messagePtr, &size, sizeof(uint16_t));
 	messagePtr += sizeof(uint16_t);

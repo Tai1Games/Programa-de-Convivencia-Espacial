@@ -35,7 +35,7 @@ protected:
 public:
 	MultiplayerHost();
 	MultiplayerHost(int port);
-	MultiplayerHost(char* addr, char* port);
+	MultiplayerHost(const char* addr, const char* port);
 	void init();
 	~MultiplayerHost();
 
