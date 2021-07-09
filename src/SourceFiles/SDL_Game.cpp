@@ -120,7 +120,7 @@ void SDL_Game::closeResources() {
 }
 
 void SDL_Game::start(char* addr, char* port) {
-	exit_ = false;º
+	exit_ = false;
 	gamestateMachine_->changeToState(States::playableMenu, 0);
 	//gamestateMachine_->changeToState(States::play, 4, GamemodeID::Timed, "BoilerRoom"); //BoilerRoom, LivingRoom, GymRoom
 

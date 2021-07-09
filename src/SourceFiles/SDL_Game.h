@@ -42,6 +42,7 @@ protected:
 	static unique_ptr<SDL_Game> instance_;
 
 	bool sendData_ = false;
+	bool isHosting_ = false;
 	bool isFullscreen_ = false;
 	int displayW_=1920;
 	int displayH_=1080;
@@ -90,7 +91,7 @@ public:
 	const Constants* getConstants() { return &constants_; }
 
 	bool haveToSend() const {
-		return sendData_;
+		return isHosting_ && sendData_;
 	}
 
 	MultiplayerHost* getHost() {

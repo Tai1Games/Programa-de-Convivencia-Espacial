@@ -131,7 +131,7 @@ void Texture::render(const SDL_Rect& dest, double velX, double velY, double rotV
 	if (texture_)
 	{
 		SDL_RenderCopyEx(renderer_, texture_, &clip, &dest, angle, nullptr, flip);
-		if (SDL_Game::instance()->isHosting())
+		if (SDL_Game::instance()->haveToSend())
 		{
 			SpritePacket sp(texId_, (short)dest.x, (short)dest.y, (short)dest.w, (short)dest.h, (unsigned char)flip,
 				(float)velX, (float)velY, (float)rotVel, (short)angle, (unsigned char)frameX, (unsigned char) frameY);
