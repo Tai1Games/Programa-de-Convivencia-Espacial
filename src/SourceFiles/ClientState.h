@@ -1,37 +1,36 @@
 #pragma once
 #include "GameState.h"
-#include "SDL_net.h"
+//#include "SDL_net.h"
 #include "Constants.h"
 #include "MatchInfo.h"
 #include <queue>
+#include "Socket.h"
 
 class ClientState :
 	public GameState
 {
 private:
-	IPaddress hostIp_;
-	TCPsocket hostConnection_;
-	SDLNet_SocketSet socketSet_;
+	Socket socket;
+	Socket* serverSocket = nullptr;
 
-	bool doneReceiving_ = false;
+	char buffer[Socket::MAX_MESSAGE_SIZE];
 
-	//1024 bytes a 16 bytes por sprite = 64 sprites
-	//a 12 = 85 sprites
-	//a 20 = 51 sprites
-	char buffer[2048];
-	int receivedBytes_ = 0;
-
-	std::queue<SpritePacket> spritesToRender_;
+	std::vector<SpritePacket> spritesToRender_;
 
 	std::vector<MatchInfo::PlayerInfo*>* playerInfoVector_;
 
-	void receiveSprite();
-	void receiveAudio();
+	int32_t currentFrameId_ = 0;
+
+	double MS_PER_FRAME;
+	int lastUpdateInstant = 0;
+
+	void receiveSprite(char* aux);
+	void receiveAudio(char* aux);
+	void receivePlayerInfo(char* aux);
 	void connectToServer();
-	void receivePlayerInfo();
 public:
-	ClientState(char* host);
-	virtual ~ClientState() { SDLNet_Quit(); };
+	ClientState(const char* addr = "localhost", const char* port = "2000");
+	virtual ~ClientState();
 
 	virtual void init() override;
 	virtual void update() override;

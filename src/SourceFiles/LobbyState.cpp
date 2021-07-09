@@ -346,7 +346,7 @@ void LobbyState::handleJoinedPlayers() {
 		}
 		if (player.inputBinder->menuForward()) {
 			player.ready = true;
-		std:cout << "Jufador listisimo" << endl;
+		//std:cout << "Jufador listisimo" << endl;
 		}
 		else if (player.inputBinder->menuBack()) {
 			if (player.ready)

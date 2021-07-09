@@ -7,12 +7,6 @@
 
 using json = nlohmann::json;
 
-
-//puede meterse en el gameManager o un wrapper de ventana con mas funcionalidades
-// crea ventana y renderer
-void createWindow() {
-}
-
 int main(int argc, char* argv[])
 {
 	//Colocar antes del constructor de SDL_Game

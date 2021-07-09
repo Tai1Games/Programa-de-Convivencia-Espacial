@@ -27,15 +27,16 @@ MultiplayerHost::MultiplayerHost(char* addr, char* port)
 void MultiplayerHost::init()
 {
 	if (!socket->correct()) {
-		throw std::runtime_error("Socket initialization failed");
+		throw std::runtime_error("Host socket initialization failed");
 	}
 	socket->bind();
 
 	for (int i = 0; i < 3; i++)
 		clients_[i] = nullptr;
 
-	buffer = (char*)malloc(MAX_PACKET_SIZE);
-	memset(&message, 0, MAX_PACKET_SIZE);
+	buffer = (char*)malloc(Socket::MAX_MESSAGE_SIZE);
+	memset(&message, 0, Socket::MAX_MESSAGE_SIZE);
+	messagePtr = &message[0];
 }
 
 MultiplayerHost::~MultiplayerHost() {
@@ -43,8 +44,7 @@ MultiplayerHost::~MultiplayerHost() {
 	socket = nullptr;
 }
 
-// este método hace uso de SDL_Net porque poco o nada tiene
-// que ver con el resto del proyecto.
+// este método hace uso de SDL_Net porque poco o nada tiene que ver con el resto del proyecto. En la práctica, no se usa.
 std::string MultiplayerHost::getHostIpAddress()
 {
 	if (SDLNet_Init() < 0) {
@@ -121,11 +121,13 @@ void MultiplayerHost::checkActivity()
 		if (clientPlace < 3) {
 			//std::cout << "Jugador conectado, id asignada: " << clientPlace << std::endl;
 			clients_[clientPlace].reset(client);
-			socket->send("C", *clients_[clientPlace].get(), 1);
+			char* myStr = "C";
+			socket->send(myStr, *clients_[clientPlace].get(), 1);
 		}
 		// tiramos la conexión, no cabe
 		else {
-			socket->send("L", *clients_[clientPlace].get(), 1);
+			char* myStr = "L";
+			socket->send(myStr, *clients_[clientPlace].get(), 1);
 			client = nullptr;
 		}
 	}
@@ -190,7 +192,8 @@ void MultiplayerHost::handlePlayerJoin(int clientNumber)
 		socket->send(piPacket, *clientSocket);
 	}
 	else { //Ya hay demasiados jugadores, avisamos que estamos llenos y tiramos la conexion
-		socket->send("L", *clientSocket, 1);
+		char* myStr = "L";
+		socket->send(myStr, *clientSocket, 1);
 		clients_[clientNumber] = nullptr;
 	}
 }
@@ -209,7 +212,9 @@ void MultiplayerHost::handlePlayerInput(int clientNumber)
 
 void MultiplayerHost::start()
 {
+	messagePtr = &message[0];
 	addFrameId();
+	messagePtr += sizeof(uint16_t);// + sizeof(uint8_t);	// reservar espacio para el contador de tamaño de paquete (comentado la secuencia de seguridad)
 	checkActivity();
 }
 
@@ -233,20 +238,30 @@ void MultiplayerHost::addAudio(AudioPacket& aPacket)
 	messagePtr += aPacket.size();
 }
 
-void MultiplayerHost::finishSending()
+// colocar el indicador de tamaño en el segundo espacio de la cabecera, despues del indicador de frame
+int MultiplayerHost::finishSending()
 {
-	memcpy(messagePtr, "\0", 1);
-	messagePtr++;
+	uint16_t size = (messagePtr - &message[0]) - (sizeof(uint32_t) + sizeof(uint16_t));
+	messagePtr = &message[0];
+	messagePtr += sizeof(uint32_t);
+	memcpy(messagePtr, &size, sizeof(uint16_t));
+	messagePtr += sizeof(uint16_t);
+
+	//uint8_t securitySecuence = 0xFF;
+	//memcpy(messagePtr, &securitySecuence, sizeof(uint8_t));
+
 	++frameId;
+
+	return size + sizeof(uint32_t) + sizeof(uint16_t);// + sizeof(uint8_t);
 }
 
 void MultiplayerHost::send()
 {
-	finishSending();
+	int len = finishSending();
 
 	for (int i = 0; i < 3; i++) {
 		if (clients_[i] != nullptr) {
-			clients_[i].get()->send(message, *clients_[i].get());
+			clients_[i].get()->send(message, *clients_[i].get(), len);
 		}
 	}
 }

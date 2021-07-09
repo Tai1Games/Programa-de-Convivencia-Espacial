@@ -124,7 +124,7 @@ public:
      *
      *    @return 0 en caso de éxito o -1 si error
      */
-    int send(char* aux, const Socket& sock, int32_t size = -1);
+    int send(char* aux, const Socket& sock, int32_t size);
 
     /**
      *  Enlaza el descriptor del socket a la dirección y puerto

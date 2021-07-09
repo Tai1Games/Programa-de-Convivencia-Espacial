@@ -6,27 +6,49 @@
 #define us unsigned short
 #define uc unsigned char
 
-ClientState::ClientState(char* host) {
-	if (SDLNet_Init() < 0) {
-		std::cout << "Algo salió mal :c" << std::endl;
-		SDL_Game::instance()->exitGame();
+ClientState::ClientState(const char* addr, const char* port) :
+	socket(addr, port)
+{
+	// if (SDLNet_Init() < 0) {
+	// 	std::cout << "Algo salió mal :c" << std::endl;
+	// 	SDL_Game::instance()->exitGame();
+	// }
+
+	// if (SDLNet_ResolveHost(&hostIp_, host, 2000) < 0) {
+	// 	std::cout << "Error al resolver host" << std::endl;
+	// 	SDL_Game::instance()->exitGame();
+	// }
+
+	// hostConnection_ = SDLNet_TCP_Open(&hostIp_);
+	// if (!hostConnection_) {
+	// 	std::cout << "Error al conectar con host" << std::endl;
+	// 	SDL_Game::instance()->exitGame();
+	// }
+
+	// //revisar si nos hemos conectado
+
+	// socketSet_ = SDLNet_AllocSocketSet(1);
+	// SDLNet_TCP_AddSocket(socketSet_, hostConnection_);
+
+	MS_PER_FRAME = SDL_Game::instance()->getMS_PER_FRAME();
+
+
+	if (!socket.correct()) {
+		throw std::runtime_error("Client socket initialization failed");
 	}
+	socket.bind();
 
-	if (SDLNet_ResolveHost(&hostIp_, host, 2000) < 0) {
-		std::cout << "Error al resolver host" << std::endl;
-		SDL_Game::instance()->exitGame();
-	}
+	memset(&buffer, 0, Socket::MAX_MESSAGE_SIZE);
 
-	hostConnection_ = SDLNet_TCP_Open(&hostIp_);
-	if (!hostConnection_) {
-		std::cout << "Error al conectar con host" << std::endl;
-		SDL_Game::instance()->exitGame();
-	}
+	spritesToRender_.reserve(200);
 
-	//revisar si nos hemos conectado
+	serverSocket = (Socket*)malloc(sizeof(Socket));
+}
 
-	socketSet_ = SDLNet_AllocSocketSet(1);
-	SDLNet_TCP_AddSocket(socketSet_, hostConnection_);
+ClientState::~ClientState()
+{
+	delete serverSocket;
+	SDLNet_Quit(); 
 }
 
 void ClientState::init() {
@@ -35,66 +57,100 @@ void ClientState::init() {
 
 void ClientState::update()
 {
-	doneReceiving_ = false;
-	while (!doneReceiving_) {
-		//Como mucho espera un frame a recibir informacion, si no prosigue con el juego
-		if (SDLNet_CheckSockets(socketSet_, 16) > 0) {
-			if (SDLNet_SocketReady(hostConnection_)) {
-				if (SDLNet_TCP_Recv(hostConnection_, buffer, 1) <= 0) {
-					std::cout << "error al recibir datos" << std::endl;
-					SDLNet_TCP_Close(hostConnection_);
-					SDLNet_TCP_DelSocket(socketSet_, hostConnection_);
-				}
-				switch (buffer[0]) {
-				case 'A':
-					//Audio
-					receiveAudio();
-					break;
-				case 'C':
-					connectToServer();
-					break;
-				case 'F':
-					//Finished
-					doneReceiving_ = true;
-					break;
-				case 'P':
-					//Player ids info
-					receivePlayerInfo();
-					break;
-				case 'S':
-					//Sprite
-					receiveSprite();
-					break;
-				}
+	if(socket.recv(buffer, serverSocket) != -1)
+	{
+
+		char* aux = buffer;
+
+		uint32_t frameId;
+		memcpy(&frameId, aux, sizeof(uint32_t));
+		aux += sizeof(uint32_t);
+
+		if(frameId <= currentFrameId_) return;	// ya hemos recibido este paquete, lo descartamos
+
+		currentFrameId_ = frameId;
+
+		uint16_t len;
+		memcpy(&len, aux, sizeof(uint16_t));
+		aux += sizeof(uint16_t);
+
+		// descartamos el paquete si el tamano no tiene sentido
+		if(len >= Socket::MAX_MESSAGE_SIZE - (sizeof(uint32_t) + sizeof(uint16_t) /*+ sizeof(uint8_t)*/) || len < 0) {
+			std::cout << "Paquete corrupto.\n";
+			return; 
+		}
+
+		// comprobar secuencia de seguridad
+		// uint8_t securitySequence;
+		// memcpy(&securitySequence, aux, sizeof(uint8_t));
+		// aux += sizeof(uint8_t);
+		// if(securitySequence != 0xFF) {
+		// 	std::cout << "Paquete corrupto.\n";
+		// 	return;
+		// }
+
+		// el paquete es correcto, hemos recibido un nuevo frame actualizado. Sincronizamos info y descartamos el frame actual
+		spritesToRender_.clear();
+		lastUpdateInstant = SDL_Game::instance()->getTime();
+
+		aux = buffer;
+		while(aux < buffer + len)
+		{
+			switch (aux[0]) {
+			case 'A':
+				//Audio
+				receiveAudio(aux);
+				aux += AudioPacket::SIZE;
+				break;
+			case 'C':
+				connectToServer();
+				aux += 1;
+				break;
+			case 'P':
+				//Player ids info
+				receivePlayerInfo(aux);
+				aux += PlayerInfoPacket::SIZE;
+				break;
+			case 'S':
+				//Sprite
+				receiveSprite(aux);
+				aux += SpritePacket::SIZE;
+				break;
+			case 'L':
+				// partida llena (no hacemos más gestión). Lo ideal sería volver al menú o a la pantalla de inicio
+				throw std::runtime_error("Partida llena. No se puede jugar.");
+				break;
 			}
 		}
-		else
-			doneReceiving_ = true;
 	}
 }
 
 void ClientState::render()
 {
-	SpritePacket sprite;
-	while (!spritesToRender_.empty()) {
-		sprite = spritesToRender_.front();
-		SDL_Game::instance()->getTexturesMngr()->getTexture(sprite.textureId)->render({ sprite.posX, sprite.posY, sprite.width, sprite.height }, (double)sprite.rotationDegrees, (us)sprite.frameNumberX, (us)sprite.frameNumberY, (SDL_RendererFlip)sprite.flip);
-		spritesToRender_.pop();
+	int currentTime = SDL_Game::instance()->getTime();
+	double framesBetween = (currentTime - lastUpdateInstant) / MS_PER_FRAME;
+
+	for(SpritePacket sp : spritesToRender_)
+	{
+		int posX = sp.posX + sp.velX * framesBetween;
+		int posY = sp.posY + sp.velY * framesBetween;
+		int angle = sp.rotationDegrees + sp.angVel * framesBetween;
+		
+		SDL_Game::instance()->getTexturesMngr()->getTexture(sp.textureId)->
+			render({ posX, posY, sp.width, sp.height }, angle, (us)sp.frameNumberX, (us)sp.frameNumberY, (SDL_RendererFlip)sp.flip);
 	}
 }
 
-void ClientState::receiveSprite() {
-	//Ya que se ha recibido el identificador de tipo es SpritePacketSize - 1
-	receivedBytes_ = 0;
-	int n = 0;
-	while (receivedBytes_ < sizeof(SpritePacket) - 1) {
-		n = SDLNet_TCP_Recv(hostConnection_, buffer + receivedBytes_, sizeof(SpritePacket) - 1 - receivedBytes_);
-		receivedBytes_ += n;
-	}
+void ClientState::receiveSprite(char* aux)
+{
+	SpritePacket spP;
+	spP.from_bin(aux);
+	spritesToRender_.push_back(spP);
+
 	//*((us*)(buffer+sizeof(char)*7))
 	//id      pos x			pos y		  width	         height		   rot				frameX		     frameY			flip
-	spritesToRender_.push({ 'S', (uc)buffer[0], *((short*)(buffer + 1)), *((short*)(buffer + 3)), *((short*)(buffer + 5)),
-		*((short*)(buffer + 7)),*((short*)(buffer + 9)),(uc)buffer[11],(uc)buffer[12],(uc)buffer[13] });
+	// spritesToRender_.push({ 'S', (uc)buffer[0], *((short*)(buffer + 1)), *((short*)(buffer + 3)), *((short*)(buffer + 5)),
+	// 	*((short*)(buffer + 7)),*((short*)(buffer + 9)),(uc)buffer[11],(uc)buffer[12],(uc)buffer[13] });
 }
 
 
@@ -104,71 +160,43 @@ void ClientState::handleInput()
 	int schar = sizeof(char);
 	int sbool = sizeof(bool);
 	int sfloat = sizeof(float);
-	for (MatchInfo::PlayerInfo* pInfo : *playerInfoVector_) {
-		int offset = 0;
+	for (MatchInfo::PlayerInfo* pInfo : *playerInfoVector_)
+	{
+		//send input
 		InputPacket pInputPacket = pInfo->inputBinder->getInputPacket();
-		buffer[offset] = pInputPacket.packetId;
-		offset += schar;
-		buffer[offset] = pInfo->playerId;
-		offset += schar;
-		*((bool*)(buffer + offset)) = pInputPacket.holdGrab;
-		offset += sbool;
-		*((bool*)(buffer + offset)) = pInputPacket.releaseGrab;
-		offset += sbool;
-		*((bool*)(buffer + offset)) = pInputPacket.pressThrow;
-		offset += sbool;
-		*((bool*)(buffer + offset)) = pInputPacket.pressPick;
-		offset += sbool;
-		*((bool*)(buffer + offset)) = pInputPacket.holdImpulse;
-		offset += sbool;
-		*((bool*)(buffer + offset)) = pInputPacket.pressImpulse;
-		offset += sbool;
-		*((float*)(buffer + offset)) = pInputPacket.aimDirX;
-		offset += sfloat;
-		*((float*)(buffer + offset)) = pInputPacket.aimDirY;
-		offset += sfloat;
-		*((bool*)(buffer + offset)) = pInputPacket.releaseImpulse;
-		offset += sbool;
-		*((bool*)(buffer + offset)) = pInputPacket.pressAttack;
-		offset += sbool;
-		*((bool*)(buffer + offset)) = pInputPacket.menuForward;
-		offset += sbool;
-		*((bool*)(buffer + offset)) = pInputPacket.menuBack;
-		offset += sbool;
-		*((bool*)(buffer + offset)) = pInputPacket.pressPause;
-		offset += sbool;
-		buffer[offset] = pInputPacket.menuMove;
-
-		SDLNet_TCP_Send(hostConnection_, buffer, sizeof(InputPacket));
+		socket.send(pInputPacket, *serverSocket);
 	}
 }
 
 
-void ClientState::receiveAudio()
+void ClientState::receiveAudio(char* aux)
 {
-	SDLNet_TCP_Recv(hostConnection_, buffer, sizeof(AudioPacket) - 1);
-	if ((bool)buffer[0]) {//Music
-		SDL_Game::instance()->getAudioMngr()->playMusic(buffer[1], -1);
-	}
-	else {
-		SDL_Game::instance()->getAudioMngr()->playChannel(buffer[1], buffer[2], 0);
-	}
+	AudioPacket aP;
+	aP.from_bin(aux);
+	if(aP.isMusic) 
+		SDL_Game::instance()->getAudioMngr()->playMusic(aP.soundId, aP.nLoops);
+	else
+		SDL_Game::instance()->getAudioMngr()->playChannel(aP.soundId, aP.nLoops);
 }
 
-void ClientState::connectToServer() {
-	buffer[0] = 'P';
-	buffer[1] = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers();
-	for (int i = 0; i < SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers(); i++)
-		buffer[2 + i] = (char)(*playerInfoVector_)[i]->playerSkin;
-
-	SDLNet_TCP_Send(hostConnection_, buffer, sizeof(PlayerInfoPacket));
-	memset(buffer, 0, 2048);
+void ClientState::connectToServer()
+{
+	PlayerInfoPacket pInfo;
+	pInfo.numberOfPlayers = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers();
+	pInfo.player1Info = (char)(*playerInfoVector_)[0]->playerSkin;
+	pInfo.player2Info = (char)(*playerInfoVector_)[1]->playerSkin;
+	pInfo.player3Info = (char)(*playerInfoVector_)[2]->playerSkin;
+	
+    if(socket.send(pInfo, socket) == -1)
+        std::cout << "no se pudo enviar\n";
 }
 
-void ClientState::receivePlayerInfo() {
-	SDLNet_TCP_Recv(hostConnection_, buffer, sizeof(PlayerInfoPacket) - 1);
-	for (int i = 0; i < (int)buffer[0]; i++) {
-		(*playerInfoVector_)[i]->playerId = (size_t)buffer[i + 1];
-	}
-	memset(buffer, 0, 2048);
+void ClientState::receivePlayerInfo(char* aux)
+{
+	PlayerInfoPacket pInfoP;
+	pInfoP.from_bin(aux);
+
+	(*playerInfoVector_)[0]->playerId = pInfoP.player1Info;
+	(*playerInfoVector_)[1]->playerId = pInfoP.player2Info;
+	(*playerInfoVector_)[2]->playerId = pInfoP.player3Info;
 }

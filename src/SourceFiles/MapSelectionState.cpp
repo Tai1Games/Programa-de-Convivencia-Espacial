@@ -18,7 +18,7 @@ void MapSelectionState::init() {
 	createImages();
 	createTexts();
 	createIcons();
-	cout << "init map select";
+	//cout << "init map select\n";
 
 	Entity* temp = entityManager_->addEntity();
 	mapSelCursor_ = temp->addComponent<UIViewer>(Resources::CursorUiSelectMap, coordsImages_[0] + mapCursorOffset_, mapScale_ * 3, 0);

@@ -12,14 +12,14 @@
 #include "WeaponFactory.h"
 
 TileMap::TileMap(int w, int h, string map, EntityManager *eM, b2World *pW, BulletPool *bp, ConfettiPool *cP, StaplerPool *staplerPool, GameMode *gameMode) : Component(ComponentType::Tilemap), //w y h son de la ventana
-																																							 width_(w),
-																																							 height_(h),
-																																							 entityManager_(eM),
-																																							 physicsWorld_(pW),
-																																							 bulletPool_(bp),
-																																							 confettiPool_(cP),
-																																							 staplerPool_(staplerPool),
-																																							 gameMode_(gameMode)
+	width_(w),
+	height_(h),
+	entityManager_(eM),
+	physicsWorld_(pW),
+	bulletPool_(bp),
+	confettiPool_(cP),
+	staplerPool_(staplerPool),
+	gameMode_(gameMode)
 {
 	loadTileson(map);
 	playerSpawns_.reserve(4);
@@ -44,7 +44,7 @@ void TileMap::init()
 		{
 			//pos = position in tile units
 			vector<tson::Object> objetos = tileLayer.getObjects();
-			std::cout << "NumItems capa " << tileLayer.getName() << ": " << objetos.size() << "\n";
+			//std::cout << "NumItems capa " << tileLayer.getName() << ": " << objetos.size() << "\n";
 			for (auto &obj : objetos)
 			{
 				if (tileLayer.getName() == "Walls")
@@ -147,7 +147,7 @@ void TileMap::draw() const
 					int margin = tSet->getMargin();
 
 					tilesetT_ = SDL_Game::instance()->getTexturesMngr()->getTexture(Resources::tilesetTag_.find(tSet->getName())->second);
-					;
+					
 					//Posicion de dibujado del vector
 					tson::Vector2i position = {std::get<0>(pos) * width_ / mapCols_, std::get<1>(pos) * height_ / mapRows_};
 
@@ -187,7 +187,7 @@ bool TileMap::loadTileson(string path)
 			mapRows_ = tMap_.getSize().y;
 			//guardamos los datos de los tilesets que se usan
 			tileSets_ = tMap_.getTilesets();
-			std::cout << tMap_.getSize().x << " " << tMap_.getSize().y << " " << tMap_.getTilesets().size() << "\n";
+			//std::cout << tMap_.getSize().x << " " << tMap_.getSize().y << " " << tMap_.getTilesets().size() << "\n";
 			return true;
 		}
 		std::cout << "No se pudo cargar el mapa\n";

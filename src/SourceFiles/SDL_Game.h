@@ -59,7 +59,7 @@ private:
 	char* addr_ = nullptr, * port_ = nullptr;
 
 public:
-	void start(char* addr = "localhost", char* port = "2000");
+	void start(char* addr = nullptr, char* port = nullptr);
 	SDL_Game();
 	virtual ~SDL_Game();
 
@@ -89,6 +89,8 @@ public:
 	GameStateMachine* getStateMachine() { return gamestateMachine_; }
 	SDL_Renderer* getRenderer() { return  renderer_; }
 	const Constants* getConstants() { return &constants_; }
+
+	double getMS_PER_FRAME() const { return MS_PER_FRAME_; }
 
 	bool haveToSend() const {
 		return isHosting_ && sendData_;

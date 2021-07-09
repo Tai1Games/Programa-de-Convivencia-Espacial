@@ -119,7 +119,11 @@ void SDL_Game::closeResources() {
 	inputHandler_ = nullptr;
 }
 
-void SDL_Game::start(char* addr, char* port) {
+void SDL_Game::start(char* addr, char* port)
+{
+	if(addr == nullptr) addr = "localhost";
+	if(port == nullptr) port = "2000";
+
 	exit_ = false;
 	gamestateMachine_->changeToState(States::playableMenu, 0);
 	//gamestateMachine_->changeToState(States::play, 4, GamemodeID::Timed, "BoilerRoom"); //BoilerRoom, LivingRoom, GymRoom

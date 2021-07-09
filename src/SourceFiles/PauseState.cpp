@@ -48,7 +48,7 @@ void PauseState::init()
 	musicSliderControlImage_ = musicSliderControl->addComponent<UIViewer>(Resources::SliderControl, b2Vec2((musicSliderImage_->getPosUIElement().x + 33) + ((currentMusicVolume_ / 10) * (250 / (maxMusicVolume_ / 10))), btns_[Buttons::Music]->getPosUIElement().y), 2, 0);
 	effectsSliderControlImage_ = effectsSliderControl->addComponent<UIViewer>(Resources::SliderControl, b2Vec2((effectsSliderImage_->getPosUIElement().x + 33) + ((currentEffectsVolume_ / 10) * (250 / (maxEffectsVolume_ / 10))), btns_[Buttons::Effects]->getPosUIElement().y), 2, 0);
 
-	cout << "Pause initialized to " << ownerPlayerID_ << endl;
+	//cout << "Pause initialized to " << ownerPlayerID_ << endl;
 	ownerBinder_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo()->at(ownerPlayerID_)->inputBinder;
 
 	//FONDO

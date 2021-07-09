@@ -18,6 +18,7 @@ Socket::Socket(const char * address, const char * port):sd(-1)
     if(resGetAddr != 0) // ha habido un error
     {
         std::cerr << "ERROR: getaddrinfo failed with errorcode: " << resGetAddr << "\n";
+        std::cerr << "\t" << gai_strerror(resGetAddr) << "\n";
         correct_ = false;
         return;
     }
@@ -46,7 +47,8 @@ int Socket::recv(char* buff, Socket * &sock, int maxLen)
     struct sockaddr sa;
     socklen_t sa_len = sizeof(struct sockaddr);
 
-    int len = std::min(maxLen, 32768);
+    int a = MAX_MESSAGE_SIZE;
+    int len = std::min(maxLen, a);
 
     ssize_t bytes = ::recvfrom(sd, buff, len, 0, &sa, &sa_len);
 
@@ -98,12 +100,6 @@ int Socket::send(Serializable& obj, const Socket& sock)
 
 int Socket::send(char* aux, const Socket& sock, int32_t size)
 {
-    if(size == -1) {
-        size = strlen(aux);
-        if(size >= MAX_MESSAGE_SIZE)      // demasiado grande
-            return -1;
-    }
-
     //Enviar el objeto binario a sock usando el socket sd
     return sendto(sock.sd, aux, size, 0, &sock.sa, sock.sa_len);
 }

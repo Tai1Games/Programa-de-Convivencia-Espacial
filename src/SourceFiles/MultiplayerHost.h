@@ -18,10 +18,11 @@ protected:
 
 	char* buffer;
 	
-	char message[MAX_PACKET_SIZE];
+	char message[Socket::MAX_MESSAGE_SIZE];
 	char* messagePtr = &message[0];
 
 	uint32_t frameId = 0;
+	uint32_t size = 0;
 
 	std::string getHostIpAddress();
 
@@ -29,7 +30,7 @@ protected:
 	void checkActivity();
 	void handlePlayerJoin(int clientNumber);
 	void handlePlayerInput(int clientNumber);
-	void finishSending();
+	int finishSending();
 
 public:
 	MultiplayerHost();

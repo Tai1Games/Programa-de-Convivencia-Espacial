@@ -12,9 +12,9 @@ bool PlayerController::isImpulseValid(const b2Vec2& dir)
 	//b2Vec2 normalDir(dir.x, dir.y);
 	float angle = atan2(dir.y, dir.x) - atan2(normal.y, normal.x);
 	if (angle < 0) angle += (2 * PI);
-	cout << "normal on impulse " << normal.x << " " << normal.y << endl;
-	cout << "dir on impulse " << dir.x << " " << dir.y << endl;
-	cout << "angle " << angle << endl;
+	//cout << "normal on impulse " << normal.x << " " << normal.y << endl;
+	//cout << "dir on impulse " << dir.x << " " << dir.y << endl;
+	//cout << "angle " << angle << endl;
 	//comop mucho permite impulsos perpendiculares al agarre
 	//sumar radianes a PI/2 para restringir aun mas la direccion de impulso
 	return angle <= ((PI * 0.5f) + impulseRadError_) || angle >= ((1.5 * PI) - impulseRadError_);
