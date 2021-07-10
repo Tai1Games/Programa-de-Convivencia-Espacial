@@ -33,6 +33,13 @@ void ClientState::init() {
     rcvThread = new std::thread(&ClientState::rcv, this);
 }
 
+void ClientState::update() {
+	if(!connected_) {
+		char aux = 'J';
+		socket.send(&aux, socket, 1);
+	}
+}
+
 void ClientState::connectToServer()
 {
 	PlayerInfoPacket pInfo;
@@ -94,6 +101,7 @@ void ClientState::rcv()
 					aux += AudioPacket::SIZE;
 					break;
 				case 'C':
+					connected_ = true;
 					connectToServer();
 					aux += 1;
 					break;
@@ -153,8 +161,6 @@ void ClientState::handleInput()
 		//send input
 		InputPacket pInputPacket = pInfo->inputBinder->getInputPacket();
 		pInputPacket.instant = SDL_Game::instance()->getTime();
-		char aux = 'J';
-		socket.send(&aux, socket, 1);
 		socket.send(pInputPacket, socket);
 	}
 }

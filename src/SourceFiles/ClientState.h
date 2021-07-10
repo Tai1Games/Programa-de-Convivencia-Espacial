@@ -14,6 +14,8 @@ private:
 
 	char* buffer;
 
+	bool connected_ = false;
+
 	std::vector<SpritePacket> spritesToRender_;
 
 	std::vector<MatchInfo::PlayerInfo*>* playerInfoVector_;
@@ -29,11 +31,13 @@ private:
 	void receiveAudio(char* aux);
 	void receivePlayerInfo(char* aux);
 	void connectToServer();
+
 public:
 	ClientState(const char* addr = "localhost", const char* port = "2000");
 	virtual ~ClientState();
 
 	virtual void init() override;
+	virtual void update() override;
 	void rcv();
 	virtual void render() override;
 	virtual void handleInput() override;

@@ -97,6 +97,10 @@ public:
 
 	double getMS_PER_FRAME() const { return MS_PER_FRAME_; }
 
+	bool isHosting() const {
+		return isHosting_;
+	}
+
 	bool haveToSend() const {
 		return isHosting_ && sendData_;
 	}

@@ -131,7 +131,7 @@ void SDLAudioManager::playMusic(int tag, int loops) {
 	if (music != nullptr) {
 		Mix_PlayMusic(music, loops);
 
-		if (SDL_Game::instance()->haveToSend()) {
+		if (SDL_Game::instance()->isHosting()) {
 			AudioPacket aP = { true, (char)tag, (char)loops };
 			SDL_Game::instance()->getHost()->addAudio(aP);
 		}
