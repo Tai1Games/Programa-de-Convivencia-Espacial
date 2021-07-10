@@ -54,7 +54,7 @@ private:
 	void closeResources();
 
 	Uint32 lastSendTime = 0;
-	Uint32 MS_PER_SEND_TICK = 250;
+	Uint32 MS_PER_SEND_TICK = 60;
 
 	// 6 porque 65535 es el tamaño max de puerto (2^16)
 	char addr_[108] = "localhost", port_[6] = "2000";
@@ -74,11 +74,15 @@ public:
 		return instance_.get();
 	}
 
+	char* getAddr() {return addr_;}
+	char* getPort() {return port_;}
+
 	inline unsigned int getTime() {
 		return SDL_GetTicks();
 	}
 
 	inline void exitGame() { exit_ = true; }
+	inline bool isExit() const { return exit_; }
 
 	inline void switchFullscreen();
 

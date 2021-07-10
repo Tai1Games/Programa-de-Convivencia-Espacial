@@ -5,6 +5,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/CMake/)
 
 set(CMAKE_CXX_STANDARD 17)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+
 file(GLOB SOURCE "SourceFiles/*.cpp" "SourceFiles/*.h")
 
 find_package(SDL2 REQUIRED)
@@ -12,6 +14,13 @@ find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_net REQUIRED)
 find_package(SDL2_ttf REQUIRED)
+# find_package(Threads REQUIRED)
+# if(THREADS_HAVE_PTHREAD_ARG)
+#     target_compile_options(${PROJECT_NAME} PUBLIC "-pthread")
+# endif()
+# if(CMAKE_THREAD_LIBS_INIT)
+#     target_link_libraries(${PROJECT_NAME} "${CMAKE_THREAD_LIBS_INIT}")
+# endif()
 
 include_directories(${PROJECT_NAME} 
                                 ${SDL2_INCLUDE_DIRS} 

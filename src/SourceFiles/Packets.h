@@ -117,10 +117,11 @@ public:
 class InputPacket : public Serializable
 {
 public:
-	const static int SIZE = sizeof(char) * 3 + sizeof(bool) * 11 + sizeof(float) * 2;
+	const static int SIZE = sizeof(char) * 3 + sizeof(bool) * 11 + sizeof(float) * 2 + sizeof(unsigned int);
 
 	char packetId = 'I'; //Input
 	char playerId = 0;
+	unsigned int instant = 0;
 	bool holdGrab = false;
 	bool releaseGrab = false;
 	bool pressThrow = false;
@@ -138,7 +139,7 @@ public:
 
 public:
 	InputPacket() {};
-	InputPacket(char packtId, char id, bool hG = false, bool rG = false, bool pT = false,
+	InputPacket(char packtId, char id, unsigned int inst, bool hG = false, bool rG = false, bool pT = false,
 	bool pP = false, bool hI = false, bool pI = false, float dirX = 0, float dirY = 0,
 	bool rI = false, bool pA = false, bool mF = false, bool mB = false,
 	bool pPause = false, bool mM = false);

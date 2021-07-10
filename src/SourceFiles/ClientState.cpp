@@ -9,29 +9,7 @@
 ClientState::ClientState(const char* addr, const char* port) :
 	socket(addr, port)
 {
-	// if (SDLNet_Init() < 0) {
-	// 	std::cout << "Algo salió mal :c" << std::endl;
-	// 	SDL_Game::instance()->exitGame();
-	// }
-
-	// if (SDLNet_ResolveHost(&hostIp_, host, 2000) < 0) {
-	// 	std::cout << "Error al resolver host" << std::endl;
-	// 	SDL_Game::instance()->exitGame();
-	// }
-
-	// hostConnection_ = SDLNet_TCP_Open(&hostIp_);
-	// if (!hostConnection_) {
-	// 	std::cout << "Error al conectar con host" << std::endl;
-	// 	SDL_Game::instance()->exitGame();
-	// }
-
-	// //revisar si nos hemos conectado
-
-	// socketSet_ = SDLNet_AllocSocketSet(1);
-	// SDLNet_TCP_AddSocket(socketSet_, hostConnection_);
-
 	MS_PER_FRAME = SDL_Game::instance()->getMS_PER_FRAME();
-
 
 	if (!socket.correct()) {
 		throw std::runtime_error("Client socket initialization failed");
@@ -53,75 +31,80 @@ ClientState::~ClientState()
 
 void ClientState::init() {
 	playerInfoVector_ = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
+
+    rcvThread = new std::thread(&ClientState::rcv, this);
 }
 
-void ClientState::update()
+void ClientState::rcv()
 {
-	if(socket.recv(buffer, serverSocket) != -1)
+	while(!SDL_Game::instance()->isExit()) 
 	{
-
-		char* aux = buffer;
-
-		uint32_t frameId;
-		memcpy(&frameId, aux, sizeof(uint32_t));
-		aux += sizeof(uint32_t);
-
-		if(frameId <= currentFrameId_) return;	// ya hemos recibido este paquete, lo descartamos
-
-		currentFrameId_ = frameId;
-
-		uint16_t len;
-		memcpy(&len, aux, sizeof(uint16_t));
-		aux += sizeof(uint16_t);
-
-		// descartamos el paquete si el tamano no tiene sentido
-		if(len >= Socket::MAX_MESSAGE_SIZE - (sizeof(uint32_t) + sizeof(uint16_t) /*+ sizeof(uint8_t)*/) || len < 0) {
-			std::cout << "Paquete corrupto.\n";
-			return; 
-		}
-
-		// comprobar secuencia de seguridad
-		// uint8_t securitySequence;
-		// memcpy(&securitySequence, aux, sizeof(uint8_t));
-		// aux += sizeof(uint8_t);
-		// if(securitySequence != 0xFF) {
-		// 	std::cout << "Paquete corrupto.\n";
-		// 	return;
-		// }
-
-		// el paquete es correcto, hemos recibido un nuevo frame actualizado. Sincronizamos info y descartamos el frame actual
-		spritesToRender_.clear();
-		lastUpdateInstant = SDL_Game::instance()->getTime();
-
-		aux = buffer;
-		while(aux < buffer + len)
+		if(socket.recv(buffer, serverSocket) != -1)
 		{
-			switch (aux[0]) {
-			case 'A':
-				//Audio
-				receiveAudio(aux);
-				aux += AudioPacket::SIZE;
-				break;
-			case 'C':
-				connectToServer();
-				aux += 1;
-				break;
-			case 'P':
-				//Player ids info
-				receivePlayerInfo(aux);
-				aux += PlayerInfoPacket::SIZE;
-				break;
-			case 'S':
-				//Sprite
-				receiveSprite(aux);
-				aux += SpritePacket::SIZE;
-				break;
-			case 'L':
-				// partida llena (no hacemos más gestión). Lo ideal sería volver al menú o a la pantalla de inicio
-				throw std::runtime_error("Partida llena. No se puede jugar.");
-				break;
+			char* aux = buffer;
+
+			unsigned int frameId;
+			memcpy(&frameId, aux, sizeof(unsigned int));
+			aux += sizeof(unsigned int);
+
+			if(frameId <= currentFrameId_) return;	// ya hemos recibido este paquete, lo descartamos
+
+			currentFrameId_ = frameId;
+
+			uint16_t len;
+			memcpy(&len, aux, sizeof(uint16_t));
+			aux += sizeof(uint16_t);
+
+			// descartamos el paquete si el tamano no tiene sentido
+			if(len >= Socket::MAX_MESSAGE_SIZE - (sizeof(uint32_t) + sizeof(uint16_t) /*+ sizeof(uint8_t)*/) || len < 0) {
+				std::cout << "Paquete corrupto.\n";
+				return; 
+			}
+
+			// comprobar secuencia de seguridad
+			// uint8_t securitySequence;
+			// memcpy(&securitySequence, aux, sizeof(uint8_t));
+			// aux += sizeof(uint8_t);
+			// if(securitySequence != 0xFF) {
+			// 	std::cout << "Paquete corrupto.\n";
+			// 	return;
+			// }
+
+			// el paquete es correcto, hemos recibido un nuevo frame actualizado. Sincronizamos info y descartamos el frame actual
+			spritesToRender_.clear();
+			lastUpdateInstant = SDL_Game::instance()->getTime();
+
+			aux = buffer;
+			while(aux < buffer + len)
+			{
+				switch (aux[0]) {
+				case 'A':
+					//Audio
+					receiveAudio(aux);
+					aux += AudioPacket::SIZE;
+					break;
+				case 'C':
+					connectToServer();
+					aux += 1;
+					break;
+				case 'P':
+					//Player ids info
+					receivePlayerInfo(aux);
+					aux += PlayerInfoPacket::SIZE;
+					break;
+				case 'S':
+					//Sprite
+					receiveSprite(aux);
+					aux += SpritePacket::SIZE;
+					break;
+				case 'L':
+					// partida llena (no hacemos más gestión). Lo ideal sería volver al menú o a la pantalla de inicio
+					throw std::runtime_error("Partida llena. No se puede jugar.");
+					break;
+				}
 			}
 		}
+		else std::cout << "NO RECIBO AAAA\n";
 	}
 }
 
@@ -146,11 +129,6 @@ void ClientState::receiveSprite(char* aux)
 	SpritePacket spP;
 	spP.from_bin(aux);
 	spritesToRender_.push_back(spP);
-
-	//*((us*)(buffer+sizeof(char)*7))
-	//id      pos x			pos y		  width	         height		   rot				frameX		     frameY			flip
-	// spritesToRender_.push({ 'S', (uc)buffer[0], *((short*)(buffer + 1)), *((short*)(buffer + 3)), *((short*)(buffer + 5)),
-	// 	*((short*)(buffer + 7)),*((short*)(buffer + 9)),(uc)buffer[11],(uc)buffer[12],(uc)buffer[13] });
 }
 
 
@@ -164,6 +142,7 @@ void ClientState::handleInput()
 	{
 		//send input
 		InputPacket pInputPacket = pInfo->inputBinder->getInputPacket();
+		pInputPacket.instant = SDL_Game::instance()->getTime();
 		socket.send(pInputPacket, *serverSocket);
 	}
 }

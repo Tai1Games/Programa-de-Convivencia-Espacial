@@ -5,9 +5,9 @@
 #include <sstream>
 #include <iostream>
 
-MultiplayerHost::MultiplayerHost() : MultiplayerHost(2000) {
+MultiplayerHost::MultiplayerHost() : MultiplayerHost(2000)
+{
 }
-
 
 MultiplayerHost::MultiplayerHost(int port)
 {
@@ -18,7 +18,7 @@ MultiplayerHost::MultiplayerHost(int port)
 	init();
 }
 
-MultiplayerHost::MultiplayerHost(const char* addr, const char* port)
+MultiplayerHost::MultiplayerHost(const char *addr, const char *port)
 {
 	socket = new Socket(addr, port);
 	init();
@@ -26,7 +26,8 @@ MultiplayerHost::MultiplayerHost(const char* addr, const char* port)
 
 void MultiplayerHost::init()
 {
-	if (!socket->correct()) {
+	if (!socket->correct())
+	{
 		throw std::runtime_error("Host socket initialization failed");
 	}
 	socket->bind();
@@ -34,20 +35,28 @@ void MultiplayerHost::init()
 	for (int i = 0; i < 3; i++)
 		clients_[i] = nullptr;
 
-	buffer = (char*)malloc(Socket::MAX_MESSAGE_SIZE);
+	buffer = (char *)malloc(Socket::MAX_MESSAGE_SIZE);
 	memset(message, 0, Socket::MAX_MESSAGE_SIZE);
-	messagePtr = message;
+	messagePtr = message + sizeof(unsigned int) + sizeof(uint16_t);
+
+	rcvThread = new std::thread(&MultiplayerHost::rcv, this);
 }
 
-MultiplayerHost::~MultiplayerHost() {
+MultiplayerHost::~MultiplayerHost()
+{
 	delete socket;
 	socket = nullptr;
+	delete rcvThread;
+	rcvThread = nullptr;
+	delete buffer;
+	buffer = nullptr;
 }
 
 // este método hace uso de SDL_Net porque poco o nada tiene que ver con el resto del proyecto. En la práctica, no se usa.
 std::string MultiplayerHost::getHostIpAddress()
 {
-	if (SDLNet_Init() < 0) {
+	if (SDLNet_Init() < 0)
+	{
 		throw std::runtime_error("Couldn't start SDLNet");
 	}
 
@@ -56,28 +65,34 @@ std::string MultiplayerHost::getHostIpAddress()
 	if (SDLNet_ResolveHost(&ip, "ipinfo.io", 80) < 0)
 		throw std::runtime_error("Couldn't resolve host");
 	TCPsocket conn = SDLNet_TCP_Open(&ip);
-	if (!conn) throw std::runtime_error("Couldn't open TCP conn");
+	if (!conn)
+		throw std::runtime_error("Couldn't open TCP conn");
 
 	// envia peticion para conseguir la ip
-	const char* getter = "GET /ip HTTP/1.0\nHost: ipinfo.io\n\n";
+	const char *getter = "GET /ip HTTP/1.0\nHost: ipinfo.io\n\n";
 	int size = strlen(getter);
 	int result = SDLNet_TCP_Send(conn, getter, size);
-	if (result != size) throw;
+	if (result != size)
+		throw;
 
 	// get the response, we assume it is at most bufferSize chars
 	const int bufferSize = 255;
 	char auxBuffer[bufferSize + 1];
 	int read = 0;
 	memset(auxBuffer, '\0', bufferSize + 1);
-	while (read < bufferSize) {
+	while (read < bufferSize)
+	{
 		result = SDLNet_TCP_Recv(conn, auxBuffer + read, bufferSize);
-		if (result < 0) {
+		if (result < 0)
+		{
 			throw;
 		}
-		else if (result == 0) {
+		else if (result == 0)
+		{
 			break;
 		}
-		else {
+		else
+		{
 			read = read + result;
 		}
 	}
@@ -85,7 +100,8 @@ std::string MultiplayerHost::getHostIpAddress()
 	// The IP is the last token of the response
 	std::vector<std::string> tokens;
 	std::stringstream iss(auxBuffer);
-	for (std::string s; iss >> s;) {
+	for (std::string s; iss >> s;)
+	{
 		tokens.push_back(s);
 	}
 
@@ -96,59 +112,98 @@ std::string MultiplayerHost::getHostIpAddress()
 	return tokens.back();
 }
 
-void MultiplayerHost::checkActivity()
+void MultiplayerHost::handlePlayerInput(int clientNumber)
 {
-	Socket* client = nullptr;
-	
-	if(socket->recv(buffer, client) == -1) {
-		return;
-	}
+	//receivedBytes_ = SDLNet_TCP_Recv(clients_[clientNumber], buffer, InputPacket::SIZE);
 
-	// else hay actividad
-	
+	InputPacket inputPacket;
+	Socket *cSocket = clients_[clientNumber].get();
+	if (socket->recv(inputPacket, cSocket) == -1)
+		return;
+
+	// lo metemos para procesar si es más reciente
+	if (inputPacket.instant > inputPackets[inputPacket.playerId].first.instant)
+	{
+		inputMutex.lock();
+		inputPackets[inputPacket.playerId] = std::pair<InputPacket, bool>(inputPacket, true);
+		inputMutex.unlock();
+	}
+}
+
+void MultiplayerHost::rcv()
+{
+	while (!SDL_Game::instance()->isExit())
+	{
+		std::cout << "AAAA\n";
+
+		Socket *client = nullptr;
+
+		if (socket->recv(buffer, client) != -1)
+		{
+			// hay actividad
+			checkJoin(client);
+			handlePlayerActivity(client);
+		}
+	}
+}
+
+void MultiplayerHost::checkJoin(Socket *client)
+{
 	// comprobar si ya está conectado
 	bool alreadyConn = false;
 	int i = 0;
-	while(i < 3 && client != clients_[i].get()) i++;
+	while (i < 3 && client != clients_[i].get())
+		i++;
 
-	if(i != 3) // no está conectado ya
+	if (i != 3) // no está conectado ya
 	{
 		int clientPlace = 0;
 		while (clientPlace < 3 && clients_[clientPlace] != nullptr)
 			clientPlace++;
-	
+
 		// cabe el cliente
-		if (clientPlace < 3) {
+		if (clientPlace < 3)
+		{
 			//std::cout << "Jugador conectado, id asignada: " << clientPlace << std::endl;
+			clientsMutex.lock();
 			clients_[clientPlace].reset(client);
+			clientsMutex.unlock();
+
 			char myStr = 'C';
 			socket->send(&myStr, *clients_[clientPlace].get(), 1);
 		}
 		// tiramos la conexión, no cabe
-		else {
+		else
+		{
 			char myStr = 'L';
 			socket->send(&myStr, *clients_[clientPlace].get(), 1);
 			client = nullptr;
 		}
 	}
+}
 
+void MultiplayerHost::handlePlayerActivity(Socket *client)
+{
 	//Revisar actividad de los demas
 	for (int i = 0; i < 3; i++)
 	{
 		if (clients_[i] != nullptr)
 		{
 			memset(buffer, 0, MAX_PACKET_SIZE);
-			Socket* s = 0;
-			receivedBytes_ = socket->recv(buffer, s, 1);
+			Socket *s = 0;
 
-			if (receivedBytes_ <= 0)
+			if (socket->recv(buffer, s, 1) == -1)
 			{
 				//Usuario ha desconectado o perdido conexion
+				clientsMutex.lock();
 				clients_[i] = nullptr;
+				clientsMutex.unlock();
 			}
-			else {
+			else
+			{
 				//Tratamiento de mensajes de los jugadores
-				switch (buffer[0]) {
+				switch (buffer[0])
+				{
 				case 'P':
 					handlePlayerJoin(i);
 					break;
@@ -162,25 +217,31 @@ void MultiplayerHost::checkActivity()
 	}
 }
 
-void MultiplayerHost::handlePlayerJoin(int clientNumber) 
+void MultiplayerHost::handlePlayerJoin(int clientNumber)
 {
-	Socket* clientSocket = clients_[clientNumber].get();
+	clientsMutex.lock();
+	Socket *clientSocket = clients_[clientNumber].get();
+	clientsMutex.unlock();
 
 	PlayerInfoPacket piPacket;
-	if (socket->recv(piPacket, clientSocket) != 0)
+
+	if (socket->recv(piPacket, clientSocket) == -1)
 	{
 		std::cout << "Couldn't recv in handlePlayerJoin";
+		clientsMutex.lock();
 		clients_[clientNumber] = nullptr;
+		clientSocket = nullptr;
+		clientsMutex.unlock();
 		return;
 	}
 
 	//Revisamos si caben el numero que quieren entrar
 	int nStartingPlayers = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers();
-	
+
 	if (piPacket.numberOfPlayers + nStartingPlayers < 5)
 	{
 		//Aceptamos
-		std::vector<MatchInfo::PlayerInfo*>* playersVector = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
+		std::vector<MatchInfo::PlayerInfo *> *playersVector = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
 		for (int i = 0; i < piPacket.numberOfPlayers; i++)
 		{
 			playersVector->push_back(new MatchInfo::PlayerInfo(SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers(), new ClientBinder(), buffer[i + 1]));
@@ -191,59 +252,64 @@ void MultiplayerHost::handlePlayerJoin(int clientNumber)
 		piPacket.updatePlayersId(nStartingPlayers);
 		socket->send(piPacket, *clientSocket);
 	}
-	else { //Ya hay demasiados jugadores, avisamos que estamos llenos y tiramos la conexion
+	else
+	{ //Ya hay demasiados jugadores, avisamos que estamos llenos y tiramos la conexion
 		char myStr = 'L';
 		socket->send(&myStr, *clientSocket, 1);
+		clientsMutex.lock();
 		clients_[clientNumber] = nullptr;
+		clientsMutex.unlock();
 	}
-}
-
-void MultiplayerHost::handlePlayerInput(int clientNumber)
-{
-	//receivedBytes_ = SDLNet_TCP_Recv(clients_[clientNumber], buffer, InputPacket::SIZE);
-
-	InputPacket inputPacket;
-	Socket* cSocket = clients_[clientNumber].get();
-	if(socket->recv(inputPacket, cSocket) == -1) return;
-
-	std::vector<MatchInfo::PlayerInfo*>* playersVector = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
-	(*playersVector)[inputPacket.playerId]->inputBinder->syncInput(inputPacket);
-}
-
-void MultiplayerHost::start()
-{
-	messagePtr = message;
-	addFrameId();
-	messagePtr += sizeof(uint16_t);// + sizeof(uint8_t);	// reservar espacio para el contador de tamaño de paquete (comentado la secuencia de seguridad)
-	checkActivity();
 }
 
 void MultiplayerHost::addFrameId()
 {
-	memcpy(messagePtr, &frameId, sizeof(uint32_t));
-	messagePtr += sizeof(uint32_t);
+	memcpy(messagePtr, &frameId, sizeof(unsigned int));
+	messagePtr += sizeof(unsigned int);
 }
 
-void MultiplayerHost::addTexture(SpritePacket& sPacket)
+void MultiplayerHost::addTexture(SpritePacket &sPacket)
 {
 	sPacket.to_bin();
+	packetMutex.lock();
 	memcpy(messagePtr, sPacket.data(), sPacket.size());
 	messagePtr += sPacket.size();
+	packetMutex.unlock();
 }
 
-void MultiplayerHost::addAudio(AudioPacket& aPacket)
+void MultiplayerHost::addAudio(AudioPacket &aPacket)
 {
 	aPacket.to_bin();
+	packetMutex.lock();
 	memcpy(messagePtr, aPacket.data(), aPacket.size());
 	messagePtr += aPacket.size();
+	packetMutex.unlock();
+}
+
+void MultiplayerHost::processInput()
+{
+	std::vector<MatchInfo::PlayerInfo *> *playersVector = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getPlayersInfo();
+
+	for (int i = 0; i < 3; i++)
+	{
+		inputMutex.lock();
+		// es un paquete sin procesar
+		if (inputPackets[i].second)
+		{
+			InputPacket *inputPacket = &inputPackets[i].first;
+			(*playersVector)[inputPacket->playerId]->inputBinder->syncInput(*inputPacket);
+			inputPackets[i].second = false;
+		}
+		inputMutex.unlock();
+	}
 }
 
 // colocar el indicador de tamaño en el segundo espacio de la cabecera, despues del indicador de frame
 int MultiplayerHost::finishSending()
 {
-	uint16_t size = (messagePtr - message) - (sizeof(uint32_t) + sizeof(uint16_t));
+	uint16_t size = (messagePtr - &message[0]) - (sizeof(unsigned int) + sizeof(uint16_t));
 	messagePtr = message;
-	messagePtr += sizeof(uint32_t);
+	addFrameId();
 	memcpy(messagePtr, &size, sizeof(uint16_t));
 	messagePtr += sizeof(uint16_t);
 
@@ -252,16 +318,26 @@ int MultiplayerHost::finishSending()
 
 	++frameId;
 
-	return size + sizeof(uint32_t) + sizeof(uint16_t);// + sizeof(uint8_t);
+	return size + sizeof(unsigned int) + sizeof(uint16_t); // + sizeof(uint8_t);
 }
 
 void MultiplayerHost::send()
 {
+	packetMutex.lock();
 	int len = finishSending();
 
-	for (int i = 0; i < 3; i++) {
-		if (clients_[i] != nullptr) {
+	for (int i = 0; i < 3; i++)
+	{
+		clientsMutex.lock();
+		if (clients_[i] != nullptr)
+		{
 			clients_[i].get()->send(message, *clients_[i].get(), len);
 		}
+		clientsMutex.unlock();
 	}
+	//printf("message: %.*s\n", len, message);
+	//std::cout << message << "\0\n";
+	memset(message, 0, Socket::MAX_MESSAGE_SIZE);
+	messagePtr = message + sizeof(unsigned int) + sizeof(uint16_t);
+	packetMutex.unlock();
 }

@@ -50,11 +50,12 @@ int Socket::recv(char* buff, Socket * &sock, int maxLen)
     int a = MAX_MESSAGE_SIZE;
     int len = std::min(maxLen, a);
 
+    //char buffer[len];
+
     ssize_t bytes = ::recvfrom(sd, buff, len, 0, &sa, &sa_len);
 
     if ( bytes <= 0 )
     {
-        //std::cout << "bytes <= 0\n";
         return -1;
     }
 
@@ -62,6 +63,8 @@ int Socket::recv(char* buff, Socket * &sock, int maxLen)
     {
         sock = new Socket(&sa, sa_len);
     }
+
+    //strcpy(buff, buffer);
 
     return 0;
 }

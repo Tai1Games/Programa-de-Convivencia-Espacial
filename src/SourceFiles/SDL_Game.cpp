@@ -57,16 +57,16 @@ void SDL_Game::switchFullscreen()
 {
 	if(!isFullscreen_)
 	{
-			SDL_SetWindowSize(window_, displayW_, displayH_);
-			SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN);
-			isFullscreen_ = true;
+		SDL_SetWindowSize(window_, displayW_, displayH_);
+		SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN);
+		isFullscreen_ = true;
 	}
 	else
 	{
-			SDL_SetWindowSize(window_, displayW_*windowScale_, displayH_*windowScale_);
-			SDL_SetWindowFullscreen(window_, 0);
-			SDL_SetWindowPosition(window_, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);	
-			isFullscreen_ = false;
+		SDL_SetWindowSize(window_, displayW_*windowScale_, displayH_*windowScale_);
+		SDL_SetWindowFullscreen(window_, 0);
+		SDL_SetWindowPosition(window_, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);	
+		isFullscreen_ = false;
 	}
 }
 
@@ -151,7 +151,7 @@ void SDL_Game::start(char* addr, char* port)
 MultiplayerHost* SDL_Game::getHost() {
 	if (mpHost_ == nullptr) {
 		mpHost_ = new MultiplayerHost(addr_, port_);
-		sendData_ = true;
+		isHosting_ = true;
 		gamestateMachine_->setMpHost(mpHost_);
 	} return mpHost_;
 }

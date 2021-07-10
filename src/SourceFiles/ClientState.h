@@ -19,6 +19,8 @@ private:
 
 	std::vector<MatchInfo::PlayerInfo*>* playerInfoVector_;
 
+	std::thread* rcvThread;
+	
 	int32_t currentFrameId_ = 0;
 
 	double MS_PER_FRAME;
@@ -33,7 +35,7 @@ public:
 	virtual ~ClientState();
 
 	virtual void init() override;
-	virtual void update() override;
+	void rcv();
 	virtual void render() override;
 	virtual void handleInput() override;
 };

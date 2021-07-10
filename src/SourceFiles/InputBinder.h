@@ -221,7 +221,7 @@ public:
 			return lastDir;
 		}
 		else {
-			cout << "no hay collider" << endl;
+			//cout << "no hay collider\n";
 			return b2Vec2();
 		}
 	}

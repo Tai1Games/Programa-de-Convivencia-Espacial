@@ -260,11 +260,12 @@ int PlayerInfoPacket::from_bin(char* bobj)
 // }
 
 
-InputPacket::InputPacket(char pcktId, char id, bool hG, bool rG, bool pT, bool pP,
+InputPacket::InputPacket(char pcktId, char id, unsigned int inst, bool hG, bool rG, bool pT, bool pP,
 	bool hI, bool pI, float dirX, float dirY, bool rI, bool pA,
 	bool mF, bool mB, bool pPause, bool mM) :
 	packetId(pcktId),
 	playerId(id),
+	instant(inst),
 	holdGrab(hG),
 	releaseGrab(rG),
 	pressThrow(pT),
@@ -294,6 +295,8 @@ void InputPacket::to_bin()
 	aux += sizeof(char);
 	memcpy(aux, &playerId, sizeof(char));
 	aux += sizeof(char);
+	memcpy(aux, &instant, sizeof(uint16_t));
+	aux += sizeof(uint16_t);
 	memcpy(aux, &holdGrab, sizeof(bool));
 	aux += sizeof(bool);
 	memcpy(aux, &releaseGrab, sizeof(bool));
@@ -346,6 +349,8 @@ int InputPacket::from_bin(char* bobj)
 	aux += sizeof(char);
 	memcpy(&playerId, aux, sizeof(char));
 	aux += sizeof(char);
+	memcpy(&instant, aux, sizeof(uint16_t));
+	aux += sizeof(uint16_t);
 	memcpy(&holdGrab, aux, sizeof(bool));
 	aux += sizeof(bool);
 	memcpy(&releaseGrab, aux, sizeof(bool));

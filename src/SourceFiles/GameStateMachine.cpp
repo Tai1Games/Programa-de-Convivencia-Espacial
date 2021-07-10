@@ -153,9 +153,9 @@ void GameStateMachine::loadState(int state, int gameMode, string tileMap)
 			states_[state] = new OnlineMenuState();
 			break;
 		case States::client:
-			aux = CONST(string, "HOST_IP");
-			host = &aux[0];
-			states_[state] = new ClientState(host);
+			// aux = CONST(string, "HOST_IP");
+			// host = &aux[0];
+			states_[state] = new ClientState(SDL_Game::instance()->getAddr(), SDL_Game::instance()->getPort());
 			break;
 		case States::endGame:
 			states_[state] = new EndGameState();
@@ -206,11 +206,11 @@ void GameStateMachine::gameCycle()
 {
 	handleInput();
 	if (mpHost_ != nullptr) {
-		mpHost_->start();
+		mpHost_->processInput();
 	}
 	update();
 	render();
-	if (mpHost_ != nullptr) {
+	if (mpHost_ != nullptr && SDL_Game::instance()->haveToSend()) {
 		mpHost_->send();
 	}
 }
