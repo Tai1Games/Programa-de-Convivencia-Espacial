@@ -82,6 +82,11 @@ public:
      */
     int recv(char* buff, Socket * &sock, int maxLen = MAX_MESSAGE_SIZE);
 
+    int recv(char* buff, int maxLen = MAX_MESSAGE_SIZE) {
+        Socket * s = 0;
+        return recv(buff, s, maxLen);
+    };
+
     /**
      *  Recibe un mensaje de aplicación
      *

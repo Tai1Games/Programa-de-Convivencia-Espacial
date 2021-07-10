@@ -11,16 +11,15 @@ class ClientState :
 {
 private:
 	Socket socket;
-	Socket* serverSocket = nullptr;
 
-	char buffer[Socket::MAX_MESSAGE_SIZE];
+	char* buffer;
 
 	std::vector<SpritePacket> spritesToRender_;
 
 	std::vector<MatchInfo::PlayerInfo*>* playerInfoVector_;
 
 	std::thread* rcvThread;
-	
+
 	int32_t currentFrameId_ = 0;
 
 	double MS_PER_FRAME;

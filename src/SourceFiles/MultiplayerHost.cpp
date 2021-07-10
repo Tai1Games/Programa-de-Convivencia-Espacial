@@ -27,10 +27,7 @@ MultiplayerHost::MultiplayerHost(const char *addr, const char *port)
 void MultiplayerHost::init()
 {
 	if (!socket->correct())
-	{
 		throw std::runtime_error("Host socket initialization failed");
-	}
-	socket->bind();
 
 	for (int i = 0; i < 3; i++)
 		clients_[i] = nullptr;
@@ -112,24 +109,6 @@ std::string MultiplayerHost::getHostIpAddress()
 	return tokens.back();
 }
 
-void MultiplayerHost::handlePlayerInput(int clientNumber)
-{
-	//receivedBytes_ = SDLNet_TCP_Recv(clients_[clientNumber], buffer, InputPacket::SIZE);
-
-	InputPacket inputPacket;
-	Socket *cSocket = clients_[clientNumber].get();
-	if (socket->recv(inputPacket, cSocket) == -1)
-		return;
-
-	// lo metemos para procesar si es más reciente
-	if (inputPacket.instant > inputPackets[inputPacket.playerId].first.instant)
-	{
-		inputMutex.lock();
-		inputPackets[inputPacket.playerId] = std::pair<InputPacket, bool>(inputPacket, true);
-		inputMutex.unlock();
-	}
-}
-
 void MultiplayerHost::rcv()
 {
 	while (!SDL_Game::instance()->isExit())
@@ -152,10 +131,10 @@ void MultiplayerHost::checkJoin(Socket *client)
 	// comprobar si ya está conectado
 	bool alreadyConn = false;
 	int i = 0;
-	while (i < 3 && client != clients_[i].get())
+	while (i < 3 && (clients_[i] == nullptr || *client != *(clients_[i].get())))
 		i++;
 
-	if (i != 3) // no está conectado ya
+	if (i < 3) // aún no está conectado
 	{
 		int clientPlace = 0;
 		while (clientPlace < 3 && clients_[clientPlace] != nullptr)
@@ -259,6 +238,24 @@ void MultiplayerHost::handlePlayerJoin(int clientNumber)
 		clientsMutex.lock();
 		clients_[clientNumber] = nullptr;
 		clientsMutex.unlock();
+	}
+}
+
+void MultiplayerHost::handlePlayerInput(int clientNumber)
+{
+	//receivedBytes_ = SDLNet_TCP_Recv(clients_[clientNumber], buffer, InputPacket::SIZE);
+
+	InputPacket inputPacket;
+	Socket *cSocket = clients_[clientNumber].get();
+	if (socket->recv(inputPacket, cSocket) == -1)
+		return;
+
+	// lo metemos para procesar si es más reciente
+	if (inputPacket.instant > inputPackets[inputPacket.playerId].first.instant)
+	{
+		inputMutex.lock();
+		inputPackets[inputPacket.playerId] = std::pair<InputPacket, bool>(inputPacket, true);
+		inputMutex.unlock();
 	}
 }
 

@@ -16,16 +16,14 @@ ClientState::ClientState(const char* addr, const char* port) :
 	}
 	socket.bind();
 
-	memset(&buffer, 0, Socket::MAX_MESSAGE_SIZE);
-
+	buffer = (char *)malloc(Socket::MAX_MESSAGE_SIZE);
 	spritesToRender_.reserve(200);
-
-	serverSocket = (Socket*)malloc(sizeof(Socket));
 }
 
 ClientState::~ClientState()
 {
-	delete serverSocket;
+	delete buffer;
+	delete rcvThread;
 	SDLNet_Quit(); 
 }
 
@@ -35,11 +33,23 @@ void ClientState::init() {
     rcvThread = new std::thread(&ClientState::rcv, this);
 }
 
+void ClientState::connectToServer()
+{
+	PlayerInfoPacket pInfo;
+	pInfo.numberOfPlayers = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers();
+	pInfo.player1Info = (char)(*playerInfoVector_)[0]->playerSkin;
+	pInfo.player2Info = (char)(*playerInfoVector_)[1]->playerSkin;
+	pInfo.player3Info = (char)(*playerInfoVector_)[2]->playerSkin;
+	
+    if(socket.send(pInfo, socket) == -1)
+        std::cout << "no se pudo enviar\n";
+}
+
 void ClientState::rcv()
 {
 	while(!SDL_Game::instance()->isExit()) 
 	{
-		if(socket.recv(buffer, serverSocket) != -1)
+		if(socket.recv(buffer) != -1)
 		{
 			char* aux = buffer;
 
@@ -143,7 +153,9 @@ void ClientState::handleInput()
 		//send input
 		InputPacket pInputPacket = pInfo->inputBinder->getInputPacket();
 		pInputPacket.instant = SDL_Game::instance()->getTime();
-		socket.send(pInputPacket, *serverSocket);
+		char aux = 'J';
+		socket.send(&aux, socket, 1);
+		socket.send(pInputPacket, socket);
 	}
 }
 
@@ -155,18 +167,6 @@ void ClientState::receiveAudio(char* aux)
 		SDL_Game::instance()->getAudioMngr()->playMusic(aP.soundId, aP.nLoops);
 	else
 		SDL_Game::instance()->getAudioMngr()->playChannel(aP.soundId, aP.nLoops);
-}
-
-void ClientState::connectToServer()
-{
-	PlayerInfoPacket pInfo;
-	pInfo.numberOfPlayers = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers();
-	pInfo.player1Info = (char)(*playerInfoVector_)[0]->playerSkin;
-	pInfo.player2Info = (char)(*playerInfoVector_)[1]->playerSkin;
-	pInfo.player3Info = (char)(*playerInfoVector_)[2]->playerSkin;
-	
-    if(socket.send(pInfo, socket) == -1)
-        std::cout << "no se pudo enviar\n";
 }
 
 void ClientState::receivePlayerInfo(char* aux)

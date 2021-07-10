@@ -4,29 +4,6 @@
 #include "Serializable.h"
 #include <algorithm>
 
-/*
-Identificadores de paquetes
-A -> Audio
-C -> Conectado correctamente
-I -> Input
-L -> Error, el servidor no puede recibir tantos jugadores
-F -> Final de stream de paquetes
-S -> Sprite
-P -> Informacion de jugadores
-	- Si lo envía el cliente indica el numero de jugadores que tiene
-	- Si lo envía el servidor indica la id de los jugadores para el cliente en orden
-M -> Musica
-*/
-#pragma pack(push,2)
-
-//Lo mejor es asegurarse de que los elementos que son multiplos de dos vayan en su propia palabra
-//Con la instruccion que tenemos queda así, que es la manera mas eficiente y evita errores
-/*
-	|char|char|
-	|  short  |
-	|  short  |
-*/
-
 class SpritePacket : public Serializable
 {
 public:
@@ -111,8 +88,6 @@ public:
 // 	void to_bin() override;
 // 	int from_bin(char* bobj) override;
 // };
-
-#pragma pack(pop)
 
 class InputPacket : public Serializable
 {
