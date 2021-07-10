@@ -40,18 +40,6 @@ void ClientState::update() {
 	}
 }
 
-void ClientState::connectToServer()
-{
-	PlayerInfoPacket pInfo;
-	pInfo.numberOfPlayers = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers();
-	pInfo.player1Info = (char)(*playerInfoVector_)[0]->playerSkin;
-	pInfo.player2Info = (char)(*playerInfoVector_)[1]->playerSkin;
-	pInfo.player3Info = (char)(*playerInfoVector_)[2]->playerSkin;
-	
-    if(socket.send(pInfo, socket) == -1)
-        std::cout << "no se pudo enviar\n";
-}
-
 void ClientState::rcv()
 {
 	while(!SDL_Game::instance()->isExit()) 
@@ -73,7 +61,7 @@ void ClientState::rcv()
 			aux += sizeof(uint16_t);
 
 			// descartamos el paquete si el tamano no tiene sentido
-			if(len >= Socket::MAX_MESSAGE_SIZE - (sizeof(uint32_t) + sizeof(uint16_t) /*+ sizeof(uint8_t)*/) || len < 0) {
+			if(len >= Socket::MAX_MESSAGE_SIZE || len < sizeof(unsigned int) + sizeof(uint16_t)) {
 				std::cout << "Paquete corrupto.\n";
 				return; 
 			}
@@ -88,8 +76,11 @@ void ClientState::rcv()
 			// }
 
 			// el paquete es correcto, hemos recibido un nuevo frame actualizado. Sincronizamos info y descartamos el frame actual
-			spritesToRender_.clear();
 			lastUpdateInstant = SDL_Game::instance()->getTime();
+
+			spriteMutex.lock();
+			spritesToRender_.clear();
+			spriteMutex.unlock();
 
 			aux = buffer;
 			while(aux < buffer + len)
@@ -126,11 +117,24 @@ void ClientState::rcv()
 	}
 }
 
+void ClientState::connectToServer()
+{
+	PlayerInfoPacket pInfo;
+	pInfo.numberOfPlayers = SDL_Game::instance()->getStateMachine()->getMatchInfo()->getNumberOfPlayers();
+	pInfo.player1Info = (char)(*playerInfoVector_)[0]->playerSkin;
+	pInfo.player2Info = (char)(*playerInfoVector_)[1]->playerSkin;
+	pInfo.player3Info = (char)(*playerInfoVector_)[2]->playerSkin;
+	
+    if(socket.send(pInfo, socket) == -1)
+        std::cout << "no se pudo enviar\n";
+}
+
 void ClientState::render()
 {
 	int currentTime = SDL_Game::instance()->getTime();
 	double framesBetween = (currentTime - lastUpdateInstant) / MS_PER_FRAME;
 
+	spriteMutex.lock();
 	for(SpritePacket sp : spritesToRender_)
 	{
 		int posX = sp.posX + sp.velX * framesBetween;
@@ -140,13 +144,16 @@ void ClientState::render()
 		SDL_Game::instance()->getTexturesMngr()->getTexture(sp.textureId)->
 			render({ posX, posY, sp.width, sp.height }, angle, (us)sp.frameNumberX, (us)sp.frameNumberY, (SDL_RendererFlip)sp.flip);
 	}
+	spriteMutex.unlock();
 }
 
 void ClientState::receiveSprite(char* aux)
 {
 	SpritePacket spP;
 	spP.from_bin(aux);
+	spriteMutex.lock();
 	spritesToRender_.push_back(spP);
+	spriteMutex.unlock();
 }
 
 

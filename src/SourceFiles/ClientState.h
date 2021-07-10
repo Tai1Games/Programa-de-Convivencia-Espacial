@@ -5,6 +5,7 @@
 #include "MatchInfo.h"
 #include <queue>
 #include "Socket.h"
+#include <mutex>
 
 class ClientState :
 	public GameState
@@ -21,6 +22,7 @@ private:
 	std::vector<MatchInfo::PlayerInfo*>* playerInfoVector_;
 
 	std::thread* rcvThread;
+	std::mutex spriteMutex;
 
 	int32_t currentFrameId_ = 0;
 
